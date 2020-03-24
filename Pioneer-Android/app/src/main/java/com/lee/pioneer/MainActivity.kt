@@ -78,7 +78,7 @@ class MainActivity :
      */
     private fun initMainUi() {
         window.decorView.background =
-            ContextCompat.getDrawable(applicationContext, R.color.themeBackground)
+            ContextCompat.getDrawable(applicationContext, R.color.colorThemeBackground)
         show()
     }
 

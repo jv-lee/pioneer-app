@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/girl"
         android:name="com.lee.pioneer.view.GirlFragment"
-        android:label="girl"
+        android:label="@string/nav_girl"
         tools:layout="@layout/fragment_girl" />
 
 </navigation>
