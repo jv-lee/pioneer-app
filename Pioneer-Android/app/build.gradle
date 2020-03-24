@@ -23,9 +23,19 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
+        debug{
+            minifyEnabled configs.minifyEnabled
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debugUri.each { k, v ->
+                buildConfigField("String", k, "\"" + v + "\"")
+            }
+        }
+        release {
+            minifyEnabled configs.minifyEnabled
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            releaseUri.each { k, v ->
+                buildConfigField("String", k, "\"" + v + "\"")
+            }
         }
     }
 
@@ -50,5 +60,4 @@ android {
 
 dependencies {
     implementation project(path: ':library')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
