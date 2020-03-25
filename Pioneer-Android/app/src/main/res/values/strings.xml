@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Pioneer-Android</string>
 
-    <string name="nav_article">专题</string>
-    <string name="nav_goods">干货</string>
-    <string name="nav_girl">妹子</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_recommend">推荐</string>
+    <string name="nav_favorite">收藏</string>
     <string name="nav_me">我的</string>
+    <string name="search_hint">点击搜索内容</string>
 
 </resources>

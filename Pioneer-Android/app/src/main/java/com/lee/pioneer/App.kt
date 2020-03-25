@@ -1,19 +1,54 @@
 package com.lee.pioneer
 
+import android.app.Activity
+import android.app.Application
+import android.os.Bundle
 import com.lee.library.base.BaseApplication
+import com.lee.library.utils.DensityUtil
+import com.lee.library.utils.SPUtil
+import com.lee.library.utils.StatusUtil
 
 /**
  * @author jv.lee
  * @date 2020/3/23
- * @description
+ * @description 程序入口
  */
-class App :BaseApplication(){
+class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
 
     override fun init() {
-
+        registerActivityLifecycleCallbacks(this)
+        SPUtil.getInstance(this)
     }
 
     override fun unInit() {
+
+    }
+
+    override fun onActivityPaused(activity: Activity) {
+
+    }
+
+    override fun onActivityStarted(activity: Activity) {
+
+    }
+
+    override fun onActivityDestroyed(activity: Activity) {
+
+        DensityUtil.resetDensity(activity)
+    }
+
+    override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {
+    }
+
+    override fun onActivityStopped(activity: Activity) {
+    }
+
+    override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
+        DensityUtil.setDensity(this, activity)
+        StatusUtil.setStatusFontLight2(activity)
+    }
+
+    override fun onActivityResumed(activity: Activity) {
 
     }
 

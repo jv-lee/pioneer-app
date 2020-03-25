@@ -13,6 +13,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import setupWithNavController
 
+/**
+ * @author jv.lee
+ * @date 2020/3/24
+ * @description 程序主窗口
+ */
 class MainActivity :
     BaseActivity<ActivityMainBinding, ViewModel>(R.layout.activity_main, null),
     NavigationInterface {
@@ -61,7 +66,12 @@ class MainActivity :
      */
     private fun setupBottomNavigationBar() {
         val navGraphIds =
-            listOf(R.navigation.article, R.navigation.goods, R.navigation.girl, R.navigation.me)
+            listOf(
+                R.navigation.home,
+                R.navigation.recommend,
+                R.navigation.favorite,
+                R.navigation.me
+            )
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = binding.bottomNav.setupWithNavController(

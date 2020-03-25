@@ -1,4 +1,4 @@
-package com.lee.pioneer.model.entity
+package com.lee.pioneer.model
 
 /**
  * @author jv.lee

@@ -2,13 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/girl"
-    app:startDestination="@id/girl">
+    android:id="@+id/home"
+    app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/girl"
-        android:name="com.lee.pioneer.view.GirlFragment"
-        android:label="@string/nav_girl"
-        tools:layout="@layout/fragment_girl" />
+        android:id="@+id/home"
+        android:name="com.lee.pioneer.view.HomeFragment"
+        android:label="@string/nav_home"
+        tools:layout="@layout/fragment_home" />
 
 </navigation>

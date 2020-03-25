@@ -10,4 +10,5 @@
 
     <color name="colorThemeBackground">#F6F6F6</color>
     <color name="colorThemeItem">#FFFFFF</color>
+    <color name="colorThemeSearch">#F0F0F0</color>
 </resources>

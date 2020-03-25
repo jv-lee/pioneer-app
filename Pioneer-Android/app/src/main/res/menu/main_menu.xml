@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/article"
-        android:icon="@drawable/vector_article"
-        android:title="@string/nav_article" />
+        android:id="@+id/home"
+        android:icon="@drawable/vector_home"
+        android:title="@string/nav_home" />
     <item
-        android:id="@+id/goods"
-        android:icon="@drawable/vector_goods"
-        android:title="@string/nav_goods" />
+        android:id="@+id/recommend"
+        android:icon="@drawable/vector_recommend"
+        android:title="@string/nav_recommend" />
     <item
-        android:id="@+id/girl"
-        android:icon="@drawable/vector_gril"
-        android:title="@string/nav_girl" />
+        android:id="@+id/favorite"
+        android:icon="@drawable/vector_favorite"
+        android:title="@string/nav_favorite" />
     <item
         android:id="@+id/me"
         android:icon="@drawable/vector_me"

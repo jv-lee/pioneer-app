@@ -5,10 +5,10 @@ import com.lee.library.net.request.IRequest
 import com.lee.library.net.request.Request
 import com.lee.pioneer.const.HttpConstant
 import com.lee.pioneer.http.service.ApiService
-import com.lee.pioneer.model.entity.Banner
-import com.lee.pioneer.model.entity.Category
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.Data
+import com.lee.pioneer.model.Banner
+import com.lee.pioneer.model.Category
+import com.lee.pioneer.model.Content
+import com.lee.pioneer.model.Data
 import kotlinx.coroutines.Deferred
 
 /**

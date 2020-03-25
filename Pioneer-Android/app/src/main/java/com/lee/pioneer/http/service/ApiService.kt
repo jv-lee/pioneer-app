@@ -1,9 +1,9 @@
 package com.lee.pioneer.http.service
 
-import com.lee.pioneer.model.entity.Banner
-import com.lee.pioneer.model.entity.Category
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.Data
+import com.lee.pioneer.model.Banner
+import com.lee.pioneer.model.Category
+import com.lee.pioneer.model.Content
+import com.lee.pioneer.model.Data
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
