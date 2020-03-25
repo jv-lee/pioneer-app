@@ -1,7 +1,7 @@
 ext {
     androidId = [
             compileSdkVersion: 29,
-            minSdkVersion    : 19,
+            minSdkVersion    : 21,
             targetSdkVersion : 29,
             versionCode      : 1,
             versionName      : "1.0",
@@ -17,12 +17,12 @@ ext {
 
     //测试地址
     debugUri = [
-            BASE_URI: "https://gank.io/api/v2"
+            BASE_URI: "https://gank.io/api/v2/"
     ]
 
     //正式地址
     releaseUri = [
-            BASE_URI: "https://gank.io/api/v2"
+            BASE_URI: "https://gank.io/api/v2/"
     ]
 
     //第三方依赖版本号
@@ -46,6 +46,8 @@ ext {
 
             //生命周期
             "lifecycle"       : "androidx.lifecycle:lifecycle-extensions:2.1.0",
+
+            "multidex"        : "androidx.multidex:multidex:2.0.1",
 
             //android控件
             "appcompat"       : "androidx.appcompat:appcompat:1.1.0",

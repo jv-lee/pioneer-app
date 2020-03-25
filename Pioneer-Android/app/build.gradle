@@ -20,6 +20,11 @@ android {
         versionName androidId.versionName
 
         multiDexEnabled configs.multiDexEnabled
+
+        //指定只支持中文字符
+        resConfigs('zh-rCN')
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -60,4 +65,8 @@ android {
 
 dependencies {
     implementation project(path: ':library')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.4-all.zip
 }

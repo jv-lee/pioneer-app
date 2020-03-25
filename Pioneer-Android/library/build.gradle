@@ -12,7 +12,6 @@ android {
         versionCode androidId.versionCode
         versionName androidId.versionName
 
-        multiDexEnabled configs.multiDexEnabled
     }
 
     buildTypes {
