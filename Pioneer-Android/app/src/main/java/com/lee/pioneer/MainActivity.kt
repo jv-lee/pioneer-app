@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.lee.library.base.BaseActivity
 import com.lee.pioneer.databinding.ActivityMainBinding
-import com.lee.pioneer.view.control.NavigationInterface
+import com.lee.pioneer.view.controller.BottomNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import setupWithNavController
@@ -20,7 +20,7 @@ import setupWithNavController
  */
 class MainActivity :
     BaseActivity<ActivityMainBinding, ViewModel>(R.layout.activity_main, null),
-    NavigationInterface {
+    BottomNavController {
 
     private var currentNavController: LiveData<NavController>? = null
 

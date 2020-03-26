@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.RecommendFragment">
+        tools:context=".view.fragment.RecommendFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView

@@ -1,6 +1,7 @@
 package com.lee.library.base
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Toast
@@ -42,9 +43,15 @@ abstract class BaseFullActivity<V : ViewDataBinding, VM : ViewModel>(var layoutI
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
 
-        //设置view and data
-        bindData(savedInstanceState)
+        intentParams(intent)
+
         bindView()
+
+        bindData(savedInstanceState)
+    }
+
+    open fun intentParams(intent: Intent) {
+
     }
 
     override fun onResume() {

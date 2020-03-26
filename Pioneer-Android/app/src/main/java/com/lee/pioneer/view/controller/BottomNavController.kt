@@ -1,11 +1,11 @@
-package com.lee.pioneer.view.control
+package com.lee.pioneer.view.controller
 
 /**
  * @author jv.lee
  * @date 2020/3/15
  * @description
  */
-interface NavigationInterface {
+interface BottomNavController {
     fun hide()
     fun show()
 }

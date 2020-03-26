@@ -1,4 +1,4 @@
-package com.lee.pioneer.const
+package com.lee.pioneer.constants
 
 import com.lee.pioneer.BuildConfig
 

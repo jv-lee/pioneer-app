@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.MeFragment">
+        tools:context=".view.fragment.MeFragment">
 
         <TextView
             android:layout_width="match_parent"

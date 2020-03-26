@@ -1,5 +1,6 @@
 package com.lee.library.base
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.CoroutineScope
@@ -23,8 +25,11 @@ import java.util.*
  * @date 2019/8/16.
  * @description
  */
-abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(var layoutId: Int, var vm: Class<VM>?) :
-    DialogFragment() , CoroutineScope by CoroutineScope(Dispatchers.Main) {
+abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
+    var layoutId: Int,
+    var vm: Class<VM>?
+) :
+    DialogFragment(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     protected lateinit var binding: V
     protected lateinit var viewModel: VM
@@ -33,7 +38,11 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(var layou
     private var isVisibleView = false
     private var fistVisible = true
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         Objects.requireNonNull<Window>(dialog?.window)
             .setBackgroundDrawable(ColorDrawable(Color.parseColor("#00000000")))
         this.dialog?.setCancelable(false)
@@ -47,13 +56,21 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(var layou
         super.onActivityCreated(savedInstanceState)
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
-        bindData(savedInstanceState)
+
+        intentParams(arguments)
         bindView()
+        bindData(savedInstanceState)
+
         isVisibleView = true
         if (isVisibleUser && fistVisible) {
             fistVisible = false
             lazyLoad()
         }
+    }
+
+
+    open fun intentParams(arguments: Bundle?) {
+
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

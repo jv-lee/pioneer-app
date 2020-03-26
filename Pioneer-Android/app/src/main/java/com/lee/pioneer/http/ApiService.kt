@@ -1,9 +1,9 @@
-package com.lee.pioneer.http.service
+package com.lee.pioneer.http
 
-import com.lee.pioneer.model.Banner
-import com.lee.pioneer.model.Category
-import com.lee.pioneer.model.Content
-import com.lee.pioneer.model.Data
+import com.lee.pioneer.model.entity.Banner
+import com.lee.pioneer.model.entity.Category
+import com.lee.pioneer.model.entity.Content
+import com.lee.pioneer.model.entity.Data
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -28,7 +28,7 @@ interface ApiService {
      * GanHuo： 干货分类
      * Girl：妹子图
      */
-    @GET("categoriess/{category_type}")
+    @GET("categories/{category_type}")
     fun getCategoriesAsync(@Path("category_type") categoryType: String): Deferred<Data<Category>>
 
     /**

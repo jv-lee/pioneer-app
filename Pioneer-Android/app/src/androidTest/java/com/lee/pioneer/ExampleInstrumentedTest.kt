@@ -3,7 +3,7 @@ package com.lee.pioneer
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.lee.library.utils.LogUtil
-import com.lee.pioneer.http.ApiImpl
+import com.lee.pioneer.model.repository.ApiRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.junit.Assert.assertEquals
@@ -25,21 +25,23 @@ class ExampleInstrumentedTest {
 
 
         GlobalScope.launch {
-            val banners = ApiImpl.getInstance().getBannerAsync().await()
+            val banners = ApiRepository.getApi().getBannerAsync().await()
             LogUtil.i("banners->${banners.data.size}")
 
-            val categories = ApiImpl.getInstance().getCategoriesAsync("Article").await()
+            val categories = ApiRepository.getApi().getCategoriesAsync("Article").await()
             LogUtil.i("categories->${categories.data}")
 
             val dataList =
-                ApiImpl.getInstance().getCategoryDataAsync("Article", "Android", 1, 10).await()
+                ApiRepository.getApi().getCategoryDataAsync("Article", "Android", 1, 10)
+                    .await()
             LogUtil.i("dataList->${dataList.data.size}")
 
-            val hotData = ApiImpl.getInstance().getHotDataAsync("views", "Article", 10).await()
+            val hotData =
+                ApiRepository.getApi().getHotDataAsync("views", "Article", 10).await()
             LogUtil.i("hotData->${hotData.data.size}")
 
             val searchData =
-                ApiImpl.getInstance().getSearchDataAsync("设计模式", "Article", "Android", 1, 10)
+                ApiRepository.getApi().getSearchDataAsync("设计模式", "Article", "Android", 1, 10)
                     .await()
             LogUtil.i("searchData->${searchData.data.size}")
         }

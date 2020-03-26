@@ -65,13 +65,16 @@ abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
         super.onActivityCreated(savedInstanceState)
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
-        bindData(savedInstanceState)
+        intentParams(arguments)
         bindView()
+        bindData(savedInstanceState)
         isVisibleView = true
         if (isVisibleUser && fistVisible) {
             fistVisible = false
         }
     }
+
+    open fun intentParams(arguments: Bundle?){}
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)

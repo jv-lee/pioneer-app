@@ -21,26 +21,10 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun unInit() {
-
-    }
-
-    override fun onActivityPaused(activity: Activity) {
-
-    }
-
-    override fun onActivityStarted(activity: Activity) {
-
-    }
-
-    override fun onActivityDestroyed(activity: Activity) {
-
-        DensityUtil.resetDensity(activity)
+        unregisterActivityLifecycleCallbacks(this)
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {
-    }
-
-    override fun onActivityStopped(activity: Activity) {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
@@ -48,8 +32,20 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
         StatusUtil.setStatusFontLight2(activity)
     }
 
-    override fun onActivityResumed(activity: Activity) {
+    override fun onActivityStarted(activity: Activity) {
+    }
 
+    override fun onActivityResumed(activity: Activity) {
+    }
+
+    override fun onActivityPaused(activity: Activity) {
+    }
+
+    override fun onActivityStopped(activity: Activity) {
+    }
+
+    override fun onActivityDestroyed(activity: Activity) {
+        DensityUtil.resetDensity(activity)
     }
 
 }

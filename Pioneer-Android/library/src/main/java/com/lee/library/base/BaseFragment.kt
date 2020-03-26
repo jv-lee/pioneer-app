@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.lee.library.utils.LogUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,7 +21,10 @@ import kotlinx.coroutines.cancel
  * @date 2019/8/16.
  * @description
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(var layoutId: Int, var vm: Class<VM>?) : Fragment()
+abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
+    var layoutId: Int,
+    var vm: Class<VM>?
+) : Fragment()
     , CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     protected lateinit var binding: V
@@ -30,24 +34,38 @@ abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(var layoutId: I
     private var isVisibleView = false
     private var fistVisible = true
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         //设置viewBinding
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        LogUtil.i("onCreateView")
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        LogUtil.i("onViewCreate")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        LogUtil.i("onActivityCreate")
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
-        bindData(savedInstanceState)
+        intentParams(arguments)
         bindView()
+        bindData(savedInstanceState)
         isVisibleView = true
         if (isVisibleUser && fistVisible) {
             fistVisible = false
             lazyLoad()
         }
     }
+
+    open fun intentParams(arguments: Bundle?) {}
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -96,4 +114,5 @@ abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(var layoutId: I
     fun Fragment.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(activity, message, duration).show()
     }
+
 }
