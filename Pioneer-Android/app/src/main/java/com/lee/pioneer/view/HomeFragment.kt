@@ -1,11 +1,14 @@
 package com.lee.pioneer.view
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Observer
 import com.lee.library.base.BaseFragment
 import com.lee.pioneer.R
+import com.lee.pioneer.const.KeyConst
 import com.lee.pioneer.databinding.FragmentHomeBinding
+import com.lee.pioneer.http.ApiImpl
+import com.lee.pioneer.vm.HomeViewModel
+import kotlinx.coroutines.launch
 
 /**
  * @author jv.lee
@@ -13,10 +16,26 @@ import com.lee.pioneer.databinding.FragmentHomeBinding
  * @description
  */
 class HomeFragment :
-    BaseFragment<FragmentHomeBinding, ViewModel>(R.layout.fragment_home, null) {
+    BaseFragment<FragmentHomeBinding, HomeViewModel>(
+        R.layout.fragment_home,
+        HomeViewModel::class.java
+    ) {
 
     override fun bindData(savedInstanceState: Bundle?) {
+        viewModel.apply {
+            categoryObservable.observe(this@HomeFragment, Observer {
+                toast("list.size->" + it.size)
+            })
+            failedCodeObservable.observe(this@HomeFragment, Observer {
+                toast("failed response")
+            })
 
+            mException.observe(this@HomeFragment, Observer {
+                toast("failed response")
+            })
+        }
+
+        viewModel.buildCategoryFragment()
     }
 
     override fun bindView() {

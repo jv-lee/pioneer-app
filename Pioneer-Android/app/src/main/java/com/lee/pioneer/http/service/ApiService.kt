@@ -28,7 +28,7 @@ interface ApiService {
      * GanHuo： 干货分类
      * Girl：妹子图
      */
-    @GET("categories/{category_type}")
+    @GET("categoriess/{category_type}")
     fun getCategoriesAsync(@Path("category_type") categoryType: String): Deferred<Data<Category>>
 
     /**

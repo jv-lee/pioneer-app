@@ -10,5 +10,6 @@ import com.lee.pioneer.BuildConfig
 interface HttpConstant {
     companion object {
         const val BASE_URI = BuildConfig.BASE_URI
+        const val BASE_HTTP_SUCCESS = 100
     }
 }
