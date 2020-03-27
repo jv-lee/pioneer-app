@@ -8,6 +8,19 @@ import kotlinx.coroutines.coroutineScope
  * @date 2020/3/26
  * @description
  */
+suspend fun <T> executeResponseAny(response: T?, successBlock: (T) -> Unit) {
+    coroutineScope {
+        when (response) {
+            null -> {
+                throw Exception("response is null")
+            }
+            else -> {
+                successBlock(response)
+            }
+        }
+    }
+}
+
 suspend fun <T> executeResponse(
     response: Data<T>?,
     successBlock: (List<T>) -> Unit

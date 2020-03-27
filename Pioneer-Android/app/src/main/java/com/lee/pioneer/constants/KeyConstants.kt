@@ -9,5 +9,6 @@ interface KeyConstants {
 
     companion object {
         const val CATEGORY_TYPE = "Article"
+        const val CATEGORY_ALL = "All"
     }
 }

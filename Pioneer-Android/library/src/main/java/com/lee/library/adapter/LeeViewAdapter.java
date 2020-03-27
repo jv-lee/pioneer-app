@@ -159,7 +159,7 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         this.mData.add(data);
     }
 
-    public void clertData() {
+    public void clearData() {
         if (mData == null) {
             return;
         }

@@ -16,5 +16,9 @@
 
     <dimen name="padding_small">4dp</dimen>
 
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_medium">6dp</dimen>
+    <dimen name="margin_large">8dp</dimen>
+
     <dimen name="search_radius">6dp</dimen>
 </resources>

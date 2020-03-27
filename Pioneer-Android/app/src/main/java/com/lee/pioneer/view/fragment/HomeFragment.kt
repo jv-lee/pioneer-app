@@ -7,7 +7,6 @@ import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
-import com.lee.pioneer.tools.TabLayoutUtil
 import com.lee.pioneer.viewmodel.HomeViewModel
 
 /**
@@ -28,16 +27,15 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
         binding.tvSearch.setOnClickListener { toast("start Search .") }
         binding.vpContainer.adapter = vpAdapter
         binding.tabCategory.setupWithViewPager(binding.vpContainer)
-        TabLayoutUtil.reflex(binding.tabCategory)
     }
 
     override fun bindData() {
         viewModel.apply {
             //获取分类数据 构建分类tab 及 fragment
-            categoryObservable.observe(this@HomeFragment, Observer {
+            categoryObservable.observe(this@HomeFragment, Observer { it ->
                 it.map {
                     titles.add(it.title)
-                    fragments.add(ContentListFragment())
+                    fragments.add(ContentListFragment.newInstance(it.type))
                 }
                 vpAdapter.notifyDataSetChanged()
                 binding.vpContainer.offscreenPageLimit = fragments.size - 1
