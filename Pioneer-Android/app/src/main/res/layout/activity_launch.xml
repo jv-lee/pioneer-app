@@ -10,20 +10,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/colorThemeBackground"
         tools:context=".LaunchActivity">
 
-        <!--    通过invisible提前占位初始化view    -->
-        <com.lee.library.widget.NoScrollViewPager
-            android:id="@+id/pager_container"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.lee.library.widget.nav.BottomNavView
             android:id="@+id/bottom_nav"
@@ -34,8 +31,8 @@
             app:itemIconTint="@drawable/main_selector"
             app:itemTextColor="@drawable/main_selector"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/main_menu"
-            tools:visibility="visible" />
+            app:menu="@menu/main_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

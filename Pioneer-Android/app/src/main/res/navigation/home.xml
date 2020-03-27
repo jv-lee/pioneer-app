@@ -9,6 +9,20 @@
         android:id="@+id/homeFragment"
         android:name="com.lee.pioneer.view.fragment.HomeFragment"
         android:label="@string/nav_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_contentDetailsFragment"
+            app:destination="@id/contentDetailsFragment"
+            app:enterAnim="@anim/slide_left_in"
+            app:exitAnim="@anim/slide_right_out"
+            app:popEnterAnim="@anim/slide_right_in"
+            app:popExitAnim="@anim/slide_left_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contentDetailsFragment"
+        android:name="com.lee.pioneer.view.fragment.ContentDetailsFragment"
+        android:label="contentDetails"
+        tools:layout="@layout/fragment_content_details" />
 
 </navigation>

@@ -1,11 +1,10 @@
 package com.lee.pioneer.view.fragment
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.lee.library.adapter.UiPagerAdapter
-import com.lee.library.base.BaseFragment
-import com.lee.library.utils.LogUtil
+import com.lee.library.base.BaseNavigationFragment
+import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
 import com.lee.pioneer.tools.TabLayoutUtil
@@ -16,7 +15,7 @@ import com.lee.pioneer.viewmodel.HomeViewModel
  * @date 2020/3/24
  * @description
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
+class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
     R.layout.fragment_home,
     HomeViewModel::class.java
 ) {
@@ -32,7 +31,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         TabLayoutUtil.reflex(binding.tabCategory)
     }
 
-    override fun bindData(savedInstanceState: Bundle?) {
+    override fun bindData() {
         viewModel.apply {
             //获取分类数据 构建分类tab 及 fragment
             categoryObservable.observe(this@HomeFragment, Observer {
@@ -51,11 +50,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 }
             })
         }
+
+        viewModel.buildCategoryFragment()
     }
 
-    override fun lazyLoad() {
-        super.lazyLoad()
-        viewModel.buildCategoryFragment()
+    override fun onResume() {
+        super.onResume()
+        (activity as LaunchActivity).showView()
     }
 
 }

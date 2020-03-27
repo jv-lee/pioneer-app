@@ -4,12 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lee.library.utils.StatusUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +24,7 @@ import kotlinx.coroutines.cancel
  * @date 2019-08-15
  * @description
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : ViewModel>(
+abstract class BaseNavigationActivity<V : ViewDataBinding, VM : ViewModel>(
     var layoutId: Int,
     var vm: Class<VM>?
 ) :
@@ -35,6 +38,10 @@ abstract class BaseActivity<V : ViewDataBinding, VM : ViewModel>(
     private var firstTime: Long = 0
     private var hasBackExit = false
     private var hasBackExitTimer = 2000
+    private var navVisible = false
+
+    private var bottomNavigationView: BottomNavigationView? = null
+    private var fragmentContainerView: FragmentContainerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         StatusUtil.statusBar(this, false)
@@ -98,6 +105,30 @@ abstract class BaseActivity<V : ViewDataBinding, VM : ViewModel>(
 
     fun Activity.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(mActivity, message, duration).show()
+    }
+
+    public fun hideView() {
+        navVisible = true
+        bottomNavigationView?.visibility = View.GONE
+    }
+
+    public fun showView() {
+        if (navVisible) {
+            bottomNavigationView?.visibility = View.VISIBLE
+            fragmentContainerView?.visibility = View.VISIBLE
+        }
+    }
+
+    protected fun setNavigationVisible(visible: Boolean) {
+        this.navVisible = visible
+    }
+
+    protected fun withBottomNavigationView(bottomNavigationView: BottomNavigationView) {
+        this.bottomNavigationView = bottomNavigationView
+    }
+
+    protected fun withFragmentContainerView(fragmentContainerView: FragmentContainerView) {
+        this.fragmentContainerView = fragmentContainerView
     }
 
 }

@@ -24,7 +24,7 @@ import kotlinx.coroutines.cancel
 abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
     var layoutId: Int,
     var vm: Class<VM>?
-) : BottomSheetDialogFragment() , CoroutineScope by CoroutineScope(Dispatchers.Main) {
+) : BottomSheetDialogFragment(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     protected lateinit var binding: V
     protected lateinit var viewModel: VM
@@ -35,7 +35,11 @@ abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
         return super.onCreateDialog(savedInstanceState) as BottomSheetDialog
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         //设置viewBinding
         binding = DataBindingUtil.inflate(layoutInflater, layoutId, container, false)
         return binding.root
@@ -62,12 +66,12 @@ abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
         super.onActivityCreated(savedInstanceState)
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
-        intentParams(arguments)
+        intentParams(arguments, savedInstanceState)
         bindView()
-        bindData(savedInstanceState)
+        bindData()
     }
 
-    open fun intentParams(arguments: Bundle?){}
+    open fun intentParams(arguments: Bundle?, savedInstanceState: Bundle?) {}
 
     @ExperimentalCoroutinesApi
     override fun onDetach() {
@@ -76,15 +80,16 @@ abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
     }
 
     /**
+     * 设置view基础配置
+     */
+    protected abstract fun bindView()
+
+    /**
      * 设置加载数据等业务操作
      *
      * @param savedInstanceState 重置回调参数
      */
-    protected abstract fun bindData(savedInstanceState: Bundle?)
+    protected abstract fun bindData()
 
-    /**
-     * 设置view基础配置
-     */
-    protected abstract fun bindView()
 
 }

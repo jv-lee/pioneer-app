@@ -53,13 +53,9 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
 
-        intentParams(arguments)
+        intentParams(arguments,savedInstanceState)
         bindView()
-        bindData(savedInstanceState)
-
-    }
-
-    open fun intentParams(arguments: Bundle?) {
+        bindData()
 
     }
 
@@ -78,16 +74,23 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
     }
 
     /**
-     * 设置加载数据等业务操作
-     *
-     * @param savedInstanceState 重置回调参数
+     * 初始化参数配置
      */
-    protected abstract fun bindData(savedInstanceState: Bundle?)
+    open fun intentParams(arguments: Bundle?,savedInstanceState: Bundle?) {
+
+    }
 
     /**
      * 设置view基础配置
      */
     protected abstract fun bindView()
+
+    /**
+     * 设置加载数据等业务操作
+     *
+     */
+    protected abstract fun bindData()
+
 
     /**
      * 使用page 多fragment时 懒加载

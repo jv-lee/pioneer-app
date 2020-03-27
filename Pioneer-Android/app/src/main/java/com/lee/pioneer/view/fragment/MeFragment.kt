@@ -1,9 +1,8 @@
 package com.lee.pioneer.view.fragment
 
-import android.os.Bundle
 import androidx.lifecycle.ViewModel
-import com.lee.library.base.BaseFragment
-import com.lee.library.utils.LogUtil
+import com.lee.library.base.BaseNavigationFragment
+import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
 
@@ -13,18 +12,19 @@ import com.lee.pioneer.databinding.FragmentMeBinding
  * @description
  */
 class MeFragment :
-    BaseFragment<FragmentMeBinding, ViewModel>(R.layout.fragment_me, null) {
+    BaseNavigationFragment<FragmentMeBinding, ViewModel>(R.layout.fragment_me, null) {
 
     override fun bindView() {
 
     }
 
-    override fun bindData(savedInstanceState: Bundle?) {
+    override fun bindData() {
     }
 
-    override fun lazyLoad() {
-        super.lazyLoad()
 
+    override fun onResume() {
+        super.onResume()
+        (activity as LaunchActivity).showView()
     }
 
 }

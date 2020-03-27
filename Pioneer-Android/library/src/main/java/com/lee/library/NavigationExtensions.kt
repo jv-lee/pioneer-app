@@ -1,4 +1,4 @@
-/*
+package com.lee.library/*
  * Copyright 2019, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.lee.pioneer.R
 
 /**
  * Manages the various graphs needed for a [BottomNavigationView].

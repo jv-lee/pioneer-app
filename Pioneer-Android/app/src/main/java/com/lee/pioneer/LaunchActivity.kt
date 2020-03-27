@@ -1,67 +1,46 @@
 package com.lee.pioneer
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.lee.library.adapter.UiPagerAdapter
-import com.lee.library.base.BaseActivity
-import com.lee.library.utils.LogUtil
+import androidx.navigation.NavController
+import com.lee.library.base.BaseNavigationActivity
+import com.lee.library.setupWithNavController
 import com.lee.pioneer.databinding.ActivityLaunchBinding
-import com.lee.pioneer.view.controller.BottomNavController
-import com.lee.pioneer.view.fragment.FavoriteFragment
-import com.lee.pioneer.view.fragment.HomeFragment
-import com.lee.pioneer.view.fragment.MeFragment
-import com.lee.pioneer.view.fragment.RecommendFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
  * @author jv.lee
- * @date 2020.3.27
- * @description 程序主窗口 使用ViewPager去控制多fragment分页
+ * @date 2020/3/24
+ * @description 程序主窗口 使用FragmentContainerView去控制多fragment分页 单Activity架构 使用navigation框架
  */
 class LaunchActivity :
-    BaseActivity<ActivityLaunchBinding, ViewModel>(R.layout.activity_launch, null),
-    BottomNavController {
+    BaseNavigationActivity<ActivityLaunchBinding, ViewModel>(R.layout.activity_launch, null) {
 
-    private val vpAdapter by lazy { UiPagerAdapter(supportFragmentManager, fragments, titles) }
-    private val fragments by lazy {
-        listOf<Fragment>(
-            HomeFragment(),
-            RecommendFragment(),
-            FavoriteFragment(),
-            MeFragment()
-        )
-    }
-    private val titles by lazy {
-        listOf(
-            getString(R.string.nav_home),
-            getString(R.string.nav_recommend),
-            getString(R.string.nav_favorite),
-            getString(R.string.nav_me)
-        )
+    private var currentNavController: LiveData<NavController>? = null
+
+    override fun intentParams(intent: Intent, savedInstanceState: Bundle?) {
+        super.intentParams(intent, savedInstanceState)
+        savedInstanceState ?: main()
     }
 
-    override fun bindView() {
-        binding.pagerContainer.adapter = vpAdapter
-        binding.pagerContainer.offscreenPageLimit = fragments.size - 1
-        binding.pagerContainer.setNoScroll(true)
-        binding.bottomNav.bindViewPager(binding.pagerContainer)
-    }
-
-    override fun bindData(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
         main()
     }
 
-    override fun hide() {
-        binding.bottomNav.visibility = View.GONE
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
     }
 
-    override fun show() {
-        binding.bottomNav.visibility = View.VISIBLE
-        binding.pagerContainer.visibility = View.VISIBLE
+    override fun bindView() {
+
+    }
+
+    override fun bindData() {
     }
 
     /**
@@ -69,17 +48,45 @@ class LaunchActivity :
      */
     private fun main() {
         launch {
+            setupBottomNavigationBar()
             delay(1000)
             initMainUi()
         }
     }
 
     /**
-     * TODO 初始化主界面ui
+     * TODO 初始化Fragment导航
+     */
+    private fun setupBottomNavigationBar() {
+        withBottomNavigationView(binding.bottomNav)
+        withFragmentContainerView(binding.navHostContainer)
+
+        val navGraphIds =
+            listOf(
+                R.navigation.home,
+                R.navigation.recommend,
+                R.navigation.favorite,
+                R.navigation.me
+            )
+
+        // Setup the bottom navigation view with a list of navigation graphs
+        val controller = binding.bottomNav.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.nav_host_container,
+            intent = intent
+        )
+        currentNavController = controller
+    }
+
+    /**
+     * TODO 显示主界面
      */
     private fun initMainUi() {
         window.decorView.background =
             ContextCompat.getDrawable(applicationContext, R.color.colorThemeBackground)
-        show()
+        setNavigationVisible(true)
+        showView()
     }
+
 }

@@ -21,7 +21,10 @@ import kotlinx.coroutines.cancel
  * @date 2019-08-15
  * @description
  */
-abstract class BaseFullActivity<V : ViewDataBinding, VM : ViewModel>(var layoutId: Int, var vm: Class<VM>?) : AppCompatActivity()
+abstract class BaseFullActivity<V : ViewDataBinding, VM : ViewModel>(
+    var layoutId: Int,
+    var vm: Class<VM>?
+) : AppCompatActivity()
     , CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     protected lateinit var binding: V
@@ -43,14 +46,14 @@ abstract class BaseFullActivity<V : ViewDataBinding, VM : ViewModel>(var layoutI
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
 
-        intentParams(intent)
+        intentParams(intent, savedInstanceState)
 
         bindView()
 
-        bindData(savedInstanceState)
+        bindData()
     }
 
-    open fun intentParams(intent: Intent) {
+    open fun intentParams(intent: Intent, savedInstanceState: Bundle?) {
 
     }
 
@@ -60,9 +63,9 @@ abstract class BaseFullActivity<V : ViewDataBinding, VM : ViewModel>(var layoutI
         StatusUtil.fullWindow(this)
     }
 
-    protected abstract fun bindData(savedInstanceState: Bundle?)
     protected abstract fun bindView()
 
+    protected abstract fun bindData()
 
     /**
      * 设置back键位 连按两次才可退出activity
