@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.lee.library.adapter.UiPagerAdapter
 import com.lee.library.base.BaseFragment
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
 import com.lee.pioneer.tools.TabLayoutUtil

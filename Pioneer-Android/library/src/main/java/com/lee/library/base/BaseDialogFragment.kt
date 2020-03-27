@@ -1,6 +1,5 @@
 package com.lee.library.base
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.CoroutineScope
@@ -34,8 +32,6 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
     protected lateinit var binding: V
     protected lateinit var viewModel: VM
 
-    private var isVisibleUser = false
-    private var isVisibleView = false
     private var fistVisible = true
 
     override fun onCreateView(
@@ -61,31 +57,17 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
         bindView()
         bindData(savedInstanceState)
 
-        isVisibleView = true
-        if (isVisibleUser && fistVisible) {
-            fistVisible = false
-            lazyLoad()
-        }
     }
-
 
     open fun intentParams(arguments: Bundle?) {
 
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            isVisibleUser = true
-            onFragmentResume()
-            //首次用户可见 开始加载数据
-            if (isVisibleView && isVisibleUser && fistVisible) {
-                fistVisible = false
-                lazyLoad()
-            }
-        } else {
-            isVisibleUser = false
-            onFragmentPause()
+    override fun onResume() {
+        super.onResume()
+        if (fistVisible) {
+            fistVisible = false
+            lazyLoad()
         }
     }
 
@@ -94,10 +76,6 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
         super.onDetach()
         cancel()
     }
-
-    open fun onFragmentResume() {}
-
-    open fun onFragmentPause() {}
 
     /**
      * 设置加载数据等业务操作

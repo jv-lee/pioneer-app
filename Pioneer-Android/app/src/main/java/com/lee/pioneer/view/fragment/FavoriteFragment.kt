@@ -14,11 +14,15 @@ import com.lee.pioneer.databinding.FragmentFavoriteBinding
 class FavoriteFragment :
     BaseFragment<FragmentFavoriteBinding, ViewModel>(R.layout.fragment_favorite, null) {
 
-    override fun bindData(savedInstanceState: Bundle?) {
+    override fun bindView() {
 
     }
 
-    override fun bindView() {
+    override fun bindData(savedInstanceState: Bundle?) {
+    }
+
+    override fun lazyLoad() {
+        super.lazyLoad()
 
     }
 

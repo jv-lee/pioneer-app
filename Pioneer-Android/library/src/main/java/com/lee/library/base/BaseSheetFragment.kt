@@ -30,9 +30,6 @@ abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
     protected lateinit var viewModel: VM
 
     private var mBehavior: BottomSheetBehavior<*>? = null
-    private var isVisibleUser = false
-    private var isVisibleView = false
-    private var fistVisible = true
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState) as BottomSheetDialog
@@ -68,38 +65,15 @@ abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
         intentParams(arguments)
         bindView()
         bindData(savedInstanceState)
-        isVisibleView = true
-        if (isVisibleUser && fistVisible) {
-            fistVisible = false
-        }
     }
 
     open fun intentParams(arguments: Bundle?){}
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            isVisibleUser = true
-            onFragmentResume()
-            //首次用户可见 开始加载数据
-            if (isVisibleView && isVisibleUser && fistVisible) {
-                fistVisible = false
-            }
-        } else {
-            isVisibleUser = false
-            onFragmentPause()
-        }
-    }
 
     @ExperimentalCoroutinesApi
     override fun onDetach() {
         super.onDetach()
         cancel()
     }
-
-    open fun onFragmentResume() {}
-
-    open fun onFragmentPause() {}
 
     /**
      * 设置加载数据等业务操作

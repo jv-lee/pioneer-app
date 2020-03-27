@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.lee.library.base.BaseActivity
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.databinding.ActivityMainBinding
 import com.lee.pioneer.view.controller.BottomNavController
 import kotlinx.coroutines.delay
@@ -16,7 +17,7 @@ import setupWithNavController
 /**
  * @author jv.lee
  * @date 2020/3/24
- * @description 程序主窗口
+ * @description 程序主窗口 使用FragmentContainerView去控制多fragment分页
  */
 class MainActivity :
     BaseActivity<ActivityMainBinding, ViewModel>(R.layout.activity_main, null),
@@ -38,7 +39,6 @@ class MainActivity :
     }
 
     override fun bindView() {
-
     }
 
     override fun hide() {

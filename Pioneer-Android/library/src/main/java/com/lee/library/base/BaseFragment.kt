@@ -1,6 +1,7 @@
 package com.lee.library.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.lee.library.utils.LogUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
+import java.lang.reflect.ParameterizedType
 
 /**
  * @author jv.lee
@@ -30,8 +31,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
     protected lateinit var binding: V
     protected lateinit var viewModel: VM
 
-    private var isVisibleUser = false
-    private var isVisibleView = false
     private var fistVisible = true
 
     override fun onCreateView(
@@ -39,59 +38,53 @@ abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.i(getChildClassName(),"onCreateView()")
         //设置viewBinding
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        LogUtil.i("onCreateView")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LogUtil.i("onViewCreate")
+        Log.i(getChildClassName(),"onViewCreated()")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtil.i("onActivityCreate")
+        Log.i(getChildClassName(),"onActivityCreated()")
         //设置viewModel
         if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
         intentParams(arguments)
         bindView()
         bindData(savedInstanceState)
-        isVisibleView = true
-        if (isVisibleUser && fistVisible) {
-            fistVisible = false
-            lazyLoad()
-        }
     }
 
-    open fun intentParams(arguments: Bundle?) {}
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            isVisibleUser = true
-            onFragmentResume()
-            //首次用户可见 开始加载数据
-            if (isVisibleView && isVisibleUser && fistVisible) {
-                fistVisible = false
-                lazyLoad()
-            }
-        } else {
-            isVisibleUser = false
-            onFragmentPause()
+    override fun onResume() {
+        super.onResume()
+        Log.i(getChildClassName(),"onResume()")
+        if (fistVisible) {
+            fistVisible = false
+            lazyLoad()
         }
     }
 
     @ExperimentalCoroutinesApi
     override fun onDetach() {
         super.onDetach()
+        Log.i(getChildClassName(),"onDetach()")
         cancel()
     }
 
-    open fun onFragmentResume() {}
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i(getChildClassName(),"onDestroyView()")
+    }
 
-    open fun onFragmentPause() {}
+    /**
+     * 初始化参数传递
+     */
+    open fun intentParams(arguments: Bundle?) {}
 
 
     /**
@@ -109,10 +102,16 @@ abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
     /**
      * 使用page 多fragment时 懒加载
      */
-    open fun lazyLoad() {}
+    open fun lazyLoad() {
+        Log.i(getChildClassName(),"lazyLoad()")
+    }
 
     fun Fragment.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(activity, message, duration).show()
+    }
+
+    private fun getChildClassName(): String {
+        return javaClass.simpleName
     }
 
 }
