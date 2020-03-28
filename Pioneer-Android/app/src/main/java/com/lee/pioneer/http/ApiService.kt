@@ -1,12 +1,10 @@
 package com.lee.pioneer.http
 
-import com.lee.pioneer.model.entity.Banner
-import com.lee.pioneer.model.entity.Category
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.Data
+import com.lee.pioneer.model.entity.*
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 /**
  * @author jv.lee
@@ -95,5 +93,8 @@ interface ApiService {
         @Path("page") page: Int,
         @Path("count") count: Int
     ): Deferred<Data<Content>>
+
+    @GET
+    fun getWanData(@Url url: String): Deferred<WanData>
 
 }

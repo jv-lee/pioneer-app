@@ -46,19 +46,31 @@ class ContentListFragment :
     override fun bindData() {
         viewModel.apply {
             contentListObservable.observe(this@ContentListFragment, Observer {
-//                mAdapter.addData(it.data)
+                //                mAdapter.addData(it.data)
 //                mAdapter.notifyDataSetChanged()
                 toast("dataSize:${it.data.size}")
+            })
+            bannerObservable.observe(this@ContentListFragment, Observer {
+                toast("bannerSize:${it.data.size}")
+            })
+            wandataObservable.observe(this@ContentListFragment, Observer {
+                toast("wandataSize:${it?.data?.datas?.size}")
             })
             failedEvent.observe(this@ContentListFragment, Observer { it ->
                 it.message?.let { toast(it) }
             })
         }
 
+        viewModel.loadWanData()
+
+        viewModel.loadBanner()
+
         type?.let {
             //是否到最后一页 (page * page_count) > total_counts
             viewModel.loadListData(it, false)
         }
+
+
 
     }
 

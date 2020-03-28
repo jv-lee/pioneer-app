@@ -49,7 +49,7 @@ class LaunchActivity :
     private fun main() {
         launch {
             setupBottomNavigationBar()
-            delay(1000)
+            delay(2000)
             initMainUi()
         }
     }
