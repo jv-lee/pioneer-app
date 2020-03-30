@@ -9,7 +9,7 @@ import com.lee.pioneer.databinding.FragmentFavoriteBinding
 /**
  * @author jv.lee
  * @date 2020/3/24
- * @description
+ * @description 收藏页面
  */
 class FavoriteFragment :
     BaseNavigationFragment<FragmentFavoriteBinding, ViewModel>(R.layout.fragment_favorite, null) {

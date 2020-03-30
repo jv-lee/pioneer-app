@@ -9,7 +9,7 @@ import retrofit2.http.Url
 /**
  * @author jv.lee
  * @date 2020/3/24
- * @description
+ * @description 干货集中营API
  */
 interface ApiService {
 

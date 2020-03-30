@@ -8,7 +8,7 @@ import com.lee.pioneer.view.item.ContentSignItem
 /**
  * @author jv.lee
  * @date 2020/3/27
- * @description
+ * @description 内容列表适配器
  */
 class ContentAdapter(context: Context, data: ArrayList<Content>) :
     LeeViewAdapter<Content>(context, data) {

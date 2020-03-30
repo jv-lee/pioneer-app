@@ -14,7 +14,7 @@ import com.lee.pioneer.model.repository.ApiRepository
 /**
  * @author jv.lee
  * @date 2020/3/27
- * @description
+ * @description 内容列表 ViewModel
  */
 class ContentListViewModel(application: Application) : BaseViewModel(application) {
 

@@ -12,7 +12,7 @@ import com.lee.pioneer.viewmodel.HomeViewModel
 /**
  * @author jv.lee
  * @date 2020/3/24
- * @description
+ * @description 主页
  */
 class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
     R.layout.fragment_home,

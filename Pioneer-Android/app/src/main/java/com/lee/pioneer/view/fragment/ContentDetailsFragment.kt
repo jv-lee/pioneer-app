@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import com.lee.pioneer.R
 
 /**
- * A simple [Fragment] subclass.
+ * @author jv.lee
+ * @date 2020/3/24
+ * @description 内容详情页
  */
 class ContentDetailsFragment : Fragment() {
 

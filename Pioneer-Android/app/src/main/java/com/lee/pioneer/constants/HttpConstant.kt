@@ -5,7 +5,7 @@ import com.lee.pioneer.BuildConfig
 /**
  * @author jv.lee
  * @date 2020/3/24
- * @description
+ * @description 服务端常量
  */
 interface HttpConstant {
     companion object {

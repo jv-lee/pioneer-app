@@ -15,7 +15,8 @@ private const val ARG_PARAM_TYPE = "arg_param_type"
 
 /**
  * @author jv.lee
- * TODO 内容列表页面
+ * @date 2020/3/24
+ * @description 内容列表页
  */
 class ContentListFragment :
     BaseNavigationFragment<FragmentContentListBinding, ContentListViewModel>(

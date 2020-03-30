@@ -9,7 +9,7 @@ import com.lee.pioneer.model.entity.Content
 /**
  * @author jv.lee
  * @date 2020/3/27
- * @description
+ * @description 内容item 单图样式
  */
 class ContentSignItem : LeeViewItem<Content> {
     override fun getItemLayout(): Int {

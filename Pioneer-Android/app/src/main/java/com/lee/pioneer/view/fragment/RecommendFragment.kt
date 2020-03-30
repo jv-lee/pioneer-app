@@ -9,7 +9,7 @@ import com.lee.pioneer.databinding.FragmentRecommendBinding
 /**
  * @author jv.lee
  * @date 2020/3/24
- * @description
+ * @description 推荐页面
  */
 class RecommendFragment :
     BaseNavigationFragment<FragmentRecommendBinding, ViewModel>(R.layout.fragment_recommend, null) {

@@ -9,7 +9,7 @@ import com.lee.pioneer.databinding.FragmentMeBinding
 /**
  * @author jv.lee
  * @date 2020/3/24
- * @description
+ * @description 我的页面
  */
 class MeFragment :
     BaseNavigationFragment<FragmentMeBinding, ViewModel>(R.layout.fragment_me, null) {
