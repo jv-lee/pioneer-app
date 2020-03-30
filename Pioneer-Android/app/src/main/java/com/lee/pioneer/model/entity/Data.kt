@@ -11,6 +11,7 @@ data class Data<T>(
     val count: Int,
     val hot: String,
     val category: String,
+    val page: Int,
     val page_count: Int,
     val total_counts: Int
 )
@@ -44,7 +45,6 @@ data class Content(
     val _id: String,
     val author: String,
     val category: String,
-//    val content: String,
     val createdAt: String,
     val desc: String,
     val images: List<String>,

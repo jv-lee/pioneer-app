@@ -18,22 +18,20 @@ import com.lee.pioneer.model.repository.ApiRepository
  */
 class ContentListViewModel(application: Application) : BaseViewModel(application) {
 
-    var page = 1
+    var page = 0
     val contentListObservable by lazy { MutableLiveData<Data<Content>>() }
     val bannerObservable by lazy { MutableLiveData<Data<Banner>>() }
     val wandataObservable by lazy { MutableLiveData<WanData>() }
 
     fun loadListData(type: String, isLoadMore: Boolean) {
-        if (!isLoadMore) page = 1
+        if (!isLoadMore) page = 0
         launch(-1) {
-            LogUtil.i("loadData Start")
             val response = ApiRepository.getApi().getCategoryDataAsync(
                 KeyConstants.CATEGORY_ALL,
                 type,
-                page,
+                ++page,
                 20
             ).await()
-            LogUtil.i("loadData End")
             contentListObservable.value = response
         }
     }

@@ -47,6 +47,7 @@ ext {
             //生命周期
             "lifecycle"       : "androidx.lifecycle:lifecycle-extensions:2.1.0",
 
+            //分包库
             "multidex"        : "androidx.multidex:multidex:2.0.1",
 
             //android控件

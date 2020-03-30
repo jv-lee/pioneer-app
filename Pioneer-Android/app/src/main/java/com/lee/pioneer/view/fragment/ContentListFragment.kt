@@ -2,15 +2,14 @@ package com.lee.pioneer.view.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.utils.LogUtil
-import com.lee.pioneer.LaunchActivity
+import com.lee.library.widget.StatusLayout.*
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentContentListBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.ContentListViewModel
+import executePageCompleted
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
 
@@ -39,39 +38,41 @@ class ContentListFragment :
     }
 
     override fun bindView() {
-        binding.rvContainer.adapter = mAdapter
+        binding.status.setStatus(STATUS_LOADING)
+
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
+        binding.rvContainer.adapter = mAdapter.proxy
+        mAdapter.openLoadMore()
+        mAdapter.setAutoLoadMoreListener {
+            type?.let { viewModel.loadListData(it, true) }
+        }
+
+        binding.refresh.setOnRefreshListener {
+            type?.let { viewModel.loadListData(it, false) }
+        }
     }
 
     override fun bindData() {
         viewModel.apply {
             contentListObservable.observe(this@ContentListFragment, Observer {
-                //                mAdapter.addData(it.data)
-//                mAdapter.notifyDataSetChanged()
-                toast("dataSize:${it.data.size}")
+                executePageCompleted(it, mAdapter,
+                    refreshBlock = {
+                        binding.status.setStatus(STATUS_DATA)
+                        binding.refresh.isRefreshing = false
+                    }, emptyBlock = {
+                        binding.status.setStatus(STATUS_EMPTY_DATA)
+                        binding.refresh.isRefreshing = false
+                    })
             })
-            bannerObservable.observe(this@ContentListFragment, Observer {
-                toast("bannerSize:${it.data.size}")
-            })
-            wandataObservable.observe(this@ContentListFragment, Observer {
-                toast("wandataSize:${it?.data?.datas?.size}")
-            })
+
             failedEvent.observe(this@ContentListFragment, Observer { it ->
                 it.message?.let { toast(it) }
             })
         }
+    }
 
-        viewModel.loadWanData()
-
-        viewModel.loadBanner()
-
-        type?.let {
-            //是否到最后一页 (page * page_count) > total_counts
-            viewModel.loadListData(it, false)
-        }
-
-
-
+    override fun lazyLoad() {
+        type?.let { viewModel.loadListData(it, false) }
     }
 
 
