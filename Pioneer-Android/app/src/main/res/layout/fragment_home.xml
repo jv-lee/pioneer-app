@@ -51,6 +51,7 @@
             app:tabMode="scrollable"
             app:tabRippleColor="@android:color/transparent" />
 
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_container"
             android:layout_width="0dp"

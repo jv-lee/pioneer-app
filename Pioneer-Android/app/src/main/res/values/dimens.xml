@@ -11,7 +11,7 @@
 
     <dimen name="tab_height">36dp</dimen>
 
-    <dimen name="margin_item">16dp</dimen>
+    <dimen name="margin_item">8dp</dimen>
     <dimen name="padding_item">16dp</dimen>
 
     <dimen name="padding_small">4dp</dimen>

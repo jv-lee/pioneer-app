@@ -3,7 +3,7 @@ package com.lee.pioneer.view.adapter
 import android.content.Context
 import com.lee.library.adapter.LeeViewAdapter
 import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.view.item.ContentSignItem
+import com.lee.pioneer.view.adapter.item.ContentSignItem
 
 /**
  * @author jv.lee
