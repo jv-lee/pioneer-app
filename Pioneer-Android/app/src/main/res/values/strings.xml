@@ -7,7 +7,10 @@
     <string name="nav_me">我的</string>
     <string name="search_hint">点击搜索内容</string>
 
+    <string name="code">这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_like_text">点赞</string>
+    <string name="item_view_text">浏览</string>
 
 </resources>

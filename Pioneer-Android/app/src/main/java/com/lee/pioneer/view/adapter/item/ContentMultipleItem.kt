@@ -12,12 +12,13 @@ import com.lee.pioneer.tools.ViewTools
 
 /**
  * @author jv.lee
- * @date 2020/3/27
- * @description 内容item 单图样式
+ * @date 2020/3/31
+ * @description 内容item 多图样式
  */
-class ContentSignItem : LeeViewItem<Content> {
+class ContentMultipleItem : LeeViewItem<Content> {
+
     override fun getItemLayout(): Int {
-        return R.layout.item_content_sign
+        return R.layout.item_content_multiple
     }
 
     override fun openClick(): Boolean {
@@ -29,7 +30,7 @@ class ContentSignItem : LeeViewItem<Content> {
     }
 
     override fun isItemView(entity: Content?, position: Int): Boolean {
-        return entity?.images?.size == 1
+        return entity?.images?.size!! > 1
     }
 
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
