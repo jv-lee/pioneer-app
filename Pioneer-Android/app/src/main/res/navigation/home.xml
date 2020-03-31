@@ -18,6 +18,11 @@
             app:popEnterAnim="@anim/slide_right_in"
             app:popExitAnim="@anim/slide_left_out"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="content"
+            app:argType="string">
+
+        </argument>
     </fragment>
 
     <fragment

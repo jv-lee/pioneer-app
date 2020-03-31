@@ -49,7 +49,7 @@ class ContentListFragment :
         mAdapter.openLoadMore()
         mAdapter.setOnItemClickListener { view, entity, position ->
             findNavController().navigate(R.id.action_homeFragment_to_contentDetailsFragment)
-            (activity as LaunchActivity).hideView()
+            hideNavigation()
         }
         mAdapter.setAutoLoadMoreListener {
             type?.let { viewModel.loadListData(it, true) }
