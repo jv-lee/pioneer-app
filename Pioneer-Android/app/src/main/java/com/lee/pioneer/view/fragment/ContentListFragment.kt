@@ -2,9 +2,11 @@ package com.lee.pioneer.view.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.StatusLayout.*
+import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentContentListBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
@@ -43,7 +45,12 @@ class ContentListFragment :
 
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
+
         mAdapter.openLoadMore()
+        mAdapter.setOnItemClickListener { view, entity, position ->
+            findNavController().navigate(R.id.action_homeFragment_to_contentDetailsFragment)
+            (activity as LaunchActivity).hideView()
+        }
         mAdapter.setAutoLoadMoreListener {
             type?.let { viewModel.loadListData(it, true) }
         }
@@ -70,11 +77,15 @@ class ContentListFragment :
                 it.message?.let { toast(it) }
             })
         }
+        type?.let {
+            if (type.equals("Android")) viewModel.loadListData(it, false)
+        }
     }
 
     override fun lazyLoad() {
-        type?.let { viewModel.loadListData(it, false) }
+        type?.let {
+            if (!type.equals("Android")) viewModel.loadListData(it, false)
+        }
     }
-
 
 }

@@ -71,6 +71,13 @@ interface ApiService {
     ): Deferred<Data<Content>>
 
     /**
+     * 文章详情 API
+     * @param postId 可接受参数 文章Id
+     */
+    @GET("post/{post_id}")
+    fun getDetailsAsync(@Path("post_id") postId: String): Deferred<Any>
+
+    /**
      * TODO 文章评论获取 API
      * @param postId 可接受参数 文章Id
      */

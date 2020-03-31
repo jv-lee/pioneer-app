@@ -23,7 +23,7 @@ class RecommendFragment :
 
     override fun onResume() {
         super.onResume()
-        (activity as LaunchActivity).showView()
+        showNavigation()
     }
 
 }

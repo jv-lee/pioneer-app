@@ -22,4 +22,7 @@
     <dimen name="margin_large">8dp</dimen>
 
     <dimen name="search_radius">6dp</dimen>
+    <dimen name="item_picture_radius">2dp</dimen>
+    <dimen name="item_picture_width">106dp</dimen>
+    <dimen name="item_picture_height">68dp</dimen>
 </resources>

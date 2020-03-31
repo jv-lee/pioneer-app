@@ -2,6 +2,7 @@ package com.lee.pioneer.view.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.LaunchActivity
@@ -19,12 +20,15 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
     HomeViewModel::class.java
 ) {
 
-    private val vpAdapter by lazy { UiPagerAdapter(childFragmentManager, fragments, titles) }
-    private val fragments = ArrayList<Fragment>()
-    private val titles = ArrayList<String>()
+    private val vpAdapter by lazy {
+        UiPagerAdapter(childFragmentManager, ArrayList<Fragment>(), ArrayList<String>())
+    }
 
     override fun bindView() {
-        binding.tvSearch.setOnClickListener { toast("start Search .") }
+        binding.tvSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_contentDetailsFragment)
+            (activity as LaunchActivity).hideView()
+        }
         binding.vpContainer.adapter = vpAdapter
         binding.tabCategory.setupWithViewPager(binding.vpContainer)
     }
@@ -34,11 +38,11 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
             //获取分类数据 构建分类tab 及 fragment
             categoryObservable.observe(this@HomeFragment, Observer { it ->
                 it.map {
-                    titles.add(it.title)
-                    fragments.add(ContentListFragment.newInstance(it.type))
+                    vpAdapter.tabList.add(it.title)
+                    vpAdapter.fragmentList.add(ContentListFragment.newInstance(it.type))
                 }
                 vpAdapter.notifyDataSetChanged()
-                binding.vpContainer.offscreenPageLimit = fragments.size - 1
+                binding.vpContainer.offscreenPageLimit = vpAdapter.count - 1
             })
 
             //获取
@@ -48,13 +52,22 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
                 }
             })
         }
-
         viewModel.buildCategoryFragment()
     }
 
     override fun onResume() {
         super.onResume()
-        (activity as LaunchActivity).showView()
+        showNavigation()
+        //重新更新view
+        if (binding.vpContainer.childCount == 0) {
+            vpAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        //清除view引用
+        binding.vpContainer.removeAllViews()
     }
 
 }

@@ -39,13 +39,10 @@ class ContentTextItem : LeeViewItem<Content> {
             val tvCategory = getView<TextView>(R.id.tv_category)
             val tvTitle = getView<TextView>(R.id.tv_title)
             val tvDescription = getView<TextView>(R.id.tv_description)
-            val ivPicture = getView<ImageView>(R.id.iv_picture)
             val tvLike = getView<TextView>(R.id.tv_like)
             val tvViews = getView<TextView>(R.id.tv_view)
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
-                GlideTools.get().loadCenterCopy(images[0], ivPicture)
-
                 tvAuthor.text = author
                 tvCategory.text = category
                 tvTitle.text = title

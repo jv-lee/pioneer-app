@@ -2,6 +2,7 @@ package com.lee.pioneer.view.adapter.item
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.TimeUtil
@@ -43,8 +44,12 @@ class ContentSignItem : LeeViewItem<Content> {
             val tvViews = getView<TextView>(R.id.tv_view)
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
+                //设置图片
+                val pictureRadius =
+                    ivPicture.context.resources.getDimension(R.dimen.item_picture_radius).toInt()
                 GlideTools.get().loadCenterCopy(images[0], ivPicture)
 
+                //设置文本
                 tvAuthor.text = author
                 tvCategory.text = category
                 tvTitle.text = title
