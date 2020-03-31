@@ -12,13 +12,10 @@
         tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.ContentDetailsFragment">
 
-        <TextView
-            android:id="@+id/tv_click"
+        <com.lee.library.widget.WebViewEx
+            android:id="@+id/web"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="这是详情页面" />
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 </layout>

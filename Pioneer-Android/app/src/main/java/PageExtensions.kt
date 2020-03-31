@@ -8,7 +8,7 @@ import com.lee.pioneer.model.entity.Data
  */
 
 fun <T> executePageCompleted(
-    data: Data<T>,
+    data: Data<List<T>>,
     adapter: LeeViewAdapter<T>,
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}

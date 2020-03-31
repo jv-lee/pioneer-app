@@ -78,13 +78,17 @@ public class WebViewEx extends WebView implements LifecycleObserver {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                String scheme = request.getUrl().getScheme();
-                if (!TextUtils.isEmpty(scheme) && !scheme.equals("http") && !scheme.equals("https")) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    view.getContext().getApplicationContext().startActivity(intent);
-                    return true;
+                try {
+                    String scheme = request.getUrl().getScheme();
+                    if (!TextUtils.isEmpty(scheme) && !scheme.equals("http") && !scheme.equals("https")) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        view.getContext().getApplicationContext().startActivity(intent);
+                        return true;
+                    }
+                } catch (Exception e) {
+                    return super.shouldOverrideUrlLoading(view, request);
                 }
                 return super.shouldOverrideUrlLoading(view, request);
             }

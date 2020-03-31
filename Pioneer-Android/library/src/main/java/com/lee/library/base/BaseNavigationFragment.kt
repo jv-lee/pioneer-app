@@ -2,9 +2,11 @@ package com.lee.library.base
 
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
@@ -64,5 +66,28 @@ open abstract class BaseNavigationFragment<V : ViewDataBinding, VM : ViewModel>(
             (activity as BaseNavigationActivity<*, *>).hideView()
         }
     }
+
+    open fun setWebBackEvent(web: WebView) {
+        web.isFocusable = true
+        web.isFocusableInTouchMode = true
+        web.requestFocus()
+        web.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(view: View?, i: Int, keyEvent: KeyEvent?): Boolean {
+                if (web.canGoBack()) {
+                    web.goBack()
+                    return true
+                }
+                return false
+            }
+
+        })
+    }
+//
+//    /**
+//     * 拦截back
+//     */
+//    open fun onBack(): Boolean {
+//        return false
+//    }
 
 }

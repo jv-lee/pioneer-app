@@ -17,7 +17,7 @@ interface ApiService {
      * TODO 首页banner轮播
      */
     @GET("banners")
-    fun getBannerAsync(): Deferred<Data<Banner>>
+    fun getBannerAsync(): Deferred<Data<List<Banner>>>
 
     /**
      * TODO 分类 API
@@ -27,7 +27,7 @@ interface ApiService {
      * Girl：妹子图
      */
     @GET("categories/{category_type}")
-    fun getCategoriesAsync(@Path("category_type") categoryType: String): Deferred<Data<Category>>
+    fun getCategoriesAsync(@Path("category_type") categoryType: String): Deferred<Data<List<Category>>>
 
     /**
      * TODO 分类数据 API
@@ -42,7 +42,7 @@ interface ApiService {
         @Path("type") type: String,
         @Path("page") page: Int,
         @Path("count") count: Int
-    ): Deferred<Data<Content>>
+    ): Deferred<Data<List<Content>>>
 
     /**
      * TODO 随机数据API
@@ -68,14 +68,14 @@ interface ApiService {
         @Path("hot_type") hotType: String,
         @Path("category") category: String,
         @Path("count") count: Int
-    ): Deferred<Data<Content>>
+    ): Deferred<Data<List<Content>>>
 
     /**
-     * 文章详情 API
+     * TODO 文章详情 API
      * @param postId 可接受参数 文章Id
      */
     @GET("post/{post_id}")
-    fun getDetailsAsync(@Path("post_id") postId: String): Deferred<Any>
+    fun getDetailsAsync(@Path("post_id") postId: String): Deferred<Data<Details>>
 
     /**
      * TODO 文章评论获取 API

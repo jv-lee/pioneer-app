@@ -6,7 +6,7 @@ package com.lee.pioneer.model.entity
  * @description
  */
 data class Data<T>(
-    val data: List<T>,
+    val data: T,
     val status: Int,
     val count: Int,
     val hot: String,

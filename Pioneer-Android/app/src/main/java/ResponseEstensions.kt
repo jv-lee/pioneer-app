@@ -23,7 +23,7 @@ suspend fun <T> executeResponseAny(response: T?, successBlock: (T) -> Unit) {
 
 suspend fun <T> executeResponse(
     response: Data<T>?,
-    successBlock: (List<T>) -> Unit
+    successBlock: (T) -> Unit
 ) {
     coroutineScope {
         when {
@@ -42,7 +42,7 @@ suspend fun <T> executeResponse(
 
 suspend fun <T> executeResponse(
     response: Data<T>?,
-    successBlock: (List<T>) -> Unit,
+    successBlock: (T) -> Unit,
     failedBlock: (CustomException) -> Unit
 ) {
     coroutineScope {
