@@ -22,10 +22,17 @@ class ContentDetailsFragment : BaseNavigationFragment<FragmentContentDetailsBind
     null
 ) {
 
-    override fun bindView() {
-        binding.tvClick.setOnClickListener {
-            findNavController().popBackStack()
+    private lateinit var detailsID: String
+
+    override fun intentParams(arguments: Bundle?, savedInstanceState: Bundle?) {
+        super.intentParams(arguments, savedInstanceState)
+        arguments?.let {
+            detailsID = arguments.getString("id", "")
         }
+    }
+
+    override fun bindView() {
+        binding.tvClick.text = detailsID
     }
 
     override fun bindData() {

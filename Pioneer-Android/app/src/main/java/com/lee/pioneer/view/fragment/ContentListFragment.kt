@@ -48,7 +48,9 @@ class ContentListFragment :
 
         mAdapter.openLoadMore()
         mAdapter.setOnItemClickListener { view, entity, position ->
-            findNavController().navigate(R.id.action_homeFragment_to_contentDetailsFragment)
+            val bundle = Bundle()
+            bundle.putString("id", entity._id)
+            findNavController().navigate(R.id.action_homeFragment_to_contentDetailsFragment, bundle)
             hideNavigation()
         }
         mAdapter.setAutoLoadMoreListener {
