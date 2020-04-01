@@ -2,7 +2,6 @@ package com.lee.pioneer.view.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -18,11 +17,20 @@ import com.lee.pioneer.R
  * @date 2020/4/1
  * @description
  */
-class TitleBar : CustomToolbarLayout {
+class AppTitleBar : CustomToolbarLayout {
 
-    private lateinit var ivBack: ImageView
-    private lateinit var ivMenu: ImageView
-    private lateinit var tvTitle: TextView
+    var ivBack: ImageView? = null
+    var ivMenu: ImageView? = null
+    var tvTitle: TextView? = null
+
+    private var titleText: String? = null
+    private var backRes: Int? = null
+    private var menuRes: Int? = null
+    private var titleEnable: Int? = null
+    private var backEnable: Int? = null
+    private var menuEnable: Int? = null
+
+    private var clickListener: ClickListener? = null
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attributes: AttributeSet) : this(context, attributes, 0)
@@ -31,12 +39,25 @@ class TitleBar : CustomToolbarLayout {
         attributes,
         defStyleAttr
     ) {
+        initAttr(attributes!!)
         initView()
+    }
+
+    private fun initAttr(attrs: AttributeSet) {
+        val typeArray = context.obtainStyledAttributes(attrs, R.styleable.AppTitleBar)
+
+        titleText = typeArray.getString(R.styleable.AppTitleBar_titleText)
+        backRes = typeArray.getResourceId(R.styleable.AppTitleBar_backRes, R.drawable.vector_back)
+        menuRes = typeArray.getResourceId(R.styleable.AppTitleBar_menuRes, R.drawable.vector_menu)
+        titleEnable = typeArray.getInt(R.styleable.AppTitleBar_titleEnable, View.VISIBLE)
+        backEnable = typeArray.getInt(R.styleable.AppTitleBar_backEnable, View.VISIBLE)
+        menuEnable = typeArray.getInt(R.styleable.AppTitleBar_menuEnable, View.VISIBLE)
+        typeArray.recycle()
     }
 
     private fun initView() {
         ivBack = ImageView(context)
-        ivBack.run {
+        ivBack?.run {
             layoutParams =
                 LayoutParams(
                     resources.getDimension(R.dimen.toolbar_button_width).toInt(),
@@ -44,13 +65,15 @@ class TitleBar : CustomToolbarLayout {
                 )
             updateLayoutParams<ConstraintLayout.LayoutParams> { startToStart = 0 }
             scaleType = ImageView.ScaleType.CENTER
-            setImageResource(R.drawable.vector_back)
+            backRes?.let { setImageResource(it) }
+            backEnable?.let { visibility = it }
+            setOnClickListener { clickListener?.backClick() }
             addView(ivBack)
         }
 
 
         ivMenu = ImageView(context)
-        ivMenu.run {
+        ivMenu?.run {
             layoutParams =
                 LayoutParams(
                     resources.getDimension(R.dimen.toolbar_button_width).toInt(),
@@ -58,13 +81,15 @@ class TitleBar : CustomToolbarLayout {
                 )
             updateLayoutParams<ConstraintLayout.LayoutParams> { endToEnd = 0 }
             scaleType = ImageView.ScaleType.CENTER
-            setImageResource(R.drawable.vector_menu)
+            menuRes?.let { setImageResource(it) }
+            menuEnable?.let { visibility = it }
+            setOnClickListener { clickListener?.menuClick() }
             addView(ivMenu)
         }
 
         tvTitle = TextView(context)
-        tvTitle.run {
-            tvTitle.layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        tvTitle?.run {
+            layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             updateLayoutParams<ConstraintLayout.LayoutParams> {
                 startToStart = 0
                 endToEnd = 0
@@ -72,10 +97,20 @@ class TitleBar : CustomToolbarLayout {
                 bottomToBottom = 0
             }
             setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
-            text = "Title"
+            titleText?.let { text = it }
+            titleEnable?.let { visibility = it }
             addView(tvTitle)
         }
 
+    }
+
+    interface ClickListener {
+        fun backClick()
+        fun menuClick()
+    }
+
+    fun addClickListener(clickListener: AppTitleBar.ClickListener) {
+        this.clickListener = clickListener
     }
 
 }

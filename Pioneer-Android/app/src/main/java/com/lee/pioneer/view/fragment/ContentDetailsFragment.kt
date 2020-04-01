@@ -8,6 +8,7 @@ import com.lee.library.widget.WebViewEx
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.databinding.FragmentContentDetailsBinding
+import com.lee.pioneer.view.widget.AppTitleBar
 import com.lee.pioneer.viewmodel.ContentDetailsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -25,7 +26,15 @@ class ContentDetailsFragment :
     private val detailsID by lazy { navArgs<ContentDetailsFragmentArgs>().value.id }
 
     override fun bindView() {
-//        binding.ivBack.setOnClickListener { findNavController().popBackStack() }
+        binding.toolbar.addClickListener(object : AppTitleBar.ClickListener {
+            override fun backClick() {
+                findNavController().popBackStack()
+            }
+
+            override fun menuClick() {
+
+            }
+        })
 
         setWebBackEvent(binding.web)
         binding.web.visibility = View.GONE

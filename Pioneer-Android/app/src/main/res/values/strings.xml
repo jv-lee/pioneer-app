@@ -12,5 +12,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_like_text">点赞</string>
     <string name="item_view_text">浏览</string>
+    <string name="details_title_text">内容详情</string>
 
 </resources>

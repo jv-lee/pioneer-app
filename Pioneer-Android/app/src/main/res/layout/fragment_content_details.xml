@@ -13,29 +13,12 @@
         tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.ContentDetailsFragment">
 
-        <com.lee.pioneer.view.widget.TitleBar
+        <com.lee.pioneer.view.widget.AppTitleBar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--        <com.lee.pioneer.view.widget.CustomToolbarLayout-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--            <ImageView-->
-        <!--                android:id="@+id/iv_back"-->
-        <!--                android:layout_width="56dp"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:scaleType="center"-->
-        <!--                android:src="@drawable/vector_back"-->
-        <!--                app:layout_constraintStart_toStartOf="parent" />-->
-
-        <!--        </com.lee.pioneer.view.widget.CustomToolbarLayout>-->
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleText="@string/details_title_text" />
 
         <com.lee.library.widget.WebViewEx
             android:id="@+id/web"
