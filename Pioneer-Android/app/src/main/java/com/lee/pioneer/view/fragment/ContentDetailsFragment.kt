@@ -1,15 +1,15 @@
 package com.lee.pioneer.view.fragment
 
-import android.os.Bundle
-import android.text.Html
-import android.text.method.ScrollingMovementMethod
 import android.view.View
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.WebViewEx
 import com.lee.pioneer.R
+import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.databinding.FragmentContentDetailsBinding
 import com.lee.pioneer.viewmodel.ContentDetailsViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * @author jv.lee
@@ -22,24 +22,18 @@ class ContentDetailsFragment :
         ContentDetailsViewModel::class.java
     ) {
 
-    private var detailsID: String? = null
-
-    override fun intentParams(arguments: Bundle?, savedInstanceState: Bundle?) {
-        super.intentParams(arguments, savedInstanceState)
-        arguments?.let {
-            detailsID = arguments.getString("id", "")
-        }
-    }
+    private val detailsID by lazy { navArgs<ContentDetailsFragmentArgs>().value.id }
 
     override fun bindView() {
+//        binding.ivBack.setOnClickListener { findNavController().popBackStack() }
+
         setWebBackEvent(binding.web)
         binding.web.visibility = View.GONE
         binding.web.settings.useWideViewPort = true
         binding.web.settings.loadWithOverviewMode = true
-        binding.web.addWebStatusListenerAdapter(object:WebViewEx.WebStatusListenerAdapter(){
+        binding.web.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
             override fun callSuccess() {
-                val js = "javascript:(function(){document.getElementsByClassName('header')[0].style.display = 'none'})()"
-                binding.web.loadUrl(js)
+                binding.web.loadUrl(HttpConstant.getNoneHeaderJs())
                 binding.web.visibility = View.VISIBLE
                 super.callSuccess()
             }
@@ -47,9 +41,8 @@ class ContentDetailsFragment :
     }
 
     override fun bindData() {
-        detailsID?.let {
-            binding.web.loadUrl("https://gank.io/post/$it")
-        }
+        toast(detailsID)
+        binding.web.loadUrl(HttpConstant.getDetailsUri(detailsID))
     }
 
     override fun onResume() {
@@ -62,6 +55,7 @@ class ContentDetailsFragment :
         binding.web.exPause()
     }
 
+    @ExperimentalCoroutinesApi
     override fun onDetach() {
         super.onDetach()
         binding.web.exDestroy()

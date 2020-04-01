@@ -45,8 +45,6 @@ class ContentSignItem : LeeViewItem<Content> {
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
                 //设置图片
-                val pictureRadius =
-                    ivPicture.context.resources.getDimension(R.dimen.item_picture_radius).toInt()
                 GlideTools.get().loadCenterCopy(images[0], ivPicture)
 
                 //设置文本

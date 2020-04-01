@@ -11,24 +11,26 @@
         android:label="@string/nav_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_contentDetailsFragment"
+            android:id="@+id/contentDetails_action"
             app:destination="@id/contentDetailsFragment"
             app:enterAnim="@anim/slide_left_in"
             app:exitAnim="@anim/slide_right_out"
             app:popEnterAnim="@anim/slide_right_in"
             app:popExitAnim="@anim/slide_left_out"
             app:popUpToInclusive="true" />
-        <argument
-            android:name="id"
-            app:argType="string">
 
-        </argument>
     </fragment>
 
     <fragment
         android:id="@+id/contentDetailsFragment"
         android:name="com.lee.pioneer.view.fragment.ContentDetailsFragment"
         android:label="contentDetails"
-        tools:layout="@layout/fragment_content_details" />
+        tools:layout="@layout/fragment_content_details" >
+
+    <argument
+        android:name="id"
+        app:argType="string"/>
+
+    </fragment>
 
 </navigation>

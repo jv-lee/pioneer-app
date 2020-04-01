@@ -13,12 +13,12 @@
         tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.HomeFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/const_toolbar"
+        <com.lee.pioneer.view.widget.CustomToolbarLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-            android:background="@color/colorThemeItem"
-            android:paddingTop="@dimen/toolbar_padding"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -38,14 +38,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.lee.pioneer.view.widget.CustomToolbarLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_category"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"
             android:background="@color/colorThemeItem"
-            app:layout_constraintTop_toBottomOf="@id/const_toolbar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:tabBackground="@android:color/transparent"
             app:tabIndicatorFullWidth="false"
             app:tabMode="scrollable"

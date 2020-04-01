@@ -2,10 +2,8 @@ package com.lee.pioneer.view.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
 import com.lee.pioneer.viewmodel.HomeViewModel
@@ -26,8 +24,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
 
     override fun bindView() {
         binding.tvSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_contentDetailsFragment)
-            (activity as LaunchActivity).hideView()
+
         }
         binding.vpContainer.adapter = vpAdapter
         binding.tabCategory.setupWithViewPager(binding.vpContainer)

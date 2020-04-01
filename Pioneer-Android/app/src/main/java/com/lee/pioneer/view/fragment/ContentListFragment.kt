@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.StatusLayout.*
-import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentContentListBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
@@ -47,10 +46,8 @@ class ContentListFragment :
         binding.rvContainer.adapter = mAdapter.proxy
 
         mAdapter.openLoadMore()
-        mAdapter.setOnItemClickListener { view, entity, position ->
-            val bundle = Bundle()
-            bundle.putString("id", entity._id)
-            findNavController().navigate(R.id.action_homeFragment_to_contentDetailsFragment, bundle)
+        mAdapter.setOnItemClickListener { _, entity, _ ->
+            findNavController().navigate(HomeFragmentDirections.contentDetailsAction(entity._id))
             hideNavigation()
         }
         mAdapter.setAutoLoadMoreListener {
