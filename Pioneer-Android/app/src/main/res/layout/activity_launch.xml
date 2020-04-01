@@ -14,13 +14,9 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
         <com.lee.library.widget.nav.BottomNavView
             android:id="@+id/bottom_nav"

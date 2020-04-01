@@ -2,6 +2,7 @@ package com.lee.pioneer.view.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.R
@@ -24,7 +25,8 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
 
     override fun bindView() {
         binding.tvSearch.setOnClickListener {
-
+            findNavController().navigate(R.id.search_action)
+            hideNavigation()
         }
         binding.vpContainer.adapter = vpAdapter
         binding.tabCategory.setupWithViewPager(binding.vpContainer)
@@ -45,7 +47,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
             //获取
             failedEvent.observe(this@HomeFragment, Observer {
                 when (it.code) {
-                    -1 -> toast("列表数据请求错误")
+                    -1 -> toast("请求错误:${it.message}  ")
                 }
             })
         }

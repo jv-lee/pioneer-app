@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.webkit.*;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -44,6 +45,7 @@ public class WebViewEx extends WebView implements LifecycleObserver {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void init() {
+        setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);

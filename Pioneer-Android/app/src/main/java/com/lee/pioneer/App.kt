@@ -5,6 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import com.lee.library.base.BaseApplication
 import com.lee.library.utils.DensityUtil
+import com.lee.library.utils.LogUtil
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 
@@ -28,11 +29,11 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        DensityUtil.setDensity(this, activity)
         StatusUtil.setStatusFontLight2(activity)
     }
 
     override fun onActivityStarted(activity: Activity) {
+
     }
 
     override fun onActivityResumed(activity: Activity) {

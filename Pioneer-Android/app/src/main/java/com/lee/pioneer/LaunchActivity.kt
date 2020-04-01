@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.lee.library.base.BaseNavigationActivity
 import com.lee.library.setupWithNavController
+import com.lee.library.utils.DensityUtil
 import com.lee.pioneer.databinding.ActivityLaunchBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

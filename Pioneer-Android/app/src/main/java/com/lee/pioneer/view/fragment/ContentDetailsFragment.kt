@@ -1,6 +1,5 @@
 package com.lee.pioneer.view.fragment
 
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
@@ -37,20 +36,17 @@ class ContentDetailsFragment :
         })
 
         setWebBackEvent(binding.web)
-        binding.web.visibility = View.GONE
         binding.web.settings.useWideViewPort = true
         binding.web.settings.loadWithOverviewMode = true
         binding.web.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
-            override fun callSuccess() {
+            override fun callProgress(progress: Int) {
+                super.callProgress(progress)
                 binding.web.loadUrl(HttpConstant.getNoneHeaderJs())
-                binding.web.visibility = View.VISIBLE
-                super.callSuccess()
             }
         })
     }
 
     override fun bindData() {
-        toast(detailsID)
         binding.web.loadUrl(HttpConstant.getDetailsUri(detailsID))
     }
 

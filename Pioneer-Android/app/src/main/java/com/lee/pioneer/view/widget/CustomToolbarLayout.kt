@@ -22,8 +22,7 @@ open class CustomToolbarLayout : ConstraintLayout {
         attributes,
         defStyleAttr
     ) {
-        //设置默认背景色
-        setBackgroundColor(ContextCompat.getColor(context, R.color.colorThemeItem))
+        initStyle()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -33,6 +32,11 @@ open class CustomToolbarLayout : ConstraintLayout {
             MATCH_PARENT,
             context.resources.getDimension(R.dimen.toolbar_height).toInt()
         )
+    }
+
+    private fun initStyle() {
+        //设置默认背景色
+        setBackgroundColor(ContextCompat.getColor(context, R.color.colorThemeItem))
         setPadding(0, context.resources.getDimension(R.dimen.toolbar_padding).toInt(), 0, 0)
     }
 
