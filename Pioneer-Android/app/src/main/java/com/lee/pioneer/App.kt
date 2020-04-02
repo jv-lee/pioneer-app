@@ -46,7 +46,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        DensityUtil.resetDensity(activity)
+//        DensityUtil.resetDensity(activity)
     }
 
 }

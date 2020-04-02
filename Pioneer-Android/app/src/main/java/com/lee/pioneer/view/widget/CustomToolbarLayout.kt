@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.lee.library.utils.SizeUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.R
 
@@ -37,14 +38,9 @@ open class CustomToolbarLayout : ConstraintLayout {
     private fun initStyle() {
         //设置默认背景色
         setBackgroundColor(ContextCompat.getColor(context, R.color.colorThemeItem))
+        //设置状态栏填充
         val statusHeight = StatusUtil.getStatusBarHeight(context)
-        setPadding(0, context.resources.getDimension(R.dimen.toolbar_padding).toInt(), 0, 0)
-        setPadding(
-            0,
-            statusHeight,
-            0,
-            0
-        )
+        setPadding(0, statusHeight, 0, 0)
     }
 
 }

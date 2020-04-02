@@ -7,25 +7,29 @@
     <dimen name="font_size_small">12sp</dimen>
     <dimen name="font_size_small_x">10sp</dimen>
 
+    <!--    系统控件高度值使用dp原始适配高度-->
     <dimen name="navigation_bar_height">56dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
 
-    <dimen name="toolbar_height">46dp</dimen>
-    <dimen name="toolbar_padding">18dp</dimen>
-    <dimen name="toolbar_button_width">56dp</dimen>
+    <!--    其他所有值修改为pt适配 -->
+    <dimen name="toolbar_button_width">56pt</dimen>
 
-    <dimen name="tab_height">36dp</dimen>
+    <dimen name="tab_height">36pt</dimen>
+    <dimen name="search_text_width_home">260pt</dimen>
+    <dimen name="search_text_width_search">300pt</dimen>
+    <dimen name="search_text_height">30pt</dimen>
 
-    <dimen name="margin_item">8dp</dimen>
-    <dimen name="padding_item">16dp</dimen>
+    <dimen name="margin_item">8pt</dimen>
+    <dimen name="padding_item">16pt</dimen>
 
-    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_small">4pt</dimen>
 
-    <dimen name="margin_small">4dp</dimen>
-    <dimen name="margin_medium">6dp</dimen>
-    <dimen name="margin_large">8dp</dimen>
+    <dimen name="margin_small">4pt</dimen>
+    <dimen name="margin_medium">6pt</dimen>
+    <dimen name="margin_large">8pt</dimen>
 
-    <dimen name="search_radius">6dp</dimen>
-    <dimen name="item_picture_radius">2dp</dimen>
-    <dimen name="item_picture_width">106dp</dimen>
-    <dimen name="item_picture_height">68dp</dimen>
+    <dimen name="search_radius">6pt</dimen>
+    <dimen name="item_picture_radius">2pt</dimen>
+    <dimen name="item_picture_width">106pt</dimen>
+    <dimen name="item_picture_height">68pt</dimen>
 </resources>

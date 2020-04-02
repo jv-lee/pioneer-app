@@ -1,6 +1,8 @@
 package com.lee.pioneer.view.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
+import com.lee.library.utils.SizeUtil
 import com.lee.pioneer.R
 
 /**
@@ -55,6 +58,7 @@ class AppTitleBar : CustomToolbarLayout {
         typeArray.recycle()
     }
 
+    @SuppressLint("ResourceType")
     private fun initView() {
         ivBack = ImageView(context)
         ivBack?.run {
@@ -99,6 +103,7 @@ class AppTitleBar : CustomToolbarLayout {
             setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
             titleText?.let { text = it }
             titleEnable?.let { visibility = it }
+            textSize = SizeUtil.px2sp(context,resources.getDimension(R.dimen.font_size_large)).toFloat()
             addView(tvTitle)
         }
 

@@ -1,6 +1,5 @@
 package com.lee.library.base
 
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
@@ -12,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.lee.library.utils.DensityUtil
 
 /**
  * @author jv.lee
@@ -28,7 +26,6 @@ open abstract class BaseNavigationFragment<V : ViewDataBinding, VM : ViewModel>(
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        DensityUtil.setDensity(BaseApplication.getContext() as Application, activity)
         //设置viewBinding
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, null, false)
     }

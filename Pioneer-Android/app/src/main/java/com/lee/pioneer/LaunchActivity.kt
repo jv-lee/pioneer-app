@@ -1,6 +1,7 @@
 package com.lee.pioneer
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.lee.library.base.BaseNavigationActivity
 import com.lee.library.setupWithNavController
+import com.lee.library.utils.AdaptScreenUtils
 import com.lee.library.utils.DensityUtil
 import com.lee.pioneer.databinding.ActivityLaunchBinding
 import kotlinx.coroutines.delay
@@ -85,9 +87,15 @@ class LaunchActivity :
      */
     private fun initMainUi() {
         window.decorView.background = null
-//            ContextCompat.getDrawable(applicationContext, R.color.colorThemeBackground)
         setNavigationVisible(true)
         showView()
+    }
+
+    /**
+     * 设置屏幕适配
+     */
+    override fun getResources(): Resources {
+        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
     }
 
 }
