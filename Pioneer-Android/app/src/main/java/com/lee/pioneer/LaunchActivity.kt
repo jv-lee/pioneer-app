@@ -84,8 +84,8 @@ class LaunchActivity :
      * TODO 显示主界面
      */
     private fun initMainUi() {
-        window.decorView.background =
-            ContextCompat.getDrawable(applicationContext, R.color.colorThemeBackground)
+        window.decorView.background = null
+//            ContextCompat.getDrawable(applicationContext, R.color.colorThemeBackground)
         setNavigationVisible(true)
         showView()
     }
