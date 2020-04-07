@@ -42,6 +42,8 @@
         <item name="android:textColor">@color/colorThemeAccent</item>
         <item name="android:hint">@string/search_hint</item>
         <item name="android:textColorHint">@color/colorThemePrimary</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">actionSearch</item>
     </style>
 
 </resources>
