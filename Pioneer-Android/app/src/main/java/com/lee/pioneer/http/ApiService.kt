@@ -99,7 +99,7 @@ interface ApiService {
         @Path("type") type: String,
         @Path("page") page: Int,
         @Path("count") count: Int
-    ): Deferred<Data<Content>>
+    ): Deferred<Data<List<Content>>>
 
     @GET
     fun getWanData(@Url url: String): Deferred<WanData>

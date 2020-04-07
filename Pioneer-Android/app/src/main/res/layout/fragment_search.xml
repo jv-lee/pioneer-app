@@ -5,13 +5,18 @@
 
     <data>
 
+        <import type="android.widget.TextView.OnEditorActionListener" />
+
+        <variable
+            name="vm"
+            type="com.lee.pioneer.viewmodel.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/colorThemeBackground"
         android:background="@color/colorThemeBackground"
+        tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.SearchFragment">
 
         <com.lee.pioneer.view.widget.CustomToolbarLayout
@@ -23,6 +28,7 @@
             <EditText
                 android:id="@+id/et_search"
                 style="@style/SearchEditStyle"
+                android:setOnEditorActionListener="@{vm.editActionListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,6 +46,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </com.lee.pioneer.view.widget.CustomToolbarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

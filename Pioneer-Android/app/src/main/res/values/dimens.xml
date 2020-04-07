@@ -31,5 +31,5 @@
     <dimen name="search_radius">6pt</dimen>
     <dimen name="item_picture_radius">2pt</dimen>
     <dimen name="item_picture_width">106pt</dimen>
-    <dimen name="item_picture_height">68pt</dimen>
+    <dimen name="item_picture_height">78pt</dimen>
 </resources>

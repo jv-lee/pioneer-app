@@ -53,7 +53,6 @@ class ContentListFragment :
         mAdapter.setAutoLoadMoreListener {
             type?.let { viewModel.loadListData(it, true) }
         }
-
         binding.refresh.setOnRefreshListener {
             type?.let { viewModel.loadListData(it, false) }
         }
@@ -61,6 +60,7 @@ class ContentListFragment :
 
     override fun bindData() {
         viewModel.apply {
+            // TODO 列表数据更新
             contentListObservable.observe(this@ContentListFragment, Observer {
                 executePageCompleted(it, mAdapter,
                     refreshBlock = {
@@ -72,19 +72,18 @@ class ContentListFragment :
                     })
             })
 
+            // TODO 错误回调
             failedEvent.observe(this@ContentListFragment, Observer { it ->
                 it.message?.let { toast(it) }
             })
         }
-        type?.let {
-            if (type.equals("Android")) viewModel.loadListData(it, false)
-        }
+        //首个tab页面默认加载
+        type?.let { if (type.equals("Android")) viewModel.loadListData(it, false) }
     }
 
     override fun lazyLoad() {
-        type?.let {
-            if (!type.equals("Android")) viewModel.loadListData(it, false)
-        }
+        //非首个tab页面使用懒加载
+        type?.let { if (!type.equals("Android")) viewModel.loadListData(it, false) }
     }
 
 }

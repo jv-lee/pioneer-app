@@ -103,7 +103,7 @@ class AppTitleBar : CustomToolbarLayout {
             setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
             titleText?.let { text = it }
             titleEnable?.let { visibility = it }
-            textSize = SizeUtil.px2sp(context,resources.getDimension(R.dimen.font_size_large)).toFloat()
+            textSize = SizeUtil.px2sp(context,resources.getDimension(R.dimen.font_size_medium)).toFloat()
             addView(tvTitle)
         }
 

@@ -1,25 +1,66 @@
 package com.lee.pioneer.view.fragment
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.KeyboardUtil
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentSearchBinding
+import com.lee.pioneer.view.adapter.ContentAdapter
+import com.lee.pioneer.viewmodel.SearchViewModel
+import executePageCompleted
 
 /**
  * A simple [Fragment] subclass.
  */
-class SearchFragment : BaseNavigationFragment<FragmentSearchBinding,ViewModel>(R.layout.fragment_search,null) {
+class SearchFragment :
+    BaseNavigationFragment<FragmentSearchBinding, SearchViewModel>(
+        R.layout.fragment_search,
+        SearchViewModel::class.java
+    ) {
+
+    private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
+
     override fun bindView() {
         binding.tvCancel.setOnClickListener {
             KeyboardUtil.hideSoftInput(activity)
-            findNavController().popBackStack() }
+            findNavController().popBackStack()
+        }
+
+        binding.rvContainer.layoutManager = LinearLayoutManager(context)
+        binding.rvContainer.adapter = mAdapter.proxy
+
+        mAdapter.openLoadMore()
+        mAdapter.setOnItemClickListener { _, entity, _ ->
+            hideNavigation()
+            findNavController().navigate(HomeFragmentDirections.contentDetailsAction(entity._id))
+        }
+        mAdapter.setAutoLoadMoreListener {
+            viewModel.searchDataList(true)
+        }
     }
 
     override fun bindData() {
+        binding.vm = viewModel
 
+        viewModel.apply {
+            contentListObservable.observe(this@SearchFragment, Observer {
+                executePageCompleted(it, mAdapter, refreshBlock = {
+                    mAdapter.addData(it.data)
+                    mAdapter.notifyDataSetChanged()
+                }, emptyBlock = {
+                    toast("未搜索到数据")
+                })
+            })
+
+            failedEvent.observe(this@SearchFragment, Observer {
+                it.message?.let { it1 -> toast(it1) }
+            })
+        }
     }
 
 

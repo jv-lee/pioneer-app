@@ -13,14 +13,20 @@ fun <T> executePageCompleted(
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}
 ) {
+    //空数据
+    if (data.total_counts == 0) {
+        emptyBlock()
+        return
+    }
     if (data.page == 1) {
         adapter.updateData(data.data)
         adapter.notifyDataSetChanged()
-        if (data.data.isNullOrEmpty() && adapter.data.isNotEmpty()) {
-            emptyBlock()
-        } else {
-            refreshBlock()
-        }
+        refreshBlock()
+//        if (data.data.isNullOrEmpty() && adapter.data.isNotEmpty()) {
+//            emptyBlock()
+//        } else {
+//
+//        }
     } else {
         adapter.addData(data.data)
         if ((data.page * data.page_count) > data.total_counts) {
