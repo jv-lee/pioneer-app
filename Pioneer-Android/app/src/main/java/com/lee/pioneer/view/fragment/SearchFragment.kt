@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.Cache
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.KeyboardUtil
 import com.lee.library.utils.LogUtil
@@ -26,6 +27,7 @@ class SearchFragment :
     private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
+        LogUtil.i("time - ${System.currentTimeMillis() - Cache.firstTime}")
         binding.tvCancel.setOnClickListener {
             KeyboardUtil.hideSoftInput(activity)
             findNavController().popBackStack()

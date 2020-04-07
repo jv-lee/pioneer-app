@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.Cache
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.StatusLayout.*
 import com.lee.pioneer.R
@@ -47,8 +48,10 @@ class ContentListFragment :
 
         mAdapter.openLoadMore()
         mAdapter.setOnItemClickListener { _, entity, _ ->
+            Cache.firstTime = System.currentTimeMillis()
             hideNavigation()
-            findNavController().navigate(HomeFragmentDirections.contentDetailsAction(entity._id))
+//            findNavController().navigate(HomeFragmentDirections.contentDetailsAction(entity._id))
+            findNavController().navigate(R.id.search_action)
         }
         mAdapter.setAutoLoadMoreListener {
             type?.let { viewModel.loadListData(it, true) }
