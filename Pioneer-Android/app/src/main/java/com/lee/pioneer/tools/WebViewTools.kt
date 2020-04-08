@@ -13,12 +13,14 @@ import kotlin.Exception
  */
 class WebViewTools constructor(context: Context) {
 
-    private val web: WebViewEx
+    private var web: WebViewEx? = null
 
     init {
         WebViewEx(context).also {
             web = it
-            web.layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            web?.run {
+                layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            }
         }
     }
 
@@ -33,6 +35,11 @@ class WebViewTools constructor(context: Context) {
         fun get() = instance ?: throw Exception("请先调用WebViewTools.get(application)初始化")
 
         fun getWeb() = get().web
+    }
+
+    fun onDestroy() {
+        web = null
+        instance = null
     }
 
 }

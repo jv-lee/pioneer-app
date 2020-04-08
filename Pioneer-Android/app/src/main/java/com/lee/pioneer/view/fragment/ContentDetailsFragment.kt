@@ -40,35 +40,37 @@ class ContentDetailsFragment :
             }
         })
 
-        binding.frameContainer.addView(web)
-        setWebBackEvent(web)
-        web.settings.useWideViewPort = true
-        web.settings.loadWithOverviewMode = true
-        web.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
-            override fun callProgress(progress: Int) {
-                super.callProgress(progress)
-                web.loadUrl(HttpConstant.getNoneHeaderJs())
-            }
-        })
+        web?.let {
+            binding.frameContainer.addView(it)
+            setWebBackEvent(it)
+            it.settings.useWideViewPort = true
+            it.settings.loadWithOverviewMode = true
+            it.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
+                override fun callProgress(progress: Int) {
+                    super.callProgress(progress)
+                    it.loadUrl(HttpConstant.getNoneHeaderJs())
+                }
+            })
+        }
     }
 
     override fun bindData() {
-        web.loadUrl(HttpConstant.getDetailsUri(detailsID))
+        web?.loadUrl(HttpConstant.getDetailsUri(detailsID))
     }
 
     override fun onResume() {
         super.onResume()
-        web.exResume()
+        web?.exResume()
     }
 
     override fun onPause() {
         super.onPause()
-        web.exPause()
+        web?.exPause()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        web.destroyView()
+        web?.destroyView()
     }
 
 }

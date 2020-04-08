@@ -41,7 +41,8 @@ class LaunchActivity :
     }
 
     override fun bindView() {
-
+        //初始化全局webView
+        WebViewTools.get(applicationContext)
     }
 
     override fun bindData() {
@@ -104,7 +105,8 @@ class LaunchActivity :
      */
     override fun onDestroy() {
         super.onDestroy()
-        WebViewTools.getWeb().exDestroy()
+        //销毁全局webView
+        WebViewTools.get().onDestroy()
     }
 
 }

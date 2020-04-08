@@ -20,7 +20,6 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
 
     override fun init() {
         registerActivityLifecycleCallbacks(this)
-        WebViewTools.get(this@App)
         GlobalScope.launch(Dispatchers.IO) {
             SPUtil.getInstance(this@App)
         }
