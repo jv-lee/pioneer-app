@@ -2,7 +2,6 @@ package com.lee.pioneer.view.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.Cache
@@ -16,7 +15,9 @@ import com.lee.pioneer.viewmodel.SearchViewModel
 import executePageCompleted
 
 /**
- * A simple [Fragment] subclass.
+ * @author jv.lee
+ * @date 2020/3/24
+ * @description 搜索页
  */
 class SearchFragment :
     BaseNavigationFragment<FragmentSearchBinding, SearchViewModel>(
@@ -39,7 +40,9 @@ class SearchFragment :
         mAdapter.openLoadMore()
         mAdapter.setOnItemClickListener { _, entity, _ ->
             hideNavigation()
-            findNavController().navigate(HomeFragmentDirections.contentDetailsAction(entity._id))
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchToContentDetails(entity._id)
+            )
         }
         mAdapter.setAutoLoadMoreListener {
             viewModel.searchDataList(true)

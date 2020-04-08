@@ -50,8 +50,7 @@ class ContentListFragment :
         mAdapter.setOnItemClickListener { _, entity, _ ->
             Cache.firstTime = System.currentTimeMillis()
             hideNavigation()
-//            findNavController().navigate(HomeFragmentDirections.contentDetailsAction(entity._id))
-            findNavController().navigate(R.id.search_action)
+            findNavController().navigate(HomeFragmentDirections.actionHomeToContentDetails(entity._id))
         }
         mAdapter.setAutoLoadMoreListener {
             type?.let { viewModel.loadListData(it, true) }

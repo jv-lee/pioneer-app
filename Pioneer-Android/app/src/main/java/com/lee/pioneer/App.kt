@@ -4,10 +4,9 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.lee.library.base.BaseApplication
-import com.lee.library.utils.DensityUtil
-import com.lee.library.utils.LogUtil
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
+import com.lee.pioneer.tools.WebViewTools
 
 /**
  * @author jv.lee
@@ -19,6 +18,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     override fun init() {
         registerActivityLifecycleCallbacks(this)
         SPUtil.getInstance(this)
+        WebViewTools.get(this)
     }
 
     override fun unInit() {

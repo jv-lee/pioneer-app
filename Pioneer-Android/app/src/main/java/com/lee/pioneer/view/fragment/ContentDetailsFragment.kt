@@ -9,9 +9,9 @@ import com.lee.library.widget.WebViewEx
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.databinding.FragmentContentDetailsBinding
+import com.lee.pioneer.tools.WebViewTools
 import com.lee.pioneer.view.widget.AppTitleBar
 import com.lee.pioneer.viewmodel.ContentDetailsViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * @author jv.lee
@@ -25,6 +25,7 @@ class ContentDetailsFragment :
     ) {
 
     private val detailsID by lazy { navArgs<ContentDetailsFragmentArgs>().value.id }
+    private val web by lazy { WebViewTools.getWeb() }
 
     override fun bindView() {
         LogUtil.i("time - ${System.currentTimeMillis() - Cache.firstTime}")
@@ -38,35 +39,26 @@ class ContentDetailsFragment :
             }
         })
 
-        setWebBackEvent(binding.web)
-        binding.web.settings.useWideViewPort = true
-        binding.web.settings.loadWithOverviewMode = true
-        binding.web.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
+        binding.frameContainer.addView(web)
+        setWebBackEvent(web)
+        web.settings.useWideViewPort = true
+        web.settings.loadWithOverviewMode = true
+        web.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
             override fun callProgress(progress: Int) {
                 super.callProgress(progress)
-                binding.web.loadUrl(HttpConstant.getNoneHeaderJs())
+                web.loadUrl(HttpConstant.getNoneHeaderJs())
             }
         })
     }
 
     override fun bindData() {
-        binding.web.loadUrl(HttpConstant.getDetailsUri(detailsID))
+        web.loadUrl(HttpConstant.getDetailsUri(detailsID))
+        web.exDestroy()
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.web.exResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        binding.web.exPause()
-    }
-
-    @ExperimentalCoroutinesApi
-    override fun onDetach() {
-        super.onDetach()
-        binding.web.exDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.frameContainer.removeAllViews()
     }
 
 }

@@ -26,7 +26,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
     override fun bindView() {
         binding.tvSearch.setOnClickListener {
             hideNavigation()
-            findNavController().navigate(R.id.search_action)
+            findNavController().navigate(R.id.action_home_to_search)
         }
         binding.vpContainer.adapter = vpAdapter
         binding.tabCategory.setupWithViewPager(binding.vpContainer)
