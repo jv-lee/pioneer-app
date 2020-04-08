@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-    <ImageView
+    <com.lee.library.widget.ImageViewRound
         android:id="@+id/iv_picture"
         android:layout_width="@dimen/item_picture_width"
         android:layout_height="@dimen/item_picture_height"
@@ -67,9 +67,11 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_mode="round"
+        app:radius="@dimen/item_picture_radius"
         tools:background="@color/colorPrimary" />
 
-    <ImageView
+    <com.lee.library.widget.ImageViewRound
         android:id="@+id/iv_picture2"
         android:layout_width="@dimen/item_picture_width"
         android:layout_height="@dimen/item_picture_height"
@@ -78,9 +80,11 @@
         app:layout_constraintEnd_toStartOf="@id/iv_picture3"
         app:layout_constraintStart_toEndOf="@id/iv_picture"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_mode="round"
+        app:radius="@dimen/item_picture_radius"
         tools:background="@color/colorPrimary" />
 
-    <ImageView
+    <com.lee.library.widget.ImageViewRound
         android:id="@+id/iv_picture3"
         android:layout_width="@dimen/item_picture_width"
         android:layout_height="@dimen/item_picture_height"
@@ -89,6 +93,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_picture2"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_mode="round"
+        app:radius="@dimen/item_picture_radius"
         tools:background="@color/colorPrimary" />
 
     <TextView

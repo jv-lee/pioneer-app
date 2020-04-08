@@ -29,7 +29,7 @@
     <dimen name="margin_large">8pt</dimen>
 
     <dimen name="search_radius">6pt</dimen>
-    <dimen name="item_picture_radius">2pt</dimen>
+    <dimen name="item_picture_radius">4pt</dimen>
     <dimen name="item_picture_width">106pt</dimen>
     <dimen name="item_picture_height">78pt</dimen>
 </resources>

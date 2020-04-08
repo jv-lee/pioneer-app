@@ -42,7 +42,7 @@
             <enum name="round" value="1" />
             <enum name="oval" value="2" />
         </attr>
-        <attr name="radius" format="float" />
+        <attr name="radius" format="dimension" />
     </declare-styleable>
 
 </resources>

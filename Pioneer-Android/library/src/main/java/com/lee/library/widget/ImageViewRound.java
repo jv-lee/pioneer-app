@@ -72,7 +72,7 @@ public class ImageViewRound extends ImageView {
     private void initAttr(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ImageViewRound);
         mType = typedArray.getInt(R.styleable.ImageViewRound_layout_mode, TYPE_CIRCLE);
-        mRoundRadius = typedArray.getFloat(R.styleable.ImageViewRound_radius, DEFAULT_ROUND_RADIUS);
+        mRoundRadius = typedArray.getDimension(R.styleable.ImageViewRound_radius, DEFAULT_ROUND_RADIUS);
         typedArray.recycle();
     }
 
