@@ -9,7 +9,7 @@ import kotlin.Exception
 /**
  * @author jv.lee
  * @date 2020/4/8
- * @description
+ * @description 全局单例webView
  */
 class WebViewTools constructor(context: Context) {
 

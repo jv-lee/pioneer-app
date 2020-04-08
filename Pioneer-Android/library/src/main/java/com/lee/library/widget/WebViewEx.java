@@ -10,7 +10,14 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.webkit.*;
+import android.view.ViewGroup;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
@@ -45,7 +52,7 @@ public class WebViewEx extends WebView implements LifecycleObserver {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void init() {
-        setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
+        setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -213,6 +220,12 @@ public class WebViewEx extends WebView implements LifecycleObserver {
         if (lifecycleOwner != null) {
             lifecycleOwner.getLifecycle().removeObserver(this);
         }
+    }
+
+    public void destroyView() {
+        loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+        clearHistory();
+        ((ViewGroup) getParent()).removeAllViews();
     }
 
     private WebStatusListenerAdapter webStatusListenerAdapter;

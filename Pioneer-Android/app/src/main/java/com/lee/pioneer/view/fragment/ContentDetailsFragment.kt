@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.fragment
 
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.Cache
@@ -53,12 +54,21 @@ class ContentDetailsFragment :
 
     override fun bindData() {
         web.loadUrl(HttpConstant.getDetailsUri(detailsID))
-        web.exDestroy()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        web.exResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        web.exPause()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.frameContainer.removeAllViews()
+        web.destroyView()
     }
 
 }

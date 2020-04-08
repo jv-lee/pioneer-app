@@ -7,6 +7,9 @@ import com.lee.library.base.BaseApplication
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.tools.WebViewTools
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * @author jv.lee
@@ -17,8 +20,10 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
 
     override fun init() {
         registerActivityLifecycleCallbacks(this)
-        SPUtil.getInstance(this)
-        WebViewTools.get(this)
+        WebViewTools.get(this@App)
+        GlobalScope.launch(Dispatchers.IO) {
+            SPUtil.getInstance(this@App)
+        }
     }
 
     override fun unInit() {

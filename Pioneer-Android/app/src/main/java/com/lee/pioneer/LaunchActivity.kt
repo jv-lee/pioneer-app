@@ -12,6 +12,7 @@ import com.lee.library.setupWithNavController
 import com.lee.library.utils.AdaptScreenUtils
 import com.lee.library.utils.DensityUtil
 import com.lee.pioneer.databinding.ActivityLaunchBinding
+import com.lee.pioneer.tools.WebViewTools
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -96,6 +97,14 @@ class LaunchActivity :
      */
     override fun getResources(): Resources {
         return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+    }
+
+    /**
+     * 销毁全局webView
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+        WebViewTools.getWeb().exDestroy()
     }
 
 }
