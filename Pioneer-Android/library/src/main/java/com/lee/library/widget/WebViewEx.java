@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.text.TextUtils;
@@ -13,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -54,7 +57,7 @@ public class WebViewEx extends WebView implements LifecycleObserver {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void init() {
-        setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        setBackgroundColor(Color.TRANSPARENT);
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -86,22 +89,55 @@ public class WebViewEx extends WebView implements LifecycleObserver {
                 dialog.show();
             }
 
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            /**
+             * 高版本重定向
+             * @param view
+             * @param request
+             * @return
+             */
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                try {
-                    String scheme = request.getUrl().getScheme();
-                    if (!TextUtils.isEmpty(scheme) && !scheme.equals("http") && !scheme.equals("https")) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
-                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        view.getContext().getApplicationContext().startActivity(intent);
-                        return true;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    try {
+                        String scheme = request.getUrl().getScheme();
+                        if (!TextUtils.isEmpty(scheme) && !scheme.equals("http") && !scheme.equals("https")) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            view.getContext().getApplicationContext().startActivity(intent);
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        return super.shouldOverrideUrlLoading(view, request);
                     }
-                } catch (Exception e) {
-                    return super.shouldOverrideUrlLoading(view, request);
                 }
                 return super.shouldOverrideUrlLoading(view, request);
+            }
+
+            /**
+             * 低版本重定向
+             * @param view
+             * @param url
+             * @return
+             */
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    try {
+                        Uri uri = Uri.parse(url);
+                        String scheme = uri.getScheme();
+                        if (!TextUtils.isEmpty(scheme) && !scheme.equals("http") && !scheme.equals("https")) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            view.getContext().getApplicationContext().startActivity(intent);
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        return super.shouldOverrideUrlLoading(view, url);
+                    }
+                }
+                return super.shouldOverrideUrlLoading(view, url);
             }
 
             @Override
@@ -143,10 +179,9 @@ public class WebViewEx extends WebView implements LifecycleObserver {
                 }
             }
 
-            //加载网页错误
             @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                super.onReceivedError(view, errorCode, description, failingUrl);
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
                 isFailed = false;
                 if (webStatusListenerAdapter != null) {
                     webStatusListenerAdapter.callFailed();
@@ -157,6 +192,7 @@ public class WebViewEx extends WebView implements LifecycleObserver {
                 }
             }
         });
+
         setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -242,9 +278,13 @@ public class WebViewEx extends WebView implements LifecycleObserver {
     }
 
     public void destroyView() {
-        loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+        loadEmpty();
         clearHistory();
         ((ViewGroup) getParent()).removeAllViews();
+    }
+
+    public void loadEmpty() {
+        loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
     }
 
     private WebStatusListenerAdapter webStatusListenerAdapter;

@@ -1,6 +1,5 @@
 package com.lee.pioneer.view.fragment
 
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.Cache
@@ -36,7 +35,6 @@ class ContentDetailsFragment :
             }
 
             override fun menuClick() {
-
             }
         })
 
@@ -46,9 +44,12 @@ class ContentDetailsFragment :
             it.settings.useWideViewPort = true
             it.settings.loadWithOverviewMode = true
             it.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
-                var noneFlag = true
                 override fun callProgress(progress: Int) {
-                    noneFlag = false.also { web?.loadUrl(HttpConstant.getNoneHeaderJs()) }
+                    binding.progress.progress = progress
+                }
+
+                override fun callSuccess() {
+                    web?.loadUrl(HttpConstant.getNoneHeaderJs())
                 }
             })
         }

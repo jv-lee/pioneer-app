@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import com.lee.library.widget.WebViewEx
-import kotlin.Exception
 
 /**
  * @author jv.lee
@@ -20,6 +19,7 @@ class WebViewTools constructor(context: Context) {
             web = it
             web?.run {
                 layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+                loadEmpty()
             }
         }
     }
