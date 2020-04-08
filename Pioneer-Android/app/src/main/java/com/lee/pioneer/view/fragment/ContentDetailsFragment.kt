@@ -46,9 +46,9 @@ class ContentDetailsFragment :
             it.settings.useWideViewPort = true
             it.settings.loadWithOverviewMode = true
             it.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
+                var noneFlag = true
                 override fun callProgress(progress: Int) {
-                    super.callProgress(progress)
-                    it.loadUrl(HttpConstant.getNoneHeaderJs())
+                    noneFlag = false.also { web?.loadUrl(HttpConstant.getNoneHeaderJs()) }
                 }
             })
         }
