@@ -2,9 +2,7 @@ package com.lee.pioneer.view.fragment
 
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.lee.library.Cache
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.utils.LogUtil
 import com.lee.library.widget.WebViewEx
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
@@ -28,7 +26,6 @@ class ContentDetailsFragment :
     private val web by lazy { WebViewTools.getWeb() }
 
     override fun bindView() {
-        LogUtil.i("time - ${System.currentTimeMillis() - Cache.firstTime}")
         binding.toolbar.addClickListener(object : AppTitleBar.ClickListener {
             override fun backClick() {
                 findNavController().popBackStack()

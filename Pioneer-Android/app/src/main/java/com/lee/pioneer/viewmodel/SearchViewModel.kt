@@ -24,10 +24,12 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
     private var page = 0
     private val searchTextObservable = ObservableField<String>("")
     val contentListObservable by lazy { MutableLiveData<Data<List<Content>>>() }
+    val loadingObservable by lazy { MutableLiveData<Boolean>() }
 
     val editActionListener = TextView.OnEditorActionListener { view, actionId, keyEvent ->
         if (actionId == IME_ACTION_SEARCH) {
             searchTextObservable.set(view.text.toString())
+            loadingObservable.value = true
             searchDataList(false)
             KeyboardUtil.hideSoftInput(view.context as Activity?)
         }
@@ -36,7 +38,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
 
     fun searchDataList(isLoadMore: Boolean) {
         if (searchTextObservable.get() == "") return
-        if (!isLoadMore) page = 1
+        if (!isLoadMore) page = 0
         launch(-1) {
             val text = searchTextObservable.get()!!
             val response =

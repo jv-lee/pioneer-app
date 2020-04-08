@@ -1,13 +1,11 @@
 package com.lee.pioneer.view.fragment
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lee.library.Cache
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.KeyboardUtil
-import com.lee.library.utils.LogUtil
+import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentSearchBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
@@ -28,7 +26,6 @@ class SearchFragment :
     private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
-        LogUtil.i("time - ${System.currentTimeMillis() - Cache.firstTime}")
         binding.tvCancel.setOnClickListener {
             KeyboardUtil.hideSoftInput(activity)
             findNavController().popBackStack()
@@ -54,16 +51,20 @@ class SearchFragment :
 
         viewModel.apply {
             contentListObservable.observe(this@SearchFragment, Observer {
-                executePageCompleted(it, mAdapter, refreshBlock = {
-                    mAdapter.addData(it.data)
-                    mAdapter.notifyDataSetChanged()
-                }, emptyBlock = {
-                    toast("未搜索到数据")
-                })
+                executePageCompleted(it, mAdapter,
+                    refreshBlock = {
+                        binding.status.setStatus(StatusLayout.STATUS_DATA)
+                    }, emptyBlock = {
+                        binding.status.setStatus(StatusLayout.STATUS_EMPTY_DATA)
+                    })
             })
 
             failedEvent.observe(this@SearchFragment, Observer {
                 it.message?.let { it1 -> toast(it1) }
+            })
+
+            loadingObservable.observe(this@SearchFragment, Observer {
+                binding.status.setStatus(StatusLayout.STATUS_LOADING)
             })
         }
     }

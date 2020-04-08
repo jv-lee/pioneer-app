@@ -47,7 +47,11 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_search_to_contentDetails"
-            app:destination="@id/contentDetailsFragment" />
+            app:destination="@id/contentDetailsFragment"
+            app:enterAnim="@anim/bottom_in"
+            app:exitAnim="@anim/default_in_out"
+            app:popEnterAnim="@anim/default_in_out"
+            app:popExitAnim="@anim/bottom_out" />
     </fragment>
 
 </navigation>
