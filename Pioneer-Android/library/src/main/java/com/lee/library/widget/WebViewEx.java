@@ -34,6 +34,8 @@ public class WebViewEx extends WebView implements LifecycleObserver {
     private LifecycleOwner lifecycleOwner;
     private boolean isFailed = false;
     private boolean isPause = false;
+    private long time;
+    private String firstUrl;
 
     public WebViewEx(Context context) {
         super(context);
@@ -171,8 +173,6 @@ public class WebViewEx extends WebView implements LifecycleObserver {
 
     }
 
-    long time;
-
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
@@ -187,6 +187,25 @@ public class WebViewEx extends WebView implements LifecycleObserver {
                 webStatusCallBack.callScroll();
             }
         }
+    }
+
+    @Override
+    public boolean canGoBack() {
+        if (getUrl().equals(firstUrl)) {
+            return false;
+        } else {
+            return super.canGoBack();
+        }
+    }
+
+    /**
+     * 初始化首个加载地址 标记地址 复用webView时做back操作
+     *
+     * @param url
+     */
+    public void initUrl(String url) {
+        firstUrl = url;
+        loadUrl(url);
     }
 
     public void bindLifecycle(LifecycleOwner lifecycleOwner) {

@@ -55,7 +55,7 @@ class ContentDetailsFragment :
     }
 
     override fun bindData() {
-        web?.loadUrl(HttpConstant.getDetailsUri(detailsID))
+        web?.initUrl(HttpConstant.getDetailsUri(detailsID))
     }
 
     override fun onResume() {
