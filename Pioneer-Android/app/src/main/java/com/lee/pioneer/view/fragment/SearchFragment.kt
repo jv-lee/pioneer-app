@@ -7,6 +7,7 @@ import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.KeyboardUtil
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
+import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentSearchBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.SearchViewModel
@@ -38,7 +39,10 @@ class SearchFragment :
         mAdapter.setOnItemClickListener { _, entity, _ ->
             hideNavigation()
             findNavController().navigate(
-                SearchFragmentDirections.actionSearchToContentDetails(entity._id)
+                SearchFragmentDirections.actionSearchToContentDetails(
+                    entity._id,
+                    KeyConstants.CONST_EMPTY
+                )
             )
         }
         mAdapter.setAutoLoadMoreListener {

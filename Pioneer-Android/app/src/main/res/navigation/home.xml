@@ -38,6 +38,10 @@
             android:name="id"
             app:argType="string" />
 
+        <argument
+            android:name="url"
+            app:argType="string" />
+
     </fragment>
 
     <fragment

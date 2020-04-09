@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.StatusLayout.*
 import com.lee.pioneer.R
+import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
 import com.lee.pioneer.databinding.FragmentContentListBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.ContentListViewModel
@@ -48,7 +49,9 @@ class ContentListFragment :
         mAdapter.openLoadMore()
         mAdapter.setOnItemClickListener { _, entity, _ ->
             hideNavigation()
-            findNavController().navigate(HomeFragmentDirections.actionHomeToContentDetails(entity._id))
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeToContentDetails(entity._id, CONST_EMPTY)
+            )
         }
         mAdapter.setAutoLoadMoreListener {
             type?.let { viewModel.loadListData(it, true) }

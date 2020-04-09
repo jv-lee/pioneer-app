@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
 import com.lee.pioneer.viewmodel.HomeViewModel
@@ -24,6 +25,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
     override fun bindView() {
+        binding.status.setStatus(StatusLayout.STATUS_LOADING)
         binding.tvSearch.setOnClickListener {
             hideNavigation()
             findNavController().navigate(R.id.action_home_to_search)
@@ -36,6 +38,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
         viewModel.apply {
             //获取分类数据 构建分类tab 及 fragment
             categoryObservable.observe(this@HomeFragment, Observer { it ->
+                binding.status.setStatus(StatusLayout.STATUS_DATA)
                 it.map {
                     vpAdapter.tabList.add(it.title)
                     vpAdapter.fragmentList.add(ContentListFragment.newInstance(it.type))
@@ -47,7 +50,10 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
             //获取
             failedEvent.observe(this@HomeFragment, Observer {
                 when (it.code) {
-                    -1 -> toast("请求错误:${it.message}  ")
+                    -1 -> {
+                        toast("请求错误:${it.message}  ")
+                        binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                    }
                 }
             })
         }

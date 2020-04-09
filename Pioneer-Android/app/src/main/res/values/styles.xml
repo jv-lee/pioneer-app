@@ -28,6 +28,24 @@
 
     </style>
 
+    <style name="SearchTextRecommendStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/search_text_height</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
+        <item name="android:layout_marginStart">@dimen/margin_item</item>
+        <item name="android:layout_marginEnd">@dimen/margin_item</item>
+        <item name="android:background">@drawable/shape_search_bg</item>
+        <item name="android:drawableStart">@drawable/vector_search</item>
+        <item name="android:drawablePadding">@dimen/padding_small</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:paddingStart">@dimen/padding_small</item>
+        <item name="android:paddingEnd">@dimen/padding_small</item>
+        <item name="android:textSize">@dimen/font_size_medium</item>
+        <item name="android:textColor">@color/colorThemePrimary</item>
+        <item name="android:text">@string/search_hint</item>
+
+    </style>
+
     <style name="SearchEditStyle" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">@dimen/search_text_width_search</item>
         <item name="android:layout_height">@dimen/search_text_height</item>

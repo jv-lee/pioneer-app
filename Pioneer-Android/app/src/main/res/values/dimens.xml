@@ -17,10 +17,12 @@
     <!--  TODO  控件样式宽高  -->
     <dimen name="toolbar_button_width">56pt</dimen>
     <dimen name="tab_height">36pt</dimen>
+    <dimen name="margin_tab_height">37pt</dimen>
     <dimen name="search_text_width_home">260pt</dimen>
     <dimen name="search_text_width_search">300pt</dimen>
-    <dimen name="search_text_height">30pt</dimen>
+    <dimen name="search_text_height">36pt</dimen>
     <dimen name="search_radius">6pt</dimen>
+    <dimen name="search_icon_size">36pt</dimen>
     <dimen name="web_loading_progress_height">6dp</dimen>
 
     <!--  TODO  全局item内部控件样式  -->

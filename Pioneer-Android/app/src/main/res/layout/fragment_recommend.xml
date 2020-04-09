@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorThemeBackground"
         tools:context=".view.fragment.RecommendFragment">
 
-        <TextView
-            android:background="#ff0000"
-            android:layout_width="360pt"
-            android:layout_height="match_parent"
-            android:text="@string/nav_recommend" />
+        <com.lee.pioneer.view.widget.CustomToolbarLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <TextView
+                android:id="@+id/tv_search"
+                style="@style/SearchTextRecommendStyle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.lee.pioneer.view.widget.CustomToolbarLayout>
+
+        <com.lee.library.widget.banner.MZBannerView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="160pt"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:open_mz_mode="false" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

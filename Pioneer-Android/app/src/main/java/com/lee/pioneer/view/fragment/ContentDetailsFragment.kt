@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.fragment
 
+import android.text.TextUtils
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,6 +24,7 @@ class ContentDetailsFragment :
         ContentDetailsViewModel::class.java
     ) {
 
+    private val detailsUrl by lazy { navArgs<ContentDetailsFragmentArgs>().value.url }
     private val detailsID by lazy { navArgs<ContentDetailsFragmentArgs>().value.id }
     private val web by lazy { WebViewTools.getWeb() }
 
@@ -56,7 +58,11 @@ class ContentDetailsFragment :
     }
 
     override fun bindData() {
-        web?.initUrl(HttpConstant.getDetailsUri(detailsID))
+        if (TextUtils.isEmpty(detailsID)) {
+            web?.initUrl(detailsUrl)
+        } else {
+            web?.initUrl(HttpConstant.getDetailsUri(detailsID))
+        }
     }
 
     override fun onResume() {
