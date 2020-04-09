@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--  TODO  全局字体size值-->
     <dimen name="font_size_large_xx">22sp</dimen>
     <dimen name="font_size_large_x">20sp</dimen>
     <dimen name="font_size_large">18sp</dimen>
@@ -7,29 +8,32 @@
     <dimen name="font_size_small">14sp</dimen>
     <dimen name="font_size_small_x">12sp</dimen>
 
-    <!--    系统控件高度值使用dp原始适配高度-->
+    <!--  TODO  系统控件高度值使用dp原始适配高度-->
     <dimen name="navigation_bar_height">56dp</dimen>
     <dimen name="toolbar_height">56dp</dimen>
 
-    <!--    其他所有值修改为pt适配 -->
-    <dimen name="toolbar_button_width">56pt</dimen>
+    <!--  TODO  其他所有值修改为pt适配 -->
 
+    <!--  TODO  控件样式宽高  -->
+    <dimen name="toolbar_button_width">56pt</dimen>
     <dimen name="tab_height">36pt</dimen>
     <dimen name="search_text_width_home">260pt</dimen>
     <dimen name="search_text_width_search">300pt</dimen>
     <dimen name="search_text_height">30pt</dimen>
+    <dimen name="search_radius">6pt</dimen>
+    <dimen name="web_loading_progress_height">6dp</dimen>
 
+    <!--  TODO  全局item内部控件样式  -->
+    <dimen name="item_picture_radius">4pt</dimen>
+    <dimen name="item_picture_width">106pt</dimen>
+    <dimen name="item_picture_height">78pt</dimen>
+
+    <!--  TODO  全局通用样式 （统一全局padding margin值）-->
     <dimen name="margin_item">8pt</dimen>
     <dimen name="padding_item">16pt</dimen>
-
     <dimen name="padding_small">4pt</dimen>
-
     <dimen name="margin_small">4pt</dimen>
     <dimen name="margin_medium">6pt</dimen>
     <dimen name="margin_large">8pt</dimen>
 
-    <dimen name="search_radius">6pt</dimen>
-    <dimen name="item_picture_radius">4pt</dimen>
-    <dimen name="item_picture_width">106pt</dimen>
-    <dimen name="item_picture_height">78pt</dimen>
 </resources>

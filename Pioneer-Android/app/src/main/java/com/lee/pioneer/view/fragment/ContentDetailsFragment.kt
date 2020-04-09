@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.fragment
 
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
@@ -42,10 +43,12 @@ class ContentDetailsFragment :
             it.settings.loadWithOverviewMode = true
             it.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
                 override fun callProgress(progress: Int) {
+                    binding.progress.visibility = View.VISIBLE
                     binding.progress.progress = progress
                 }
 
                 override fun callSuccess() {
+                    binding.progress.visibility = View.GONE
                     web?.loadUrl(HttpConstant.getNoneHeaderJs())
                 }
             })
