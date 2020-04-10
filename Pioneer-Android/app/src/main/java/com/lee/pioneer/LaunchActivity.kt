@@ -3,14 +3,12 @@ package com.lee.pioneer
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.lee.library.base.BaseNavigationActivity
 import com.lee.library.setupWithNavController
 import com.lee.library.utils.AdaptScreenUtils
-import com.lee.library.utils.DensityUtil
 import com.lee.pioneer.databinding.ActivityLaunchBinding
 import com.lee.pioneer.tools.WebViewTools
 import kotlinx.coroutines.ExperimentalCoroutinesApi

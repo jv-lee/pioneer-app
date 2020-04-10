@@ -82,12 +82,5 @@ open abstract class BaseNavigationFragment<V : ViewDataBinding, VM : ViewModel>(
 
         })
     }
-//
-//    /**
-//     * 拦截back
-//     */
-//    open fun onBack(): Boolean {
-//        return false
-//    }
 
 }

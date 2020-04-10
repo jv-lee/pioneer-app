@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorThemeBackground"
+        tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.MeFragment">
 
-        <TextView
+        <com.lee.pioneer.view.widget.AppTitleBar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/nav_me" />
+            android:layout_height="wrap_content"
+            app:backEnable="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menuEnable="gone"
+            app:titleText="@string/nav_me" />
 
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_item"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <com.lee.pioneer.view.widget.LineButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.lee.pioneer.view.widget.LineButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.lee.pioneer.view.widget.LineButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.lee.pioneer.view.widget.LineButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

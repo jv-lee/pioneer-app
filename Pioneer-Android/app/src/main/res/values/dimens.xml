@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  TODO  全局字体size值-->
+    <!--  TODO  全局通用字体size值-->
     <dimen name="font_size_large_xx">22sp</dimen>
     <dimen name="font_size_large_x">20sp</dimen>
     <dimen name="font_size_large">18sp</dimen>
     <dimen name="font_size_medium">16sp</dimen>
     <dimen name="font_size_small">14sp</dimen>
     <dimen name="font_size_small_x">12sp</dimen>
+
+    <!--  TODO  全局通用样式 （统一全局padding margin值）-->
+    <dimen name="margin_item">8pt</dimen>
+    <dimen name="padding_item">16pt</dimen>
+    <dimen name="padding_small">4pt</dimen>
+    <dimen name="padding_medium">6pt</dimen>
+    <dimen name="padding_large">8pt</dimen>
+    <dimen name="margin_small">4pt</dimen>
+    <dimen name="margin_medium">6pt</dimen>
+    <dimen name="margin_large">8pt</dimen>
 
     <!--  TODO  系统控件高度值使用dp原始适配高度-->
     <dimen name="navigation_bar_height">56dp</dimen>
@@ -30,12 +40,9 @@
     <dimen name="item_picture_width">106pt</dimen>
     <dimen name="item_picture_height">78pt</dimen>
 
-    <!--  TODO  全局通用样式 （统一全局padding margin值）-->
-    <dimen name="margin_item">8pt</dimen>
-    <dimen name="padding_item">16pt</dimen>
-    <dimen name="padding_small">4pt</dimen>
-    <dimen name="margin_small">4pt</dimen>
-    <dimen name="margin_medium">6pt</dimen>
-    <dimen name="margin_large">8pt</dimen>
+    <!--  TODO 自定义VIEW  -->
+    <dimen name="view_line_icon_size">26dp</dimen>
+    <dimen name="view_line_text_margin">36dp</dimen>
+    <dimen name="view_line_text_size">@dimen/font_size_small</dimen>
 
 </resources>
