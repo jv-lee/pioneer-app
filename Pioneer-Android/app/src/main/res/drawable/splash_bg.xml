@@ -11,7 +11,7 @@
     </item>
 
     <item
-        android:bottom="56dp"
+        android:bottom="86dp"
         android:gravity="center|bottom">
         <bitmap
             android:antialias="true"

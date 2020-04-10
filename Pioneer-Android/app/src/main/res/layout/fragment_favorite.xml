@@ -12,5 +12,16 @@
         tools:context=".view.fragment.FavoriteFragment">
 
 
+        <View
+            android:layout_width="360pt"
+            android:layout_height="200pt"
+            android:background="#ff0000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is text"
+            android:textSize="@dimen/font_size_medium" />
+
     </FrameLayout>
 </layout>

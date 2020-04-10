@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_large"
         android:ellipsize="end"
@@ -41,13 +41,14 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/font_size_medium"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_author"
         tools:text="@string/code" />
 
     <TextView
         android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
         android:ellipsize="end"
@@ -56,6 +57,7 @@
         android:text="@string/code"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/font_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 

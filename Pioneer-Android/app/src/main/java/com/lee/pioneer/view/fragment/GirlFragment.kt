@@ -46,8 +46,10 @@ class GirlFragment :
                 executePageCompleted(it, mAdapter,
                     {
                         binding.status.setStatus(StatusLayout.STATUS_DATA)
+                        binding.refresh.isRefreshing = false
                     }, {
                         binding.status.setStatus(StatusLayout.STATUS_EMPTY_DATA)
+                        binding.refresh.isRefreshing = false
                     })
             })
 

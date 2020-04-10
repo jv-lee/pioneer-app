@@ -25,7 +25,7 @@ fun <T> executePageCompleted(
 
     } else {
         adapter.addData(data.data)
-        if ((data.page * data.page_count) > data.total_counts) {
+        if (data.page >= data.page_count) {
             adapter.loadMoreEnd()
         } else {
             adapter.loadMoreCompleted()
