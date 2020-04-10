@@ -2,13 +2,19 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@android:color/white" />
 
-    <item android:top="169dp">
-        <bitmap android:src="@mipmap/ic_splash_info" android:gravity="top"/>
+    <item
+        android:bottom="56dp"
+        android:gravity="center">
+        <bitmap
+            android:antialias="true"
+            android:src="@mipmap/ic_splash_info" />
     </item>
 
-    <item android:bottom="96dp">
+    <item
+        android:bottom="56dp"
+        android:gravity="center|bottom">
         <bitmap
-            android:gravity="bottom"
+            android:antialias="true"
             android:src="@mipmap/ic_splash_logo" />
     </item>
 </layer-list>

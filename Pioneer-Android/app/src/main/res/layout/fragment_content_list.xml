@@ -21,7 +21,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:itemCount="30"
+                tools:listitem="@layout/item_content_multiple" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
