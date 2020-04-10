@@ -26,4 +26,14 @@
 
     </declare-styleable>
 
+    <declare-styleable name="LineButtonView">
+        <attr name="iconSize" format="dimension" />
+        <attr name="itemTextSize" format="dimension" />
+        <attr name="itemTextMargin" format="dimension" />
+        <attr name="itemTextColor" format="reference" />
+        <attr name="itemText" format="string" />
+        <attr name="leftDrawable" format="reference" />
+        <attr name="rightDrawable" format="reference" />
+    </declare-styleable>
+
 </resources>

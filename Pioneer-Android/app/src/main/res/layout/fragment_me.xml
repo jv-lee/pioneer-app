@@ -32,11 +32,17 @@
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:itemText="历史记录"
+                app:leftDrawable="@drawable/vector_search"
+                app:rightDrawable="@drawable/vector_arrow" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:itemText="收藏夹"
+                app:leftDrawable="@drawable/vector_favorite"
+                app:rightDrawable="@drawable/vector_arrow"/>
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:layout_width="match_parent"
