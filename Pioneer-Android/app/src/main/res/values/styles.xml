@@ -11,25 +11,8 @@
         <item name="android:windowBackground">@drawable/splash_bg</item>
     </style>
 
-    <style name="SearchTextStyle" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_width">@dimen/search_text_width_home</item>
-        <item name="android:layout_height">@dimen/search_text_height</item>
-        <item name="android:foreground">?android:selectableItemBackground</item>
-        <item name="android:layout_marginStart">@dimen/margin_item</item>
-        <item name="android:background">@drawable/shape_search_bg</item>
-        <item name="android:drawableStart">@drawable/vector_search</item>
-        <item name="android:drawablePadding">@dimen/padding_small</item>
-        <item name="android:gravity">start|center_vertical</item>
-        <item name="android:paddingStart">@dimen/padding_small</item>
-        <item name="android:paddingEnd">@dimen/padding_small</item>
-        <item name="android:textSize">@dimen/font_size_medium</item>
-        <item name="android:textColor">@color/colorThemePrimary</item>
-        <item name="android:text">@string/search_hint</item>
-
-    </style>
-
-    <style name="SearchTextRecommendStyle" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_width">match_parent</item>
+    <style name="SearchStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/search_text_height</item>
         <item name="android:foreground">?android:selectableItemBackground</item>
         <item name="android:layout_marginStart">@dimen/margin_item</item>
@@ -43,21 +26,11 @@
         <item name="android:textSize">@dimen/font_size_medium</item>
         <item name="android:textColor">@color/colorThemePrimary</item>
         <item name="android:text">@string/search_hint</item>
-
     </style>
 
-    <style name="SearchEditStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:layout_width">@dimen/search_text_width_search</item>
-        <item name="android:layout_height">@dimen/search_text_height</item>
-        <item name="android:layout_marginStart">@dimen/margin_item</item>
-        <item name="android:background">@drawable/shape_search_bg</item>
-        <item name="android:drawableStart">@drawable/vector_search</item>
-        <item name="android:drawablePadding">@dimen/padding_small</item>
-        <item name="android:gravity">start|center_vertical</item>
-        <item name="android:paddingStart">@dimen/padding_small</item>
-        <item name="android:paddingEnd">@dimen/padding_small</item>
-        <item name="android:textSize">@dimen/font_size_medium</item>
-        <item name="android:textColor">@color/colorThemeAccent</item>
+    <style name="SearchEditStyle" parent="SearchStyle">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:text" />
         <item name="android:hint">@string/search_hint</item>
         <item name="android:textColorHint">@color/colorThemePrimary</item>
         <item name="android:singleLine">true</item>

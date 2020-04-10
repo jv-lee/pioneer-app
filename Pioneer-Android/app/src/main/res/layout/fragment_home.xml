@@ -23,12 +23,14 @@
 
             <TextView
                 android:id="@+id/tv_search"
-                style="@style/SearchTextStyle"
+                style="@style/SearchStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_logo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/iv_logo"
                 android:layout_width="@dimen/search_icon_size"
                 android:layout_height="@dimen/search_icon_size"
                 android:layout_marginEnd="@dimen/margin_item"

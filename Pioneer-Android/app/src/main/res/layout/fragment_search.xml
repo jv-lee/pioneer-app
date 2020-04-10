@@ -30,14 +30,16 @@
                 style="@style/SearchEditStyle"
                 android:setOnEditorActionListener="@{vm.editActionListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_cancel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/search_icon_size"
+                android:layout_height="@dimen/search_icon_size"
                 android:layout_marginEnd="@dimen/margin_item"
+                android:gravity="center"
                 android:text="@string/cancel"
                 android:textColor="@color/colorThemeAccent"
                 android:textSize="@dimen/font_size_large"
@@ -58,10 +60,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_container"
-                tools:itemCount="10"
-                tools:listitem="@layout/item_content_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_content_text" />
 
         </com.lee.library.widget.StatusLayout>
 
