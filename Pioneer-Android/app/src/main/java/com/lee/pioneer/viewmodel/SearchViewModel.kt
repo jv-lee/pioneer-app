@@ -26,7 +26,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
     val contentListObservable by lazy { MutableLiveData<Data<List<Content>>>() }
     val loadingObservable by lazy { MutableLiveData<Boolean>() }
 
-    val editActionListener = TextView.OnEditorActionListener { view, actionId, keyEvent ->
+    val editActionListener = TextView.OnEditorActionListener { view, actionId, _ ->
         if (actionId == IME_ACTION_SEARCH) {
             searchTextObservable.set(view.text.toString())
             loadingObservable.value = true

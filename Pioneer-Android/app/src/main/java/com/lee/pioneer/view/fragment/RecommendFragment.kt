@@ -30,8 +30,8 @@ class RecommendFragment :
             findNavController().navigate(R.id.action_recommend_to_search)
         }
         binding.banner.setDelayedTime(5000)
-        binding.banner.setBannerPageClickListener { view, position ->
-            (binding.banner.data[position] as Banner)?.let {
+        binding.banner.setBannerPageClickListener { _, position ->
+            (binding.banner.data[position] as Banner).let {
                 hideNavigation()
                 findNavController().navigate(
                     RecommendFragmentDirections.actionRecommendToContentDetails(
@@ -59,7 +59,7 @@ class RecommendFragment :
     override fun onResume() {
         super.onResume()
         showNavigation()
-        binding.banner?.let {
+        binding.banner.let {
             binding.banner.pause()
             binding.banner.start()
         }
@@ -67,7 +67,7 @@ class RecommendFragment :
 
     override fun onPause() {
         super.onPause()
-        binding.banner?.let {
+        binding.banner.let {
             binding.banner.pause()
         }
     }

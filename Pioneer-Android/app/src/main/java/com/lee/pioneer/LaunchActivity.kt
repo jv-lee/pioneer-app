@@ -13,6 +13,7 @@ import com.lee.library.utils.AdaptScreenUtils
 import com.lee.library.utils.DensityUtil
 import com.lee.pioneer.databinding.ActivityLaunchBinding
 import com.lee.pioneer.tools.WebViewTools
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -70,7 +71,7 @@ class LaunchActivity :
             listOf(
                 R.navigation.home,
                 R.navigation.recommend,
-                R.navigation.favorite,
+                R.navigation.girl,
                 R.navigation.me
             )
 
@@ -103,6 +104,7 @@ class LaunchActivity :
     /**
      * 销毁全局webView
      */
+    @ExperimentalCoroutinesApi
     override fun onDestroy() {
         super.onDestroy()
         //销毁全局webView

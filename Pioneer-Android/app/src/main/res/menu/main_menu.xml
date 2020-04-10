@@ -9,9 +9,9 @@
         android:icon="@drawable/vector_recommend"
         android:title="@string/nav_recommend" />
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/girl"
         android:icon="@drawable/vector_favorite"
-        android:title="@string/nav_favorite" />
+        android:title="@string/nav_girl" />
     <item
         android:id="@+id/me"
         android:icon="@drawable/vector_me"

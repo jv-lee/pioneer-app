@@ -2,7 +2,6 @@ package com.lee.pioneer.view.fragment
 
 import androidx.lifecycle.ViewModel
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentFavoriteBinding
 
