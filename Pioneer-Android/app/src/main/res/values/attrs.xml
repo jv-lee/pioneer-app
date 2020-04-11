@@ -30,7 +30,7 @@
         <attr name="iconSize" format="dimension" />
         <attr name="itemTextSize" format="dimension" />
         <attr name="itemTextMargin" format="dimension" />
-        <attr name="itemTextColor" format="reference" />
+        <attr name="itemTextColor" format="color" />
         <attr name="itemText" format="string" />
         <attr name="leftDrawable" format="reference" />
         <attr name="rightDrawable" format="reference" />

@@ -65,6 +65,7 @@ class LineButtonView : ConstraintLayout {
                 R.styleable.LineButtonView_itemTextColor,
                 ContextCompat.getColor(context, R.color.colorThemeAccent)
             )
+            itemText = getString(R.styleable.LineButtonView_itemText) ?: ""
             leftDrawableId = getResourceId(R.styleable.LineButtonView_leftDrawable, 0)
             rightDrawableId = getResourceId(R.styleable.LineButtonView_rightDrawable, 0)
 
