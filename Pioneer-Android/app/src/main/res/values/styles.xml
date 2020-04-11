@@ -38,10 +38,10 @@
         <item name="android:singleLine">true</item>
         <item name="android:imeOptions">actionSearch</item>
     </style>
-
+    <!--  通用行view样式 左图文 右图   -->
     <style name="CommendLineButtonView">
         <item name="android:foreground">?attr/selectableItemBackground</item>
-        <item name="background">@drawable/shape_line_button_default_background</item>
+        <item name="android:background">@drawable/shape_line_button_default_background</item>
         <item name="android:padding">@dimen/padding_large</item>
         <item name="rightDrawable">@drawable/vector_arrow</item>
     </style>
