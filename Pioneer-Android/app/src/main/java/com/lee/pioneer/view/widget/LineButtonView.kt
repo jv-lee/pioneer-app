@@ -41,7 +41,6 @@ class LineButtonView : ConstraintLayout {
         defStyleAttr
     ) {
         initAttribute(attributes!!)
-        initStyle()
         initView()
     }
 
@@ -71,12 +70,6 @@ class LineButtonView : ConstraintLayout {
 
             recycle()
         }
-    }
-
-    private fun initStyle() {
-        setPadding(resources.getDimensionPixelSize(R.dimen.padding_large))
-        background =
-            ContextCompat.getDrawable(context, R.drawable.shape_line_button_default_background)
     }
 
     private fun initView() {

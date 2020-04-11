@@ -31,26 +31,19 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <com.lee.pioneer.view.widget.LineButtonView
+                style="@style/CommendLineButtonView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:itemText="历史记录"
-                app:leftDrawable="@drawable/vector_search"
-                app:rightDrawable="@drawable/vector_arrow" />
+                app:leftDrawable="@drawable/vector_search" />
 
             <com.lee.pioneer.view.widget.LineButtonView
+                style="@style/CommendLineButtonView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:itemText="收藏夹"
-                app:leftDrawable="@drawable/vector_favorite"
-                app:rightDrawable="@drawable/vector_arrow"/>
+                app:leftDrawable="@drawable/vector_favorite" />
 
-            <com.lee.pioneer.view.widget.LineButtonView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.lee.pioneer.view.widget.LineButtonView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

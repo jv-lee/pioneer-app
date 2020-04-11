@@ -11,6 +11,7 @@
         <item name="android:windowBackground">@drawable/splash_bg</item>
     </style>
 
+    <!--    搜索text样式    -->
     <style name="SearchStyle" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/search_text_height</item>
@@ -28,6 +29,7 @@
         <item name="android:text">@string/search_hint</item>
     </style>
 
+    <!--    搜索edit样式    -->
     <style name="SearchEditStyle" parent="SearchStyle">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:text" />
@@ -35,6 +37,13 @@
         <item name="android:textColorHint">@color/colorThemePrimary</item>
         <item name="android:singleLine">true</item>
         <item name="android:imeOptions">actionSearch</item>
+    </style>
+
+    <style name="CommendLineButtonView">
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="background">@drawable/shape_line_button_default_background</item>
+        <item name="android:padding">@dimen/padding_large</item>
+        <item name="rightDrawable">@drawable/vector_arrow</item>
     </style>
 
 </resources>
