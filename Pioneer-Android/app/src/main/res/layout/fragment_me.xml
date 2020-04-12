@@ -46,6 +46,15 @@
                 app:itemText="我的收藏"
                 app:leftDrawable="@drawable/vector_favorite" />
 
+            <com.lee.pioneer.view.widget.LineButtonView
+                android:id="@+id/line_settings"
+                style="@style/CommendLineButtonView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                app:itemText="设置"
+                app:leftDrawable="@drawable/vector_favorite" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
