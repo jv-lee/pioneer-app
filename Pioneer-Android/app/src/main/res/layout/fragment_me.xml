@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onClickListener"
+            type="OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +25,8 @@
             android:layout_height="wrap_content"
             app:backEnable="gone"
             app:layout_constraintTop_toTopOf="parent"
-            app:menuEnable="gone"
+            app:menuEnable="visible"
+            app:menuRes="@drawable/vector_theme_mode_default"
             app:titleText="@string/nav_me" />
 
         <LinearLayout
@@ -31,29 +37,47 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <com.lee.pioneer.view.widget.LineButtonView
+                android:id="@+id/line_message"
+                style="@style/CommendLineButtonView"
+                android:onClick="@{onClickListener}"
+                app:itemText="@string/me_item_message"
+                app:leftDrawable="@drawable/vector_message" />
+
+            <com.lee.pioneer.view.widget.LineButtonView
+                android:id="@+id/line_like"
+                style="@style/CommendLineButtonView"
+                android:onClick="@{onClickListener}"
+                app:itemText="@string/me_item_like"
+                app:leftDrawable="@drawable/vector_like" />
+
+            <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_history"
                 style="@style/CommendLineButtonView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:itemText="历史记录"
-                app:leftDrawable="@drawable/vector_search" />
+                android:onClick="@{onClickListener}"
+                app:itemText="@string/me_item_history"
+                app:leftDrawable="@drawable/vector_history" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_favorite"
                 style="@style/CommendLineButtonView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:itemText="我的收藏"
+                android:onClick="@{onClickListener}"
+                app:itemText="@string/me_item_favorite"
                 app:leftDrawable="@drawable/vector_favorite" />
+
+            <com.lee.pioneer.view.widget.LineButtonView
+                android:id="@+id/line_feedback"
+                style="@style/CommendLineButtonView"
+                android:layout_marginTop="@dimen/margin_large"
+                android:onClick="@{onClickListener}"
+                app:itemText="@string/me_item_feedback"
+                app:leftDrawable="@drawable/vector_feedback" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_settings"
                 style="@style/CommendLineButtonView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
-                app:itemText="设置"
-                app:leftDrawable="@drawable/vector_favorite" />
+                android:onClick="@{onClickListener}"
+                app:itemText="@string/me_item_settings"
+                app:leftDrawable="@drawable/vector_settings" />
 
         </LinearLayout>
 

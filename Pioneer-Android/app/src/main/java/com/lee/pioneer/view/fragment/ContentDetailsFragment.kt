@@ -29,12 +29,9 @@ class ContentDetailsFragment :
     private val web by lazy { WebViewTools.getWeb() }
 
     override fun bindView() {
-        binding.toolbar.addClickListener(object : AppTitleBar.ClickListener {
+        binding.toolbar.addClickListener(object : AppTitleBar.ClickListener() {
             override fun backClick() {
                 findNavController().popBackStack()
-            }
-
-            override fun menuClick() {
             }
         })
 

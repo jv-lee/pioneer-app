@@ -42,8 +42,9 @@
     <dimen name="item_picture_height">78pt</dimen>
 
     <!--  TODO 自定义VIEW  -->
-    <dimen name="view_line_icon_size">26dp</dimen>
-    <dimen name="view_line_text_margin">36dp</dimen>
+    <dimen name="view_line_icon_size">20pt</dimen>
+    <dimen name="view_line_text_margin">36pt</dimen>
     <dimen name="view_line_text_size">@dimen/font_size_small</dimen>
+    <dimen name="view_line_item_padding">12pt</dimen>
 
 </resources>

@@ -2,7 +2,6 @@ package com.lee.pioneer.view.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -109,9 +108,9 @@ class AppTitleBar : CustomToolbarLayout {
 
     }
 
-    interface ClickListener {
-        fun backClick()
-        fun menuClick()
+    open class ClickListener {
+        open fun backClick(){}
+        open fun menuClick(){}
     }
 
     fun addClickListener(clickListener: AppTitleBar.ClickListener) {

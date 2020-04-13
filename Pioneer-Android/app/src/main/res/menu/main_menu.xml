@@ -10,7 +10,7 @@
         android:title="@string/nav_recommend" />
     <item
         android:id="@+id/girl"
-        android:icon="@drawable/vector_favorite"
+        android:icon="@drawable/vector_girl"
         android:title="@string/nav_girl" />
     <item
         android:id="@+id/me"

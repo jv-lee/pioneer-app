@@ -1,18 +1,29 @@
 <resources>
     <string name="app_name">Pioneer-Android</string>
 
+    <!--    首页导航-->
     <string name="nav_home">首页</string>
     <string name="nav_recommend">推荐</string>
     <string name="nav_girl">妹子</string>
     <string name="nav_me">我的</string>
-    <string name="search_hint">点击搜索内容</string>
 
-    <string name="code">这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="item_like_text">点赞</string>
-    <string name="item_view_text">浏览</string>
+    <!--    通用字符-->
+    <string name="search_hint">点击搜索内容</string>
     <string name="details_title_text">内容详情</string>
     <string name="cancel">取消</string>
 
+    <!--    我的页面item字符-->
+    <string name="me_item_message">消息中心</string>
+    <string name="me_item_like">我喜欢的</string>
+    <string name="me_item_history">历史记录</string>
+    <string name="me_item_favorite">我的收藏</string>
+    <string name="me_item_feedback">意见反馈</string>
+    <string name="me_item_settings">设置</string>
+
+    <!--    列表item字符-->
+    <string name="item_like_text">点赞</string>
+    <string name="item_view_text">浏览</string>
+
+    <!--    tools字符-->
+    <string name="code">这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，</string>
 </resources>
