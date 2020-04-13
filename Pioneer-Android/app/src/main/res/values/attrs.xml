@@ -34,6 +34,8 @@
         <attr name="itemText" format="string" />
         <attr name="leftDrawable" format="reference" />
         <attr name="rightDrawable" format="reference" />
+        <attr name="leftTint" format="color" />
+        <attr name="rightTint" format="color" />
     </declare-styleable>
 
 </resources>

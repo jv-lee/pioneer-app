@@ -1,6 +1,7 @@
 package com.lee.pioneer.view.widget
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
@@ -8,8 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
+import androidx.core.widget.ImageViewCompat
 import com.lee.library.utils.SizeUtil
 import com.lee.pioneer.R
 
@@ -27,11 +28,12 @@ class LineButtonView : ConstraintLayout {
     private lateinit var itemText: String
     private var leftDrawableId = 0
     private var rightDrawableId = 0
+    private var leftTint: Int = 0
+    private var rightTint: Int = 0
 
-
+    private lateinit var tvText: TextView
     private lateinit var leftDrawable: ImageView
     private lateinit var rightDrawable: ImageView
-
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attributes: AttributeSet) : this(context, attributes, 0)
@@ -67,28 +69,21 @@ class LineButtonView : ConstraintLayout {
             itemText = getString(R.styleable.LineButtonView_itemText) ?: ""
             leftDrawableId = getResourceId(R.styleable.LineButtonView_leftDrawable, 0)
             rightDrawableId = getResourceId(R.styleable.LineButtonView_rightDrawable, 0)
+            leftTint = getColor(
+                R.styleable.LineButtonView_leftTint,
+                0
+            )
+            rightTint = getColor(
+                R.styleable.LineButtonView_rightTint,
+                0
+            )
 
             recycle()
         }
     }
 
     private fun initView() {
-
-        leftDrawable = ImageView(context)
-        leftDrawable.run {
-            layoutParams = LayoutParams(iconSize, iconSize)
-            updateLayoutParams<ConstraintLayout.LayoutParams> {
-                startToStart = 0
-                topToTop = 0
-                bottomToBottom = 0
-            }
-            if (leftDrawableId != 0) {
-                setImageResource(leftDrawableId)
-            }
-            addView(this)
-        }
-
-        val tvText = TextView(context)
+        tvText = TextView(context)
         tvText.run {
             layoutParams =
                 LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -107,6 +102,26 @@ class LineButtonView : ConstraintLayout {
             addView(this)
         }
 
+        leftDrawable = ImageView(context)
+        leftDrawable.run {
+            layoutParams = LayoutParams(iconSize, iconSize)
+            updateLayoutParams<ConstraintLayout.LayoutParams> {
+                startToStart = 0
+                topToTop = 0
+                bottomToBottom = 0
+            }
+            if (leftDrawableId != 0) {
+                setImageResource(leftDrawableId)
+            }
+            if (leftTint != 0) {
+                ImageViewCompat.setImageTintList(
+                    leftDrawable,
+                    ColorStateList.valueOf(leftTint)
+                )
+            }
+            addView(this)
+        }
+
         rightDrawable = ImageView(context)
         rightDrawable.run {
             layoutParams = LayoutParams(iconSize, iconSize)
@@ -117,6 +132,12 @@ class LineButtonView : ConstraintLayout {
             }
             if (rightDrawableId != 0) {
                 setImageResource(rightDrawableId)
+            }
+            if (rightTint != 0) {
+                ImageViewCompat.setImageTintList(
+                    rightDrawable,
+                    ColorStateList.valueOf(rightTint)
+                )
             }
             addView(this)
         }
