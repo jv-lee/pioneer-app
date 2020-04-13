@@ -2,6 +2,7 @@ package com.lee.pioneer.view.fragment
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.adapter.LeeViewAdapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
@@ -24,12 +25,11 @@ class GirlFragment :
     private val mAdapter by lazy { GirlAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
-        binding.status.setStatus(StatusLayout.STATUS_LOADING)
-
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 
-        mAdapter.openLoadMore()
+        mAdapter.openStatusView()
+        mAdapter.updateStatus(LeeViewAdapter.STATUS_PAGE_LOADING)
         mAdapter.setOnItemClickListener { view, entity, position -> }
         mAdapter.setAutoLoadMoreListener {
             viewModel.getGirlContentData(true)
@@ -45,18 +45,17 @@ class GirlFragment :
             contentObservable.observe(this@GirlFragment, Observer {
                 executePageCompleted(it, mAdapter,
                     {
-                        binding.status.setStatus(StatusLayout.STATUS_DATA)
                         binding.refresh.isRefreshing = false
                     }, {
-                        binding.status.setStatus(StatusLayout.STATUS_EMPTY_DATA)
                         binding.refresh.isRefreshing = false
+                        mAdapter.updateStatus(LeeViewAdapter.STATUS_PAGE_EMPTY)
                     })
             })
 
             failedEvent.observe(this@GirlFragment, Observer { it ->
                 it?.message?.let {
                     toast(it)
-                    binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                    mAdapter.updateStatus(LeeViewAdapter.STATUS_PAGE_ERROR)
                 }
             })
         }

@@ -46,7 +46,7 @@ class ContentListFragment :
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 
-        mAdapter.openLoadMore()
+        mAdapter.openStatusView()
         mAdapter.setOnItemClickListener { _, entity, _ ->
             hideNavigation()
             findNavController().navigate(

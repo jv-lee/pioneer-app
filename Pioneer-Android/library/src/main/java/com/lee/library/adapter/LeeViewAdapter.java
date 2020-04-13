@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lee.library.R;
 import com.lee.library.adapter.listener.LeeViewItem;
 import com.lee.library.adapter.manager.LeeViewItemManager;
-import com.lee.library.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,17 +44,24 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
     private boolean hasLoadMore = false;
 
     /**
-     * 加载更多 view
+     * 加载更多/及初始加载 view
      */
-    private View loadMoreLayout;
+    private View statusLayout;
+    private View pageLoadingView;
+    private View pageErrorView;
+    private View pageEmptyView;
     private View loadMoreView;
     private View loadEndView;
     private View loadErrorView;
 
-    private final int STATUS_INIT = 0;
-    private final int STATUS_MORE = 1;
-    private final int STATUS_END = 2;
-    private final int STATUS_ERROR = 3;
+
+    public static final int STATUS_INIT = 0;
+    public static final int STATUS_PAGE_LOADING = 1;
+    public static final int STATUS_PAGE_EMPTY = 2;
+    public static final int STATUS_PAGE_ERROR = 3;
+    private final int STATUS_ITEM_MORE = 4;
+    private final int STATUS_ITEM_END = 5;
+    private final int STATUS_ITEM_ERROR = 6;
 
     /**
      * item类型管理器
@@ -296,7 +302,7 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         int current = getItemCount() - position;
         //回调加载更多 关闭开关
         if (current == loadMoreNum) {
-            updateStatus(STATUS_MORE);
+            updateStatus(STATUS_ITEM_MORE);
             hasLoadMore = false;
             //防止更新过快导致 RecyclerView 还处于锁定状态 就直接更新数据
             ValueAnimator value = ValueAnimator.ofInt(0, 1);
@@ -311,35 +317,47 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         }
     }
 
-    private void updateStatus(int status) {
-        if (loadMoreView == null || loadEndView == null || loadErrorView == null) {
+    public void updateStatus(int status) {
+        if (pageLoadingView == null || pageEmptyView == null || pageErrorView == null || loadMoreView == null || loadEndView == null || loadErrorView == null) {
             return;
         }
-        loadMoreView.setVisibility(View.GONE);
-        loadErrorView.setVisibility(View.GONE);
-        loadEndView.setVisibility(View.GONE);
+        for (int i = 0; i < ((ViewGroup) statusLayout).getChildCount(); i++) {
+            ((ViewGroup) statusLayout).getChildAt(i).setVisibility(View.GONE);
+        }
         switch (status) {
-            case STATUS_MORE:
+            case STATUS_PAGE_LOADING:
+                pageLoadingView.setVisibility(View.VISIBLE);
+                break;
+            case STATUS_PAGE_EMPTY:
+                pageEmptyView.setVisibility(View.VISIBLE);
+                break;
+            case STATUS_PAGE_ERROR:
+                pageErrorView.setVisibility(View.VISIBLE);
+                break;
+            case STATUS_ITEM_MORE:
                 loadMoreView.setVisibility(View.VISIBLE);
                 break;
-            case STATUS_END:
+            case STATUS_ITEM_END:
                 loadEndView.setVisibility(View.VISIBLE);
                 break;
-            case STATUS_ERROR:
+            case STATUS_ITEM_ERROR:
                 loadErrorView.setVisibility(View.VISIBLE);
                 break;
             default:
         }
     }
 
-    public void openLoadMore() {
+    public void openStatusView() {
         hasLoadMore = true;
-        if (loadMoreLayout == null) {
-            loadMoreLayout = LayoutInflater.from(context).inflate(loadResId == 0 ? R.layout.lee_item_load : loadResId, new FrameLayout(context), false);
-            loadMoreView = loadMoreLayout.findViewById(R.id.view_loadMore);
-            loadEndView = loadMoreLayout.findViewById(R.id.view_loadEnd);
-            loadErrorView = loadMoreLayout.findViewById(R.id.view_loadError);
-            addFooter(loadMoreLayout);
+        if (statusLayout == null) {
+            statusLayout = LayoutInflater.from(context).inflate(loadResId == 0 ? R.layout.lee_page_load : loadResId, new FrameLayout(context), false);
+            pageLoadingView = statusLayout.findViewById(R.id.const_page_loading);
+            pageEmptyView = statusLayout.findViewById(R.id.const_page_empty);
+            pageErrorView = statusLayout.findViewById(R.id.const_page_error);
+            loadMoreView = statusLayout.findViewById(R.id.const_item_loadMore);
+            loadEndView = statusLayout.findViewById(R.id.const_item_loadEnd);
+            loadErrorView = statusLayout.findViewById(R.id.const_item_loadError);
+            addFooter(statusLayout);
         }
         updateStatus(STATUS_INIT);
     }
@@ -360,7 +378,7 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         if (proxyAdapter == null) {
             getProxy();
         }
-        updateStatus(STATUS_END);
+        updateStatus(STATUS_ITEM_END);
         hasLoadMore = false;
         notifyDataSetChanged();
     }
@@ -382,14 +400,14 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         if (proxyAdapter == null) {
             getProxy();
         }
-        updateStatus(STATUS_END);
+        updateStatus(STATUS_ITEM_END);
         hasLoadMore = false;
         int startIndex = mData.size() - count;
         notifyItemRangeInserted(startIndex, count);
     }
 
     public void loadFailed() {
-        updateStatus(STATUS_ERROR);
+        updateStatus(STATUS_ITEM_ERROR);
     }
 
 
