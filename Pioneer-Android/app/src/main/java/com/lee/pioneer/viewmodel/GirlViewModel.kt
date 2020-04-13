@@ -7,7 +7,6 @@ import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.Data
 import com.lee.pioneer.model.repository.ApiRepository
 import executeResponseAny
-import kotlinx.coroutines.delay
 
 /**
  * @author jv.lee
@@ -22,7 +21,6 @@ class GirlViewModel(application: Application) : BaseViewModel(application) {
     fun getGirlContentData(isMore: Boolean) {
         if (!isMore) page = 0
         launch(-1) {
-            delay(5000)
             val response =
                 ApiRepository.getApi().getCategoryDataAsync("Girl", "Girl", ++page, 20).await()
             executeResponseAny(response, {

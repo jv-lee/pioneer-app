@@ -1,7 +1,5 @@
 package com.lee.pioneer.view.fragment
 
-import android.view.View
-import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -14,6 +12,7 @@ import com.lee.pioneer.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.model.entity.Banner
 import com.lee.pioneer.tools.ViewTools
 import com.lee.pioneer.view.adapter.ContentAdapter
+import com.lee.pioneer.view.adapter.resource.RecommendLoadResource
 import com.lee.pioneer.view.widget.BannerViewHolder
 import com.lee.pioneer.viewmodel.RecommendViewModel
 
@@ -84,6 +83,7 @@ class RecommendFragment :
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 
+        mAdapter.setLoadResource(RecommendLoadResource())
         mAdapter.openStatusView()
         mAdapter.pageLoading()
         mAdapter.addHeader(headerBinding.root)

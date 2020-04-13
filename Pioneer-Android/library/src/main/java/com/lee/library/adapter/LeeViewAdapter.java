@@ -14,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lee.library.R;
+import com.lee.library.adapter.listener.DefaultLoadResource;
 import com.lee.library.adapter.listener.LeeViewItem;
+import com.lee.library.adapter.listener.LoadResource;
 import com.lee.library.adapter.manager.LeeViewItemManager;
 
 import java.util.ArrayList;
@@ -94,6 +96,10 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
      * autoLoadMore
      */
     private AutoLoadMoreListener mAutoLoadMoreListener;
+    /**
+     * 状态布局及加载更多布局资源di接口动态设置
+     */
+    private LoadResource mLoadResource;
     /**
      * 数据源
      */
@@ -371,18 +377,21 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         isPageCompleted = false;
         //开启loadMore模式
         hasLoadMore = true;
+        if (mLoadResource == null) {
+            mLoadResource = new DefaultLoadResource();
+        }
         if (pageLayout == null) {
-            pageLayout = LayoutInflater.from(context).inflate(R.layout.lee_page_load, new FrameLayout(context), false);
-            pageLoadingView = pageLayout.findViewById(R.id.const_page_loading);
-            pageEmptyView = pageLayout.findViewById(R.id.const_page_empty);
-            pageErrorView = pageLayout.findViewById(R.id.const_page_error);
+            pageLayout = LayoutInflater.from(context).inflate(mLoadResource.pageLayoutId(), new FrameLayout(context), false);
+            pageLoadingView = pageLayout.findViewById(mLoadResource.pageLoadingId());
+            pageEmptyView = pageLayout.findViewById(mLoadResource.pageEmptyId());
+            pageErrorView = pageLayout.findViewById(mLoadResource.pageErrorId());
         }
         addFooter(pageLayout);
         if (itemLayout == null) {
-            itemLayout = LayoutInflater.from(context).inflate(R.layout.lee_item_load, new FrameLayout(context), false);
-            loadMoreView = itemLayout.findViewById(R.id.const_item_loadMore);
-            loadEndView = itemLayout.findViewById(R.id.const_item_loadEnd);
-            loadErrorView = itemLayout.findViewById(R.id.const_item_loadError);
+            itemLayout = LayoutInflater.from(context).inflate(mLoadResource.itemLayoutId(), new FrameLayout(context), false);
+            loadMoreView = itemLayout.findViewById(mLoadResource.itemLoadMoreId());
+            loadEndView = itemLayout.findViewById(mLoadResource.itemLoadEndId());
+            loadErrorView = itemLayout.findViewById(mLoadResource.itemLoadErrorId());
         }
         addFooter(itemLayout);
         updateStatus(STATUS_INIT);
@@ -638,4 +647,7 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         this.mAutoLoadMoreListener = autoLoadMoreListener;
     }
 
+    public void setLoadResource(LoadResource loadResource) {
+        this.mLoadResource = loadResource;
+    }
 }
