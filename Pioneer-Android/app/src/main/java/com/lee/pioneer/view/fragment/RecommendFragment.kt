@@ -71,6 +71,8 @@ class RecommendFragment :
             R.drawable.recommend_comment_selector
         )
         headerBinding.groupType.setOnCheckedChangeListener { group, checkedId ->
+            mAdapter.openStatusView()
+            mAdapter.pageLoading()
             when (checkedId) {
                 R.id.radio_view -> viewModel.getContentList("views")
                 R.id.radio_like -> viewModel.getContentList("likes")
@@ -86,6 +88,15 @@ class RecommendFragment :
         mAdapter.pageLoading()
         mAdapter.addHeader(headerBinding.root)
         mAdapter.notifyDataSetChanged()
+        mAdapter.setOnItemClickListener { view, entity, position ->
+            hideNavigation()
+            findNavController().navigate(
+                RecommendFragmentDirections.actionRecommendToContentDetails(
+                    entity._id,
+                    KeyConstants.CONST_EMPTY
+                )
+            )
+        }
     }
 
     override fun bindData() {
@@ -99,7 +110,7 @@ class RecommendFragment :
                 if (it.isNullOrEmpty()) {
                     mAdapter.pageEmpty()
                 } else {
-                    mAdapter.loadMoreCompleted()
+                    mAdapter.pageCompleted()
                     mAdapter.updateData(it)
                     mAdapter.loadMoreEnd()
                 }

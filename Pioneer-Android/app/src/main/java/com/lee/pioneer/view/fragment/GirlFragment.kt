@@ -1,11 +1,13 @@
 package com.lee.pioneer.view.fragment
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.LeeViewAdapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
+import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentGirlBinding
 import com.lee.pioneer.view.adapter.GirlAdapter
 import com.lee.pioneer.viewmodel.GirlViewModel
@@ -30,7 +32,15 @@ class GirlFragment :
 
         mAdapter.openStatusView()
         mAdapter.pageLoading()
-        mAdapter.setOnItemClickListener { view, entity, position -> }
+        mAdapter.setOnItemClickListener { view, entity, position ->
+            hideNavigation()
+            findNavController().navigate(
+                GirlFragmentDirections.actionGirlToContentDetails(
+                    entity._id,
+                    KeyConstants.CONST_EMPTY
+                )
+            )
+        }
         mAdapter.setAutoLoadMoreListener {
             viewModel.getGirlContentData(true)
         }
