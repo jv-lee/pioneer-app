@@ -28,7 +28,7 @@ class MeFragment :
     }
 
     override fun bindData() {
-
+        binding.isNight = false
     }
 
     override fun onResume() {
@@ -40,7 +40,7 @@ class MeFragment :
         when (v?.id) {
             R.id.line_message -> toast("message")
             R.id.line_like -> toast("like")
-            R.id.line_history -> toast("history")
+            R.id.line_views -> toast("views")
             R.id.line_favorite -> toast("favorite")
             R.id.line_feedback -> toast("feedback")
             R.id.line_settings -> toast("settings")

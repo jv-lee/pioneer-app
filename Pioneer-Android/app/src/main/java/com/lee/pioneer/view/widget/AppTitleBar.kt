@@ -2,6 +2,7 @@ package com.lee.pioneer.view.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -102,15 +103,37 @@ class AppTitleBar : CustomToolbarLayout {
             setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
             titleText?.let { text = it }
             titleEnable?.let { visibility = it }
-            textSize = SizeUtil.px2sp(context,resources.getDimension(R.dimen.font_size_medium)).toFloat()
+            textSize =
+                SizeUtil.px2sp(context, resources.getDimension(R.dimen.font_size_medium)).toFloat()
             addView(tvTitle)
         }
 
     }
 
+    /**
+     * 设置toolbar title
+     */
+    fun setTitleText(title: String) {
+        tvTitle?.text = title
+    }
+
+    /**
+     * 设置Back按键资源文件
+     */
+    fun setBackDrawable(drawable: Drawable) {
+        ivBack?.setImageDrawable(drawable)
+    }
+
+    /**
+     * 设置Menu按键资源文件
+     */
+    fun setMenuDrawable(drawable: Drawable) {
+        ivMenu?.setImageDrawable(drawable)
+    }
+
     open class ClickListener {
-        open fun backClick(){}
-        open fun menuClick(){}
+        open fun backClick() {}
+        open fun menuClick() {}
     }
 
     fun addClickListener(clickListener: AppTitleBar.ClickListener) {

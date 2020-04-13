@@ -5,11 +5,13 @@
 
     <data>
 
-        <import type="android.view.View.OnClickListener" />
-
         <variable
             name="onClickListener"
-            type="OnClickListener" />
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="isNight"
+            type="java.lang.Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,8 +27,8 @@
             android:layout_height="wrap_content"
             app:backEnable="gone"
             app:layout_constraintTop_toTopOf="parent"
+            app:menuDrawable="@{isNight ? @drawable/vector_theme_mode_night:@drawable/vector_theme_mode_default}"
             app:menuEnable="visible"
-            app:menuRes="@drawable/vector_theme_mode_default"
             app:titleText="@string/nav_me" />
 
         <LinearLayout
@@ -41,28 +43,32 @@
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
                 app:itemText="@string/me_item_message"
-                app:leftDrawable="@drawable/vector_message" />
+                app:leftDrawable="@drawable/vector_message"
+                app:leftTint="@color/colorMessage" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_like"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
                 app:itemText="@string/me_item_like"
-                app:leftDrawable="@drawable/vector_like" />
+                app:leftDrawable="@drawable/vector_like"
+                app:leftTint="@color/colorLike" />
 
             <com.lee.pioneer.view.widget.LineButtonView
-                android:id="@+id/line_history"
+                android:id="@+id/line_views"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
-                app:itemText="@string/me_item_history"
-                app:leftDrawable="@drawable/vector_history" />
+                app:itemText="@string/me_item_views"
+                app:leftDrawable="@drawable/vector_view"
+                app:leftTint="@color/colorViews" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_favorite"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
                 app:itemText="@string/me_item_favorite"
-                app:leftDrawable="@drawable/vector_favorite" />
+                app:leftDrawable="@drawable/vector_favorite"
+                app:leftTint="@color/colorFavorite" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_feedback"
