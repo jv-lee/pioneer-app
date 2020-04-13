@@ -93,6 +93,7 @@ class RecommendFragment :
 
             contentObservable.observe(this@RecommendFragment, Observer {
                 mAdapter.updateData(it)
+                mAdapter.loadMoreEnd()
             })
 
             failedEvent.observe(this@RecommendFragment, Observer {
