@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_large"
         tools:background="@color/colorThemeBackground">
 
         <com.lee.library.widget.banner.MZBannerView
@@ -21,9 +22,12 @@
 
         <RadioGroup
             android:id="@+id/group_type"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/colorThemeItem"
+            android:gravity="center"
             android:orientation="horizontal"
+            android:padding="@dimen/padding_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/banner">
@@ -32,7 +36,8 @@
                 android:id="@+id/radio_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
                 android:background="@drawable/vector_view"
                 android:button="@null"
                 android:gravity="center" />
@@ -41,7 +46,8 @@
                 android:id="@+id/radio_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
                 android:background="@drawable/vector_like"
                 android:button="@null"
                 android:gravity="center" />
@@ -50,7 +56,8 @@
                 android:id="@+id/radio_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
                 android:background="@drawable/vector_comment"
                 android:button="@null"
                 android:gravity="center" />

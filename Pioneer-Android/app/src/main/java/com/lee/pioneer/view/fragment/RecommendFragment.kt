@@ -69,6 +69,13 @@ class RecommendFragment :
             headerBinding.radioComment,
             R.drawable.recommend_comment_selector
         )
+        headerBinding.groupType.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.radio_view -> viewModel.getContentList("views")
+                R.id.radio_like -> viewModel.getContentList("likes")
+                R.id.radio_comment -> viewModel.getContentList("comments")
+            }
+        }
 
         //设置数据列表
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
@@ -83,11 +90,20 @@ class RecommendFragment :
                 headerBinding.banner.setPages(it) { BannerViewHolder() }
                 headerBinding.banner.start()
             })
+
+            contentObservable.observe(this@RecommendFragment, Observer {
+                mAdapter.updateData(it)
+            })
+
+            failedEvent.observe(this@RecommendFragment, Observer {
+                it.message?.run { toast(this) }
+            })
         }
     }
 
     override fun lazyLoad() {
         viewModel.getBannerData()
+        viewModel.getContentList("views")
     }
 
     override fun onResume() {
