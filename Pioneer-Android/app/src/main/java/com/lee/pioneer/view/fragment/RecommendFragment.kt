@@ -1,17 +1,20 @@
 package com.lee.pioneer.view.fragment
 
+import androidx.core.view.ViewCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.pioneer.LaunchActivity
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentRecommendBinding
+import com.lee.pioneer.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.model.entity.Banner
+import com.lee.pioneer.tools.ViewTools
+import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.view.widget.BannerViewHolder
 import com.lee.pioneer.viewmodel.RecommendViewModel
-import java.lang.Exception
 
 /**
  * @author jv.lee
@@ -24,14 +27,24 @@ class RecommendFragment :
         RecommendViewModel::class.java
     ) {
 
+    private val headerBinding by lazy {
+        DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(
+            layoutInflater, R.layout.layout_recommend_header, null, false
+        )
+    }
+    private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
+
     override fun bindView() {
+        //设置toolbar 搜索跳转
         binding.tvSearch.setOnClickListener {
             hideNavigation()
             findNavController().navigate(R.id.action_recommend_to_search)
         }
-        binding.banner.setDelayedTime(5000)
-        binding.banner.setBannerPageClickListener { _, position ->
-            (binding.banner.data[position] as Banner).let {
+
+        //设置推荐头部 banner
+        headerBinding.banner.setDelayedTime(5000)
+        headerBinding.banner.setBannerPageClickListener { _, position ->
+            (headerBinding.banner.data[position] as Banner).let {
                 hideNavigation()
                 findNavController().navigate(
                     RecommendFragmentDirections.actionRecommendToContentDetails(
@@ -41,13 +54,34 @@ class RecommendFragment :
                 )
             }
         }
+
+        //设置推荐头部 分类样式
+        headerBinding.groupType.check(R.id.radio_view)
+        ViewTools.setBackgroundSelectorTint(
+            headerBinding.radioView,
+            R.drawable.recommend_view_selector
+        )
+        ViewTools.setBackgroundSelectorTint(
+            headerBinding.radioLike,
+            R.drawable.recommend_like_selector
+        )
+        ViewTools.setBackgroundSelectorTint(
+            headerBinding.radioComment,
+            R.drawable.recommend_comment_selector
+        )
+
+        //设置数据列表
+        binding.rvContainer.layoutManager = LinearLayoutManager(context)
+        binding.rvContainer.adapter = mAdapter.proxy
+        mAdapter.addHeader(headerBinding.root)
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun bindData() {
         viewModel.apply {
             bannerObservable.observe(this@RecommendFragment, Observer {
-                binding.banner.setPages(it) { BannerViewHolder() }
-                binding.banner.start()
+                headerBinding.banner.setPages(it) { BannerViewHolder() }
+                headerBinding.banner.start()
             })
         }
     }
@@ -59,17 +93,13 @@ class RecommendFragment :
     override fun onResume() {
         super.onResume()
         showNavigation()
-        binding.banner.let {
-            binding.banner.pause()
-            binding.banner.start()
-        }
+        headerBinding.banner.pause()
+        headerBinding.banner.start()
     }
 
     override fun onPause() {
         super.onPause()
-        binding.banner.let {
-            binding.banner.pause()
-        }
+        headerBinding.banner.pause()
     }
 
 }

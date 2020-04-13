@@ -1,7 +1,10 @@
 package com.lee.pioneer.tools
 
+import android.content.res.ColorStateList
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import com.lee.pioneer.R
 
 
 /**
@@ -25,6 +28,19 @@ class ViewTools {
             val maxWidth = text.maxWidth
             val textWidth = text.paint.measureText(text.text.toString())
             return textWidth > maxWidth
+        }
+
+        /**
+         * 设置viewBackgroundTint方法 向下兼容
+         */
+        fun setBackgroundSelectorTint(view: View, selectorId: Int) {
+            ViewCompat.setBackgroundTintList(
+                view,
+                ColorStateList.createFromXml(
+                    view.resources,
+                    view.resources.getXml(selectorId)
+                )
+            )
         }
 
 
