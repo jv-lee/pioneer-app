@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.widget.StatusLayout.*
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
 import com.lee.pioneer.databinding.FragmentContentListBinding
@@ -41,12 +40,11 @@ class ContentListFragment :
     }
 
     override fun bindView() {
-        binding.status.setStatus(STATUS_LOADING)
-
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 
         mAdapter.openStatusView()
+        mAdapter.pageLoading()
         mAdapter.setOnItemClickListener { _, entity, _ ->
             hideNavigation()
             findNavController().navigate(
@@ -65,20 +63,24 @@ class ContentListFragment :
         viewModel.apply {
             // TODO 列表数据更新
             contentListObservable.observe(this@ContentListFragment, Observer {
-                executePageCompleted(it, mAdapter,
-                    refreshBlock = {
-                        binding.status.setStatus(STATUS_DATA)
-                        binding.refresh.isRefreshing = false
-                    }, emptyBlock = {
-                        binding.status.setStatus(STATUS_EMPTY_DATA)
-                        binding.refresh.isRefreshing = false
-                    })
+                executePageCompleted(it, mAdapter, binding.refresh)
             })
 
             // TODO 错误回调
+            //错误处理
             failedEvent.observe(this@ContentListFragment, Observer { it ->
-                it.message?.let { toast(it) }
+                it?.message?.let { toast(it) }
+                when (it.code) {
+                    -1 -> {
+                        if (mAdapter.isPageCompleted) {
+                            mAdapter.loadFailed()
+                        } else {
+                            mAdapter.pageError()
+                        }
+                    }
+                }
             })
+
         }
         //首个tab页面默认加载
         type?.let { if (type.equals("Android")) viewModel.loadListData(it, false) }

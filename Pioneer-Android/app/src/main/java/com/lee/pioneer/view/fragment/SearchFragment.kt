@@ -5,7 +5,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.KeyboardUtil
-import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentSearchBinding
@@ -57,18 +56,29 @@ class SearchFragment :
             contentListObservable.observe(this@SearchFragment, Observer {
                 executePageCompleted(it, mAdapter,
                     refreshBlock = {
-                        binding.status.setStatus(StatusLayout.STATUS_DATA)
+                        mAdapter.pageCompleted()
                     }, emptyBlock = {
-                        binding.status.setStatus(StatusLayout.STATUS_EMPTY_DATA)
+                        mAdapter.pageEmpty()
                     })
             })
 
-            failedEvent.observe(this@SearchFragment, Observer {
-                it.message?.let { it1 -> toast(it1) }
+            //错误处理
+            failedEvent.observe(this@SearchFragment, Observer { it ->
+                it?.message?.let { toast(it) }
+                when (it.code) {
+                    -1 -> {
+                        if (mAdapter.isPageCompleted) {
+                            mAdapter.loadFailed()
+                        } else {
+                            mAdapter.pageError()
+                        }
+                    }
+                }
             })
 
             loadingObservable.observe(this@SearchFragment, Observer {
-                binding.status.setStatus(StatusLayout.STATUS_LOADING)
+                mAdapter.openStatusView()
+                mAdapter.pageLoading()
             })
         }
     }

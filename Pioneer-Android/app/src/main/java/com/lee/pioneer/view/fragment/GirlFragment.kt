@@ -29,7 +29,7 @@ class GirlFragment :
         binding.rvContainer.adapter = mAdapter.proxy
 
         mAdapter.openStatusView()
-        mAdapter.updateStatus(LeeViewAdapter.STATUS_PAGE_LOADING)
+        mAdapter.pageLoading()
         mAdapter.setOnItemClickListener { view, entity, position -> }
         mAdapter.setAutoLoadMoreListener {
             viewModel.getGirlContentData(true)
@@ -43,21 +43,23 @@ class GirlFragment :
     override fun bindData() {
         viewModel.apply {
             contentObservable.observe(this@GirlFragment, Observer {
-                executePageCompleted(it, mAdapter,
-                    {
-                        binding.refresh.isRefreshing = false
-                    }, {
-                        binding.refresh.isRefreshing = false
-                        mAdapter.updateStatus(LeeViewAdapter.STATUS_PAGE_EMPTY)
-                    })
+                executePageCompleted(it, mAdapter, binding.refresh)
             })
 
+            //错误处理
             failedEvent.observe(this@GirlFragment, Observer { it ->
-                it?.message?.let {
-                    toast(it)
-                    mAdapter.updateStatus(LeeViewAdapter.STATUS_PAGE_ERROR)
+                it?.message?.let { toast(it) }
+                when (it.code) {
+                    -1 -> {
+                        if (mAdapter.isPageCompleted) {
+                            mAdapter.loadFailed()
+                        } else {
+                            mAdapter.pageError()
+                        }
+                    }
                 }
             })
+
         }
     }
 

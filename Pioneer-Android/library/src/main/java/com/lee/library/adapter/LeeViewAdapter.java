@@ -44,24 +44,34 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
     private boolean hasLoadMore = false;
 
     /**
-     * 加载更多/及初始加载 view
+     * 数据列表初始状态
      */
-    private View statusLayout;
+    private View pageLayout;
     private View pageLoadingView;
     private View pageErrorView;
     private View pageEmptyView;
+
+    /**
+     * 加载更多
+     */
+    private View itemLayout;
     private View loadMoreView;
     private View loadEndView;
     private View loadErrorView;
 
+    /**
+     * 加载状态常量
+     */
+    private final int STATUS_INIT = 0;
+    private final int STATUS_PAGE_LOADING = 1;
+    private final int STATUS_PAGE_EMPTY = 2;
+    private final int STATUS_PAGE_ERROR = 3;
+    private final int STATUS_PAGE_COMPLETED = 4;
+    private final int STATUS_ITEM_MORE = 5;
+    private final int STATUS_ITEM_END = 6;
+    private final int STATUS_ITEM_ERROR = 7;
 
-    public static final int STATUS_INIT = 0;
-    public static final int STATUS_PAGE_LOADING = 1;
-    public static final int STATUS_PAGE_EMPTY = 2;
-    public static final int STATUS_PAGE_ERROR = 3;
-    private final int STATUS_ITEM_MORE = 4;
-    private final int STATUS_ITEM_END = 5;
-    private final int STATUS_ITEM_ERROR = 6;
+    private boolean isPageCompleted = false;
 
     /**
      * item类型管理器
@@ -317,12 +327,15 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         }
     }
 
-    public void updateStatus(int status) {
+    private void updateStatus(int status) {
         if (pageLoadingView == null || pageEmptyView == null || pageErrorView == null || loadMoreView == null || loadEndView == null || loadErrorView == null) {
             return;
         }
-        for (int i = 0; i < ((ViewGroup) statusLayout).getChildCount(); i++) {
-            ((ViewGroup) statusLayout).getChildAt(i).setVisibility(View.GONE);
+        for (int i = 0; i < ((ViewGroup) pageLayout).getChildCount(); i++) {
+            ((ViewGroup) pageLayout).getChildAt(i).setVisibility(View.GONE);
+        }
+        for (int i = 0; i < ((ViewGroup) itemLayout).getChildCount(); i++) {
+            ((ViewGroup) itemLayout).getChildAt(i).setVisibility(View.GONE);
         }
         switch (status) {
             case STATUS_PAGE_LOADING:
@@ -333,6 +346,10 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
                 break;
             case STATUS_PAGE_ERROR:
                 pageErrorView.setVisibility(View.VISIBLE);
+                break;
+            case STATUS_PAGE_COMPLETED:
+                isPageCompleted = true;
+                removeFooter(pageLayout);
                 break;
             case STATUS_ITEM_MORE:
                 loadMoreView.setVisibility(View.VISIBLE);
@@ -348,18 +365,43 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
     }
 
     public void openStatusView() {
+        clearData();
+        notifyDataSetChanged();
+        //将加载成功设置为false  可以再次初始列表加载
+        isPageCompleted = false;
+        //开启loadMore模式
         hasLoadMore = true;
-        if (statusLayout == null) {
-            statusLayout = LayoutInflater.from(context).inflate(loadResId == 0 ? R.layout.lee_page_load : loadResId, new FrameLayout(context), false);
-            pageLoadingView = statusLayout.findViewById(R.id.const_page_loading);
-            pageEmptyView = statusLayout.findViewById(R.id.const_page_empty);
-            pageErrorView = statusLayout.findViewById(R.id.const_page_error);
-            loadMoreView = statusLayout.findViewById(R.id.const_item_loadMore);
-            loadEndView = statusLayout.findViewById(R.id.const_item_loadEnd);
-            loadErrorView = statusLayout.findViewById(R.id.const_item_loadError);
-            addFooter(statusLayout);
+        if (pageLayout == null) {
+            pageLayout = LayoutInflater.from(context).inflate(R.layout.lee_page_load, new FrameLayout(context), false);
+            pageLoadingView = pageLayout.findViewById(R.id.const_page_loading);
+            pageEmptyView = pageLayout.findViewById(R.id.const_page_empty);
+            pageErrorView = pageLayout.findViewById(R.id.const_page_error);
         }
+        addFooter(pageLayout);
+        if (itemLayout == null) {
+            itemLayout = LayoutInflater.from(context).inflate(R.layout.lee_item_load, new FrameLayout(context), false);
+            loadMoreView = itemLayout.findViewById(R.id.const_item_loadMore);
+            loadEndView = itemLayout.findViewById(R.id.const_item_loadEnd);
+            loadErrorView = itemLayout.findViewById(R.id.const_item_loadError);
+        }
+        addFooter(itemLayout);
         updateStatus(STATUS_INIT);
+    }
+
+    public void pageLoading() {
+        updateStatus(STATUS_PAGE_LOADING);
+    }
+
+    public void pageEmpty() {
+        updateStatus(STATUS_PAGE_EMPTY);
+    }
+
+    public void pageError() {
+        updateStatus(STATUS_PAGE_ERROR);
+    }
+
+    public void pageCompleted() {
+        updateStatus(STATUS_PAGE_COMPLETED);
     }
 
     /**
@@ -433,6 +475,10 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
     @Override
     public int getItemCount() {
         return mData == null ? 0 : mData.size();
+    }
+
+    public boolean isPageCompleted() {
+        return isPageCompleted;
     }
 
     /**

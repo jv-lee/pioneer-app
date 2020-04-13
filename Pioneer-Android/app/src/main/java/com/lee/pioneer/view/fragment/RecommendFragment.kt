@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.fragment
 
+import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -80,6 +81,9 @@ class RecommendFragment :
         //设置数据列表
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
+
+        mAdapter.openStatusView()
+        mAdapter.pageLoading()
         mAdapter.addHeader(headerBinding.root)
         mAdapter.notifyDataSetChanged()
     }
@@ -92,12 +96,21 @@ class RecommendFragment :
             })
 
             contentObservable.observe(this@RecommendFragment, Observer {
-                mAdapter.updateData(it)
-                mAdapter.loadMoreEnd()
+                if (it.isNullOrEmpty()) {
+                    mAdapter.pageEmpty()
+                } else {
+                    mAdapter.loadMoreCompleted()
+                    mAdapter.updateData(it)
+                    mAdapter.loadMoreEnd()
+                }
+
             })
 
             failedEvent.observe(this@RecommendFragment, Observer {
                 it.message?.run { toast(this) }
+                when (it.code) {
+                    -1 -> mAdapter.pageError()
+                }
             })
         }
     }
