@@ -61,6 +61,8 @@ class GirlFragment :
                         val scale = (255.0 / it.height)
                         binding.statusBar.background.mutate().alpha = (abs(it.top) * scale).toInt()
                     }
+                } else {
+                    binding.statusBar.background.mutate().alpha = 255
                 }
             }
         })
