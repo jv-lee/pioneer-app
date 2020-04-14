@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.lee.library.base.BaseApplication
+import com.lee.library.cache.CacheManager
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.tools.WebViewTools
@@ -22,6 +23,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
         registerActivityLifecycleCallbacks(this)
         GlobalScope.launch(Dispatchers.IO) {
             SPUtil.getInstance(this@App)
+            CacheManager.getInstance(this@App, BuildConfig.VERSION_CODE)
         }
     }
 
