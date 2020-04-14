@@ -27,6 +27,7 @@ class ContentListViewModel(application: Application) : BaseViewModel(application
             val dataCache = CacheRepository.get().getDataCache<Data<List<Content>>>("content-key")
             dataCache?.let {
                 LogUtil.i("dataCache:"+dataCache.data)
+
             }
             val response = ApiRepository.getApi().getCategoryDataAsync(
                 KeyConstants.CATEGORY_ALL,
