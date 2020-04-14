@@ -7,6 +7,9 @@ import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.Data
 import com.lee.pioneer.model.repository.ApiRepository
 import executeResponseAny
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlin.random.Random
 
 /**
  * @author jv.lee
@@ -21,11 +24,17 @@ class GirlViewModel(application: Application) : BaseViewModel(application) {
     fun getGirlContentData(isMore: Boolean) {
         if (!isMore) page = 0
         launch(-1) {
-            val response =
-                ApiRepository.getApi().getCategoryDataAsync("Girl", "Girl", ++page, 20).await()
-            executeResponseAny(response, {
-                contentObservable.value = it
-            })
+            //数据转换 添加viewType
+            flow {
+                val responseAsync =
+                    ApiRepository.getApi().getCategoryDataAsync("Girl", "Girl", ++page, 20)
+                emit(responseAsync.await())
+            }.map { it ->
+                it.data.forEach { it.viewType = Random.nextInt() % 2 }
+                it
+            }.flowOn(Dispatchers.IO).collect { it ->
+                executeResponseAny(it, { contentObservable.value = it })
+            }
         }
     }
 

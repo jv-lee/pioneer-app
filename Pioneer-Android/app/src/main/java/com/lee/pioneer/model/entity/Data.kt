@@ -54,7 +54,8 @@ data class Content(
     val title: String,
     val type: String,
     val url: String,
-    val views: Int
+    val views: Int,
+    var viewType: Int = 0
 )
 
 data class Details(

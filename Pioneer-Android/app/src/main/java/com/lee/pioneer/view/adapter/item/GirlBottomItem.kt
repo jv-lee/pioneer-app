@@ -27,7 +27,7 @@ class GirlBottomItem : LeeViewItem<Content> {
     }
 
     override fun isItemView(entity: Content?, position: Int): Boolean {
-        return entity != null && position % 2 == 0
+        return entity != null && entity.viewType != 0
     }
 
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
