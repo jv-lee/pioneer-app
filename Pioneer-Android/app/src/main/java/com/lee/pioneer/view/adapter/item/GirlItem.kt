@@ -31,7 +31,7 @@ class GirlItem : LeeViewItem<Content> {
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
         holder?.let {
             entity?.images?.get(0)?.let {
-                GlideTools.get().loadCenterCopy(it, holder.getView(R.id.iv_picture))
+//                GlideTools.get().loadCenterCopy(it, holder.getView(R.id.iv_picture))
             }
         }
 

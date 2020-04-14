@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="AppTitleBar">
+    <declare-styleable name="TitleToolbar">
         <attr name="titleText" format="string" />
         <attr name="backRes" format="reference" />
         <attr name="menuRes" format="reference" />

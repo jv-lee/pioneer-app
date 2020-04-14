@@ -1,4 +1,4 @@
-package com.lee.pioneer.view.widget
+package com.lee.pioneer.view.widget.toolbar
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -18,9 +18,9 @@ import com.lee.pioneer.R
 /**
  * @author jv.lee
  * @date 2020/4/1
- * @description
+ * @description 自定义项目 带标题的toolbar
  */
-class AppTitleBar : CustomToolbarLayout {
+open class TitleToolbar : CustomToolbarLayout {
 
     var ivBack: ImageView? = null
     var ivMenu: ImageView? = null
@@ -47,14 +47,14 @@ class AppTitleBar : CustomToolbarLayout {
     }
 
     private fun initAttr(attrs: AttributeSet) {
-        val typeArray = context.obtainStyledAttributes(attrs, R.styleable.AppTitleBar)
+        val typeArray = context.obtainStyledAttributes(attrs, R.styleable.TitleToolbar)
 
-        titleText = typeArray.getString(R.styleable.AppTitleBar_titleText)
-        backRes = typeArray.getResourceId(R.styleable.AppTitleBar_backRes, R.drawable.vector_back)
-        menuRes = typeArray.getResourceId(R.styleable.AppTitleBar_menuRes, R.drawable.vector_menu)
-        titleEnable = typeArray.getInt(R.styleable.AppTitleBar_titleEnable, View.VISIBLE)
-        backEnable = typeArray.getInt(R.styleable.AppTitleBar_backEnable, View.VISIBLE)
-        menuEnable = typeArray.getInt(R.styleable.AppTitleBar_menuEnable, View.VISIBLE)
+        titleText = typeArray.getString(R.styleable.TitleToolbar_titleText)
+        backRes = typeArray.getResourceId(R.styleable.TitleToolbar_backRes, R.drawable.vector_back)
+        menuRes = typeArray.getResourceId(R.styleable.TitleToolbar_menuRes, R.drawable.vector_menu)
+        titleEnable = typeArray.getInt(R.styleable.TitleToolbar_titleEnable, View.VISIBLE)
+        backEnable = typeArray.getInt(R.styleable.TitleToolbar_backEnable, View.VISIBLE)
+        menuEnable = typeArray.getInt(R.styleable.TitleToolbar_menuEnable, View.VISIBLE)
         typeArray.recycle()
     }
 
@@ -136,7 +136,7 @@ class AppTitleBar : CustomToolbarLayout {
         open fun menuClick() {}
     }
 
-    fun addClickListener(clickListener: AppTitleBar.ClickListener) {
+    fun addClickListener(clickListener: ClickListener) {
         this.clickListener = clickListener
     }
 

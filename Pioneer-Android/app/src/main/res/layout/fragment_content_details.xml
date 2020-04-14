@@ -14,7 +14,7 @@
         tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.ContentDetailsFragment">
 
-        <com.lee.pioneer.view.widget.AppTitleBar
+        <com.lee.pioneer.view.widget.toolbar.TitleToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
