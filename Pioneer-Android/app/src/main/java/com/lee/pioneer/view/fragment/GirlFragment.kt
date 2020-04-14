@@ -2,6 +2,7 @@ package com.lee.pioneer.view.fragment
 
 import android.annotation.SuppressLint
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -47,6 +48,7 @@ class GirlFragment :
         headerViewBinding.root.setPadding(0, binding.statusBar.getToolbarLayoutHeight(), 0, 0)
         //设置statusBar透明度
         binding.statusBar.background.mutate().alpha = 0
+        ViewCompat.setElevation(binding.statusBar, 1f)
 
         //设置列表数据项
         binding.rvContainer.layoutManager = linearLayoutManager
