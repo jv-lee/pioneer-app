@@ -2,6 +2,8 @@ package com.lee.pioneer.model.repository
 
 import com.google.gson.reflect.TypeToken
 import com.lee.library.cache.CacheManager
+import com.lee.pioneer.model.entity.Content
+import com.lee.pioneer.model.entity.PageData
 
 /**
  * @author jv.lee
@@ -20,12 +22,20 @@ class CacheRepository {
         }
     }
 
-    fun <T> getDataCache(key: String): T {
-        val type = object : TypeToken<T>() {}.type
-        return CacheManager.getInstance().get<T>(key, type)
+    /**
+     * @param key 存储key
+     * 无法完全使用泛形解析 所以使用PageData包装类配合泛形使用
+     */
+    fun <T> getPageCache(key: String): PageData<T>? {
+        val type = object : TypeToken<PageData<T>>() {}.type
+        return CacheManager.getInstance().get(key, type)
     }
 
-    fun <T> putDataCache(key: String, data: T) {
+    /**
+     * @param key 存储key
+     * @param data 存储数据源
+     */
+    fun <T> putPageCache(key: String, data: PageData<T>) {
         CacheManager.getInstance().put(key, data)
     }
 

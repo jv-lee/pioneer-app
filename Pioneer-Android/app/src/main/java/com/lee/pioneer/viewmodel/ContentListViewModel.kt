@@ -25,7 +25,7 @@ class ContentListViewModel(application: Application) : BaseViewModel(application
         if (!isLoadMore) page = 0
         launch(-1) {
             val dataCache =
-                CacheRepository.get().getDataCache<PageData<Content>>("content-key2")
+                CacheRepository.get().getPageCache<Content>("content-key12")
             dataCache?.let {
                 LogUtil.i("dataCache:" + dataCache)
             }
@@ -36,7 +36,7 @@ class ContentListViewModel(application: Application) : BaseViewModel(application
                 20
             ).await()
             executeResponseAny(response) {
-                CacheRepository.get().putDataCache("content-key2", it)
+                CacheRepository.get().putPageCache<Content>("content-key12", it)
                 contentListObservable.value = it
             }
         }
