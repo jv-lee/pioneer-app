@@ -15,8 +15,8 @@ import executeResponseAny
  */
 class RecommendViewModel(application: Application) : BaseViewModel(application) {
 
-    val bannerObservable by lazy { MutableLiveData<List<Banner>>() }
-    val contentObservable by lazy { MutableLiveData<List<Content>>() }
+    val bannerObservable by lazy { MutableLiveData<ArrayList<Banner>>() }
+    val contentObservable by lazy { MutableLiveData<ArrayList<Content>>() }
     private val viewsData = arrayListOf<Content>()
     private val likesData = arrayListOf<Content>()
     private val commentsData = arrayListOf<Content>()
@@ -39,13 +39,13 @@ class RecommendViewModel(application: Application) : BaseViewModel(application) 
         launch(-1) {
             val response = ApiRepository.getApi().getHotDataAsync(type, "GanHuo", 20).await()
             executeResponseAny(response) {
-                putCacheContentList(type,it.data)
+                putCacheContentList(type, it.data)
                 contentObservable.value = it.data
             }
         }
     }
 
-    private fun putCacheContentList(type: String, data: List<Content>) {
+    private fun putCacheContentList(type: String, data: ArrayList<Content>) {
         when (type) {
             "views" -> viewsData.addAll(data)
             "likes" -> likesData.addAll(data)
@@ -53,7 +53,7 @@ class RecommendViewModel(application: Application) : BaseViewModel(application) 
         }
     }
 
-    private fun getCacheContentList(type: String): List<Content> {
+    private fun getCacheContentList(type: String): ArrayList<Content> {
         return when (type) {
             "views" -> viewsData
             "likes" -> likesData

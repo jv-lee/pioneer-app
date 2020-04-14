@@ -64,6 +64,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             try {
                 tryBlock()
             } catch (e: Throwable) {
+                e.printStackTrace()
                 if (e !is CancellationException || handleCancellationExceptionManually) {
                     failedEvent.value = CustomException(failedCode,e)
                     catchBlock(e)

@@ -39,7 +39,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
             //获取分类数据 构建分类tab 及 fragment
             categoryObservable.observe(this@HomeFragment, Observer { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
-                it.map {
+                it.data.map {
                     vpAdapter.tabList.add(it.title)
                     vpAdapter.fragmentList.add(ContentListFragment.newInstance(it.type))
                 }

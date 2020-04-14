@@ -11,6 +11,7 @@ import com.lee.pioneer.databinding.FragmentSearchBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.SearchViewModel
 import executePageCompleted
+import executePageError
 
 /**
  * @author jv.lee
@@ -66,13 +67,7 @@ class SearchFragment :
             failedEvent.observe(this@SearchFragment, Observer { it ->
                 it?.message?.let { toast(it) }
                 when (it.code) {
-                    -1 -> {
-                        if (mAdapter.isPageCompleted) {
-                            mAdapter.loadFailed()
-                        } else {
-                            mAdapter.pageError()
-                        }
-                    }
+                    -1 -> executePageError(mAdapter, null)
                 }
             })
 
