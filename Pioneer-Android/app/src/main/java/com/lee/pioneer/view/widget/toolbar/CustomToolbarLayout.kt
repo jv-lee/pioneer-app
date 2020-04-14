@@ -25,6 +25,7 @@ open class CustomToolbarLayout : ConstraintLayout {
         attributes,
         defStyleAttr
     ) {
+        toolbarLayoutHeight = initLayoutHeight()
         initBackground()
         initStatusBarPadding()
     }
@@ -32,10 +33,16 @@ open class CustomToolbarLayout : ConstraintLayout {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         //设置默认宽高比 适配沉浸式
+        setMeasuredDimension(MATCH_PARENT, toolbarLayoutHeight)
+    }
+
+    /**
+     * 初始化布局高度
+     */
+    open fun initLayoutHeight(): Int {
         val toolbarHeight = resources.getDimension(R.dimen.toolbar_height).toInt()
         val statusHeight = StatusUtil.getStatusBarHeight(context)
-        toolbarLayoutHeight = toolbarHeight + statusHeight
-        setMeasuredDimension(MATCH_PARENT, toolbarLayoutHeight)
+        return toolbarHeight + statusHeight
     }
 
     /**

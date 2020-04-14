@@ -11,6 +11,7 @@
     <string name="search_hint">点击搜索内容</string>
     <string name="details_title_text">内容详情</string>
     <string name="cancel">取消</string>
+    <string name="today">Today</string>
 
     <!--    我的页面item字符-->
     <string name="me_item_message">消息中心</string>

@@ -13,11 +13,13 @@
         android:background="@color/colorThemeBackground"
         tools:context=".view.fragment.GirlFragment">
 
-        <com.lee.pioneer.view.widget.toolbar.TransparentToolbar
-            android:id="@+id/toolbar"
+        <com.lee.pioneer.view.widget.toolbar.CustomStatusBarLayout
+            android:id="@+id/statusBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:elevation="1dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menuEnable="gone" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refresh"
