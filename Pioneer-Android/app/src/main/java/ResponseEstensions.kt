@@ -1,6 +1,7 @@
 import com.lee.library.mvvm.CustomException
 import com.lee.pioneer.constants.HttpConstant.Companion.BASE_HTTP_SUCCESS
 import com.lee.pioneer.model.entity.Data
+import com.lee.pioneer.model.entity.PageData
 import kotlinx.coroutines.coroutineScope
 
 /**

@@ -1,17 +1,27 @@
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lee.library.adapter.LeeViewAdapter
-import com.lee.pioneer.model.entity.Data
+import com.lee.pioneer.model.entity.PageData
 
 /**
  * @author jv.lee
  * @date 2020/3/30
  * @description 分页数据公共操作类
  */
+fun <T> executePageError(
+    adapter: LeeViewAdapter<T>,
+    refreshView: SwipeRefreshLayout?) {
+    refreshView?.isRefreshing = false
+    if (adapter.isPageCompleted) {
+        adapter.loadFailed()
+    } else {
+        adapter.pageError()
+    }
+}
 
 fun <T> executePageCompleted(
-    data: Data<List<T>>,
+    data: PageData<T>,
     adapter: LeeViewAdapter<T>,
-    refreshView:SwipeRefreshLayout,
+    refreshView: SwipeRefreshLayout,
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}
 ) {
@@ -38,7 +48,7 @@ fun <T> executePageCompleted(
 }
 
 fun <T> executePageCompleted(
-    data: Data<List<T>>,
+    data: PageData<T>,
     adapter: LeeViewAdapter<T>,
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}

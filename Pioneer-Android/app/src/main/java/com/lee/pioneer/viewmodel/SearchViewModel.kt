@@ -8,9 +8,8 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.BaseViewModel
 import com.lee.library.utils.KeyboardUtil
-import com.lee.library.utils.LogUtil
 import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.Data
+import com.lee.pioneer.model.entity.PageData
 import com.lee.pioneer.model.repository.ApiRepository
 import executeResponseAny
 
@@ -23,7 +22,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
 
     private var page = 0
     private val searchTextObservable = ObservableField<String>("")
-    val contentListObservable by lazy { MutableLiveData<Data<List<Content>>>() }
+    val contentListObservable by lazy { MutableLiveData<PageData<Content>>() }
     val loadingObservable by lazy { MutableLiveData<Boolean>() }
 
     val editActionListener = TextView.OnEditorActionListener { view, actionId, _ ->

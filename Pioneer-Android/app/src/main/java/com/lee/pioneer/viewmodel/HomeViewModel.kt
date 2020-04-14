@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.BaseViewModel
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.model.entity.Category
+import com.lee.pioneer.model.entity.PageData
 import com.lee.pioneer.model.repository.ApiRepository
 import executeResponse
+import executeResponseAny
 
 /**
  * @author jv.lee
@@ -15,14 +17,14 @@ import executeResponse
  */
 class HomeViewModel(application: Application) : BaseViewModel(application) {
 
-    val categoryObservable by lazy { MutableLiveData<List<Category>>() }
+    val categoryObservable by lazy { MutableLiveData<PageData<Category>>() }
 
     /**
      * TODO 构建主页分类tab 子fragments
      */
     fun buildCategoryFragment() {
         launch(-1) {
-            executeResponse(ApiRepository.getApi().getCategoriesAsync(KeyConstants.CATEGORY_TYPE).await()) {
+            executeResponseAny(ApiRepository.getApi().getCategoriesAsync(KeyConstants.CATEGORY_TYPE).await()) {
                 categoryObservable.value = it
             }
         }

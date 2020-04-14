@@ -7,6 +7,11 @@ package com.lee.pioneer.model.entity
  */
 data class Data<T>(
     val data: T,
+    val status: Int
+)
+
+data class PageData<T>(
+    val data: ArrayList<T>,
     val status: Int,
     val count: Int,
     val hot: String,

@@ -11,6 +11,7 @@ import com.lee.pioneer.databinding.FragmentContentListBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.ContentListViewModel
 import executePageCompleted
+import executePageError
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
 
@@ -71,13 +72,7 @@ class ContentListFragment :
             failedEvent.observe(this@ContentListFragment, Observer { it ->
                 it?.message?.let { toast(it) }
                 when (it.code) {
-                    -1 -> {
-                        if (mAdapter.isPageCompleted) {
-                            mAdapter.loadFailed()
-                        } else {
-                            mAdapter.pageError()
-                        }
-                    }
+                    -1 -> executePageError(mAdapter, binding.refresh)
                 }
             })
 

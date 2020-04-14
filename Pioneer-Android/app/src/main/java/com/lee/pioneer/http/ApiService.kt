@@ -17,7 +17,7 @@ interface ApiService {
      * TODO 首页banner轮播
      */
     @GET("banners")
-    fun getBannerAsync(): Deferred<Data<List<Banner>>>
+    fun getBannerAsync(): Deferred<PageData<Banner>>
 
     /**
      * TODO 分类 API
@@ -27,7 +27,7 @@ interface ApiService {
      * Girl：妹子图
      */
     @GET("categories/{category_type}")
-    fun getCategoriesAsync(@Path("category_type") categoryType: String): Deferred<Data<List<Category>>>
+    fun getCategoriesAsync(@Path("category_type") categoryType: String): Deferred<PageData<Category>>
 
     /**
      * TODO 分类数据 API
@@ -42,7 +42,7 @@ interface ApiService {
         @Path("type") type: String,
         @Path("page") page: Int,
         @Path("count") count: Int
-    ): Deferred<Data<List<Content>>>
+    ): Deferred<PageData<Content>>
 
     /**
      * TODO 随机数据API
@@ -68,7 +68,7 @@ interface ApiService {
         @Path("hot_type") hotType: String,
         @Path("category") category: String,
         @Path("count") count: Int
-    ): Deferred<Data<List<Content>>>
+    ): Deferred<PageData<Content>>
 
     /**
      * TODO 文章详情 API
@@ -99,7 +99,7 @@ interface ApiService {
         @Path("type") type: String,
         @Path("page") page: Int,
         @Path("count") count: Int
-    ): Deferred<Data<List<Content>>>
+    ): Deferred<PageData<Content>>
 
     @GET
     fun getWanData(@Url url: String): Deferred<WanData>

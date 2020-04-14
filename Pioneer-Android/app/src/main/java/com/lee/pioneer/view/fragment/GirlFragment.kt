@@ -1,16 +1,13 @@
 package com.lee.pioneer.view.fragment
 
 import android.annotation.SuppressLint
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
-import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.utils.LogUtil
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -19,6 +16,7 @@ import com.lee.pioneer.databinding.LayoutGirlHeaderBinding
 import com.lee.pioneer.view.adapter.GirlAdapter
 import com.lee.pioneer.viewmodel.GirlViewModel
 import executePageCompleted
+import executePageError
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -106,13 +104,7 @@ class GirlFragment :
             failedEvent.observe(this@GirlFragment, Observer { it ->
                 it?.message?.let { toast(it) }
                 when (it.code) {
-                    -1 -> {
-                        if (mAdapter.isPageCompleted) {
-                            mAdapter.loadFailed()
-                        } else {
-                            mAdapter.pageError()
-                        }
-                    }
+                    -1 -> executePageError(mAdapter, binding.refresh)
                 }
             })
 
