@@ -85,6 +85,7 @@ class GirlFragment :
         }
 
         binding.refresh.setOnRefreshListener {
+            mAdapter.openStatusView()
             viewModel.getGirlContentData(false)
         }
     }

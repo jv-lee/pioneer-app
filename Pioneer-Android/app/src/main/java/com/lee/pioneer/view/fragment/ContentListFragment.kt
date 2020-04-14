@@ -56,6 +56,7 @@ class ContentListFragment :
             type?.let { viewModel.loadListData(it, true) }
         }
         binding.refresh.setOnRefreshListener {
+            mAdapter.openStatusView()
             type?.let { viewModel.loadListData(it, false) }
         }
     }
