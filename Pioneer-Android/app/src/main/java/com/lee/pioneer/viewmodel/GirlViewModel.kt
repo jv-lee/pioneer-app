@@ -8,6 +8,7 @@ import com.lee.pioneer.model.entity.Data
 import com.lee.pioneer.model.repository.ApiRepository
 import executeResponseAny
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlin.random.Random
 
@@ -16,6 +17,7 @@ import kotlin.random.Random
  * @date 2020/4/10
  * @description
  */
+@ExperimentalCoroutinesApi
 class GirlViewModel(application: Application) : BaseViewModel(application) {
 
     var page = 0
