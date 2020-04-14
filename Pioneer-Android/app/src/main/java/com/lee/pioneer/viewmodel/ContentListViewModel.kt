@@ -24,11 +24,11 @@ class ContentListViewModel(application: Application) : BaseViewModel(application
     fun loadListData(type: String, isLoadMore: Boolean) {
         if (!isLoadMore) page = 0
         launch(-1) {
-//            val dataCache =
-//                CacheRepository.get().getDataCache<PageData<Content>>("content-key2")
-//            dataCache?.let {
-//                LogUtil.i("dataCache:" + dataCache)
-//            }
+            val dataCache =
+                CacheRepository.get().getDataCache<PageData<Content>>("content-key2")
+            dataCache?.let {
+                LogUtil.i("dataCache:" + dataCache)
+            }
             val response = ApiRepository.getApi().getCategoryDataAsync(
                 KeyConstants.CATEGORY_ALL,
                 type,
