@@ -41,7 +41,7 @@
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:gravity="center_vertical"
-                android:padding="@dimen/padding_small"
+                android:padding="@dimen/padding_large"
                 android:textColor="@color/colorThemePrimary"
                 android:textSize="@dimen/font_size_small"
                 app:layout_constraintEnd_toEndOf="parent"

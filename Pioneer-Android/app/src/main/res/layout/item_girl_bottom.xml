@@ -29,7 +29,7 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="3"
-                android:padding="@dimen/padding_small"
+                android:padding="@dimen/padding_large"
                 android:textColor="@color/colorThemePrimary"
                 android:textSize="@dimen/font_size_small"
                 app:layout_constraintEnd_toEndOf="parent"
