@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.adapter.item
 
+import android.widget.TextView
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.pioneer.R
@@ -11,9 +12,9 @@ import com.lee.pioneer.tools.GlideTools
  * @date 2020/4/10
  * @description
  */
-class GirlItem : LeeViewItem<Content> {
+class GirlTopItem : LeeViewItem<Content> {
     override fun getItemLayout(): Int {
-        return R.layout.item_girl
+        return R.layout.item_girl_top
     }
 
     override fun openClick(): Boolean {
@@ -25,7 +26,7 @@ class GirlItem : LeeViewItem<Content> {
     }
 
     override fun isItemView(entity: Content?, position: Int): Boolean {
-        return entity != null
+        return entity != null && position % 2 != 0
     }
 
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
@@ -33,6 +34,7 @@ class GirlItem : LeeViewItem<Content> {
             entity?.images?.get(0)?.let {
                 GlideTools.get().loadCenterCopy(it, holder.getView(R.id.iv_picture))
             }
+            holder.getView<TextView>(R.id.tv_description).text = entity?.desc
         }
     }
 

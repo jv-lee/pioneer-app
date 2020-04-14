@@ -3,7 +3,8 @@ package com.lee.pioneer.view.adapter
 import android.content.Context
 import com.lee.library.adapter.LeeViewAdapter
 import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.view.adapter.item.GirlItem
+import com.lee.pioneer.view.adapter.item.GirlBottomItem
+import com.lee.pioneer.view.adapter.item.GirlTopItem
 
 /**
  * @author jv.lee
@@ -14,7 +15,8 @@ class GirlAdapter(context: Context, data: ArrayList<Content>) :
     LeeViewAdapter<Content>(context, data) {
 
     init {
-        addItemStyles(GirlItem())
+        addItemStyles(GirlTopItem())
+        addItemStyles(GirlBottomItem())
     }
 
 }
