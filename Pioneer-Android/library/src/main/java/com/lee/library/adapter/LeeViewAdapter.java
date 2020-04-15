@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lee.library.R;
 import com.lee.library.adapter.listener.DefaultLoadResource;
 import com.lee.library.adapter.listener.LeeViewItem;
 import com.lee.library.adapter.listener.LoadResource;
@@ -348,9 +347,13 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
                 pageLoadingView.setVisibility(View.VISIBLE);
                 break;
             case STATUS_PAGE_EMPTY:
+                clearData();
+                notifyDataSetChanged();
                 pageEmptyView.setVisibility(View.VISIBLE);
                 break;
             case STATUS_PAGE_ERROR:
+                clearData();
+                notifyDataSetChanged();
                 pageErrorView.setVisibility(View.VISIBLE);
                 break;
             case STATUS_PAGE_COMPLETED:
@@ -371,8 +374,6 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
     }
 
     public void openStatusView() {
-        clearData();
-        notifyDataSetChanged();
         //将加载成功设置为false  可以再次初始列表加载
         isPageCompleted = false;
         //开启loadMore模式

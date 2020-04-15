@@ -1,13 +1,11 @@
 package com.lee.pioneer.view.adapter.item
 
-import android.widget.ImageView
 import android.widget.TextView
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.tools.GlideTools
 import com.lee.pioneer.tools.ViewTools
 
 /**
