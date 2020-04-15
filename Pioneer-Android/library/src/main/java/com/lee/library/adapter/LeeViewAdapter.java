@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lee.library.adapter.listener.DefaultLoadResource;
 import com.lee.library.adapter.listener.LeeViewItem;
+import com.lee.library.adapter.listener.LoadErrorListener;
 import com.lee.library.adapter.listener.LoadResource;
 import com.lee.library.adapter.manager.LeeViewItemManager;
 
@@ -99,6 +100,11 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
      * 状态布局及加载更多布局资源di接口动态设置
      */
     private LoadResource mLoadResource;
+    /**
+     * 错误状态重试接口
+     */
+    private LoadErrorListener mLoadErrorListener;
+
     /**
      * 数据源
      */
@@ -557,7 +563,7 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
             viewHolder.getConvertView().setOnLongClickListener(v -> {
                 int position = getPosition(viewHolder);
                 if (position >= 0) {
-                    mOnItemLongClickListener.onItemLongClick(v, mData.get(position), position);
+                    return mOnItemLongClickListener.onItemLongClick(v, mData.get(position), position);
                 }
                 return true;
             });
@@ -635,20 +641,60 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener<T> mOnItemLongClickListener) {
-        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    /**
+     * 设置item长按点击事件
+     *
+     * @param onItemLongClickListener
+     */
+    public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
+        this.mOnItemLongClickListener = onItemLongClickListener;
     }
 
+    /**
+     * 设置item子view点击事件
+     *
+     * @param onItemChildView
+     * @param childClickIds
+     */
     public void setOnItemChildClickListener(OnItemChildView<T> onItemChildView, Integer... childClickIds) {
         this.childClickIds = Arrays.asList(childClickIds);
         this.mOnItemChildChange = onItemChildView;
     }
 
+    /**
+     * 设置自动加载更多监听
+     *
+     * @param autoLoadMoreListener
+     */
     public void setAutoLoadMoreListener(AutoLoadMoreListener autoLoadMoreListener) {
         this.mAutoLoadMoreListener = autoLoadMoreListener;
     }
 
+    /**
+     * 设置自定义 page状态资源布局接口
+     *
+     * @param loadResource
+     */
     public void setLoadResource(LoadResource loadResource) {
         this.mLoadResource = loadResource;
     }
+
+    /**
+     * 设置错误重试接口
+     *
+     * @param loadErrorlistener
+     */
+    public void setLoadErrorListener(LoadErrorListener loadErrorlistener) {
+        if (mLoadResource != null && pageLayout != null) {
+            pageLayout.findViewById(mLoadResource.pageReloadId()).setOnClickListener(v -> {
+                loadErrorlistener.pageReload();
+            });
+        }
+        if (mLoadResource != null && itemLayout != null) {
+            itemLayout.findViewById(mLoadResource.itemReloadId()).setOnClickListener(v -> {
+                loadErrorlistener.itemReload();
+            });
+        }
+    }
+
 }

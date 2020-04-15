@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
@@ -46,14 +47,26 @@ class ContentListFragment :
 
         mAdapter.openStatusView()
         mAdapter.pageLoading()
+        mAdapter.setAutoLoadMoreListener {
+            type?.let { viewModel.loadListData(it, true) }
+        }
+        mAdapter.setLoadErrorListener(object : LoadErrorListener {
+            override fun itemReload() {
+                toast("重试item")
+                type?.let { viewModel.loadListData(it, isLoadMore = true, isReload = true) }
+            }
+
+            override fun pageReload() {
+                toast("重试page")
+                type?.let { viewModel.loadListData(it, false) }
+            }
+
+        })
         mAdapter.setOnItemClickListener { _, entity, _ ->
             hideNavigation()
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeToContentDetails(entity._id, CONST_EMPTY)
             )
-        }
-        mAdapter.setAutoLoadMoreListener {
-            type?.let { viewModel.loadListData(it, true) }
         }
         binding.refresh.setOnRefreshListener {
             mAdapter.openStatusView()

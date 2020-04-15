@@ -9,10 +9,10 @@ import kotlinx.coroutines.coroutineScope
  * @date 2019-08-15
  * @description
  */
-open class ResponsePageViewModel(application: Application, val page: Int = 0) :
+open class ResponsePageViewModel(application: Application, val firstPage: Int = 0) :
     BaseViewModel(application) {
 
-    private var mPage = page
+    var page = firstPage
     private var firstCache = true
 
     /**
@@ -20,17 +20,25 @@ open class ResponsePageViewModel(application: Application, val page: Int = 0) :
      */
     fun <T> pageLaunch(
         isLoadMore: Boolean,
+        isReload: Boolean = false,
         cacheBlock: suspend CoroutineScope.() -> Unit,
         networkBlock: suspend CoroutineScope.() -> T?,
         completedBlock: suspend CoroutineScope.(T) -> Unit
     ) {
         launch(-1) {
-            if (isLoadMore) mPage++ else mPage = page
+            //加载更多设置page
+            if (isLoadMore) {
+                if (!isReload) page++
+            } else {
+                page = firstPage
+            }
+            //设置首次缓存flag
             if (firstCache) {
                 firstCache = false
                 cacheBlock()
             }
-            if (mPage == page) {
+            //根据页码回调网络请求及是否调用 completedBlock函数体 (completedBlock处理只使用一次的缓存存储,及数据设置)
+            if (page == firstPage) {
                 val response = networkBlock()
                 response?.let {
                     completedBlock(response)
@@ -46,7 +54,13 @@ open class ResponsePageViewModel(application: Application, val page: Int = 0) :
         networkBlock: suspend CoroutineScope.() -> T,
         completedBlock: suspend CoroutineScope.(T) -> Unit
     ) {
-        pageLaunch(false, cacheBlock, networkBlock, completedBlock)
+        pageLaunch(
+            isLoadMore = false,
+            isReload = false,
+            cacheBlock = cacheBlock,
+            networkBlock = networkBlock,
+            completedBlock = completedBlock
+        )
     }
 
     /**
