@@ -24,7 +24,7 @@
             <com.lee.library.widget.ImageViewRound
                 android:id="@+id/iv_picture"
                 android:layout_width="0dp"
-                android:layout_height="240pt"
+                android:layout_height="220pt"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="0dp"
-                android:layout_height="60pt"
+                android:layout_height="80pt"
                 android:background="@drawable/shape_girl_item_text_bottom_bg"
                 android:ellipsize="end"
                 android:maxLines="3"

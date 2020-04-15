@@ -28,12 +28,9 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
             {
                 //缓存数据
                 CacheRepository.get().getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase())
-                    .await()?.let { it ->
-                        contentListObservable.value = it
-                    }
+                    .await()?.let { it -> contentListObservable.value = it }
             },
             {
-                LogUtil.i("page -> $page")
                 //网络数据
                 ApiRepository.getApi().getContentDataAsync(
                     KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
@@ -44,8 +41,7 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
             },
             {
                 //存储缓存数据
-                CacheRepository.get()
-                    .putCache(CONTENT_CACHE_KEY + type.toLowerCase(), it)
+                CacheRepository.get().putCache(CONTENT_CACHE_KEY + type.toLowerCase(), it)
             })
     }
 
