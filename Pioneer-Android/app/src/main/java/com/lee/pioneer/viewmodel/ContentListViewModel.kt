@@ -27,20 +27,15 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
         pageLaunch(isLoadMore,
             {
                 //缓存数据
-                CacheRepository.get()
-                    .getPageCacheAsyn<Content>(CONTENT_CACHE_KEY + type.toLowerCase())
+                CacheRepository.get().getPageCacheAsyn(CONTENT_CACHE_KEY + type.toLowerCase())
                     .await()?.let { it ->
-                        LogUtil.i("磁盘数据$it")
-                        executeResponseAny(it) { contentListObservable.value = it }
+                        contentListObservable.value = it
                     }
             },
             {
                 //网络数据
                 ApiRepository.getApi().getContentDataAsync(
-                    KeyConstants.CATEGORY_ALL,
-                    type,
-                    page,
-                    KeyConstants.PAGE_COUNT
+                    KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
                 ).await().let { it ->
                     if (page == 1) {
                         CacheRepository.get()
