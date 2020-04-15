@@ -29,30 +29,23 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
 
     fun getGirlContentData(isMore: Boolean, isReload: Boolean = false) {
         //数据转换 添加viewType
-//        launch {
-//            flow {
-//                val responseAsync =
-//                    ApiRepository.getApi()
-//                        .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, ++page, PAGE_COUNT)
-//                emit(responseAsync.await())
-//            }.map { it ->
-//                it.data.forEach { it.viewType = Random.nextInt() % 2 }
-//                it
-//            }.flowOn(Dispatchers.IO).collect { it ->
-//                executeResponseAny(it, { contentObservable.value = it })
-//            }
-//        }
         pageLaunch(isMore, isReload,
             {
                 CacheRepository.get()
                     .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase())
-                    .await()?.let { contentObservable.value = it }
+                    .await()?.let {
+                        it.data.map { it.viewType = Random.nextInt() % 2 }
+                        contentObservable.value = it
+                    }
             },
             {
                 ApiRepository.getApi()
                     .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
                     .await().let {
-                        executeResponseAny(it, { contentObservable.value = it })
+                        executeResponseAny(it, {
+                            it.data.map { it.viewType = Random.nextInt() % 2 }
+                            contentObservable.value = it
+                        })
                         it
                     }
             },
