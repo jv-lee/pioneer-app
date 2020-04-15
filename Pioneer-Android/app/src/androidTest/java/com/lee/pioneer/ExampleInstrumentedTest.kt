@@ -32,7 +32,7 @@ class ExampleInstrumentedTest {
             LogUtil.i("categories->${categories.data}")
 
             val dataList =
-                ApiRepository.getApi().getCategoryDataAsync("Article", "Android", 1, 10)
+                ApiRepository.getApi().getContentDataAsync("Article", "Android", 1, 10)
                     .await()
             LogUtil.i("dataList->${dataList.data.size}")
 

@@ -37,7 +37,7 @@ interface ApiService {
      * @param count： [10, 50]
      */
     @GET("data/category/{category}/type/{type}/page/{page}/count/{count}")
-    fun getCategoryDataAsync(
+    fun getContentDataAsync(
         @Path("category") category: String,
         @Path("type") type: String,
         @Path("page") page: Int,

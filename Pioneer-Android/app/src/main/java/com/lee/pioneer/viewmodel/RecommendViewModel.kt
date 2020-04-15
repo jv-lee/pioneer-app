@@ -3,6 +3,8 @@ package com.lee.pioneer.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.BaseViewModel
+import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
+import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.model.entity.Banner
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.repository.ApiRepository
@@ -37,7 +39,7 @@ class RecommendViewModel(application: Application) : BaseViewModel(application) 
             return
         }
         launch(-1) {
-            val response = ApiRepository.getApi().getHotDataAsync(type, "GanHuo", 20).await()
+            val response = ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT).await()
             executeResponseAny(response) {
                 putCacheContentList(type, it.data)
                 contentObservable.value = it.data

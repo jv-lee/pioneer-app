@@ -4,6 +4,8 @@ import com.google.gson.reflect.TypeToken
 import com.lee.library.cache.CacheManager
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.PageData
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Deferred
 
 /**
  * @author jv.lee
@@ -26,9 +28,9 @@ class CacheRepository {
      * @param key 存储key
      * 无法完全使用泛形解析 所以使用PageData包装类配合泛形使用
      */
-    fun <T> getPageCache(key: String): PageData<T>? {
+    fun <T> getPageCacheAsyn(key: String): Deferred<PageData<T>?> {
         val type = object : TypeToken<PageData<T>>() {}.type
-        return CacheManager.getInstance().get(key, type)
+        return CompletableDeferred(CacheManager.getInstance().get<PageData<T>>(key, type))
     }
 
     /**

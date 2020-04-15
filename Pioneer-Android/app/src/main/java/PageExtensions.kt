@@ -9,7 +9,8 @@ import com.lee.pioneer.model.entity.PageData
  */
 fun <T> executePageError(
     adapter: LeeViewAdapter<T>,
-    refreshView: SwipeRefreshLayout?) {
+    refreshView: SwipeRefreshLayout?
+) {
     refreshView?.isRefreshing = false
     if (adapter.isPageCompleted) {
         adapter.loadFailed()
@@ -25,16 +26,15 @@ fun <T> executePageCompleted(
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}
 ) {
+    refreshView.isRefreshing = false
     if (data.page == 1) {
         if (data.data.isNullOrEmpty()) {
-            refreshView.isRefreshing = false
             adapter.pageEmpty()
             emptyBlock()
             return
         }
         adapter.updateData(data.data)
         adapter.notifyDataSetChanged()
-        refreshView.isRefreshing = false
         adapter.pageCompleted()
         refreshBlock()
     } else {

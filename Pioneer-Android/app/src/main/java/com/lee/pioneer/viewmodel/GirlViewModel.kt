@@ -3,6 +3,8 @@ package com.lee.pioneer.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.BaseViewModel
+import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_GIRL
+import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.PageData
 import com.lee.pioneer.model.repository.ApiRepository
@@ -27,7 +29,8 @@ class GirlViewModel(application: Application) : BaseViewModel(application) {
             //数据转换 添加viewType
             flow {
                 val responseAsync =
-                    ApiRepository.getApi().getCategoryDataAsync("Girl", "Girl", ++page, 20)
+                    ApiRepository.getApi()
+                        .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, ++page, PAGE_COUNT)
                 emit(responseAsync.await())
             }.map { it ->
                 it.data.forEach { it.viewType = Random.nextInt() % 2 }

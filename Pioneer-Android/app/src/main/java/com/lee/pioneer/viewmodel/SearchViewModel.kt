@@ -8,6 +8,9 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.BaseViewModel
 import com.lee.library.utils.KeyboardUtil
+import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_ALL
+import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
+import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.PageData
 import com.lee.pioneer.model.repository.ApiRepository
@@ -21,7 +24,7 @@ import executeResponseAny
 class SearchViewModel(application: Application) : BaseViewModel(application) {
 
     private var page = 0
-    private val searchTextObservable = ObservableField<String>("")
+    private val searchTextObservable = ObservableField<String>(CONST_EMPTY)
     val contentListObservable by lazy { MutableLiveData<PageData<Content>>() }
     val loadingObservable by lazy { MutableLiveData<Boolean>() }
 
@@ -42,7 +45,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
             val text = searchTextObservable.get()!!
             val response =
                 ApiRepository.getApi()
-                    .getSearchDataAsync(text, "All", "All", ++page, 20)
+                    .getSearchDataAsync(text, CATEGORY_ALL, CATEGORY_ALL, ++page, PAGE_COUNT)
                     .await()
             executeResponseAny(response) { contentListObservable.value = it }
         }
