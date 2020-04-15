@@ -55,12 +55,7 @@ class SearchFragment :
 
         viewModel.apply {
             contentListObservable.observe(this@SearchFragment, Observer {
-                executePageCompleted(it, mAdapter,
-                    refreshBlock = {
-                        mAdapter.pageCompleted()
-                    }, emptyBlock = {
-                        mAdapter.pageEmpty()
-                    })
+                executePageCompleted(it, mAdapter)
             })
 
             //错误处理
