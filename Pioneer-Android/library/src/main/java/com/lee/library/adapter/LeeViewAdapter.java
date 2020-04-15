@@ -575,6 +575,23 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
     }
 
     /**
+     * 设置错误回调逻辑
+     */
+    private void bindLoadErrorListener() {
+        if (mLoadResource != null && pageLayout != null) {
+            pageLayout.findViewById(mLoadResource.pageReloadId()).setOnClickListener(v -> {
+                mLoadErrorListener.pageReload();
+            });
+        }
+        if (mLoadResource != null && itemLayout != null) {
+            itemLayout.findViewById(mLoadResource.itemReloadId()).setOnClickListener(v -> {
+                updateStatus(STATUS_ITEM_MORE);
+                mLoadErrorListener.itemReload();
+            });
+        }
+    }
+
+    /**
      * 条目点击监听接口
      */
     public interface OnItemClickListener<T> {
@@ -685,16 +702,8 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
      * @param loadErrorlistener
      */
     public void setLoadErrorListener(LoadErrorListener loadErrorlistener) {
-        if (mLoadResource != null && pageLayout != null) {
-            pageLayout.findViewById(mLoadResource.pageReloadId()).setOnClickListener(v -> {
-                loadErrorlistener.pageReload();
-            });
-        }
-        if (mLoadResource != null && itemLayout != null) {
-            itemLayout.findViewById(mLoadResource.itemReloadId()).setOnClickListener(v -> {
-                loadErrorlistener.itemReload();
-            });
-        }
+        mLoadErrorListener = loadErrorlistener;
+        bindLoadErrorListener();
     }
 
 }

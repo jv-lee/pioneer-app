@@ -52,12 +52,10 @@ class ContentListFragment :
         }
         mAdapter.setLoadErrorListener(object : LoadErrorListener {
             override fun itemReload() {
-                toast("重试item")
                 type?.let { viewModel.loadListData(it, isLoadMore = true, isReload = true) }
             }
 
             override fun pageReload() {
-                toast("重试page")
                 type?.let { viewModel.loadListData(it, false) }
             }
 
