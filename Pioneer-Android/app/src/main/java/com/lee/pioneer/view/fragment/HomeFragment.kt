@@ -26,6 +26,9 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
 
     override fun bindView() {
         binding.status.setStatus(StatusLayout.STATUS_LOADING)
+        binding.status.setOnReloadListener {
+            viewModel.buildCategoryFragment()
+        }
         binding.tvSearch.setOnClickListener {
             hideNavigation()
             findNavController().navigate(R.id.action_home_to_search)
@@ -39,6 +42,8 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
             //获取分类数据 构建分类tab 及 fragment
             categoryObservable.observe(this@HomeFragment, Observer { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
+                vpAdapter.tabList.clear()
+                vpAdapter.fragmentList.clear()
                 it.data.map {
                     vpAdapter.tabList.add(it.title)
                     vpAdapter.fragmentList.add(ContentListFragment.newInstance(it.type))
@@ -52,7 +57,9 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
                 when (it.code) {
                     -1 -> {
                         toast("请求错误:${it.message}  ")
-                        binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                        if (vpAdapter.tabList.isEmpty()) {
+                            binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                        }
                     }
                 }
             })

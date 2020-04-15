@@ -3,7 +3,6 @@ package com.lee.pioneer.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.ResponsePageViewModel
-import com.lee.library.utils.LogUtil
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.model.entity.Content
@@ -27,7 +26,7 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
         pageLaunch(isLoadMore,
             {
                 //缓存数据
-                CacheRepository.get().getPageCacheAsyn(CONTENT_CACHE_KEY + type.toLowerCase())
+                CacheRepository.get().getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase())
                     .await()?.let { it ->
                         contentListObservable.value = it
                     }
@@ -37,12 +36,14 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
                 ApiRepository.getApi().getContentDataAsync(
                     KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
                 ).await().let { it ->
-                    if (page == 1) {
-                        CacheRepository.get()
-                            .putPageCache(CONTENT_CACHE_KEY + type.toLowerCase(), it)
-                    }
                     executeResponseAny(it) { contentListObservable.value = it }
+                    it
                 }
+            },
+            {
+                //存储缓存数据
+                CacheRepository.get()
+                    .putCache(CONTENT_CACHE_KEY + type.toLowerCase(), it)
             })
     }
 

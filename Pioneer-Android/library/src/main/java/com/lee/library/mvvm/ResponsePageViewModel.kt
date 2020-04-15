@@ -9,27 +9,44 @@ import kotlinx.coroutines.coroutineScope
  * @date 2019-08-15
  * @description
  */
-open class ResponsePageViewModel(application: Application, var page: Int) :
+open class ResponsePageViewModel(application: Application, val page: Int = 0) :
     BaseViewModel(application) {
 
+    private var mPage = page
     private var firstCache = true
 
     /**
      * 分页数据加载封装
      */
-    fun pageLaunch(
+    fun <T> pageLaunch(
         isLoadMore: Boolean,
         cacheBlock: suspend CoroutineScope.() -> Unit,
-        networkBlock: suspend CoroutineScope.() -> Unit
+        networkBlock: suspend CoroutineScope.() -> T?,
+        completedBlock: suspend CoroutineScope.(T) -> Unit
     ) {
         launch(-1) {
-            if (isLoadMore) page++ else page = 1
+            if (isLoadMore) mPage++ else mPage = page
             if (firstCache) {
                 firstCache = false
                 cacheBlock()
             }
-            networkBlock()
+            if (mPage == page) {
+                val response = networkBlock()
+                response?.let {
+                    completedBlock(response)
+                }
+            } else {
+                networkBlock()
+            }
         }
+    }
+
+    fun <T> cacheLaunch(
+        cacheBlock: suspend CoroutineScope.() -> Unit,
+        networkBlock: suspend CoroutineScope.() -> T,
+        completedBlock: suspend CoroutineScope.(T) -> Unit
+    ) {
+        pageLaunch(false, cacheBlock, networkBlock, completedBlock)
     }
 
     /**

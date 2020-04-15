@@ -1,5 +1,7 @@
 package com.lee.pioneer
 
+import com.lee.pioneer.model.entity.Content
+import com.lee.pioneer.model.entity.Data
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -18,13 +20,9 @@ class ExampleUnitTest {
         println("1080 1920number -> ${codePtNumber(1080, 1920)}")
         println("320 760number -> ${codePtNumber(360, 720)}")
 
-        println(Random.nextInt() % 2)
-        println(Random.nextInt() % 2)
-        println(Random.nextInt() % 2)
-        println(Random.nextInt() % 2)
-        println(Random.nextInt() % 2)
-        println(Random.nextInt() % 2)
-        println(Random.nextInt() % 2)
+        var data1 = Data(1, 2)
+        var data2 = Data(1, 2)
+        println(data1 == data2)
 
     }
 
