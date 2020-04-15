@@ -2,6 +2,7 @@ package com.lee.pioneer.view.fragment
 
 import android.text.TextUtils
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
@@ -35,7 +36,8 @@ class ContentDetailsFragment :
             }
         })
 
-        web?.let {
+        web?.let { it ->
+            it.parent?.let { (it as ViewGroup).removeAllViews() }
             binding.frameContainer.addView(it)
             setWebBackEvent(it)
             it.settings.useWideViewPort = true
