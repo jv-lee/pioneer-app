@@ -33,7 +33,7 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
             {
                 CacheRepository.get()
                     .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase())
-                    .await()?.let {
+                    .await()?.let { it ->
                         it.data.map { it.viewType = Random.nextInt() % 2 }
                         contentObservable.value = it
                     }
@@ -41,12 +41,13 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
             {
                 ApiRepository.getApi()
                     .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
-                    .await().let {
-                        executeResponseAny(it, {
+                    .await().let { it ->
+                        if (contentObservable.value != it) {
                             it.data.map { it.viewType = Random.nextInt() % 2 }
                             contentObservable.value = it
-                        })
-                        it
+                            return@let it
+                        }
+                        null
                     }
             },
             {

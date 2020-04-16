@@ -34,9 +34,12 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
                 //网络数据
                 ApiRepository.getApi().getContentDataAsync(
                     KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
-                ).await().let { it ->
-                    executeResponseAny(it) { contentListObservable.value = it }
-                    it
+                ).await().let {
+                    if (contentListObservable.value != it) {
+                        contentListObservable.value = it
+                        return@let it
+                    }
+                    null
                 }
             },
             {

@@ -2,20 +2,21 @@ package com.lee.pioneer.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.BaseViewModel
+import com.lee.library.mvvm.ResponsePageViewModel
+import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.model.entity.Banner
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.repository.ApiRepository
-import executeResponseAny
+import com.lee.pioneer.model.repository.CacheRepository
 
 /**
  * @author jv.lee
  * @date 2020/4/9
  * @description
  */
-class RecommendViewModel(application: Application) : BaseViewModel(application) {
+class RecommendViewModel(application: Application) : ResponsePageViewModel(application) {
 
     val bannerObservable by lazy { MutableLiveData<ArrayList<Banner>>() }
     val contentObservable by lazy { MutableLiveData<ArrayList<Content>>() }
@@ -38,13 +39,29 @@ class RecommendViewModel(application: Application) : BaseViewModel(application) 
             contentObservable.value = data
             return
         }
-        launch(-1) {
-            val response = ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT).await()
-            executeResponseAny(response) {
-                putCacheContentList(type, it.data)
-                contentObservable.value = it.data
-            }
-        }
+        cacheLaunch(
+            {
+                CacheRepository.get().getContentCacheAsync(RECOMMEND_CACHE_KEY + "type").await()
+                    ?.let {
+                        putCacheContentList(type, it.data)
+                        contentObservable.value = it.data
+                    }
+            },
+            {
+                ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT)
+                    .await()
+                    .let {
+                        if (contentObservable.value != it.data) {
+                            putCacheContentList(type, it.data)
+                            contentObservable.value = it.data
+                            return@let it
+                        }
+                        null
+                    }
+            },
+            {
+                CacheRepository.get().putCache(RECOMMEND_CACHE_KEY + type, it)
+            })
     }
 
     private fun putCacheContentList(type: String, data: ArrayList<Content>) {
