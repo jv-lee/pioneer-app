@@ -8,7 +8,6 @@
     <dimen name="font_size_small">14sp</dimen>
     <dimen name="font_size_small_x">12sp</dimen>
 
-
     <!--  TODO  全局通用样式 （统一全局padding margin值）-->
     <dimen name="margin_item">8pt</dimen>
     <dimen name="padding_item">16pt</dimen>
@@ -37,9 +36,15 @@
     <dimen name="web_loading_progress_height">6dp</dimen>
 
     <!--  TODO  全局item内部控件样式  -->
-    <dimen name="item_picture_radius">4pt</dimen>
-    <dimen name="item_picture_width">106pt</dimen>
-    <dimen name="item_picture_height">78pt</dimen>
+    <!--  item_content  -->
+    <dimen name="item_content_picture_radius">4pt</dimen>
+    <dimen name="item_content_picture_width">106pt</dimen>
+    <dimen name="item_content_picture_height">78pt</dimen>
+    <!--  item_girl  -->
+    <dimen name="item_girl_card_size">300pt</dimen>
+    <dimen name="item_girl_picture_height">220pt</dimen>
+    <dimen name="item_girl_des_height">80pt</dimen>
+    <dimen name="item_girl_root_height">330pt</dimen>
 
     <!--  TODO 自定义VIEW  -->
     <dimen name="view_line_icon_size">20pt</dimen>
