@@ -70,7 +70,7 @@ class RecommendFragment :
             R.drawable.recommend_comment_selector
         )
         headerBinding.groupType.setOnCheckedChangeListener { group, checkedId ->
-            mAdapter.openStatusView()
+            mAdapter.initStatusView()
             mAdapter.pageLoading()
             when (checkedId) {
                 R.id.radio_view -> viewModel.getContentList("views")
@@ -84,7 +84,7 @@ class RecommendFragment :
         binding.rvContainer.adapter = mAdapter.proxy
 
         mAdapter.setLoadResource(RecommendLoadResource())
-        mAdapter.openStatusView()
+        mAdapter.initStatusView()
         mAdapter.pageLoading()
         mAdapter.addHeader(headerBinding.root)
         mAdapter.notifyDataSetChanged()

@@ -45,7 +45,7 @@ class ContentListFragment :
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 
-        mAdapter.openStatusView()
+        mAdapter.initStatusView()
         mAdapter.pageLoading()
         mAdapter.setAutoLoadMoreListener {
             type?.let { viewModel.loadListData(it, true) }
@@ -67,7 +67,7 @@ class ContentListFragment :
             )
         }
         binding.refresh.setOnRefreshListener {
-            mAdapter.openStatusView()
+            mAdapter.openLoadMore()
             type?.let { viewModel.loadListData(it, false) }
         }
     }

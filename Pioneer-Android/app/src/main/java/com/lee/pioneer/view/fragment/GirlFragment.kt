@@ -68,7 +68,7 @@ class GirlFragment :
         })
 
         //适配器参数设置
-        mAdapter.openStatusView()
+        mAdapter.initStatusView()
         mAdapter.pageLoading()
         mAdapter.addHeader(headerViewBinding.root)
         mAdapter.setOnItemClickListener { view, entity, position ->
@@ -85,7 +85,7 @@ class GirlFragment :
         }
 
         binding.refresh.setOnRefreshListener {
-            mAdapter.openStatusView()
+            mAdapter.openLoadMore()
             viewModel.getGirlContentData(false)
         }
     }

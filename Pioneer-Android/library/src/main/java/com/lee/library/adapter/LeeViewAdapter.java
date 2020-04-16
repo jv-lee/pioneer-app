@@ -379,9 +379,9 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         }
     }
 
-    public void openStatusView() {
+    public void initStatusView() {
         //将加载成功设置为false  可以再次初始列表加载
-//        isPageCompleted = false; page状态只初始化一次
+        isPageCompleted = false;
         //开启loadMore模式
         hasLoadMore = true;
         if (mLoadResource == null) {
@@ -392,15 +392,23 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
             pageLoadingView = pageLayout.findViewById(mLoadResource.pageLoadingId());
             pageEmptyView = pageLayout.findViewById(mLoadResource.pageEmptyId());
             pageErrorView = pageLayout.findViewById(mLoadResource.pageErrorId());
-            addFooter(pageLayout);
         }
+        addFooter(pageLayout);
         if (itemLayout == null) {
             itemLayout = LayoutInflater.from(context).inflate(mLoadResource.itemLayoutId(), new FrameLayout(context), false);
             loadMoreView = itemLayout.findViewById(mLoadResource.itemLoadMoreId());
             loadEndView = itemLayout.findViewById(mLoadResource.itemLoadEndId());
             loadErrorView = itemLayout.findViewById(mLoadResource.itemLoadErrorId());
-            addFooter(itemLayout);
         }
+        addFooter(itemLayout);
+        updateStatus(STATUS_INIT);
+    }
+
+    /**
+     * 开启加载更多状态
+     */
+    public void openLoadMore() {
+        hasLoadMore = true;
         updateStatus(STATUS_INIT);
     }
 

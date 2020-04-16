@@ -35,7 +35,7 @@ class SearchFragment :
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 
-        mAdapter.openStatusView()
+        mAdapter.initStatusView()
         mAdapter.setOnItemClickListener { _, entity, _ ->
             hideNavigation()
             findNavController().navigate(
@@ -67,7 +67,7 @@ class SearchFragment :
             })
 
             loadingObservable.observe(this@SearchFragment, Observer {
-                mAdapter.openStatusView()
+                mAdapter.initStatusView()
                 mAdapter.pageLoading()
             })
         }
