@@ -35,22 +35,25 @@ fun <T> executePageCompleted(
 ) {
     refreshView?.isRefreshing = false
     if (data.page == 1) {
+        //设置空页面
         if (data.data.isNullOrEmpty()) {
             adapter.pageEmpty()
             emptyBlock()
             return
         }
+        //正常情况第一页加载数据状态
         adapter.updateData(data.data)
-        adapter.notifyDataSetChanged()
         adapter.pageCompleted()
         refreshBlock()
     } else {
         adapter.addData(data.data)
-        if (data.page >= data.page_count) {
-            adapter.loadMoreEnd()
-        } else {
-            adapter.loadMoreCompleted()
-        }
+    }
+
+    //设置尾页状态 (包括notifyDateSetChange)
+    if (data.page >= data.page_count) {
+        adapter.loadMoreEnd()
+    } else {
+        adapter.loadMoreCompleted()
     }
 }
 

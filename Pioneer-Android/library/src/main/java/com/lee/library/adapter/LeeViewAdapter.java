@@ -180,10 +180,8 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         if (data.size() != 0) {
             //清空数据集合 通知数据源发生变更
             this.mData.clear();
-            notifyDataSetChanged();
         }
         this.mData.addAll(data);
-
     }
 
     protected void addData(T data) {
@@ -350,17 +348,19 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         }
         switch (status) {
             case STATUS_PAGE_LOADING:
+                clearData();
                 pageLoadingView.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
                 break;
             case STATUS_PAGE_EMPTY:
                 clearData();
-                notifyDataSetChanged();
                 pageEmptyView.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
                 break;
             case STATUS_PAGE_ERROR:
                 clearData();
-                notifyDataSetChanged();
                 pageErrorView.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
                 break;
             case STATUS_PAGE_COMPLETED:
                 isPageCompleted = true;
