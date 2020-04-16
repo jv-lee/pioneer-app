@@ -16,6 +16,7 @@ import com.lee.pioneer.model.repository.CacheRepository
 import executeResponseAny
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import java.util.*
 import kotlin.random.Random
 
 /**
@@ -32,7 +33,7 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
         pageLaunch(isMore, isReload,
             {
                 CacheRepository.get()
-                    .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase())
+                    .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
                     .await()?.let { it ->
                         it.data.map { it.viewType = Random.nextInt() % 2 }
                         contentObservable.value = it
@@ -51,7 +52,10 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
                     }
             },
             {
-                CacheRepository.get().putCache(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(), it)
+                CacheRepository.get().putCache(
+                    CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()),
+                    it
+                )
             })
     }
 

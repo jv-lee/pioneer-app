@@ -10,6 +10,7 @@ import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.PageData
 import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
+import java.util.*
 
 /**
  * @author jv.lee
@@ -27,7 +28,11 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
         pageLaunch(isLoadMore, isReload,
             {
                 //缓存数据
-                CacheRepository.get().getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase())
+                CacheRepository.get().getContentCacheAsync(
+                    CONTENT_CACHE_KEY + type.toLowerCase(
+                        Locale.getDefault()
+                    )
+                )
                     .await()?.let { it -> contentListObservable.value = it }
             },
             {
@@ -44,7 +49,8 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
             },
             {
                 //存储缓存数据
-                CacheRepository.get().putCache(CONTENT_CACHE_KEY + type.toLowerCase(), it)
+                CacheRepository.get()
+                    .putCache(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
             })
     }
 

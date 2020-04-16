@@ -10,6 +10,8 @@ import com.lee.pioneer.model.entity.Banner
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @author jv.lee
@@ -41,7 +43,11 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
         }
         cacheLaunch(
             {
-                CacheRepository.get().getContentCacheAsync(RECOMMEND_CACHE_KEY + "type").await()
+                CacheRepository.get().getContentCacheAsync(
+                    RECOMMEND_CACHE_KEY + type.toLowerCase(
+                        Locale.getDefault()
+                    )
+                ).await()
                     ?.let {
                         putCacheContentList(type, it.data)
                         contentObservable.value = it.data
@@ -60,7 +66,8 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
                     }
             },
             {
-                CacheRepository.get().putCache(RECOMMEND_CACHE_KEY + type, it)
+                CacheRepository.get()
+                    .putCache(RECOMMEND_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
             })
     }
 
