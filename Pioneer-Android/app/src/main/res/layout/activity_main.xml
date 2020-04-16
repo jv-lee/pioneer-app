@@ -7,35 +7,22 @@
 
     </data>
 
+    <!--    通过invisible提前占位初始化view    -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
         tools:background="@color/colorThemeBackground"
         tools:context=".MainActivity">
 
-        <!--    通过invisible提前占位初始化view    -->
-        <com.lee.library.widget.NoScrollViewPager
-            android:id="@+id/pager_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-
-        <com.lee.library.widget.nav.BottomNavView
-            android:id="@+id/bottom_nav"
+        <fragment
+            android:id="@+id/nav_main_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorThemeItem"
-            android:visibility="gone"
-            app:itemIconTint="@drawable/main_selector"
-            app:itemTextColor="@drawable/main_selector"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/main_menu"
-            tools:visibility="visible" />
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/main" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

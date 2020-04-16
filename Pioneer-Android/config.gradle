@@ -36,7 +36,7 @@ ext {
     //运行时注解处理器
     processor = [
             "room" : "androidx.room:room-compiler:${room}",
-            "glide": "com.github.bumptech.glide:compiler:${glide}"
+            "glide": "com.github.bumptech.glide:compiler:${glide}",
     ]
 
     support = [
@@ -65,6 +65,7 @@ ext {
 
             //room数据库
             "room"            : "androidx.room:room-ktx:${room}",
+            "room-runtime"    : "androidx.room:room-runtime:${room}",
 
             //图片加载
             "glide"           : "com.github.bumptech.glide:glide:${glide}",

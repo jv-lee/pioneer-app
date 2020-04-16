@@ -1,5 +1,8 @@
 package com.lee.pioneer.model.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /**
  * @author jv.lee
  * @date 2020/3/25

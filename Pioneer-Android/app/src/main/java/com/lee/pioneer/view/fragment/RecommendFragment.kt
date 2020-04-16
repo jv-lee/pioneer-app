@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentRecommendBinding
@@ -37,17 +38,15 @@ class RecommendFragment :
     override fun bindView() {
         //设置toolbar 搜索跳转
         binding.tvSearch.setOnClickListener {
-            hideNavigation()
-            findNavController().navigate(R.id.action_recommend_to_search)
+            findNavController().navigate(R.id.action_main_to_search)
         }
 
         //设置推荐头部 banner
         headerBinding.banner.setDelayedTime(5000)
         headerBinding.banner.setBannerPageClickListener { _, position ->
             (headerBinding.banner.data[position] as Banner).let {
-                hideNavigation()
                 findNavController().navigate(
-                    RecommendFragmentDirections.actionRecommendToContentDetails(
+                    MainFragmentDirections.actionMainToContentDetails(
                         KeyConstants.CONST_EMPTY,
                         it.url
                     )
@@ -89,9 +88,8 @@ class RecommendFragment :
         mAdapter.addHeader(headerBinding.root)
         mAdapter.notifyDataSetChanged()
         mAdapter.setOnItemClickListener { view, entity, position ->
-            hideNavigation()
             findNavController().navigate(
-                RecommendFragmentDirections.actionRecommendToContentDetails(
+                MainFragmentDirections.actionMainToContentDetails(
                     entity._id,
                     KeyConstants.CONST_EMPTY
                 )
@@ -133,7 +131,6 @@ class RecommendFragment :
 
     override fun onResume() {
         super.onResume()
-        showNavigation()
         headerBinding.banner.pause()
         headerBinding.banner.start()
     }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.TimeUtil
+import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentGirlBinding
@@ -72,9 +73,8 @@ class GirlFragment :
         mAdapter.pageLoading()
         mAdapter.addHeader(headerViewBinding.root)
         mAdapter.setOnItemClickListener { view, entity, position ->
-            hideNavigation()
             findNavController().navigate(
-                GirlFragmentDirections.actionGirlToContentDetails(
+                MainFragmentDirections.actionMainToContentDetails(
                     entity._id,
                     KeyConstants.CONST_EMPTY
                 )
@@ -114,11 +114,6 @@ class GirlFragment :
 
     override fun lazyLoad() {
         viewModel.getGirlContentData(false)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        showNavigation()
     }
 
 }

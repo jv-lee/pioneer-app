@@ -30,8 +30,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
             viewModel.buildCategoryFragment()
         }
         binding.tvSearch.setOnClickListener {
-            hideNavigation()
-            findNavController().navigate(R.id.action_home_to_search)
+            findNavController().navigate(R.id.action_main_to_search)
         }
         binding.vpContainer.adapter = vpAdapter
         binding.tabCategory.setupWithViewPager(binding.vpContainer)
@@ -69,7 +68,6 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
 
     override fun onResume() {
         super.onResume()
-        showNavigation()
         //重新更新view
         if (binding.vpContainer.childCount == 0) {
             vpAdapter.notifyDataSetChanged()

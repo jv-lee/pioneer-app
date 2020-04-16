@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
 import com.lee.pioneer.databinding.FragmentContentListBinding
@@ -61,9 +62,10 @@ class ContentListFragment :
 
         })
         mAdapter.setOnItemClickListener { _, entity, _ ->
-            hideNavigation()
+//            AppDataBase.get().contentHistoryDao()
+//                .insert(ContentHistory(null, HistoryType.CONTENT, HistorySource.ID, entity))
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeToContentDetails(entity._id, CONST_EMPTY)
+                MainFragmentDirections.actionMainToContentDetails(entity._id, CONST_EMPTY)
             )
         }
         binding.refresh.setOnRefreshListener {

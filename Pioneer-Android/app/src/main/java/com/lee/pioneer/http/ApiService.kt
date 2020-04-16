@@ -4,7 +4,6 @@ import com.lee.pioneer.model.entity.*
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Url
 
 /**
  * @author jv.lee
@@ -100,8 +99,5 @@ interface ApiService {
         @Path("page") page: Int,
         @Path("count") count: Int
     ): Deferred<PageData<Content>>
-
-    @GET
-    fun getWanData(@Url url: String): Deferred<WanData>
 
 }

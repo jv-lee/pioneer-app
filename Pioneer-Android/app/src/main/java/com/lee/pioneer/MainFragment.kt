@@ -1,0 +1,63 @@
+package com.lee.pioneer
+
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import com.lee.library.adapter.UiPagerAdapter
+import com.lee.library.base.BaseNavigationFragment
+
+import com.lee.pioneer.R
+import com.lee.pioneer.databinding.FragmentMainBinding
+import com.lee.pioneer.view.fragment.GirlFragment
+import com.lee.pioneer.view.fragment.HomeFragment
+import com.lee.pioneer.view.fragment.MeFragment
+import com.lee.pioneer.view.fragment.RecommendFragment
+
+/**
+ * A simple [Fragment] subclass.
+ */
+class MainFragment :
+    BaseNavigationFragment<FragmentMainBinding, ViewModel>(R.layout.fragment_main, null) {
+
+    private val vpAdapter by lazy { UiPagerAdapter(childFragmentManager, fragments, titles) }
+    private val fragments by lazy {
+        listOf<Fragment>(
+            HomeFragment(),
+            RecommendFragment(),
+            GirlFragment(),
+            MeFragment()
+        )
+    }
+    private val titles by lazy {
+        listOf(
+            getString(R.string.nav_home),
+            getString(R.string.nav_recommend),
+            getString(R.string.nav_girl),
+            getString(R.string.nav_me)
+        )
+    }
+
+    override fun bindView() {
+        binding.vpContainer.adapter = vpAdapter
+        binding.vpContainer.offscreenPageLimit = fragments.size - 1
+        binding.vpContainer.setNoScroll(true)
+        binding.bottomNav.bindViewPager(binding.vpContainer)
+    }
+
+    override fun bindData() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //重新更新view
+        if (binding.vpContainer.childCount == 0) {
+            vpAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        //清除view引用
+        binding.vpContainer.removeAllViews()
+    }
+
+}

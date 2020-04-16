@@ -27,4 +27,7 @@
 
     <!--    tools字符-->
     <string name="code">这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

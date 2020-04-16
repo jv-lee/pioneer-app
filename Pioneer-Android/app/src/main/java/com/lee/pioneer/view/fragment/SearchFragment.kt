@@ -37,7 +37,6 @@ class SearchFragment :
 
         mAdapter.initStatusView()
         mAdapter.setOnItemClickListener { _, entity, _ ->
-            hideNavigation()
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchToContentDetails(
                     entity._id,

@@ -31,9 +31,12 @@ class MeFragment :
         binding.isNight = false
     }
 
-    override fun onResume() {
-        super.onResume()
-        showNavigation()
+    override fun lazyLoad() {
+        super.lazyLoad()
+//        launch {
+//            val response = AppDataBase.get().contentHistoryDao().queryContentHistoryAsync().await()
+//            toast("responseSize:${response.size}")
+//        }
     }
 
     override fun onClick(v: View?) {

@@ -22,7 +22,6 @@ class FavoriteFragment :
 
     override fun onResume() {
         super.onResume()
-        showNavigation()
     }
 
 }

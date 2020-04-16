@@ -2,25 +2,22 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home"
-    app:startDestination="@id/homeFragment">
-
+    app:startDestination="@id/main">
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.lee.pioneer.view.fragment.HomeFragment"
-        android:label="@string/nav_home"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/main"
+        android:name="com.lee.pioneer.MainFragment"
+        tools:layout="@layout/fragment_main">
+
         <action
-            android:id="@+id/action_home_to_contentDetails"
-            app:destination="@id/contentDetailsFragment"
+            android:id="@+id/action_main_to_contentDetails"
+            app:destination="@id/contentDetails"
             app:enterAnim="@anim/slide_right_in"
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
             app:popExitAnim="@anim/slide_right_out" />
-
         <action
-            android:id="@+id/action_home_to_search"
-            app:destination="@id/searchFragment"
+            android:id="@+id/action_main_to_search"
+            app:destination="@id/search"
             app:enterAnim="@anim/bottom_in"
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
@@ -29,7 +26,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/contentDetailsFragment"
+        android:id="@+id/contentDetails"
         android:name="com.lee.pioneer.view.fragment.ContentDetailsFragment"
         android:label="contentDetails"
         tools:layout="@layout/fragment_content_details">
@@ -45,13 +42,14 @@
     </fragment>
 
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/search"
         android:name="com.lee.pioneer.view.fragment.SearchFragment"
         android:label="searchFragment"
         tools:layout="@layout/fragment_search">
+
         <action
             android:id="@+id/action_search_to_contentDetails"
-            app:destination="@id/contentDetailsFragment"
+            app:destination="@id/contentDetails"
             app:enterAnim="@anim/bottom_in"
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
