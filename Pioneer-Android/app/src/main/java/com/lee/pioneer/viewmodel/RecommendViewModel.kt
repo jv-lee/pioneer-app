@@ -6,10 +6,12 @@ import com.lee.library.mvvm.ResponsePageViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.model.entity.Banner
-import com.lee.pioneer.model.entity.Content
+import com.lee.pioneer.db.AppDataBase
+import com.lee.pioneer.model.entity.*
 import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,6 +27,18 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
     private val viewsData = arrayListOf<Content>()
     private val likesData = arrayListOf<Content>()
     private val commentsData = arrayListOf<Content>()
+
+    /**
+     * 浏览后添加至数据库
+     */
+    fun insertContentHistoryToDB(content: Content) {
+        launch {
+            withContext(Dispatchers.IO) {
+                AppDataBase.get().contentHistoryDao()
+                    .insert(ContentHistory.push(HistoryType.CONTENT, HistorySource.ID, content))
+            }
+        }
+    }
 
     fun getBannerData() {
         launch(-2) {

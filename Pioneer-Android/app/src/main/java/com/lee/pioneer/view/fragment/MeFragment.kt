@@ -1,7 +1,6 @@
 package com.lee.pioneer.view.fragment
 
 import android.view.View
-import androidx.lifecycle.Observer
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
@@ -37,12 +36,6 @@ class MeFragment :
 
     override fun lazyLoad() {
         super.lazyLoad()
-        launch {
-            val response = AppDataBase.get().contentHistoryDao().queryContentHistoryAsync()
-            response.forEach {
-                LogUtil.i("roomData->${it.content.title}")
-            }
-        }
     }
 
     override fun onClick(v: View?) {

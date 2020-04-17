@@ -11,6 +11,8 @@ import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentRecommendBinding
 import com.lee.pioneer.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.model.entity.Banner
+import com.lee.pioneer.model.entity.HistorySource
+import com.lee.pioneer.model.entity.HistoryType
 import com.lee.pioneer.tools.ViewTools
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.view.adapter.resource.RecommendLoadResource
@@ -88,6 +90,7 @@ class RecommendFragment :
         mAdapter.addHeader(headerBinding.root)
         mAdapter.notifyDataSetChanged()
         mAdapter.setOnItemClickListener { view, entity, position ->
+            viewModel.insertContentHistoryToDB(entity)
             findNavController().navigate(
                 MainFragmentDirections.actionMainToContentDetails(
                     entity._id,

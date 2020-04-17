@@ -29,9 +29,9 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
-                        "room.schemaLocation":"$projectDir/schemas".toString(),
-                        "room.incremental":"true",
-                        "room.expandProjection":"true"]
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
             }
         }
     }
@@ -80,8 +80,9 @@ android {
 }
 
 dependencies {
-    processor.each {k,v -> annotationProcessor v}
-    kapts.each {k,v -> kapt v}
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    processor.each { k, v -> annotationProcessor v }
+    kapts.each { k, v -> kapt v }
     implementation project(path: ':library')
 
     testImplementation 'junit:junit:4.12'

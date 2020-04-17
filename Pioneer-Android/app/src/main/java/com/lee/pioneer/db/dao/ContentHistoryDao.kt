@@ -13,6 +13,6 @@ import com.lee.pioneer.model.entity.ContentHistory
 @Dao
 interface ContentHistoryDao : BaseDao<ContentHistory> {
     @Query("SELECT * FROM ContentHistory ORDER BY read_time DESC")
-    fun queryContentHistoryAsync(): List<ContentHistory>
+    fun queryContentHistory(): List<ContentHistory>
 
 }

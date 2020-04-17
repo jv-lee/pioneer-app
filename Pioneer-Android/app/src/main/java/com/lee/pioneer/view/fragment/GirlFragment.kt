@@ -73,6 +73,7 @@ class GirlFragment :
         mAdapter.pageLoading()
         mAdapter.addHeader(headerViewBinding.root)
         mAdapter.setOnItemClickListener { view, entity, position ->
+            viewModel.insertContentHistoryToDB(entity)
             findNavController().navigate(
                 MainFragmentDirections.actionMainToContentDetails(
                     entity._id,

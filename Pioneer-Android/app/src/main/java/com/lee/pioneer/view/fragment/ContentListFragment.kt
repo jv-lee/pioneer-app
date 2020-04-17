@@ -66,8 +66,7 @@ class ContentListFragment :
 
         })
         mAdapter.setOnItemClickListener { _, entity, _ ->
-            AppDataBase.get().contentHistoryDao()
-                .insert(ContentHistory.push(HistoryType.CONTENT, HistorySource.ID, entity))
+            viewModel.insertContentHistoryToDB(entity)
             findNavController().navigate(
                 MainFragmentDirections.actionMainToContentDetails(entity._id, CONST_EMPTY)
             )

@@ -2,20 +2,16 @@ package com.lee.pioneer.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.BaseViewModel
 import com.lee.library.mvvm.ResponsePageViewModel
-import com.lee.pioneer.constants.CacheConstants
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
-import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_GIRL
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.PageData
+import com.lee.pioneer.db.AppDataBase
+import com.lee.pioneer.model.entity.*
 import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
-import executeResponseAny
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.random.Random
 
@@ -27,6 +23,18 @@ import kotlin.random.Random
 class GirlViewModel(application: Application) : ResponsePageViewModel(application, 1) {
 
     val contentObservable by lazy { MutableLiveData<PageData<Content>>() }
+
+    /**
+     * 浏览后添加至数据库
+     */
+    fun insertContentHistoryToDB(content: Content) {
+        launch {
+            withContext(Dispatchers.IO) {
+                AppDataBase.get().contentHistoryDao()
+                    .insert(ContentHistory.push(HistoryType.PICTURE, HistorySource.ID, content))
+            }
+        }
+    }
 
     fun getGirlContentData(isMore: Boolean, isReload: Boolean = false) {
         //数据转换 添加viewType
