@@ -1,7 +1,11 @@
 package com.lee.pioneer
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.content.res.Resources
 import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.lifecycle.ViewModel
 import com.lee.library.base.BaseActivity
 import com.lee.library.utils.AdaptScreenUtils
@@ -21,8 +25,7 @@ class MainActivity :
     override fun bindView() {
         launch {
             delay(1000)
-            window.decorView.background = null
-            binding.mainContainer.visibility = View.VISIBLE
+            animUi()
         }
     }
 
@@ -36,6 +39,26 @@ class MainActivity :
      */
     override fun getResources(): Resources {
         return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+    }
+
+    private fun animUi() {
+        val anim = ObjectAnimator.ofFloat(0F, 1F)
+        anim.duration = 300
+        anim.interpolator = LinearInterpolator()
+        anim.addUpdateListener {
+            binding.mainContainer.alpha = it.getAnimatedValue() as Float
+        }
+        anim.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                binding.mainContainer.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                window.decorView.background = null
+            }
+        })
+        anim.start()
+
     }
 
 }
