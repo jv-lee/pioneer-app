@@ -1,16 +1,10 @@
 package com.lee.pioneer.tools
 
 import android.widget.ImageView
-import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
-import com.bumptech.glide.request.transition.DrawableCrossFadeTransition
 
 /**
  * @author jv.lee
@@ -40,6 +34,8 @@ class GlideTools {
         optionsCommand = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .priority(Priority.HIGH)
+            .dontAnimate()
+            .dontTransform()
     }
 
     var cacheArray = arrayListOf<Any>()
@@ -47,7 +43,7 @@ class GlideTools {
     fun loadCenterCopy(path: Any?, imageView: ImageView) {
         Glide.with(imageView.context)
             .load(path)
-            .apply(optionsCommand.centerCrop())
+            .apply(optionsCommand)
             .into(imageView)
 //        if (cacheArray.contains(path)) {
 //            Glide.with(imageView.context)
@@ -62,41 +58,6 @@ class GlideTools {
 //                .transition(DrawableTransitionOptions.withCrossFade(DrawableCrossFadeFactory.Builder(100)))
 //                .into(imageView)
 //        }
-    }
-
-    fun loadCenterInside(path: Any?, imageView: ImageView) {
-        Glide.with(imageView.context)
-            .load(path)
-            .apply(optionsCommand.centerInside())
-            .into(imageView)
-    }
-
-    fun loadFitCenter(path: Any?, imageView: ImageView) {
-        Glide.with(imageView.context)
-            .load(path)
-            .apply(optionsCommand.fitCenter())
-            .into(imageView)
-    }
-
-    fun loadCircleCrop(path: Any?, imageView: ImageView) {
-        Glide.with(imageView.context)
-            .load(path)
-            .apply(optionsCommand.circleCrop())
-            .into(imageView)
-    }
-
-    fun loadCircle(path: Any?, imageView: ImageView) {
-        Glide.with(imageView.context)
-            .load(path)
-            .apply(optionsCommand.apply(RequestOptions.bitmapTransform(CircleCrop())))
-            .into(imageView)
-    }
-
-    fun loadRound(path: Any?, imageView: ImageView, radius: Int) {
-        Glide.with(imageView.context)
-            .load(path)
-            .apply(optionsCommand.apply(RequestOptions.bitmapTransform(RoundedCorners(radius))))
-            .into(imageView)
     }
 
 }
