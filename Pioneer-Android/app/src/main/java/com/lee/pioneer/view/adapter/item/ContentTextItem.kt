@@ -56,4 +56,8 @@ class ContentTextItem : LeeViewItem<Content> {
         }
     }
 
+    override fun viewRecycled(holder: LeeViewHolder?, entity: Content?, position: Int) {
+
+    }
+
 }

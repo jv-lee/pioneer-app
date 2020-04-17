@@ -30,7 +30,7 @@ class BannerViewHolder : MZViewHolder<Banner> {
 
     override fun onBind(context: Context?, position: Int, data: Banner?) {
         data?.run {
-            GlideTools.get().loadCenterCopy(image, iv)
+            GlideTools.get().loadSmallImage(image, iv)
         }
     }
 

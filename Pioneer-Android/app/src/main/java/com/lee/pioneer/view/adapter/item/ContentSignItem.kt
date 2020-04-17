@@ -2,7 +2,7 @@ package com.lee.pioneer.view.adapter.item
 
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.TimeUtil
@@ -45,7 +45,7 @@ class ContentSignItem : LeeViewItem<Content> {
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
                 //设置图片
-                GlideTools.get().loadCenterCopy(images[0], ivPicture)
+                GlideTools.get().loadSmallImage(images[0], ivPicture)
 
                 //设置文本
                 tvAuthor.text = author
@@ -59,6 +59,14 @@ class ContentSignItem : LeeViewItem<Content> {
                     if (entity.views == 0) tvLike.context.getString(R.string.item_view_text) else views.toString()
                 tvTime.text = TimeUtil.getChineseTimeString2(publishedAt)
 
+            }
+        }
+    }
+
+    override fun viewRecycled(holder: LeeViewHolder?, entity: Content?, position: Int) {
+        holder?.let {
+            it.getView<ImageView>(R.id.iv_picture)?.run {
+                Glide.with(this.context).clear(this)
             }
         }
     }

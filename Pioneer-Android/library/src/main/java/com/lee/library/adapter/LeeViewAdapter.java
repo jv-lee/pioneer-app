@@ -18,6 +18,7 @@ import com.lee.library.adapter.listener.LeeViewItem;
 import com.lee.library.adapter.listener.LoadErrorListener;
 import com.lee.library.adapter.listener.LoadResource;
 import com.lee.library.adapter.manager.LeeViewItemManager;
+import com.lee.library.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -312,6 +313,12 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         }
     }
 
+    @Override
+    public void onViewRecycled(@NonNull LeeViewHolder holder) {
+        super.onViewRecycled(holder);
+        viewRecycled(holder);
+    }
+
     /**
      * 自动加载数据
      *
@@ -580,6 +587,19 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
 
     private void convert(LeeViewHolder holder, T entity) {
         itemStyle.convert(holder, entity, holder.getLayoutPosition());
+    }
+
+    private void viewRecycled(LeeViewHolder holder) {
+        int position;
+        if (proxyAdapter != null) {
+            position = holder.getLayoutPosition() - proxyAdapter.getHeaderCount();
+        } else {
+            position = holder.getLayoutPosition();
+        }
+        if (position < getItemCount()) {
+            T entity = getData().get(position);
+            itemStyle.viewRecycled(holder, entity, position);
+        }
     }
 
     /**

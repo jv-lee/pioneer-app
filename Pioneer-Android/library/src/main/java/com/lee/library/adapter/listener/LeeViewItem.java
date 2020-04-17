@@ -48,4 +48,12 @@ public interface LeeViewItem<T> {
      */
     void convert(LeeViewHolder holder, T entity, int position);
 
+    /**
+     *
+     * @param holder
+     * @param entity
+     * @param position
+     */
+    void viewRecycled(LeeViewHolder holder, T entity, int position);
+
 }
