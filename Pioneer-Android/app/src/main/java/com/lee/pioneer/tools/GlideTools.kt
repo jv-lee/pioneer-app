@@ -51,19 +51,6 @@ class GlideTools {
             .apply(optionsCommand)
             .transition(DrawableTransitionOptions.withCrossFade(DrawableCrossFadeFactory.Builder(150)))
             .into(imageView)
-//        if (cacheArray.contains(path)) {
-//            Glide.with(imageView.context)
-//                .load(path)
-//                .apply(optionsCommand.centerCrop())
-//                .into(imageView)
-//        } else {
-//            path?.let { cacheArray.add(it) }
-//            Glide.with(imageView.context)
-//                .load(path)
-//                .apply(optionsCommand.centerCrop())
-//                .transition(DrawableTransitionOptions.withCrossFade(DrawableCrossFadeFactory.Builder(100)))
-//                .into(imageView)
-//        }
     }
 
 }
