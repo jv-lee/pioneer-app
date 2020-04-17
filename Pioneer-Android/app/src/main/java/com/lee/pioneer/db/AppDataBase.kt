@@ -1,9 +1,9 @@
 package com.lee.pioneer.db
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.lee.library.base.BaseApplication
 import com.lee.pioneer.db.dao.ContentHistoryDao
 import com.lee.pioneer.model.entity.ContentHistory
 
@@ -21,16 +21,20 @@ abstract class AppDataBase : RoomDatabase() {
         private const val DBName = "pioneer-database.db"
 
         @Volatile
-        private var dataBase: AppDataBase? = null
+        private var instance: AppDataBase? = null
 
         @JvmStatic
-        fun get() = dataBase ?: synchronized(this) {
-            dataBase ?: Room.databaseBuilder(
-                BaseApplication.getContext(),
+        fun getInstance(context: Context) = instance ?: synchronized(this) {
+            instance ?: Room.databaseBuilder(
+                context,
                 AppDataBase::class.java,
                 DBName
-            ).build().also { dataBase = it }
+            )
+                .allowMainThreadQueries()
+                .build().also { instance = it }
         }
+
+        fun get() = instance ?: throw Exception("请先调用AppDataBase.getInstance(context) 初始化.")
 
     }
 

@@ -35,8 +35,11 @@ ext {
 
     //运行时注解处理器
     processor = [
-            "room" : "androidx.room:room-compiler:${room}",
             "glide": "com.github.bumptech.glide:compiler:${glide}",
+    ]
+
+    kapts = [
+            "room": "androidx.room:room-compiler:${room}"
     ]
 
     support = [

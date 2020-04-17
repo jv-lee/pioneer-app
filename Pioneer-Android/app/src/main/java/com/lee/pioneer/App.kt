@@ -7,6 +7,7 @@ import com.lee.library.base.BaseApplication
 import com.lee.library.cache.CacheManager
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
+import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.tools.WebViewTools
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -22,6 +23,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     override fun init() {
         registerActivityLifecycleCallbacks(this)
         GlobalScope.launch(Dispatchers.IO) {
+            AppDataBase.getInstance(this@App)
             SPUtil.getInstance(this@App)
             CacheManager.getInstance(this@App, BuildConfig.VERSION_CODE)
         }

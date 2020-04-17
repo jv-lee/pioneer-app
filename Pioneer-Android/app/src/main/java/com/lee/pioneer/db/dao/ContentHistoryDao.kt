@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.lee.pioneer.db.base.BaseDao
 import com.lee.pioneer.model.entity.ContentHistory
-import kotlinx.coroutines.Deferred
 
 /**
  * @author jv.lee
@@ -13,7 +12,7 @@ import kotlinx.coroutines.Deferred
  */
 @Dao
 interface ContentHistoryDao : BaseDao<ContentHistory> {
-    @Query("SELECT * FROM ContentHistory")
-    fun queryContentHistoryAsync(): Deferred<List<ContentHistory>>
+    @Query("SELECT * FROM ContentHistory ORDER BY read_time DESC")
+    fun queryContentHistoryAsync(): List<ContentHistory>
 
 }

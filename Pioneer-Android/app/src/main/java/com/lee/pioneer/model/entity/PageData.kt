@@ -1,12 +1,9 @@
 package com.lee.pioneer.model.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
 /**
  * @author jv.lee
  * @date 2020/3/25
- * @description
+ * @description 网络请求操作类
  */
 data class Data<T>(
     val data: T,

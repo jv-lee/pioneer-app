@@ -1,9 +1,8 @@
 package com.lee.pioneer.model.entity
 
 import androidx.annotation.IntDef
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.lee.pioneer.db.converters.StringListConverter
 import com.lee.pioneer.model.entity.HistoryType.Companion.CONTENT
 import com.lee.pioneer.model.entity.HistoryType.Companion.PICTURE
 
@@ -14,7 +13,8 @@ import com.lee.pioneer.model.entity.HistoryType.Companion.PICTURE
  */
 @Target(
     AnnotationTarget.CONSTRUCTOR,
-    AnnotationTarget.PROPERTY
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.VALUE_PARAMETER
 )
 @IntDef(CONTENT, PICTURE)
 @Retention(AnnotationRetention.SOURCE)
@@ -28,7 +28,8 @@ annotation class HistoryType {
 
 @Target(
     AnnotationTarget.CONSTRUCTOR,
-    AnnotationTarget.PROPERTY
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.VALUE_PARAMETER
 )
 @IntDef(CONTENT, PICTURE)
 @Retention(AnnotationRetention.SOURCE)
@@ -47,9 +48,16 @@ annotation class HistorySource {
  * @param source id/url
  */
 @Entity
+@TypeConverters(StringListConverter::class)
 data class ContentHistory(
-    @PrimaryKey(autoGenerate = true) var id: Int?,
-    @HistoryType val type: Int,
-    @HistorySource val source: Int,
+    @ColumnInfo(name = "history_id") @PrimaryKey(autoGenerate = false) var id: String,
+    @ColumnInfo(name = "history_type") @HistoryType val type: Int,
+    @ColumnInfo(name = "history_source") @HistorySource val source: Int,
+    @ColumnInfo(name = "read_time") val readTime: Long,
     @Embedded val content: Content
-)
+) {
+    companion object {
+        fun push(@HistoryType type: Int, @HistorySource source: Int, content: Content) =
+            ContentHistory(content._id, type, source, System.currentTimeMillis(), content)
+    }
+}

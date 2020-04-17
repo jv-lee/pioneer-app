@@ -10,6 +10,10 @@ import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
 import com.lee.pioneer.databinding.FragmentContentListBinding
+import com.lee.pioneer.db.AppDataBase
+import com.lee.pioneer.model.entity.ContentHistory
+import com.lee.pioneer.model.entity.HistorySource
+import com.lee.pioneer.model.entity.HistoryType
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.ContentListViewModel
 import executePageCompleted
@@ -62,8 +66,8 @@ class ContentListFragment :
 
         })
         mAdapter.setOnItemClickListener { _, entity, _ ->
-//            AppDataBase.get().contentHistoryDao()
-//                .insert(ContentHistory(null, HistoryType.CONTENT, HistorySource.ID, entity))
+            AppDataBase.get().contentHistoryDao()
+                .insert(ContentHistory.push(HistoryType.CONTENT, HistorySource.ID, entity))
             findNavController().navigate(
                 MainFragmentDirections.actionMainToContentDetails(entity._id, CONST_EMPTY)
             )
