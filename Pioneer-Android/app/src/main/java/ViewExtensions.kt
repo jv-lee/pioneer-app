@@ -12,11 +12,24 @@ fun Fragment.toast2(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(activity, message, duration).show()
 }
 
-fun RecyclerView.glideEnable(){
-    addOnScrollListener(object:RecyclerView.OnScrollListener(){
+fun RecyclerView.glideEnable() {
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
-            if(getContext() != null) Glide.with(getContext()).resumeRequests()
+            when (newState) {
+                //正在拖动
+                RecyclerView.SCROLL_STATE_DRAGGING -> {
+                    if (context != null) Glide.with(context).pauseRequests()
+                }
+                //滑动停止
+                RecyclerView.SCROLL_STATE_IDLE -> {
+                    if (context != null) Glide.with(context).resumeRequests()
+                }
+                //惯性滑动中
+                RecyclerView.SCROLL_STATE_SETTLING -> {
+                    if (context != null) Glide.with(context).pauseRequests()
+                }
+            }
         }
     })
 }

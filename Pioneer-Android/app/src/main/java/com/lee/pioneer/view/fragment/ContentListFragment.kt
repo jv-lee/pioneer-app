@@ -18,6 +18,7 @@ import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.ContentListViewModel
 import executePageCompleted
 import executePageError
+import glideEnable
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
 
@@ -47,6 +48,7 @@ class ContentListFragment :
     }
 
     override fun bindView() {
+        binding.rvContainer.glideEnable()
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 

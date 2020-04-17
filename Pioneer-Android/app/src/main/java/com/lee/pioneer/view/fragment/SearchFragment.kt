@@ -12,6 +12,7 @@ import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.SearchViewModel
 import executePageCompleted
 import executePageError
+import glideEnable
 
 /**
  * @author jv.lee
@@ -32,6 +33,7 @@ class SearchFragment :
             findNavController().popBackStack()
         }
 
+        binding.rvContainer.glideEnable()
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 

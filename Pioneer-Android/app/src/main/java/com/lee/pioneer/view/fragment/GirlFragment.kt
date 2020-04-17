@@ -18,6 +18,7 @@ import com.lee.pioneer.view.adapter.GirlAdapter
 import com.lee.pioneer.viewmodel.GirlViewModel
 import executePageCompleted
 import executePageError
+import glideEnable
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -50,6 +51,7 @@ class GirlFragment :
         ViewCompat.setElevation(binding.statusBar, 1f)
 
         //设置列表数据项
+        binding.rvContainer.glideEnable()
         binding.rvContainer.layoutManager = linearLayoutManager
         binding.rvContainer.adapter = mAdapter.proxy
         //设置滑动设置statusBar透明度

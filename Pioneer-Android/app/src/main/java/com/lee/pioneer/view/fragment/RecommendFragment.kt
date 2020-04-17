@@ -18,6 +18,7 @@ import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.view.adapter.resource.RecommendLoadResource
 import com.lee.pioneer.view.widget.BannerViewHolder
 import com.lee.pioneer.viewmodel.RecommendViewModel
+import glideEnable
 
 /**
  * @author jv.lee
@@ -81,6 +82,7 @@ class RecommendFragment :
         }
 
         //设置数据列表
+        binding.rvContainer.glideEnable()
         binding.rvContainer.layoutManager = LinearLayoutManager(context)
         binding.rvContainer.adapter = mAdapter.proxy
 
