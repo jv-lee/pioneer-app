@@ -32,19 +32,15 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
                 //缓存数据
                 CacheRepository.get().getContentCacheAsync(
                     CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault())
-                ).await()?.let { it -> contentListObservable.value = it }
+                ).await()?.let { it ->
+                    contentListObservable.value = it
+                }
             },
             {
                 //网络数据
                 ApiRepository.getApi().getContentDataAsync(
                     KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
-                ).await().let {
-                    if (contentListObservable.value != it) {
-                        contentListObservable.value = it
-                        return@let it
-                    }
-                    null
-                }
+                ).await().also { contentListObservable.value = it }
             },
             {
                 //存储缓存数据

@@ -4,7 +4,9 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 
 /**
  * @author jv.lee
@@ -32,9 +34,9 @@ class GlideTools {
     private fun initOptions() {
         //初始化普通加载
         optionsCommand = RequestOptions()
+            .skipMemoryCache(false)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .priority(Priority.HIGH)
-            .dontAnimate()
             .dontTransform()
     }
 
@@ -42,8 +44,10 @@ class GlideTools {
 
     fun loadCenterCopy(path: Any?, imageView: ImageView) {
         Glide.with(imageView.context)
+            .asDrawable()
             .load(path)
             .apply(optionsCommand)
+            .transition(DrawableTransitionOptions.withCrossFade(DrawableCrossFadeFactory.Builder(150)))
             .into(imageView)
 //        if (cacheArray.contains(path)) {
 //            Glide.with(imageView.context)

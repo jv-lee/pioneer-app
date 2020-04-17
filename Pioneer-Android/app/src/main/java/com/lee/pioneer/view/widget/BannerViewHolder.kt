@@ -24,7 +24,7 @@ class BannerViewHolder : MZViewHolder<Banner> {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        iv.scaleType = ImageView.ScaleType.FIT_XY
+        iv.scaleType = ImageView.ScaleType.CENTER_CROP
         return iv
     }
 

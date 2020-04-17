@@ -23,7 +23,7 @@ open class ResponsePageViewModel(application: Application, val firstPage: Int = 
         isReload: Boolean = false,
         cacheBlock: suspend CoroutineScope.() -> Unit,
         networkBlock: suspend CoroutineScope.() -> T?,
-        completedBlock: suspend CoroutineScope.(T) -> Unit
+        completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         launch(-1) {
             //加载更多设置page

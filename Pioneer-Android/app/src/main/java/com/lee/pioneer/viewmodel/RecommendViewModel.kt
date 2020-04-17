@@ -70,13 +70,9 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
             {
                 ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT)
                     .await()
-                    .let {
-                        if (contentObservable.value != it.data) {
-                            putCacheContentList(type, it.data)
-                            contentObservable.value = it.data
-                            return@let it
-                        }
-                        null
+                    .also {
+                        putCacheContentList(type, it.data)
+                        contentObservable.value = it.data
                     }
             },
             {

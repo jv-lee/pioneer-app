@@ -111,9 +111,11 @@ class RecommendFragment :
                 if (it.isNullOrEmpty()) {
                     mAdapter.pageEmpty()
                 } else {
-                    mAdapter.pageCompleted()
-                    mAdapter.updateData(it)
-                    mAdapter.loadMoreEnd()
+                    if (mAdapter.data != it) {
+                        mAdapter.pageCompleted()
+                        mAdapter.updateData(it)
+                        mAdapter.loadMoreEnd()
+                    }
                 }
 
             })

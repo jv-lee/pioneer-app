@@ -1,5 +1,6 @@
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lee.library.adapter.LeeViewAdapter
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.model.entity.PageData
 
 /**
@@ -39,6 +40,10 @@ fun <T> executePageCompleted(
         if (data.data.isNullOrEmpty()) {
             adapter.pageEmpty()
             emptyBlock()
+            return
+        }
+        //数据源相同不做任何操作
+        if (adapter.data == data.data) {
             return
         }
         //正常情况第一页加载数据状态
