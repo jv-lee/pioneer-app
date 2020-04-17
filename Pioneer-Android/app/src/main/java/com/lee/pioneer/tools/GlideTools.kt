@@ -7,6 +7,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
+import com.lee.pioneer.R
 
 /**
  * @author jv.lee
@@ -38,6 +39,7 @@ class GlideTools {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .priority(Priority.HIGH)
             .dontTransform()
+            .placeholder(R.mipmap.ic_picture_temp)
     }
 
     var cacheArray = arrayListOf<Any>()
