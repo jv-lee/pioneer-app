@@ -19,7 +19,7 @@ fun RecyclerView.glideEnable() {
             when (newState) {
                 //正在拖动
                 RecyclerView.SCROLL_STATE_DRAGGING -> {
-                    if (context != null) Glide.with(context).pauseRequests()
+                    if (context != null) Glide.with(context).resumeRequests()
                 }
                 //滑动停止
                 RecyclerView.SCROLL_STATE_IDLE -> {
