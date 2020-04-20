@@ -14,8 +14,10 @@ fun Fragment.toast2(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
 
 fun RecyclerView.glideEnable() {
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        var isDown = false
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
+            if (!isDown) return
             when (newState) {
                 //正在拖动
                 RecyclerView.SCROLL_STATE_DRAGGING -> {
@@ -30,6 +32,11 @@ fun RecyclerView.glideEnable() {
                     if (context != null) Glide.with(context).pauseRequests()
                 }
             }
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            isDown = dy >= 0
         }
     })
 }

@@ -31,6 +31,12 @@ public interface LeeViewItem<T> {
     boolean openShake();
 
     /**
+     * 是否打开回收回调
+     * @return boolean
+     */
+    boolean openRecycler();
+
+    /**
      * 是否为当前的item布局
      *
      * @param entity
@@ -49,7 +55,7 @@ public interface LeeViewItem<T> {
     void convert(LeeViewHolder holder, T entity, int position);
 
     /**
-     *
+     * 当item隐藏后 回调销毁及回收操作
      * @param holder
      * @param entity
      * @param position

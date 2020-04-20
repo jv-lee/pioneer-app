@@ -5,7 +5,6 @@ import androidx.collection.SparseArrayCompat;
 
 import com.lee.library.adapter.LeeViewHolder;
 import com.lee.library.adapter.listener.LeeViewItem;
-import com.lee.library.utils.LogUtil;
 
 /**
  * @author jv.lee
@@ -96,7 +95,9 @@ public class LeeViewItemManager<T> {
         for (int i = 0; i < styles.size(); i++) {
             LeeViewItem<T> item = styles.valueAt(i);
             if (item.isItemView(entity, position)) {
-                item.viewRecycled(holder, entity, position);
+                if (item.openRecycler()) {
+                    item.viewRecycled(holder, entity, position);
+                }
                 return;
             }
         }

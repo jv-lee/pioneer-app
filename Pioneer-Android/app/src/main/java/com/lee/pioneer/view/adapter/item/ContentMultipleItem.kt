@@ -30,6 +30,10 @@ class ContentMultipleItem : LeeViewItem<Content> {
         return true
     }
 
+    override fun openRecycler(): Boolean {
+        return false
+    }
+
     override fun isItemView(entity: Content?, position: Int): Boolean {
         return entity?.images?.size!! > 1
     }
