@@ -28,18 +28,21 @@ ext {
     //第三方依赖版本号
     kotlin = '1.3.61'
     room = "2.2.2"
-    glide = "4.7.1"
+    glide = "4.9.0"
     gson = "2.8.5"
     retrofit = "2.5.0"
     navigation = "2.3.0-alpha04"
 
     //运行时注解处理器
     processor = [
-            "glide": "com.github.bumptech.glide:compiler:${glide}",
+            "annotation": "androidx.annotation:annotation:1.1.0",
+            "glide"     : "com.github.bumptech.glide:compiler:${glide}",
+            "room"      : "androidx.room:room-compiler:${room}"
     ]
 
     kapts = [
-            "room": "androidx.room:room-compiler:${room}"
+            "room" : "androidx.room:room-compiler:${room}",
+            "glide": "com.github.bumptech.glide:compiler:${glide}"
     ]
 
     support = [
