@@ -18,7 +18,6 @@ import com.lee.library.adapter.listener.LeeViewItem;
 import com.lee.library.adapter.listener.LoadErrorListener;
 import com.lee.library.adapter.listener.LoadResource;
 import com.lee.library.adapter.manager.LeeViewItemManager;
-import com.lee.library.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,11 +109,6 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
      * 数据源
      */
     private List<T> mData;
-
-    /**
-     * 加载布局id
-     */
-    private int loadResId;
 
     /**
      * 点击防抖结束时间
@@ -483,16 +477,6 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         updateStatus(STATUS_ITEM_ERROR);
     }
 
-
-    /**
-     * 设置加载更多view 布局id
-     *
-     * @param resId
-     */
-    public void setLoadResId(int resId) {
-        this.loadResId = resId;
-    }
-
     /**
      * 设置加载更多最低阈值
      * num = 5 则为 20-5 = 滑动到15项的时候加载
@@ -727,10 +711,10 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
     /**
      * 设置错误重试接口
      *
-     * @param loadErrorlistener
+     * @param loadErrorListener
      */
-    public void setLoadErrorListener(LoadErrorListener loadErrorlistener) {
-        mLoadErrorListener = loadErrorlistener;
+    public void setLoadErrorListener(LoadErrorListener loadErrorListener) {
+        mLoadErrorListener = loadErrorListener;
         bindLoadErrorListener();
     }
 

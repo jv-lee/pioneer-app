@@ -4,6 +4,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.lee.pioneer.R
 
@@ -39,13 +40,13 @@ class GlideTools {
         RequestOptions()
             .skipMemoryCache(false)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .priority(Priority.HIGH)
+            .priority(Priority.IMMEDIATE)
             .dontTransform()
             .placeholder(R.mipmap.ic_picture_temp)
             .also {
                 optionsCommand = it
                 smallCommend = it
-                smallCommend.override(200, 200)
+                smallCommend.override(150, 150)
                 bigCommend = it
                 bigCommend.override(360, 360)
             }
@@ -54,27 +55,27 @@ class GlideTools {
     var cacheArray = arrayListOf<Any>()
 
     fun loadImage(path: Any?, imageView: ImageView) {
-        Glide.with(imageView.context)
+        val request = Glide.with(imageView.context)
             .asDrawable()
             .load(path)
             .apply(optionsCommand)
-            .into(imageView)
+        request.into(imageView)
     }
 
     fun loadSmallImage(path: Any?, imageView: ImageView) {
-        Glide.with(imageView.context)
+        val request = Glide.with(imageView.context)
             .asDrawable()
             .load(path)
             .apply(smallCommend)
-            .into(imageView)
+        request.into(imageView)
     }
 
     fun loadBigImage(path: Any?, imageView: ImageView) {
-        Glide.with(imageView.context)
+        val request = Glide.with(imageView.context)
             .asDrawable()
             .load(path)
             .apply(bigCommend)
-            .into(imageView)
+        request.into(imageView)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.adapter.item
 
+import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lee.library.adapter.LeeViewHolder
@@ -28,6 +29,10 @@ class GirlBottomItem : LeeViewItem<Content> {
         return true
     }
 
+    override fun openRecycler(): Boolean {
+        return false
+    }
+
     override fun isItemView(entity: Content?, position: Int): Boolean {
         return entity != null && entity.viewType != 0
     }
@@ -43,7 +48,7 @@ class GirlBottomItem : LeeViewItem<Content> {
 
     override fun viewRecycled(holder: LeeViewHolder?, entity: Content?, position: Int) {
         holder?.let {
-            holder.getView<ImageViewRound>(R.id.iv_picture)?.run {
+            holder.getView<ImageView>(R.id.iv_picture)?.run {
                 Glide.with(this.context).clear(this)
             }
         }
