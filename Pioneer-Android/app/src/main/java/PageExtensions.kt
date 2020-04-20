@@ -1,6 +1,5 @@
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lee.library.adapter.LeeViewAdapter
-import com.lee.library.utils.LogUtil
 import com.lee.pioneer.model.entity.PageData
 
 /**

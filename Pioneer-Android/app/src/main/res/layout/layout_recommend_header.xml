@@ -38,8 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:background="@drawable/vector_view"
-                android:button="@null"
+                android:background="@null"
+                android:button="@drawable/vector_view"
                 android:gravity="center" />
 
             <RadioButton
@@ -48,8 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:background="@drawable/vector_like"
-                android:button="@null"
+                android:background="@null"
+                android:button="@drawable/vector_like"
                 android:gravity="center" />
 
             <RadioButton
@@ -58,8 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:background="@drawable/vector_comment"
-                android:button="@null"
+                android:background="@null"
+                android:button="@drawable/vector_comment"
                 android:gravity="center" />
 
         </RadioGroup>

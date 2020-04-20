@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.fragment
 
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,8 @@ import com.lee.pioneer.view.adapter.resource.RecommendLoadResource
 import com.lee.pioneer.view.widget.BannerViewHolder
 import com.lee.pioneer.viewmodel.RecommendViewModel
 import glideEnable
+import setBackgroundSelectorTintCompat
+import setButtonTint
 
 /**
  * @author jv.lee
@@ -59,16 +62,16 @@ class RecommendFragment :
 
         //设置推荐头部 分类样式
         headerBinding.groupType.check(R.id.radio_view)
-        ViewTools.setBackgroundSelectorTint(
-            headerBinding.radioView,
+        headerBinding.radioView.setButtonTint(
+            R.drawable.vector_view,
             R.drawable.recommend_view_selector
         )
-        ViewTools.setBackgroundSelectorTint(
-            headerBinding.radioLike,
+        headerBinding.radioLike.setButtonTint(
+            R.drawable.vector_like,
             R.drawable.recommend_like_selector
         )
-        ViewTools.setBackgroundSelectorTint(
-            headerBinding.radioComment,
+        headerBinding.radioComment.setButtonTint(
+            R.drawable.vector_comment,
             R.drawable.recommend_comment_selector
         )
         headerBinding.groupType.setOnCheckedChangeListener { group, checkedId ->

@@ -1,7 +1,16 @@
+import android.content.res.ColorStateList
+import android.graphics.drawable.StateListDrawable
+import android.view.View
+import android.widget.ImageView
+import android.widget.RadioButton
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+
 
 /**
  * @author jv.lee
@@ -37,4 +46,55 @@ fun RecyclerView.glideEnable() {
             isDown = dy >= 0
         }
     })
+}
+
+/**
+ * 向下兼容设置View背景着色器选择器
+ */
+fun View.setBackgroundSelectorTintCompat(selectorId: Int) {
+    ViewCompat.setBackgroundTintList(
+        this,
+        ColorStateList.createFromXml(
+            this.resources,
+            this.resources.getXml(selectorId)
+        )
+    )
+}
+
+/**
+ * ImageView扩展函数 向下兼容Tint着色器
+ */
+fun ImageView.setImageTintCompat(drawableId: Int, color: Int = 0) {
+    if (color == 0) {
+        setImageResource(drawableId)
+        return
+    }
+    var drawable =
+        ContextCompat.getDrawable(context, drawableId)
+    val colors = intArrayOf(color, color)
+    val states = arrayOfNulls<IntArray>(2)
+    states[0] = intArrayOf(android.R.attr.state_pressed)
+    states[1] = intArrayOf()
+    val colorList = ColorStateList(states, colors)
+    val stateListDrawable = StateListDrawable()
+    stateListDrawable.addState(states[0], drawable) //注意顺序
+
+    stateListDrawable.addState(states[1], drawable)
+    val state = stateListDrawable.constantState
+    drawable =
+        DrawableCompat.wrap(state?.newDrawable() ?: stateListDrawable)
+            .mutate()
+    DrawableCompat.setTintList(drawable, colorList)
+    setImageDrawable(drawable)
+}
+
+/**
+ * RadioButton 扩展函数 向下兼容Button Tint着色器
+ */
+fun RadioButton.setButtonTint(drawableId: Int, selectorId: Int) {
+    val drawable =
+        DrawableCompat.wrap(ContextCompat.getDrawable(context, drawableId)!!)
+    val colorStateList = ContextCompat.getColorStateList(context, selectorId)
+    DrawableCompat.setTintList(drawable, colorStateList)
+    buttonDrawable = drawable
 }

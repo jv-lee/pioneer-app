@@ -13,6 +13,8 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.widget.ImageViewCompat
 import com.lee.library.utils.SizeUtil
 import com.lee.pioneer.R
+import com.lee.pioneer.tools.ViewTools
+import setImageTintCompat
 
 /**
  * @author jv.lee
@@ -110,15 +112,8 @@ class LineButtonView : ConstraintLayout {
                 topToTop = 0
                 bottomToBottom = 0
             }
-            if (leftDrawableId != 0) {
-                setImageResource(leftDrawableId)
-            }
-            if (leftTint != 0) {
-                ImageViewCompat.setImageTintList(
-                    leftDrawable,
-                    ColorStateList.valueOf(leftTint)
-                )
-            }
+            //设置兼容资源及调色
+            setImageTintCompat(leftDrawableId, leftTint)
             addView(this)
         }
 
@@ -130,16 +125,10 @@ class LineButtonView : ConstraintLayout {
                 topToTop = 0
                 bottomToBottom = 0
             }
-            if (rightDrawableId != 0) {
-                setImageResource(rightDrawableId)
-            }
-            if (rightTint != 0) {
-                ImageViewCompat.setImageTintList(
-                    rightDrawable,
-                    ColorStateList.valueOf(rightTint)
-                )
-            }
+            //设置兼容资源及调色
+            setImageTintCompat(rightDrawableId, rightTint)
             addView(this)
         }
     }
+
 }
