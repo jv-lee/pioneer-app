@@ -30,7 +30,7 @@ class GirlTopItem : LeeViewItem<Content> {
     }
 
     override fun openRecycler(): Boolean {
-        return false
+        return true
     }
 
     override fun isItemView(entity: Content?, position: Int): Boolean {
@@ -40,7 +40,8 @@ class GirlTopItem : LeeViewItem<Content> {
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
         holder?.let {
             entity?.images?.get(0)?.let {
-                GlideTools.get().loadSmallImage(it, holder.getView(R.id.iv_picture))
+                LogUtil.i("image:$it")
+                GlideTools.get().loadBigImage(it, holder.getView(R.id.iv_picture))
             }
             holder.getView<TextView>(R.id.tv_description).text = entity?.desc
         }

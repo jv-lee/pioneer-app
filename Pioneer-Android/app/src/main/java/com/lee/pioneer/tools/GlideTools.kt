@@ -46,7 +46,7 @@ class GlideTools {
             .also {
                 optionsCommand = it
                 smallCommend = it
-                smallCommend.override(200, 200)
+                smallCommend.override(150, 150)
                 bigCommend = it
                 bigCommend.override(360, 360)
             }

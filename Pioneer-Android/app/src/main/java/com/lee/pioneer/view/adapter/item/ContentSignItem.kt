@@ -30,7 +30,7 @@ class ContentSignItem : LeeViewItem<Content> {
     }
 
     override fun openRecycler(): Boolean {
-        return false
+        return true
     }
 
     override fun isItemView(entity: Content?, position: Int): Boolean {
