@@ -3,6 +3,7 @@ package com.lee.pioneer.view.adapter.item
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.TimeUtil

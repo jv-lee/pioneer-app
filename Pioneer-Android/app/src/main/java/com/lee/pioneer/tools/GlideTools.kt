@@ -40,7 +40,7 @@ class GlideTools {
         RequestOptions()
             .skipMemoryCache(false)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .priority(Priority.HIGH)
+            .priority(Priority.IMMEDIATE)
             .dontTransform()
             .placeholder(R.mipmap.ic_picture_temp)
             .also {
