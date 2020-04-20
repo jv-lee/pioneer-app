@@ -1,6 +1,5 @@
 package com.lee.pioneer.view.fragment
 
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -12,15 +11,11 @@ import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentRecommendBinding
 import com.lee.pioneer.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.model.entity.Banner
-import com.lee.pioneer.model.entity.HistorySource
-import com.lee.pioneer.model.entity.HistoryType
-import com.lee.pioneer.tools.ViewTools
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.view.adapter.resource.RecommendLoadResource
 import com.lee.pioneer.view.widget.BannerViewHolder
 import com.lee.pioneer.viewmodel.RecommendViewModel
 import glideEnable
-import setBackgroundSelectorTintCompat
 import setButtonTint
 
 /**

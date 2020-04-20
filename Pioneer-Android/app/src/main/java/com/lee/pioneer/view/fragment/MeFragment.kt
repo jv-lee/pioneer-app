@@ -2,13 +2,10 @@ package com.lee.pioneer.view.fragment
 
 import android.view.View
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
-import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.view.widget.toolbar.TitleToolbar
 import com.lee.pioneer.viewmodel.MeViewModel
-import kotlinx.coroutines.launch
 
 /**
  * @author jv.lee

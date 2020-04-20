@@ -40,7 +40,9 @@
                 android:layout_marginEnd="@dimen/margin_large"
                 android:background="@null"
                 android:button="@drawable/vector_view"
-                android:gravity="center" />
+                android:gravity="center"
+                tools:buttonTint="@drawable/recommend_view_selector"
+                tools:checked="true" />
 
             <RadioButton
                 android:id="@+id/radio_like"
@@ -50,7 +52,9 @@
                 android:layout_marginEnd="@dimen/margin_large"
                 android:background="@null"
                 android:button="@drawable/vector_like"
-                android:gravity="center" />
+                android:gravity="center"
+                tools:buttonTint="@drawable/recommend_like_selector"
+                tools:checked="false" />
 
             <RadioButton
                 android:id="@+id/radio_comment"
@@ -60,7 +64,9 @@
                 android:layout_marginEnd="@dimen/margin_large"
                 android:background="@null"
                 android:button="@drawable/vector_comment"
-                android:gravity="center" />
+                android:gravity="center"
+                tools:buttonTint="@drawable/recommend_comment_selector"
+                tools:checked="false" />
 
         </RadioGroup>
 

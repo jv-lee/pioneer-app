@@ -3,24 +3,21 @@ import android.graphics.drawable.StateListDrawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
 
 /**
  * @author jv.lee
  * @date 2020/4/1
- * @description
+ * @description TODO View.扩展函数
  */
-fun Fragment.toast2(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(activity, message, duration).show()
-}
 
+/**
+ * 监听RecyclerView滑动状态 Glide加载模式
+ */
 fun RecyclerView.glideEnable() {
     if (true) return
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
