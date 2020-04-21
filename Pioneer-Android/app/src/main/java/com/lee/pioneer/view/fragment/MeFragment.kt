@@ -4,6 +4,7 @@ import android.view.View
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
+import com.lee.pioneer.view.widget.menu.CustomMenuInflater
 import com.lee.pioneer.view.widget.toolbar.TitleToolbar
 import com.lee.pioneer.viewmodel.MeViewModel
 
@@ -29,10 +30,13 @@ class MeFragment :
 
     override fun bindData() {
         binding.isNight = false
+
+
     }
 
     override fun lazyLoad() {
         super.lazyLoad()
+        CustomMenuInflater(context!!).inflate(R.menu.main_menu)
     }
 
     override fun onClick(v: View?) {

@@ -21,7 +21,6 @@ class PioneerGlideModel : AppGlideModule() {
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         HttpManager.getInstance().getClient()
             ?.let {
-                LogUtil.i("GlideModel ok")
                 registry.replace(
                     GlideUrl::class.java,
                     InputStream::class.java,

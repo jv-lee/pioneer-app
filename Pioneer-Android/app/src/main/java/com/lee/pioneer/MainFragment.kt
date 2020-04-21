@@ -4,8 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.lee.library.adapter.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
-
-import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMainBinding
 import com.lee.pioneer.view.fragment.GirlFragment
 import com.lee.pioneer.view.fragment.HomeFragment
@@ -46,6 +44,7 @@ class MainFragment :
     }
 
     override fun bindData() {
+
     }
 
     override fun onResume() {

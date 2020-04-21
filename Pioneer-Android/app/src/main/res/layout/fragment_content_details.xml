@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
+            app:menuRes="@menu/main_menu"
             app:titleText="@string/details_title_text" />
 
         <FrameLayout

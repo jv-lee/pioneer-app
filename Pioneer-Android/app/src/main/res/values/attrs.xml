@@ -3,7 +3,8 @@
 
     <declare-styleable name="TitleToolbar">
         <attr name="titleText" format="string" />
-        <attr name="backRes" format="reference" />
+        <attr name="backIcon" format="reference" />
+        <attr name="menuIcon" format="reference" />
         <attr name="menuRes" format="reference" />
 
         <attr name="titleEnable" format="enum">
@@ -36,6 +37,12 @@
         <attr name="rightDrawable" format="reference" />
         <attr name="leftTint" format="color" />
         <attr name="rightTint" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomMenuItem">
+        <attr name="android:id" format="reference" />
+        <attr name="android:icon" format="reference"/>
+        <attr name="android:title" format="string"/>
     </declare-styleable>
 
 </resources>
