@@ -2,9 +2,12 @@ package com.lee.pioneer.view.widget.toolbar
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.updateLayoutParams
+import com.lee.library.utils.SizeUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.R
 
@@ -28,6 +31,7 @@ open class CustomToolbarLayout : ConstraintLayout {
         toolbarLayoutHeight = initLayoutHeight()
         initBackground()
         initStatusBarPadding()
+//        initBottomLine()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -58,6 +62,23 @@ open class CustomToolbarLayout : ConstraintLayout {
     open fun initStatusBarPadding() {
         val statusHeight = StatusUtil.getStatusBarHeight(context)
         setPadding(0, statusHeight, 0, 0)
+    }
+
+    private fun initBottomLine() {
+        val lineView = View(context)
+        lineView.run {
+            layoutParams = LayoutParams(MATCH_PARENT, SizeUtil.px2dp(context, 1f))
+            lineView.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.colorThemeBackground
+                )
+            )
+            updateLayoutParams<ConstraintLayout.LayoutParams> {
+                bottomToBottom = 0
+            }
+        }
+        addView(lineView)
     }
 
     /**

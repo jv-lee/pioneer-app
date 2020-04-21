@@ -87,7 +87,7 @@ open class TitleToolbar : CustomToolbarLayout {
             backIcon?.let { setImageResource(it) }
             backEnable?.let { visibility = it }
             setOnClickListener { clickListener?.backClick() }
-            addView(ivBack)
+            addView(this)
         }
     }
 
@@ -106,7 +106,7 @@ open class TitleToolbar : CustomToolbarLayout {
             titleEnable?.let { visibility = it }
             textSize =
                 SizeUtil.px2sp(context, resources.getDimension(R.dimen.font_size_medium)).toFloat()
-            addView(tvTitle)
+            addView(this)
         }
     }
 
@@ -127,7 +127,7 @@ open class TitleToolbar : CustomToolbarLayout {
                 popupHelper?.show()
                 clickListener?.menuClick()
             }
-            addView(ivMenu)
+            addView(this)
         }
     }
 
