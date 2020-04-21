@@ -7,7 +7,7 @@ import com.lee.library.utils.StatusUtil
 /**
  * @author jv.lee
  * @date 2020/4/14
- * @description
+ * @description 自定义状态栏填充view 占位符View
  */
 class CustomStatusBarLayout : CustomToolbarLayout {
 

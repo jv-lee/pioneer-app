@@ -13,7 +13,9 @@ import com.lee.pioneer.view.fragment.MeFragment
 import com.lee.pioneer.view.fragment.RecommendFragment
 
 /**
- * A simple [Fragment] subclass.
+ * @author jv.lee
+ * @date 2020.4.17
+ * @description RootFragment 是所有Fragment的容器类
  */
 class MainFragment :
     BaseNavigationFragment<FragmentMainBinding, ViewModel>(R.layout.fragment_main, null) {
