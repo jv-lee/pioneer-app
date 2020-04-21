@@ -9,6 +9,9 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.view.menu.MenuPopupHelper
+import androidx.appcompat.widget.PopupMenu
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
@@ -25,9 +28,12 @@ open class TitleToolbar : CustomToolbarLayout {
     var ivBack: ImageView? = null
     var ivMenu: ImageView? = null
     var tvTitle: TextView? = null
+    var popupMenu: PopupMenu? = null
+    var popupHelper: MenuPopupHelper? = null
 
     private var titleText: String? = null
-    private var backRes: Int? = null
+    private var backIcon: Int? = null
+    private var menuIcon: Int? = null
     private var menuRes: Int? = null
     private var titleEnable: Int? = null
     private var backEnable: Int? = null
@@ -50,16 +56,25 @@ open class TitleToolbar : CustomToolbarLayout {
         val typeArray = context.obtainStyledAttributes(attrs, R.styleable.TitleToolbar)
 
         titleText = typeArray.getString(R.styleable.TitleToolbar_titleText)
-        backRes = typeArray.getResourceId(R.styleable.TitleToolbar_backRes, R.drawable.vector_back)
-        menuRes = typeArray.getResourceId(R.styleable.TitleToolbar_menuRes, R.drawable.vector_menu)
+        backIcon =
+            typeArray.getResourceId(R.styleable.TitleToolbar_backIcon, R.drawable.vector_back)
+        menuIcon =
+            typeArray.getResourceId(R.styleable.TitleToolbar_menuIcon, R.drawable.vector_menu)
+        menuRes = typeArray.getResourceId(R.styleable.TitleToolbar_menuRes, 0)
         titleEnable = typeArray.getInt(R.styleable.TitleToolbar_titleEnable, View.VISIBLE)
         backEnable = typeArray.getInt(R.styleable.TitleToolbar_backEnable, View.VISIBLE)
         menuEnable = typeArray.getInt(R.styleable.TitleToolbar_menuEnable, View.VISIBLE)
         typeArray.recycle()
     }
 
-    @SuppressLint("ResourceType")
     private fun initView() {
+        buildTitleText()
+        buildBackImage()
+        buildMenuImage()
+        buildMenuWindow()
+    }
+
+    private fun buildBackImage() {
         ivBack = ImageView(context)
         ivBack?.run {
             layoutParams =
@@ -69,28 +84,14 @@ open class TitleToolbar : CustomToolbarLayout {
                 )
             updateLayoutParams<ConstraintLayout.LayoutParams> { startToStart = 0 }
             scaleType = ImageView.ScaleType.CENTER
-            backRes?.let { setImageResource(it) }
+            backIcon?.let { setImageResource(it) }
             backEnable?.let { visibility = it }
             setOnClickListener { clickListener?.backClick() }
             addView(ivBack)
         }
+    }
 
-
-        ivMenu = ImageView(context)
-        ivMenu?.run {
-            layoutParams =
-                LayoutParams(
-                    resources.getDimension(R.dimen.toolbar_button_width).toInt(),
-                    MATCH_PARENT
-                )
-            updateLayoutParams<ConstraintLayout.LayoutParams> { endToEnd = 0 }
-            scaleType = ImageView.ScaleType.CENTER
-            menuRes?.let { setImageResource(it) }
-            menuEnable?.let { visibility = it }
-            setOnClickListener { clickListener?.menuClick() }
-            addView(ivMenu)
-        }
-
+    private fun buildTitleText() {
         tvTitle = TextView(context)
         tvTitle?.run {
             layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
@@ -107,7 +108,37 @@ open class TitleToolbar : CustomToolbarLayout {
                 SizeUtil.px2sp(context, resources.getDimension(R.dimen.font_size_medium)).toFloat()
             addView(tvTitle)
         }
+    }
 
+    @SuppressLint("RestrictedApi")
+    private fun buildMenuImage() {
+        ivMenu = ImageView(context)
+        ivMenu?.run {
+            layoutParams =
+                LayoutParams(
+                    resources.getDimension(R.dimen.toolbar_button_width).toInt(),
+                    MATCH_PARENT
+                )
+            updateLayoutParams<ConstraintLayout.LayoutParams> { endToEnd = 0 }
+            scaleType = ImageView.ScaleType.CENTER
+            menuIcon?.let { setImageResource(it) }
+            menuEnable?.let { visibility = it }
+            setOnClickListener {
+                popupHelper?.show()
+                clickListener?.menuClick()
+            }
+            addView(ivMenu)
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun buildMenuWindow() {
+        if (menuRes == 0) return
+        ivMenu?.let { it ->
+            popupMenu = PopupMenu(context, it).apply { menuInflater.inflate(menuRes!!, menu) }
+            popupHelper = MenuPopupHelper(context, popupMenu?.menu as MenuBuilder, it)
+            popupHelper?.setForceShowIcon(true)
+        }
     }
 
     /**
