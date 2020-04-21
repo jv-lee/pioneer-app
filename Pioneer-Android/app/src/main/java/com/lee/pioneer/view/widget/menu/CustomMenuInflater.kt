@@ -7,8 +7,13 @@ import android.content.res.XmlResourceParser
 import android.util.AttributeSet
 import android.util.Xml
 import android.view.InflateException
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.MenuRes
+import androidx.core.view.setPadding
 import com.lee.library.utils.LogUtil
+import com.lee.library.utils.SizeUtil
 import com.lee.pioneer.R
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
@@ -29,6 +34,19 @@ class CustomMenuInflater(var context: Context) {
 
     /** Item tag name in XML.  */
     private val XML_ITEM = "item"
+
+    private val rootView by lazy {
+        LinearLayout(context).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            setBackgroundResource(R.drawable.shape_search_bg)
+            val padding = SizeUtil.dp2px(context, 10f)
+            setPadding(padding)
+            orientation = LinearLayout.VERTICAL
+        }
+    }
 
     @SuppressLint("ResourceType")
     fun inflate(@MenuRes menuRes: Int) {
@@ -89,7 +107,21 @@ class CustomMenuInflater(var context: Context) {
         val itemIconId = typed.getResourceId(R.styleable.CustomMenuItem_android_icon, 0)
         val itemTitleText = typed.getText(R.styleable.CustomMenuItem_android_title)
 
-        LogUtil.i("itemId -> $itemId itemIconId -> $itemIconId itemTitleText -> $itemTitleText")
+//        MenuItem(itemId, itemIconId, itemTitleText.toString())
+        val view = TextView(context)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        view.id = itemId
+        view.text = itemTitleText
+        rootView.addView(view)
+
+        typed.recycle()
+    }
+
+    fun buildMenuView(): LinearLayout {
+        return rootView
     }
 
 }

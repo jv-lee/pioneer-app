@@ -2,21 +2,25 @@ package com.lee.pioneer.view.widget.toolbar
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.PopupWindow
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.appcompat.view.menu.MenuPopupHelper
-import androidx.appcompat.widget.PopupMenu
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
+import com.lee.library.utils.LogUtil
 import com.lee.library.utils.SizeUtil
 import com.lee.pioneer.R
+import com.lee.pioneer.view.widget.menu.CustomMenuInflater
 
 /**
  * @author jv.lee
@@ -28,8 +32,7 @@ open class TitleToolbar : CustomToolbarLayout {
     var ivBack: ImageView? = null
     var ivMenu: ImageView? = null
     var tvTitle: TextView? = null
-    var popupMenu: PopupMenu? = null
-    var popupHelper: MenuPopupHelper? = null
+    var menuPW: PopupWindow? = null
 
     private var titleText: String? = null
     private var backIcon: Int? = null
@@ -124,7 +127,7 @@ open class TitleToolbar : CustomToolbarLayout {
             menuIcon?.let { setImageResource(it) }
             menuEnable?.let { visibility = it }
             setOnClickListener {
-                popupHelper?.show()
+                menuPW?.showAsDropDown(it)
                 clickListener?.menuClick()
             }
             addView(this)
@@ -135,9 +138,13 @@ open class TitleToolbar : CustomToolbarLayout {
     private fun buildMenuWindow() {
         if (menuRes == 0) return
         ivMenu?.let { it ->
-            popupMenu = PopupMenu(context, it).apply { menuInflater.inflate(menuRes!!, menu) }
-            popupHelper = MenuPopupHelper(context, popupMenu?.menu as MenuBuilder, it)
-            popupHelper?.setForceShowIcon(true)
+            menuPW = PopupWindow(
+                CustomMenuInflater(context).apply { inflate(R.menu.main_menu) }.buildMenuView(),
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            menuPW?.isFocusable = true
+            menuPW?.setBackgroundDrawable(ColorDrawable())
         }
     }
 
