@@ -2,11 +2,12 @@ package com.lee.pioneer.viewmodel
 
 import android.app.Activity
 import android.app.Application
+import android.text.TextUtils
 import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
 import android.widget.TextView
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.BaseViewModel
+import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_ALL
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
@@ -14,14 +15,13 @@ import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.PageData
 import com.lee.pioneer.model.repository.ApiRepository
-import executeResponseAny
 
 /**
  * @author jv.lee
  * @date 2020/4/7
  * @description
  */
-class SearchViewModel(application: Application) : BaseViewModel(application) {
+class SearchViewModel(application: Application) : ResponseViewModel(application) {
 
     private var page = 0
     private val searchTextObservable = ObservableField<String>(CONST_EMPTY)
@@ -39,7 +39,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun searchDataList(isLoadMore: Boolean) {
-        if (searchTextObservable.get() == "") return
+        if (TextUtils.isEmpty(searchTextObservable.get())) return
         if (!isLoadMore) page = 0
         launch(-1) {
             val text = searchTextObservable.get()!!

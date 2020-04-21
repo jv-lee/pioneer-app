@@ -1,16 +1,15 @@
-package com.lee.library.mvvm
+package com.lee.library.mvvm.vm
 
 import android.app.Application
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
 
 /**
  * @author jv.lee
  * @date 2019-08-15
- * @description
+ * @description 设置分页列表ViewModel
  */
 open class ResponsePageViewModel(application: Application, val firstPage: Int = 0) :
-    BaseViewModel(application) {
+    ResponseViewModel(application) {
 
     var page = firstPage
     private var firstCache = true
@@ -61,22 +60,6 @@ open class ResponsePageViewModel(application: Application, val firstPage: Int = 
             networkBlock = networkBlock,
             completedBlock = completedBlock
         )
-    }
-
-    /**
-     * 获取网络数据返回非空判断
-     */
-    suspend fun <T> executeResponseAny(response: T?, successBlock: (T) -> Unit) {
-        coroutineScope {
-            when (response) {
-                null -> {
-                    throw Exception("response is null")
-                }
-                else -> {
-                    successBlock(response)
-                }
-            }
-        }
     }
 
 }

@@ -2,7 +2,7 @@ package com.lee.pioneer.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.ResponsePageViewModel
+import com.lee.library.mvvm.vm.ResponsePageViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
