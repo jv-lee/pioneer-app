@@ -55,20 +55,19 @@ data class ContentHistory(
     @ColumnInfo(name = "history_type") @ContentType val type: Int,
     @ColumnInfo(name = "history_source") @ContentSource val source: Int,
     @ColumnInfo(name = "read_time") val readTime: Long,
-    @ColumnInfo(name = "is_favorite") var isFavorite: Int,
+    @ColumnInfo(name = "is_collect") var isCollect: Int,
     @Embedded val content: Content
 ) {
     companion object {
         fun parse(
-            @ContentType type: Int, @ContentSource source: Int, isFavorite: Int,
-            content: Content
+            @ContentType type: Int, @ContentSource source: Int, isCollect: Int, content: Content
         ) =
             ContentHistory(
                 content._id,
                 type,
                 source,
                 System.currentTimeMillis(),
-                isFavorite,
+                isCollect,
                 content
             )
     }

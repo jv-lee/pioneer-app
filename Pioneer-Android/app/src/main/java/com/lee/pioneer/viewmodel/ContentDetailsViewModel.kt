@@ -16,14 +16,14 @@ class ContentDetailsViewModel(application: Application) : BaseViewModel(applicat
 
     val favoriteObservable by lazy { MutableLiveData<Int>() }
 
-    fun insertFavorite(id: String) {
+    fun contentCollect(id: String) {
         launch {
             //查询是否收藏
-            val isFavorite =
+            val isCollect =
                 withContext(Dispatchers.IO) {
-                    DataBaseRepository.get().historyDao.isFavorite(id)
+                    DataBaseRepository.get().historyDao.isCollect(id)
                 }
-            if (isFavorite == 1) {
+            if (isCollect == 1) {
                 favoriteObservable.value = 0
                 return@launch
             }
@@ -34,7 +34,7 @@ class ContentDetailsViewModel(application: Application) : BaseViewModel(applicat
                     DataBaseRepository.get().historyDao.queryContentById(id)[0]
                 }
             withContext(Dispatchers.IO) {
-                content.isFavorite = 1
+                content.isCollect = 1
                 DataBaseRepository.get().historyDao.insert(content)
             }
             favoriteObservable.value = 1

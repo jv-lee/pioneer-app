@@ -24,7 +24,7 @@ class HistoryFragment :
         launch {
             val response = DataBaseRepository.get().historyDao.queryContentHistory()
             response.forEach {
-                LogUtil.i("roomData->${it.content.title} ${it.isFavorite}")
+                LogUtil.i("roomData->${it.content.title} ${it.isCollect}")
             }
         }
     }

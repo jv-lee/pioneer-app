@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/favorite"
-        android:icon="@drawable/vector_favorite"
-        android:title="@string/menu_favorite" />
+        android:id="@+id/collect"
+        android:icon="@drawable/vector_collect"
+        android:title="@string/menu_collect" />
 
     <item
         android:id="@+id/share"

@@ -39,8 +39,8 @@ class ContentDetailsFragment :
 
             override fun menuItemClick(view: View) {
                 when (view.id) {
-                    R.id.favorite -> {
-                        viewModel.insertFavorite(detailsID)
+                    R.id.collect -> {
+                        viewModel.contentCollect(detailsID)
                     }
                     R.id.share -> {
                         ShareUtil.shareText(
@@ -82,9 +82,9 @@ class ContentDetailsFragment :
         viewModel.run {
             favoriteObservable.observe(this@ContentDetailsFragment, Observer {
                 if (it == 0) {
-                    toast("已收藏该内容")
+                    toast(getString(R.string.menu_collect_completed))
                 } else {
-                    toast("内容收藏成功")
+                    toast(getString(R.string.menu_collect_complete))
                 }
             })
         }

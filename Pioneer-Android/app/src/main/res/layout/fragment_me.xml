@@ -67,7 +67,7 @@
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
                 app:itemText="@string/me_item_favorite"
-                app:leftDrawable="@drawable/vector_favorite"
+                app:leftDrawable="@drawable/vector_collect"
                 app:leftTint="@color/colorFavorite" />
 
             <com.lee.pioneer.view.widget.LineButtonView

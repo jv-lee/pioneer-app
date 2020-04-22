@@ -55,7 +55,7 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
     fun insertContentHistoryToDB(content: Content) {
         launch {
             val extends = withContext(Dispatchers.IO) {
-                DataBaseRepository.get().historyDao.isFavorite(content._id)
+                DataBaseRepository.get().historyDao.isCollect(content._id)
             }
             withContext(Dispatchers.IO) {
                 DataBaseRepository.get().historyDao

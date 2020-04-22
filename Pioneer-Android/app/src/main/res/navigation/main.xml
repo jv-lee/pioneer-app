@@ -30,8 +30,8 @@
             app:popEnterAnim="@anim/default_in_out"
             app:popExitAnim="@anim/slide_right_out" />
         <action
-            android:id="@+id/action_main_to_favorite"
-            app:destination="@id/favorite"
+            android:id="@+id/action_main_to_collect"
+            app:destination="@id/collect"
             app:enterAnim="@anim/slide_right_in"
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
@@ -91,10 +91,10 @@
         tools:layout="@layout/fragment_history" />
 
     <fragment
-        android:id="@+id/favorite"
-        android:name="com.lee.pioneer.view.fragment.FavoriteFragment"
+        android:id="@+id/collect"
+        android:name="com.lee.pioneer.view.fragment.CollectFragment"
         android:label="favoriteFragment"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_collect" />
 
     <fragment
         android:id="@+id/feedback"

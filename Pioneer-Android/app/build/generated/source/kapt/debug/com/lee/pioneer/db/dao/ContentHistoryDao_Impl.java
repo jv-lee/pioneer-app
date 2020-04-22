@@ -34,7 +34,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
     this.__insertionAdapterOfContentHistory = new EntityInsertionAdapter<ContentHistory>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR REPLACE INTO `ContentHistory` (`history_id`,`history_type`,`history_source`,`read_time`,`is_favorite`,`_id`,`author`,`category`,`createdAt`,`desc`,`images`,`likeCounts`,`publishedAt`,`stars`,`title`,`type`,`url`,`views`,`viewType`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `ContentHistory` (`history_id`,`history_type`,`history_source`,`read_time`,`is_collect`,`_id`,`author`,`category`,`createdAt`,`desc`,`images`,`likeCounts`,`publishedAt`,`stars`,`title`,`type`,`url`,`views`,`viewType`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -47,7 +47,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         stmt.bindLong(2, value.getType());
         stmt.bindLong(3, value.getSource());
         stmt.bindLong(4, value.getReadTime());
-        stmt.bindLong(5, value.isFavorite());
+        stmt.bindLong(5, value.isCollect());
         final Content _tmpContent = value.getContent();
         if(_tmpContent != null) {
           if (_tmpContent.get_id() == null) {
@@ -142,7 +142,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
     this.__updateAdapterOfContentHistory = new EntityDeletionOrUpdateAdapter<ContentHistory>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR REPLACE `ContentHistory` SET `history_id` = ?,`history_type` = ?,`history_source` = ?,`read_time` = ?,`is_favorite` = ?,`_id` = ?,`author` = ?,`category` = ?,`createdAt` = ?,`desc` = ?,`images` = ?,`likeCounts` = ?,`publishedAt` = ?,`stars` = ?,`title` = ?,`type` = ?,`url` = ?,`views` = ?,`viewType` = ? WHERE `history_id` = ?";
+        return "UPDATE OR REPLACE `ContentHistory` SET `history_id` = ?,`history_type` = ?,`history_source` = ?,`read_time` = ?,`is_collect` = ?,`_id` = ?,`author` = ?,`category` = ?,`createdAt` = ?,`desc` = ?,`images` = ?,`likeCounts` = ?,`publishedAt` = ?,`stars` = ?,`title` = ?,`type` = ?,`url` = ?,`views` = ?,`viewType` = ? WHERE `history_id` = ?";
       }
 
       @Override
@@ -155,7 +155,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         stmt.bindLong(2, value.getType());
         stmt.bindLong(3, value.getSource());
         stmt.bindLong(4, value.getReadTime());
-        stmt.bindLong(5, value.isFavorite());
+        stmt.bindLong(5, value.isCollect());
         final Content _tmpContent = value.getContent();
         if(_tmpContent != null) {
           if (_tmpContent.get_id() == null) {
@@ -313,7 +313,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
 
   @Override
   public List<ContentHistory> queryContentHistory() {
-    final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_favorite` AS `is_favorite` FROM ContentHistory ORDER BY read_time DESC";
+    final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_collect` AS `is_collect` FROM ContentHistory ORDER BY read_time DESC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     __db.assertNotSuspendingTransaction();
     final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -336,7 +336,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
       final int _cursorIndexOfType_1 = CursorUtil.getColumnIndexOrThrow(_cursor, "history_type");
       final int _cursorIndexOfSource = CursorUtil.getColumnIndexOrThrow(_cursor, "history_source");
       final int _cursorIndexOfReadTime = CursorUtil.getColumnIndexOrThrow(_cursor, "read_time");
-      final int _cursorIndexOfIsFavorite = CursorUtil.getColumnIndexOrThrow(_cursor, "is_favorite");
+      final int _cursorIndexOfIsCollect = CursorUtil.getColumnIndexOrThrow(_cursor, "is_collect");
       final List<ContentHistory> _result = new ArrayList<ContentHistory>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final ContentHistory _item;
@@ -348,8 +348,8 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         _tmpSource = _cursor.getInt(_cursorIndexOfSource);
         final long _tmpReadTime;
         _tmpReadTime = _cursor.getLong(_cursorIndexOfReadTime);
-        final int _tmpIsFavorite;
-        _tmpIsFavorite = _cursor.getInt(_cursorIndexOfIsFavorite);
+        final int _tmpIsCollect;
+        _tmpIsCollect = _cursor.getInt(_cursorIndexOfIsCollect);
         final Content _tmpContent;
         if (! (_cursor.isNull(_cursorIndexOfId) && _cursor.isNull(_cursorIndexOfAuthor) && _cursor.isNull(_cursorIndexOfCategory) && _cursor.isNull(_cursorIndexOfCreatedAt) && _cursor.isNull(_cursorIndexOfDesc) && _cursor.isNull(_cursorIndexOfImages) && _cursor.isNull(_cursorIndexOfLikeCounts) && _cursor.isNull(_cursorIndexOfPublishedAt) && _cursor.isNull(_cursorIndexOfStars) && _cursor.isNull(_cursorIndexOfTitle) && _cursor.isNull(_cursorIndexOfType) && _cursor.isNull(_cursorIndexOfUrl) && _cursor.isNull(_cursorIndexOfViews) && _cursor.isNull(_cursorIndexOfViewType))) {
           final String _tmp_id;
@@ -386,7 +386,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         }  else  {
           _tmpContent = null;
         }
-        _item = new ContentHistory(_tmpId,_tmpType,_tmpSource,_tmpReadTime,_tmpIsFavorite,_tmpContent);
+        _item = new ContentHistory(_tmpId,_tmpType,_tmpSource,_tmpReadTime,_tmpIsCollect,_tmpContent);
         _result.add(_item);
       }
       return _result;
@@ -398,7 +398,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
 
   @Override
   public List<ContentHistory> queryContentFavorite() {
-    final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_favorite` AS `is_favorite` FROM ContentHistory WHERE is_favorite =1";
+    final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_collect` AS `is_collect` FROM ContentHistory WHERE is_collect =1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     __db.assertNotSuspendingTransaction();
     final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
@@ -421,7 +421,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
       final int _cursorIndexOfType_1 = CursorUtil.getColumnIndexOrThrow(_cursor, "history_type");
       final int _cursorIndexOfSource = CursorUtil.getColumnIndexOrThrow(_cursor, "history_source");
       final int _cursorIndexOfReadTime = CursorUtil.getColumnIndexOrThrow(_cursor, "read_time");
-      final int _cursorIndexOfIsFavorite = CursorUtil.getColumnIndexOrThrow(_cursor, "is_favorite");
+      final int _cursorIndexOfIsCollect = CursorUtil.getColumnIndexOrThrow(_cursor, "is_collect");
       final List<ContentHistory> _result = new ArrayList<ContentHistory>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final ContentHistory _item;
@@ -433,8 +433,8 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         _tmpSource = _cursor.getInt(_cursorIndexOfSource);
         final long _tmpReadTime;
         _tmpReadTime = _cursor.getLong(_cursorIndexOfReadTime);
-        final int _tmpIsFavorite;
-        _tmpIsFavorite = _cursor.getInt(_cursorIndexOfIsFavorite);
+        final int _tmpIsCollect;
+        _tmpIsCollect = _cursor.getInt(_cursorIndexOfIsCollect);
         final Content _tmpContent;
         if (! (_cursor.isNull(_cursorIndexOfId) && _cursor.isNull(_cursorIndexOfAuthor) && _cursor.isNull(_cursorIndexOfCategory) && _cursor.isNull(_cursorIndexOfCreatedAt) && _cursor.isNull(_cursorIndexOfDesc) && _cursor.isNull(_cursorIndexOfImages) && _cursor.isNull(_cursorIndexOfLikeCounts) && _cursor.isNull(_cursorIndexOfPublishedAt) && _cursor.isNull(_cursorIndexOfStars) && _cursor.isNull(_cursorIndexOfTitle) && _cursor.isNull(_cursorIndexOfType) && _cursor.isNull(_cursorIndexOfUrl) && _cursor.isNull(_cursorIndexOfViews) && _cursor.isNull(_cursorIndexOfViewType))) {
           final String _tmp_id;
@@ -471,7 +471,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         }  else  {
           _tmpContent = null;
         }
-        _item = new ContentHistory(_tmpId,_tmpType,_tmpSource,_tmpReadTime,_tmpIsFavorite,_tmpContent);
+        _item = new ContentHistory(_tmpId,_tmpType,_tmpSource,_tmpReadTime,_tmpIsCollect,_tmpContent);
         _result.add(_item);
       }
       return _result;
@@ -482,8 +482,8 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public int isFavorite(final String id) {
-    final String _sql = "SELECT COUNT(*) FROM ContentHistory WHERE _id = ? AND is_favorite = 1";
+  public int isCollect(final String id) {
+    final String _sql = "SELECT COUNT(*) FROM ContentHistory WHERE _id = ? AND is_collect = 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     if (id == null) {
@@ -509,7 +509,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
 
   @Override
   public List<ContentHistory> queryContentById(final String id) {
-    final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_favorite` AS `is_favorite` FROM ContentHistory WHERE _id = ?";
+    final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_collect` AS `is_collect` FROM ContentHistory WHERE _id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     if (id == null) {
@@ -538,7 +538,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
       final int _cursorIndexOfType_1 = CursorUtil.getColumnIndexOrThrow(_cursor, "history_type");
       final int _cursorIndexOfSource = CursorUtil.getColumnIndexOrThrow(_cursor, "history_source");
       final int _cursorIndexOfReadTime = CursorUtil.getColumnIndexOrThrow(_cursor, "read_time");
-      final int _cursorIndexOfIsFavorite = CursorUtil.getColumnIndexOrThrow(_cursor, "is_favorite");
+      final int _cursorIndexOfIsCollect = CursorUtil.getColumnIndexOrThrow(_cursor, "is_collect");
       final List<ContentHistory> _result = new ArrayList<ContentHistory>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final ContentHistory _item;
@@ -550,8 +550,8 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         _tmpSource = _cursor.getInt(_cursorIndexOfSource);
         final long _tmpReadTime;
         _tmpReadTime = _cursor.getLong(_cursorIndexOfReadTime);
-        final int _tmpIsFavorite;
-        _tmpIsFavorite = _cursor.getInt(_cursorIndexOfIsFavorite);
+        final int _tmpIsCollect;
+        _tmpIsCollect = _cursor.getInt(_cursorIndexOfIsCollect);
         final Content _tmpContent;
         if (! (_cursor.isNull(_cursorIndexOfId) && _cursor.isNull(_cursorIndexOfAuthor) && _cursor.isNull(_cursorIndexOfCategory) && _cursor.isNull(_cursorIndexOfCreatedAt) && _cursor.isNull(_cursorIndexOfDesc) && _cursor.isNull(_cursorIndexOfImages) && _cursor.isNull(_cursorIndexOfLikeCounts) && _cursor.isNull(_cursorIndexOfPublishedAt) && _cursor.isNull(_cursorIndexOfStars) && _cursor.isNull(_cursorIndexOfTitle) && _cursor.isNull(_cursorIndexOfType) && _cursor.isNull(_cursorIndexOfUrl) && _cursor.isNull(_cursorIndexOfViews) && _cursor.isNull(_cursorIndexOfViewType))) {
           final String _tmp_id;
@@ -588,7 +588,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
         }  else  {
           _tmpContent = null;
         }
-        _item = new ContentHistory(_tmpId,_tmpType,_tmpSource,_tmpReadTime,_tmpIsFavorite,_tmpContent);
+        _item = new ContentHistory(_tmpId,_tmpType,_tmpSource,_tmpReadTime,_tmpIsCollect,_tmpContent);
         _result.add(_item);
       }
       return _result;

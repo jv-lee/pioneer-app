@@ -22,14 +22,14 @@ interface ContentHistoryDao : BaseDao<ContentHistory> {
     /**
      * 查询所有收藏的内容
      */
-    @Query("SELECT * FROM ContentHistory WHERE is_favorite =1")
+    @Query("SELECT * FROM ContentHistory WHERE is_collect =1")
     fun queryContentFavorite(): List<ContentHistory>
 
     /**
      * 查询该条记录是否点击收藏
      */
-    @Query("SELECT COUNT(*) FROM ContentHistory WHERE _id = :id AND is_favorite = 1")
-    fun isFavorite(id: String): Int
+    @Query("SELECT COUNT(*) FROM ContentHistory WHERE _id = :id AND is_collect = 1")
+    fun isCollect(id: String): Int
 
     /**
      * 通过id 查询出一条内容

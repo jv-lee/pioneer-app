@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a9317fa3093edefa6aa276350624bdc7",
+    "identityHash": "cb891b2150ea5004fb3956cffb8dc0e2",
     "entities": [
       {
         "tableName": "ContentHistory",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`history_id` TEXT NOT NULL, `history_type` INTEGER NOT NULL, `history_source` INTEGER NOT NULL, `read_time` INTEGER NOT NULL, `is_favorite` INTEGER NOT NULL, `_id` TEXT NOT NULL, `author` TEXT NOT NULL, `category` TEXT NOT NULL, `createdAt` TEXT NOT NULL, `desc` TEXT NOT NULL, `images` TEXT NOT NULL, `likeCounts` INTEGER NOT NULL, `publishedAt` TEXT NOT NULL, `stars` INTEGER NOT NULL, `title` TEXT NOT NULL, `type` TEXT NOT NULL, `url` TEXT NOT NULL, `views` INTEGER NOT NULL, `viewType` INTEGER NOT NULL, PRIMARY KEY(`history_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`history_id` TEXT NOT NULL, `history_type` INTEGER NOT NULL, `history_source` INTEGER NOT NULL, `read_time` INTEGER NOT NULL, `is_collect` INTEGER NOT NULL, `_id` TEXT NOT NULL, `author` TEXT NOT NULL, `category` TEXT NOT NULL, `createdAt` TEXT NOT NULL, `desc` TEXT NOT NULL, `images` TEXT NOT NULL, `likeCounts` INTEGER NOT NULL, `publishedAt` TEXT NOT NULL, `stars` INTEGER NOT NULL, `title` TEXT NOT NULL, `type` TEXT NOT NULL, `url` TEXT NOT NULL, `views` INTEGER NOT NULL, `viewType` INTEGER NOT NULL, PRIMARY KEY(`history_id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -33,8 +33,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "isFavorite",
-            "columnName": "is_favorite",
+            "fieldPath": "isCollect",
+            "columnName": "is_collect",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -136,7 +136,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a9317fa3093edefa6aa276350624bdc7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cb891b2150ea5004fb3956cffb8dc0e2')"
     ]
   }
 }
