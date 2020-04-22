@@ -49,7 +49,7 @@ class ContentSignItem : LeeViewItem<Content> {
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
                 //设置图片
-                GlideTools.get().loadSmallImage(images[0], ivPicture)
+                GlideTools.get().loadImage(images[0], ivPicture)
 
                 //设置文本
                 tvAuthor.text = author

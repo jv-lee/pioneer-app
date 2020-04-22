@@ -5,8 +5,6 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
-import com.lee.library.utils.LogUtil
-import com.lee.library.widget.ImageViewRound
 import com.lee.pioneer.R
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.tools.GlideTools
@@ -40,7 +38,7 @@ class GirlBottomItem : LeeViewItem<Content> {
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
         holder?.let {
             entity?.images?.get(0)?.let {
-                GlideTools.get().loadBigImage(it, holder.getView(R.id.iv_picture))
+                GlideTools.get().loadImage(it, holder.getView(R.id.iv_picture))
             }
             holder.getView<TextView>(R.id.tv_description).text = entity?.desc
         }

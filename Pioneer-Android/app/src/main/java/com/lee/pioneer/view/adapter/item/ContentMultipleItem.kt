@@ -3,7 +3,6 @@ package com.lee.pioneer.view.adapter.item
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.TimeUtil
@@ -53,10 +52,10 @@ class ContentMultipleItem : LeeViewItem<Content> {
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
                 //设置图片
-                GlideTools.get().loadSmallImage(images[0], ivPicture)
-                GlideTools.get().loadSmallImage(images[1], ivPicture2)
+                GlideTools.get().loadImage(images[0], ivPicture)
+                GlideTools.get().loadImage(images[1], ivPicture2)
                 if (images.size > 2) {
-                    GlideTools.get().loadSmallImage(images[2], ivPicture3)
+                    GlideTools.get().loadImage(images[2], ivPicture3)
                 } else {
                     ivPicture3.setImageDrawable(null)
                 }

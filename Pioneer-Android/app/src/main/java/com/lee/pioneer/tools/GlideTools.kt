@@ -31,10 +31,6 @@ class GlideTools {
 
     private lateinit var optionsCommand: RequestOptions
 
-    private lateinit var smallCommend: RequestOptions
-
-    private lateinit var bigCommend: RequestOptions
-
     private fun initOptions() {
         //初始化普通加载
         RequestOptions()
@@ -45,10 +41,6 @@ class GlideTools {
             .placeholder(R.mipmap.ic_picture_temp)
             .also {
                 optionsCommand = it
-                smallCommend = it
-                smallCommend.override(150, 150)
-                bigCommend = it
-                bigCommend.override(360, 360)
             }
     }
 
@@ -61,21 +53,4 @@ class GlideTools {
             .apply(optionsCommand)
         request.into(imageView)
     }
-
-    fun loadSmallImage(path: Any?, imageView: ImageView) {
-        val request = Glide.with(imageView.context)
-            .asDrawable()
-            .load(path)
-            .apply(smallCommend)
-        request.into(imageView)
-    }
-
-    fun loadBigImage(path: Any?, imageView: ImageView) {
-        val request = Glide.with(imageView.context)
-            .asDrawable()
-            .load(path)
-            .apply(bigCommend)
-        request.into(imageView)
-    }
-
 }

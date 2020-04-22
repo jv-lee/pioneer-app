@@ -78,14 +78,14 @@ public class CacheManager {
     public synchronized <T> T get(String key, Class<T> clazz) {
         String data = memoryCache.get(key);
         if (null != data) {
-            Log.i(TAG, "get: from memory cacheData:" + data);
+            Log.i(TAG, "get: from memory cacheData" );
             return readJsonToObject(data, clazz);
         }
 
         data = diskCache.get(key);
         if (null != data) {
             memoryCache.put(key, data);
-            Log.i(TAG, "get: from disk cacheData:" + data);
+            Log.i(TAG, "get: from disk cacheData");
             return readJsonToObject(data, clazz);
         }
         Log.i(TAG, "get: local not cache, request network data.");
@@ -101,14 +101,14 @@ public class CacheManager {
     public synchronized <T> T get(String key, Type type) {
         String data = memoryCache.get(key);
         if (null != data) {
-            Log.i(TAG, "get: from memory cacheData:" + data);
+            Log.i(TAG, "get: from memory cacheData");
             return readJsonToObject(data, type);
         }
 
         data = diskCache.get(key);
         if (null != data) {
             memoryCache.put(key, data);
-            Log.i(TAG, "get: from disk cacheData:" + data);
+            Log.i(TAG, "get: from disk cacheData");
             return readJsonToObject(data, type);
         }
         Log.i(TAG, "get: local not cache, request network data.");
