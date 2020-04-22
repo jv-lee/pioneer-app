@@ -78,8 +78,9 @@
 
     <declare-styleable name="CustomMenuItem">
         <attr name="android:id" format="reference" />
-        <attr name="android:icon" format="reference"/>
-        <attr name="android:title" format="string"/>
+        <attr name="android:icon" format="reference" />
+        <attr name="android:title" format="string" />
+        <attr name="android:iconTint" format="color" />
     </declare-styleable>
 
 </resources>

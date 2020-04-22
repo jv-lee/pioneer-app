@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.extensions.glideEnable
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
@@ -18,7 +19,6 @@ import com.lee.pioneer.view.adapter.GirlAdapter
 import com.lee.pioneer.viewmodel.GirlViewModel
 import executePageCompleted
 import executePageError
-import glideEnable
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList

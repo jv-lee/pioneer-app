@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Pioneer-Android</string>
 
+    <!--    tools字符-->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="code">这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，</string>
+
     <!--    首页导航-->
     <string name="nav_home">首页</string>
     <string name="nav_recommend">推荐</string>
@@ -25,11 +29,7 @@
     <string name="item_like_text">点赞</string>
     <string name="item_view_text">浏览</string>
 
-    <!--    tools字符-->
-    <string name="code">这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    details Menu字符-->
     <string name="menu_favorite">收藏</string>
     <string name="menu_shared">分享</string>
 </resources>

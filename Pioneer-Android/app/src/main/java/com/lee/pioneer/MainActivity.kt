@@ -46,7 +46,7 @@ class MainActivity :
         anim.duration = 300
         anim.interpolator = LinearInterpolator()
         anim.addUpdateListener {
-            binding.mainContainer.alpha = it.getAnimatedValue() as Float
+            binding.mainContainer.alpha = it.animatedValue as Float
         }
         anim.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator?) {

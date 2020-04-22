@@ -1,7 +1,6 @@
 package com.lee.pioneer.view.widget
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
@@ -10,11 +9,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
-import androidx.core.widget.ImageViewCompat
+import com.lee.library.extensions.setImageTintCompat
 import com.lee.library.utils.SizeUtil
 import com.lee.pioneer.R
-import com.lee.pioneer.tools.ViewTools
-import setImageTintCompat
 
 /**
  * @author jv.lee

@@ -6,19 +6,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.extensions.glideEnable
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
 import com.lee.pioneer.databinding.FragmentContentListBinding
-import com.lee.pioneer.db.AppDataBase
-import com.lee.pioneer.model.entity.ContentHistory
-import com.lee.pioneer.model.entity.HistorySource
-import com.lee.pioneer.model.entity.HistoryType
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.ContentListViewModel
 import executePageCompleted
 import executePageError
-import glideEnable
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
 

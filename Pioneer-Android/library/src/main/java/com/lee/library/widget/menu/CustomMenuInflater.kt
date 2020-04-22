@@ -10,8 +10,10 @@ import android.view.InflateException
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.MenuRes
+import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import com.lee.library.R
+import com.lee.library.extensions.setImageTintCompat
 import com.lee.library.utils.SizeUtil
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
@@ -104,11 +106,16 @@ class CustomMenuInflater(var context: Context) {
         val itemId = typed.getResourceId(R.styleable.CustomMenuItem_android_id, 0)
         val itemIconId = typed.getResourceId(R.styleable.CustomMenuItem_android_icon, 0)
         val itemTitleText = typed.getText(R.styleable.CustomMenuItem_android_title)
+        val itemIconTint =
+            typed.getColor(
+                R.styleable.CustomMenuItem_android_iconTint,
+                ContextCompat.getColor(context, R.color.colorAccent)
+            )
 
         val view = CustomMenuItemView(context)
         view.id = itemId
         view.getTitle().text = itemTitleText
-        view.getIcon().setImageResource(itemIconId)
+        view.getIcon().setImageTintCompat(itemIconId, itemIconTint)
         rootView.addView(view)
 
         typed.recycle()

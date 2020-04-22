@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.extensions.glideEnable
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -12,7 +13,6 @@ import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.SearchViewModel
 import executePageCompleted
 import executePageError
-import glideEnable
 
 /**
  * @author jv.lee

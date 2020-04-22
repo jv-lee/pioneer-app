@@ -6,7 +6,7 @@
         android:title="@string/menu_favorite" />
 
     <item
-        android:id="@+id/shared"
-        android:icon="@drawable/vector_favorite"
+        android:id="@+id/share"
+        android:icon="@drawable/vector_share"
         android:title="@string/menu_shared" />
 </menu>
