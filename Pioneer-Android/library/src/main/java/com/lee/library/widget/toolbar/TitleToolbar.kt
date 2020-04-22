@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -13,6 +12,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
+import androidx.navigation.findNavController
 import com.lee.library.R
 import com.lee.library.utils.SizeUtil
 import com.lee.library.widget.menu.CustomPopupMenuHelper
@@ -84,7 +84,9 @@ open class TitleToolbar : CustomToolbarLayout {
             scaleType = ImageView.ScaleType.CENTER
             backIcon?.let { setImageResource(it) }
             backEnable?.let { visibility = it }
-            setOnClickListener { clickListener?.backClick() }
+            setOnClickListener {
+                findNavController().popBackStack()
+                clickListener?.backClick() }
             addView(this)
         }
     }

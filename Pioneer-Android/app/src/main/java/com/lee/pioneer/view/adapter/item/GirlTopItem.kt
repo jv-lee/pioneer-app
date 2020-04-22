@@ -39,7 +39,6 @@ class GirlTopItem : LeeViewItem<Content> {
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
         holder?.let {
             entity?.images?.get(0)?.let {
-                LogUtil.i("image:$it")
                 GlideTools.get().loadImage(it, holder.getView(R.id.iv_picture))
             }
             holder.getView<TextView>(R.id.tv_description).text = entity?.desc

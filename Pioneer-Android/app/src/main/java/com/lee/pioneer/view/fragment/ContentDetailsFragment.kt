@@ -4,16 +4,15 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.ShareUtil
 import com.lee.library.widget.WebViewEx
+import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.databinding.FragmentContentDetailsBinding
 import com.lee.pioneer.tools.WebViewTools
-import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.viewmodel.ContentDetailsViewModel
 
 /**
@@ -33,9 +32,6 @@ class ContentDetailsFragment :
 
     override fun bindView() {
         binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
-            override fun backClick() {
-                findNavController().popBackStack()
-            }
 
             override fun menuClick() {
                 binding.toolbar.showMenu(-120, 10)
