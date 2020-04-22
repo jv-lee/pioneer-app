@@ -6,10 +6,10 @@ import com.lee.library.mvvm.vm.ResponsePageViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.model.entity.*
 import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
+import com.lee.pioneer.model.repository.DataBaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -33,9 +33,19 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
      */
     fun insertContentHistoryToDB(content: Content) {
         launch {
+            val extends = withContext(Dispatchers.IO) {
+                DataBaseRepository.get().historyDao.isFavorite(content._id)
+            }
             withContext(Dispatchers.IO) {
-                AppDataBase.get().contentHistoryDao()
-                    .insert(ContentHistory.push(HistoryType.CONTENT, HistorySource.ID, content))
+                DataBaseRepository.get().historyDao
+                    .insert(
+                        ContentHistory.parse(
+                            ContentType.CONTENT,
+                            ContentSource.ID,
+                            extends,
+                            content
+                        )
+                    )
             }
         }
     }

@@ -5,7 +5,7 @@ import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHistoryBinding
-import com.lee.pioneer.db.AppDataBase
+import com.lee.pioneer.model.repository.DataBaseRepository
 import kotlinx.coroutines.launch
 
 /**
@@ -22,9 +22,9 @@ class HistoryFragment :
 
     override fun bindData() {
         launch {
-            val response = AppDataBase.get().contentHistoryDao().queryContentHistory()
+            val response = DataBaseRepository.get().historyDao.queryContentHistory()
             response.forEach {
-                LogUtil.i("roomData->${it.content.title}")
+                LogUtil.i("roomData->${it.content.title} ${it.isFavorite}")
             }
         }
     }

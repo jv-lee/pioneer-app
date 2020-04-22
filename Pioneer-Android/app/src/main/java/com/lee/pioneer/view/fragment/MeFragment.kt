@@ -1,11 +1,11 @@
 package com.lee.pioneer.view.fragment
 
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
-import com.lee.library.widget.menu.CustomMenuInflater
-import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.viewmodel.MeViewModel
 
 /**
@@ -30,23 +30,16 @@ class MeFragment :
 
     override fun bindData() {
         binding.isNight = false
-
-
-    }
-
-    override fun lazyLoad() {
-        super.lazyLoad()
-        CustomMenuInflater(context!!).inflate(R.menu.main_menu)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.line_message -> toast("message")
-            R.id.line_like -> toast("like")
-            R.id.line_views -> toast("views")
-            R.id.line_favorite -> toast("favorite")
-            R.id.line_feedback -> toast("feedback")
-            R.id.line_settings -> toast("settings")
+            R.id.line_message -> toast("message 功能暂未开发")
+            R.id.line_like -> toast("like 功能暂未开发")
+            R.id.line_views -> findNavController().navigate(R.id.action_main_to_history)
+            R.id.line_favorite -> findNavController().navigate(R.id.action_main_to_favorite)
+            R.id.line_feedback -> findNavController().navigate(R.id.action_main_to_feedback)
+            R.id.line_settings -> findNavController().navigate(R.id.action_main_to_settings)
         }
     }
 

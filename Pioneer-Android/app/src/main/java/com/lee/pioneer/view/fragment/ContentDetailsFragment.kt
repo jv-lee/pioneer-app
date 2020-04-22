@@ -3,6 +3,7 @@ package com.lee.pioneer.view.fragment
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
@@ -36,7 +37,11 @@ class ContentDetailsFragment :
             }
 
             override fun menuItemClick(view: View) {
-                toast("viewId:${view.id}")
+                when (view.id) {
+                    R.id.favorite -> viewModel.insertFavorite(detailsID)
+                    R.id.share -> {
+                    }
+                }
             }
         })
 
@@ -65,6 +70,16 @@ class ContentDetailsFragment :
             web?.initUrl(detailsUrl)
         } else {
             web?.initUrl(HttpConstant.getDetailsUri(detailsID))
+        }
+
+        viewModel.run {
+            favoriteObservable.observe(this@ContentDetailsFragment, Observer {
+                if (it == 0) {
+                    toast("已收藏该内容")
+                } else {
+                    toast("内容收藏成功")
+                }
+            })
         }
     }
 

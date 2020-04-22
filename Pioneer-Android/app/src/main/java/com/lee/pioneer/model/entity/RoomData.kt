@@ -3,8 +3,9 @@ package com.lee.pioneer.model.entity
 import androidx.annotation.IntDef
 import androidx.room.*
 import com.lee.pioneer.db.converters.StringListConverter
-import com.lee.pioneer.model.entity.HistoryType.Companion.CONTENT
-import com.lee.pioneer.model.entity.HistoryType.Companion.PICTURE
+import com.lee.pioneer.model.entity.ContentType.Companion.CONTENT
+import com.lee.pioneer.model.entity.ContentType.Companion.PICTURE
+import org.jetbrains.annotations.NotNull
 
 /**
  * @author jv.lee
@@ -19,7 +20,7 @@ import com.lee.pioneer.model.entity.HistoryType.Companion.PICTURE
 @IntDef(CONTENT, PICTURE)
 @Retention(AnnotationRetention.SOURCE)
 @MustBeDocumented
-annotation class HistoryType {
+annotation class ContentType {
     companion object {
         const val CONTENT = 0
         const val PICTURE = 1
@@ -34,7 +35,7 @@ annotation class HistoryType {
 @IntDef(CONTENT, PICTURE)
 @Retention(AnnotationRetention.SOURCE)
 @MustBeDocumented
-annotation class HistorySource {
+annotation class ContentSource {
     companion object {
         const val ID = 0
         const val URL = 1
@@ -51,13 +52,24 @@ annotation class HistorySource {
 @TypeConverters(StringListConverter::class)
 data class ContentHistory(
     @ColumnInfo(name = "history_id") @PrimaryKey(autoGenerate = false) var id: String,
-    @ColumnInfo(name = "history_type") @HistoryType val type: Int,
-    @ColumnInfo(name = "history_source") @HistorySource val source: Int,
+    @ColumnInfo(name = "history_type") @ContentType val type: Int,
+    @ColumnInfo(name = "history_source") @ContentSource val source: Int,
     @ColumnInfo(name = "read_time") val readTime: Long,
+    @ColumnInfo(name = "is_favorite") var isFavorite: Int,
     @Embedded val content: Content
 ) {
     companion object {
-        fun push(@HistoryType type: Int, @HistorySource source: Int, content: Content) =
-            ContentHistory(content._id, type, source, System.currentTimeMillis(), content)
+        fun parse(
+            @ContentType type: Int, @ContentSource source: Int, isFavorite: Int,
+            content: Content
+        ) =
+            ContentHistory(
+                content._id,
+                type,
+                source,
+                System.currentTimeMillis(),
+                isFavorite,
+                content
+            )
     }
 }

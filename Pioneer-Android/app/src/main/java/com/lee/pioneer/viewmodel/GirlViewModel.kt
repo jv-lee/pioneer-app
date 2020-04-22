@@ -6,10 +6,10 @@ import com.lee.library.mvvm.vm.ResponsePageViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_GIRL
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.model.entity.*
 import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
+import com.lee.pioneer.model.repository.DataBaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -28,9 +28,19 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
      */
     fun insertContentHistoryToDB(content: Content) {
         launch {
+            val extends = withContext(Dispatchers.IO) {
+                DataBaseRepository.get().historyDao.isFavorite(content._id)
+            }
             withContext(Dispatchers.IO) {
-                AppDataBase.get().contentHistoryDao()
-                    .insert(ContentHistory.push(HistoryType.PICTURE, HistorySource.ID, content))
+                DataBaseRepository.get().historyDao
+                    .insert(
+                        ContentHistory.parse(
+                            ContentType.PICTURE,
+                            ContentSource.ID,
+                            extends,
+                            content
+                        )
+                    )
             }
         }
     }
@@ -42,7 +52,7 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
                 CacheRepository.get()
                     .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
                     .await()?.let { it ->
-//                        it.data.map { it.viewType = Random.nextInt() % 2 }
+                        //                        it.data.map { it.viewType = Random.nextInt() % 2 }
                         contentObservable.value = it
                     }
             },
@@ -50,7 +60,7 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
                 ApiRepository.getApi()
                     .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
                     .await().also { it ->
-//                        it.data.map { it.viewType = Random.nextInt() % 2 }
+                        //                        it.data.map { it.viewType = Random.nextInt() % 2 }
                         contentObservable.value = it
                     }
             },

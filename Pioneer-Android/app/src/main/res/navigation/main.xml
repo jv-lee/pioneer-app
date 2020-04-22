@@ -22,6 +22,34 @@
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
             app:popExitAnim="@anim/bottom_out" />
+        <action
+            android:id="@+id/action_main_to_history"
+            app:destination="@id/history"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/default_in_out"
+            app:popEnterAnim="@anim/default_in_out"
+            app:popExitAnim="@anim/slide_right_out" />
+        <action
+            android:id="@+id/action_main_to_favorite"
+            app:destination="@id/favorite"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/default_in_out"
+            app:popEnterAnim="@anim/default_in_out"
+            app:popExitAnim="@anim/slide_right_out" />
+        <action
+            android:id="@+id/action_main_to_feedback"
+            app:destination="@id/feedback"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/default_in_out"
+            app:popEnterAnim="@anim/default_in_out"
+            app:popExitAnim="@anim/slide_right_out" />
+        <action
+            android:id="@+id/action_main_to_settings"
+            app:destination="@id/settings"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/default_in_out"
+            app:popEnterAnim="@anim/default_in_out"
+            app:popExitAnim="@anim/slide_right_out" />
 
     </fragment>
 
@@ -55,5 +83,29 @@
             app:popEnterAnim="@anim/default_in_out"
             app:popExitAnim="@anim/bottom_out" />
     </fragment>
+
+    <fragment
+        android:id="@+id/history"
+        android:name="com.lee.pioneer.view.fragment.HistoryFragment"
+        android:label="historyFragment"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/favorite"
+        android:name="com.lee.pioneer.view.fragment.FavoriteFragment"
+        android:label="favoriteFragment"
+        tools:layout="@layout/fragment_favorite" />
+
+    <fragment
+        android:id="@+id/feedback"
+        android:name="com.lee.pioneer.view.fragment.FeedbackFragment"
+        android:label="feedbackFragment"
+        tools:layout="@layout/fragment_feedback" />
+
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.lee.pioneer.view.fragment.SettingsFragment"
+        android:label="settingsFragment"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

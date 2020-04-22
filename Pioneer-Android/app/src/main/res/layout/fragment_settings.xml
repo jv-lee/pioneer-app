@@ -6,11 +6,11 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorThemeBackground"
-        tools:context=".view.fragment.HistoryFragment">
+        tools:context=".view.fragment.SettingsFragment">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>
