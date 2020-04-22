@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.utils.ShareUtil
 import com.lee.library.widget.WebViewEx
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
@@ -42,8 +43,14 @@ class ContentDetailsFragment :
 
             override fun menuItemClick(view: View) {
                 when (view.id) {
-                    R.id.favorite -> viewModel.insertFavorite(detailsID)
+                    R.id.favorite -> {
+                        viewModel.insertFavorite(detailsID)
+                    }
                     R.id.share -> {
+                        ShareUtil.shareText(
+                            context,
+                            if (TextUtils.isEmpty(detailsUrl)) HttpConstant.getDetailsUri(detailsID) else detailsUrl
+                        )
                     }
                 }
             }
