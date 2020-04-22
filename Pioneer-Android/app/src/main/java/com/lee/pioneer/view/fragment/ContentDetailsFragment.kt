@@ -11,7 +11,7 @@ import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.databinding.FragmentContentDetailsBinding
 import com.lee.pioneer.tools.WebViewTools
-import com.lee.pioneer.view.widget.toolbar.TitleToolbar
+import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.viewmodel.ContentDetailsViewModel
 
 /**
@@ -30,9 +30,13 @@ class ContentDetailsFragment :
     private val web by lazy { WebViewTools.getWeb() }
 
     override fun bindView() {
-        binding.toolbar.addClickListener(object : TitleToolbar.ClickListener() {
+        binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
             override fun backClick() {
                 findNavController().popBackStack()
+            }
+
+            override fun menuItemClick(view: View) {
+                toast("viewId:${view.id}")
             }
         })
 

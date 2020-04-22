@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="TitleToolbar">
-        <attr name="titleText" format="string" />
-        <attr name="backIcon" format="reference" />
-        <attr name="menuIcon" format="reference" />
-        <attr name="menuRes" format="reference" />
-
-        <attr name="titleEnable" format="enum">
-            <enum name="visible" value="0x00000000" />
-            <enum name="invisible" value="0x00000004" />
-            <enum name="gone" value="0x00000008" />
-        </attr>
-
-        <attr name="backEnable" format="enum">
-            <enum name="visible" value="0x00000000" />
-            <enum name="invisible" value="0x00000004" />
-            <enum name="gone" value="0x00000008" />
-        </attr>
-
-        <attr name="menuEnable" format="enum">
-            <enum name="visible" value="0x00000000" />
-            <enum name="invisible" value="0x00000004" />
-            <enum name="gone" value="0x00000008" />
-        </attr>
-
-    </declare-styleable>
-
     <declare-styleable name="LineButtonView">
         <attr name="iconSize" format="dimension" />
         <attr name="itemTextSize" format="dimension" />
@@ -37,12 +11,6 @@
         <attr name="rightDrawable" format="reference" />
         <attr name="leftTint" format="color" />
         <attr name="rightTint" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="CustomMenuItem">
-        <attr name="android:id" format="reference" />
-        <attr name="android:icon" format="reference"/>
-        <attr name="android:title" format="string"/>
     </declare-styleable>
 
 </resources>

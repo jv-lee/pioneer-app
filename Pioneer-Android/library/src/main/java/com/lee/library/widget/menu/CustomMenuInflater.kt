@@ -1,4 +1,4 @@
-package com.lee.pioneer.view.widget.menu
+package com.lee.library.widget.menu
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,12 +9,10 @@ import android.util.Xml
 import android.view.InflateException
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.annotation.MenuRes
 import androidx.core.view.setPadding
-import com.lee.library.utils.LogUtil
+import com.lee.library.R
 import com.lee.library.utils.SizeUtil
-import com.lee.pioneer.R
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
@@ -41,7 +39,7 @@ class CustomMenuInflater(var context: Context) {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
-            setBackgroundResource(R.drawable.shape_search_bg)
+            setBackgroundResource(R.drawable.shape_menu_bg)
             val padding = SizeUtil.dp2px(context, 10f)
             setPadding(padding)
             orientation = LinearLayout.VERTICAL
@@ -107,14 +105,10 @@ class CustomMenuInflater(var context: Context) {
         val itemIconId = typed.getResourceId(R.styleable.CustomMenuItem_android_icon, 0)
         val itemTitleText = typed.getText(R.styleable.CustomMenuItem_android_title)
 
-//        MenuItem(itemId, itemIconId, itemTitleText.toString())
-        val view = TextView(context)
-        view.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        val view = CustomMenuItemView(context)
         view.id = itemId
-        view.text = itemTitleText
+        view.getTitle().text = itemTitleText
+        view.getIcon().setImageResource(itemIconId)
         rootView.addView(view)
 
         typed.recycle()

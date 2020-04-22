@@ -13,7 +13,7 @@
         android:background="@color/colorThemeBackground"
         tools:context=".view.fragment.GirlFragment">
 
-        <com.lee.pioneer.view.widget.toolbar.CustomStatusBarLayout
+        <com.lee.library.widget.toolbar.CustomStatusBarLayout
             android:id="@+id/statusBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

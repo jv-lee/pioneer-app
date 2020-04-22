@@ -14,12 +14,12 @@
         tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.ContentDetailsFragment">
 
-        <com.lee.pioneer.view.widget.toolbar.TitleToolbar
+        <com.lee.library.widget.toolbar.TitleToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:menuRes="@menu/main_menu"
+            app:menuRes="@menu/details_menu"
             app:titleText="@string/details_title_text" />
 
         <FrameLayout

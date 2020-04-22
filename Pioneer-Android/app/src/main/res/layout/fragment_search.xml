@@ -19,7 +19,7 @@
         tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.SearchFragment">
 
-        <com.lee.pioneer.view.widget.toolbar.CustomToolbarLayout
+        <com.lee.library.widget.toolbar.CustomToolbarLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </com.lee.pioneer.view.widget.toolbar.CustomToolbarLayout>
+        </com.lee.library.widget.toolbar.CustomToolbarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_container"

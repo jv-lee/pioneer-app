@@ -1,26 +1,20 @@
-package com.lee.pioneer.view.widget.toolbar
+package com.lee.library.widget.toolbar
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.view.WindowManager
 import android.widget.ImageView
-import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.Fragment
-import com.lee.library.utils.LogUtil
+import com.lee.library.R
 import com.lee.library.utils.SizeUtil
-import com.lee.pioneer.R
-import com.lee.pioneer.view.widget.menu.CustomMenuInflater
+import com.lee.library.widget.menu.CustomPopupMenuHelper
 
 /**
  * @author jv.lee
@@ -32,7 +26,7 @@ open class TitleToolbar : CustomToolbarLayout {
     var ivBack: ImageView? = null
     var ivMenu: ImageView? = null
     var tvTitle: TextView? = null
-    var menuPW: PopupWindow? = null
+    var menuPopupHelper: CustomPopupMenuHelper? = null
 
     private var titleText: String? = null
     private var backIcon: Int? = null
@@ -127,7 +121,7 @@ open class TitleToolbar : CustomToolbarLayout {
             menuIcon?.let { setImageResource(it) }
             menuEnable?.let { visibility = it }
             setOnClickListener {
-                menuPW?.showAsDropDown(it)
+                menuPopupHelper?.menuPW?.showAsDropDown(it)
                 clickListener?.menuClick()
             }
             addView(this)
@@ -137,14 +131,10 @@ open class TitleToolbar : CustomToolbarLayout {
     @SuppressLint("RestrictedApi")
     private fun buildMenuWindow() {
         if (menuRes == 0) return
-        ivMenu?.let { it ->
-            menuPW = PopupWindow(
-                CustomMenuInflater(context).apply { inflate(R.menu.main_menu) }.buildMenuView(),
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
-            )
-            menuPW?.isFocusable = true
-            menuPW?.setBackgroundDrawable(ColorDrawable())
+        ivMenu?.let {
+            menuRes?.let { it ->
+                menuPopupHelper = CustomPopupMenuHelper(context, it)
+            }
         }
     }
 
@@ -172,10 +162,12 @@ open class TitleToolbar : CustomToolbarLayout {
     open class ClickListener {
         open fun backClick() {}
         open fun menuClick() {}
+        open fun menuItemClick(view: View) {}
     }
 
-    fun addClickListener(clickListener: ClickListener) {
+    fun setClickListener(clickListener: ClickListener) {
         this.clickListener = clickListener
+        menuPopupHelper?.toolbarClickListener = clickListener
     }
 
 }

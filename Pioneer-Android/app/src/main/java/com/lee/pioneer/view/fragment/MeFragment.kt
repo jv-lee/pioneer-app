@@ -4,8 +4,8 @@ import android.view.View
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
-import com.lee.pioneer.view.widget.menu.CustomMenuInflater
-import com.lee.pioneer.view.widget.toolbar.TitleToolbar
+import com.lee.library.widget.menu.CustomMenuInflater
+import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.viewmodel.MeViewModel
 
 /**
@@ -21,7 +21,7 @@ class MeFragment :
 
     override fun bindView() {
         binding.onClickListener = this
-        binding.toolbar.addClickListener(object : TitleToolbar.ClickListener() {
+        binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
             override fun menuClick() {
                 binding.toolbar.ivMenu?.setImageResource(R.drawable.vector_theme_mode_night)
             }
