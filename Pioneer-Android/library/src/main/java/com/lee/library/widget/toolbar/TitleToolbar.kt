@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -121,7 +122,6 @@ open class TitleToolbar : CustomToolbarLayout {
             menuIcon?.let { setImageResource(it) }
             menuEnable?.let { visibility = it }
             setOnClickListener {
-                menuPopupHelper?.menuPW?.showAsDropDown(it)
                 clickListener?.menuClick()
             }
             addView(this)
@@ -136,6 +136,14 @@ open class TitleToolbar : CustomToolbarLayout {
                 menuPopupHelper = CustomPopupMenuHelper(context, it)
             }
         }
+    }
+
+    fun showMenu() {
+        menuPopupHelper?.menuPW?.showAsDropDown(ivMenu)
+    }
+
+    fun showMenu(offsetX: Int, offsetY: Int) {
+        menuPopupHelper?.menuPW?.showAsDropDown(ivMenu, offsetX, offsetY)
     }
 
     /**

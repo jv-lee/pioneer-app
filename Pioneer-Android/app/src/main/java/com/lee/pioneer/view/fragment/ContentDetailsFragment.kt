@@ -36,6 +36,10 @@ class ContentDetailsFragment :
                 findNavController().popBackStack()
             }
 
+            override fun menuClick() {
+                binding.toolbar.showMenu(-120, 10)
+            }
+
             override fun menuItemClick(view: View) {
                 when (view.id) {
                     R.id.favorite -> viewModel.insertFavorite(detailsID)

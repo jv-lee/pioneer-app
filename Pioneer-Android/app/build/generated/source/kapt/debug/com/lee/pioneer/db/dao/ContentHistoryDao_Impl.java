@@ -397,6 +397,91 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
+  public List<ContentHistory> queryContentFavorite() {
+    final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_favorite` AS `is_favorite` FROM ContentHistory WHERE is_favorite =1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "_id");
+      final int _cursorIndexOfAuthor = CursorUtil.getColumnIndexOrThrow(_cursor, "author");
+      final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+      final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+      final int _cursorIndexOfDesc = CursorUtil.getColumnIndexOrThrow(_cursor, "desc");
+      final int _cursorIndexOfImages = CursorUtil.getColumnIndexOrThrow(_cursor, "images");
+      final int _cursorIndexOfLikeCounts = CursorUtil.getColumnIndexOrThrow(_cursor, "likeCounts");
+      final int _cursorIndexOfPublishedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "publishedAt");
+      final int _cursorIndexOfStars = CursorUtil.getColumnIndexOrThrow(_cursor, "stars");
+      final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+      final int _cursorIndexOfType = CursorUtil.getColumnIndexOrThrow(_cursor, "type");
+      final int _cursorIndexOfUrl = CursorUtil.getColumnIndexOrThrow(_cursor, "url");
+      final int _cursorIndexOfViews = CursorUtil.getColumnIndexOrThrow(_cursor, "views");
+      final int _cursorIndexOfViewType = CursorUtil.getColumnIndexOrThrow(_cursor, "viewType");
+      final int _cursorIndexOfId_1 = CursorUtil.getColumnIndexOrThrow(_cursor, "history_id");
+      final int _cursorIndexOfType_1 = CursorUtil.getColumnIndexOrThrow(_cursor, "history_type");
+      final int _cursorIndexOfSource = CursorUtil.getColumnIndexOrThrow(_cursor, "history_source");
+      final int _cursorIndexOfReadTime = CursorUtil.getColumnIndexOrThrow(_cursor, "read_time");
+      final int _cursorIndexOfIsFavorite = CursorUtil.getColumnIndexOrThrow(_cursor, "is_favorite");
+      final List<ContentHistory> _result = new ArrayList<ContentHistory>(_cursor.getCount());
+      while(_cursor.moveToNext()) {
+        final ContentHistory _item;
+        final String _tmpId;
+        _tmpId = _cursor.getString(_cursorIndexOfId_1);
+        final int _tmpType;
+        _tmpType = _cursor.getInt(_cursorIndexOfType_1);
+        final int _tmpSource;
+        _tmpSource = _cursor.getInt(_cursorIndexOfSource);
+        final long _tmpReadTime;
+        _tmpReadTime = _cursor.getLong(_cursorIndexOfReadTime);
+        final int _tmpIsFavorite;
+        _tmpIsFavorite = _cursor.getInt(_cursorIndexOfIsFavorite);
+        final Content _tmpContent;
+        if (! (_cursor.isNull(_cursorIndexOfId) && _cursor.isNull(_cursorIndexOfAuthor) && _cursor.isNull(_cursorIndexOfCategory) && _cursor.isNull(_cursorIndexOfCreatedAt) && _cursor.isNull(_cursorIndexOfDesc) && _cursor.isNull(_cursorIndexOfImages) && _cursor.isNull(_cursorIndexOfLikeCounts) && _cursor.isNull(_cursorIndexOfPublishedAt) && _cursor.isNull(_cursorIndexOfStars) && _cursor.isNull(_cursorIndexOfTitle) && _cursor.isNull(_cursorIndexOfType) && _cursor.isNull(_cursorIndexOfUrl) && _cursor.isNull(_cursorIndexOfViews) && _cursor.isNull(_cursorIndexOfViewType))) {
+          final String _tmp_id;
+          _tmp_id = _cursor.getString(_cursorIndexOfId);
+          final String _tmpAuthor;
+          _tmpAuthor = _cursor.getString(_cursorIndexOfAuthor);
+          final String _tmpCategory;
+          _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
+          final String _tmpCreatedAt;
+          _tmpCreatedAt = _cursor.getString(_cursorIndexOfCreatedAt);
+          final String _tmpDesc;
+          _tmpDesc = _cursor.getString(_cursorIndexOfDesc);
+          final List<String> _tmpImages;
+          final String _tmp;
+          _tmp = _cursor.getString(_cursorIndexOfImages);
+          _tmpImages = __stringListConverter.stringJsonToList(_tmp);
+          final int _tmpLikeCounts;
+          _tmpLikeCounts = _cursor.getInt(_cursorIndexOfLikeCounts);
+          final String _tmpPublishedAt;
+          _tmpPublishedAt = _cursor.getString(_cursorIndexOfPublishedAt);
+          final int _tmpStars;
+          _tmpStars = _cursor.getInt(_cursorIndexOfStars);
+          final String _tmpTitle;
+          _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+          final String _tmpType_1;
+          _tmpType_1 = _cursor.getString(_cursorIndexOfType);
+          final String _tmpUrl;
+          _tmpUrl = _cursor.getString(_cursorIndexOfUrl);
+          final int _tmpViews;
+          _tmpViews = _cursor.getInt(_cursorIndexOfViews);
+          final int _tmpViewType;
+          _tmpViewType = _cursor.getInt(_cursorIndexOfViewType);
+          _tmpContent = new Content(_tmp_id,_tmpAuthor,_tmpCategory,_tmpCreatedAt,_tmpDesc,_tmpImages,_tmpLikeCounts,_tmpPublishedAt,_tmpStars,_tmpTitle,_tmpType_1,_tmpUrl,_tmpViews,_tmpViewType);
+        }  else  {
+          _tmpContent = null;
+        }
+        _item = new ContentHistory(_tmpId,_tmpType,_tmpSource,_tmpReadTime,_tmpIsFavorite,_tmpContent);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
   public int isFavorite(final String id) {
     final String _sql = "SELECT COUNT(*) FROM ContentHistory WHERE _id = ? AND is_favorite = 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);

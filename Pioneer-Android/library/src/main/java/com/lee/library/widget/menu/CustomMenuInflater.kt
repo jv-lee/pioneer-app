@@ -7,7 +7,9 @@ import android.content.res.XmlResourceParser
 import android.util.AttributeSet
 import android.util.Xml
 import android.view.InflateException
+import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.annotation.MenuRes
 import androidx.core.content.ContextCompat
@@ -42,8 +44,6 @@ class CustomMenuInflater(var context: Context) {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setBackgroundResource(R.drawable.shape_menu_bg)
-            val padding = SizeUtil.dp2px(context, 10f)
-            setPadding(padding)
             orientation = LinearLayout.VERTICAL
         }
     }
@@ -80,12 +80,16 @@ class CustomMenuInflater(var context: Context) {
             eventType = parser.next()
         } while (eventType != XmlPullParser.END_DOCUMENT)
 
+        var count = 0
         var reachedEndOfMenu = false
         while (!reachedEndOfMenu) {
             when (eventType) {
                 XmlPullParser.START_TAG -> {
                     tagName = parser.name
                     if (tagName == XML_ITEM) {
+                        if (count++ != 0) {
+                            drawLine()
+                        }
                         readItem(attrs)
                     }
                 }
@@ -99,6 +103,14 @@ class CustomMenuInflater(var context: Context) {
             }
             eventType = parser.next()
         }
+    }
+
+    private fun drawLine() {
+        val lineView = View(context)
+        lineView.layoutParams =
+            ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SizeUtil.dp2px(context, 1f))
+        lineView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.darker_gray))
+        rootView.addView(lineView)
     }
 
     private fun readItem(attrs: AttributeSet?) {
