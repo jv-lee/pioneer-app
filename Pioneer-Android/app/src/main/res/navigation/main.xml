@@ -43,13 +43,6 @@
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
             app:popExitAnim="@anim/slide_right_out" />
-        <action
-            android:id="@+id/action_main_to_settings"
-            app:destination="@id/settings"
-            app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
-            app:popExitAnim="@anim/slide_right_out" />
 
     </fragment>
 
@@ -117,11 +110,5 @@
         android:name="com.lee.pioneer.view.fragment.FeedbackFragment"
         android:label="feedbackFragment"
         tools:layout="@layout/fragment_feedback" />
-
-    <fragment
-        android:id="@+id/settings"
-        android:name="com.lee.pioneer.view.fragment.SettingsFragment"
-        android:label="settingsFragment"
-        tools:layout="@layout/fragment_settings" />
 
 </navigation>

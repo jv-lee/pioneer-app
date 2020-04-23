@@ -3,6 +3,7 @@ package com.lee.pioneer.view.fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.utils.CacheUtil
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
@@ -39,7 +40,13 @@ class MeFragment :
             R.id.line_views -> findNavController().navigate(R.id.action_main_to_history)
             R.id.line_favorite -> findNavController().navigate(R.id.action_main_to_collect)
             R.id.line_feedback -> findNavController().navigate(R.id.action_main_to_feedback)
-            R.id.line_settings -> findNavController().navigate(R.id.action_main_to_settings)
+            R.id.line_settings -> {
+                if (CacheUtil.clearAllCache(context)) {
+                    toast("清除成功")
+                } else {
+                    toast("清除失败")
+                }
+            }
         }
     }
 

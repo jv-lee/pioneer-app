@@ -6,6 +6,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
 
 /**
@@ -46,11 +47,21 @@ class GlideTools {
 
     var cacheArray = arrayListOf<Any>()
 
-    fun loadImage(path: Any?, imageView: ImageView) {
+    fun loadImage(path: String?, imageView: ImageView) {
         val request = Glide.with(imageView.context)
             .asDrawable()
-            .load(path)
+            .load(http2https(path))
             .apply(optionsCommand)
         request.into(imageView)
     }
+
+    private fun http2https(path: Any?): Any? {
+        path?.let {
+            if (path is String && path.startsWith("http://")) {
+                return path.replace("http://", "https://")
+            }
+        }
+        return path
+    }
+
 }

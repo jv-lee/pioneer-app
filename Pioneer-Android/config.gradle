@@ -87,7 +87,11 @@ ext {
             "call-fast-json"  : "com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2",
 
             //第三方
-            "permission"      : "com.github.jv-lee:permission:lite-2.0.0"
+            "permission"      : "com.github.jv-lee:permission:lite-2.0.0",
+
+            //email
+            "email"           : "com.sun.mail:android-mail:1.6.0",
+            "email-activa"    : "com.sun.mail:android-activation:1.6.0"
     ]
 
 }

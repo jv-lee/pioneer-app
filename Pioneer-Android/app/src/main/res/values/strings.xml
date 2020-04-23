@@ -23,7 +23,7 @@
     <string name="me_item_views">浏览过的</string>
     <string name="me_item_favorite">我的收藏</string>
     <string name="me_item_feedback">意见反馈</string>
-    <string name="me_item_settings">设置</string>
+    <string name="me_item_settings">清除缓存</string>
 
     <!--    列表item字符-->
     <string name="item_like_text">点赞</string>
