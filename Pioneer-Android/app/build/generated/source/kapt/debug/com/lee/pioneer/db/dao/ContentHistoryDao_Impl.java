@@ -240,11 +240,11 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public void insert(final ContentHistory... arg0) {
+  public void insert(final ContentHistory... value) {
     __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
-      __insertionAdapterOfContentHistory.insert(arg0);
+      __insertionAdapterOfContentHistory.insert(value);
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
@@ -252,11 +252,11 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public void insert(final List<? extends ContentHistory> arg0) {
+  public void insert(final List<? extends ContentHistory> list) {
     __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
-      __insertionAdapterOfContentHistory.insert(arg0);
+      __insertionAdapterOfContentHistory.insert(list);
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
@@ -264,11 +264,11 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public void delete(final ContentHistory... arg0) {
+  public void delete(final ContentHistory... value) {
     __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
-      __deletionAdapterOfContentHistory.handleMultiple(arg0);
+      __deletionAdapterOfContentHistory.handleMultiple(value);
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
@@ -276,11 +276,11 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public void delete(final List<? extends ContentHistory> arg0) {
+  public void delete(final List<? extends ContentHistory> list) {
     __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
-      __deletionAdapterOfContentHistory.handleMultiple(arg0);
+      __deletionAdapterOfContentHistory.handleMultiple(list);
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
@@ -288,11 +288,11 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public void update(final ContentHistory... arg0) {
+  public void update(final ContentHistory... value) {
     __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
-      __updateAdapterOfContentHistory.handleMultiple(arg0);
+      __updateAdapterOfContentHistory.handleMultiple(value);
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
@@ -300,11 +300,11 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public void update(final List<? extends ContentHistory> arg0) {
+  public void update(final List<? extends ContentHistory> list) {
     __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
-      __updateAdapterOfContentHistory.handleMultiple(arg0);
+      __updateAdapterOfContentHistory.handleMultiple(list);
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
@@ -419,7 +419,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public List<ContentHistory> queryContentFavorite(final int limit) {
+  public List<ContentHistory> queryContentCollect(final int limit) {
     final String _sql = "SELECT `_id`, `author`, `category`, `createdAt`, `desc`, `images`, `likeCounts`, `publishedAt`, `stars`, `title`, `type`, `url`, `views`, `viewType`, `ContentHistory`.`history_id` AS `history_id`, `ContentHistory`.`history_type` AS `history_type`, `ContentHistory`.`history_source` AS `history_source`, `ContentHistory`.`read_time` AS `read_time`, `ContentHistory`.`is_collect` AS `is_collect` FROM ContentHistory WHERE is_collect = 1 LIMIT ? * 20,20";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -506,7 +506,7 @@ public final class ContentHistoryDao_Impl implements ContentHistoryDao {
   }
 
   @Override
-  public int queryContentFavoriteCount() {
+  public int queryContentCollectCount() {
     final String _sql = "SELECT COUNT(*) FROM ContentHistory WHERE is_collect = 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     __db.assertNotSuspendingTransaction();

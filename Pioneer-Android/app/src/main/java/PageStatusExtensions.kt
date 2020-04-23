@@ -9,7 +9,7 @@ import com.lee.pioneer.model.entity.PageData
  */
 
 /**
- * 分页数据列表错误处理
+ * TODO 网络数据分页数据列表错误处理
  */
 fun <T> executePageError(
     adapter: LeeViewAdapter<T>,
@@ -24,17 +24,18 @@ fun <T> executePageError(
 }
 
 /**
- * 分页数据列表填充处理
+ * TODO 带刷新头的分页数据列表填充处理
  */
 fun <T> executePageCompleted(
     data: PageData<T>,
     adapter: LeeViewAdapter<T>,
     refreshView: SwipeRefreshLayout?,
+    limit: Int = 1,
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}
 ) {
     refreshView?.isRefreshing = false
-    if (data.page == 1) {
+    if (data.page == limit) {
         //设置空页面
         if (data.data.isNullOrEmpty()) {
             adapter.pageEmpty()
@@ -61,11 +62,15 @@ fun <T> executePageCompleted(
     }
 }
 
+/**
+ * TODO 不带刷新头的分页数据列表填充处理
+ */
 fun <T> executePageCompleted(
     data: PageData<T>,
     adapter: LeeViewAdapter<T>,
+    limit: Int = 1,
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}
 ) {
-    executePageCompleted(data, adapter, null, refreshBlock, emptyBlock)
+    executePageCompleted(data, adapter, null, limit, refreshBlock, emptyBlock)
 }

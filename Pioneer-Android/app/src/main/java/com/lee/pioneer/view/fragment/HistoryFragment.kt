@@ -1,12 +1,17 @@
 package com.lee.pioneer.view.fragment
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.LogUtil
+import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
+import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentHistoryBinding
 import com.lee.pioneer.view.adapter.ContentChildAdapter
 import com.lee.pioneer.viewmodel.HistoryViewModel
+import executePageCompleted
 
 /**
  * @author jv.lee
@@ -19,16 +24,30 @@ class HistoryFragment :
         HistoryViewModel::class.java
     ) {
 
-    val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
+    private val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
+        binding.rvContainer.layoutManager = LinearLayoutManager(context)
+        binding.rvContainer.adapter = mAdapter.proxy
 
+        mAdapter.initStatusView()
+        mAdapter.pageLoading()
+        mAdapter.setAutoLoadMoreListener {
+            viewModel.loadHistory(true)
+        }
+        mAdapter.setOnItemClickListener { view, entity, position ->
+            findNavController().navigate(
+                HistoryFragmentDirections.actionHistoryToContentDetails(
+                    entity.content._id, KeyConstants.CONST_EMPTY
+                )
+            )
+        }
     }
 
     override fun bindData() {
         viewModel.apply {
             dataObservable.observe(this@HistoryFragment, Observer {
-                LogUtil.i("$it")
+                executePageCompleted(it, mAdapter, 0)
             })
         }
 

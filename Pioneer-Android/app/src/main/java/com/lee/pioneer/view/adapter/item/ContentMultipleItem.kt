@@ -52,13 +52,14 @@ class ContentMultipleItem : LeeViewItem<Content> {
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
                 //设置图片
-                GlideTools.get().loadImage(images[0], ivPicture)
-                GlideTools.get().loadImage(images[1], ivPicture2)
-                if (images.size > 2) {
-                    GlideTools.get().loadImage(images[2], ivPicture3)
-                } else {
-                    ivPicture3.setImageDrawable(null)
-                }
+//                GlideTools.get().loadImage(images[0], ivPicture)
+//                GlideTools.get().loadImage(images[1], ivPicture2)
+//                if (images.size > 2) {
+//                    GlideTools.get().loadImage(images[2], ivPicture3)
+//                } else {
+//                    ivPicture3.setImageDrawable(null)
+//                }
+
 
                 //设置文本
                 tvAuthor.text = author

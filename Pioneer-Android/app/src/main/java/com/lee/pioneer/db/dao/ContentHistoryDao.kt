@@ -30,13 +30,13 @@ interface ContentHistoryDao : BaseDao<ContentHistory> {
      * 查询所有收藏的内容
      */
     @Query("SELECT * FROM ContentHistory WHERE is_collect = 1 LIMIT :limit * ${KeyConstants.PAGE_COUNT},${KeyConstants.PAGE_COUNT}")
-    fun queryContentFavorite(limit: Int): List<ContentHistory>
+    fun queryContentCollect(limit: Int): List<ContentHistory>
 
     /**
      * 获取收藏内容总条数
      */
     @Query("SELECT COUNT(*) FROM ContentHistory WHERE is_collect = 1")
-    fun queryContentFavoriteCount(): Int
+    fun queryContentCollectCount(): Int
 
     /**
      * 查询该条记录是否点击收藏
