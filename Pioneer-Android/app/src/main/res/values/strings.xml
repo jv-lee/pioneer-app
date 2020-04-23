@@ -28,6 +28,8 @@
     <!--    列表item字符-->
     <string name="item_like_text">点赞</string>
     <string name="item_view_text">浏览</string>
+    <string name="item_like_text_count">%1$s 点赞</string>
+    <string name="item_view_text_count">%1$s 浏览</string>
 
     <!--    details Menu字符-->
     <string name="menu_collect">收藏</string>

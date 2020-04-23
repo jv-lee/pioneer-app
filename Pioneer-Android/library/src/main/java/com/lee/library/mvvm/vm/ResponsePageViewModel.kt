@@ -8,10 +8,10 @@ import kotlinx.coroutines.CoroutineScope
  * @date 2019-08-15
  * @description 设置分页列表ViewModel
  */
-open class ResponsePageViewModel(application: Application, val firstPage: Int = 0) :
+open class ResponsePageViewModel(application: Application, private val limit: Int = 0) :
     ResponseViewModel(application) {
 
-    var page = firstPage
+    var page = limit
     private var firstCache = true
 
     /**
@@ -20,8 +20,8 @@ open class ResponsePageViewModel(application: Application, val firstPage: Int = 
     fun <T> pageLaunch(
         isLoadMore: Boolean,
         isReload: Boolean = false,
-        cacheBlock: suspend CoroutineScope.() -> Unit,
-        networkBlock: suspend CoroutineScope.() -> T?,
+        startBlock: suspend CoroutineScope.() -> Unit = {},
+        resumeBlock: suspend CoroutineScope.() -> T? = { null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         launch(-1) {
@@ -29,35 +29,35 @@ open class ResponsePageViewModel(application: Application, val firstPage: Int = 
             if (isLoadMore) {
                 if (!isReload) page++
             } else {
-                page = firstPage
+                page = limit
             }
             //设置首次缓存flag
             if (firstCache) {
                 firstCache = false
-                cacheBlock()
+                startBlock()
             }
             //根据页码回调网络请求及是否调用 completedBlock函数体 (completedBlock处理只使用一次的缓存存储,及数据设置)
-            if (page == firstPage) {
-                val response = networkBlock()
+            if (page == limit) {
+                val response = resumeBlock()
                 response?.let {
                     completedBlock(response)
                 }
             } else {
-                networkBlock()
+                resumeBlock()
             }
         }
     }
 
     fun <T> cacheLaunch(
-        cacheBlock: suspend CoroutineScope.() -> Unit,
-        networkBlock: suspend CoroutineScope.() -> T,
-        completedBlock: suspend CoroutineScope.(T) -> Unit
+        startBlock: suspend CoroutineScope.() -> Unit = {},
+        resumeBlock: suspend CoroutineScope.() -> T? = { null },
+        completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         pageLaunch(
             isLoadMore = false,
             isReload = false,
-            cacheBlock = cacheBlock,
-            networkBlock = networkBlock,
+            startBlock = startBlock,
+            resumeBlock = resumeBlock,
             completedBlock = completedBlock
         )
     }

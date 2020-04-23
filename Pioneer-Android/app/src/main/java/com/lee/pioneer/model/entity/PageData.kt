@@ -12,13 +12,9 @@ data class Data<T>(
 
 data class PageData<T>(
     val data: ArrayList<T>,
-    val status: Int,
-    val count: Int,
-    val hot: String,
-    val category: String,
+    val status: Int = 0,
     val page: Int,
-    val page_count: Int,
-    val total_counts: Int
+    val page_count: Int
 )
 
 /**

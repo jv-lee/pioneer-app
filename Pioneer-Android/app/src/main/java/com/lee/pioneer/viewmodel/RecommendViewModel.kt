@@ -29,7 +29,7 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
     private val commentsData = arrayListOf<Content>()
 
     /**
-     * 浏览后添加至数据库
+     * 浏览记录数据库保存
      */
     fun insertContentHistoryToDB(content: Content) {
         launch {

@@ -8,8 +8,15 @@ package com.lee.pioneer.tools
 class CommonTools {
 
     companion object {
-        fun test() {
-
+        /**
+         * 数据总数转总页数
+         */
+        fun totalToPage(totalCount: Int, pageSize: Int): Int {
+            return if (totalCount % pageSize != 0) {
+                totalCount / pageSize + 1
+            } else {
+                totalCount / pageSize
+            }
         }
     }
 

@@ -24,6 +24,16 @@ class ExampleUnitTest {
         var data2 = Data(1, 2)
         println(data1 == data2)
 
+        var count = 106
+        var pageSize = 20
+        var pageCount = 0
+        pageCount = if (count % pageSize != 0) {
+            count / pageSize + 1
+        } else {
+            count / pageSize
+        }
+        println(pageCount)
+
     }
 
     private fun codePtNumber(width: Int, height: Int): Double {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_item"
+    android:background="@color/colorThemeItem"
+    android:padding="@dimen/padding_item">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        tools:text="JackeyLove专访"
+        android:textColor="@color/colorThemeAccent"
+        android:textSize="@dimen/font_size_small"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_item"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxLines="2"
+        tools:text="虽然迟到的JackeyLove专访来了"
+        android:textColor="@color/colorThemePrimaryDark"
+        android:textSize="@dimen/font_size_small_x"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_item"
+        android:textColor="@color/colorThemePrimary"
+        android:textSize="@dimen/font_size_small_x"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        tools:text="@string/item_like_text_count" />
+
+    <TextView
+        android:id="@+id/tv_view_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_item"
+        android:layout_marginTop="@dimen/margin_item"
+        android:textColor="@color/colorThemePrimary"
+        android:textSize="@dimen/font_size_small_x"
+        app:layout_constraintStart_toEndOf="@id/tv_like_count"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        tools:text="@string/item_view_text_count" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

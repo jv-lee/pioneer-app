@@ -20,8 +20,4 @@ class CollectFragment :
     override fun bindData() {
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
 }

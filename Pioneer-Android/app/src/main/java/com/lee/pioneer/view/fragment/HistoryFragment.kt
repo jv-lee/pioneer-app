@@ -1,12 +1,12 @@
 package com.lee.pioneer.view.fragment
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Observer
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHistoryBinding
-import com.lee.pioneer.model.repository.DataBaseRepository
-import kotlinx.coroutines.launch
+import com.lee.pioneer.view.adapter.ContentChildAdapter
+import com.lee.pioneer.viewmodel.HistoryViewModel
 
 /**
  * @author jv.lee
@@ -14,19 +14,25 @@ import kotlinx.coroutines.launch
  * @description MeFragment ChildPage -> 浏览记录页面
  */
 class HistoryFragment :
-    BaseNavigationFragment<FragmentHistoryBinding, ViewModel>(R.layout.fragment_history, null) {
+    BaseNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(
+        R.layout.fragment_history,
+        HistoryViewModel::class.java
+    ) {
+
+    val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
 
     }
 
     override fun bindData() {
-        launch {
-            val response = DataBaseRepository.get().historyDao.queryContentHistory()
-            response.forEach {
-                LogUtil.i("roomData->${it.content.title} ${it.isCollect}")
-            }
+        viewModel.apply {
+            dataObservable.observe(this@HistoryFragment, Observer {
+                LogUtil.i("$it")
+            })
         }
+
+        viewModel.loadHistory(false)
     }
 
 }
