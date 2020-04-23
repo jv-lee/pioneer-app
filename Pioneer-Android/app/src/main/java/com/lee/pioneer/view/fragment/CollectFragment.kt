@@ -33,7 +33,7 @@ class CollectFragment :
         mAdapter.setAutoLoadMoreListener {
             viewModel.loadHistory(true)
         }
-        mAdapter.setOnItemClickListener { view, entity, position ->
+        mAdapter.setOnItemClickListener { _, entity, _ ->
             findNavController().navigate(
                 CollectFragmentDirections.actionCollectToContentDetails(
                     entity.content._id, KeyConstants.CONST_EMPTY

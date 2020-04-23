@@ -16,8 +16,8 @@ class ContentAdapter(context: Context, data: ArrayList<Content>) :
     LeeViewAdapter<Content>(context, data) {
 
     init {
-        addItemStyles(ContentSignItem())
-        addItemStyles(ContentMultipleItem())
+//        addItemStyles(ContentSignItem())
+//        addItemStyles(ContentMultipleItem())
         addItemStyles(ContentTextItem())
     }
 
