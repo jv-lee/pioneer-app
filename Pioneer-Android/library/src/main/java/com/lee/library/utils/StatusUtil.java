@@ -96,7 +96,7 @@ public class StatusUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int originFlag = activity.getWindow().getDecorView().getSystemUiVisibility();
             //使用异或清除SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            activity.getWindow().getDecorView().setSystemUiVisibility(originFlag ^ View
+            activity.getWindow().getDecorView().setSystemUiVisibility(originFlag & ~View
                     .SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }

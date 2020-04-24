@@ -40,7 +40,9 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        if (!PreferencesTools.hasNightMode()) {
+        if (PreferencesTools.hasNightMode()) {
+            StatusUtil.clearStatusFontLight2(activity)
+        } else {
             StatusUtil.setStatusFontLight2(activity)
         }
     }
