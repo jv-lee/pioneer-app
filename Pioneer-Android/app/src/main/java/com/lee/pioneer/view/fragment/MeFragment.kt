@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.widget.dialog.ChoiceDialog
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
@@ -19,6 +20,12 @@ class MeFragment :
         R.layout.fragment_me,
         MeViewModel::class.java
     ), View.OnClickListener {
+
+    val clearDialog by lazy {
+        ChoiceDialog.build(context, "确认清除缓存").apply {
+            setConfirmListener { viewModel.clearCache() }
+        }
+    }
 
     override fun bindView() {
         binding.vm = viewModel
@@ -50,7 +57,7 @@ class MeFragment :
             R.id.line_views -> findNavController().navigate(R.id.action_main_to_history)
             R.id.line_favorite -> findNavController().navigate(R.id.action_main_to_collect)
             R.id.line_feedback -> findNavController().navigate(R.id.action_main_to_feedback)
-            R.id.line_settings -> viewModel.clearCache()
+            R.id.line_settings -> clearDialog.show()
         }
     }
 
