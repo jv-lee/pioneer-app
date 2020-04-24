@@ -60,7 +60,9 @@
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorFullWidth="false"
                 app:tabMode="scrollable"
-                app:tabRippleColor="@android:color/transparent" />
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextColor="@color/colorThemePrimary" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/vp_container"

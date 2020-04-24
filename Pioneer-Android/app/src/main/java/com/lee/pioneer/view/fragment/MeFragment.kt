@@ -1,13 +1,18 @@
 package com.lee.pioneer.view.fragment
 
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.utils.SPUtil
 import com.lee.library.widget.dialog.ChoiceDialog
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
+import com.lee.pioneer.tools.PreferencesTools
 import com.lee.pioneer.viewmodel.MeViewModel
 
 /**
@@ -21,8 +26,8 @@ class MeFragment :
         MeViewModel::class.java
     ), View.OnClickListener {
 
-    val clearDialog by lazy {
-        ChoiceDialog.build(context, "确认清除缓存").apply {
+    private val clearDialog by lazy {
+        ChoiceDialog.build(context, getString(R.string.me_clear_title)).apply {
             setConfirmListener { viewModel.clearCache() }
         }
     }
@@ -32,7 +37,16 @@ class MeFragment :
         binding.onClickListener = this
         binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
             override fun menuClick() {
-                binding.toolbar.ivMenu?.setImageResource(R.drawable.vector_theme_mode_night)
+                if (PreferencesTools.hasNightMode()) {
+                    PreferencesTools.setNightModel(false)
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+                    binding.toolbar.ivMenu?.setImageResource(R.drawable.vector_theme_mode_default)
+                } else {
+                    PreferencesTools.setNightModel(true)
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                    binding.toolbar.ivMenu?.setImageResource(R.drawable.vector_theme_mode_night)
+                }
+
             }
         })
     }

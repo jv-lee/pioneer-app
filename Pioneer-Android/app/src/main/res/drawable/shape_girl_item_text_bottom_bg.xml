@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/colorThemeAccent" />
+    <solid android:color="@color/colorThemeItem" />
     <corners
         android:bottomLeftRadius="@dimen/item_content_picture_radius"
         android:bottomRightRadius="@dimen/item_content_picture_radius" />
