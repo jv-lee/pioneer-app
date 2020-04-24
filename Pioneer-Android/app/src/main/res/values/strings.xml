@@ -36,4 +36,6 @@
     <string name="menu_shared">分享</string>
     <string name="menu_collect_completed">已收藏该内容</string>
     <string name="menu_collect_complete">内容收藏成功</string>
+    <string name="me_clear_success">清除成功</string>
+    <string name="me_clear_failed">清除失败</string>
 </resources>

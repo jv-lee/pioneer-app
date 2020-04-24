@@ -12,6 +12,10 @@
         <variable
             name="isNight"
             type="java.lang.Boolean" />
+
+        <variable
+            name="vm"
+            type="com.lee.pioneer.viewmodel.MeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,32 +46,32 @@
                 android:id="@+id/line_message"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
-                app:itemText="@string/me_item_message"
                 app:leftDrawable="@drawable/vector_message"
+                app:leftText="@string/me_item_message"
                 app:leftTint="@color/colorMessage" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_like"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
-                app:itemText="@string/me_item_like"
                 app:leftDrawable="@drawable/vector_like"
+                app:leftText="@string/me_item_like"
                 app:leftTint="@color/colorLike" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_views"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
-                app:itemText="@string/me_item_views"
                 app:leftDrawable="@drawable/vector_view"
+                app:leftText="@string/me_item_views"
                 app:leftTint="@color/colorViews" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_favorite"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
-                app:itemText="@string/me_item_favorite"
                 app:leftDrawable="@drawable/vector_collect"
+                app:leftText="@string/me_item_favorite"
                 app:leftTint="@color/colorFavorite" />
 
             <com.lee.pioneer.view.widget.LineButtonView
@@ -75,15 +79,19 @@
                 style="@style/CommendLineButtonView"
                 android:layout_marginTop="@dimen/margin_large"
                 android:onClick="@{onClickListener}"
-                app:itemText="@string/me_item_feedback"
-                app:leftDrawable="@drawable/vector_feedback" />
+                app:leftDrawable="@drawable/vector_feedback"
+                app:leftText="@string/me_item_feedback" />
 
             <com.lee.pioneer.view.widget.LineButtonView
                 android:id="@+id/line_settings"
                 style="@style/CommendLineButtonView"
                 android:onClick="@{onClickListener}"
-                app:itemText="@string/me_item_settings"
-                app:leftDrawable="@drawable/vector_settings" />
+                app:leftDrawable="@drawable/vector_settings"
+                app:leftText="@string/me_item_settings"
+                app:rightText="@{vm.totalCacheStr}"
+                app:rightTextColor="@color/colorThemePrimary"
+                app:rightTextSize="@dimen/font_size_small"
+                tools:rightText="31.5M" />
 
         </LinearLayout>
 
