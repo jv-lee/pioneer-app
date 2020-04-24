@@ -21,5 +21,49 @@
             app:menuEnable="gone"
             app:titleText="@string/me_item_feedback" />
 
+        <EditText
+            android:id="@+id/et_container"
+            android:layout_width="0dp"
+            android:layout_height="160pt"
+            android:layout_margin="@dimen/padding_item"
+            android:background="@drawable/shape_theme_item"
+            android:gravity="start"
+            android:hint="最多输入300字符"
+            android:padding="@dimen/padding_item"
+            android:textSize="@dimen/font_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <EditText
+            android:id="@+id/et_my_link"
+            android:layout_width="0dp"
+            android:layout_height="36pt"
+            android:layout_margin="@dimen/padding_item"
+            android:background="@drawable/shape_theme_item"
+            android:ellipsize="end"
+            android:gravity="center|start"
+            android:hint="请留下你的手机号或QQ，方便联系回馈"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/padding_item"
+            android:paddingRight="@dimen/padding_item"
+            android:textSize="@dimen/font_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_container" />
+
+        <Button
+            android:id="@+id/btn_commit"
+            android:layout_width="0dp"
+            android:layout_height="36pt"
+            android:layout_margin="@dimen/padding_item"
+            android:background="@drawable/shape_theme_accent"
+            android:text="提交"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/colorThemePrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_my_link" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
