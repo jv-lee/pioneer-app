@@ -13,5 +13,6 @@
     <color name="colorThemeBackground">#F6F6F6</color>
     <color name="colorThemeItem">#FFFFFF</color>
     <color name="colorThemeSearch">#F0F0F0</color>
+    <color name="colorThemePlaceholder">#F9F9F9</color>
 
 </resources>

@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import com.lee.library.widget.banner.holder.MZViewHolder
+import com.lee.pioneer.R
 import com.lee.pioneer.model.entity.Banner
 import com.lee.pioneer.tools.GlideTools
 
@@ -25,6 +27,9 @@ class BannerViewHolder : MZViewHolder<Banner> {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         iv.scaleType = ImageView.ScaleType.CENTER_CROP
+        context?.let {
+            iv.setBackgroundColor(ContextCompat.getColor(it, R.color.colorThemePlaceholder))
+        }
         return iv
     }
 
