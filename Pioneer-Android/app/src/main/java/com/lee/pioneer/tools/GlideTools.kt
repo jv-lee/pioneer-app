@@ -12,9 +12,11 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
-import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * @author jv.lee
@@ -38,6 +40,7 @@ class GlideTools {
     }
 
     private lateinit var optionsCommand: RequestOptions
+    private val loadDuration = 250
 
     private fun initOptions() {
         //初始化普通加载
@@ -51,10 +54,9 @@ class GlideTools {
             }
     }
 
-    var cacheArray = arrayListOf<Any>()
-
     @SuppressLint("CheckResult")
     fun loadImage(path: String?, imageView: ImageView) {
+        var imageTag = imageView.getTag(R.id.iv_icon)
         val request = Glide.with(imageView.context)
             .asDrawable()
             .load(http2https(path))
@@ -76,20 +78,22 @@ class GlideTools {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    imageView.background = null
+                    if (isFirstResource) {
+                        imageView.setTag(R.id.iv_icon, "animator")
+                        GlobalScope.launch(Dispatchers.Main) {
+                            delay(loadDuration.toLong())
+                            imageView.background = null
+                        }
+                    }
                     return false
                 }
 
             })
-        if (!cacheArray.contains(path.hashCode())) {
+        //通过tag判断是否为第一次加载 首次加载使用动画显示
+        if (imageTag == null) {
             request.transition(
-                DrawableTransitionOptions.withCrossFade(
-                    DrawableCrossFadeFactory.Builder(
-                        250
-                    )
-                )
+                DrawableTransitionOptions.withCrossFade().crossFade(loadDuration)
             )
-            cacheArray.add(path.hashCode())
         }
         request.into(imageView)
     }
