@@ -85,7 +85,7 @@ class GlideTools {
             request.transition(
                 DrawableTransitionOptions.withCrossFade(
                     DrawableCrossFadeFactory.Builder(
-                        150
+                        250
                     )
                 )
             )
