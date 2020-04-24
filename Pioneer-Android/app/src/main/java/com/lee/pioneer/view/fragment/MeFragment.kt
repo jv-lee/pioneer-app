@@ -29,7 +29,10 @@ class MeFragment :
 
     private val clearDialog by lazy {
         ChoiceDialog.build(context, getString(R.string.me_clear_title)).apply {
-            setConfirmListener { viewModel.clearCache() }
+            setConfirmListener {
+                viewModel.clearCache()
+                dismiss()
+            }
         }
     }
 
