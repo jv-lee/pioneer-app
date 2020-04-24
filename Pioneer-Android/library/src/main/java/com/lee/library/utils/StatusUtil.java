@@ -92,7 +92,7 @@ public class StatusUtil {
      *
      * @param activity
      */
-    public static void claerStatusFontLight2(Activity activity) {
+    public static void clearStatusFontLight2(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int originFlag = activity.getWindow().getDecorView().getSystemUiVisibility();
             //使用异或清除SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

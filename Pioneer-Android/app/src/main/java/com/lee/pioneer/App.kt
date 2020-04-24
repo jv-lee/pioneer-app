@@ -9,7 +9,7 @@ import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.tools.CommonTools
-import com.lee.pioneer.tools.WebViewTools
+import com.lee.pioneer.tools.PreferencesTools
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -40,7 +40,9 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        StatusUtil.setStatusFontLight2(activity)
+        if (!PreferencesTools.hasNightMode()) {
+            StatusUtil.setStatusFontLight2(activity)
+        }
     }
 
     override fun onActivityStarted(activity: Activity) {

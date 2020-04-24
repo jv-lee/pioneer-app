@@ -9,6 +9,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowAnimationStyle">@style/AppTheme.Animation</item>
         <item name="android:windowBackground">@drawable/splash_bg</item>
+        <!--   取消白屏过渡     -->
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!--    搜索text样式    -->
