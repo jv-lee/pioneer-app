@@ -9,11 +9,9 @@ import android.util.Xml
 import android.view.InflateException
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.annotation.MenuRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.setPadding
 import com.lee.library.R
 import com.lee.library.extensions.setImageTintCompat
 import com.lee.library.utils.SizeUtil
@@ -43,7 +41,7 @@ class CustomMenuInflater(var context: Context) {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
-            setBackgroundResource(R.drawable.shape_menu_bg)
+            setBackgroundResource(R.drawable.shape_theme_menu)
             orientation = LinearLayout.VERTICAL
         }
     }
