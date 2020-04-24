@@ -1,5 +1,8 @@
 package com.lee.pioneer.tools
 
+import androidx.appcompat.app.AppCompatDelegate
+import com.lee.library.utils.LogUtil
+
 /**
  * @author jv.lee
  * @date 2020/3/26
@@ -16,6 +19,26 @@ class CommonTools {
                 totalCount / pageSize + 1
             } else {
                 totalCount / pageSize
+            }
+        }
+
+        fun setNightMode(): Boolean {
+            return if (PreferencesTools.hasNightMode()) {
+                PreferencesTools.setNightModel(false)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                false
+            } else {
+                PreferencesTools.setNightModel(true)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                true
+            }
+        }
+
+        fun hasNightMode() {
+            if (PreferencesTools.hasNightMode()) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }

@@ -12,6 +12,7 @@ import com.lee.library.widget.dialog.ChoiceDialog
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
+import com.lee.pioneer.tools.CommonTools
 import com.lee.pioneer.tools.PreferencesTools
 import com.lee.pioneer.viewmodel.MeViewModel
 
@@ -37,22 +38,14 @@ class MeFragment :
         binding.onClickListener = this
         binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
             override fun menuClick() {
-                if (PreferencesTools.hasNightMode()) {
-                    PreferencesTools.setNightModel(false)
-                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-                    binding.toolbar.ivMenu?.setImageResource(R.drawable.vector_theme_mode_default)
-                } else {
-                    PreferencesTools.setNightModel(true)
-                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-                    binding.toolbar.ivMenu?.setImageResource(R.drawable.vector_theme_mode_night)
-                }
-
+                binding.isNight = CommonTools.setNightMode()
             }
         })
     }
 
     override fun bindData() {
-        binding.isNight = false
+        AppCompatDelegate.getDefaultNightMode()
+        binding.isNight = PreferencesTools.hasNightMode()
 
         viewModel.clearObserver.observe(this@MeFragment, Observer {
             toast(if (it) getString(R.string.me_clear_success) else getString(R.string.me_clear_failed))

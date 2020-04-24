@@ -54,6 +54,8 @@
         <attr name="backIcon" format="reference" />
         <attr name="menuIcon" format="reference" />
         <attr name="menuRes" format="reference" />
+        <attr name="backIconTint" format="color" />
+        <attr name="menuIconTint" format="color" />
 
         <attr name="titleEnable" format="enum">
             <enum name="visible" value="0x00000000" />

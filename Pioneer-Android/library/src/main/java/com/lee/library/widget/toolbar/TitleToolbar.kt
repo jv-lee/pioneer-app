@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import androidx.navigation.findNavController
 import com.lee.library.R
+import com.lee.library.extensions.setImageTintCompat
 import com.lee.library.utils.SizeUtil
 import com.lee.library.widget.menu.CustomPopupMenuHelper
 
@@ -31,7 +32,9 @@ open class TitleToolbar : CustomToolbarLayout {
 
     private var titleText: String? = null
     private var backIcon: Int? = null
+    private var backIconTint: Int? = null
     private var menuIcon: Int? = null
+    private var menuIconTint: Int? = null
     private var menuRes: Int? = null
     private var titleEnable: Int? = null
     private var backEnable: Int? = null
@@ -56,8 +59,18 @@ open class TitleToolbar : CustomToolbarLayout {
         titleText = typeArray.getString(R.styleable.TitleToolbar_titleText)
         backIcon =
             typeArray.getResourceId(R.styleable.TitleToolbar_backIcon, R.drawable.vector_back)
+        backIconTint =
+            typeArray.getColor(
+                R.styleable.TitleToolbar_backIconTint,
+                ContextCompat.getColor(context, R.color.colorThemeAccent)
+            )
         menuIcon =
             typeArray.getResourceId(R.styleable.TitleToolbar_menuIcon, R.drawable.vector_menu)
+        menuIconTint =
+            typeArray.getColor(
+                R.styleable.TitleToolbar_menuIconTint,
+                ContextCompat.getColor(context, R.color.colorThemeAccent)
+            )
         menuRes = typeArray.getResourceId(R.styleable.TitleToolbar_menuRes, 0)
         titleEnable = typeArray.getInt(R.styleable.TitleToolbar_titleEnable, View.VISIBLE)
         backEnable = typeArray.getInt(R.styleable.TitleToolbar_backEnable, View.VISIBLE)
@@ -82,11 +95,12 @@ open class TitleToolbar : CustomToolbarLayout {
                 )
             updateLayoutParams<ConstraintLayout.LayoutParams> { startToStart = 0 }
             scaleType = ImageView.ScaleType.CENTER
-            backIcon?.let { setImageResource(it) }
+            backIcon?.let { setImageTintCompat(it, backIconTint!!) }
             backEnable?.let { visibility = it }
             setOnClickListener {
                 findNavController().popBackStack()
-                clickListener?.backClick() }
+                clickListener?.backClick()
+            }
             addView(this)
         }
     }
@@ -121,7 +135,7 @@ open class TitleToolbar : CustomToolbarLayout {
                 )
             updateLayoutParams<ConstraintLayout.LayoutParams> { endToEnd = 0 }
             scaleType = ImageView.ScaleType.CENTER
-            menuIcon?.let { setImageResource(it) }
+            menuIcon?.let { setImageTintCompat(it, menuIconTint!!) }
             menuEnable?.let { visibility = it }
             setOnClickListener {
                 clickListener?.menuClick()

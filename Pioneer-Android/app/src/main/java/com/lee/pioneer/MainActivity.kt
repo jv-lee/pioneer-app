@@ -3,7 +3,9 @@ package com.lee.pioneer
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.content.res.Resources
+import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.lifecycle.ViewModel
@@ -22,11 +24,22 @@ import kotlinx.coroutines.launch
 class MainActivity :
     BaseActivity<ActivityMainBinding, ViewModel>(R.layout.activity_main, null) {
 
-    override fun bindView() {
-        launch {
-            delay(1000)
-            animUi()
+    override fun intentParams(intent: Intent, savedInstanceState: Bundle?) {
+        super.intentParams(intent, savedInstanceState)
+        if (savedInstanceState == null) {
+            launch {
+                delay(1000)
+                animUi(300)
+            }
         }
+    }
+
+    override fun bindView() {
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        animUi(0)
     }
 
     override fun bindData() {
@@ -41,9 +54,9 @@ class MainActivity :
         return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
     }
 
-    private fun animUi() {
+    private fun animUi(duration: Long) {
         val anim = ObjectAnimator.ofFloat(0F, 1F)
-        anim.duration = 300
+        anim.duration = duration
         anim.interpolator = LinearInterpolator()
         anim.addUpdateListener {
             binding.mainContainer.alpha = it.animatedValue as Float
@@ -58,7 +71,6 @@ class MainActivity :
             }
         })
         anim.start()
-
     }
 
 }
