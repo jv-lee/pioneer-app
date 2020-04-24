@@ -4,7 +4,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.utils.CacheUtil
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
@@ -33,7 +32,6 @@ class MeFragment :
 
     override fun bindData() {
         binding.isNight = false
-        binding.lineSettings.setRightText(CacheUtil.getTotalCacheSize(context))
 
         viewModel.clearObserver.observe(this@MeFragment, Observer {
             toast(if (it) getString(R.string.me_clear_success) else getString(R.string.me_clear_failed))

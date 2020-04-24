@@ -14,7 +14,7 @@ import com.lee.pioneer.App
  */
 class MeViewModel(application: Application) : BaseViewModel(application) {
 
-    val totalCacheStr = ObservableField<String>()
+    val totalCacheStr = ObservableField<String>("")
     val clearObserver = MutableLiveData<Boolean>()
 
     fun clearCache() {
