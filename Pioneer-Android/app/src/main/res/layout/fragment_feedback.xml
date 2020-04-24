@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.lee.pioneer.viewmodel.FeedbackViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,10 +25,11 @@
             app:titleText="@string/me_item_feedback" />
 
         <EditText
-            android:id="@+id/et_container"
+            android:id="@+id/et_content"
             android:layout_width="0dp"
             android:layout_height="160pt"
             android:layout_margin="@dimen/padding_item"
+            android:addTextChangedListener="@{vm.etContentWatcher}"
             android:background="@drawable/shape_theme_item"
             android:gravity="start"
             android:hint="最多输入300字符"
@@ -36,10 +40,11 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <EditText
-            android:id="@+id/et_my_link"
+            android:id="@+id/et_link"
             android:layout_width="0dp"
             android:layout_height="36pt"
             android:layout_margin="@dimen/padding_item"
+            android:addTextChangedListener="@{vm.etLinkWatcher}"
             android:background="@drawable/shape_theme_item"
             android:ellipsize="end"
             android:gravity="center|start"
@@ -50,7 +55,7 @@
             android:textSize="@dimen/font_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_container" />
+            app:layout_constraintTop_toBottomOf="@id/et_content" />
 
         <Button
             android:id="@+id/btn_commit"
@@ -58,12 +63,13 @@
             android:layout_height="36pt"
             android:layout_margin="@dimen/padding_item"
             android:background="@drawable/shape_theme_accent"
+            android:onClick="@{(v)->vm.commit()}"
             android:text="提交"
-            android:textSize="@dimen/font_size_small"
             android:textColor="@color/colorThemePrimary"
+            android:textSize="@dimen/font_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_my_link" />
+            app:layout_constraintTop_toBottomOf="@id/et_link" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

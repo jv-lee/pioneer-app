@@ -38,4 +38,6 @@
     <string name="menu_collect_complete">内容收藏成功</string>
     <string name="me_clear_success">清除成功</string>
     <string name="me_clear_failed">清除失败</string>
+    <string name="feedback_success">反馈内容发送成功</string>
+    <string name="feedback_empty">反馈内容不能为空</string>
 </resources>
