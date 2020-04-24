@@ -6,6 +6,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
 
@@ -52,6 +53,16 @@ class GlideTools {
             .asDrawable()
             .load(http2https(path))
             .apply(optionsCommand)
+        if (!cacheArray.contains(path.hashCode())) {
+            request.transition(
+                DrawableTransitionOptions.withCrossFade(
+                    DrawableCrossFadeFactory.Builder(
+                        150
+                    )
+                )
+            )
+            cacheArray.add(path.hashCode())
+        }
         request.into(imageView)
     }
 
