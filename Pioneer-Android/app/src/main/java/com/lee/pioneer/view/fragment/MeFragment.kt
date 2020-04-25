@@ -2,12 +2,9 @@ package com.lee.pioneer.view.fragment
 
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.utils.SPUtil
 import com.lee.library.widget.dialog.ChoiceDialog
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R

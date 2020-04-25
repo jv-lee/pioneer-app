@@ -1,7 +1,6 @@
 package com.lee.pioneer.tools
 
 import androidx.appcompat.app.AppCompatDelegate
-import com.lee.library.utils.LogUtil
 
 /**
  * @author jv.lee
