@@ -12,7 +12,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.lee.pioneer.R
+import com.lee.library.utils.LogUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -41,6 +41,7 @@ class GlideTools {
 
     private lateinit var optionsCommand: RequestOptions
     private val loadDuration = 250
+    private val animEnableArray = arrayListOf<Int>()
 
     private fun initOptions() {
         //初始化普通加载
@@ -56,7 +57,7 @@ class GlideTools {
 
     @SuppressLint("CheckResult")
     fun loadImage(path: String?, imageView: ImageView) {
-        var imageTag = imageView.getTag(R.id.iv_icon)
+        var animEnable = animEnableArray.contains(path.hashCode())
         val request = Glide.with(imageView.context)
             .asDrawable()
             .load(http2https(path))
@@ -79,7 +80,6 @@ class GlideTools {
                     isFirstResource: Boolean
                 ): Boolean {
                     if (isFirstResource) {
-                        imageView.setTag(R.id.iv_icon, "animator")
                         GlobalScope.launch(Dispatchers.Main) {
                             delay(loadDuration.toLong())
                             imageView.background = null
@@ -90,7 +90,8 @@ class GlideTools {
 
             })
         //通过tag判断是否为第一次加载 首次加载使用动画显示
-        if (imageTag == null) {
+        if (!animEnable) {
+            animEnableArray.add(path.hashCode())
             request.transition(
                 DrawableTransitionOptions.withCrossFade().crossFade(loadDuration)
             )
