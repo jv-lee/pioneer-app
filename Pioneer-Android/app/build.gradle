@@ -82,7 +82,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     processor.each { k, v -> annotationProcessor v }
     kapts.each { k, v -> kapt v }
     implementation project(path: ':library')
