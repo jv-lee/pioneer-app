@@ -7,6 +7,7 @@ import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.R
+import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.tools.GlideTools
 import com.lee.pioneer.tools.ViewTools
@@ -52,14 +53,25 @@ class ContentMultipleItem : LeeViewItem<Content> {
             val tvTime = getView<TextView>(R.id.tv_time)
             entity?.run {
                 //设置图片
-//                GlideTools.get().loadImage(images[0], ivPicture)
-//                GlideTools.get().loadImage(images[1], ivPicture2)
-//                if (images.size > 2) {
-//                    GlideTools.get().loadImage(images[2], ivPicture3)
-//                } else {
-//                    ivPicture3.setImageDrawable(null)
-//                }
-
+                GlideTools.get().loadPlaceholderImage(
+                    HttpConstant.getCropImagePath(images[0]),
+                    R.drawable.shape_theme_placeholder,
+                    ivPicture
+                )
+                GlideTools.get().loadPlaceholderImage(
+                    HttpConstant.getCropImagePath(images[1]),
+                    R.drawable.shape_theme_placeholder,
+                    ivPicture2
+                )
+                if (images.size > 2) {
+                    GlideTools.get().loadPlaceholderImage(
+                        HttpConstant.getCropImagePath(images[2]),
+                        R.drawable.shape_theme_placeholder,
+                        ivPicture3
+                    )
+                } else {
+                    ivPicture3.setImageDrawable(null)
+                }
 
                 //设置文本
                 tvAuthor.text = author
@@ -72,7 +84,6 @@ class ContentMultipleItem : LeeViewItem<Content> {
                 tvViews.text =
                     if (entity.views == 0) tvLike.context.getString(R.string.item_view_text) else views.toString()
                 tvTime.text = TimeUtil.getChineseTimeString2(publishedAt)
-
             }
         }
     }

@@ -32,8 +32,7 @@ class ContentTextItem : LeeViewItem<Content> {
     }
 
     override fun isItemView(entity: Content?, position: Int): Boolean {
-//        return entity?.images.isNullOrEmpty()
-        return entity != null
+        return entity?.images.isNullOrEmpty()
     }
 
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {

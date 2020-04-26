@@ -57,7 +57,7 @@ class GlideTools {
     }
 
     @SuppressLint("CheckResult")
-    fun loadImage(path: String, imageView: ImageView) {
+    fun loadImage(path: String?, imageView: ImageView) {
         var animEnable = animEnableArray.contains(path.hashCode())
         val request = Glide.with(imageView.context)
             .asDrawable()
@@ -81,10 +81,7 @@ class GlideTools {
                     isFirstResource: Boolean
                 ): Boolean {
                     if (isFirstResource) {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            delay(loadDuration.toLong())
-                            imageView.background = null
-                        }
+                        imageView.background = null
                     }
                     return false
                 }
@@ -101,11 +98,13 @@ class GlideTools {
     }
 
     fun loadPlaceholderImage(
-        path: String, @DrawableRes placeholderResId: Int,
+        path: String?, @DrawableRes placeholderResId: Int,
         imageView: ImageView
     ) {
-        imageView.setBackgroundResource(placeholderResId)
-        loadImage(path, imageView)
+        path?.let {
+            imageView.setBackgroundResource(placeholderResId)
+            loadImage(path, imageView)
+        }
     }
 
     private fun http2https(path: Any?): Any? {

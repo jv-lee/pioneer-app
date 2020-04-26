@@ -12,6 +12,7 @@ interface HttpConstant {
         const val BASE_URI = BuildConfig.BASE_URI
         const val BASE_HTTP_SUCCESS = 100
 
+        fun getCropImagePath(path: String?) = "${path}/crop/1/w/300"
         fun getDetailsUri(id: String) = "https://gank.io/post/$id"
         fun getNoneHeaderJs() =
             "javascript:(function(){document.getElementsByClassName('header')[0].style.display = 'none'})()"

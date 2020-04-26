@@ -7,6 +7,7 @@ import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
+import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.tools.GlideTools
 
@@ -39,7 +40,7 @@ class GirlTopItem : LeeViewItem<Content> {
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
         holder?.run {
             entity?.images?.get(0)?.let {
-                GlideTools.get().loadPlaceholderImage(it, R.drawable.shape_theme_placeholder, getView(R.id.iv_picture))
+                GlideTools.get().loadPlaceholderImage(HttpConstant.getCropImagePath(it), R.drawable.shape_theme_placeholder, getView(R.id.iv_picture))
             }
             getView<TextView>(R.id.tv_description).text = entity?.desc
         }
