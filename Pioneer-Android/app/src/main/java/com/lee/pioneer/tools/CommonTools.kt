@@ -25,10 +25,12 @@ class CommonTools {
             return if (PreferencesTools.hasNightMode()) {
                 PreferencesTools.setNightModel(false)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                GlideTools.get().updatePlaceholder()
                 false
             } else {
                 PreferencesTools.setNightModel(true)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                GlideTools.get().updatePlaceholder()
                 true
             }
         }

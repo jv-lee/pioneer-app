@@ -1,9 +1,11 @@
 package com.lee.pioneer.tools
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
@@ -13,7 +15,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.lee.library.base.BaseApplication
 import com.lee.library.utils.LogUtil
+import com.lee.pioneer.App
+import com.lee.pioneer.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -41,10 +46,21 @@ class GlideTools {
     }
 
     private lateinit var optionsCommand: RequestOptions
-    private val loadDuration = 250
+    private val loadDuration = 300
     private val animEnableArray = arrayListOf<Int>()
+    private var placeholderResId: Int? = null
+
+    fun updatePlaceholder() {
+        placeholderResId = if (PreferencesTools.hasNightMode()) {
+            R.mipmap.ic_picture_temp_night
+        } else {
+            R.mipmap.ic_picture_temp
+        }
+    }
 
     private fun initOptions() {
+        updatePlaceholder()
+        PreferencesTools.hasNightMode()
         //初始化普通加载
         RequestOptions()
             .skipMemoryCache(false)
@@ -62,7 +78,7 @@ class GlideTools {
         val request = Glide.with(imageView.context)
             .asDrawable()
             .load(http2https(path))
-            .apply(optionsCommand)
+            .apply(optionsCommand.placeholder(placeholderResId!!))
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
@@ -80,9 +96,9 @@ class GlideTools {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    if (isFirstResource) {
-                        imageView.background = null
-                    }
+//                    if (isFirstResource) {
+//                        imageView.background = null
+//                    }
                     return false
                 }
 
@@ -102,7 +118,7 @@ class GlideTools {
         imageView: ImageView
     ) {
         path?.let {
-            imageView.setBackgroundResource(placeholderResId)
+            //            imageView.setBackgroundResource(placeholderResId)
             loadImage(path, imageView)
         }
     }

@@ -21,7 +21,6 @@ import com.bumptech.glide.Glide
  * 监听RecyclerView滑动状态 Glide加载模式
  */
 fun RecyclerView.glideEnable() {
-//    if (true) return
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
         var isDown = false
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -38,7 +37,7 @@ fun RecyclerView.glideEnable() {
                 RecyclerView.SCROLL_STATE_SETTLING ->
                     context?.let { Glide.with(it).pauseRequests() }
             }
-        }
+    }
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
