@@ -35,6 +35,8 @@ class MainActivity :
     }
 
     override fun bindView() {
+        banBackEnable(true)
+        backExitEnable(true)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -55,6 +57,7 @@ class MainActivity :
     }
 
     private fun animUi(duration: Long) {
+        banBackEnable(false)
         val anim = ObjectAnimator.ofFloat(0F, 1F)
         anim.duration = duration
         anim.interpolator = LinearInterpolator()
