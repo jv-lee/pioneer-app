@@ -22,6 +22,23 @@
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
             app:popExitAnim="@anim/bottom_out" />
+
+        <action
+            android:id="@+id/action_main_to_message"
+            app:destination="@id/message"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/default_in_out"
+            app:popEnterAnim="@anim/default_in_out"
+            app:popExitAnim="@anim/slide_right_out" />
+
+        <action
+            android:id="@+id/action_main_to_like"
+            app:destination="@id/like"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/default_in_out"
+            app:popEnterAnim="@anim/default_in_out"
+            app:popExitAnim="@anim/slide_right_out" />
+
         <action
             android:id="@+id/action_main_to_history"
             app:destination="@id/history"
@@ -78,6 +95,18 @@
     </fragment>
 
     <fragment
+        android:id="@+id/message"
+        android:name="com.lee.pioneer.view.fragment.MessageFragment"
+        android:label="messageFragment"
+        tools:layout="@layout/fragment_message" />
+
+    <fragment
+        android:id="@+id/like"
+        android:name="com.lee.pioneer.view.fragment.LikeFragment"
+        android:label="likeFragment"
+        tools:layout="@layout/fragment_like" />
+
+    <fragment
         android:id="@+id/history"
         android:name="com.lee.pioneer.view.fragment.HistoryFragment"
         android:label="historyFragment"
@@ -110,5 +139,6 @@
         android:name="com.lee.pioneer.view.fragment.FeedbackFragment"
         android:label="feedbackFragment"
         tools:layout="@layout/fragment_feedback" />
+
 
 </navigation>

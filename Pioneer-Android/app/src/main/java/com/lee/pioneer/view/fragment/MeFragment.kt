@@ -59,8 +59,8 @@ class MeFragment :
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.line_message -> toast("message 功能暂未开发")
-            R.id.line_like -> toast("like 功能暂未开发")
+            R.id.line_message -> findNavController().navigate(R.id.action_main_to_message)
+            R.id.line_like -> findNavController().navigate(R.id.action_main_to_like)
             R.id.line_views -> findNavController().navigate(R.id.action_main_to_history)
             R.id.line_favorite -> findNavController().navigate(R.id.action_main_to_collect)
             R.id.line_feedback -> findNavController().navigate(R.id.action_main_to_feedback)
