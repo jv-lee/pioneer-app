@@ -21,6 +21,9 @@ import com.bumptech.glide.Glide
  * 监听RecyclerView滑动状态 Glide加载模式
  */
 fun RecyclerView.glideEnable() {
+    if (true) {
+        return
+    }
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
         var isDown = false
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
