@@ -3,6 +3,7 @@ package com.lee.pioneer.tools
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
@@ -56,7 +57,7 @@ class GlideTools {
     }
 
     @SuppressLint("CheckResult")
-    fun loadImage(path: String?, imageView: ImageView) {
+    fun loadImage(path: String, imageView: ImageView) {
         var animEnable = animEnableArray.contains(path.hashCode())
         val request = Glide.with(imageView.context)
             .asDrawable()
@@ -97,6 +98,14 @@ class GlideTools {
             )
         }
         request.into(imageView)
+    }
+
+    fun loadPlaceholderImage(
+        path: String, @DrawableRes placeholderResId: Int,
+        imageView: ImageView
+    ) {
+        imageView.setBackgroundResource(placeholderResId)
+        loadImage(path, imageView)
     }
 
     private fun http2https(path: Any?): Any? {

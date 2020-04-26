@@ -37,11 +37,11 @@ class GirlTopItem : LeeViewItem<Content> {
     }
 
     override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
-        holder?.let {
+        holder?.run {
             entity?.images?.get(0)?.let {
-                GlideTools.get().loadImage(it, holder.getView(R.id.iv_picture))
+                GlideTools.get().loadPlaceholderImage(it, R.drawable.shape_theme_placeholder, getView(R.id.iv_picture))
             }
-            holder.getView<TextView>(R.id.tv_description).text = entity?.desc
+            getView<TextView>(R.id.tv_description).text = entity?.desc
         }
     }
 
