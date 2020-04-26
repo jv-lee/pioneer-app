@@ -36,7 +36,6 @@ class MainActivity :
 
     override fun bindView() {
         banBackEnable(true)
-        backExitEnable(true)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
