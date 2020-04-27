@@ -2,9 +2,9 @@ package com.lee.pioneer.view.fragment
 
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.utils.CacheUtil
 import com.lee.library.widget.dialog.ChoiceDialog
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
@@ -27,7 +27,12 @@ class MeFragment :
     private val clearDialog by lazy {
         ChoiceDialog.build(context, getString(R.string.me_clear_title)).apply {
             setConfirmListener {
-                viewModel.clearCache()
+                if (CacheUtil.clearAllCache(activity)) {
+                    viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
+                    toast(getString(R.string.me_clear_success))
+                } else {
+                    toast(getString(R.string.me_clear_failed))
+                }
                 dismiss()
             }
         }
@@ -46,15 +51,11 @@ class MeFragment :
     override fun bindData() {
         AppCompatDelegate.getDefaultNightMode()
         binding.isNight = PreferencesTools.hasNightMode()
-
-        viewModel.clearObserver.observe(this@MeFragment, Observer {
-            toast(if (it) getString(R.string.me_clear_success) else getString(R.string.me_clear_failed))
-        })
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.setCacheStr()
+        viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
     }
 
     override fun onClick(v: View?) {
