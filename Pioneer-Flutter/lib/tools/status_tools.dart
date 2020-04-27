@@ -1,0 +1,24 @@
+import 'dart:io';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+/**
+ * @author jv.lee
+ * @description 状态栏操作工具
+ */
+class StatusTools {
+  //andorid状态栏沉浸式设置
+  static transipaerntStatusBar() {
+    if (Platform.isAndroid) {
+      SystemUiOverlayStyle systemUiOverlayStyle =
+          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    }
+  }
+
+  //android获取状态栏高度
+  static getStatusHeight() {
+    return MediaQueryData.fromWindow(window).padding.top;
+  }
+}

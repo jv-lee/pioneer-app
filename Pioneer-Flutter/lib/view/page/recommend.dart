@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class RecommendPage extends StatefulWidget{
+/**
+ * @author jv.lee
+ * @description 主页-推荐页面
+ */
+class RecommendPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return RecommendState();
   }
 }
 
-class RecommendState extends State<RecommendPage>{
+class RecommendState extends State<RecommendPage> {
   @override
   void initState() {
     super.initState();
@@ -16,9 +20,9 @@ class RecommendState extends State<RecommendPage>{
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.grey,
-        child: Center(
-          child: Text('this is RecommendPage.'),
+      color: Colors.grey,
+      child: Center(
+        child: Text('this is RecommendPage.'),
       ),
     );
   }

@@ -1,4 +1,4 @@
-class ResStrings{
+class ThemeStrings {
   //首页导航
   static const NAV_HOME = "首页";
   static const NAV_RECOMMEND = "推荐";
@@ -32,11 +32,9 @@ class ResStrings{
   static const ITEM_LIKE_TEXT_COUNT = "点赞";
   static const ITEM_view_TEXT_COUNT = "浏览";
 
-
   //Details Menu字符
   static const MENU_COLLECT = "收藏";
   static const MENU_SHARED = "分享";
   static const MENU_COLLECT_COMPLETED = "已收藏该内容";
   static const MENU_COLLECT_COMPLETE = "内容收藏成功";
-    
 }

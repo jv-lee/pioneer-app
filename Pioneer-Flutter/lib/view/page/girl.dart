@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class GirlPage extends StatefulWidget{
+/**
+ * @author jv.lee
+ * @description 主页-妹子页面
+ */
+class GirlPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return GirlState();
   }
 }
 
-class GirlState extends State<GirlPage>{
+class GirlState extends State<GirlPage> {
   @override
   void initState() {
     super.initState();
@@ -16,9 +20,9 @@ class GirlState extends State<GirlPage>{
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.blue,
-        child: Center(
-          child: Text('this is GirlPage.'),
+      color: Colors.blue,
+      child: Center(
+        child: Text('this is GirlPage.'),
       ),
     );
   }

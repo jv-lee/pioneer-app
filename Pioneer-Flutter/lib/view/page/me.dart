@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget{
+/**
+ * @author jv.lee
+ * @description 主页-我的页面
+ */
+class MePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return HomeState();
+    return MeState();
   }
 }
 
-class HomeState extends State<HomePage>{
+class MeState extends State<MePage> {
   @override
   void initState() {
     super.initState();
@@ -16,9 +20,9 @@ class HomeState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.red,
-        child: Center(
-          child: Text('this is HomePage.'),
+      color: Colors.yellow,
+      child: Center(
+        child: Text('this is MePage.'),
       ),
     );
   }
