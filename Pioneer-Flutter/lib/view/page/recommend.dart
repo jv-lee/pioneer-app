@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-/**
- * @author jv.lee
- * @description 主页-推荐页面
- */
+/// @author jv.lee
+/// @description 主页-推荐页面
 class RecommendPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

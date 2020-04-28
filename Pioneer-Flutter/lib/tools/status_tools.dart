@@ -3,13 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/**
- * @author jv.lee
- * @description 状态栏操作工具
- */
+/// @author jv.lee
+/// @description 状态栏操作工具
 class StatusTools {
-  //andorid状态栏沉浸式设置
-  static transipaerntStatusBar() {
+  //android状态栏沉浸式设置
+  static transparentStatusBar() {
     if (Platform.isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle =
           SystemUiOverlayStyle(statusBarColor: Colors.transparent);

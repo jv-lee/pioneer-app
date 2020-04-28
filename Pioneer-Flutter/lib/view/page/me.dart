@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-/**
- * @author jv.lee
- * @description 主页-我的页面
- */
+/// @author jv.lee
+/// @description 主页-我的页面
 class MePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

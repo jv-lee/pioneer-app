@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-/**
- * @author jv.lee
- * @description 主页-主页面
- */
+/// @author jv.lee
+/// @description 主页-主页面
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

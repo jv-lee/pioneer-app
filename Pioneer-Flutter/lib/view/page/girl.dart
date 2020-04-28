@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-/**
- * @author jv.lee
- * @description 主页-妹子页面
- */
+/// @author jv.lee
+/// @description 主页-妹子页面
 class GirlPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
