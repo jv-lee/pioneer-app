@@ -5,7 +5,7 @@ import 'package:pioneer_flutter/view/page/main.dart';
 
 void main() {
   runApp(PioneerApp());
-  StatusTools.transipaerntStatusBar();
+  // StatusTools.transipaerntStatusBar();
 }
 
 class PioneerApp extends StatelessWidget {
