@@ -15,6 +15,11 @@ class StatusTools {
     }
   }
 
+  static statusBarLight(bool light) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarIconBrightness: light ? Brightness.light : Brightness.dark));
+  }
+
   //android获取状态栏高度
   static getStatusHeight() {
     return MediaQueryData.fromWindow(window).padding.top;

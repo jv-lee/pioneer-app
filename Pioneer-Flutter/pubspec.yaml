@@ -19,6 +19,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - images/ic_logo.png
+    - images/ic_picture_temp.png
+    - images/ic_picture_temp_night.png
+
   fonts:
     - family: ThemeIcons
       fonts:

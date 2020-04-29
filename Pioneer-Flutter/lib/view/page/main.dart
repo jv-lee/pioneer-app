@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
-import 'package:pioneer_flutter/view/page/recommend.dart';
 import 'package:pioneer_flutter/tools/status_tools.dart';
+import 'package:pioneer_flutter/view/page/recommend.dart';
 
 import 'girl.dart';
 import 'home.dart';
@@ -29,6 +30,7 @@ class MainState extends State<MainPage> {
     //监听第一帧绘制完毕后设置沉浸式状态栏
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       StatusTools.transparentStatusBar();
+      StatusTools.statusBarLight(false);
     });
   }
 
@@ -41,7 +43,8 @@ class MainState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: _pageList[_tabIndex],
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark, child: _pageList[_tabIndex]),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(

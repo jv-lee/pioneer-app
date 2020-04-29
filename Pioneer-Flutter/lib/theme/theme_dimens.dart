@@ -1,23 +1,23 @@
 class ThemeDimens {
 //全局通用
-  static const MARGIN_ITEM = 8;
-  static const MARGIN_SMALL = 4;
+  static const margin_item = 8.0;
+  static const margin_small = 4;
   static const margin_medium = 6;
   static const margin_large = 8;
   static const padding_item = 16;
-  static const padding_small = 4;
+  static const padding_small = 4.0;
   static const padding_medium = 6;
   static const padding_large = 8;
 
 //控件宽高
-  static const tab_height = 36;
-  static const margin_tab_height = 37;
-  static const search_text_width_home = 260;
-  static const search_text_width_search = 300;
-  static const search_text_height = 36;
-  static const search_icon_size = 36;
-  static const common_radius = 6;
-  static const web_loading_progress_height = 6;
+  static const tab_height = 36.0;
+  static const margin_tab_height = 37.0;
+  static const search_text_width_home = 260.0;
+  static const search_text_width_search = 300.0;
+  static const search_text_height = 36.0;
+  static const search_icon_size = 36.0;
+  static const common_radius = 6.0;
+  static const web_loading_progress_height = 6.0;
 
 //itemContent
   static const item_content_picture_radius = 4;
@@ -40,7 +40,7 @@ class ThemeDimens {
   static const font_size_large_xx = 22;
   static const font_size_large_x = 20;
   static const font_size_large = 18;
-  static const font_size_medium = 16;
+  static const font_size_medium = 16.0;
   static const font_size_small = 14;
   static const font_size_small_x = 12;
 
