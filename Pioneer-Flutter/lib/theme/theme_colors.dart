@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class ThemeColors {
   //系统颜色
-  static const colorPrimary = Color(0xFFFF1875F0);
+  static const colorPrimary = Color(0xFF9B9B9B);
   static const colorPrimaryDark = Color(0xFF414141);
   static const colorAccent = Color(0xFF191919);
 

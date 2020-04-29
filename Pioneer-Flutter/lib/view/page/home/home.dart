@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pioneer_flutter/theme/theme_colors.dart';
-import 'package:pioneer_flutter/view/widget/home/home_toolbar.dart';
+import 'package:pioneer/theme/theme_colors.dart';
+
+import 'home_tab.dart';
+import 'home_toolbar.dart';
 
 /// @author jv.lee
 /// @description 主页-主页面
@@ -26,9 +28,7 @@ class HomeState extends State<HomePage> {
         Expanded(
           flex: 0,
           child: Column(
-            children: <Widget>[
-              HomeToolbar()
-            ],
+            children: <Widget>[HomeToolbar(), HomeTab()],
           ),
         ),
         Expanded(

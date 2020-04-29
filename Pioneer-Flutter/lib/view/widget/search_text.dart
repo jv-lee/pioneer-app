@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pioneer_flutter/theme/theme_colors.dart';
-import 'package:pioneer_flutter/theme/theme_dimens.dart';
-import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer/theme/theme_colors.dart';
+import 'package:pioneer/theme/theme_dimens.dart';
+import 'package:pioneer/theme/theme_icons.dart';
+import 'package:pioneer/theme/theme_strings.dart';
 
 ///@author jv.lee
 ///@description 项目通用 搜索框text展示样式
@@ -18,16 +19,26 @@ class SearchText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(
-          ThemeDimens.padding_small, 0, ThemeDimens.padding_small, 0),
+          ThemeDimens.padding_large, 0, ThemeDimens.padding_large, 0),
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(right: ThemeDimens.margin_item),
       width: width == null ? ThemeDimens.search_text_width_home : width,
       height: height == null ? ThemeDimens.search_text_height : height,
-      child: Text(
-        ThemeStrings.SEARCH_HINT,
-        style: TextStyle(
-            fontSize: ThemeDimens.font_size_medium,
-            color: ThemeColors.colorThemePrimary),
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: ThemeDimens.padding_large),
+            child: Icon(ThemeIcons.search,
+                color: ThemeColors.colorPrimary,
+                size: ThemeDimens.font_size_medium),
+          ),
+          Text(
+            ThemeStrings.SEARCH_HINT,
+            style: TextStyle(
+                fontSize: ThemeDimens.font_size_medium,
+                color: ThemeColors.colorThemePrimary),
+          )
+        ],
       ),
       decoration: BoxDecoration(
           color: ThemeColors.colorThemeSearch,

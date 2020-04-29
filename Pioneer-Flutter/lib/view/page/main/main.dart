@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pioneer_flutter/theme/theme_colors.dart';
-import 'package:pioneer_flutter/theme/theme_icons.dart';
-import 'package:pioneer_flutter/theme/theme_strings.dart';
-import 'package:pioneer_flutter/tools/status_tools.dart';
-import 'package:pioneer_flutter/view/page/recommend.dart';
+import 'package:pioneer/theme/theme_colors.dart';
+import 'package:pioneer/theme/theme_icons.dart';
+import 'package:pioneer/theme/theme_strings.dart';
+import 'package:pioneer/tools/status_tools.dart';
+import 'package:pioneer/view/page/recommend/recommend.dart';
 
-import 'girl.dart';
-import 'home.dart';
-import 'me.dart';
+import '../girl/girl.dart';
+import '../home/home.dart';
+import '../me/me.dart';
 
 /// @author jv.lee
 /// @description 主页

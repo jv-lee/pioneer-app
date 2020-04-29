@@ -6,8 +6,8 @@ class ThemeDimens {
   static const margin_large = 8;
   static const padding_item = 16;
   static const padding_small = 4.0;
-  static const padding_medium = 6;
-  static const padding_large = 8;
+  static const padding_medium = 6.0;
+  static const padding_large = 8.0;
 
 //控件宽高
   static const tab_height = 36.0;
