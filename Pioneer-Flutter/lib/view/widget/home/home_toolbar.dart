@@ -10,6 +10,7 @@ class HomeToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      brightness: Brightness.light,
       backgroundColor: ThemeColors.colorThemeItem,
       title: Flex(
         mainAxisAlignment: MainAxisAlignment.end,

@@ -9,10 +9,11 @@
             android:src="@mipmap/ic_splash_info" />
     </item>
 
-    <item android:bottom="86dp">
+    <item android:top="600dp">
         <bitmap
             android:antialias="true"
-            android:gravity="bottom"
+            android:gravity="top"
             android:src="@mipmap/ic_splash_logo" />
     </item>
+
 </layer-list>

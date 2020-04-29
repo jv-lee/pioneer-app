@@ -30,7 +30,6 @@ class MainState extends State<MainPage> {
     //监听第一帧绘制完毕后设置沉浸式状态栏
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       StatusTools.transparentStatusBar();
-      StatusTools.statusBarLight(false);
     });
   }
 
@@ -44,7 +43,7 @@ class MainState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark, child: _pageList[_tabIndex]),
+          value: SystemUiOverlayStyle.light, child: _pageList[_tabIndex]),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(
