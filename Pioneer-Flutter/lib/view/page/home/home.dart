@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pioneer/theme/theme_colors.dart';
 
-import 'home_tab.dart';
+import 'home_tab_page.dart';
 import 'home_toolbar.dart';
 
 /// @author jv.lee
@@ -27,15 +26,11 @@ class HomeState extends State<HomePage> {
       children: <Widget>[
         Expanded(
           flex: 0,
-          child: Column(
-            children: <Widget>[HomeToolbar(), HomeTab()],
-          ),
+          child: HomeToolbar(),
         ),
         Expanded(
           flex: 1,
-          child: Container(
-            color: ThemeColors.colorThemeBackground,
-          ),
+          child: HomeTabPage(),
         ),
       ],
     );
