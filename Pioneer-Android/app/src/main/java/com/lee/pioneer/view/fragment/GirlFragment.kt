@@ -101,7 +101,7 @@ class GirlFragment :
 
         viewModel.apply {
             contentObservable.observe(this@GirlFragment, Observer {
-                executePageCompleted(it, mAdapter, binding.refresh)
+                executePageCompleted(it, mAdapter, binding.refresh, diff = true)
             })
 
             //错误处理

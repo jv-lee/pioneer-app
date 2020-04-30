@@ -60,7 +60,10 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
                 ApiRepository.getApi()
                     .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
                     .await().also { it ->
-                        //                        it.data.map { it.viewType = Random.nextInt() % 2 }
+                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据
+                        contentObservable.value?.data?.let { data ->
+                            it.data.addAll(0, data)
+                        }
                         contentObservable.value = it
                     }
             },

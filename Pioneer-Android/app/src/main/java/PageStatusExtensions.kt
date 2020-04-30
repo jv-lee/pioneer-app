@@ -1,6 +1,9 @@
+import androidx.recyclerview.widget.DiffUtil
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lee.library.adapter.LeeViewAdapter
+import com.lee.library.adapter.callback.DiffCallback
 import com.lee.pioneer.model.entity.PageData
+
 
 /**
  * @author jv.lee
@@ -31,6 +34,7 @@ fun <T> executePageCompleted(
     adapter: LeeViewAdapter<T>,
     refreshView: SwipeRefreshLayout?,
     limit: Int = 1,
+    diff: Boolean = false,
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}
 ) {
@@ -51,7 +55,15 @@ fun <T> executePageCompleted(
         adapter.pageCompleted()
         refreshBlock()
     } else {
-        adapter.addData(data.data)
+        if (diff) {
+            //防止activity重建在viewModel中填充历史数据 做差分填充
+            val oldData = adapter.data
+            adapter.updateData(data.data)
+            val result = DiffUtil.calculateDiff(DiffCallback<T>(oldData, data.data), true)
+            result.dispatchUpdatesTo(adapter)
+        }else{
+            adapter.addData(data.data)
+        }
     }
 
     //设置尾页状态 (包括notifyDateSetChange)
@@ -69,8 +81,9 @@ fun <T> executePageCompleted(
     data: PageData<T>,
     adapter: LeeViewAdapter<T>,
     limit: Int = 1,
+    diff:Boolean = false,
     refreshBlock: () -> Unit = {},
     emptyBlock: () -> Unit = {}
 ) {
-    executePageCompleted(data, adapter, null, limit, refreshBlock, emptyBlock)
+    executePageCompleted(data, adapter, null, limit,diff, refreshBlock, emptyBlock)
 }
