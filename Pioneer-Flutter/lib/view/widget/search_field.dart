@@ -44,17 +44,13 @@ class SearchFieldState extends State<SearchField> {
           ),
         ),
         Expanded(
-          flex: 0,
-          child: Text(ThemeStrings.CANCEL,style: TextStyle(fontSize: ThemeDimens.font_size_large),),
-        )
+            flex: 0,
+            child: GestureDetector(
+              onTapDown: (tapDownDetails) => {Navigator.pop(context)},
+              child: Text(ThemeStrings.CANCEL,
+                  style: TextStyle(fontSize: ThemeDimens.font_size_large)),
+            ))
       ],
     );
   }
 }
-
-//Padding(
-//padding: EdgeInsets.only(right: ThemeDimens.padding_large),
-//child: Icon(ThemeIcons.search,
-//color: Theme.of(context).primaryColor,
-//size: ThemeDimens.search_icon_size),
-//)
