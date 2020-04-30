@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pioneer/theme/theme_colors.dart';
 import 'package:pioneer/theme/theme_dimens.dart';
 import 'package:pioneer/view/widget/clear_thme.dart';
 import 'package:pioneer/view/widget/temp_color_page.dart';
@@ -29,19 +28,23 @@ class HomeTabPageState extends State<HomeTabPage>
     _pageController = PageController(initialPage: 0);
     _tabController = TabController(length: tabs.length, vsync: this);
     _tabController.addListener((){
-      if (_tabController.indexIsChanging) {//判断TabBar是否切换
+      //判断TabBar是否切换
+      if (_tabController.indexIsChanging) {
         onPageChange(_tabController.index, p: _pageController);
       }
     });
   }
 
   onPageChange(int index, {PageController p, TabController t}) async {
-    if (p != null) {//判断是哪一个切换
+    //判断是哪一个切换
+    if (p != null) {
       isPageCanChanged = false;
-      await _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);//等待pageview切换完毕,再释放pageivew监听
+      //等待PageView切换完毕,再释放PageView监听
+      await _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
       isPageCanChanged = true;
     } else {
-      _tabController.animateTo(index);//切换Tabbar
+      //切换TabBar
+      _tabController.animateTo(index);
     }
   }
 
@@ -59,9 +62,9 @@ class HomeTabPageState extends State<HomeTabPage>
               child: ClearTheme(
                   child: TabBar(
                       indicatorSize: TabBarIndicatorSize.label,
-                      indicatorColor: ThemeColors.colorAccent,
-                      unselectedLabelColor: ThemeColors.colorPrimary,
-                      labelColor: ThemeColors.colorAccent,
+                      indicatorColor: Theme.of(context).accentColor,
+                      unselectedLabelColor: Theme.of(context).primaryColor,
+                      labelColor: Theme.of(context).accentColor,
                       controller: _tabController,
                       tabs: tabs.map((title) => Tab(text: title,)).toList()))),
         ),

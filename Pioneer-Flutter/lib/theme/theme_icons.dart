@@ -6,5 +6,4 @@ class ThemeIcons {
   static const IconData girl = IconData(0xe684, fontFamily: 'ThemeIcons');
   static const IconData me = IconData(0xe600, fontFamily: 'ThemeIcons');
   static const IconData search = IconData(0xe6a5,fontFamily: 'ThemeIcons');
-
 }

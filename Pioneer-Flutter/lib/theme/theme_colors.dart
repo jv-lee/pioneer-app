@@ -1,20 +1,23 @@
 import 'package:flutter/cupertino.dart';
 
 class ThemeColors {
-  //系统颜色
-  static const colorPrimary = Color(0xFF9B9B9B);
-  static const colorPrimaryDark = Color(0xFF414141);
-  static const colorAccent = Color(0xFF191919);
+  //亮色主题颜色
+  static const lightColorPrimary = Color(0xFF9B9B9B);
+  static const lightColorPrimaryDark = Color(0xFF414141);
+  static const lightColorAccent = Color(0xFF191919);
+  static const lightColorBackground = Color(0xFFF6F6F6);
+  static const lightColorItem = Color(0xFFFFFFFF);
+  static const lightColorSearch = Color(0xFFF0F0F0);
+  static const lightColorPlaceholder = Color(0xFFF9F9F9);
 
-  //主题颜色
-  static const colorThemePrimary = Color(0xFF9B9B9B);
-  static const colorThemePrimaryDark = Color(0xFF414141);
-  static const colorThemeAccent = Color(0xFF191919);
-  static const colorThemeWindow = Color(0xFFFFFFFF);
-  static const colorThemeBackground = Color(0xFFF6F6F6);
-  static const colorThemeItem = Color(0xFFFFFFFF);
-  static const colorThemeSearch = Color(0xFFF0F0F0);
-  static const colorThemePlaceholder = Color(0xFFF9F9F9);
+  //深色主题颜色
+  static const darkColorPrimary = Color(0xFF575757);
+  static const darkColorPrimaryDark = Color(0xFF7E7E7E);
+  static const darkColorAccent = Color(0xFF9F9F9F);
+  static const darkColorBackground = Color(0xFF010101);
+  static const darkColorItem = Color(0xFF1B1B1B);
+  static const darkColorSearch = Color(0xFF2E2E2E);
+  static const darkColorPlaceholder = Color(0xFF575757);
 
   //我的页面leftDrawable颜色
   static const colorMessage = Color(0xFF1875F0);

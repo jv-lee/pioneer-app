@@ -15,7 +15,8 @@ class ThemeDimens {
   static const search_text_width_home = 260.0;
   static const search_text_width_search = 300.0;
   static const search_text_height = 36.0;
-  static const search_icon_size = 36.0;
+  static const search_icon_size = 18.0;
+  static const logo_size = 32.0;
   static const common_radius = 6.0;
   static const web_loading_progress_height = 6.0;
 
@@ -37,12 +38,12 @@ class ThemeDimens {
   static const view_line_item_padding = 12;
 
 //全局通用字体size值
-  static const font_size_large_xx = 22;
-  static const font_size_large_x = 20;
-  static const font_size_large = 18;
+  static const font_size_large_xx = 22.0;
+  static const font_size_large_x = 20.0;
+  static const font_size_large = 18.0;
   static const font_size_medium = 16.0;
-  static const font_size_small = 14;
-  static const font_size_small_x = 12;
+  static const font_size_small = 14.0;
+  static const font_size_small_x = 12.0;
 
 //系统控件高度值使用dp原始适配高度
   static const navigation_bar_height = 56;

@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import com.lee.library.R
 import com.lee.library.extensions.setImageTintCompat
 import com.lee.library.utils.SizeUtil
+import com.lee.library.utils.StatusUtil
 import com.lee.library.widget.menu.CustomPopupMenuHelper
 
 /**
@@ -51,6 +52,14 @@ open class TitleToolbar : CustomToolbarLayout {
     ) {
         initAttr(attributes!!)
         initView()
+    }
+
+    /**
+     * 设置状态栏填充padding
+     */
+    override fun initStatusBarPadding() {
+        val statusHeight = StatusUtil.getStatusBarHeight(context)
+        setPadding(0, statusHeight, 0, 0)
     }
 
     private fun initAttr(attrs: AttributeSet) {

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pioneer/theme/theme_colors.dart';
+import 'package:flutter/material.dart';
 import 'package:pioneer/theme/theme_dimens.dart';
 import 'package:pioneer/theme/theme_icons.dart';
 import 'package:pioneer/theme/theme_strings.dart';
@@ -29,19 +29,19 @@ class SearchText extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: ThemeDimens.padding_large),
             child: Icon(ThemeIcons.search,
-                color: ThemeColors.colorPrimary,
-                size: ThemeDimens.font_size_medium),
+                color: Theme.of(context).primaryColor,
+                size: ThemeDimens.search_icon_size),
           ),
           Text(
             ThemeStrings.SEARCH_HINT,
             style: TextStyle(
                 fontSize: ThemeDimens.font_size_medium,
-                color: ThemeColors.colorThemePrimary),
+                color: Theme.of(context).primaryColor),
           )
         ],
       ),
       decoration: BoxDecoration(
-          color: ThemeColors.colorThemeSearch,
+          color: Theme.of(context).focusColor,
           borderRadius:
               BorderRadius.all(Radius.circular(ThemeDimens.common_radius))),
     );

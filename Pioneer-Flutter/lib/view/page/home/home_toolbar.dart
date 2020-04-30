@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pioneer/theme/theme_colors.dart';
 import 'package:pioneer/theme/theme_dimens.dart';
 import 'package:pioneer/view/widget/search_text.dart';
 
@@ -12,7 +11,7 @@ class HomeToolbar extends StatelessWidget {
     return AppBar(
       elevation: 0,
       brightness: Brightness.light,
-      backgroundColor: ThemeColors.colorThemeItem,
+      backgroundColor: Theme.of(context).canvasColor,
       title: Flex(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -25,6 +24,7 @@ class HomeToolbar extends StatelessWidget {
               child: SearchText(),
               onTapDown: (tapDownDetails) => {
                 //路由跳转位置
+                Navigator.pushNamed(context, '/search')
               },
             ),
           ),
@@ -32,8 +32,8 @@ class HomeToolbar extends StatelessWidget {
             flex: 0,
             child: Image(
               image: AssetImage('images/ic_logo.png'),
-              width: ThemeDimens.search_icon_size,
-              height: ThemeDimens.search_icon_size,
+              width: ThemeDimens.logo_size,
+              height: ThemeDimens.logo_size,
             ),
           ),
         ],

@@ -66,9 +66,8 @@ class MainState extends State<MainPage> {
             _tabIndex = index;
           });
         },
-        backgroundColor: ThemeColors.colorThemeItem,
-        selectedItemColor: ThemeColors.colorThemeAccent,
-        unselectedItemColor: ThemeColors.colorThemePrimary,
+        selectedItemColor: Theme.of(context).accentColor,
+        unselectedItemColor: Theme.of(context).primaryColor,
       ),
     );
   }
