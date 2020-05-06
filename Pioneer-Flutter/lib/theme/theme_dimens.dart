@@ -33,7 +33,7 @@ class ThemeDimens {
 
 //自定义view
   static const view_line_icon_size = 20;
-  static const view_line_text_margin = 36;
+  static const view_line_text_margin = 8.0;
   static const view_line_text_size = font_size_small;
   static const view_line_item_padding = 12;
 
