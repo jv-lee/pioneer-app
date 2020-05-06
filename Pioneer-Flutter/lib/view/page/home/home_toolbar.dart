@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pioneer/theme/theme_dimens.dart';
-import 'package:pioneer/view/widget/search_text.dart';
+import 'package:pioneer_flutter/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/view/widget/search_text.dart';
 
 ///@author jv.lee
 ///@description home页面 toolbar组件

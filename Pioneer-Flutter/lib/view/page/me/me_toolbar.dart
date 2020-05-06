@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pioneer/theme/theme_strings.dart';
-import 'package:pioneer/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/theme/theme_dimens.dart';
 
 class MeToolbar extends StatelessWidget {
   @override

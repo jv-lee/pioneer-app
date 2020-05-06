@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pioneer/theme/theme_dimens.dart';
-import 'package:pioneer/theme/theme_icons.dart';
-import 'package:pioneer/theme/theme_strings.dart';
+import 'package:pioneer_flutter/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/theme/theme_icons.dart';
+import 'package:pioneer_flutter/theme/theme_strings.dart';
 
 ///@author jv.lee
 ///@description 项目通用 搜索框text展示样式

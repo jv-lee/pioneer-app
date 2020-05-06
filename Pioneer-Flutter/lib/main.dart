@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pioneer/theme/theme_colors.dart';
-import 'package:pioneer/view/page/search/search.dart';
+import 'package:pioneer_flutter/theme/theme_colors.dart';
+import 'package:pioneer_flutter/view/page/search/search.dart';
 
 import 'view/page/main/main.dart';
 
