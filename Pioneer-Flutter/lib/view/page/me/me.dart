@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer/view/page/me/me_content.dart';
+import 'package:pioneer/view/page/me/me_toolbar.dart';
 
 /// @author jv.lee
 /// @description 主页-我的页面
@@ -17,11 +19,9 @@ class MeState extends State<MePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.yellow,
-      child: Center(
-        child: Text('this is MePage.'),
-      ),
-    );
+    return Flex(direction: Axis.vertical,children: <Widget>[
+      Expanded(flex:0,child: MeToolbar(),),
+      Expanded(flex:1,child: MeContent(),),
+    ],);
   }
 }
