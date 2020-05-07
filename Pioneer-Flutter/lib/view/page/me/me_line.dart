@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pioneer_flutter/theme/theme_icons.dart';
 
 class MeLine extends StatelessWidget {
   MeLine(

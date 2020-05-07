@@ -18,8 +18,6 @@ class MeContentState extends State<MeContent> {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).backgroundColor,
-      child: ConstrainedBox(
-        constraints: BoxConstraints.expand(),
         child: Column(
           children: <Widget>[
             //消息中心
@@ -104,7 +102,6 @@ class MeContentState extends State<MeContent> {
                     color: Theme.of(context).primaryColor)),
           ],
         ),
-      ),
     );
   }
 }

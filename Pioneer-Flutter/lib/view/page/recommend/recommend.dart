@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/view/page/recommend/recommend_toolbar.dart';
 
 /// @author jv.lee
 /// @description 主页-推荐页面
@@ -18,9 +19,11 @@ class RecommendState extends State<RecommendPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey,
-      child: Center(
-        child: Text('this is RecommendPage.'),
+      color: Theme.of(context).backgroundColor,
+      child: Column(
+        children: <Widget>[
+          RecommendToolbar()
+        ],
       ),
     );
   }
