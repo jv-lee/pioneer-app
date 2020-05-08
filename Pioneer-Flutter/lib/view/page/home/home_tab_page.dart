@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
-import 'package:pioneer_flutter/view/widget/clear_thme.dart';
+import 'package:pioneer_flutter/view/widget/clear_theme.dart';
 import 'package:pioneer_flutter/view/widget/temp_color_page.dart';
 
 class HomeTabPage extends StatefulWidget {

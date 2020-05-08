@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_banner_swiper/flutter_banner_swiper.dart';
 import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
+import 'package:pioneer_flutter/view/widget/banner_page.dart';
 
 class RecommendContentBanner extends StatefulWidget {
   @override
@@ -13,7 +13,6 @@ class RecommendContentBanner extends StatefulWidget {
 
 class RecommendContentBannerState extends State<RecommendContentBanner> {
   List<Data> datas = List<Data>();
-  var bannerIndex = 0;
 
   @override
   void initState() {
@@ -31,8 +30,8 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
 
   @override
   Widget build(BuildContext context) {
-    return BannerSwiper(
-      height: 160,
+    return BannerPage(
+      height: 120,
       width: 54,
       length: datas.length,
       autoLoop: true,
@@ -51,13 +50,10 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(6)),
       ),
-      getwidget: (index) {
-        if (bannerIndex == datas.length) {
-          bannerIndex = 0;
-        }
+      getWidget: (index) {
         return Container(
           child: Image.network(
-            datas[bannerIndex++].image,
+            datas[index].image,
             fit: BoxFit.cover,
           ),
         );
