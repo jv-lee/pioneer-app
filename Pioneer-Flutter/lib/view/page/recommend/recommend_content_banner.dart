@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_banner_swiper/flutter_banner_swiper.dart';
 import 'package:pioneer_flutter/http/http_manager.dart';
-import 'package:pioneer_flutter/model/BannerEntity.dart';
+import 'package:pioneer_flutter/model/banner_entity.dart';
 
 class RecommendContentBanner extends StatefulWidget {
   @override

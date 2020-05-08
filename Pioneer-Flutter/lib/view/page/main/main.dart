@@ -41,8 +41,10 @@ class MainState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light, child: _pageList[_tabIndex]),
+      body: IndexedStack(
+        index: _tabIndex,
+        children: _pageList,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(
