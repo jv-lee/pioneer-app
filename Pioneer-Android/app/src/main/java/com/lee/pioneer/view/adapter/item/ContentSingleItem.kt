@@ -17,9 +17,9 @@ import com.lee.pioneer.tools.ViewTools
  * @date 2020/3/27
  * @description 内容item 单图样式
  */
-class ContentSignItem : LeeViewItem<Content> {
+class ContentSingleItem : LeeViewItem<Content> {
     override fun getItemLayout(): Int {
-        return R.layout.item_content_sign
+        return R.layout.item_content_single
     }
 
     override fun openClick(): Boolean {

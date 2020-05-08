@@ -4,7 +4,7 @@ import android.content.Context
 import com.lee.library.adapter.LeeViewAdapter
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.view.adapter.item.ContentMultipleItem
-import com.lee.pioneer.view.adapter.item.ContentSignItem
+import com.lee.pioneer.view.adapter.item.ContentSingleItem
 import com.lee.pioneer.view.adapter.item.ContentTextItem
 
 /**
@@ -16,7 +16,7 @@ class ContentAdapter(context: Context, data: ArrayList<Content>) :
     LeeViewAdapter<Content>(context, data) {
 
     init {
-        addItemStyles(ContentSignItem())
+        addItemStyles(ContentSingleItem())
         addItemStyles(ContentMultipleItem())
         addItemStyles(ContentTextItem())
     }

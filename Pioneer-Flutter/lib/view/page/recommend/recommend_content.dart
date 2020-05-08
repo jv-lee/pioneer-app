@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/view/item/content_text_item.dart';
 import 'package:pioneer_flutter/view/page/recommend/recommend_content_banner.dart';
 
 class RecommendContent extends StatefulWidget {
@@ -31,12 +32,7 @@ class RecommendContentState extends State<RecommendContent> {
             if (index == 0) {
               return RecommendContentBanner();
             }
-            return Container(
-              color: index % 2 == 0 ? Colors.red : Colors.greenAccent,
-              child: Center(
-                child: Text('index - $index'),
-              ),
-            );
+            return ContentTextItem();
           }),
     );
   }
