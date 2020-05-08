@@ -10,7 +10,6 @@ class RecommendContent extends StatefulWidget {
 }
 
 class RecommendContentState extends State<RecommendContent> {
-
   var _itemCount = 0;
 
   @override
@@ -24,9 +23,7 @@ class RecommendContentState extends State<RecommendContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme
-          .of(context)
-          .backgroundColor,
+      color: Theme.of(context).backgroundColor,
       child: ListView.builder(
           padding: EdgeInsets.all(0),
           itemCount: _itemCount,

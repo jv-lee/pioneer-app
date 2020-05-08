@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 import 'package:pioneer_flutter/view/widget/banner_page.dart';
@@ -30,34 +31,34 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
 
   @override
   Widget build(BuildContext context) {
-    return BannerPage(
-      height: 120,
-      width: 54,
-      length: datas.length,
-      autoLoop: true,
-      spaceMode: false,
-      normalWidget: Container(
-        width: 6,
-        height: 6,
-        margin: EdgeInsets.only(left: 2, right: 2),
-        decoration: BoxDecoration(
-            color: Colors.black38, borderRadius: BorderRadius.circular(6)),
-      ),
-      selectorWidget: Container(
-        width: 6,
-        height: 6,
-        margin: EdgeInsets.only(left: 2, right: 2),
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(6)),
-      ),
-      getWidget: (index) {
-        return Container(
-          child: Image.network(
-            datas[index].image,
-            fit: BoxFit.cover,
-          ),
-        );
-      },
+    return Container(
+      height: 160,
+      child: buildBanner(),
     );
+  }
+
+  Widget buildBanner() {
+    if (datas.length == 0) {
+      return Center(
+        child: Text('加载中...'),
+      );
+    } else {
+      return Swiper(
+          autoplay: true,
+          duration: 300,
+          itemCount: datas.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Image.network(
+              datas[index].image,
+              fit: BoxFit.cover,
+            );
+          },
+          pagination: SwiperPagination(
+              builder: DotSwiperPaginationBuilder(
+                  activeSize: 6,
+                  size: 6,
+                  color: Colors.black54,
+                  activeColor: Colors.white)));
+    }
   }
 }
