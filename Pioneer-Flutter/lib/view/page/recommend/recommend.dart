@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/view/page/recommend/recommend_content.dart';
 import 'package:pioneer_flutter/view/page/recommend/recommend_toolbar.dart';
 
 /// @author jv.lee
@@ -18,13 +19,18 @@ class RecommendState extends State<RecommendPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).backgroundColor,
-      child: Column(
-        children: <Widget>[
-          RecommendToolbar()
-        ],
-      ),
+    return Flex(
+      direction: Axis.vertical,
+      children: <Widget>[
+        Expanded(
+          flex: 0,
+          child: RecommendToolbar(),
+        ),
+        Expanded(
+          flex: 1,
+          child: RecommendContent(),
+        )
+      ],
     );
   }
 }

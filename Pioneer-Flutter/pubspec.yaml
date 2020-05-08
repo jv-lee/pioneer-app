@@ -11,6 +11,9 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
+  flutter_banner_swiper: ^0.1.4
+  dio: 3.0.9
+  toast: ^0.1.5
 
 dev_dependencies:
   flutter_test:
