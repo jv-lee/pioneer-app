@@ -37,4 +37,7 @@ class ThemeStrings {
   static const MENU_SHARED = "分享";
   static const MENU_COLLECT_COMPLETED = "已收藏该内容";
   static const MENU_COLLECT_COMPLETE = "内容收藏成功";
+
+  static const CODE = "这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，";
+
 }

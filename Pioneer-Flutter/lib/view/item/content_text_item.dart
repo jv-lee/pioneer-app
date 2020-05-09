@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/theme/theme_strings.dart';
 
 class ContentTextItem extends StatelessWidget {
   @override
@@ -16,7 +17,7 @@ class ContentTextItem extends StatelessWidget {
               Expanded(
                 flex: 0,
                 child: Text(
-                  'ahtorName',
+                  'author',
                   style: TextStyle(
                       fontSize: ThemeDimens.font_size_small,
                       color: Theme.of(context).primaryColorDark),
@@ -28,14 +29,26 @@ class ContentTextItem extends StatelessWidget {
               Expanded(
                 flex: 0,
                 child: Text(
-                  'address',
+                  'category',
                   style: TextStyle(
                       fontSize: ThemeDimens.font_size_small,
                       color: Theme.of(context).primaryColorDark),
                 ),
               )
             ],
-          )
+          ),
+          Container(
+              margin: EdgeInsets.only(top: ThemeDimens.margin_large),
+              child: Text(
+                ThemeStrings.CODE,
+                style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                  fontSize: ThemeDimens.font_size_medium,
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ))
         ],
       ),
     );
