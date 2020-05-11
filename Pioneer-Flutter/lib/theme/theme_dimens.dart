@@ -1,7 +1,7 @@
 class ThemeDimens {
 //全局通用
   static const margin_item = 8.0;
-  static const margin_small = 4;
+  static const margin_small = 4.0;
   static const margin_medium = 6;
   static const margin_large = 8.0;
   static const padding_item = 16.0;

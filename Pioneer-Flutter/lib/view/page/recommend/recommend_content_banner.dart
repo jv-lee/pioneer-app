@@ -32,7 +32,7 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160,
+      height: 180,
       child: buildBanner(),
     );
   }
