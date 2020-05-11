@@ -51,18 +51,19 @@ class ContentTextItem extends StatelessWidget {
                     color: Theme.of(context).accentColor,
                     fontSize: ThemeDimens.font_size_medium,
                     fontWeight: FontWeight.bold,
-                  ))),
+                  ),
+                  strutStyle:
+                      StrutStyle(forceStrutHeight: true, leading: 0.1))),
           Container(
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(top: ThemeDimens.margin_small),
-            child: Text(
-              ThemeStrings.CODE,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: Theme.of(context).primaryColorDark,
-                  fontSize: ThemeDimens.font_size_small),
-            ),
+            child: Text(ThemeStrings.CODE,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: Theme.of(context).primaryColorDark,
+                    fontSize: ThemeDimens.font_size_small),
+                strutStyle: StrutStyle(forceStrutHeight: true, leading: 0.1)),
           ),
           Container(
             margin: EdgeInsets.only(top: ThemeDimens.margin_large),

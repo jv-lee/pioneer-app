@@ -41,27 +41,62 @@ class ContentSingleItem extends StatelessWidget {
             ],
           ),
           Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(top: ThemeDimens.margin_large),
-              child: Text('WanAndorid',
-                  textAlign: TextAlign.start,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontSize: ThemeDimens.font_size_medium,
-                    fontWeight: FontWeight.bold,
-                  ))),
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: EdgeInsets.only(top: ThemeDimens.margin_small),
-            child: Text(
-              ThemeStrings.CODE,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: Theme.of(context).primaryColorDark,
-                  fontSize: ThemeDimens.font_size_small),
+            margin: EdgeInsets.only(top: ThemeDimens.margin_large),
+            height: ThemeDimens.item_content_picture_height,
+            child: Flex(
+              direction: Axis.horizontal,
+              children: <Widget>[
+                Expanded(
+                  flex: 0,
+                  child: Container(
+                    margin: EdgeInsets.only(right: ThemeDimens.margin_medium),
+                    height: ThemeDimens.item_content_picture_height,
+                    width: ThemeDimens.item_content_picture_width,
+                    color: Colors.red,
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Flex(
+                    direction: Axis.vertical,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 0,
+                        child: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text('ThemeStrings.CODE',
+                                textAlign: TextAlign.start,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Theme.of(context).accentColor,
+                                  fontSize: ThemeDimens.font_size_medium,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                strutStyle: StrutStyle(
+                                    forceStrutHeight: true, leading: 0.1))),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          margin:
+                              EdgeInsets.only(top: ThemeDimens.margin_small),
+                          alignment: Alignment.centerLeft,
+                          child: Text(ThemeStrings.CODE,
+                              textAlign: TextAlign.start,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: ThemeDimens.font_size_small),
+                              strutStyle: StrutStyle(
+                                  forceStrutHeight: true, leading: 0.1)),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           Container(

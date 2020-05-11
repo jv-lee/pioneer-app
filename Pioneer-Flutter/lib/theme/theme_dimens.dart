@@ -2,7 +2,7 @@ class ThemeDimens {
 //全局通用
   static const margin_item = 8.0;
   static const margin_small = 4.0;
-  static const margin_medium = 6;
+  static const margin_medium = 6.0;
   static const margin_large = 8.0;
   static const padding_item = 16.0;
   static const padding_small = 4.0;
@@ -22,8 +22,8 @@ class ThemeDimens {
 
 //itemContent
   static const item_content_picture_radius = 4;
-  static const item_content_picture_width = 106;
-  static const item_content_picture_height = 78;
+  static const item_content_picture_width = 106.0;
+  static const item_content_picture_height = 78.0;
 
 //itemGirl
   static const item_girl_card_size = 300;
