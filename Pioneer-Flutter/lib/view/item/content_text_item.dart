@@ -9,6 +9,7 @@ class ContentTextItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: ThemeDimens.margin_item),
       padding: EdgeInsets.all(ThemeDimens.padding_item),
       color: Theme.of(context).canvasColor,
       child: Column(
@@ -72,17 +73,22 @@ class ContentTextItem extends StatelessWidget {
                   child: Icon(
                     ThemeIcons.like,
                     size: 14,
+                    color: Theme.of(context).primaryColor,
                   ),
                   margin: EdgeInsets.only(right: 3),
                 ),
                 Text(
                   '点赞',
-                  style: TextStyle(fontSize: ThemeDimens.font_size_small_x),
+                  style: TextStyle(
+                    fontSize: ThemeDimens.font_size_small_x,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 Container(
                   child: Icon(
                     ThemeIcons.like,
                     size: 14,
+                    color: Theme.of(context).primaryColor,
                   ),
                   margin: EdgeInsets.only(right: 3, left: 3),
                 ),
@@ -90,6 +96,7 @@ class ContentTextItem extends StatelessWidget {
                   '浏览',
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
                 Spacer(
@@ -97,7 +104,10 @@ class ContentTextItem extends StatelessWidget {
                 ),
                 Text(
                   '昨天',
-                  style: TextStyle(fontSize: ThemeDimens.font_size_small_x),
+                  style: TextStyle(
+                    fontSize: ThemeDimens.font_size_small_x,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 )
               ],
             ),

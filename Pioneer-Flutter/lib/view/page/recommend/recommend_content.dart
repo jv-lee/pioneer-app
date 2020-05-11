@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
+import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
 import 'package:pioneer_flutter/view/page/recommend/recommend_content_banner.dart';
 
@@ -17,7 +19,7 @@ class RecommendContentState extends State<RecommendContent> {
   void initState() {
     super.initState();
     setState(() {
-      _itemCount = 2;
+      _itemCount = 4;
     });
   }
 
@@ -31,6 +33,12 @@ class RecommendContentState extends State<RecommendContent> {
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return RecommendContentBanner();
+            }
+            if (index == 1) {
+              return ContentSingleItem();
+            }
+            if (index == 2) {
+              return ContentMultipleItem();
             }
             return ContentTextItem();
           }),
