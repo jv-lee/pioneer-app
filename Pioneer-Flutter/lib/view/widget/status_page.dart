@@ -6,9 +6,18 @@ enum StatusPageEnum { loading, empty, error, data }
 class StatusPage extends StatefulWidget {
   final StatusPageEnum status;
   final Widget child;
+  final Widget loading;
+  final Widget empty;
+  final Widget error;
   final Function reLoadFun;
 
-  StatusPage({this.child, this.status, this.reLoadFun});
+  StatusPage(
+      {this.status,
+      this.child,
+      this.loading,
+      this.empty,
+      this.error,
+      this.reLoadFun});
 
   @override
   State<StatefulWidget> createState() {
@@ -25,15 +34,13 @@ class StatusPageState extends State<StatusPage> {
   Widget buildWidget(BuildContext context) {
     switch (widget.status == null ? StatusPageEnum.loading : widget.status) {
       case StatusPageEnum.loading:
-        return buildLoading(context);
+        return widget.loading == null ? buildLoading(context) : widget.loading;
       case StatusPageEnum.empty:
-        return buildEmpty(context);
+        return widget.empty == null ? buildEmpty(context) : widget.empty;
       case StatusPageEnum.error:
-        return buildError(context);
+        return widget.error == null ? buildError(context) : widget.error;
       case StatusPageEnum.data:
-        return widget.child == null
-            ? Container(child: Text('child == null'))
-            : widget.child;
+        return widget.child == null ? buildData(context) : widget.child;
       default:
         return buildLoading(context);
     }
@@ -73,5 +80,9 @@ class StatusPageState extends State<StatusPage> {
         ),
       ),
     );
+  }
+
+  Widget buildData(BuildContext context) {
+    return Container(child: Text('child == null'));
   }
 }
