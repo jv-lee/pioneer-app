@@ -123,7 +123,7 @@ class ContentMultipleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3),
                 ),
                 Text(
-                  '点赞',
+                  ThemeStrings.ITEM_LIKE_TEXT,
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,
@@ -138,7 +138,7 @@ class ContentMultipleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3, left: 3),
                 ),
                 Text(
-                  '浏览',
+                  ThemeStrings.ITEM_VIEW_TEXT,
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,
