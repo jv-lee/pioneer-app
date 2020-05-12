@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pioneer_flutter/model/content_entity.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
 
 class ContentSingleItem extends StatelessWidget {
+
+  ContentSingleItem({this.data}):super();
+
+  final ContentData data;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +26,7 @@ class ContentSingleItem extends StatelessWidget {
               Expanded(
                 flex: 0,
                 child: Text(
-                  'author',
+                  data.author,
                   style: TextStyle(
                       fontSize: ThemeDimens.font_size_small,
                       color: Theme.of(context).primaryColorDark),
@@ -32,7 +38,7 @@ class ContentSingleItem extends StatelessWidget {
               Expanded(
                 flex: 0,
                 child: Text(
-                  'category',
+                  data.category,
                   style: TextStyle(
                       fontSize: ThemeDimens.font_size_small,
                       color: Theme.of(context).primaryColorDark),
@@ -64,7 +70,7 @@ class ContentSingleItem extends StatelessWidget {
                         flex: 0,
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: Text('ThemeStrings.CODE',
+                            child: Text(data.title,
                                 textAlign: TextAlign.start,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -82,7 +88,7 @@ class ContentSingleItem extends StatelessWidget {
                           margin:
                               EdgeInsets.only(top: ThemeDimens.margin_small),
                           alignment: Alignment.centerLeft,
-                          child: Text(ThemeStrings.CODE,
+                          child: Text(data.desc,
                               textAlign: TextAlign.start,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -113,7 +119,7 @@ class ContentSingleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3),
                 ),
                 Text(
-                  ThemeStrings.ITEM_LIKE_TEXT,
+                  data.likeCounts == 0 ? ThemeStrings.ITEM_LIKE_TEXT : data.likeCounts.toString(),
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,
@@ -128,7 +134,7 @@ class ContentSingleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3, left: 3),
                 ),
                 Text(
-                  ThemeStrings.ITEM_VIEW_TEXT,
+                  data.views == 0 ? ThemeStrings.ITEM_VIEW_TEXT : data.views.toString(),
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,

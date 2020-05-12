@@ -5,6 +5,10 @@ import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 
 class RecommendContentBanner extends StatefulWidget {
+  final List<BannerData> data;
+
+  RecommendContentBanner({this.data}):super();
+
   @override
   State<StatefulWidget> createState() {
     return RecommendContentBannerState();
@@ -12,20 +16,10 @@ class RecommendContentBanner extends StatefulWidget {
 }
 
 class RecommendContentBannerState extends State<RecommendContentBanner> {
-  List<BannerData> datas = List<BannerData>();
 
   @override
   void initState() {
     super.initState();
-    getBannerDate();
-  }
-
-  getBannerDate() async {
-    var response = await HttpManager.instance.getDio().get('banners');
-    var banner = BannerEntity.fromJson(response.data);
-    setState(() {
-      datas.addAll(banner.data);
-    });
   }
 
   @override
@@ -37,7 +31,7 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
   }
 
   Widget buildBanner() {
-    if (datas.length == 0) {
+    if (widget.data == null) {
       return Center(
         child: Text('加载中...'),
       );
@@ -45,10 +39,10 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
       return Swiper(
           autoplay: true,
           duration: 300,
-          itemCount: datas.length,
+          itemCount: widget.data.length,
           itemBuilder: (BuildContext context, int index) {
             return Image.network(
-              datas[index].image,
+              widget.data[index].image,
               fit: BoxFit.cover,
             );
           },
