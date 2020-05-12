@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/http/http_manager.dart';
+import 'package:pioneer_flutter/model/content_entity.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
@@ -16,48 +18,50 @@ class RecommendContent extends StatefulWidget {
 }
 
 class RecommendContentState extends State<RecommendContent> {
-  var _itemCount = 0;
+  int _headCount = 1;
+  List<ContentData> datas = List<ContentData>();
+
   StatusPageEnum _status = StatusPageEnum.loading;
 
   @override
   void initState() {
     super.initState();
+    getContentData();
+  }
+
+  getContentData() async {
+    var response = await HttpManager.instance
+        .getDio()
+        .get('hot/views/category/GanHuo/count/20');
+    var content = ContentEntity.fromJson(response.data);
     setState(() {
-      _itemCount = 4;
+      datas.addAll(content.data);
+      _status = StatusPageEnum.data;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme
-          .of(context)
-          .backgroundColor,
-      child: Flex(direction: Axis.vertical,children: <Widget>[
-        Expanded(flex: 0,child: CupertinoButton(child: Text('title'), onPressed: () {
-          setState(() {
-            _status = StatusPageEnum.data;
-          });
-        },),),
-        Expanded(flex: 1,child: StatusPage(
-          status: _status,
-          child: ListView.builder(
-              padding: EdgeInsets.all(0),
-              itemCount: _itemCount,
-              itemBuilder: (BuildContext context, int index) {
-                if (index == 0) {
-                  return RecommendContentBanner();
-                }
-                if (index == 1) {
-                  return ContentSingleItem();
-                }
-                if (index == 2) {
-                  return ContentMultipleItem();
-                }
-                return ContentTextItem();
-              }),
-        ),)
-      ],),
+      color: Theme.of(context).backgroundColor,
+      child: StatusPage(
+        status: _status,
+        child: ListView.builder(
+            padding: EdgeInsets.all(0),
+            itemCount: _headCount + datas.length,
+            itemBuilder: (BuildContext context, int index) {
+              if(index == 0) {
+                return RecommendContentBanner();
+              }
+              if (index == 1) {
+                return ContentSingleItem();
+              }
+              if (index == 2) {
+                return ContentMultipleItem();
+              }
+              return ContentTextItem();
+            }),
+      )
     );
   }
 }

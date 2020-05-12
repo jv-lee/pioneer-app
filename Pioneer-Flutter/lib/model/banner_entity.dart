@@ -1,14 +1,14 @@
 class BannerEntity {
-  List<Data> data;
+  List<BannerData> data;
   int status;
 
   BannerEntity({this.data, this.status});
 
   BannerEntity.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = new List<BannerData>();
       json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
+        data.add(new BannerData.fromJson(v));
       });
     }
     status = json['status'];
@@ -24,14 +24,14 @@ class BannerEntity {
   }
 }
 
-class Data {
+class BannerData {
   String image;
   String title;
   String url;
 
-  Data({this.image, this.title, this.url});
+  BannerData({this.image, this.title, this.url});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  BannerData.fromJson(Map<String, dynamic> json) {
     image = json['image'];
     title = json['title'];
     url = json['url'];

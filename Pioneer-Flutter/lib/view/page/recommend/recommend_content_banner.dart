@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
-import 'package:pioneer_flutter/view/widget/banner_page.dart';
 
 class RecommendContentBanner extends StatefulWidget {
   @override
@@ -13,7 +12,7 @@ class RecommendContentBanner extends StatefulWidget {
 }
 
 class RecommendContentBannerState extends State<RecommendContentBanner> {
-  List<Data> datas = List<Data>();
+  List<BannerData> datas = List<BannerData>();
 
   @override
   void initState() {
