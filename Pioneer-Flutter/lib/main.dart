@@ -18,6 +18,7 @@ class PioneerApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
             color: ThemeColors.lightColorItem,
             elevation: 0,
+            brightness: Brightness.light,
             iconTheme: IconThemeData(color: ThemeColors.lightColorAccent),
             textTheme: TextTheme(
                 title: TextStyle(color: ThemeColors.lightColorAccent))),
@@ -39,6 +40,7 @@ class PioneerApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
             color: ThemeColors.darkColorItem,
             elevation: 0,
+            brightness: Brightness.dark,
             iconTheme: IconThemeData(color: ThemeColors.darkColorAccent),
             textTheme: TextTheme(
                 title: TextStyle(color: ThemeColors.darkColorAccent))),
