@@ -143,7 +143,6 @@ class SuperListViewState extends State<SuperListView> {
     switch (widget.itemStatus) {
       case ItemStatus.loading:
         return buildItemLoading(context);
-        break;
       case ItemStatus.empty:
         return buildItemEmpty(context);
       case ItemStatus.error:
