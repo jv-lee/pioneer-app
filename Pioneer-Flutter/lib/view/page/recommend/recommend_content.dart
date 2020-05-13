@@ -17,7 +17,8 @@ class RecommendContent extends StatefulWidget {
 }
 
 class RecommendContentState extends State<RecommendContent> {
-  int _headCount = 1;
+  int _headerCount = 1;
+  int _footerCount = 1;
   List<ContentData> contentData = List<ContentData>();
   List<BannerData> bannerData = List<BannerData>();
   StatusPageEnum _status = StatusPageEnum.loading;
@@ -57,14 +58,25 @@ class RecommendContentState extends State<RecommendContent> {
           status: _status,
           child: ListView.builder(
               padding: EdgeInsets.all(0),
-              itemCount: _headCount + contentData.length,
+              itemCount: _headerCount + contentData.length + _footerCount,
               itemBuilder: (BuildContext context, int index) {
+                print('index - $index');
                 if (index == 0) {
-                  return RecommendContentBanner(
+                  return GestureDetector(child: RecommendContentBanner(
                     data: bannerData,
+                  ),onTapDown: (details){
+                    getContentData();
+                  },);
+                }
+                if (index == (contentData.length + 1)) {
+                  return Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Center(
+                      child: Text('没有更多了'),
+                    ),
                   );
                 }
-                var entity = contentData[index - _headCount];
+                var entity = contentData[index - _headerCount];
                 if (entity.images.length == 0) {
                   return ContentTextItem(
                     data: entity,
