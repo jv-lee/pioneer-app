@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-enum StatusPageEnum { loading, empty, error, data }
+import 'package:pioneer_flutter/view/widget/status/status.dart';
 
 class StatusPage extends StatefulWidget {
-  final StatusPageEnum status;
+  final PageStatus status;
   final Widget child;
   final Widget loading;
   final Widget empty;
@@ -32,14 +31,14 @@ class StatusPageState extends State<StatusPage> {
   }
 
   Widget buildWidget(BuildContext context) {
-    switch (widget.status == null ? StatusPageEnum.loading : widget.status) {
-      case StatusPageEnum.loading:
+    switch (widget.status == null ? PageStatus.loading : widget.status) {
+      case PageStatus.loading:
         return widget.loading == null ? buildLoading(context) : widget.loading;
-      case StatusPageEnum.empty:
+      case PageStatus.empty:
         return widget.empty == null ? buildEmpty(context) : widget.empty;
-      case StatusPageEnum.error:
+      case PageStatus.error:
         return widget.error == null ? buildError(context) : widget.error;
-      case StatusPageEnum.data:
+      case PageStatus.data:
         return widget.child == null ? buildData(context) : widget.child;
       default:
         return buildLoading(context);

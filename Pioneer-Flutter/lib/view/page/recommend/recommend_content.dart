@@ -7,7 +7,8 @@ import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
 import 'package:pioneer_flutter/view/page/recommend/recommend_content_banner.dart';
-import 'package:pioneer_flutter/view/widget/status_page.dart';
+import 'package:pioneer_flutter/view/widget/status/status.dart';
+import 'package:pioneer_flutter/view/widget/status/status_page.dart';
 
 class RecommendContent extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class RecommendContentState extends State<RecommendContent> {
   int _footerCount = 1;
   List<ContentData> contentData = List<ContentData>();
   List<BannerData> bannerData = List<BannerData>();
-  StatusPageEnum _status = StatusPageEnum.loading;
+  PageStatus _status = PageStatus.loading;
 
   @override
   void initState() {
@@ -45,7 +46,7 @@ class RecommendContentState extends State<RecommendContent> {
     var content = ContentEntity.fromJson(response.data);
     setState(() {
       contentData.addAll(content.data);
-      _status = StatusPageEnum.data;
+      _status = PageStatus.data;
     });
   }
 
