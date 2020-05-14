@@ -64,7 +64,6 @@ class RecommendContentState extends State<RecommendContent> {
               padding: EdgeInsets.all(0),
               itemCount: _headerCount + contentData.length + _footerCount,
               itemBuilder: (BuildContext context, int index) {
-                print('index - $index');
                 if (index == 0) {
                   return GestureDetector(child: RecommendContentBanner(
                     data: bannerData,

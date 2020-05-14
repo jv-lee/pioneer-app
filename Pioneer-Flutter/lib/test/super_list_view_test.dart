@@ -15,26 +15,50 @@ class SuperListViewTest extends StatefulWidget {
 
 class _SuperListViewTestState extends State<SuperListViewTest> {
   StatusController _statusController;
+  List<String> data = List<String>();
+
+  int page = 1;
+
+  loadData(int page) {
+    Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        for (var i = 0; i < 10; i++) {
+          data.add("item - index-$i");
+        }
+        if (page == 1) {
+          _statusController.pageComplete().itemLoading();
+        } else if (page == 5) {
+          _statusController.itemComplete();
+        } else {
+          _statusController.itemLoading();
+        }
+      });
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _statusController = StatusController(
-        pageStatus: PageStatus.error, itemStatus: ItemStatus.empty);
+        pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
+    loadData(page);
   }
 
   @override
   Widget build(BuildContext context) {
     return SuperListView(
       statusController: _statusController,
-      itemCount: 30,
+      itemCount: data.length,
       onPageReload: () {
-        _statusController.pageComplete();
-        _statusController.itemError();
+        _statusController.pageComplete().itemError();
       },
       onItemReload: () {
         _statusController.itemComplete();
       },
+      onLoadMore: () {
+        loadData(++page);
+      },
+      isLoadMore: true,
       headerChildren: <Widget>[
         Container(
           color: Colors.orange,
@@ -67,9 +91,9 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
         return Container(
           margin: EdgeInsets.only(bottom: 10),
           color: Colors.red,
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(30),
           child: Center(
-            child: Text('this is item $index'),
+            child: Text(data[index]),
           ),
         );
       },

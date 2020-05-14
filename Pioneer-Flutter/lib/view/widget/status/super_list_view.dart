@@ -11,6 +11,7 @@ class SuperListView extends StatefulWidget {
   final int itemCount;
   final Function onPageReload;
   final Function onItemReload;
+  final Function onLoadMore;
   final IndexedWidgetBuilder itemBuilder;
   final Widget pageLoading;
   final Widget pageEmpty;
@@ -21,12 +22,14 @@ class SuperListView extends StatefulWidget {
   final List<Widget> headerChildren;
   final List<Widget> footerChildren;
   final int itemMoreCount = 1;
+  final bool isLoadMore;
 
   SuperListView(
       {@required this.statusController,
       this.itemCount = 0,
       this.onPageReload,
       this.onItemReload,
+      this.onLoadMore,
       this.itemBuilder,
       this.pageLoading,
       this.pageEmpty,
@@ -34,6 +37,7 @@ class SuperListView extends StatefulWidget {
       this.itemLoading,
       this.itemError,
       this.itemNoMore,
+      this.isLoadMore = false,
       this.headerChildren = const <Widget>[],
       this.footerChildren = const <Widget>[]})
       : super();
@@ -161,6 +165,11 @@ class SuperListViewState extends State<SuperListView> {
           }
 
           //创建loadMoreItem
+          if (widget.isLoadMore &&
+              widget.onLoadMore != null &&
+              widget.statusController.itemStatus != ItemStatus.noMore) {
+            widget.onLoadMore();
+          }
           return buildItemWidget(context);
         });
   }

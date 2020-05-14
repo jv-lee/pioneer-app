@@ -13,43 +13,52 @@ class StatusController extends ChangeNotifier {
   PageStatus pageStatus;
   ItemStatus itemStatus;
 
-  pageLoading() {
+  StatusController pageLoading() {
     this.pageStatus = PageStatus.loading;
     notifyListeners();
+    return this;
   }
 
-  pageError() {
+  StatusController pageError() {
     this.pageStatus = PageStatus.error;
     notifyListeners();
+    return this;
   }
 
-  pageEmpty() {
+  StatusController pageEmpty() {
     this.pageStatus = PageStatus.empty;
     notifyListeners();
+    return this;
   }
 
-  pageComplete() {
+  StatusController pageComplete() {
     this.pageStatus = PageStatus.data;
     notifyListeners();
+    return this;
   }
 
-  itemLoading() {
+  StatusController itemLoading() {
     this.itemStatus = ItemStatus.loading;
     notifyListeners();
+    return this;
   }
 
-  itemComplete() {
+  StatusController itemComplete() {
     this.itemStatus = ItemStatus.noMore;
     notifyListeners();
+    return this;
   }
 
-  itemError() {
+  StatusController itemError() {
     this.itemStatus = ItemStatus.error;
     notifyListeners();
+    return this;
   }
 
-  itemEmpty() {
+  StatusController itemEmpty() {
     this.itemStatus = ItemStatus.empty;
     notifyListeners();
+    return this;
   }
+
 }
