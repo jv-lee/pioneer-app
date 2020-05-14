@@ -3,7 +3,8 @@ import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
 
 /// @author jv.lee
-/// @description 主页-妹子页面
+/// @date 2020/4/30
+/// @description 主页-妹子TAB
 class GirlPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

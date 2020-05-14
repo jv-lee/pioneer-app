@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// @author jv.lee
+/// @date 2020/4/30
 /// @description 状态栏操作工具
 class StatusTools {
   //android状态栏沉浸式设置

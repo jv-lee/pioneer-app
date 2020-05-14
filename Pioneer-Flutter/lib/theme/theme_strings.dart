@@ -1,3 +1,6 @@
+/// @author jv.lee
+/// @date 2020/5/9
+/// @description
 class ThemeStrings {
   //首页导航
   static const NAV_HOME = "首页";

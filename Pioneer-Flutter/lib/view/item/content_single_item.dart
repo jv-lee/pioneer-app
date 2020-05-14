@@ -6,6 +6,9 @@ import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
 
+/// @author jv.lee
+/// @date 2020/5/13
+/// @description 列表item 单图样式
 class ContentSingleItem extends StatelessWidget {
 
   ContentSingleItem({this.data}):super();

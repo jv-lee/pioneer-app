@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description
 class ThemeIcons {
   static const IconData home = IconData(0xe619, fontFamily: 'ThemeIcons');
   static const IconData recommend = IconData(0xe6b5, fontFamily: 'ThemeIcons');

@@ -4,7 +4,8 @@ import 'home_tab_page.dart';
 import 'home_toolbar.dart';
 
 /// @author jv.lee
-/// @description 主页-主页面
+/// @date 2020/4/30
+/// @description 主页-HomeTAB
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

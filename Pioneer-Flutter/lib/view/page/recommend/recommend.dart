@@ -3,7 +3,8 @@ import 'package:pioneer_flutter/view/page/recommend/recommend_content.dart';
 import 'package:pioneer_flutter/view/page/recommend/recommend_toolbar.dart';
 
 /// @author jv.lee
-/// @description 主页-推荐页面
+/// @date 2020/5/8
+/// @description 主页-推荐TAB
 class RecommendPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

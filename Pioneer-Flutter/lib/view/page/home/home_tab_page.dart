@@ -4,6 +4,9 @@ import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/widget/clear_theme.dart';
 import 'package:pioneer_flutter/view/widget/temp_color_page.dart';
 
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 主页-HomeTAB-内部page页面
 class HomeTabPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

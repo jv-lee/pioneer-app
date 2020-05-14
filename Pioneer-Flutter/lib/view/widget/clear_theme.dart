@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// @author jv.lee
+/// @date 2020/4/30
+/// @description 清除主题样式控件
 class ClearTheme extends StatelessWidget {
   ClearTheme({Key key,this.child }) : super(key: key);
 

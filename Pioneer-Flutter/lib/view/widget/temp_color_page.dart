@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-///@author jv.lee
-///@description 临时占位pageWidget
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 临时占位pageWidget
 class TempColorPage extends StatelessWidget {
   TempColorPage({Key key, this.color}) : super(key: key);
 

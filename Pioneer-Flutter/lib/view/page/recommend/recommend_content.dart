@@ -10,6 +10,9 @@ import 'package:pioneer_flutter/view/page/recommend/recommend_content_banner.dar
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_page.dart';
 
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 主页-推荐TAB-内容组件
 class RecommendContent extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

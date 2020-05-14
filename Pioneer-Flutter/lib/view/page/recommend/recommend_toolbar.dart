@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/view/widget/search_text.dart';
 
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 主页-推荐TAB-toolbar
 class RecommendToolbar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {

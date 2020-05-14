@@ -1,3 +1,6 @@
+/// @author jv.lee
+/// @date 2020/5/12
+/// @description
 class BannerEntity {
   List<BannerData> data;
   int status;

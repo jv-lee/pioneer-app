@@ -1,3 +1,6 @@
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description
 class ThemeDimens {
 //全局通用
   static const margin_item = 8.0;

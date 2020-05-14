@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
+/// @author jv.lee
+/// @date 2020/4/30
+/// @description
 class ThemeColors {
   //亮色主题颜色
   static const lightColorPrimary = Color(0xFF9B9B9B);

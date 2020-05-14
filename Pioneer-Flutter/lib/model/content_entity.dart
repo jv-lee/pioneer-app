@@ -1,3 +1,6 @@
+/// @author jv.lee
+/// @date 2020/5/12
+/// @description
 class ContentEntity {
   String category;
   List<ContentData> data;

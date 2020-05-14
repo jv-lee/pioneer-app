@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/widget/search_text.dart';
 
-///@author jv.lee
-///@description home页面 toolbar组件
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 主页-HomeTAB-toolbar组件
 class HomeToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

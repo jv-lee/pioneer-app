@@ -3,7 +3,8 @@ import 'package:pioneer_flutter/view/page/me/me_content.dart';
 import 'package:pioneer_flutter/view/page/me/me_toolbar.dart';
 
 /// @author jv.lee
-/// @description 主页-我的页面
+/// @date 2020/4/30
+/// @description 主页-MeTAB
 class MePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

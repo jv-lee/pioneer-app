@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 主页-MeTAB-行组件
 class MeLine extends StatelessWidget {
   MeLine(
       {key,

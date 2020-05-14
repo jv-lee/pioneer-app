@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 
+/// @author jv.lee
+/// @date 2020/5/12
+/// @description
 class StatusPage extends StatefulWidget {
   final PageStatus status;
   final Widget child;

@@ -4,8 +4,9 @@ import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
 
-///@author jv.lee
-///@description 项目通用 搜索框text展示样式
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 项目通用 搜索框text展示样式
 class SearchText extends StatelessWidget {
   SearchText({Key key, this.width, this.height})
       : assert(width == null),

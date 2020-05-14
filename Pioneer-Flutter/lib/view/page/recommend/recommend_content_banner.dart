@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 
+/// @author jv.lee
+/// @date 2020/5/8
+/// @description 主页-推荐TAB-Banner组件
 class RecommendContentBanner extends StatefulWidget {
   final List<BannerData> data;
 
