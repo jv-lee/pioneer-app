@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/view/widget/load/page_load.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
@@ -15,24 +16,33 @@ class SuperListViewTest extends StatefulWidget {
 
 class _SuperListViewTestState extends State<SuperListViewTest> {
   StatusController _statusController;
-  List<String> data = List<String>();
+  PageLoad<String> _pageLoad;
 
-  int page = 1;
+  int requestCount = 0;
 
-  loadData(int page) {
-    Future.delayed(Duration(seconds: 3), () {
-      setState(() {
-        for (var i = 0; i < 10; i++) {
-          data.add("item - index-$i");
+  Future<List<String>> getData(page) async {
+    return Future.delayed(Duration(seconds: 3), () {
+      _pageLoad.pageTotal = 10;
+      var array = List<String>();
+      for (var i = 0; i < 10; i++) {
+        array.add("page - $page item - index-$i");
+      }
+      if(page == 1) {
+        if(requestCount == 0) {
+          requestCount++;
+          return null;
         }
-        if (page == 1) {
-          _statusController.pageComplete().itemLoading();
-        } else if (page == 5) {
-          _statusController.itemComplete();
-        } else {
-          _statusController.itemLoading();
+        return array;
+      }
+
+      if (page == 2) {
+        if (requestCount < 2) {
+          requestCount++;
+          return null;
         }
-      });
+        return array;
+      }
+      return array;
     });
   }
 
@@ -41,22 +51,35 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
     super.initState();
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
-    loadData(page);
+
+    _pageLoad = PageLoad<String>(
+        data: List<String>(),
+        page: 1,
+        pageTotal: 5,
+        requestData: (page) {
+          return getData(page);
+        },
+        notify: () {
+          setState(() {});
+        },
+        statusController: _statusController);
+
+    _pageLoad.loadData(false);
   }
 
   @override
   Widget build(BuildContext context) {
     return SuperListView(
       statusController: _statusController,
-      itemCount: data.length,
+      itemCount: _pageLoad.data.length,
       onPageReload: () {
-        _statusController.pageComplete().itemError();
+        _pageLoad.loadData(false);
       },
       onItemReload: () {
-        _statusController.itemComplete();
+        _pageLoad.loadData(true);
       },
       onLoadMore: () {
-        loadData(++page);
+        _pageLoad.loadData(true);
       },
       isLoadMore: true,
       headerChildren: <Widget>[
@@ -93,7 +116,7 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
           color: Colors.red,
           padding: EdgeInsets.all(30),
           child: Center(
-            child: Text(data[index]),
+            child: Text(_pageLoad.data[index]),
           ),
         );
       },

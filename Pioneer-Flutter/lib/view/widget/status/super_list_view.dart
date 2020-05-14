@@ -7,6 +7,7 @@ import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 /// @date 2020/5/13
 /// @description 扩展ListView 可添加头部Widget/底部Widget - 页面加载装 loading/error/empty/data - item加载状态 loading/error/mepty/noMore
 class SuperListView extends StatefulWidget {
+  final ScrollController scrollController;
   final StatusController statusController;
   final int itemCount;
   final Function onPageReload;
@@ -25,7 +26,8 @@ class SuperListView extends StatefulWidget {
   final bool isLoadMore;
 
   SuperListView(
-      {@required this.statusController,
+      {this.scrollController,
+      @required this.statusController,
       this.itemCount = 0,
       this.onPageReload,
       this.onItemReload,
@@ -51,6 +53,22 @@ class SuperListView extends StatefulWidget {
 class SuperListViewState extends State<SuperListView> {
   PageStatus _pageStatus;
   ItemStatus _itemStatus;
+  ScrollController _controller;
+
+  initScrollController() {
+    if (widget.scrollController != null) {
+      _controller = widget.scrollController;
+    } else {
+      _controller = ScrollController();
+    }
+    _controller.addListener(() {
+      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+        if (widget.statusController.itemStatus != ItemStatus.noMore) {
+          widget.onLoadMore();
+        }
+      }
+    });
+  }
 
   changeStatus() {
     setState(() {
@@ -65,6 +83,7 @@ class SuperListViewState extends State<SuperListView> {
     _pageStatus = widget.statusController.pageStatus;
     _itemStatus = widget.statusController.itemStatus;
     widget.statusController.addListener(changeStatus);
+    initScrollController();
   }
 
   @override
@@ -138,6 +157,7 @@ class SuperListViewState extends State<SuperListView> {
 
   Widget buildPageData(BuildContext context) {
     return ListView.builder(
+        controller: _controller,
         padding: EdgeInsets.all(0),
         itemCount: widget.itemCount +
             widget.headerChildren.length +
@@ -164,12 +184,6 @@ class SuperListViewState extends State<SuperListView> {
                 index - (widget.headerChildren.length + widget.itemCount)];
           }
 
-          //创建loadMoreItem
-          if (widget.isLoadMore &&
-              widget.onLoadMore != null &&
-              widget.statusController.itemStatus != ItemStatus.noMore) {
-            widget.onLoadMore();
-          }
           return buildItemWidget(context);
         });
   }
