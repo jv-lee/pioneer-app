@@ -27,8 +27,8 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
       for (var i = 0; i < 10; i++) {
         array.add("page - $page item - index-$i");
       }
-      if(page == 1) {
-        if(requestCount == 0) {
+      if (page == 1) {
+        if (requestCount == 0) {
           requestCount++;
           return null;
         }
@@ -51,7 +51,6 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
     super.initState();
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
-
     _pageLoad = PageLoad<String>(
         data: List<String>(),
         page: 1,
@@ -63,7 +62,6 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
           setState(() {});
         },
         statusController: _statusController);
-
     _pageLoad.loadData(false);
   }
 
@@ -89,14 +87,6 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
         ),
         Container(
           color: Colors.yellow,
-          height: 30,
-        ),
-        Container(
-          color: Colors.green,
-          height: 30,
-        ),
-        Container(
-          color: Colors.pink,
           height: 30,
         ),
       ],
