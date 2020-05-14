@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
+import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 
 /// @author jv.lee
 /// @date 2020/5/13
-/// @description
+/// @description 扩展ListView 可添加头部Widget/底部Widget - 页面加载装 loading/error/empty/data - item加载状态 loading/error/mepty/noMore
 class SuperListView extends StatefulWidget {
-  final PageStatus pageStatus;
-  final ItemStatus itemStatus;
+  final StatusController statusController;
   final int itemCount;
   final Function onPageReload;
   final Function onItemReload;
@@ -23,8 +23,7 @@ class SuperListView extends StatefulWidget {
   final int itemMoreCount = 1;
 
   SuperListView(
-      {this.pageStatus = PageStatus.data,
-      this.itemStatus = ItemStatus.empty,
+      {@required this.statusController,
       this.itemCount = 0,
       this.onPageReload,
       this.onItemReload,
@@ -46,13 +45,37 @@ class SuperListView extends StatefulWidget {
 }
 
 class SuperListViewState extends State<SuperListView> {
+  PageStatus _pageStatus;
+  ItemStatus _itemStatus;
+
+  changeStatus() {
+    setState(() {
+      _pageStatus = widget.statusController.pageStatus;
+      _itemStatus = widget.statusController.itemStatus;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageStatus = widget.statusController.pageStatus;
+    _itemStatus = widget.statusController.itemStatus;
+    widget.statusController.addListener(changeStatus);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.statusController.removeListener(changeStatus);
+  }
+
   @override
   Widget build(BuildContext context) {
     return buildPageWidget(context);
   }
 
   Widget buildPageWidget(BuildContext context) {
-    switch (widget.pageStatus) {
+    switch (_pageStatus) {
       case PageStatus.loading:
         return widget.pageLoading == null
             ? buildPageLoading(context)
@@ -143,7 +166,7 @@ class SuperListViewState extends State<SuperListView> {
   }
 
   Widget buildItemWidget(BuildContext context) {
-    switch (widget.itemStatus) {
+    switch (_itemStatus) {
       case ItemStatus.loading:
         return buildItemLoading(context);
       case ItemStatus.empty:
@@ -171,7 +194,9 @@ class SuperListViewState extends State<SuperListView> {
 
   Widget buildItemNoMore(BuildContext context) {
     return Container(
-      child: Text('没有更多了'),
+      child: Center(
+        child: Text('没有更多了'),
+      ),
     );
   }
 

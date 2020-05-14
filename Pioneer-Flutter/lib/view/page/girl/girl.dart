@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
+import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
 
 /// @author jv.lee
@@ -13,24 +14,26 @@ class GirlPage extends StatefulWidget {
 }
 
 class GirlState extends State<GirlPage> {
-
-  PageStatus _status = PageStatus.error;
+  StatusController _statusController;
 
   @override
   void initState() {
     super.initState();
+    _statusController = StatusController(
+        pageStatus: PageStatus.error, itemStatus: ItemStatus.empty);
   }
 
   @override
   Widget build(BuildContext context) {
     return SuperListView(
-      pageStatus: _status,
-      itemStatus: ItemStatus.loading,
+      statusController: _statusController,
       itemCount: 30,
-      onPageReload: (){
-        setState(() {
-          this._status = PageStatus.data;
-        });
+      onPageReload: () {
+        _statusController.pageComplete();
+        _statusController.itemError();
+      },
+      onItemReload: () {
+        _statusController.itemComplete();
       },
       headerChildren: <Widget>[
         Container(
