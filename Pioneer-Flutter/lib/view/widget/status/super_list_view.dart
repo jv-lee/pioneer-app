@@ -54,6 +54,7 @@ class SuperListViewState extends State<SuperListView> {
   PageStatus _pageStatus;
   ItemStatus _itemStatus;
   ScrollController _controller;
+  double _itemHeight = 48.0;
 
   initScrollController() {
     if (widget.scrollController != null) {
@@ -63,7 +64,8 @@ class SuperListViewState extends State<SuperListView> {
     }
     _controller.addListener(() {
       if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-        if (widget.statusController.itemStatus != ItemStatus.noMore && widget.statusController.itemStatus != ItemStatus.error) {
+        if (widget.statusController.itemStatus != ItemStatus.noMore &&
+            widget.statusController.itemStatus != ItemStatus.error) {
           widget.onLoadMore();
         }
       }
@@ -205,6 +207,7 @@ class SuperListViewState extends State<SuperListView> {
 
   Widget buildItemLoading(BuildContext context) {
     return Container(
+      height: _itemHeight,
       child: Center(
         child: CircularProgressIndicator(),
       ),
@@ -212,11 +215,14 @@ class SuperListViewState extends State<SuperListView> {
   }
 
   Widget buildItemEmpty(BuildContext context) {
-    return Container();
+    return Container(
+      height: _itemHeight,
+    );
   }
 
   Widget buildItemNoMore(BuildContext context) {
     return Container(
+      height: _itemHeight,
       child: Center(
         child: Text('没有更多了'),
       ),
@@ -225,14 +231,21 @@ class SuperListViewState extends State<SuperListView> {
 
   Widget buildItemError(BuildContext context) {
     return Container(
+      height: _itemHeight,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('data is error'),
-            CupertinoButton(
-              child: Text('Reload'),
-              onPressed: () {
+            GestureDetector(
+              child: Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                  'Reload',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+              onTapDown: (details) {
                 if (widget.onItemReload != null) {
                   widget.onItemReload();
                 }
