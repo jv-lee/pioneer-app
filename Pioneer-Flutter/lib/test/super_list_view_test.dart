@@ -20,9 +20,9 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
 
   int requestCount = 0;
 
-  Future<List<String>> getData(page) async {
+  Future<List<String>> getData(page,PageLoad pageLoad) async {
     return Future.delayed(Duration(seconds: 3), () {
-      _pageLoad.pageTotal = 10;
+      pageLoad.pageTotal = 10;
       var array = List<String>();
       for (var i = 0; i < 10; i++) {
         array.add("page - $page item - index-$i");
@@ -54,9 +54,8 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
     _pageLoad = PageLoad<String>(
         data: List<String>(),
         page: 1,
-        pageTotal: 5,
         requestData: (page) {
-          return getData(page);
+          return getData(page,_pageLoad);
         },
         notify: () {
           setState(() {});

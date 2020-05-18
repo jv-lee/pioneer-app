@@ -63,7 +63,7 @@ class SuperListViewState extends State<SuperListView> {
     }
     _controller.addListener(() {
       if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-        if (widget.statusController.itemStatus != ItemStatus.noMore) {
+        if (widget.statusController.itemStatus != ItemStatus.noMore && widget.statusController.itemStatus != ItemStatus.error) {
           widget.onLoadMore();
         }
       }
