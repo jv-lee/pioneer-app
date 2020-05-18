@@ -20,7 +20,7 @@ class HomeViewModel(application: Application) : ResponsePageViewModel(applicatio
     val categoryObservable by lazy { MutableLiveData<PageData<Category>>() }
 
     /**
-     * TODO 构建主页分类tab 子fragments  启动缓存及网络数据加载
+     *  构建主页分类tab 子fragments  启动缓存及网络数据加载
      */
     fun buildCategoryFragment() {
         cacheLaunch(

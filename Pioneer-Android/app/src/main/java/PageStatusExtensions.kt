@@ -8,11 +8,11 @@ import com.lee.pioneer.model.entity.PageData
 /**
  * @author jv.lee
  * @date 2020/3/30
- * @description TODO 分页数据状态展示 公共操作扩展执行函数
+ * @description  分页数据状态展示 公共操作扩展执行函数
  */
 
 /**
- * TODO 网络数据分页数据列表错误处理
+ *  网络数据分页数据列表错误处理
  */
 fun <T> executePageError(
     adapter: LeeViewAdapter<T>,
@@ -27,7 +27,7 @@ fun <T> executePageError(
 }
 
 /**
- * TODO 带刷新头的分页数据列表填充处理
+ *  带刷新头的分页数据列表填充处理
  */
 fun <T> executePageCompleted(
     data: PageData<T>,
@@ -75,7 +75,7 @@ fun <T> executePageCompleted(
 }
 
 /**
- * TODO 不带刷新头的分页数据列表填充处理
+ *  不带刷新头的分页数据列表填充处理
  */
 fun <T> executePageCompleted(
     data: PageData<T>,

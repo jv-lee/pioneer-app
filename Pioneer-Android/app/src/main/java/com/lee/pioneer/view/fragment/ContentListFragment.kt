@@ -78,12 +78,12 @@ class ContentListFragment :
 
     override fun bindData() {
         viewModel.apply {
-            // TODO 列表数据更新
+            //  列表数据更新
             contentListObservable.observe(this@ContentListFragment, Observer {
                 executePageCompleted(it, mAdapter, binding.refresh,diff = true)
             })
 
-            // TODO 错误回调
+            //  错误回调
             //错误处理
             failedEvent.observe(this@ContentListFragment, Observer { it ->
                 it?.message?.let { toast(it) }
