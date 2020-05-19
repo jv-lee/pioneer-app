@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
+import com.lee.library.extensions.setBackgroundAlphaCompat
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
@@ -62,10 +63,10 @@ class GirlFragment :
                 if (position == 0) {
                     linearLayoutManager.findViewByPosition(position)?.let {
                         val scale = (255.0 / it.height)
-                        binding.statusBar.background.mutate().alpha = (abs(it.top) * scale).toInt()
+                        binding.statusBar.setBackgroundAlphaCompat((abs(it.top) * scale).toInt())
                     }
                 } else {
-                    binding.statusBar.background.mutate().alpha = 255
+                    binding.statusBar.setBackgroundAlphaCompat(255)
                 }
             }
         })

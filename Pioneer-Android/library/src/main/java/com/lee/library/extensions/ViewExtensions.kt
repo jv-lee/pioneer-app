@@ -63,6 +63,18 @@ fun View.setBackgroundSelectorTintCompat(selectorId: Int) {
 }
 
 /**
+ * 设置view透明度兼容方法
+ */
+fun View.setBackgroundAlphaCompat(alpha: Int) {
+    val mutate = background.mutate()
+    if (mutate != null) {
+        mutate.alpha = alpha
+    } else {
+        background.alpha = alpha
+    }
+}
+
+/**
  * ImageView扩展函数 向下兼容Tint着色器
  */
 fun ImageView.setImageTintCompat(drawableId: Int, color: Int = 0) {
