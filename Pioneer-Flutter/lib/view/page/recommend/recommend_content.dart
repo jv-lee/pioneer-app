@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
-import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/model/hot_entity.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
@@ -46,7 +46,7 @@ class RecommendContentState extends State<RecommendContent> {
     var response = await HttpManager.instance
         .getDio()
         .get('hot/views/category/GanHuo/count/20');
-    var content = ContentEntity.fromJson(response.data);
+    var content = HotEntity.fromJson(response.data);
     setState(() {
       contentData.addAll(content.data);
       _status = PageStatus.data;
