@@ -52,7 +52,6 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
                 CacheRepository.get()
                     .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
                     .await()?.let { it ->
-                        //                        it.data.map { it.viewType = Random.nextInt() % 2 }
                         contentObservable.value = it
                     }
             },
