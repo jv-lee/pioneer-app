@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/presenter/girl_presenter.dart';
 import 'package:pioneer_flutter/view/widget/load/page_load.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
@@ -56,12 +57,34 @@ class GirlState extends State<GirlPage> {
       },
       isLoadMore: true,
       itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.only(bottom: 10),
-          color: Colors.red,
-          padding: EdgeInsets.all(30),
-          child: Center(
-            child: Text(_pageLoad.data[index].desc),
+        return Card(
+          margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
+          elevation: 10,
+          child: Container(
+            height: 300,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 220,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                            ThemeDimens.item_content_picture_radius),
+                        topRight: Radius.circular(
+                            ThemeDimens.item_content_picture_radius),
+                      ),
+                      image: DecorationImage(
+                          image: NetworkImage(_pageLoad.data[index].images[0]),
+                          fit: BoxFit.cover)),
+                ),
+                Container(
+                  height: 80,
+                  child: Center(
+                    child: Text(_pageLoad.data[index].desc),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

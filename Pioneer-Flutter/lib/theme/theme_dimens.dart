@@ -24,21 +24,21 @@ class ThemeDimens {
   static const web_loading_progress_height = 6.0;
 
 //itemContent
-  static const item_content_picture_radius = 4;
+  static const item_content_picture_radius = 4.0;
   static const item_content_picture_width = 106.0;
   static const item_content_picture_height = 78.0;
 
 //itemGirl
-  static const item_girl_card_size = 300;
-  static const item_girl_picture_height = 220;
-  static const item_girl_des_height = 80;
-  static const item_girl_root_height = 330;
+  static const item_girl_card_size = 300.0;
+  static const item_girl_picture_height = 220.0;
+  static const item_girl_des_height = 80.0;
+  static const item_girl_root_height = 330.0;
 
 //自定义view
-  static const view_line_icon_size = 20;
+  static const view_line_icon_size = 20.0;
   static const view_line_text_margin = 8.0;
   static const view_line_text_size = font_size_small;
-  static const view_line_item_padding = 12;
+  static const view_line_item_padding = 12.0;
 
 //全局通用字体size值
   static const font_size_large_xx = 22.0;
