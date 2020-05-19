@@ -209,7 +209,22 @@ class SuperListViewState extends State<SuperListView> {
     return Container(
       height: _itemHeight,
       child: Center(
-        child: CircularProgressIndicator(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 16,
+              width: 16,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+              ),
+            ),
+            Container(
+              child: Text('加载中...'),
+              padding: EdgeInsets.only(left: 10),
+            ),
+          ],
+        ),
       ),
     );
   }
