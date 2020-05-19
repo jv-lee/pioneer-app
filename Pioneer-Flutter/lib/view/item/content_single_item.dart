@@ -1,17 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pioneer_flutter/model/hot_entity.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/view/item/content_item_image.dart';
 
 /// @author jv.lee
 /// @date 2020/5/13
 /// @description 列表item 单图样式
 class ContentSingleItem extends StatelessWidget {
-
-  ContentSingleItem({this.data}):super();
+  ContentSingleItem(this.data) : super();
 
   final ContentData data;
 
@@ -57,12 +56,7 @@ class ContentSingleItem extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   flex: 0,
-                  child: Container(
-                    margin: EdgeInsets.only(right: ThemeDimens.margin_medium),
-                    height: ThemeDimens.item_content_picture_height,
-                    width: ThemeDimens.item_content_picture_width,
-                    color: Colors.red,
-                  ),
+                  child: ContentItemImage(data.images[0]),
                 ),
                 Expanded(
                   flex: 1,
@@ -122,7 +116,9 @@ class ContentSingleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3),
                 ),
                 Text(
-                  data.likeCounts == 0 ? ThemeStrings.ITEM_LIKE_TEXT : data.likeCounts.toString(),
+                  data.likeCounts == 0
+                      ? ThemeStrings.ITEM_LIKE_TEXT
+                      : data.likeCounts.toString(),
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,
@@ -137,7 +133,9 @@ class ContentSingleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3, left: 3),
                 ),
                 Text(
-                  data.views == 0 ? ThemeStrings.ITEM_VIEW_TEXT : data.views.toString(),
+                  data.views == 0
+                      ? ThemeStrings.ITEM_VIEW_TEXT
+                      : data.views.toString(),
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,

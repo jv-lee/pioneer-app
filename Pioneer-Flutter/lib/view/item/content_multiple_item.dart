@@ -6,12 +6,13 @@ import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
 
+import 'content_item_image.dart';
+
 /// @author jv.lee
 /// @date 2020/5/13
 /// @description 列表item 多图样式
 class ContentMultipleItem extends StatelessWidget {
-
-  ContentMultipleItem({this.data}):super();
+  ContentMultipleItem(this.data) : super();
 
   final ContentData data;
 
@@ -81,11 +82,7 @@ class ContentMultipleItem extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    width: ThemeDimens.item_content_picture_width,
-                    height: ThemeDimens.item_content_picture_height,
-                    color: Colors.red,
-                  ),
+                  child: ContentItemImage(data.images[0]),
                 ),
                 Expanded(
                   flex: 0,
@@ -95,11 +92,7 @@ class ContentMultipleItem extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    width: ThemeDimens.item_content_picture_width,
-                    height: ThemeDimens.item_content_picture_height,
-                    color: Colors.red,
-                  ),
+                  child: ContentItemImage(data.images[1]),
                 ),
                 Expanded(
                   flex: 0,
@@ -109,11 +102,8 @@ class ContentMultipleItem extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    width: ThemeDimens.item_content_picture_width,
-                    height: ThemeDimens.item_content_picture_height,
-                    color: Colors.red,
-                  ),
+                  child: ContentItemImage(
+                      data.images.length > 2 ? data.images[2] : ''),
                 ),
               ],
             ),
@@ -132,7 +122,9 @@ class ContentMultipleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3),
                 ),
                 Text(
-                  data.likeCounts == 0 ? ThemeStrings.ITEM_LIKE_TEXT : data.likeCounts.toString(),
+                  data.likeCounts == 0
+                      ? ThemeStrings.ITEM_LIKE_TEXT
+                      : data.likeCounts.toString(),
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,
@@ -147,7 +139,9 @@ class ContentMultipleItem extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3, left: 3),
                 ),
                 Text(
-                  data.views == 0 ? ThemeStrings.ITEM_VIEW_TEXT : data.views.toString(),
+                  data.views == 0
+                      ? ThemeStrings.ITEM_VIEW_TEXT
+                      : data.views.toString(),
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,

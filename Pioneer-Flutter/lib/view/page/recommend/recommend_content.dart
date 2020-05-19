@@ -65,11 +65,14 @@ class RecommendContentState extends State<RecommendContent> {
               itemCount: _headerCount + contentData.length + _footerCount,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) {
-                  return GestureDetector(child: RecommendContentBanner(
-                    data: bannerData,
-                  ),onTapDown: (details){
-                    getContentData();
-                  },);
+                  return GestureDetector(
+                    child: RecommendContentBanner(
+                      data: bannerData,
+                    ),
+                    onTapDown: (details) {
+                      getContentData();
+                    },
+                  );
                 }
                 if (index == (contentData.length + 1)) {
                   return Padding(
@@ -86,11 +89,11 @@ class RecommendContentState extends State<RecommendContent> {
                   );
                 } else if (entity.images.length == 1) {
                   return ContentSingleItem(
-                    data: entity,
+                    entity,
                   );
                 } else {
                   return ContentMultipleItem(
-                    data: entity,
+                    entity,
                   );
                 }
               }),
