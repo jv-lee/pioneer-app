@@ -36,32 +36,26 @@ class PageLoad<T> {
     var data =
         await requestData(!isMore ? _currentPage = page : ++_currentPage);
 
-    print('loadData - isMore:$isMore currentPage:$_currentPage');
-
     //首页page - 数据返回空 错误加载
     if (_currentPage == page && data == null) {
-      print('首页page - 数据返回空 错误加载');
       statusController.pageError();
       return;
     }
 
     //首页page - 数据返回空数组 空加载
     if (_currentPage == page && data.isEmpty) {
-      print('首页page - 数据返回空数组 空加载');
       statusController.pageEmpty();
       return;
     }
 
     //首页数据加载成功
     if (_currentPage == page && data != null) {
-      print('首页数据加载成功');
       this.data.clear();
       this.data.addAll(data);
       statusController.pageComplete();
 
       //是否只有一页数据
       if (_currentPage == pageTotal) {
-        print('是否只有一页数据');
         statusController.itemComplete();
       } else {
         statusController.itemLoading();
@@ -72,7 +66,6 @@ class PageLoad<T> {
 
     //加载更多成功
     if (_currentPage < pageTotal && data != null) {
-      print('加载更多成功');
       this.data.addAll(data);
       notify();
       statusController.itemLoading();
@@ -81,7 +74,6 @@ class PageLoad<T> {
 
     //加载更多失败
     if (_currentPage < pageTotal && data == null) {
-      print('加载更多失败');
       _currentPage--;
       statusController.itemError();
       return;
@@ -89,7 +81,6 @@ class PageLoad<T> {
 
     //加载更多至尾页
     if (_currentPage == pageTotal && data != null) {
-      print('加载更多至尾页');
       this.data.addAll(data);
       notify();
       statusController.itemComplete();

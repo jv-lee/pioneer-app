@@ -21,7 +21,6 @@ class _GirlStatusBarState extends State<GirlStatusBar> {
     super.initState();
     widget.scrollController.addListener(() {
       setState(() {
-        print(widget.scrollController.position);
         if (widget.scrollController.offset < 86) {
           var offset = widget.scrollController.offset.toInt() / 86;
           _number = (offset * 255).toInt();
