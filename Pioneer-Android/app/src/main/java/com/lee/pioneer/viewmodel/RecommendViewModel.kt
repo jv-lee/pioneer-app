@@ -3,6 +3,8 @@ package com.lee.pioneer.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.vm.ResponsePageViewModel
+import com.lee.library.utils.LogUtil
+import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_BANNER_KEY
 import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
@@ -52,11 +54,25 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
 
     fun getBannerData() {
         launch(-2) {
-            val response = ApiRepository.getApi().getBannerAsync().await()
-            executeResponseAny(response, {
-                bannerObservable.value = it.data
-            })
+            ApiRepository.getApi().getBannerAsync()
+                .await().data
+                .also { bannerObservable.value = it }
         }
+//        cacheLaunch(-2,
+//            {
+//                CacheRepository.get().getBannerCacheAsync(RECOMMEND_BANNER_KEY)
+//                    .await()
+//                    ?.let { bannerObservable.value = ArrayList(it) }
+//            },
+//            {
+//                ApiRepository.getApi().getBannerAsync()
+//                    .await().data
+//                    .also { bannerObservable.value = it }
+//            },
+//            {
+//                CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
+//            }
+//        )
     }
 
     fun getContentList(type: String) {
@@ -65,7 +81,7 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
             contentObservable.value = data
             return
         }
-        cacheLaunch(
+        cacheLaunch(-1,
             {
                 CacheRepository.get().getContentCacheAsync(
                     RECOMMEND_CACHE_KEY + type.toLowerCase(

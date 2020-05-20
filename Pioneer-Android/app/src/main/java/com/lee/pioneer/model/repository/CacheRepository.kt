@@ -2,6 +2,7 @@ package com.lee.pioneer.model.repository
 
 import com.google.gson.reflect.TypeToken
 import com.lee.library.cache.CacheManager
+import com.lee.pioneer.model.entity.Banner
 import com.lee.pioneer.model.entity.Category
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.PageData
@@ -43,6 +44,14 @@ class CacheRepository {
     ): Deferred<PageData<Content>?> {
         val type = object : TypeToken<PageData<Content>>() {}.type
         return CompletableDeferred(CacheManager.getInstance().get<PageData<Content>>(key, type))
+    }
+
+    /**
+     * 获取banner缓存
+     */
+    fun getBannerCacheAsync(key: String): Deferred<List<Banner>?> {
+        val type = object : TypeToken<List<Banner>>() {}.type
+        return CompletableDeferred(CacheManager.getInstance().get<List<Banner>>(key, type))
     }
 
     /**

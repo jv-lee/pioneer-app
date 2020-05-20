@@ -23,7 +23,7 @@ class HomeViewModel(application: Application) : ResponsePageViewModel(applicatio
      *  构建主页分类tab 子fragments  启动缓存及网络数据加载
      */
     fun buildCategoryFragment() {
-        cacheLaunch(
+        cacheLaunch(-1,
             {
                 //加载本地缓存
                 CacheRepository.get().getCategoryCacheAsync(CATEGORY_CACHE_KEY).await()

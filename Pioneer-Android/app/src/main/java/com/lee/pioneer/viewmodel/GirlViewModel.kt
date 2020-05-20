@@ -46,10 +46,10 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
         }
     }
 
-    fun getGirlContentData(isMore: Boolean, isReload: Boolean = false) {
+    fun getGirlContentData(isLoadMore: Boolean, isReload: Boolean = false) {
         //数据转换 添加viewType
-        pageLaunch(isMore, isReload,
-            {
+        pageLaunch(isLoadMore, isReload,-1,
+                {
                 CacheRepository.get()
                     .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
                     .await()?.let { it -> contentObservable.value = it }

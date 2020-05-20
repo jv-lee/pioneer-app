@@ -26,7 +26,7 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
      * 获取Content数据列表
      */
     fun loadListData(type: String, isLoadMore: Boolean, isReload: Boolean = false) {
-        pageLaunch(isLoadMore, isReload,
+        pageLaunch(isLoadMore, isReload,-1,
             {
                 //缓存数据
                 CacheRepository.get().getContentCacheAsync(

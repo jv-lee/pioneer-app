@@ -18,13 +18,14 @@ open class ResponsePageViewModel(application: Application, val limit: Int = 0) :
      * 分页数据加载封装
      */
     fun <T> pageLaunch(
-        isLoadMore: Boolean,
+        isLoadMore: Boolean = false,
         isReload: Boolean = false,
+        failedCode: Int = -1,
         startBlock: suspend CoroutineScope.() -> Unit = {},
         resumeBlock: suspend CoroutineScope.() -> T? = { null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
-        launch(-1) {
+        launch(failedCode) {
             //加载更多设置page
             if (isLoadMore) {
                 if (!isReload) page++
@@ -49,6 +50,7 @@ open class ResponsePageViewModel(application: Application, val limit: Int = 0) :
     }
 
     fun <T> cacheLaunch(
+        failedCode: Int = -1,
         startBlock: suspend CoroutineScope.() -> Unit = {},
         resumeBlock: suspend CoroutineScope.() -> T? = { null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
@@ -56,6 +58,7 @@ open class ResponsePageViewModel(application: Application, val limit: Int = 0) :
         pageLaunch(
             isLoadMore = false,
             isReload = false,
+            failedCode = failedCode,
             startBlock = startBlock,
             resumeBlock = resumeBlock,
             completedBlock = completedBlock

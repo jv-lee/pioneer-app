@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setButtonTint
@@ -35,6 +36,7 @@ class RecommendFragment :
         )
     }
     private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
+    private var type = "views"
 
     override fun bindView() {
         //设置toolbar 搜索跳转
@@ -73,9 +75,18 @@ class RecommendFragment :
             mAdapter.initStatusView()
             mAdapter.pageLoading()
             when (checkedId) {
-                R.id.radio_view -> viewModel.getContentList("views")
-                R.id.radio_like -> viewModel.getContentList("likes")
-                R.id.radio_comment -> viewModel.getContentList("comments")
+                R.id.radio_view -> {
+                    type = "views"
+                    viewModel.getContentList(type)
+                }
+                R.id.radio_like -> {
+                    type = "likes"
+                    viewModel.getContentList(type)
+                }
+                R.id.radio_comment -> {
+                    type = "comments"
+                    viewModel.getContentList(type)
+                }
             }
         }
 
@@ -98,6 +109,14 @@ class RecommendFragment :
                 )
             )
         }
+        mAdapter.setLoadErrorListener(object : LoadErrorListener {
+            override fun itemReload() {}
+
+            override fun pageReload() {
+                viewModel.getContentList(type)
+            }
+
+        })
     }
 
     override fun bindData() {
@@ -131,7 +150,7 @@ class RecommendFragment :
 
     override fun lazyLoad() {
         viewModel.getBannerData()
-        viewModel.getContentList("views")
+        viewModel.getContentList(type)
     }
 
     override fun onResume() {

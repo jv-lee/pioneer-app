@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setBackgroundAlphaCompat
@@ -87,7 +88,16 @@ class GirlFragment :
         mAdapter.setAutoLoadMoreListener {
             viewModel.getGirlContentData(true)
         }
+        mAdapter.setLoadErrorListener(object : LoadErrorListener {
+            override fun itemReload() {
+                viewModel.getGirlContentData(isLoadMore = true, isReload = true)
+            }
 
+            override fun pageReload() {
+                viewModel.getGirlContentData(isLoadMore = false, isReload = true)
+            }
+
+        })
         binding.refresh.setOnRefreshListener {
             mAdapter.openLoadMore()
             viewModel.getGirlContentData(false)
