@@ -18,8 +18,7 @@ class _GirlHeaderState extends State<GirlHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: StatusTools.getStatusHeight()),
-      margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+      padding: EdgeInsets.fromLTRB(16, 8 + StatusTools.getStatusHeight(), 16, 8),
       child: Column(
         children: <Widget>[
           Row(

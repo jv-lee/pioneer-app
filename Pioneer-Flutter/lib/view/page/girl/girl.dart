@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/tools/status_tools.dart';
 import 'package:pioneer_flutter/view/item/girl_item.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_header.dart';
+import 'package:pioneer_flutter/view/page/girl/girl_statusbar.dart';
 import 'package:pioneer_flutter/view/presenter/girl_presenter.dart';
 import 'package:pioneer_flutter/view/widget/load/page_load.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
@@ -21,12 +23,14 @@ class GirlPage extends StatefulWidget {
 class GirlState extends State<GirlPage> {
   GirlPresenter _presenter;
   StatusController _statusController;
+  ScrollController _scrollController;
   PageLoad<ContentData> _pageLoad;
 
   @override
   void initState() {
     super.initState();
     _presenter = GirlPresenter();
+    _scrollController = ScrollController();
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
     _pageLoad = PageLoad<ContentData>(
@@ -44,24 +48,29 @@ class GirlState extends State<GirlPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SuperListView(
-      statusController: _statusController,
-      itemCount: _pageLoad.data.length,
-      onPageReload: () {
-        _pageLoad.loadData(false);
-      },
-      onItemReload: () {
-        _pageLoad.loadData(true);
-      },
-      onLoadMore: () {
-        _pageLoad.loadData(true);
-      },
-      isLoadMore: true,
-      headerChildren: <Widget>[
-        GirlHeader()],
-      itemBuilder: (context, index) {
-        return GirlItem(_pageLoad.data[index]);
-      },
+    return Stack(
+      children: <Widget>[
+        SuperListView(
+          scrollController: _scrollController,
+          statusController: _statusController,
+          itemCount: _pageLoad.data.length,
+          onPageReload: () {
+            _pageLoad.loadData(false);
+          },
+          onItemReload: () {
+            _pageLoad.loadData(true);
+          },
+          onLoadMore: () {
+            _pageLoad.loadData(true);
+          },
+          isLoadMore: true,
+          headerChildren: <Widget>[GirlHeader()],
+          itemBuilder: (context, index) {
+            return GirlItem(_pageLoad.data[index]);
+          },
+        ),
+        GirlStatusBar(_scrollController)
+      ],
     );
   }
 }
