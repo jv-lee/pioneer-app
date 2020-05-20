@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_entity.dart';
 import 'package:pioneer_flutter/view/item/girl_item.dart';
+import 'package:pioneer_flutter/view/page/girl/girl_header.dart';
 import 'package:pioneer_flutter/view/presenter/girl_presenter.dart';
 import 'package:pioneer_flutter/view/widget/load/page_load.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
@@ -56,6 +57,8 @@ class GirlState extends State<GirlPage> {
         _pageLoad.loadData(true);
       },
       isLoadMore: true,
+      headerChildren: <Widget>[
+        GirlHeader()],
       itemBuilder: (context, index) {
         return GirlItem(_pageLoad.data[index]);
       },
