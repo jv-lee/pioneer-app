@@ -1,9 +1,8 @@
 package com.lee.pioneer.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.library.mvvm.vm.ResponsePageViewModel
+import com.lee.library.mvvm.live.PageLiveData
+import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.model.entity.ContentHistory
 import com.lee.pioneer.model.entity.PageData
@@ -17,8 +16,9 @@ import kotlinx.coroutines.withContext
  * @date 2020/4/22
  * @description
  */
-class CollectViewModel(application: Application) : ResponsePageViewModel(application) {
-    val dataObservable by lazy { MutableLiveData<PageData<ContentHistory>>() }
+class CollectViewModel(application: Application) : ResponseViewModel(application) {
+
+    val contentData by lazy { PageLiveData<PageData<ContentHistory>>(limit = 0) }
     private val pageCount by lazy {
         CommonTools.totalToPage(
             DataBaseRepository.get().historyDao.queryContentCollectCount(),
@@ -30,18 +30,14 @@ class CollectViewModel(application: Application) : ResponsePageViewModel(applica
      * 加载本地数据库历史记录
      */
     fun loadHistory(isLoadMore: Boolean) {
-        pageLaunch(isLoadMore, resumeBlock = {
+        contentData.pageLaunch(isLoadMore, resumeBlock = { page: Int, limit: Int ->
             //获取总页数 使用懒加载
-            val pageCount = withContext(Dispatchers.IO) {
-                pageCount
-            }
+            val pageCount = withContext(Dispatchers.IO) { pageCount }
             //获取当前页
             val response = withContext(Dispatchers.IO) {
                 DataBaseRepository.get().historyDao.queryContentCollect(page)
             }
-            //通知数据更新
-            dataObservable.value =
-                PageData(ArrayList(response), page = page, page_count = pageCount)
+            PageData(ArrayList(response), page = page, page_count = pageCount)
         })
     }
 }

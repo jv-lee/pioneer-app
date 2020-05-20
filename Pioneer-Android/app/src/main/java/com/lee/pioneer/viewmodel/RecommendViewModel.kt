@@ -1,9 +1,8 @@
 package com.lee.pioneer.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.vm.ResponsePageViewModel
-import com.lee.library.utils.LogUtil
+import com.lee.library.mvvm.live.CacheLiveData
+import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_BANNER_KEY
 import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
@@ -22,10 +21,10 @@ import kotlin.collections.ArrayList
  * @date 2020/4/9
  * @description
  */
-class RecommendViewModel(application: Application) : ResponsePageViewModel(application) {
+class RecommendViewModel(application: Application) : ResponseViewModel(application) {
 
-    val bannerObservable by lazy { MutableLiveData<ArrayList<Banner>>() }
-    val contentObservable by lazy { MutableLiveData<ArrayList<Content>>() }
+    val bannerData by lazy { CacheLiveData<ArrayList<Banner>>() }
+    val contentData by lazy { CacheLiveData<PageData<Content>>() }
     private val viewsData = arrayListOf<Content>()
     private val likesData = arrayListOf<Content>()
     private val commentsData = arrayListOf<Content>()
@@ -54,57 +53,46 @@ class RecommendViewModel(application: Application) : ResponsePageViewModel(appli
 
     fun getBannerData() {
         launch(-2) {
-            ApiRepository.getApi().getBannerAsync()
-                .await().data
-                .also { bannerObservable.value = it }
+            bannerData.cacheLaunch(
+                {
+                    val response =
+                        CacheRepository.get().getBannerCacheAsync(RECOMMEND_BANNER_KEY).await()
+                    if (response != null) ArrayList(response) else null
+                },
+                {
+                    ApiRepository.getApi().getBannerAsync()
+                        .await().data
+                },
+                {
+                    CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
+                })
         }
-//        cacheLaunch(-2,
-//            {
-//                CacheRepository.get().getBannerCacheAsync(RECOMMEND_BANNER_KEY)
-//                    .await()
-//                    ?.let { bannerObservable.value = ArrayList(it) }
-//            },
-//            {
-//                ApiRepository.getApi().getBannerAsync()
-//                    .await().data
-//                    .also { bannerObservable.value = it }
-//            },
-//            {
-//                CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
-//            }
-//        )
     }
 
     fun getContentList(type: String) {
         val data = getCacheContentList(type)
         if (data.isNotEmpty()) {
-            contentObservable.value = data
+            contentData.data.value = PageData(data, page_count = 0, page = 0)
             return
         }
-        cacheLaunch(-1,
-            {
-                CacheRepository.get().getContentCacheAsync(
-                    RECOMMEND_CACHE_KEY + type.toLowerCase(
-                        Locale.getDefault()
-                    )
-                ).await()
-                    ?.let {
-                        putCacheContentList(type, it.data)
-                        contentObservable.value = it.data
-                    }
-            },
-            {
-                ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT)
-                    .await()
-                    .also {
-                        putCacheContentList(type, it.data)
-                        contentObservable.value = it.data
-                    }
-            },
-            {
-                CacheRepository.get()
-                    .putCache(RECOMMEND_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
-            })
+        launch(-1) {
+            contentData.cacheLaunch(
+                {
+                    CacheRepository.get().getContentCacheAsync(
+                        RECOMMEND_CACHE_KEY + type.toLowerCase(Locale.getDefault())
+                    ).await()
+                        ?.also { putCacheContentList(type, ArrayList(it.data)) }
+                },
+                {
+                    ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT)
+                        .await()
+                        .also { putCacheContentList(type, it.data) }
+                },
+                {
+                    CacheRepository.get()
+                        .putCache(RECOMMEND_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
+                })
+        }
     }
 
     private fun putCacheContentList(type: String, data: ArrayList<Content>) {

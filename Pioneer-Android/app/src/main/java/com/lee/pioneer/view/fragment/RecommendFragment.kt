@@ -121,25 +121,25 @@ class RecommendFragment :
 
     override fun bindData() {
         viewModel.apply {
-            bannerObservable.observe(this@RecommendFragment, Observer {
+            bannerData.data.observe(this@RecommendFragment, Observer {
                 headerBinding.banner.setPages(it.toList()) { BannerViewHolder() }
                 headerBinding.banner.start()
             })
 
-            contentObservable.observe(this@RecommendFragment, Observer {
-                if (it.isNullOrEmpty()) {
+            contentData.data.observe(this@RecommendFragment, Observer {
+                if (it.data.isNullOrEmpty()) {
                     mAdapter.pageEmpty()
                 } else {
-                    if (mAdapter.data != it) {
+                    if (mAdapter.data != it.data) {
                         mAdapter.pageCompleted()
-                        mAdapter.updateData(it)
+                        mAdapter.updateData(it.data)
                         mAdapter.loadMoreEnd()
                     }
                 }
 
             })
 
-            failedEvent.observe(this@RecommendFragment, Observer {
+            contentData.failedEvent.observe(this@RecommendFragment, Observer {
                 it.message?.run { toast(this) }
                 when (it.code) {
                     -1 -> mAdapter.pageError()

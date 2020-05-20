@@ -39,7 +39,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
     override fun bindData() {
         viewModel.apply {
             //获取分类数据 构建分类tab 及 fragment
-            categoryObservable.observe(this@HomeFragment, Observer { it ->
+            categoryData.data.observe(this@HomeFragment, Observer { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
                 vpAdapter.tabList.clear()
                 vpAdapter.fragmentList.clear()
@@ -52,14 +52,10 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
             })
 
             //获取
-            failedEvent.observe(this@HomeFragment, Observer {
-                when (it.code) {
-                    -1 -> {
-                        toast("请求错误:${it.message}  ")
-                        if (vpAdapter.tabList.isEmpty()) {
-                            binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
-                        }
-                    }
+            categoryData.failedEvent.observe(this@HomeFragment, Observer {
+                toast("请求错误:${it.message}  ")
+                if (it.code == -1 && vpAdapter.tabList.isEmpty()) {
+                    binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
                 }
             })
         }

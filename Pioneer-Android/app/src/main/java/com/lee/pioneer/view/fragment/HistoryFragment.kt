@@ -4,8 +4,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.utils.LogUtil
-import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentHistoryBinding
@@ -46,7 +44,7 @@ class HistoryFragment :
 
     override fun bindData() {
         viewModel.apply {
-            dataObservable.observe(this@HistoryFragment, Observer {
+            contentData.data.observe(this@HistoryFragment, Observer {
                 executePageCompleted(it, mAdapter, 0)
             })
         }

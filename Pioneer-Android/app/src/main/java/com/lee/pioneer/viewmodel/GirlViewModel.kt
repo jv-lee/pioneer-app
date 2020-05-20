@@ -1,9 +1,8 @@
 package com.lee.pioneer.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.vm.ResponsePageViewModel
-import com.lee.library.utils.LogUtil
+import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.live.PageLiveData
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_GIRL
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
@@ -20,9 +19,9 @@ import java.util.*
  * @date 2020/4/10
  * @description
  */
-class GirlViewModel(application: Application) : ResponsePageViewModel(application, 1) {
+class GirlViewModel(application: Application) : BaseViewModel(application) {
 
-    val contentObservable by lazy { MutableLiveData<PageData<Content>>() }
+    val contentData by lazy { PageLiveData<PageData<Content>>(limit = 1) }
 
     /**
      * 浏览后添加至数据库
@@ -47,29 +46,29 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
     }
 
     fun getGirlContentData(isLoadMore: Boolean, isReload: Boolean = false) {
-        //数据转换 添加viewType
-        pageLaunch(isLoadMore, isReload,-1,
-                {
-                CacheRepository.get()
-                    .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
-                    .await()?.let { it -> contentObservable.value = it }
-            },
-            {
-                ApiRepository.getApi()
-                    .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
-                    .await().also { it ->
-                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                        contentObservable.value?.data?.let { data ->
-                            if (page != limit) it.data.addAll(0, data)
+        launch(-1) {
+            contentData.pageLaunch(isLoadMore = isLoadMore, isReload = isReload,
+                startBlock = {
+                    CacheRepository.get()
+                        .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
+                        .await()
+                },
+                resumeBlock = { page: Int, limit: Int ->
+                    ApiRepository.getApi()
+                        .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
+                        .await().also {
+                            //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
+                            contentData.data.value?.data?.let { data ->
+                                if (page != limit) it.data.addAll(0, data)
+                            }
                         }
-                        contentObservable.value = it
-                    }
-            },
-            {
-                CacheRepository.get().putCache(
-                    CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
-                )
-            })
+                },
+                completedBlock = {
+                    CacheRepository.get().putCache(
+                        CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
+                    )
+                })
+        }
     }
 
 }
