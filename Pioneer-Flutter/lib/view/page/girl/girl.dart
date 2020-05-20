@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_entity.dart';
-import 'package:pioneer_flutter/tools/status_tools.dart';
 import 'package:pioneer_flutter/view/item/girl_item.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_header.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_statusbar.dart';
