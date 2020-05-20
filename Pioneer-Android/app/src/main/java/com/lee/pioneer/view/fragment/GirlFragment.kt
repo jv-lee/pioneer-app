@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setBackgroundAlphaCompat
+import com.lee.library.utils.LogUtil
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
@@ -102,11 +103,13 @@ class GirlFragment :
 
         viewModel.apply {
             contentObservable.observe(this@GirlFragment, Observer {
+                LogUtil.i("正常")
                 executePageCompleted(it, mAdapter, binding.refresh, diff = true)
             })
 
             //错误处理
             failedEvent.observe(this@GirlFragment, Observer { it ->
+                LogUtil.i("错误")
                 it?.message?.let { toast(it) }
                 when (it.code) {
                     -1 -> executePageError(mAdapter, binding.refresh)

@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
  * @date 2019-08-15
  * @description 设置分页列表ViewModel
  */
-open class ResponsePageViewModel(application: Application, private val limit: Int = 0) :
+open class ResponsePageViewModel(application: Application, val limit: Int = 0) :
     ResponseViewModel(application) {
 
     var page = limit

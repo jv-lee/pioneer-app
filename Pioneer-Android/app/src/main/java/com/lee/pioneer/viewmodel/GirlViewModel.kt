@@ -3,6 +3,7 @@ package com.lee.pioneer.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.vm.ResponsePageViewModel
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_GIRL
 import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
@@ -51,17 +52,15 @@ class GirlViewModel(application: Application) : ResponsePageViewModel(applicatio
             {
                 CacheRepository.get()
                     .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
-                    .await()?.let { it ->
-                        contentObservable.value = it
-                    }
+                    .await()?.let { it -> contentObservable.value = it }
             },
             {
                 ApiRepository.getApi()
                     .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
                     .await().also { it ->
-                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据
+                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
                         contentObservable.value?.data?.let { data ->
-                            it.data.addAll(0, data)
+                            if (page != limit) it.data.addAll(0, data)
                         }
                         contentObservable.value = it
                     }

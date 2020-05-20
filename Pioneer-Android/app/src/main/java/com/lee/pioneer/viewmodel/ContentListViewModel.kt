@@ -31,18 +31,16 @@ class ContentListViewModel(application: Application) : ResponsePageViewModel(app
                 //缓存数据
                 CacheRepository.get().getContentCacheAsync(
                     CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault())
-                ).await()?.let { it ->
-                    contentListObservable.value = it
-                }
+                ).await()?.let { it -> contentListObservable.value = it }
             },
             {
                 //网络数据
                 ApiRepository.getApi().getContentDataAsync(
                     KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
                 ).await().also {
-                    //填充历史数据 让activity在重建时可以从liveData中获取到完整数据
+                    //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
                     contentListObservable.value?.data?.let { data ->
-                        it.data.addAll(0, data)
+                        if (page != limit) it.data.addAll(0, data)
                     }
                     contentListObservable.value = it
                 }
