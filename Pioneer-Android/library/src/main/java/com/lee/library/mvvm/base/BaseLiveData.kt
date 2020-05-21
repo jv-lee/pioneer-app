@@ -10,8 +10,9 @@ import java.util.concurrent.CancellationException
  * @date 2020/5/21
  * @description
  */
-open class BaseLiveData {
+open class BaseLiveData<T> {
     val failedEvent: MutableLiveData<CustomException> = MutableLiveData()
+    val data by lazy { MutableLiveData<T>() }
 
     private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {

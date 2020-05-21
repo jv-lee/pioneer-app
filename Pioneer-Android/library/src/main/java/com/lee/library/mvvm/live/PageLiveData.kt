@@ -1,20 +1,15 @@
 package com.lee.library.mvvm.live
 
-import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseLiveData
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 /**
  * @author jv.lee
  * @date 2020/5/20
  * @description
  */
-class PageLiveData<T>(val limit: Int = 0) : BaseLiveData() {
+class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
 
-    val data by lazy { MutableLiveData<T>() }
     var page = limit
     private var firstCache = true
 
