@@ -44,7 +44,7 @@ class HistoryFragment :
 
     override fun bindData() {
         viewModel.apply {
-            contentData.data.observe(this@HistoryFragment, Observer {
+            contentData.observe(this@HistoryFragment, Observer {
                 executePageCompleted(it, mAdapter, 0)
             })
         }

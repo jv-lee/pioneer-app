@@ -44,7 +44,7 @@ class CollectFragment :
 
     override fun bindData() {
         viewModel.apply {
-            contentData.data.observe(this@CollectFragment, Observer {
+            contentData.observe(this@CollectFragment, Observer {
                 executePageCompleted(it, mAdapter, 0)
             })
         }

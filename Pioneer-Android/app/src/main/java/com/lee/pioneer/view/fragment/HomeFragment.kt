@@ -39,7 +39,7 @@ class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
     override fun bindData() {
         viewModel.apply {
             //获取分类数据 构建分类tab 及 fragment
-            categoryData.data.observe(this@HomeFragment, Observer { it ->
+            categoryData.observe(this@HomeFragment, Observer { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
                 vpAdapter.tabList.clear()
                 vpAdapter.fragmentList.clear()

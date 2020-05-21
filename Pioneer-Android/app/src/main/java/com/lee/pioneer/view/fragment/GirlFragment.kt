@@ -111,7 +111,7 @@ class GirlFragment :
         headerViewBinding.tvWeek.text = TimeUtil.getWeek(Date())
 
         viewModel.apply {
-            contentData.data.observe(this@GirlFragment, Observer {
+            contentData.observe(this@GirlFragment, Observer {
                 executePageCompleted(it, mAdapter, binding.refresh, diff = true)
             })
 

@@ -121,12 +121,12 @@ class RecommendFragment :
 
     override fun bindData() {
         viewModel.apply {
-            bannerData.data.observe(this@RecommendFragment, Observer {
+            bannerData.observe(this@RecommendFragment, Observer {
                 headerBinding.banner.setPages(it.toList()) { BannerViewHolder() }
                 headerBinding.banner.start()
             })
 
-            contentData.data.observe(this@RecommendFragment, Observer {
+            contentData.observe(this@RecommendFragment, Observer {
                 if (it.data.isNullOrEmpty()) {
                     mAdapter.pageEmpty()
                 } else {

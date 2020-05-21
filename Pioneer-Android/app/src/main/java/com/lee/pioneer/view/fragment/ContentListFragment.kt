@@ -79,7 +79,7 @@ class ContentListFragment :
     override fun bindData() {
         viewModel.apply {
             //列表数据更新
-            contentListData.data.observe(this@ContentListFragment, Observer {
+            contentListData.observe(this@ContentListFragment, Observer {
                 executePageCompleted(it, mAdapter, binding.refresh, diff = true)
             })
 

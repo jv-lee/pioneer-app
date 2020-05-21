@@ -30,11 +30,11 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             //首次加载缓存数据
             if (firstCache) {
                 firstCache = false
-                startBlock()?.run { data.value = this }
+                startBlock()?.run { value = this }
             }
 
             //网络数据设置
-            val response = resumeBlock(page, limit).also { data.value = it }
+            val response = resumeBlock(page, limit).also { value = it }
 
             //首页将网络数据设置缓存
             if (page == limit) {

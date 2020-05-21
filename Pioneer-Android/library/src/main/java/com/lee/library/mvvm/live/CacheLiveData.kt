@@ -21,14 +21,14 @@ class CacheLiveData<T> : BaseLiveData<T>() {
             //首次加载缓存数据
             if (firstCache) {
                 firstCache = false
-                startBlock()?.run { data.value = this }
+                startBlock()?.run { value = this }
             }
 
             //网络数据设置
             val response = resumeBlock().also {
                 //缓存数据与本地数据不一致 设置网络数据
-                if (data.value != it) {
-                    data.value = it
+                if (value != it) {
+                    value = it
                 }
             }
 

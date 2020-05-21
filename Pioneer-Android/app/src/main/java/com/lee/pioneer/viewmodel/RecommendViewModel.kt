@@ -72,7 +72,7 @@ class RecommendViewModel(application: Application) : ResponseViewModel(applicati
     fun getContentList(type: String) {
         val data = getCacheContentList(type)
         if (data.isNotEmpty()) {
-            contentData.data.value = PageData(data, page_count = 0, page = 0)
+            contentData.value = PageData(data, page_count = 0, page = 0)
             return
         }
         launch(-1) {
