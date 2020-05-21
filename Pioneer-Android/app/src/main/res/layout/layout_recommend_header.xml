@@ -16,7 +16,7 @@
         <com.lee.library.widget.banner.MZBannerView
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="160pt"
+            android:layout_height="@dimen/banner_height"
             app:layout_constraintTop_toTopOf="parent"
             app:open_mz_mode="false" />
 

@@ -48,12 +48,12 @@ class MainActivity :
         WebViewTools.get(applicationContext)
     }
 
-    /**
-     * 设置屏幕适配
-     */
-    override fun getResources(): Resources {
-        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
-    }
+//    /**
+//     * 设置屏幕适配
+//     */
+//    override fun getResources(): Resources {
+//        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+//    }
 
     private fun animUi(duration: Long) {
         banBackEnable(false)
