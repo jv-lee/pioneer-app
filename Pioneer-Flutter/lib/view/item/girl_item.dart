@@ -18,8 +18,12 @@ class _GirlItemState extends State<GirlItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
-      elevation: 10,
+      margin: EdgeInsets.fromLTRB(
+          ThemeDimens.item_girl_margin_horizontal,
+          ThemeDimens.item_girl_margin_portrait,
+          ThemeDimens.item_girl_margin_horizontal,
+          ThemeDimens.item_girl_margin_portrait),
+      elevation: ThemeDimens.item_girl_elevation,
       child: Container(
         height: ThemeDimens.item_girl_root_height,
         child: Column(

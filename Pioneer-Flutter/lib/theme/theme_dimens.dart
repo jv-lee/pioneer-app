@@ -32,6 +32,9 @@ class ThemeDimens {
   static const item_girl_card_size = 300.0;
   static const item_girl_picture_height = 220.0;
   static const item_girl_des_height = 80.0;
+  static const item_girl_margin_horizontal = 30.0;
+  static const item_girl_margin_portrait = 15.0;
+  static const item_girl_elevation = 10.0;
   static const item_girl_root_height = 300.0;
 
 //自定义view
