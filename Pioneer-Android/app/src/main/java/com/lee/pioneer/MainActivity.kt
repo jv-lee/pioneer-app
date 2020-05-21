@@ -3,6 +3,7 @@ package com.lee.pioneer
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.animation.TimeInterpolator
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
@@ -48,12 +49,12 @@ class MainActivity :
         WebViewTools.get(applicationContext)
     }
 
-//    /**
-//     * 设置屏幕适配
-//     */
-//    override fun getResources(): Resources {
-//        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
-//    }
+    /**
+     * 设置屏幕适配
+     */
+    override fun getResources(): Resources {
+        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+    }
 
     private fun animUi(duration: Long) {
         banBackEnable(false)

@@ -41,7 +41,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        DensityUtil.setDensity(activity.application,activity)
+//        DensityUtil.setDensity(activity.application,activity)
         if (PreferencesTools.hasNightMode()) {
             StatusUtil.clearStatusFontLight2(activity)
         } else {
@@ -63,7 +63,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        DensityUtil.resetDensity(activity)
+//        DensityUtil.resetDensity(activity)
     }
 
 }
