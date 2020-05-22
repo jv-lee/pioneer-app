@@ -20,18 +20,21 @@ class RecommendState extends State<RecommendPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        Expanded(
-          flex: 0,
-          child: RecommendToolbar(),
-        ),
-        Expanded(
-          flex: 1,
-          child: RecommendContent(),
-        )
-      ],
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Flex(
+        direction: Axis.vertical,
+        children: <Widget>[
+          Expanded(
+            flex: 0,
+            child: RecommendToolbar(),
+          ),
+          Expanded(
+            flex: 1,
+            child: RecommendContent(),
+          )
+        ],
+      ),
     );
   }
 }

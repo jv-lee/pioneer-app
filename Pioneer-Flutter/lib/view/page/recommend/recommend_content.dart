@@ -3,6 +3,7 @@ import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 import 'package:pioneer_flutter/model/hot_entity.dart';
 import 'package:pioneer_flutter/model/repository/api_repository.dart';
+import 'package:pioneer_flutter/view/control/recommend_control.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
@@ -23,7 +24,8 @@ class RecommendContent extends StatefulWidget {
   }
 }
 
-class RecommendContentState extends State<RecommendContent> {
+class RecommendContentState extends State<RecommendContent>
+    implements RecommendControl {
   List<ContentData> contentData = List<ContentData>();
   List<BannerData> bannerData = List<BannerData>();
   StatusController _statusController;
@@ -33,33 +35,32 @@ class RecommendContentState extends State<RecommendContent> {
   @override
   void initState() {
     super.initState();
-    _presenter = RecommendPresenter();
+    _presenter = RecommendPresenter(this);
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
     _scrollController = ScrollController();
-    getBannerData();
-    getContentData();
+    _presenter.getBannerDate();
+    _presenter.getContentData();
   }
 
-  getBannerData() {
-    _presenter.getBannerDateAsync().then((value) {
-      setState(() {
-        bannerData = value.data;
-      });
-    }).catchError((onError) {
-      print(onError.toString());
+  @override
+  bindBanner(List<BannerData> call) {
+    setState(() {
+      bannerData.addAll(call);
+      _statusController.pageComplete().itemComplete();
     });
   }
 
-  getContentData() {
-    _presenter.getContentDataAsync().then((value) {
-      setState(() {
-        contentData.addAll(value.data);
-        _statusController.pageComplete().itemComplete();
-      });
-    }).catchError((onError) {
-      _statusController.pageError();
+  @override
+  bindContent(List<ContentData> call) {
+    setState(() {
+      contentData.addAll(call);
     });
+  }
+
+  @override
+  pageError() {
+    _statusController.pageError();
   }
 
   Widget buildList(BuildContext context) {
@@ -69,7 +70,7 @@ class RecommendContentState extends State<RecommendContent> {
       scrollController: _scrollController,
       itemCount: contentData.length,
       onPageReload: () {
-        getContentData();
+        _presenter.getContentData();
       },
       headerChildren: <Widget>[
         RecommendContentBanner(
