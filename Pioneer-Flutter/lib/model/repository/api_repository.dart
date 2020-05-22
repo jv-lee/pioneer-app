@@ -60,7 +60,7 @@ class ApiRepository {
     return null;
   }
 
-  getHotDataAsync(hotType, category, count) async {
+  Future<HotEntity> getHotDataAsync(hotType, category, count) async {
     var response =
         await _dio.get("hot/$hotType/category/$category/count/$count");
     if (response.statusCode == 200) {

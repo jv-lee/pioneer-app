@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 import 'package:pioneer_flutter/model/hot_entity.dart';
+import 'package:pioneer_flutter/model/repository/api_repository.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
 import 'package:pioneer_flutter/view/page/recommend/recommend_content_banner.dart';
+import 'package:pioneer_flutter/view/presenter/recommend_presenter.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
+import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 import 'package:pioneer_flutter/view/widget/status/status_page.dart';
+import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
 
 /// @author jv.lee
 /// @date 2020/5/8
@@ -20,82 +24,79 @@ class RecommendContent extends StatefulWidget {
 }
 
 class RecommendContentState extends State<RecommendContent> {
-  int _headerCount = 1;
-  int _footerCount = 1;
   List<ContentData> contentData = List<ContentData>();
   List<BannerData> bannerData = List<BannerData>();
-  PageStatus _status = PageStatus.loading;
+  StatusController _statusController;
+  ScrollController _scrollController;
+  RecommendPresenter _presenter;
 
   @override
   void initState() {
     super.initState();
-    getBannerDate();
+    _presenter = RecommendPresenter();
+    _statusController = StatusController(
+        pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
+    _scrollController = ScrollController();
+    getBannerData();
     getContentData();
   }
 
-  getBannerDate() async {
-    var response = await HttpManager.instance.getDio().get('banners');
-    var banner = BannerEntity.fromJson(response.data);
-    setState(() {
-      bannerData.addAll(banner.data);
+  getBannerData() {
+    _presenter.getBannerDateAsync().then((value) {
+      setState(() {
+        bannerData = value.data;
+      });
+    }).catchError((onError) {
+      print(onError.toString());
     });
   }
 
-  getContentData() async {
-    var response = await HttpManager.instance
-        .getDio()
-        .get('hot/views/category/GanHuo/count/20');
-    var content = HotEntity.fromJson(response.data);
-    setState(() {
-      contentData.addAll(content.data);
-      _status = PageStatus.data;
+  getContentData() {
+    _presenter.getContentDataAsync().then((value) {
+      setState(() {
+        contentData.addAll(value.data);
+        _statusController.pageComplete().itemComplete();
+      });
+    }).catchError((onError) {
+      _statusController.pageError();
     });
+  }
+
+  Widget buildList(BuildContext context) {
+    return SuperListView(
+      isLoadMore: false,
+      statusController: _statusController,
+      scrollController: _scrollController,
+      itemCount: contentData.length,
+      onPageReload: () {
+        getContentData();
+      },
+      headerChildren: <Widget>[
+        RecommendContentBanner(
+          data: bannerData,
+        )
+      ],
+      itemBuilder: (BuildContext context, int index) {
+        var entity = contentData[index];
+        if (entity.images.length == 0) {
+          return ContentTextItem(
+            data: entity,
+          );
+        } else if (entity.images.length == 1) {
+          return ContentSingleItem(
+            entity,
+          );
+        } else {
+          return ContentMultipleItem(
+            entity,
+          );
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.only(top: 1),
-        color: Theme.of(context).backgroundColor,
-        child: StatusPage(
-          status: _status,
-          child: ListView.builder(
-              padding: EdgeInsets.all(0),
-              itemCount: _headerCount + contentData.length + _footerCount,
-              itemBuilder: (BuildContext context, int index) {
-                if (index == 0) {
-                  return GestureDetector(
-                    child: RecommendContentBanner(
-                      data: bannerData,
-                    ),
-                    onTapDown: (details) {
-                      getContentData();
-                    },
-                  );
-                }
-                if (index == (contentData.length + 1)) {
-                  return Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Center(
-                      child: Text('没有更多了'),
-                    ),
-                  );
-                }
-                var entity = contentData[index - _headerCount];
-                if (entity.images.length == 0) {
-                  return ContentTextItem(
-                    data: entity,
-                  );
-                } else if (entity.images.length == 1) {
-                  return ContentSingleItem(
-                    entity,
-                  );
-                } else {
-                  return ContentMultipleItem(
-                    entity,
-                  );
-                }
-              }),
-        ));
+    return buildList(context);
   }
 }
