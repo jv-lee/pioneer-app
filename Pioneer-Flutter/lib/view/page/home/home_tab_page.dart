@@ -22,7 +22,7 @@ class HomeTabPageState extends State<HomeTabPage>
   var isPageCanChanged = true;
 
   List tabs = ["新闻", "历史", "图片"];
-  List pages = [TempColorPage(color: Colors.red,),TempColorPage(color: Colors.yellow,),TempColorPage(color: Colors.greenAccent,)];
+  List pages = [TempColorPage(color: Colors.blue,),TempColorPage(color: Colors.yellow,),TempColorPage(color: Colors.greenAccent,)];
 
   @override
   void initState() {
