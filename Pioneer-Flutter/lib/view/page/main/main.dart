@@ -40,9 +40,12 @@ class MainState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: IndexedStack(
-        index: _tabIndex,
-        children: _pageList,
+      body: Container(
+        color: Theme.of(context).backgroundColor,
+        child: IndexedStack(
+          index: _tabIndex,
+          children: _pageList,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[

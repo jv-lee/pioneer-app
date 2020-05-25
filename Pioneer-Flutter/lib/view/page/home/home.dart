@@ -30,28 +30,25 @@ class HomeState extends State<HomePage> implements HomeControl {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).backgroundColor,
-      child: Flex(
-        direction: Axis.vertical,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Expanded(
-            flex: 0,
-            child: HomeToolbar(),
+    return Flex(
+      direction: Axis.vertical,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Expanded(
+          flex: 0,
+          child: HomeToolbar(),
+        ),
+        Expanded(
+          flex: 1,
+          child: StatusPage(
+            status: status,
+            child: HomeContent(data),
+            reLoadFun: () {
+              _presenter.buildCategoryTabs();
+            },
           ),
-          Expanded(
-            flex: 1,
-            child: StatusPage(
-              status: status,
-              child: HomeContent(data),
-              reLoadFun: () {
-                _presenter.buildCategoryTabs();
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
