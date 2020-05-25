@@ -60,21 +60,29 @@ class HomeContentState extends State<HomeContent>
         Expanded(
           flex: 0,
           child: SizedBox(
-              height: ThemeDimens.tab_height,
-              //清空原有主题点击水波纹效果
-              child: ClearTheme(
-                  child: TabBar(
-                      isScrollable: true,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicatorColor: Theme.of(context).accentColor,
-                      unselectedLabelColor: Theme.of(context).primaryColor,
-                      labelColor: Theme.of(context).accentColor,
-                      controller: _tabController,
-                      tabs: widget.data
-                          .map((item) => Tab(
-                                text: item.title.toUpperCase(),
-                              ))
-                          .toList()))),
+            height: ThemeDimens.tab_height,
+            child: Material(
+              color: Theme.of(context).canvasColor,
+              child: TabBar(
+                  isScrollable: true,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorColor: Theme.of(context).accentColor,
+                  unselectedLabelColor: Theme.of(context).primaryColor,
+                  labelColor: Theme.of(context).accentColor,
+                  controller: _tabController,
+                  tabs: widget.data
+                      .map((item) => Tab(
+                            text: item.title.toUpperCase(),
+                          ))
+                      .toList()),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 0,
+          child: Container(
+            height: 1,
+          ),
         ),
         Expanded(
           flex: 1,
