@@ -64,30 +64,33 @@ class ContentMultipleItem extends StatelessWidget {
                     fontSize: ThemeDimens.font_size_small),
                 strutStyle: StrutStyle(forceStrutHeight: true, leading: 0.1)),
           ),
-          Flex(
-            direction: Axis.horizontal,
-            children: <Widget>[
-              ContentItemImage(data.images[0], isSingle: false),
-              Expanded(
-                flex: 0,
-                child: Container(
-                  width: 2,
+          Container(
+            margin: EdgeInsets.only(top: ThemeDimens.margin_large),
+            child: Flex(
+              direction: Axis.horizontal,
+              children: <Widget>[
+                ContentItemImage(data.images[0], isSingle: false),
+                Expanded(
+                  flex: 0,
+                  child: Container(
+                    width: 2,
+                  ),
                 ),
-              ),
-              ContentItemImage(
-                data.images[1],
-                isSingle: false,
-              ),
-              Expanded(
-                flex: 0,
-                child: Container(
-                  width: 2,
+                ContentItemImage(
+                  data.images[1],
+                  isSingle: false,
                 ),
-              ),
-              ContentItemImage(
-                  data.images.length > 2 ? data.images[2] : '',
-                  isSingle: false),
-            ],
+                Expanded(
+                  flex: 0,
+                  child: Container(
+                    width: 2,
+                  ),
+                ),
+                ContentItemImage(
+                    data.images.length > 2 ? data.images[2] : '',
+                    isSingle: false),
+              ],
+            ),
           ),
           Container(
             margin: EdgeInsets.only(top: ThemeDimens.margin_large),

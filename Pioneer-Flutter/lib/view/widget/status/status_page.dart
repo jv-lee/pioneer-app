@@ -68,6 +68,7 @@ class StatusPageState extends State<StatusPage> {
     return Container(
       child: Center(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('data is error'),
             CupertinoButton(
