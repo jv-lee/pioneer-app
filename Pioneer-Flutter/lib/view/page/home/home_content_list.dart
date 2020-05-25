@@ -64,17 +64,11 @@ class _HomeContentListState extends State<HomeContentList>
       itemBuilder: (BuildContext context, int index) {
         var entity = _pageLoad.data[index];
         if (entity.images.length == 0) {
-          return ContentTextItem(
-            data: entity,
-          );
+          return ContentTextItem(entity);
         } else if (entity.images.length == 1) {
-          return ContentSingleItem(
-            entity,
-          );
+          return ContentSingleItem(entity);
         } else {
-          return ContentMultipleItem(
-            entity,
-          );
+          return ContentMultipleItem(entity);
         }
       },
     );

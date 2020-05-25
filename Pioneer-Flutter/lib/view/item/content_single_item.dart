@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
-import 'package:pioneer_flutter/view/item/content_item_image.dart';
+
+import 'content_item_image.dart';
 
 /// @author jv.lee
-/// @date 2020/5/13
-/// @description 列表item 单图样式
-class ContentSingleItem extends StatelessWidget {
+/// @date 2020/5/25
+/// @description
+class ContentSingleItem extends StatefulWidget {
   ContentSingleItem(this.data) : super();
 
   final ContentData data;
 
+  @override
+  _ContentSingleItemState createState() => _ContentSingleItemState();
+}
+
+class _ContentSingleItemState extends State<ContentSingleItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,29 +27,20 @@ class ContentSingleItem extends StatelessWidget {
       color: Theme.of(context).canvasColor,
       child: Column(
         children: <Widget>[
-          Flex(
-            direction: Axis.horizontal,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Expanded(
-                flex: 0,
-                child: Text(
-                  data.author,
-                  style: TextStyle(
-                      fontSize: ThemeDimens.font_size_small,
-                      color: Theme.of(context).primaryColorDark),
-                ),
+              Text(
+                widget.data.author,
+                style: TextStyle(
+                    fontSize: ThemeDimens.font_size_small,
+                    color: Theme.of(context).primaryColorDark),
               ),
-              Spacer(
-                flex: 1,
-              ),
-              Expanded(
-                flex: 0,
-                child: Text(
-                  data.category,
-                  style: TextStyle(
-                      fontSize: ThemeDimens.font_size_small,
-                      color: Theme.of(context).primaryColorDark),
-                ),
+              Text(
+                widget.data.category,
+                style: TextStyle(
+                    fontSize: ThemeDimens.font_size_small,
+                    color: Theme.of(context).primaryColorDark),
               )
             ],
           ),
@@ -56,7 +52,10 @@ class ContentSingleItem extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   flex: 0,
-                  child: ContentItemImage(data.images[0]),
+                  child: ContentItemImage(
+                    widget.data.images[0],
+                    isSingle: true,
+                  ),
                 ),
                 Expanded(
                   flex: 1,
@@ -67,7 +66,7 @@ class ContentSingleItem extends StatelessWidget {
                         flex: 0,
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: Text(data.title,
+                            child: Text(widget.data.title,
                                 textAlign: TextAlign.start,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -85,7 +84,7 @@ class ContentSingleItem extends StatelessWidget {
                           margin:
                               EdgeInsets.only(top: ThemeDimens.margin_small),
                           alignment: Alignment.centerLeft,
-                          child: Text(data.desc,
+                          child: Text(widget.data.desc,
                               textAlign: TextAlign.start,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -104,45 +103,46 @@ class ContentSingleItem extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: ThemeDimens.margin_large),
-            child: Flex(
-              direction: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Container(
-                  child: Icon(
-                    ThemeIcons.like,
-                    size: 14,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  margin: EdgeInsets.only(right: 3),
-                ),
-                Text(
-                  data.likeCounts == 0
-                      ? ThemeStrings.ITEM_LIKE_TEXT
-                      : data.likeCounts.toString(),
-                  style: TextStyle(
-                    fontSize: ThemeDimens.font_size_small_x,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                Container(
-                  child: Icon(
-                    ThemeIcons.like,
-                    size: 14,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  margin: EdgeInsets.only(right: 3, left: 3),
-                ),
-                Text(
-                  data.views == 0
-                      ? ThemeStrings.ITEM_VIEW_TEXT
-                      : data.views.toString(),
-                  style: TextStyle(
-                    fontSize: ThemeDimens.font_size_small_x,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                Spacer(
-                  flex: 1,
+                Row(
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        ThemeIcons.like,
+                        size: 14,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      margin: EdgeInsets.only(right: 3),
+                    ),
+                    Text(
+                      widget.data.likeCounts == 0
+                          ? ThemeStrings.ITEM_LIKE_TEXT
+                          : widget.data.likeCounts.toString(),
+                      style: TextStyle(
+                        fontSize: ThemeDimens.font_size_small_x,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Container(
+                      child: Icon(
+                        ThemeIcons.like,
+                        size: 14,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      margin: EdgeInsets.only(right: 3, left: 3),
+                    ),
+                    Text(
+                      widget.data.views == 0
+                          ? ThemeStrings.ITEM_VIEW_TEXT
+                          : widget.data.views.toString(),
+                      style: TextStyle(
+                        fontSize: ThemeDimens.font_size_small_x,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )
+                  ],
                 ),
                 Text(
                   '昨天',

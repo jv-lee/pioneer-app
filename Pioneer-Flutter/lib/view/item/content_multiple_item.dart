@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
@@ -8,13 +7,18 @@ import 'package:pioneer_flutter/theme/theme_strings.dart';
 import 'content_item_image.dart';
 
 /// @author jv.lee
-/// @date 2020/5/13
-/// @description 列表item 多图样式
-class ContentMultipleItem extends StatelessWidget {
+/// @date 2020/5/25
+/// @description
+class ContentMultipleItem extends StatefulWidget {
   ContentMultipleItem(this.data) : super();
 
   final ContentData data;
 
+  @override
+  _ContentMultipleItemState createState() => _ContentMultipleItemState();
+}
+
+class _ContentMultipleItemState extends State<ContentMultipleItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,36 +27,27 @@ class ContentMultipleItem extends StatelessWidget {
       color: Theme.of(context).canvasColor,
       child: Column(
         children: <Widget>[
-          Flex(
-            direction: Axis.horizontal,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Expanded(
-                flex: 0,
-                child: Text(
-                  data.author,
-                  style: TextStyle(
-                      fontSize: ThemeDimens.font_size_small,
-                      color: Theme.of(context).primaryColorDark),
-                ),
+              Text(
+                widget.data.author,
+                style: TextStyle(
+                    fontSize: ThemeDimens.font_size_small,
+                    color: Theme.of(context).primaryColorDark),
               ),
-              Spacer(
-                flex: 1,
-              ),
-              Expanded(
-                flex: 0,
-                child: Text(
-                  data.category,
-                  style: TextStyle(
-                      fontSize: ThemeDimens.font_size_small,
-                      color: Theme.of(context).primaryColorDark),
-                ),
+              Text(
+                widget.data.category,
+                style: TextStyle(
+                    fontSize: ThemeDimens.font_size_small,
+                    color: Theme.of(context).primaryColorDark),
               )
             ],
           ),
           Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: ThemeDimens.margin_large),
-              child: Text(data.title,
+              child: Text(widget.data.title,
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -66,7 +61,7 @@ class ContentMultipleItem extends StatelessWidget {
           Container(
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(top: ThemeDimens.margin_small),
-            child: Text(data.desc,
+            child: Text(widget.data.desc,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -74,80 +69,73 @@ class ContentMultipleItem extends StatelessWidget {
                     fontSize: ThemeDimens.font_size_small),
                 strutStyle: StrutStyle(forceStrutHeight: true, leading: 0.1)),
           ),
-          Container(
-            margin: EdgeInsets.only(top: ThemeDimens.margin_item),
-            child: Flex(
-              direction: Axis.horizontal,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: ContentItemImage(data.images[0]),
+          Flex(
+            direction: Axis.horizontal,
+            children: <Widget>[
+              ContentItemImage(widget.data.images[0], isSingle: false),
+              Expanded(
+                flex: 0,
+                child: Container(
+                  width: 2,
                 ),
-                Expanded(
-                  flex: 0,
-                  child: Container(
-                    width: 2,
-                  ),
+              ),
+              ContentItemImage(
+                widget.data.images[1],
+                isSingle: false,
+              ),
+              Expanded(
+                flex: 0,
+                child: Container(
+                  width: 2,
                 ),
-                Expanded(
-                  flex: 1,
-                  child: ContentItemImage(data.images[1]),
-                ),
-                Expanded(
-                  flex: 0,
-                  child: Container(
-                    width: 2,
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ContentItemImage(
-                      data.images.length > 2 ? data.images[2] : ''),
-                ),
-              ],
-            ),
+              ),
+              ContentItemImage(
+                  widget.data.images.length > 2 ? widget.data.images[2] : '',
+                  isSingle: false),
+            ],
           ),
           Container(
             margin: EdgeInsets.only(top: ThemeDimens.margin_large),
-            child: Flex(
-              direction: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Container(
-                  child: Icon(
-                    ThemeIcons.like,
-                    size: 14,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  margin: EdgeInsets.only(right: 3),
-                ),
-                Text(
-                  data.likeCounts == 0
-                      ? ThemeStrings.ITEM_LIKE_TEXT
-                      : data.likeCounts.toString(),
-                  style: TextStyle(
-                    fontSize: ThemeDimens.font_size_small_x,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                Container(
-                  child: Icon(
-                    ThemeIcons.like,
-                    size: 14,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  margin: EdgeInsets.only(right: 3, left: 3),
-                ),
-                Text(
-                  data.views == 0
-                      ? ThemeStrings.ITEM_VIEW_TEXT
-                      : data.views.toString(),
-                  style: TextStyle(
-                    fontSize: ThemeDimens.font_size_small_x,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                Spacer(
-                  flex: 1,
+                Row(
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        ThemeIcons.like,
+                        size: 14,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      margin: EdgeInsets.only(right: 3),
+                    ),
+                    Text(
+                      widget.data.likeCounts == 0
+                          ? ThemeStrings.ITEM_LIKE_TEXT
+                          : widget.data.likeCounts.toString(),
+                      style: TextStyle(
+                        fontSize: ThemeDimens.font_size_small_x,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Container(
+                      child: Icon(
+                        ThemeIcons.like,
+                        size: 14,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      margin: EdgeInsets.only(right: 3, left: 3),
+                    ),
+                    Text(
+                      widget.data.views == 0
+                          ? ThemeStrings.ITEM_VIEW_TEXT
+                          : widget.data.views.toString(),
+                      style: TextStyle(
+                        fontSize: ThemeDimens.font_size_small_x,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )
+                  ],
                 ),
                 Text(
                   '昨天',
