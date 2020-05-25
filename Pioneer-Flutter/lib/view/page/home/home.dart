@@ -5,7 +5,7 @@ import 'package:pioneer_flutter/view/presenter/home_presenter.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_page.dart';
 
-import 'home_tab_page.dart';
+import 'home_content.dart';
 import 'home_toolbar.dart';
 
 /// @author jv.lee
@@ -13,9 +13,7 @@ import 'home_toolbar.dart';
 /// @description 主页-HomeTAB
 class HomePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return HomeState();
-  }
+  State<StatefulWidget> createState() => HomeState();
 }
 
 class HomeState extends State<HomePage> implements HomeControl {
@@ -44,7 +42,7 @@ class HomeState extends State<HomePage> implements HomeControl {
           flex: 1,
           child: StatusPage(
             status: status,
-            child: HomeTabPage(data),
+            child: HomeContent(data),
             reLoadFun: () {
               _presenter.buildCategoryTabs();
             },

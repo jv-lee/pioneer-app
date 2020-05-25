@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/category_entity.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/view/page/home/home_content_list.dart';
 import 'package:pioneer_flutter/view/widget/clear_theme.dart';
 import 'package:pioneer_flutter/view/widget/temp_color_page.dart';
 
 /// @author jv.lee
 /// @date 2020/5/8
 /// @description 主页-HomeTAB-内部page页面
-class HomeTabPage extends StatefulWidget {
-  HomeTabPage(this.data) : super();
+class HomeContent extends StatefulWidget {
+  HomeContent(this.data) : super();
   final List<CategoryData> data;
 
   @override
-  State<StatefulWidget> createState() {
-    return HomeTabPageState();
-  }
+  State<StatefulWidget> createState() => HomeContentState();
 }
 
-class HomeTabPageState extends State<HomeTabPage>
+class HomeContentState extends State<HomeContent>
     with SingleTickerProviderStateMixin {
   TabController _tabController; //需要定义一个Controller
   PageController _pageController;
@@ -73,7 +72,7 @@ class HomeTabPageState extends State<HomeTabPage>
                       controller: _tabController,
                       tabs: widget.data
                           .map((item) => Tab(
-                                text: item.type,
+                                text: item.title.toUpperCase(),
                               ))
                           .toList()))),
         ),
@@ -88,9 +87,7 @@ class HomeTabPageState extends State<HomeTabPage>
               },
               controller: _pageController,
               itemBuilder: (BuildContext context, int index) {
-                return TempColorPage(
-                  color: Colors.blue,
-                );
+                return HomeContentList(widget.data[index].type);
               }),
         ),
       ],

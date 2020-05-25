@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pioneer_flutter/model/hot_entity.dart';
+import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';

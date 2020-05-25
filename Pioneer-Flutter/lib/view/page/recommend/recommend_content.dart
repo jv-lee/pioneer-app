@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
-import 'package:pioneer_flutter/model/hot_entity.dart';
+import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/model/repository/api_repository.dart';
 import 'package:pioneer_flutter/view/control/recommend_control.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';

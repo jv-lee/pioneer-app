@@ -3,7 +3,8 @@ import 'package:pioneer_flutter/http/http_manager.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 import 'package:pioneer_flutter/model/category_entity.dart';
 import 'package:pioneer_flutter/model/content_entity.dart';
-import 'package:pioneer_flutter/model/hot_entity.dart';
+
+import '../hot_entity.dart';
 
 /// @author jv.lee
 /// @date 2020/5/18

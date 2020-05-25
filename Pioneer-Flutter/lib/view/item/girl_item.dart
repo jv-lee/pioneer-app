@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/constants/http_constants.dart';
-import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 
 /// @author jv.lee
