@@ -9,16 +9,11 @@ import 'content_item_image.dart';
 /// @author jv.lee
 /// @date 2020/5/25
 /// @description
-class ContentMultipleItem extends StatefulWidget {
+class ContentMultipleItem extends StatelessWidget {
   ContentMultipleItem(this.data) : super();
 
   final ContentData data;
 
-  @override
-  _ContentMultipleItemState createState() => _ContentMultipleItemState();
-}
-
-class _ContentMultipleItemState extends State<ContentMultipleItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,13 +26,13 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                widget.data.author,
+                data.author,
                 style: TextStyle(
                     fontSize: ThemeDimens.font_size_small,
                     color: Theme.of(context).primaryColorDark),
               ),
               Text(
-                widget.data.category,
+                data.category,
                 style: TextStyle(
                     fontSize: ThemeDimens.font_size_small,
                     color: Theme.of(context).primaryColorDark),
@@ -47,7 +42,7 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
           Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: ThemeDimens.margin_large),
-              child: Text(widget.data.title,
+              child: Text(data.title,
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -61,7 +56,7 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
           Container(
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(top: ThemeDimens.margin_small),
-            child: Text(widget.data.desc,
+            child: Text(data.desc,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -72,7 +67,7 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
           Flex(
             direction: Axis.horizontal,
             children: <Widget>[
-              ContentItemImage(widget.data.images[0], isSingle: false),
+              ContentItemImage(data.images[0], isSingle: false),
               Expanded(
                 flex: 0,
                 child: Container(
@@ -80,7 +75,7 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
                 ),
               ),
               ContentItemImage(
-                widget.data.images[1],
+                data.images[1],
                 isSingle: false,
               ),
               Expanded(
@@ -90,7 +85,7 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
                 ),
               ),
               ContentItemImage(
-                  widget.data.images.length > 2 ? widget.data.images[2] : '',
+                  data.images.length > 2 ? data.images[2] : '',
                   isSingle: false),
             ],
           ),
@@ -110,9 +105,9 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
                       margin: EdgeInsets.only(right: 3),
                     ),
                     Text(
-                      widget.data.likeCounts == 0
+                      data.likeCounts == 0
                           ? ThemeStrings.ITEM_LIKE_TEXT
-                          : widget.data.likeCounts.toString(),
+                          : data.likeCounts.toString(),
                       style: TextStyle(
                         fontSize: ThemeDimens.font_size_small_x,
                         color: Theme.of(context).primaryColor,
@@ -127,9 +122,9 @@ class _ContentMultipleItemState extends State<ContentMultipleItem> {
                       margin: EdgeInsets.only(right: 3, left: 3),
                     ),
                     Text(
-                      widget.data.views == 0
+                      data.views == 0
                           ? ThemeStrings.ITEM_VIEW_TEXT
-                          : widget.data.views.toString(),
+                          : data.views.toString(),
                       style: TextStyle(
                         fontSize: ThemeDimens.font_size_small_x,
                         color: Theme.of(context).primaryColor,

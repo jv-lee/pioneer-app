@@ -9,16 +9,11 @@ import 'content_item_image.dart';
 /// @author jv.lee
 /// @date 2020/5/25
 /// @description
-class ContentSingleItem extends StatefulWidget {
+class ContentSingleItem extends StatelessWidget {
   ContentSingleItem(this.data) : super();
 
   final ContentData data;
 
-  @override
-  _ContentSingleItemState createState() => _ContentSingleItemState();
-}
-
-class _ContentSingleItemState extends State<ContentSingleItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,13 +26,13 @@ class _ContentSingleItemState extends State<ContentSingleItem> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                widget.data.author,
+                data.author,
                 style: TextStyle(
                     fontSize: ThemeDimens.font_size_small,
                     color: Theme.of(context).primaryColorDark),
               ),
               Text(
-                widget.data.category,
+                data.category,
                 style: TextStyle(
                     fontSize: ThemeDimens.font_size_small,
                     color: Theme.of(context).primaryColorDark),
@@ -53,7 +48,7 @@ class _ContentSingleItemState extends State<ContentSingleItem> {
                 Expanded(
                   flex: 0,
                   child: ContentItemImage(
-                    widget.data.images[0],
+                    data.images[0],
                     isSingle: true,
                   ),
                 ),
@@ -66,7 +61,7 @@ class _ContentSingleItemState extends State<ContentSingleItem> {
                         flex: 0,
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: Text(widget.data.title,
+                            child: Text(data.title,
                                 textAlign: TextAlign.start,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -84,7 +79,7 @@ class _ContentSingleItemState extends State<ContentSingleItem> {
                           margin:
                               EdgeInsets.only(top: ThemeDimens.margin_small),
                           alignment: Alignment.centerLeft,
-                          child: Text(widget.data.desc,
+                          child: Text(data.desc,
                               textAlign: TextAlign.start,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -117,9 +112,9 @@ class _ContentSingleItemState extends State<ContentSingleItem> {
                       margin: EdgeInsets.only(right: 3),
                     ),
                     Text(
-                      widget.data.likeCounts == 0
+                      data.likeCounts == 0
                           ? ThemeStrings.ITEM_LIKE_TEXT
-                          : widget.data.likeCounts.toString(),
+                          : data.likeCounts.toString(),
                       style: TextStyle(
                         fontSize: ThemeDimens.font_size_small_x,
                         color: Theme.of(context).primaryColor,
@@ -134,9 +129,9 @@ class _ContentSingleItemState extends State<ContentSingleItem> {
                       margin: EdgeInsets.only(right: 3, left: 3),
                     ),
                     Text(
-                      widget.data.views == 0
+                      data.views == 0
                           ? ThemeStrings.ITEM_VIEW_TEXT
-                          : widget.data.views.toString(),
+                          : data.views.toString(),
                       style: TextStyle(
                         fontSize: ThemeDimens.font_size_small_x,
                         color: Theme.of(context).primaryColor,
