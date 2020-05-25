@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/model/category_entity.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/widget/clear_theme.dart';
 import 'package:pioneer_flutter/view/widget/temp_color_page.dart';
@@ -7,6 +8,9 @@ import 'package:pioneer_flutter/view/widget/temp_color_page.dart';
 /// @date 2020/5/8
 /// @description 主页-HomeTAB-内部page页面
 class HomeTabPage extends StatefulWidget {
+  HomeTabPage(this.data) : super();
+  final List<CategoryData> data;
+
   @override
   State<StatefulWidget> createState() {
     return HomeTabPageState();
@@ -21,15 +25,12 @@ class HomeTabPageState extends State<HomeTabPage>
   var currentPage = 0;
   var isPageCanChanged = true;
 
-  List tabs = ["新闻", "历史", "图片"];
-  List pages = [TempColorPage(color: Colors.blue,),TempColorPage(color: Colors.yellow,),TempColorPage(color: Colors.greenAccent,)];
-
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
-    _tabController = TabController(length: tabs.length, vsync: this);
-    _tabController.addListener((){
+    _tabController = TabController(length: widget.data.length, vsync: this);
+    _tabController.addListener(() {
       //判断TabBar是否切换
       if (_tabController.indexIsChanging) {
         onPageChange(_tabController.index, p: _pageController);
@@ -42,7 +43,8 @@ class HomeTabPageState extends State<HomeTabPage>
     if (p != null) {
       isPageCanChanged = false;
       //等待PageView切换完毕,再释放PageView监听
-      await _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+      await _pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
       isPageCanChanged = true;
     } else {
       //切换TabBar
@@ -63,25 +65,32 @@ class HomeTabPageState extends State<HomeTabPage>
               //清空原有主题点击水波纹效果
               child: ClearTheme(
                   child: TabBar(
+                      isScrollable: true,
                       indicatorSize: TabBarIndicatorSize.label,
                       indicatorColor: Theme.of(context).accentColor,
                       unselectedLabelColor: Theme.of(context).primaryColor,
                       labelColor: Theme.of(context).accentColor,
                       controller: _tabController,
-                      tabs: tabs.map((title) => Tab(text: title,)).toList()))),
+                      tabs: widget.data
+                          .map((item) => Tab(
+                                text: item.type,
+                              ))
+                          .toList()))),
         ),
         Expanded(
           flex: 1,
           child: PageView.builder(
-              itemCount: pages.length,
-              onPageChanged: (index){
-                if(isPageCanChanged) {
-                 onPageChange(index);
+              itemCount: widget.data.length,
+              onPageChanged: (index) {
+                if (isPageCanChanged) {
+                  onPageChange(index);
                 }
               },
               controller: _pageController,
-              itemBuilder: (BuildContext context,int index){
-                return pages[index];
+              itemBuilder: (BuildContext context, int index) {
+                return TempColorPage(
+                  color: Colors.blue,
+                );
               }),
         ),
       ],

@@ -18,7 +18,11 @@ class RecommendPresenter {
 
   getContentData() {
     ApiRepository.instance.getHotDataAsync("views", "GanHuo", 20).then((value) {
-      control.bindContent(value.data);
+      if(value.data == null) {
+        control.pageError();
+      }else{
+        control.bindContent(value.data);
+      }
     }).catchError((error) {
       control.pageError();
     });

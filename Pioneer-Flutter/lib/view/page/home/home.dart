@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/model/category_entity.dart';
+import 'package:pioneer_flutter/view/control/home_control.dart';
+import 'package:pioneer_flutter/view/presenter/home_presenter.dart';
+import 'package:pioneer_flutter/view/widget/status/status.dart';
+import 'package:pioneer_flutter/view/widget/status/status_page.dart';
 
 import 'home_tab_page.dart';
 import 'home_toolbar.dart';
@@ -13,10 +18,16 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class HomeState extends State<HomePage> {
+class HomeState extends State<HomePage> implements HomeControl {
+  HomePresenter _presenter;
+  List<CategoryData> data = List();
+  PageStatus status = PageStatus.loading;
+
   @override
   void initState() {
     super.initState();
+    _presenter = HomePresenter(this);
+    _presenter.buildCategoryTabs();
   }
 
   @override
@@ -31,9 +42,34 @@ class HomeState extends State<HomePage> {
         ),
         Expanded(
           flex: 1,
-          child: HomeTabPage(),
+          child: StatusPage(
+            status: status,
+            child: HomeTabPage(data),
+            reLoadFun: () {
+              _presenter.buildCategoryTabs();
+            },
+          ),
         ),
       ],
     );
+  }
+
+  @override
+  bindCategoryTabs(List<CategoryData> call) {
+    setState(() {
+      data.addAll(call);
+      if (data.length == 0) {
+        status = PageStatus.empty;
+      } else {
+        status = PageStatus.data;
+      }
+    });
+  }
+
+  @override
+  pageError() {
+    setState(() {
+      status = PageStatus.error;
+    });
   }
 }
