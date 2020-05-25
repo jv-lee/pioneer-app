@@ -20,7 +20,8 @@ class HomeContentList extends StatefulWidget {
   _HomeContentListState createState() => _HomeContentListState();
 }
 
-class _HomeContentListState extends State<HomeContentList> {
+class _HomeContentListState extends State<HomeContentList>
+    with AutomaticKeepAliveClientMixin {
   ContentListPresenter _presenter;
   StatusController _statusController;
   PageLoad<ContentData> _pageLoad;
@@ -46,6 +47,7 @@ class _HomeContentListState extends State<HomeContentList> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SuperListView(
       statusController: _statusController,
       itemCount: _pageLoad.data.length,
@@ -77,4 +79,7 @@ class _HomeContentListState extends State<HomeContentList> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
