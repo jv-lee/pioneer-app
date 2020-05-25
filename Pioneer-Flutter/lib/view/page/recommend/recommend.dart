@@ -30,6 +30,12 @@ class RecommendState extends State<RecommendPage> {
             child: RecommendToolbar(),
           ),
           Expanded(
+            flex: 0,
+            child: Container(
+              height: 1,
+            ),
+          ),
+          Expanded(
             flex: 1,
             child: RecommendContent(),
           )
