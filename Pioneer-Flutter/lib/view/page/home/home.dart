@@ -45,20 +45,18 @@ class HomeState extends State<HomePage> implements HomeControl {
 
   @override
   bindCategoryTabs(List<CategoryData> call) {
-    setState(() {
-      data.addAll(call);
-      if (data.length == 0) {
-        status = PageStatus.empty;
-      } else {
-        status = PageStatus.data;
-      }
-    });
+    data.addAll(call);
+    if (data.length == 0) {
+      status = PageStatus.empty;
+    } else {
+      status = PageStatus.data;
+    }
+    setState(() {});
   }
 
   @override
   pageError() {
-    setState(() {
-      status = PageStatus.error;
-    });
+    status = PageStatus.error;
+    setState(() {});
   }
 }
