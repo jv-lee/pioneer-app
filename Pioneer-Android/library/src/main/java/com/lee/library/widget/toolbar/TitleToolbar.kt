@@ -97,6 +97,7 @@ open class TitleToolbar : CustomToolbarLayout {
     private fun buildBackImage() {
         ivBack = ImageView(context)
         ivBack?.run {
+            id = R.id.toolbar_back
             layoutParams =
                 LayoutParams(
                     resources.getDimension(R.dimen.toolbar_button_width).toInt(),
@@ -117,6 +118,7 @@ open class TitleToolbar : CustomToolbarLayout {
     private fun buildTitleText() {
         tvTitle = TextView(context)
         tvTitle?.run {
+            id = R.id.toolbar_title
             layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             updateLayoutParams<ConstraintLayout.LayoutParams> {
                 startToStart = 0
@@ -137,6 +139,7 @@ open class TitleToolbar : CustomToolbarLayout {
     private fun buildMenuImage() {
         ivMenu = ImageView(context)
         ivMenu?.run {
+            id = R.id.toolbar_menu
             layoutParams =
                 LayoutParams(
                     resources.getDimension(R.dimen.toolbar_button_width).toInt(),

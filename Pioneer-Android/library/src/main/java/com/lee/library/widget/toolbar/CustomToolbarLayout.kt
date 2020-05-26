@@ -67,6 +67,7 @@ open class CustomToolbarLayout : ConstraintLayout {
     private fun initBottomLine() {
         val lineView = View(context)
         lineView.run {
+            id = R.id.toolbar_line
             layoutParams = LayoutParams(MATCH_PARENT, SizeUtil.px2dp(context, 1f))
             lineView.setBackgroundColor(
                 ContextCompat.getColor(
