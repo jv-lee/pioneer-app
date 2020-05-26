@@ -81,24 +81,21 @@ class HomeContentState extends State<HomeContent>
           ),
         ),
         Expanded(
-          flex: 0,
-          child: Container(
-            height: 1,
-          ),
-        ),
-        Expanded(
           flex: 1,
-          child: PageView.builder(
-              itemCount: widget.data.length,
-              onPageChanged: (index) {
-                if (isPageCanChanged) {
-                  onPageChange(index);
-                }
-              },
-              controller: _pageController,
-              itemBuilder: (BuildContext context, int index) {
-                return HomeContentList(widget.data[index].type);
-              }),
+          child: Container(
+            margin: EdgeInsets.only(top: 1),
+            child: PageView.builder(
+                itemCount: widget.data.length,
+                onPageChanged: (index) {
+                  if (isPageCanChanged) {
+                    onPageChange(index);
+                  }
+                },
+                controller: _pageController,
+                itemBuilder: (BuildContext context, int index) {
+                  return HomeContentList(widget.data[index].type);
+                }),
+          ),
         ),
       ],
     );
