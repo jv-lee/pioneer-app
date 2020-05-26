@@ -20,24 +20,7 @@ class RecommendState extends State<RecommendPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        Expanded(
-          flex: 0,
-          child: RecommendToolbar(),
-        ),
-        Expanded(
-          flex: 0,
-          child: Container(
-            height: 1,
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: RecommendContent(),
-        )
-      ],
-    );
+    return Scaffold(
+        appBar: RecommendToolbar(context), body: RecommendContent());
   }
 }

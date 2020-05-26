@@ -7,13 +7,7 @@ import 'package:pioneer_flutter/theme/theme_strings.dart';
 /// @date 2020/5/8
 /// @description 项目通用 搜索框text展示样式
 class SearchText extends StatelessWidget {
-  SearchText({Key key, this.width, this.height})
-      : assert(width == null),
-        assert(height == null),
-        super(key: key);
-
-  final double width;
-  final double height;
+  SearchText({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +16,7 @@ class SearchText extends StatelessWidget {
           ThemeDimens.padding_large, 0, ThemeDimens.padding_large, 0),
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.only(right: ThemeDimens.margin_item),
-      width: width == null ? ThemeDimens.search_text_width_home : width,
-      height: height == null ? ThemeDimens.search_text_height : height,
+      height: ThemeDimens.search_text_height,
       child: Row(
         children: <Widget>[
           Padding(
