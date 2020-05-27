@@ -19,7 +19,7 @@ class GirlPage extends StatefulWidget {
   }
 }
 
-class GirlState extends State<GirlPage> {
+class GirlState extends State<GirlPage> with AutomaticKeepAliveClientMixin {
   GirlPresenter _presenter;
   StatusController _statusController;
   ScrollController _scrollController;
@@ -47,6 +47,7 @@ class GirlState extends State<GirlPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Stack(
       children: <Widget>[
         SuperListView(
@@ -72,4 +73,7 @@ class GirlState extends State<GirlPage> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

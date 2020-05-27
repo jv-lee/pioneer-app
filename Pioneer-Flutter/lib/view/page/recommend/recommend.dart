@@ -12,7 +12,7 @@ class RecommendPage extends StatefulWidget {
   }
 }
 
-class RecommendState extends State<RecommendPage> {
+class RecommendState extends State<RecommendPage> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -20,6 +20,7 @@ class RecommendState extends State<RecommendPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         appBar: RecommendToolbar(context),
         body: Container(
@@ -27,4 +28,7 @@ class RecommendState extends State<RecommendPage> {
           child: RecommendContent(),
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

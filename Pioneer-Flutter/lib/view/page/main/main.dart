@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
@@ -21,6 +22,7 @@ class MainPage extends StatefulWidget {
 class MainState extends State<MainPage> {
   int _tabIndex = 0;
   var _pageList = [HomePage(), RecommendPage(), GirlPage(), MePage()];
+  PageController _pageController;
 
   @override
   void initState() {
@@ -29,6 +31,7 @@ class MainState extends State<MainPage> {
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       StatusTools.transparentStatusBar();
     });
+    _pageController = PageController(initialPage: 0);
   }
 
   @override
@@ -39,8 +42,13 @@ class MainState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: _pageList[_tabIndex],
+      body: PageView.builder(
+          itemCount: _pageList.length,
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(), //静止PageView滑动
+          itemBuilder: (BuildContext context, int index) {
+            return _pageList[index];
+          }),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(
@@ -61,6 +69,7 @@ class MainState extends State<MainPage> {
         onTap: (index) {
           setState(() {
             _tabIndex = index;
+            _pageController.jumpToPage(index);
           });
         },
         selectedItemColor: Theme.of(context).accentColor,

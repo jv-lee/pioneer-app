@@ -32,12 +32,37 @@ class RecommendContentState extends State<RecommendContent>
   @override
   void initState() {
     super.initState();
+    print("initState");
     _presenter = RecommendPresenter(this);
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
     _scrollController = ScrollController();
     _presenter.getBannerDate();
     _presenter.getContentData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("didChangeDependencies");
+  }
+
+  @override
+  void didUpdateWidget(RecommendContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("didUpdateWidget");
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    print("deactivate");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("dispose");
   }
 
   @override
