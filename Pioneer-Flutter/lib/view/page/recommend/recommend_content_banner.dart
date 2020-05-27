@@ -8,7 +8,7 @@ import 'package:pioneer_flutter/model/banner_entity.dart';
 class RecommendContentBanner extends StatefulWidget {
   final List<BannerData> data;
 
-  RecommendContentBanner({this.data}):super();
+  RecommendContentBanner({this.data}) : super();
 
   @override
   State<StatefulWidget> createState() {
@@ -17,7 +17,6 @@ class RecommendContentBanner extends StatefulWidget {
 }
 
 class RecommendContentBannerState extends State<RecommendContentBanner> {
-
   @override
   void initState() {
     super.initState();
@@ -32,7 +31,7 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
   }
 
   Widget buildBanner() {
-    if (widget.data == null) {
+    if (widget.data == null || widget.data.length == 0) {
       return Center(
         child: Text('加载中...'),
       );

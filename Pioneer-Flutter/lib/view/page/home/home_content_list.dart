@@ -42,7 +42,8 @@ class _HomeContentListState extends State<HomeContentList>
           setState(() {});
         },
         statusController: _statusController);
-    _pageLoad.loadData(false);
+    Future.delayed(Duration(milliseconds: widget.type == "Android" ? 0 : 500),
+        () => _pageLoad.loadData(false));
   }
 
   @override
