@@ -21,9 +21,17 @@ class MeState extends State<MePage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: MeToolbar(context),
-      body: MeContent(),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Expanded(
+          flex: 0,
+          child: MeToolbar(context),
+        ),
+        Expanded(
+          child: MeContent(),
+        )
+      ],
     );
   }
 
