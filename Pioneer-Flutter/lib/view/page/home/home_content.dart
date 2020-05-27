@@ -1,11 +1,7 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/category_entity.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/page/home/home_content_list.dart';
-import 'package:pioneer_flutter/view/widget/clear_theme.dart';
-import 'package:pioneer_flutter/view/widget/temp_color_page.dart';
 
 /// @author jv.lee
 /// @date 2020/5/8
