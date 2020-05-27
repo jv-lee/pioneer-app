@@ -38,10 +38,12 @@ class _GirlItemState extends State<GirlItem> {
                     topRight: Radius.circular(
                         ThemeDimens.item_content_picture_radius),
                   ),
-                  image: DecorationImage(
-                      image: NetworkImage(HttpConstants.getCropImagePath(
-                          widget.data.images[0])),
-                      fit: BoxFit.cover)),
+                  image: widget.data.images[0] == null
+                      ? null
+                      : DecorationImage(
+                          image: NetworkImage(HttpConstants.getCropImagePath(
+                              widget.data.images[0])),
+                          fit: BoxFit.cover)),
             ),
             Container(
               alignment: Alignment.centerLeft,

@@ -22,7 +22,11 @@ class _ContentItemImageState extends State<ContentItemImage> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.path == '' ? buildEmpty() : buildImage();
+    if (widget.path == null || widget.path == "null" || widget.path == "") {
+      return buildEmpty();
+    } else {
+      return buildImage();
+    }
   }
 
   Widget buildImage() {
@@ -43,7 +47,7 @@ class _ContentItemImageState extends State<ContentItemImage> {
 
   Widget buildEmpty() {
     return Container(
-        margin: EdgeInsets.only(right: ThemeDimens.margin_medium),
+        margin: EdgeInsets.only(right: widget.isSingle ? ThemeDimens.margin_medium : 0),
         height: ThemeDimens.item_content_picture_height,
         width: ThemeDimens.item_content_picture_width,
         decoration: BoxDecoration(
