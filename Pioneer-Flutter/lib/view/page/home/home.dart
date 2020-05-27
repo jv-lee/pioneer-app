@@ -31,7 +31,6 @@ class HomeState extends State<HomePage> implements HomeControl {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
       appBar: HomeToolbar(context),
       body: StatusPage(
         status: status,

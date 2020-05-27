@@ -39,14 +39,8 @@ class MainState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        color: Theme.of(context).backgroundColor,
-        child: IndexedStack(
-          index: _tabIndex,
-          children: _pageList,
-        ),
-      ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: _pageList[_tabIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(

@@ -23,6 +23,7 @@ class PioneerApp extends StatelessWidget {
                 title: TextStyle(color: ThemeColors.lightColorAccent))),
         bottomAppBarTheme: BottomAppBarTheme(
             color: ThemeColors.lightColorItem, elevation: 5.0),
+        scaffoldBackgroundColor: ThemeColors.lightColorBackground,
         primaryColor: ThemeColors.lightColorPrimary,
         primaryColorDark: ThemeColors.lightColorPrimaryDark,
         accentColor: ThemeColors.lightColorAccent,
@@ -31,7 +32,8 @@ class PioneerApp extends StatelessWidget {
         //itemColor
         focusColor: ThemeColors.lightColorSearch,
         //searchColor
-        splashColor: ThemeColors.lightColorPlaceholder, //placeholderColor
+        splashColor: ThemeColors.lightColorPlaceholder,
+        //placeholderColor
         cursorColor: ThemeColors.lightColorAccent,
       ),
       //深色主题 darkTheme
@@ -45,6 +47,7 @@ class PioneerApp extends StatelessWidget {
                 title: TextStyle(color: ThemeColors.darkColorAccent))),
         bottomAppBarTheme:
             BottomAppBarTheme(color: ThemeColors.darkColorItem, elevation: 5.0),
+        scaffoldBackgroundColor: ThemeColors.darkColorBackground,
         primaryColor: ThemeColors.darkColorPrimary,
         primaryColorDark: ThemeColors.darkColorPrimaryDark,
         accentColor: ThemeColors.darkColorAccent,
@@ -53,7 +56,8 @@ class PioneerApp extends StatelessWidget {
         //itemColor
         focusColor: ThemeColors.darkColorSearch,
         //searchColor
-        splashColor: ThemeColors.darkColorPlaceholder, //placeholderColor
+        splashColor: ThemeColors.darkColorPlaceholder,
+        //placeholderColor
         cursorColor: ThemeColors.darkColorAccent,
       ),
       initialRoute: '/',

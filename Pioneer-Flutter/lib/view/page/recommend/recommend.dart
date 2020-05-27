@@ -21,7 +21,6 @@ class RecommendState extends State<RecommendPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
         appBar: RecommendToolbar(context),
         body: Container(
           margin: EdgeInsets.only(top: 1),

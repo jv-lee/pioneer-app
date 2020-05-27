@@ -44,7 +44,6 @@ class RecommendContentState extends State<RecommendContent>
   bindBanner(List<BannerData> call) {
     setState(() {
       bannerData.addAll(call);
-      _statusController.pageComplete().itemComplete();
     });
   }
 
@@ -52,6 +51,7 @@ class RecommendContentState extends State<RecommendContent>
   bindContent(List<ContentData> call) {
     setState(() {
       contentData.addAll(call);
+      _statusController.pageComplete().itemComplete();
     });
   }
 

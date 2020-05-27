@@ -20,9 +20,9 @@ class MeState extends State<MePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(direction: Axis.vertical,children: <Widget>[
-      Expanded(flex:0,child: MeToolbar(),),
-      Expanded(flex:1,child: MeContent(),),
-    ],);
+    return Scaffold(
+      appBar: MeToolbar(context),
+      body: MeContent(),
+    );
   }
 }
