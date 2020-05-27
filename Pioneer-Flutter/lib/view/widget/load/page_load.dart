@@ -32,60 +32,72 @@ class PageLoad<T> {
       statusController.itemLoading();
     }
 
-    //获取数据
-    var data =
-        await requestData(!isMore ? _currentPage = page : ++_currentPage);
-
-    //首页page - 数据返回空 错误加载
-    if (_currentPage == page && data == null) {
-      statusController.pageError();
-      return;
-    }
-
-    //首页page - 数据返回空数组 空加载
-    if (_currentPage == page && data.isEmpty) {
-      statusController.pageEmpty();
-      return;
-    }
-
-    //首页数据加载成功
-    if (_currentPage == page && data != null) {
-      this.data.clear();
-      this.data.addAll(data);
-      statusController.pageComplete();
-
-      //是否只有一页数据
-      if (_currentPage == pageTotal) {
-        statusController.itemComplete();
-      } else {
-        statusController.itemLoading();
+    requestData(!isMore ? _currentPage = page : ++_currentPage).then((value) {
+      //首页page - 数据返回空 错误加载
+      if (_currentPage == page && value == null) {
+        statusController.pageError();
+        return;
       }
-      notify();
-      return;
-    }
 
-    //加载更多成功
-    if (_currentPage < pageTotal && data != null) {
-      this.data.addAll(data);
-      notify();
-      statusController.itemLoading();
-      return;
-    }
+      //首页page - 数据返回空数组 空加载
+      if (_currentPage == page && value.isEmpty) {
+        statusController.pageEmpty();
+        return;
+      }
 
-    //加载更多失败
-    if (_currentPage < pageTotal && data == null) {
-      _currentPage--;
-      statusController.itemError();
-      return;
-    }
+      //首页数据加载成功
+      if (_currentPage == page && value != null) {
+        this.data.clear();
+        this.data.addAll(value);
+        statusController.pageComplete();
 
-    //加载更多至尾页
-    if (_currentPage == pageTotal && data != null) {
-      this.data.addAll(data);
-      notify();
-      statusController.itemComplete();
-      return;
-    }
+        //是否只有一页数据
+        if (_currentPage == pageTotal) {
+          statusController.itemComplete();
+        } else {
+          statusController.itemLoading();
+        }
+        notify();
+        return;
+      }
+
+      //加载更多成功
+      if (_currentPage < pageTotal && value != null) {
+        this.data.addAll(value);
+        notify();
+        statusController.itemLoading();
+        return;
+      }
+
+      //加载更多失败
+      if (_currentPage < pageTotal && value == null) {
+        _currentPage--;
+        statusController.itemError();
+        return;
+      }
+
+      //加载更多至尾页
+      if (_currentPage == pageTotal && value != null) {
+        this.data.addAll(value);
+        notify();
+        statusController.itemComplete();
+        return;
+      }
+    }).catchError((error) {
+      print('content list load error :$error');
+      //首页page - 数据返回空 错误加载
+      if (_currentPage == page) {
+        statusController.pageError();
+        return;
+      }
+
+      //加载更多失败
+      if (_currentPage < pageTotal) {
+        _currentPage--;
+        statusController.itemError();
+        return;
+      }
+    });
   }
 }
 
