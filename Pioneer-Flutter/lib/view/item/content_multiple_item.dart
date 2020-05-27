@@ -67,7 +67,8 @@ class ContentMultipleItem extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: ThemeDimens.margin_large),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 ContentItemImage(data.images[0], isSingle: false),
                 Expanded(

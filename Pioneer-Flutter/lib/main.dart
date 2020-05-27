@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/view/page/search/search.dart';
+import 'package:screen_ratio_adapter/screen_ratio_adapter.dart';
 
 import 'view/page/main/main.dart';
 
 void main() {
+//  runFxApp(PioneerApp(), uiSize: Size(360, 640));
   runApp(PioneerApp());
 }
 
