@@ -66,8 +66,8 @@ class ContentMultipleItem extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: ThemeDimens.margin_large),
-            child: Flex(
-              direction: Axis.horizontal,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 ContentItemImage(data.images[0], isSingle: false),
                 Expanded(
@@ -86,8 +86,7 @@ class ContentMultipleItem extends StatelessWidget {
                     width: 2,
                   ),
                 ),
-                ContentItemImage(
-                    data.images.length > 2 ? data.images[2] : '',
+                ContentItemImage(data.images.length > 2 ? data.images[2] : '',
                     isSingle: false),
               ],
             ),

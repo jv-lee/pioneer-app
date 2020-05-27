@@ -42,8 +42,8 @@ class ContentSingleItem extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: ThemeDimens.margin_large),
             height: ThemeDimens.item_content_picture_height,
-            child: Flex(
-              direction: Axis.horizontal,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Expanded(
                   flex: 0,
@@ -54,8 +54,8 @@ class ContentSingleItem extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Flex(
-                    direction: Axis.vertical,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Expanded(
                         flex: 0,
