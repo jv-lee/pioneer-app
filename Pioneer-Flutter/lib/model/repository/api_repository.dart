@@ -71,7 +71,7 @@ class ApiRepository {
     return null;
   }
 
-  getSearchDataAsync(search, category, type, page, count) async {
+  Future<ContentEntity> getSearchDataAsync(search, category, type, page, count) async {
     var response = await _dio.get(
         "search/$search/category/$category/type/$type/page/$page/count/$count");
     if (response.statusCode == 200) {
