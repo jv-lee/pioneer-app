@@ -5,7 +5,6 @@ import android.app.Application
 import android.os.Bundle
 import com.lee.library.base.BaseApplication
 import com.lee.library.cache.CacheManager
-import com.lee.library.utils.DensityUtil
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.db.AppDataBase
@@ -41,7 +40,6 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-//        DensityUtil.setDensity(activity.application,activity)
         if (PreferencesTools.hasNightMode()) {
             StatusUtil.clearStatusFontLight2(activity)
         } else {
@@ -63,7 +61,6 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-//        DensityUtil.resetDensity(activity)
     }
 
 }

@@ -3,7 +3,6 @@ package com.lee.pioneer
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
-import android.animation.TimeInterpolator
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle

@@ -6,7 +6,7 @@ import 'package:screen_ratio_adapter/screen_ratio_adapter.dart';
 import 'view/page/main/main.dart';
 
 void main() {
-//  runFxApp(PioneerApp(), uiSize: Size(360, 640));
+  runFxApp(PioneerApp(), uiSize: Size(360, 720));
   runApp(PioneerApp());
 }
 
