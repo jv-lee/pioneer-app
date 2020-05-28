@@ -37,7 +37,7 @@
     <dimen name="item_girl_elevation">10pt</dimen>
 
     <!--   自定义VIEW  -->
-    <dimen name="view_line_icon_size">20pt</dimen>
+    <dimen name="view_line_icon_size">24pt</dimen>
     <dimen name="view_line_text_margin">36pt</dimen>
     <dimen name="view_line_text_size">@dimen/font_size_small</dimen>
     <dimen name="view_line_item_padding">12pt</dimen>

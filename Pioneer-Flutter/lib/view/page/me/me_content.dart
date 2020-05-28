@@ -26,6 +26,7 @@ class MeContentState extends State<MeContent> {
           startChild: Icon(
             ThemeIcons.message,
             color: ThemeColors.colorMessage,
+            size: ThemeDimens.view_line_icon_size,
           ),
           centerChild: Container(
             margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
@@ -41,6 +42,7 @@ class MeContentState extends State<MeContent> {
             startChild: Icon(
               ThemeIcons.like,
               color: ThemeColors.colorLike,
+              size: ThemeDimens.view_line_icon_size,
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
@@ -54,6 +56,7 @@ class MeContentState extends State<MeContent> {
             startChild: Icon(
               ThemeIcons.views,
               color: ThemeColors.colorViews,
+              size: ThemeDimens.view_line_icon_size,
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
@@ -67,6 +70,7 @@ class MeContentState extends State<MeContent> {
             startChild: Icon(
               ThemeIcons.favorite,
               color: ThemeColors.colorFavorite,
+              size: ThemeDimens.view_line_icon_size,
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
@@ -77,7 +81,11 @@ class MeContentState extends State<MeContent> {
         //意见反馈
         MeLine(
             marginTop: ThemeDimens.margin_item,
-            startChild: Icon(ThemeIcons.feedback),
+            startChild: Icon(
+              ThemeIcons.feedback,
+              color: ThemeColors.colorDefault,
+              size: ThemeDimens.view_line_icon_size,
+            ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
               child: Text(ThemeStrings.ME_ITEM_FEEDBACK),
@@ -87,7 +95,11 @@ class MeContentState extends State<MeContent> {
         //清除缓存
         MeLine(
             marginTop: 1,
-            startChild: Icon(ThemeIcons.settings),
+            startChild: Icon(
+              ThemeIcons.settings,
+              color: ThemeColors.colorDefault,
+              size: ThemeDimens.view_line_icon_size,
+            ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
               child: Text(ThemeStrings.ME_ITEM_SETTINGS),

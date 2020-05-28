@@ -7,7 +7,7 @@ import 'view/page/main/main.dart';
 
 void main() {
   runFxApp(PioneerApp(), uiSize: Size(360, 720));
-  runApp(PioneerApp());
+//  runApp(PioneerApp());
 }
 
 class PioneerApp extends StatelessWidget {

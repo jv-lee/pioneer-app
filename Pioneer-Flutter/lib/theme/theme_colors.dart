@@ -27,4 +27,5 @@ class ThemeColors {
   static const colorLike = Color(0xFFE8331C);
   static const colorViews = Color(0xFF009CEB);
   static const colorFavorite = Color(0xFFFCC916);
+  static const colorDefault = Color(0xFF9B9B9B);
 }

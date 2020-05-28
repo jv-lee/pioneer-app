@@ -38,7 +38,7 @@ class ThemeDimens {
   static const item_girl_root_height = 300.0;
 
 //自定义view
-  static const view_line_icon_size = 20.0;
+  static const view_line_icon_size = 24.0;
   static const view_line_text_margin = 8.0;
   static const view_line_text_size = font_size_small;
   static const view_line_item_padding = 12.0;
