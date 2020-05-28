@@ -19,7 +19,7 @@ class ThemeDimens {
   static const search_text_width_search = 300.0;
   static const search_text_height = 36.0;
   static const search_icon_size = 18.0;
-  static const logo_size = 32.0;
+  static const search_logo_size = 36.0;
   static const common_radius = 6.0;
   static const web_loading_progress_height = 6.0;
 

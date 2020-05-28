@@ -31,8 +31,8 @@ class HomeToolbar extends AppBar {
                 flex: 0,
                 child: Image(
                   image: AssetImage('images/ic_logo.png'),
-                  width: ThemeDimens.logo_size,
-                  height: ThemeDimens.logo_size,
+                  width: ThemeDimens.search_logo_size,
+                  height: ThemeDimens.search_logo_size,
                 ),
               ),
             ],
