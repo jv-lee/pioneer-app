@@ -51,8 +51,7 @@ class HomeContentState extends State<HomeContent>
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
+    return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Expanded(

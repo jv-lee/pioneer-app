@@ -3,6 +3,7 @@ import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/tools/time_tools.dart';
 
 import 'content_item_image.dart';
 
@@ -118,7 +119,7 @@ class ContentMultipleItem extends StatelessWidget {
                     ),
                     Container(
                       child: Icon(
-                        ThemeIcons.like,
+                        ThemeIcons.views,
                         size: 14,
                         color: Theme.of(context).primaryColor,
                       ),
@@ -136,7 +137,7 @@ class ContentMultipleItem extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  '昨天',
+                  TimeTools.getChineseTimeString(data.publishedAt),
                   style: TextStyle(
                     fontSize: ThemeDimens.font_size_small_x,
                     color: Theme.of(context).primaryColor,
