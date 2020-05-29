@@ -50,24 +50,29 @@ class GirlState extends State<GirlPage> with AutomaticKeepAliveClientMixin {
     super.build(context);
     return Stack(
       children: <Widget>[
-        SuperListView(
-          scrollController: _scrollController,
-          statusController: _statusController,
-          itemCount: _pageLoad.data.length,
-          onPageReload: () {
+        RefreshIndicator(
+          onRefresh: () async {
             _pageLoad.loadData(false);
           },
-          onItemReload: () {
-            _pageLoad.loadData(true);
-          },
-          onLoadMore: () {
-            _pageLoad.loadData(true);
-          },
-          isLoadMore: true,
-          headerChildren: <Widget>[GirlHeader()],
-          itemBuilder: (context, index) {
-            return GirlItem(_pageLoad.data[index]);
-          },
+          child: SuperListView(
+            scrollController: _scrollController,
+            statusController: _statusController,
+            itemCount: _pageLoad.data.length,
+            onPageReload: () {
+              _pageLoad.loadData(false);
+            },
+            onItemReload: () {
+              _pageLoad.loadData(true);
+            },
+            onLoadMore: () {
+              _pageLoad.loadData(true);
+            },
+            isLoadMore: true,
+            headerChildren: <Widget>[GirlHeader()],
+            itemBuilder: (context, index) {
+              return GirlItem(_pageLoad.data[index]);
+            },
+          ),
         ),
         GirlStatusBar(_scrollController)
       ],

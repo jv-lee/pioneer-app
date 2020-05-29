@@ -49,29 +49,34 @@ class _HomeContentListState extends State<HomeContentList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SuperListView(
-      statusController: _statusController,
-      itemCount: _pageLoad.data.length,
-      onPageReload: () {
+    return RefreshIndicator(
+      onRefresh: () async {
         _pageLoad.loadData(false);
       },
-      onItemReload: () {
-        _pageLoad.loadData(true);
-      },
-      onLoadMore: () {
-        _pageLoad.loadData(true);
-      },
-      isLoadMore: true,
-      itemBuilder: (BuildContext context, int index) {
-        var entity = _pageLoad.data[index];
-        if (entity.images.length == 0) {
-          return ContentTextItem(entity);
-        } else if (entity.images.length == 1) {
-          return ContentSingleItem(entity);
-        } else {
-          return ContentMultipleItem(entity);
-        }
-      },
+      child: SuperListView(
+        statusController: _statusController,
+        itemCount: _pageLoad.data.length,
+        onPageReload: () {
+          _pageLoad.loadData(false);
+        },
+        onItemReload: () {
+          _pageLoad.loadData(true);
+        },
+        onLoadMore: () {
+          _pageLoad.loadData(true);
+        },
+        isLoadMore: true,
+        itemBuilder: (BuildContext context, int index) {
+          var entity = _pageLoad.data[index];
+          if (entity.images.length == 0) {
+            return ContentTextItem(entity);
+          } else if (entity.images.length == 1) {
+            return ContentSingleItem(entity);
+          } else {
+            return ContentMultipleItem(entity);
+          }
+        },
+      ),
     );
   }
 
