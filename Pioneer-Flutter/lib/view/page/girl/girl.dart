@@ -52,7 +52,8 @@ class GirlState extends State<GirlPage> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         RefreshIndicator(
           onRefresh: () async {
-            _pageLoad.loadData(false);
+            await Future.delayed(
+                Duration(milliseconds: 500), () => _pageLoad.loadData(false));
           },
           child: SuperListView(
             scrollController: _scrollController,
