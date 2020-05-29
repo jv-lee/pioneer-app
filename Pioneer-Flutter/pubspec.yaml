@@ -15,6 +15,7 @@ dependencies:
   toast: ^0.1.5
   flutter_swiper: ^1.1.6
   screen_ratio_adapter: ^0.0.2
+  webview_flutter: ^0.3.22+1
 
 dev_dependencies:
   flutter_test:
