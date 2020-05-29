@@ -7,6 +7,10 @@ import 'package:pioneer_flutter/theme/theme_strings.dart';
 /// @date 2020/5/8
 /// @description 项目通用 搜索框text展示样式
 class SearchField extends StatefulWidget {
+  SearchField({this.onSubmitted}) : super();
+
+  final ValueChanged<String> onSubmitted;
+
   @override
   State<StatefulWidget> createState() {
     return SearchFieldState();
@@ -28,6 +32,9 @@ class SearchFieldState extends State<SearchField> {
             margin: EdgeInsets.only(right: ThemeDimens.margin_item),
             height: ThemeDimens.search_text_height,
             child: TextField(
+              onSubmitted:
+                  widget.onSubmitted == null ? (value) {} : widget.onSubmitted,
+              textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                   hintText: ThemeStrings.SEARCH_HINT,
                   border: InputBorder.none,
