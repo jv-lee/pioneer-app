@@ -131,7 +131,7 @@ class SuperListViewState extends State<SuperListView> {
   Widget buildPageEmpty(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('data is empty'),
+        child: Text('data is empty',style: TextStyle(color: Theme.of(context).primaryColor)),
       ),
     );
   }
@@ -142,7 +142,7 @@ class SuperListViewState extends State<SuperListView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('data is error'),
+            Text('data is error',style: TextStyle(color: Theme.of(context).primaryColor)),
             CupertinoButton(
               child: Text('Reload'),
               onPressed: () {
@@ -220,7 +220,7 @@ class SuperListViewState extends State<SuperListView> {
               ),
             ),
             Container(
-              child: Text('加载中...'),
+              child: Text('加载中...',style: TextStyle(color: Theme.of(context).primaryColor)),
               padding: EdgeInsets.only(left: 10),
             ),
           ],
@@ -239,7 +239,7 @@ class SuperListViewState extends State<SuperListView> {
     return Container(
       height: _itemHeight,
       child: Center(
-        child: Text('没有更多了'),
+        child: Text('没有更多了',style: TextStyle(color: Theme.of(context).primaryColor)),
       ),
     );
   }
@@ -251,7 +251,7 @@ class SuperListViewState extends State<SuperListView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('data is error'),
+            Text('data is error',style: TextStyle(color: Theme.of(context).primaryColor),),
             GestureDetector(
               child: Container(
                 padding: EdgeInsets.only(left: 10),

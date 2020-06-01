@@ -33,7 +33,10 @@ class RecommendContentBannerState extends State<RecommendContentBanner> {
   Widget buildBanner() {
     if (widget.data == null || widget.data.length == 0) {
       return Center(
-        child: Text('加载中...'),
+        child: Text(
+          '加载中...',
+          style: TextStyle(color: Theme.of(context).accentColor),
+        ),
       );
     } else {
       return Swiper(

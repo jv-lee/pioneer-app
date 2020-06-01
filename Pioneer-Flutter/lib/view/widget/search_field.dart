@@ -36,11 +36,13 @@ class SearchFieldState extends State<SearchField> {
                   widget.onSubmitted == null ? (value) {} : widget.onSubmitted,
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
+                  hintStyle: TextStyle(color: Theme.of(context).primaryColor),
                   hintText: ThemeStrings.SEARCH_HINT,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.only(top: -10, left: -6),
                   icon: Icon(
                     ThemeIcons.search,
+                    color: Theme.of(context).primaryColor,
                     size: ThemeDimens.search_icon_size,
                   )),
             ),
