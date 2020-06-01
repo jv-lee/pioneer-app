@@ -60,9 +60,11 @@ class ContentDetailsPageState extends State<ContentDetailsPage>
               _webController.complete(webViewController);
             },
             onPageStarted: (url) {
+              print("onPageStarted");
               _animationController.forward();
             },
             onPageFinished: (url) {
+              print("onPageFinished");
               _webController.future.then((web) {
                 web.loadUrl(HttpConstants.getNoneHeaderJs());
               });

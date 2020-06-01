@@ -8,9 +8,6 @@ import 'package:pioneer_flutter/view/widget/search_text.dart';
 class HomeToolbar extends AppBar {
   HomeToolbar(context)
       : super(
-          elevation: 0,
-          brightness: Brightness.light,
-          backgroundColor: Theme.of(context).canvasColor,
           title: Flex(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,

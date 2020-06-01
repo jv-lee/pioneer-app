@@ -17,7 +17,6 @@ class MeToolbar extends AppBar {
               style: TextStyle(fontSize: ThemeDimens.font_size_medium),
             ),
             centerTitle: true,
-            brightness: Brightness.light,
             actions: [
               Container(
                 margin: EdgeInsets.only(right: ThemeDimens.padding_item),

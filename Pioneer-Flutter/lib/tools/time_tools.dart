@@ -20,7 +20,7 @@ class TimeTools {
     if (newTime < MIN) {
       return "刚刚";
     } else if (newTime <= HOUR) {
-      return "${(newTime / MIN)} 分钟";
+      return "${newTime ~/ MIN} 分钟";
     } else if (oldDate.year == newDate.year &&
         oldDate.month == newDate.month &&
         oldDate.day == newDate.day) {
