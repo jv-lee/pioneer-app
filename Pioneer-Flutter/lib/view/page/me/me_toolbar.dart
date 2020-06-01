@@ -14,6 +14,5 @@ class MeToolbar extends AppBar {
           ),
           centerTitle: true,
           brightness: Brightness.light,
-          backgroundColor: Theme.of(context).cardColor,
         );
 }

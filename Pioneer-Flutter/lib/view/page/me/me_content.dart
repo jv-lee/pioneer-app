@@ -30,7 +30,7 @@ class MeContentState extends State<MeContent> {
           ),
           centerChild: Container(
             margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-            child: Text(ThemeStrings.ME_ITEM_MESSAGE),
+            child: Text(ThemeStrings.ME_ITEM_MESSAGE,style: TextStyle(color: Theme.of(context).accentColor),),
           ),
           endChild:
               Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
@@ -46,7 +46,7 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_LIKE),
+              child: Text(ThemeStrings.ME_ITEM_LIKE,style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
@@ -60,7 +60,7 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_VIEWS),
+              child: Text(ThemeStrings.ME_ITEM_VIEWS,style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
@@ -74,7 +74,7 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_FAVORITE),
+              child: Text(ThemeStrings.ME_ITEM_FAVORITE,style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
@@ -88,7 +88,7 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_FEEDBACK),
+              child: Text(ThemeStrings.ME_ITEM_FEEDBACK,style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
@@ -102,7 +102,7 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_SETTINGS),
+              child: Text(ThemeStrings.ME_ITEM_SETTINGS,style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
