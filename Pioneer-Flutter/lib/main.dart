@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
+import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/page/search/search.dart';
 import 'package:screen_ratio_adapter/screen_ratio_adapter.dart';
 
@@ -22,7 +23,7 @@ class PioneerApp extends StatelessWidget {
             brightness: Brightness.light,
             iconTheme: IconThemeData(color: ThemeColors.lightColorAccent),
             textTheme: TextTheme(
-                title: TextStyle(color: ThemeColors.lightColorAccent))),
+                title: TextStyle(color: ThemeColors.lightColorAccent,fontSize: ThemeDimens.font_size_medium))),
         bottomAppBarTheme: BottomAppBarTheme(
             color: ThemeColors.lightColorItem, elevation: 5.0),
         scaffoldBackgroundColor: ThemeColors.lightColorBackground,
@@ -46,7 +47,7 @@ class PioneerApp extends StatelessWidget {
             brightness: Brightness.dark,
             iconTheme: IconThemeData(color: ThemeColors.darkColorAccent),
             textTheme: TextTheme(
-                title: TextStyle(color: ThemeColors.darkColorAccent))),
+                title: TextStyle(color: ThemeColors.darkColorAccent,fontSize: ThemeDimens.font_size_medium))),
         bottomAppBarTheme:
             BottomAppBarTheme(color: ThemeColors.darkColorItem, elevation: 5.0),
         scaffoldBackgroundColor: ThemeColors.darkColorBackground,

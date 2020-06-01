@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/constants/http_constants.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/view/widget/load_progress.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 /// @author jv.lee
@@ -20,13 +20,23 @@ class ContentDetailsPage extends StatefulWidget {
   }
 }
 
-class ContentDetailsPageState extends State<ContentDetailsPage> {
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
+class ContentDetailsPageState extends State<ContentDetailsPage>
+    with SingleTickerProviderStateMixin {
+  Completer<WebViewController> _webController;
+  AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
+    _webController = Completer<WebViewController>();
+    _animationController = AnimationController(
+        duration: Duration(milliseconds: 1000), vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
   }
 
   @override
@@ -34,14 +44,12 @@ class ContentDetailsPageState extends State<ContentDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(ThemeStrings.DETAILS_TITLE),
+        title: Text(
+          ThemeStrings.DETAILS_TITLE,
+        ),
         bottom: PreferredSize(
-            child: LinearProgressIndicator(
-              value: 50,
-              backgroundColor: Theme.of(context).primaryColor,
-
-            ),
-            preferredSize: Size.fromHeight(3.0)),
+            child: LoadProgress(_animationController),
+            preferredSize: Size.fromHeight(2.0)),
       ),
       body: Builder(
         builder: (BuildContext context) {
@@ -49,12 +57,16 @@ class ContentDetailsPageState extends State<ContentDetailsPage> {
             initialUrl: HttpConstants.getDetailsUri(widget.data.sId),
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (WebViewController webViewController) {
-              _controller.complete(webViewController);
+              _webController.complete(webViewController);
+            },
+            onPageStarted: (url) {
+              _animationController.forward();
             },
             onPageFinished: (url) {
-              _controller.future.then((web) {
+              _webController.future.then((web) {
                 web.loadUrl(HttpConstants.getNoneHeaderJs());
               });
+              _animationController.forward();
             },
           );
         },
