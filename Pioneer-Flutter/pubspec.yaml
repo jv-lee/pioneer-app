@@ -16,6 +16,9 @@ dependencies:
   flutter_swiper: ^1.1.6
   screen_ratio_adapter: ^0.0.2
   webview_flutter: ^0.3.22+1
+  shared_preferences: ^0.5.7+3
+  provider: ^4.0.5
+  flustars: ^0.2.6+1
 
 dev_dependencies:
   flutter_test:
