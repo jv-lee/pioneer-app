@@ -28,4 +28,6 @@ class ThemeColors {
   static const colorViews = Color(0xFF009CEB);
   static const colorFavorite = Color(0xFFFCC916);
   static const colorDefault = Color(0xFF9B9B9B);
+  static const colorLight = Color(0xFFFAAD14);
+  static const colorNight = Color(0xFF1296db);
 }

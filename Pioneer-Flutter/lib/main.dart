@@ -14,45 +14,35 @@ void main() {
 }
 
 class PioneerApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: darkThemeData,
-      darkTheme: darkThemeData,
-      initialRoute: '/',
-      routes: routes,
+    return MultiProvider(
+      providers: [ChangeNotifierProvider.value(value: DarkModeProvider())],
+      child: Consumer<DarkModeProvider>(
+        builder: (context, darkModeProvider, _) {
+          return darkModeProvider.darkMode == DarkModeProvider.MODE_SYSTEM
+              ? MaterialApp(
+                  //亮色主题 lightTheme
+                  theme: themeData,
+                  //深色主题 darkTheme
+                  darkTheme: darkThemeData,
+                  initialRoute: '/',
+                  routes: routes,
+                )
+              : MaterialApp(
+                  //亮色主题 lightTheme
+                  theme: darkModeProvider.darkMode == DarkModeProvider.MODE_DARK
+                      ? darkThemeData
+                      : themeData,
+                  //深色主题 darkTheme
+                  initialRoute: '/',
+                  routes: routes,
+                );
+        },
+      ),
     );
   }
-
-//  @override
-//  Widget build(BuildContext context) {
-//    DarkModeProvider.init(context);
-//    return MultiProvider(
-//      providers: [ChangeNotifierProvider.value(value: DarkModeProvider())],
-//      child: Consumer<DarkModeProvider>(
-//        builder: (context, darkModeProvider, _) {
-//          return darkModeProvider.darkMode == DarkModeProvider.MODE_STYSTEM
-//              ? MaterialApp(
-//                  //亮色主题 lightTheme
-//                  theme: darkThemeData,
-//                  //深色主题 darkTheme
-//                  darkTheme: darkThemeData,
-//                  initialRoute: '/',
-//                  routes: routes,
-//                )
-//              : MaterialApp(
-//                  //亮色主题 lightTheme
-//                  theme: darkModeProvider.darkMode == DarkModeProvider.MODE_DARK
-//                      ? darkThemeData
-//                      : themeData,
-//                  //深色主题 darkTheme
-//                  initialRoute: '/',
-//                  routes: routes,
-//                );
-//        },
-//      ),
-//    );
-//  }
 
   var routes = {
     '/': (context) => MainPage(),

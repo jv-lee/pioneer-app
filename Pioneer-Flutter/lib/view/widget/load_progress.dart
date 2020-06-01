@@ -41,6 +41,14 @@ class _LoadProgressState extends State<LoadProgress> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    if (!widget.animationController.isDismissed) {
+      widget.animationController.dispose();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
