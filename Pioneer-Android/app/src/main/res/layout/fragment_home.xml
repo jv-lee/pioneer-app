@@ -33,7 +33,7 @@
                 android:id="@+id/iv_logo"
                 android:layout_width="@dimen/search_logo_size"
                 android:layout_height="@dimen/search_logo_size"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/ic_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

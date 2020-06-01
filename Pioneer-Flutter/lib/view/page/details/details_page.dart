@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/constants/http_constants.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
+import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/tools/status_tools.dart';
 import 'package:pioneer_flutter/view/widget/load_progress.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -50,6 +52,52 @@ class ContentDetailsPageState extends State<ContentDetailsPage>
         bottom: PreferredSize(
             child: LoadProgress(_animationController),
             preferredSize: Size.fromHeight(2.0)),
+        actions: <Widget>[
+          PopupMenuButton(
+            color: Theme
+                .of(context)
+                .canvasColor,
+            offset: Offset(10, kToolbarHeight),
+            itemBuilder: (BuildContext context) {
+              return <PopupMenuItem<String>>[
+                PopupMenuItem<String>(
+                  height: 36,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(ThemeIcons.favorite, color: Theme
+                          .of(context)
+                          .accentColor,),
+                      Text(
+                        "收藏",
+                        style: TextStyle(color: Theme
+                            .of(context)
+                            .accentColor),
+                      )
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  value: "collect",
+                ),
+                PopupMenuItem<String>(
+                  height: 36,
+                  child: Row(
+                    children: <Widget>[
+                    Icon(ThemeIcons.share, color: Theme
+                      .of(context)
+                      .accentColor,),
+                  Text("分享",
+                    style: TextStyle(color: Theme
+                        .of(context)
+                        .accentColor))
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  value: "share",
+                ),
+              ];
+            },
+          )
+        ],
       ),
       body: Builder(
         builder: (BuildContext context) {
