@@ -59,7 +59,7 @@ class StatusPageState extends State<StatusPage> {
   Widget buildEmpty(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('data is empty'),
+        child: Text('data is empty',style: TextStyle(color: Theme.of(context).primaryColor)),
       ),
     );
   }
@@ -70,7 +70,7 @@ class StatusPageState extends State<StatusPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('data is error'),
+            Text('data is error',style: TextStyle(color: Theme.of(context).primaryColor)),
             CupertinoButton(
               child: Text('ReLoad'),
               onPressed: () {
@@ -86,6 +86,6 @@ class StatusPageState extends State<StatusPage> {
   }
 
   Widget buildData(BuildContext context) {
-    return Container(child: Text('child == null'));
+    return Container(child: Text('child == null',style: TextStyle(color: Theme.of(context).primaryColor)));
   }
 }
