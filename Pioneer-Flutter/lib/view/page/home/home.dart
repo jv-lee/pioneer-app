@@ -13,10 +13,10 @@ import 'home_toolbar.dart';
 /// @description 主页-HomeTAB
 class HomePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => HomeState();
+  State<StatefulWidget> createState() => _HomeState();
 }
 
-class HomeState extends State<HomePage> implements HomeControl {
+class _HomeState extends State<HomePage> implements HomeControl {
   HomePresenter _presenter;
   List<CategoryData> data = List();
   PageStatus status = PageStatus.loading;

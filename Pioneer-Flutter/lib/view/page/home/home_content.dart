@@ -11,10 +11,10 @@ class HomeContent extends StatefulWidget {
   final List<CategoryData> data;
 
   @override
-  State<StatefulWidget> createState() => HomeContentState();
+  State<StatefulWidget> createState() => _HomeContentState();
 }
 
-class HomeContentState extends State<HomeContent>
+class _HomeContentState extends State<HomeContent>
     with SingleTickerProviderStateMixin {
   TabController _tabController; //需要定义一个Controller
   PageController _pageController;

@@ -8,11 +8,11 @@ import 'package:pioneer_flutter/view/page/recommend/recommend_toolbar.dart';
 class RecommendPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return RecommendState();
+    return _RecommendState();
   }
 }
 
-class RecommendState extends State<RecommendPage>
+class _RecommendState extends State<RecommendPage>
     with AutomaticKeepAliveClientMixin {
   @override
   void initState() {

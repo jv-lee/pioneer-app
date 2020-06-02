@@ -15,11 +15,11 @@ import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
 class GirlPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return GirlState();
+    return _GirlState();
   }
 }
 
-class GirlState extends State<GirlPage> with AutomaticKeepAliveClientMixin {
+class _GirlState extends State<GirlPage> with AutomaticKeepAliveClientMixin {
   GirlPresenter _presenter;
   StatusController _statusController;
   ScrollController _scrollController;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
 import 'package:pioneer_flutter/view/page/me/me_content.dart';
 import 'package:pioneer_flutter/view/page/me/me_toolbar.dart';
 
@@ -9,11 +8,11 @@ import 'package:pioneer_flutter/view/page/me/me_toolbar.dart';
 class MePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MeState();
+    return _MeState();
   }
 }
 
-class MeState extends State<MePage> with AutomaticKeepAliveClientMixin {
+class _MeState extends State<MePage> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();

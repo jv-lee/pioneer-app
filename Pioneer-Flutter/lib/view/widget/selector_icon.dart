@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// @author jv.lee
 /// @date 2020/6/1
 /// @description
+// ignore: must_be_immutable
 class SelectorIcon extends StatefulWidget {
   SelectorIcon({
     @required this.normalIcon,

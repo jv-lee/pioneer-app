@@ -13,11 +13,11 @@ class SearchField extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return SearchFieldState();
+    return _SearchFieldState();
   }
 }
 
-class SearchFieldState extends State<SearchField> {
+class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return Flex(

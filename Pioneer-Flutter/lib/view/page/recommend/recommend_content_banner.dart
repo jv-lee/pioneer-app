@@ -12,11 +12,11 @@ class RecommendContentBanner extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return RecommendContentBannerState();
+    return _RecommendContentBannerState();
   }
 }
 
-class RecommendContentBannerState extends State<RecommendContentBanner> {
+class _RecommendContentBannerState extends State<RecommendContentBanner> {
   @override
   void initState() {
     super.initState();

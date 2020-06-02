@@ -17,11 +17,11 @@ import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
 class RecommendContent extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return RecommendContentState();
+    return _RecommendContentState();
   }
 }
 
-class RecommendContentState extends State<RecommendContent>
+class _RecommendContentState extends State<RecommendContent>
     implements RecommendControl {
   List<ContentData> contentData = List<ContentData>();
   List<BannerData> bannerData = List<BannerData>();

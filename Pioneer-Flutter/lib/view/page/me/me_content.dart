@@ -11,11 +11,11 @@ import 'package:pioneer_flutter/theme/theme_strings.dart';
 class MeContent extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MeContentState();
+    return _MeContentState();
   }
 }
 
-class MeContentState extends State<MeContent> {
+class _MeContentState extends State<MeContent> {
   @override
   Widget build(BuildContext context) {
     return Column(

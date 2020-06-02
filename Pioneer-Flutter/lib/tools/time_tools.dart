@@ -3,13 +3,13 @@
 /// @description
 class TimeTools {
   //分与毫秒的倍数
-  static final int MIN = 60000;
+  static const int MIN = 60000;
 
   //时与毫秒的倍数
-  static final int HOUR = 3600000;
+  static const int HOUR = 3600000;
 
   //天与毫秒的倍数
-  static final int DAY = 86400000;
+  static const int DAY = 86400000;
 
   /// 获取时间自定义显示方法
   static String getChineseTimeString(String time) {

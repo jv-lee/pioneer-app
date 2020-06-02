@@ -5,7 +5,6 @@ import 'package:pioneer_flutter/constants/http_constants.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
-import 'package:pioneer_flutter/tools/status_tools.dart';
 import 'package:pioneer_flutter/view/widget/load_progress.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -18,11 +17,11 @@ class ContentDetailsPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return ContentDetailsPageState();
+    return _ContentDetailsPageState();
   }
 }
 
-class ContentDetailsPageState extends State<ContentDetailsPage>
+class _ContentDetailsPageState extends State<ContentDetailsPage>
     with SingleTickerProviderStateMixin {
   Completer<WebViewController> _webController;
   AnimationController _animationController;

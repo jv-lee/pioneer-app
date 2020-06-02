@@ -16,11 +16,11 @@ import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
 class SearchPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return SearchPageState();
+    return _SearchPageState();
   }
 }
 
-class SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchPage> {
   SearchPresenter _presenter;
   StatusController _statusController;
   PageLoad _pageLoad;

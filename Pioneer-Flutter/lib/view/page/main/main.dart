@@ -14,11 +14,11 @@ import '../me/me.dart';
 class MainPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MainState();
+    return _MainState();
   }
 }
 
-class MainState extends State<MainPage> {
+class _MainState extends State<MainPage> {
   int _tabIndex = 0;
   var _pageList = [HomePage(), RecommendPage(), GirlPage(), MePage()];
   PageController _pageController;

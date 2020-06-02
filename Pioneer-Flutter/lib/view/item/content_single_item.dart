@@ -3,7 +3,6 @@ import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
-import 'package:pioneer_flutter/tools/common_tools.dart';
 import 'package:pioneer_flutter/tools/time_tools.dart';
 import 'package:pioneer_flutter/view/page/details/details_page.dart';
 
