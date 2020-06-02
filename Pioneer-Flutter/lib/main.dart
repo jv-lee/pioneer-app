@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/view/page/collect/collect_page.dart';
+import 'package:pioneer_flutter/view/page/feedback/feedback_page.dart';
+import 'package:pioneer_flutter/view/page/history/history_page.dart';
+import 'package:pioneer_flutter/view/page/like/like_page.dart';
+import 'package:pioneer_flutter/view/page/message/message_page.dart';
 import 'package:pioneer_flutter/view/page/search/search.dart';
 import 'package:provider/provider.dart';
 import 'package:screen_ratio_adapter/screen_ratio_adapter.dart';
@@ -14,7 +19,6 @@ void main() {
 }
 
 class PioneerApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -46,7 +50,12 @@ class PioneerApp extends StatelessWidget {
 
   var routes = {
     '/': (context) => MainPage(),
-    "/search": (context) => SearchPage()
+    "/search": (context) => SearchPage(),
+    "/message": (context) => MessagePage(),
+    "/like": (context) => LikePage(),
+    "/history": (context) => HistoryPage(),
+    "/collect": (context) => CollectPage(),
+    "/feedback": (context) => FeedbackPage(),
   };
 
   var themeData = ThemeData(

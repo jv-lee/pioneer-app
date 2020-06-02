@@ -30,26 +30,32 @@ class MeContentState extends State<MeContent> {
           ),
           centerChild: Container(
             margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-            child: Text(ThemeStrings.ME_ITEM_MESSAGE,style: TextStyle(color: Theme.of(context).accentColor),),
+            child: Text(
+              ThemeStrings.ME_ITEM_MESSAGE,
+              style: TextStyle(color: Theme.of(context).accentColor),
+            ),
           ),
           endChild:
               Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
-          onClick: (clickDetails) => {print('object')},
+          onClick: (clickDetails) => {Navigator.pushNamed(context, '/message')},
         ),
         //我喜欢的
         MeLine(
-            marginTop: 1,
-            startChild: Icon(
-              ThemeIcons.like,
-              color: ThemeColors.colorLike,
-              size: ThemeDimens.view_line_icon_size,
-            ),
-            centerChild: Container(
-              margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_LIKE,style: TextStyle(color: Theme.of(context).accentColor)),
-            ),
-            endChild:
-                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
+          marginTop: 1,
+          startChild: Icon(
+            ThemeIcons.like,
+            color: ThemeColors.colorLike,
+            size: ThemeDimens.view_line_icon_size,
+          ),
+          centerChild: Container(
+            margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
+            child: Text(ThemeStrings.ME_ITEM_LIKE,
+                style: TextStyle(color: Theme.of(context).accentColor)),
+          ),
+          endChild:
+              Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
+          onClick: (clickDetails) => {Navigator.pushNamed(context, '/like')},
+        ),
         //浏览过的
         MeLine(
             marginTop: 1,
@@ -60,10 +66,13 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_VIEWS,style: TextStyle(color: Theme.of(context).accentColor)),
+              child: Text(ThemeStrings.ME_ITEM_VIEWS,
+                  style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
-                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
+                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
+            onClick: (clickDetails) =>
+                {Navigator.pushNamed(context, '/history')}),
         //我的收藏
         MeLine(
             marginTop: 1,
@@ -74,10 +83,13 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_FAVORITE,style: TextStyle(color: Theme.of(context).accentColor)),
+              child: Text(ThemeStrings.ME_ITEM_FAVORITE,
+                  style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
-                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
+                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
+            onClick: (clickDetails) =>
+                {Navigator.pushNamed(context, '/collect')}),
         //意见反馈
         MeLine(
             marginTop: ThemeDimens.margin_item,
@@ -88,10 +100,13 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_FEEDBACK,style: TextStyle(color: Theme.of(context).accentColor)),
+              child: Text(ThemeStrings.ME_ITEM_FEEDBACK,
+                  style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
-                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
+                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
+            onClick: (clickDetails) =>
+                {Navigator.pushNamed(context, '/feedback')}),
         //清除缓存
         MeLine(
             marginTop: 1,
@@ -102,10 +117,12 @@ class MeContentState extends State<MeContent> {
             ),
             centerChild: Container(
               margin: EdgeInsets.only(left: ThemeDimens.view_line_text_margin),
-              child: Text(ThemeStrings.ME_ITEM_SETTINGS,style: TextStyle(color: Theme.of(context).accentColor)),
+              child: Text(ThemeStrings.ME_ITEM_SETTINGS,
+                  style: TextStyle(color: Theme.of(context).accentColor)),
             ),
             endChild:
-                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)),
+                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
+            onClick: (clickDetails) => {}),
       ],
     );
   }
