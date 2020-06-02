@@ -41,4 +41,7 @@
     <string name="me_clear_failed">清除失败</string>
     <string name="feedback_success">反馈内容发送成功</string>
     <string name="feedback_empty">反馈内容不能为空</string>
+    <string name="feedback_hint">最多输入300字符</string>
+    <string name="feedback_hint2">请留下你的手机号或QQ，方便联系回馈</string>
+    <string name="feedback_commit">提交</string>
 </resources>

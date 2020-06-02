@@ -28,6 +28,9 @@ class ThemeStrings {
   static const CLEAR_DIALOG_FAILED = "清除失败";
   static const FEEDBACK_SUCCESS = "反馈内容发送成功";
   static const FEEDBACK_EMPTY = "反馈内容不能为空";
+  static const FEEDBACK_HINT = "最多输入300字符";
+  static const FEEDBACK_HINT2 = "请留下你的手机号或QQ，方便联系回馈";
+  static const FEEDBACK_COMMIT = "提交";
 
   //列表item字符
   static const ITEM_LIKE_TEXT = "点赞";
@@ -41,6 +44,6 @@ class ThemeStrings {
   static const MENU_COLLECT_COMPLETED = "已收藏该内容";
   static const MENU_COLLECT_COMPLETE = "内容收藏成功";
 
-  static const CODE = "这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，";
-
+  static const CODE =
+      "这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，这是一个占位符内容，";
 }
