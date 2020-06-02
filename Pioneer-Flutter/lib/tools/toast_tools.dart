@@ -9,7 +9,7 @@ class ToastTools {
   static show(BuildContext context, String msg) {
     Toast.show(msg, context,
         duration: Toast.LENGTH_LONG,
-        backgroundColor: Theme.of(context).accentColor,
-        textColor: Theme.of(context).primaryColor);
+        backgroundColor: Theme.of(context).primaryColor,
+        textColor: Theme.of(context).accentColor);
   }
 }
