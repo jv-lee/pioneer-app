@@ -19,6 +19,14 @@ class _MessagePageState extends State<MessagePage> {
         title: Text(ThemeStrings.ME_ITEM_MESSAGE),
         centerTitle: true,
       ),
+      body: Container(
+        child: Center(
+          child: Text(
+            "没有数据.",
+            style: TextStyle(color: Theme.of(context).accentColor),
+          ),
+        ),
+      ),
     );
   }
 }

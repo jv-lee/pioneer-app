@@ -38,7 +38,9 @@ class ContentDetailsPageState extends State<ContentDetailsPage>
   @override
   void dispose() {
     super.dispose();
-    _animationController.dispose();
+    if (!_animationController.isDismissed) {
+      _animationController.dispose();
+    }
   }
 
   @override
@@ -54,9 +56,7 @@ class ContentDetailsPageState extends State<ContentDetailsPage>
             preferredSize: Size.fromHeight(2.0)),
         actions: <Widget>[
           PopupMenuButton(
-            color: Theme
-                .of(context)
-                .canvasColor,
+            color: Theme.of(context).canvasColor,
             offset: Offset(10, kToolbarHeight),
             itemBuilder: (BuildContext context) {
               return <PopupMenuItem<String>>[
@@ -64,14 +64,13 @@ class ContentDetailsPageState extends State<ContentDetailsPage>
                   height: 36,
                   child: Row(
                     children: <Widget>[
-                      Icon(ThemeIcons.favorite, color: Theme
-                          .of(context)
-                          .accentColor,),
+                      Icon(
+                        ThemeIcons.favorite,
+                        color: Theme.of(context).accentColor,
+                      ),
                       Text(
                         "收藏",
-                        style: TextStyle(color: Theme
-                            .of(context)
-                            .accentColor),
+                        style: TextStyle(color: Theme.of(context).accentColor),
                       )
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,13 +81,13 @@ class ContentDetailsPageState extends State<ContentDetailsPage>
                   height: 36,
                   child: Row(
                     children: <Widget>[
-                    Icon(ThemeIcons.share, color: Theme
-                      .of(context)
-                      .accentColor,),
-                  Text("分享",
-                    style: TextStyle(color: Theme
-                        .of(context)
-                        .accentColor))
+                      Icon(
+                        ThemeIcons.share,
+                        color: Theme.of(context).accentColor,
+                      ),
+                      Text("分享",
+                          style:
+                              TextStyle(color: Theme.of(context).accentColor))
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),

@@ -15,10 +15,17 @@ class _LikePageState extends State<LikePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(ThemeStrings.ME_ITEM_LIKE),
-        centerTitle: true,
-      ),
-    );
+        appBar: AppBar(
+          title: Text(ThemeStrings.ME_ITEM_LIKE),
+          centerTitle: true,
+        ),
+        body: Container(
+          child: Center(
+            child: Text(
+              "没有数据.",
+              style: TextStyle(color: Theme.of(context).accentColor),
+            ),
+          ),
+        ));
   }
 }
