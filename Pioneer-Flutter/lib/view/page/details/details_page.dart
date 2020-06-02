@@ -35,14 +35,6 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    if (!_animationController.isDismissed) {
-      _animationController.dispose();
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

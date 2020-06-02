@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
+import 'package:pioneer_flutter/tools/cache_tools.dart';
 import 'package:pioneer_flutter/view/page/me/me_line.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
@@ -16,6 +18,22 @@ class MeContent extends StatefulWidget {
 }
 
 class _MeContentState extends State<MeContent> {
+  var cacheValue = "0KB";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCache();
+  }
+
+  _loadCache() {
+    CacheTools.loadCache().then((value) {
+      setState(() {
+        cacheValue = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -120,9 +138,54 @@ class _MeContentState extends State<MeContent> {
               child: Text(ThemeStrings.ME_ITEM_SETTINGS,
                   style: TextStyle(color: Theme.of(context).accentColor)),
             ),
-            endChild:
-                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
-            onClick: (clickDetails) => {}),
+            endChild: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(right: 10),
+                  child: Text(
+                    cacheValue,
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+                Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor)
+              ],
+            ),
+            onClick: (clickDetails) => {
+                  showCupertinoDialog(
+                      context: context,
+                      builder: (context) {
+                        return CupertinoAlertDialog(
+                          content: Text(
+                            '确认清除缓存',
+                            style: TextStyle(
+                                fontSize: ThemeDimens.font_size_small),
+                          ),
+                          actions: <Widget>[
+                            CupertinoDialogAction(
+                                child: Text(ThemeStrings.CANCEL,
+                                    style: TextStyle(
+                                        fontSize:
+                                            ThemeDimens.font_size_medium)),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            CupertinoDialogAction(
+                                child: Text(ThemeStrings.CONFIRM,
+                                    style: TextStyle(
+                                        fontSize:
+                                            ThemeDimens.font_size_medium)),
+                                onPressed: () {
+                                  CacheTools.clearCache(context)
+                                      .whenComplete(() {
+                                    _loadCache();
+                                    Navigator.pop(context);
+                                  });
+                                })
+                          ],
+                        ).build(context);
+                      })
+                }),
       ],
     );
   }

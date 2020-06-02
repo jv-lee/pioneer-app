@@ -12,6 +12,7 @@ class ThemeStrings {
   static const SEARCH_HINT = "点击搜索内容";
   static const DETAILS_TITLE = "内容详情";
   static const CANCEL = "取消";
+  static const CONFIRM = "确定";
   static const TODAY = "Today";
 
   //我的页面item字符
