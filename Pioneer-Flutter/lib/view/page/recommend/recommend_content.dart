@@ -11,7 +11,7 @@ import 'package:pioneer_flutter/view/page/recommend/recommend_content_tab.dart';
 import 'package:pioneer_flutter/view/presenter/recommend_presenter.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
-import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
+import 'package:pioneer_flutter/view/widget/status/super_list_view2.dart';
 
 /// @author jv.lee
 /// @date 2020/5/8
@@ -53,12 +53,12 @@ class _RecommendContentState extends State<RecommendContent>
   @override
   bindContent(List<ContentData> call) {
     contentData.clear();
-    if (call.isEmpty) {
-      _statusController.pageEmpty();
+    if (call.length == 0) {
+      _statusController.pageEmpty().itemEmpty();
     } else {
       contentData.addAll(call);
+      _statusController.pageComplete().itemComplete();
     }
-    _statusController.pageComplete().itemComplete();
     setState(() {});
   }
 
@@ -68,7 +68,7 @@ class _RecommendContentState extends State<RecommendContent>
   }
 
   Widget buildList(BuildContext context) {
-    return SuperListView(
+    return SuperListView2(
       isLoadMore: false,
       statusController: _statusController,
       scrollController: _scrollController,
@@ -82,6 +82,7 @@ class _RecommendContentState extends State<RecommendContent>
         ),
         RecommendContentTab((value) {
           type = value;
+          _statusController.pageLoading();
           _presenter.getContentData(type);
         })
       ],
