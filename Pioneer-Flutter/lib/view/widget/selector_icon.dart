@@ -45,6 +45,7 @@ class _SelectorIconState extends State<SelectorIcon> {
       },
     );
   }
+
 }
 
 typedef SelectorFunction<T> = void Function(bool isPress);

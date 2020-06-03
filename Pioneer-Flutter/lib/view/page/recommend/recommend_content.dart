@@ -6,6 +6,7 @@ import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
 import 'package:pioneer_flutter/view/page/recommend/recommend_content_banner.dart';
+import 'package:pioneer_flutter/view/page/recommend/recommend_content_tab.dart';
 import 'package:pioneer_flutter/view/presenter/recommend_presenter.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
@@ -72,7 +73,8 @@ class _RecommendContentState extends State<RecommendContent>
       headerChildren: <Widget>[
         RecommendContentBanner(
           data: bannerData,
-        )
+        ),
+        RecommendContentTab()
       ],
       itemBuilder: (BuildContext context, int index) {
         var entity = contentData[index];
