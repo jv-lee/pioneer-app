@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/constants/recommend_constants.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/view/control/recommend_control.dart';
@@ -29,6 +30,7 @@ class _RecommendContentState extends State<RecommendContent>
   StatusController _statusController;
   ScrollController _scrollController;
   RecommendPresenter _presenter;
+  String type = RecommendConstants.KEY_VIEWS;
 
   @override
   void initState() {
@@ -38,7 +40,7 @@ class _RecommendContentState extends State<RecommendContent>
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
     _scrollController = ScrollController();
     _presenter.getBannerDate();
-    _presenter.getContentData();
+    _presenter.getContentData(type);
   }
 
   @override
@@ -50,10 +52,14 @@ class _RecommendContentState extends State<RecommendContent>
 
   @override
   bindContent(List<ContentData> call) {
-    setState(() {
+    contentData.clear();
+    if (call.isEmpty) {
+      _statusController.pageEmpty();
+    } else {
       contentData.addAll(call);
-      _statusController.pageComplete().itemComplete();
-    });
+    }
+    _statusController.pageComplete().itemComplete();
+    setState(() {});
   }
 
   @override
@@ -68,13 +74,16 @@ class _RecommendContentState extends State<RecommendContent>
       scrollController: _scrollController,
       itemCount: contentData.length,
       onPageReload: () {
-        _presenter.getContentData();
+        _presenter.getContentData(type);
       },
       headerChildren: <Widget>[
         RecommendContentBanner(
           data: bannerData,
         ),
-        RecommendContentTab()
+        RecommendContentTab((value) {
+          type = value;
+          _presenter.getContentData(type);
+        })
       ],
       itemBuilder: (BuildContext context, int index) {
         var entity = contentData[index];

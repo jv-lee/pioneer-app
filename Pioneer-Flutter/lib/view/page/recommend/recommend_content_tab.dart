@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/constants/recommend_constants.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
@@ -8,6 +9,10 @@ import 'package:pioneer_flutter/view/widget/radio_icon.dart';
 /// @date 2020/6/3
 /// @description 主页-推荐TAB-tabs组件
 class RecommendContentTab extends StatefulWidget {
+  RecommendContentTab(this.typeFunction);
+
+  final TypeFunction typeFunction;
+
   @override
   State<StatefulWidget> createState() {
     return _RecommendContentTabState();
@@ -16,10 +21,17 @@ class RecommendContentTab extends StatefulWidget {
 
 class _RecommendContentTabState extends State<RecommendContentTab> {
   int groupValue = 1;
+
   onChange(val) {
     this.setState(() {
       groupValue = val;
-      print("val = " + val.toString());
+      if (val == 1) {
+        widget.typeFunction(RecommendConstants.KEY_VIEWS);
+      } else if (val == 2) {
+        widget.typeFunction(RecommendConstants.KEY_LIKES);
+      } else {
+        widget.typeFunction(RecommendConstants.KEY_COMMENDS);
+      }
     });
   }
 
@@ -39,7 +51,7 @@ class _RecommendContentTabState extends State<RecommendContentTab> {
               icon: ThemeIcons.views,
               defaultColor: Theme.of(context).primaryColor,
               activeColor: ThemeColors.colorViews,
-              changeFunction: (value)=>onChange(value),
+              changeFunction: (value) => onChange(value),
             ),
             margin: EdgeInsets.only(
                 left: ThemeDimens.margin_large,
@@ -52,7 +64,7 @@ class _RecommendContentTabState extends State<RecommendContentTab> {
               icon: ThemeIcons.like,
               defaultColor: Theme.of(context).primaryColor,
               activeColor: ThemeColors.colorLike,
-              changeFunction: (value)=>onChange(value),
+              changeFunction: (value) => onChange(value),
             ),
             margin: EdgeInsets.only(
                 left: ThemeDimens.margin_large,
@@ -65,7 +77,7 @@ class _RecommendContentTabState extends State<RecommendContentTab> {
               icon: ThemeIcons.commend,
               defaultColor: Theme.of(context).primaryColor,
               activeColor: ThemeColors.colorMessage,
-              changeFunction: (value)=>onChange(value),
+              changeFunction: (value) => onChange(value),
             ),
             margin: EdgeInsets.only(
                 left: ThemeDimens.margin_large,
@@ -76,3 +88,5 @@ class _RecommendContentTabState extends State<RecommendContentTab> {
     );
   }
 }
+
+typedef TypeFunction = void Function(String type);
