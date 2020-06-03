@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 
 /// @author jv.lee
@@ -28,6 +29,8 @@ class StatusPage extends StatefulWidget {
 }
 
 class StatusPageState extends State<StatusPage> {
+  double fontSize = ThemeDimens.font_size_small;
+
   @override
   Widget build(BuildContext context) {
     return buildWidget(context);
@@ -59,7 +62,8 @@ class StatusPageState extends State<StatusPage> {
   Widget buildEmpty(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('data is empty',style: TextStyle(color: Theme.of(context).primaryColor)),
+        child: Text('data is empty',
+            style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
       ),
     );
   }
@@ -70,9 +74,10 @@ class StatusPageState extends State<StatusPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('data is error',style: TextStyle(color: Theme.of(context).primaryColor)),
+            Text('data is error',
+                style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
             CupertinoButton(
-              child: Text('ReLoad'),
+              child: Text('ReLoad',style: TextStyle(fontSize: fontSize),),
               onPressed: () {
                 if (widget.reLoadFun != null) {
                   widget.reLoadFun();
@@ -86,6 +91,8 @@ class StatusPageState extends State<StatusPage> {
   }
 
   Widget buildData(BuildContext context) {
-    return Container(child: Text('child == null',style: TextStyle(color: Theme.of(context).primaryColor)));
+    return Container(
+        child: Text('child == null',
+            style: TextStyle(color: Theme.of(context).primaryColor)));
   }
 }
