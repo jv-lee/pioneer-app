@@ -52,7 +52,6 @@ class _RecommendContentState extends State<RecommendContent>
 
   @override
   bindContent(List<ContentData> call) {
-    contentData.clear();
     if (call.length == 0) {
       _statusController.pageEmpty().itemEmpty();
     } else {
@@ -82,7 +81,10 @@ class _RecommendContentState extends State<RecommendContent>
         ),
         RecommendContentTab((value) {
           type = value;
-          _statusController.pageLoading();
+          setState(() {
+            contentData.clear();
+          });
+          _statusController.pageLoading().itemEmpty();
           _presenter.getContentData(type);
         })
       ],
