@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
+import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/view/control/content_list_control.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
@@ -21,29 +23,40 @@ class HomeContentList extends StatefulWidget {
 }
 
 class _HomeContentListState extends State<HomeContentList>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin
+    implements ContentListControl {
   ContentListPresenter _presenter;
   StatusController _statusController;
   PageLoad<ContentData> _pageLoad;
 
   @override
+  bindData(ContentEntity data) {
+    _pageLoad.pageTotal = data.pageCount;
+    _pageLoad.loadData(data.data);
+  }
+
+  @override
+  pageError() {
+    _statusController.pageError();
+  }
+
+  @override
   void initState() {
     super.initState();
-    _presenter = ContentListPresenter();
+    _presenter = ContentListPresenter(this);
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
     _pageLoad = PageLoad<ContentData>(
         data: List<ContentData>(),
-        page: 1,
-        requestData: (page) {
-          return _presenter.getContentDataAsync(widget.type, page, _pageLoad);
-        },
+        initPage: 1,
         notify: () {
           setState(() {});
         },
         statusController: _statusController);
-    Future.delayed(Duration(milliseconds: widget.type == "Android" ? 0 : 500),
-        () => _pageLoad.loadData(false));
+    Future.delayed(
+        Duration(milliseconds: widget.type == "Android" ? 0 : 500),
+        () => _presenter.getContentDataAsync(
+            widget.type, _pageLoad.getPage(false)));
   }
 
   @override
@@ -52,19 +65,21 @@ class _HomeContentListState extends State<HomeContentList>
     return RefreshIndicator(
       onRefresh: () async {
         await Future.delayed(
-            Duration(milliseconds: 500), () => _pageLoad.loadData(false));
+            Duration(milliseconds: 500),
+            () => _presenter.getContentDataAsync(
+                widget.type, _pageLoad.getPage(false)));
       },
       child: SuperListView(
         statusController: _statusController,
         itemCount: _pageLoad.data.length,
         onPageReload: () {
-          _pageLoad.loadData(false);
+          _presenter.getContentDataAsync(widget.type, _pageLoad.getPage(false));
         },
         onItemReload: () {
-          _pageLoad.loadData(true);
+          _presenter.getContentDataAsync(widget.type, _pageLoad.getPage(true));
         },
         onLoadMore: () {
-          _pageLoad.loadData(true);
+          _presenter.getContentDataAsync(widget.type, _pageLoad.getPage(true));
         },
         isLoadMore: true,
         itemBuilder: (BuildContext context, int index) {

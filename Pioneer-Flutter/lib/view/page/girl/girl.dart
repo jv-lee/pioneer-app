@@ -6,7 +6,7 @@ import 'package:pioneer_flutter/view/item/girl_item.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_header.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_statusbar.dart';
 import 'package:pioneer_flutter/view/presenter/girl_presenter.dart';
-import 'package:pioneer_flutter/view/widget/load/page_load2.dart';
+import 'package:pioneer_flutter/view/widget/load/page_load.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
@@ -27,7 +27,7 @@ class _GirlState extends State<GirlPage>
   GirlPresenter _presenter;
   StatusController _statusController;
   ScrollController _scrollController;
-  PageLoad2<ContentData> _pageLoad;
+  PageLoad<ContentData> _pageLoad;
 
   @override
   bindData(ContentEntity data) {
@@ -47,7 +47,7 @@ class _GirlState extends State<GirlPage>
     _scrollController = ScrollController();
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
-    _pageLoad = PageLoad2<ContentData>(
+    _pageLoad = PageLoad<ContentData>(
         data: List<ContentData>(),
         initPage: 1,
         notify: () {

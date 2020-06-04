@@ -20,9 +20,8 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
 
   int requestCount = 0;
 
-  Future<List<String>> getData(page,PageLoad pageLoad) async {
+  Future<List<String>> getData(page) {
     return Future.delayed(Duration(seconds: 3), () {
-      pageLoad.pageTotal = 10;
       var array = List<String>();
       for (var i = 0; i < 10; i++) {
         array.add("page - $page item - index-$i");
@@ -53,15 +52,14 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
     _pageLoad = PageLoad<String>(
         data: List<String>(),
-        page: 1,
-        requestData: (page) {
-          return getData(page,_pageLoad);
-        },
+        initPage: 1,
         notify: () {
           setState(() {});
         },
         statusController: _statusController);
-    _pageLoad.loadData(false);
+    getData(_pageLoad.getPage(false)).then((value) {
+      _pageLoad.loadData(value);
+    });
   }
 
   @override
@@ -70,13 +68,19 @@ class _SuperListViewTestState extends State<SuperListViewTest> {
       statusController: _statusController,
       itemCount: _pageLoad.data.length,
       onPageReload: () {
-        _pageLoad.loadData(false);
+        getData(_pageLoad.getPage(false)).then((value) {
+          _pageLoad.loadData(value);
+        });
       },
       onItemReload: () {
-        _pageLoad.loadData(true);
+        getData(_pageLoad.getPage(true)).then((value) {
+          _pageLoad.loadData(value);
+        });
       },
       onLoadMore: () {
-        _pageLoad.loadData(true);
+        getData(_pageLoad.getPage(true)).then((value) {
+          _pageLoad.loadData(value);
+        });
       },
       isLoadMore: true,
       headerChildren: <Widget>[

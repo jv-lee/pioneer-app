@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
+import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/tools/toast_tools.dart';
+import 'package:pioneer_flutter/view/control/search_control.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
@@ -20,24 +23,37 @@ class SearchPage extends StatefulWidget {
   }
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchPage> implements SearchControl {
   SearchPresenter _presenter;
   StatusController _statusController;
   PageLoad _pageLoad;
   var searchText = "";
 
   @override
+  bindData(ContentEntity data) {
+    _pageLoad.pageTotal = data.pageCount;
+    _pageLoad.loadData(data.data);
+  }
+
+  @override
+  pageError() {
+    _statusController.pageError().itemEmpty();
+  }
+
+  @override
+  searchEmpty() {
+    _statusController.pageEmpty();
+  }
+
+  @override
   void initState() {
     super.initState();
-    _presenter = SearchPresenter();
+    _presenter = SearchPresenter(this);
     _statusController = StatusController(
         pageStatus: PageStatus.data, itemStatus: ItemStatus.empty);
     _pageLoad = PageLoad<ContentData>(
         data: List<ContentData>(),
-        page: 1,
-        requestData: (page) {
-          return _presenter.searchDataList(searchText, page, _pageLoad);
-        },
+        initPage: 1,
         notify: () {
           setState(() {});
         },
@@ -52,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
           onSubmitted: (value) {
             searchText = value;
             _statusController.pageLoading();
-            _pageLoad.loadData(false);
+            _presenter.searchDataList(searchText, _pageLoad.getPage(false));
           },
         ),
         centerTitle: true,
@@ -64,13 +80,13 @@ class _SearchPageState extends State<SearchPage> {
           statusController: _statusController,
           itemCount: _pageLoad.data.length,
           onPageReload: () {
-            _pageLoad.loadData(false);
+            _presenter.searchDataList(searchText, _pageLoad.getPage(false));
           },
           onItemReload: () {
-            _pageLoad.loadData(true);
+            _presenter.searchDataList(searchText, _pageLoad.getPage(true));
           },
           onLoadMore: () {
-            _pageLoad.loadData(true);
+            _presenter.searchDataList(searchText, _pageLoad.getPage(true));
           },
           isLoadMore: true,
           itemBuilder: (BuildContext context, int index) {
@@ -87,4 +103,5 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
+
 }

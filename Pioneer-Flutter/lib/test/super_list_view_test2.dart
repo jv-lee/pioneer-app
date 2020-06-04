@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pioneer_flutter/view/widget/load/page_load2.dart';
+import 'package:pioneer_flutter/view/widget/load/page_load.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 import 'package:pioneer_flutter/view/widget/status/super_list_view2.dart';
@@ -16,11 +16,11 @@ class SuperListViewTest2 extends StatefulWidget {
 
 class _SuperListViewTestState extends State<SuperListViewTest2> {
   StatusController _statusController;
-  PageLoad2<String> _pageLoad;
+  PageLoad<String> _pageLoad;
 
   int requestCount = 0;
 
-  Future<List<String>> getData(page, PageLoad2 pageLoad) async {
+  Future<List<String>> getData(page, PageLoad pageLoad) async {
     return Future.delayed(Duration(seconds: 3), () {
       pageLoad.pageTotal = 10;
       var array = List<String>();
@@ -51,7 +51,7 @@ class _SuperListViewTestState extends State<SuperListViewTest2> {
     super.initState();
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
-    _pageLoad = PageLoad2<String>(
+    _pageLoad = PageLoad<String>(
         data: List<String>(),
         initPage: 1,
         notify: () {
