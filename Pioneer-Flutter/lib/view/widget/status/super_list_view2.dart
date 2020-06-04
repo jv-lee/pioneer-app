@@ -156,6 +156,7 @@ class SuperListView2State extends State<SuperListView2> {
               child: Text('Reload',style: TextStyle(fontSize: fontSize),),
               onPressed: () {
                 if (widget.onPageReload != null) {
+                  widget.statusController.pageLoading().itemEmpty();
                   widget.onPageReload();
                 }
               },
@@ -306,6 +307,7 @@ class SuperListView2State extends State<SuperListView2> {
               ),
               onTapDown: (details) {
                 if (widget.onItemReload != null) {
+                  widget.statusController.itemLoading();
                   widget.onItemReload();
                 }
               },

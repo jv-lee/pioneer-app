@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
-import 'package:pioneer_flutter/test/super_list_view_test.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/page/collect/collect_page.dart';
@@ -51,7 +50,7 @@ class PioneerApp extends StatelessWidget {
   }
 
   var routes = {
-//    '/': (context) => SuperListViewTest(),
+//    '/': (context) => SuperListViewTest2(),
     '/': (context) => MainPage(),
     "/search": (context) => SearchPage(),
     "/message": (context) => MessagePage(),
