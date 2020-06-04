@@ -44,18 +44,18 @@ class _RecommendContentState extends State<RecommendContent>
   }
 
   @override
-  bindBanner(List<BannerData> call) {
+  bindBanner(List<BannerData> data) {
     setState(() {
-      bannerData.addAll(call);
+      bannerData.addAll(data);
     });
   }
 
   @override
-  bindContent(List<ContentData> call) {
-    if (call.length == 0) {
+  bindData(List<ContentData> data) {
+    if (data.length == 0) {
       _statusController.pageEmpty().itemEmpty();
     } else {
-      contentData.addAll(call);
+      contentData.addAll(data);
       _statusController.pageComplete().itemComplete();
     }
     setState(() {});
@@ -63,7 +63,7 @@ class _RecommendContentState extends State<RecommendContent>
 
   @override
   pageError() {
-    _statusController.pageError();
+    _statusController.pageError().itemEmpty();
   }
 
   Widget buildList(BuildContext context) {
@@ -105,4 +105,5 @@ class _RecommendContentState extends State<RecommendContent>
   Widget build(BuildContext context) {
     return buildList(context);
   }
+
 }

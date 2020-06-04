@@ -18,8 +18,26 @@ class HomePage extends StatefulWidget {
 
 class _HomeState extends State<HomePage> implements HomeControl {
   HomePresenter _presenter;
-  List<CategoryData> data = List();
-  PageStatus status = PageStatus.loading;
+  List<CategoryData> _categoryData = List();
+  PageStatus _status = PageStatus.loading;
+
+  @override
+  bindData(List<CategoryData> data) {
+    _categoryData.clear();
+    _categoryData.addAll(data);
+    if (data.length == 0) {
+      _status = PageStatus.empty;
+    } else {
+      _status = PageStatus.data;
+    }
+    setState(() {});
+  }
+
+  @override
+  pageError() {
+    _status = PageStatus.error;
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -39,8 +57,8 @@ class _HomeState extends State<HomePage> implements HomeControl {
         ),
         Expanded(
           child: StatusPage(
-            status: status,
-            child: HomeContent(data),
+            status: _status,
+            child: HomeContent(_categoryData),
             reLoadFun: () {
               _presenter.buildCategoryTabs();
             },
@@ -48,23 +66,5 @@ class _HomeState extends State<HomePage> implements HomeControl {
         )
       ],
     );
-  }
-
-  @override
-  bindCategoryTabs(List<CategoryData> call) {
-    data.clear();
-    data.addAll(call);
-    if (data.length == 0) {
-      status = PageStatus.empty;
-    } else {
-      status = PageStatus.data;
-    }
-    setState(() {});
-  }
-
-  @override
-  pageError() {
-    status = PageStatus.error;
-    setState(() {});
   }
 }

@@ -21,7 +21,8 @@ class HomePresenter {
         return null;
       } else {
         var categoryEntity = CategoryEntity.fromJson(json.decode(value));
-        homeControl.bindCategoryTabs(categoryEntity.data);
+        print(categoryEntity.toString());
+        homeControl.bindData(categoryEntity.data);
         return categoryEntity;
       }
     }).then((value) async {
@@ -30,7 +31,7 @@ class HomePresenter {
       if (value == null && response == null) {
         homeControl.pageError();
       } else if (value.toString() != response.toString()) {
-        homeControl.bindCategoryTabs(response.data);
+        homeControl.bindData(response.data);
         var sp = await SharedPreferences.getInstance();
         sp.setString(CacheConstants.KEY_HOME_CACHE, json.encode(response));
       }

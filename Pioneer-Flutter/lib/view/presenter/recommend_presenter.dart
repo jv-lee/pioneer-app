@@ -24,7 +24,7 @@ class RecommendPresenter {
   getContentData(String type) {
     var data = getCacheContentList(type);
     if (data != null) {
-      control.bindContent(data);
+      control.bindData(data);
       return;
     }
     ApiRepository.instance.getHotDataAsync(type, "GanHuo", 20).then((value) {
@@ -32,7 +32,7 @@ class RecommendPresenter {
         control.pageError();
       } else {
         putCacheContentList(type, value.data);
-        control.bindContent(value.data);
+        control.bindData(value.data);
       }
     }).catchError((error) {
       control.pageError();

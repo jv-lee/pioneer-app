@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
+import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/view/control/girl_control.dart';
 import 'package:pioneer_flutter/view/item/girl_item.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_header.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_statusbar.dart';
 import 'package:pioneer_flutter/view/presenter/girl_presenter.dart';
 import 'package:pioneer_flutter/view/widget/load/page_load.dart';
+import 'package:pioneer_flutter/view/widget/load/page_load2.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 import 'package:pioneer_flutter/view/widget/status/super_list_view.dart';
@@ -19,30 +22,40 @@ class GirlPage extends StatefulWidget {
   }
 }
 
-class _GirlState extends State<GirlPage> with AutomaticKeepAliveClientMixin {
+class _GirlState extends State<GirlPage>
+    with AutomaticKeepAliveClientMixin
+    implements GirlControl {
   GirlPresenter _presenter;
   StatusController _statusController;
   ScrollController _scrollController;
-  PageLoad<ContentData> _pageLoad;
+  PageLoad2<ContentData> _pageLoad;
+
+  @override
+  bindData(ContentEntity data) {
+    _pageLoad.pageTotal = data.pageCount;
+    _pageLoad.loadData(data.data);
+  }
+
+  @override
+  pageError() {
+    _statusController.pageError();
+  }
 
   @override
   void initState() {
     super.initState();
-    _presenter = GirlPresenter();
+    _presenter = GirlPresenter(this);
     _scrollController = ScrollController();
     _statusController = StatusController(
         pageStatus: PageStatus.loading, itemStatus: ItemStatus.empty);
-    _pageLoad = PageLoad<ContentData>(
+    _pageLoad = PageLoad2<ContentData>(
         data: List<ContentData>(),
-        page: 1,
-        requestData: (page) {
-          return _presenter.getContentDataAsync(page, _pageLoad);
-        },
+        initPage: 1,
         notify: () {
           setState(() {});
         },
         statusController: _statusController);
-    _pageLoad.loadData(false);
+    _presenter.getContentData(_pageLoad.getPage(false));
   }
 
   @override
@@ -52,21 +65,24 @@ class _GirlState extends State<GirlPage> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         RefreshIndicator(
           onRefresh: () async {
-            await Future.delayed(
-                Duration(milliseconds: 500), () => _pageLoad.loadData(false));
+            await Future.delayed(Duration(milliseconds: 500),
+                () => _presenter.getContentData(_pageLoad.getPage(false)));
           },
           child: SuperListView(
             scrollController: _scrollController,
             statusController: _statusController,
             itemCount: _pageLoad.data.length,
             onPageReload: () {
-              _pageLoad.loadData(false);
+              _presenter.getContentData(
+                  _pageLoad.getPage(false));
             },
             onItemReload: () {
-              _pageLoad.loadData(true);
+              _presenter.getContentData(
+                  _pageLoad.getPage(true));
             },
             onLoadMore: () {
-              _pageLoad.loadData(true);
+              _presenter.getContentData(
+                  _pageLoad.getPage(true));
             },
             isLoadMore: true,
             headerChildren: <Widget>[GirlHeader()],
