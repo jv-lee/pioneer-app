@@ -15,7 +15,7 @@ abstract class CacheLoad<T> {
       var response = await loadNetwork();
       if (value == null && response == null) {
         loadError();
-      } else if (response != null &&   toJson(response) != toJson(cacheEntity) ) {
+      } else if (response != null &&   cacheEntity == null || toJson(response) != toJson(cacheEntity) ) {
         bindData(response);
         localSave(response);
       }
