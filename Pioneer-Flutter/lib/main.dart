@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
@@ -15,38 +17,49 @@ import 'view/page/main/main.dart';
 
 void main() {
   runFxApp(PioneerApp(), uiSize: Size(360, 720));
-//  runApp(PioneerApp());
 }
 
 // ignore: must_be_immutable
 class PioneerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: DarkModeProvider())],
-      child: Consumer<DarkModeProvider>(
-        builder: (context, darkModeProvider, _) {
-          return darkModeProvider.darkMode == DarkModeProvider.MODE_SYSTEM
-              ? MaterialApp(
-                  //亮色主题 lightTheme
-                  theme: themeData,
-                  //深色主题 darkTheme
-                  darkTheme: darkThemeData,
-                  initialRoute: '/',
-                  routes: routes,
-                )
-              : MaterialApp(
-                  //亮色主题 lightTheme
-                  theme: darkModeProvider.darkMode == DarkModeProvider.MODE_DARK
-                      ? darkThemeData
-                      : themeData,
-                  //深色主题 darkTheme
-                  initialRoute: '/',
-                  routes: routes,
-                );
-        },
-      ),
-    );
+    if (Platform.isIOS) {
+      return MaterialApp(
+        //亮色主题 lightTheme
+        theme: themeData,
+        //深色主题 darkTheme
+        darkTheme: darkThemeData,
+        initialRoute: '/',
+        routes: routes,
+      );
+    } else {
+      return MultiProvider(
+        providers: [ChangeNotifierProvider.value(value: DarkModeProvider())],
+        child: Consumer<DarkModeProvider>(
+          builder: (context, darkModeProvider, _) {
+            return darkModeProvider.darkMode == DarkModeProvider.MODE_SYSTEM
+                ? MaterialApp(
+                    //亮色主题 lightTheme
+                    theme: themeData,
+                    //深色主题 darkTheme
+                    darkTheme: darkThemeData,
+                    initialRoute: '/',
+                    routes: routes,
+                  )
+                : MaterialApp(
+                    //亮色主题 lightTheme
+                    theme:
+                        darkModeProvider.darkMode == DarkModeProvider.MODE_DARK
+                            ? darkThemeData
+                            : themeData,
+                    //深色主题 darkTheme
+                    initialRoute: '/',
+                    routes: routes,
+                  );
+          },
+        ),
+      );
+    }
   }
 
   var routes = {
