@@ -9,19 +9,20 @@ import 'package:pioneer_flutter/tools/toast_tools.dart';
 /// @description
 class CacheTools {
   ///加载缓存
-  static Future<String> loadCache() async {
+  static Future<String> loadCacheAsync() async {
     try {
       Directory tempDir = await getTemporaryDirectory();
       double value = await _getTotalSizeOfFilesInDir(tempDir);
       print('临时目录大小: ' + value.toString());
-      return _renderSize(value);
+      return Future.value(_renderSize(value));
     } catch (err) {
       print(err);
     }
   }
 
   /// 递归方式 计算文件的大小
-  static Future<double> _getTotalSizeOfFilesInDir(final FileSystemEntity file) async {
+  static Future<double> _getTotalSizeOfFilesInDir(
+      final FileSystemEntity file) async {
     try {
       if (file is File) {
         int length = await file.length();
@@ -74,9 +75,9 @@ class CacheTools {
   }
 
   ///格式化文件大小
-  static _renderSize(double value) {
+  static String _renderSize(double value) {
     if (null == value) {
-      return 0;
+      return "0";
     }
     List<String> unitArr = List()..add('B')..add('KB')..add('MB')..add('GB');
     int index = 0;

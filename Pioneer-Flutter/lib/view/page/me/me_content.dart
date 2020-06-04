@@ -27,10 +27,9 @@ class _MeContentState extends State<MeContent> {
   }
 
   _loadCache() {
-    CacheTools.loadCache().then((value) {
-      setState(() {
-        cacheValue = value;
-      });
+    CacheTools.loadCacheAsync().then((value) {
+      cacheValue = value;
+      setState(() {});
     });
   }
 

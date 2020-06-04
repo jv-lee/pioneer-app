@@ -1,4 +1,3 @@
-import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 
 /// @author jv.lee

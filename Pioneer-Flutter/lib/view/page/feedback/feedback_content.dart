@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
 import 'package:pioneer_flutter/tools/toast_tools.dart';
-import 'package:toast/toast.dart';
 
 /// @author jv.lee
 /// @date 2020/6/2

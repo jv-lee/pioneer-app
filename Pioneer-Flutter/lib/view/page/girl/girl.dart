@@ -6,7 +6,6 @@ import 'package:pioneer_flutter/view/item/girl_item.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_header.dart';
 import 'package:pioneer_flutter/view/page/girl/girl_statusbar.dart';
 import 'package:pioneer_flutter/view/presenter/girl_presenter.dart';
-import 'package:pioneer_flutter/view/widget/load/page_load.dart';
 import 'package:pioneer_flutter/view/widget/load/page_load2.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
