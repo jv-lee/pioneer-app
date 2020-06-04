@@ -52,6 +52,7 @@ class _HomeState extends State<HomePage> implements HomeControl {
 
   @override
   bindCategoryTabs(List<CategoryData> call) {
+    data.clear();
     data.addAll(call);
     if (data.length == 0) {
       status = PageStatus.empty;

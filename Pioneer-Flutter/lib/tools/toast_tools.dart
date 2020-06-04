@@ -8,6 +8,7 @@ import 'package:toast/toast.dart';
 class ToastTools {
   static show(BuildContext context, String msg) {
     Toast.show(msg, context,
+        gravity: Toast.CENTER,
         duration: Toast.LENGTH_LONG,
         backgroundColor: Theme.of(context).primaryColor,
         textColor: Theme.of(context).accentColor);
