@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pioneer_flutter/view/widget/load/page_load.dart';
+import 'package:pioneer_flutter/tools/page_load.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 import 'package:pioneer_flutter/view/widget/status/super_list_view2.dart';

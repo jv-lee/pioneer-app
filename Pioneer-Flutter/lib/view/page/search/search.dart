@@ -7,7 +7,7 @@ import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
 import 'package:pioneer_flutter/view/item/content_text_item.dart';
 import 'package:pioneer_flutter/view/presenter/search_presenter.dart';
-import 'package:pioneer_flutter/view/widget/load/page_load.dart';
+import 'package:pioneer_flutter/tools/page_load.dart';
 import 'package:pioneer_flutter/view/widget/search_field.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
