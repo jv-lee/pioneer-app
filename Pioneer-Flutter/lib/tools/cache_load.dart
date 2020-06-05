@@ -7,9 +7,12 @@ abstract class CacheLoad<T> {
       //获取缓存数据
       String value = await loadCache();
       T cacheEntity;
-      if (value != null) {
+      if (value != null && value.isNotEmpty) {
+        print("value != null");
         cacheEntity = buildEntity(value);
         bindData(cacheEntity);
+      }else{
+        print("value == null");
       }
 
       var response = await loadNetwork();

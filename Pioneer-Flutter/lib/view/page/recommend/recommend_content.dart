@@ -45,9 +45,9 @@ class _RecommendContentState extends State<RecommendContent>
 
   @override
   bindBanner(List<BannerData> data) {
-    setState(() {
-      bannerData.addAll(data);
-    });
+    bannerData.clear();
+    bannerData.addAll(data);
+    setState(() {});
   }
 
   @override
@@ -105,5 +105,4 @@ class _RecommendContentState extends State<RecommendContent>
   Widget build(BuildContext context) {
     return buildList(context);
   }
-
 }

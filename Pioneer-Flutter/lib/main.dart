@@ -23,10 +23,10 @@ void main() {
 class PioneerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS || Platform.isAndroid) {
       return MaterialApp(
         //亮色主题 lightTheme
-        theme: themeData,
+        theme: darkThemeData,
         //深色主题 darkTheme
         darkTheme: darkThemeData,
         initialRoute: '/',

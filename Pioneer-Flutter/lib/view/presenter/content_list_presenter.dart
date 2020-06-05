@@ -12,11 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// @description
 class ContentListPresenter {
   ContentListPresenter(this.control) {
-    cacheLoad = ContentDataCacheLoad(control, "type", 1);
+    cacheLoad = _ContentDataCacheLoad(control);
   }
 
   final ContentListControl control;
-  ContentDataCacheLoad cacheLoad;
+  _ContentDataCacheLoad cacheLoad;
 
   getContentDataAsync(type, page) async {
     cacheLoad.page = page;
@@ -25,8 +25,8 @@ class ContentListPresenter {
   }
 }
 
-class ContentDataCacheLoad extends CacheFirstLoad<ContentEntity> {
-  ContentDataCacheLoad(this.control, this.type, this.page) : super();
+class _ContentDataCacheLoad extends CacheFirstLoad<ContentEntity> {
+  _ContentDataCacheLoad(this.control) : super();
   final ContentListControl control;
   String type;
   int page;

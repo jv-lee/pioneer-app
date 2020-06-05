@@ -12,20 +12,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// @description
 class HomePresenter {
   HomePresenter(this.homeControl) {
-    cacheLoad = CategoryTabsCacheLoad(homeControl);
+    _cacheLoad = _CategoryTabsCacheLoad(homeControl);
   }
 
   final HomeControl homeControl;
-  CategoryTabsCacheLoad cacheLoad;
+  _CategoryTabsCacheLoad _cacheLoad;
 
   buildCategoryTabs() {
-    cacheLoad.load();
+    _cacheLoad.load();
   }
 
 }
 
-class CategoryTabsCacheLoad extends CacheLoad<CategoryEntity> {
-  CategoryTabsCacheLoad(this.homeControl) : super();
+class _CategoryTabsCacheLoad extends CacheLoad<CategoryEntity> {
+  _CategoryTabsCacheLoad(this.homeControl) : super();
   final HomeControl homeControl;
 
   @override
