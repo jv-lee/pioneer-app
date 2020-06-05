@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/theme/widget_strings.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
 
@@ -28,21 +29,21 @@ class SuperListView2 extends StatefulWidget {
 
   SuperListView2(
       {this.scrollController,
-        @required this.statusController,
-        this.itemCount = 0,
-        this.onPageReload,
-        this.onItemReload,
-        this.onLoadMore,
-        this.itemBuilder,
-        this.pageLoading,
-        this.pageEmpty,
-        this.pageError,
-        this.itemLoading,
-        this.itemError,
-        this.itemNoMore,
-        this.isLoadMore = false,
-        this.headerChildren = const <Widget>[],
-        this.footerChildren = const <Widget>[]})
+      @required this.statusController,
+      this.itemCount = 0,
+      this.onPageReload,
+      this.onItemReload,
+      this.onLoadMore,
+      this.itemBuilder,
+      this.pageLoading,
+      this.pageEmpty,
+      this.pageError,
+      this.itemLoading,
+      this.itemError,
+      this.itemNoMore,
+      this.isLoadMore = false,
+      this.headerChildren = const <Widget>[],
+      this.footerChildren = const <Widget>[]})
       : super();
 
   @override
@@ -126,7 +127,7 @@ class SuperListView2State extends State<SuperListView2> {
 
   Widget buildPageLoading(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 100,bottom: 100),
+      margin: EdgeInsets.only(top: 100, bottom: 100),
       child: Center(
         child: CircularProgressIndicator(),
       ),
@@ -135,25 +136,30 @@ class SuperListView2State extends State<SuperListView2> {
 
   Widget buildPageEmpty(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 100,bottom: 100),
+      margin: EdgeInsets.only(top: 100, bottom: 100),
       child: Center(
-        child: Text('data is empty',
-            style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
+        child: Text(WidgetStrings.STATUS_PAGE_EMPTY,
+            style: TextStyle(
+                color: Theme.of(context).primaryColor, fontSize: fontSize)),
       ),
     );
   }
 
   Widget buildPageError(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 100,bottom: 100),
+      margin: EdgeInsets.only(top: 100, bottom: 100),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('data is error',
-                style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
+            Text(WidgetStrings.STATUS_PAGE_ERROR,
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontSize: fontSize)),
             CupertinoButton(
-              child: Text('Reload',style: TextStyle(fontSize: fontSize),),
+              child: Text(
+                WidgetStrings.STATUS_PAGE_RELOAD,
+                style: TextStyle(fontSize: fontSize),
+              ),
               onPressed: () {
                 if (widget.onPageReload != null) {
                   widget.statusController.pageLoading().itemEmpty();
@@ -209,9 +215,7 @@ class SuperListView2State extends State<SuperListView2> {
 
           //创建contentItem
           if (index <
-              (widget.headerChildren.length +
-                  pageCount +
-                  widget.itemCount)) {
+              (widget.headerChildren.length + pageCount + widget.itemCount)) {
             return widget.itemBuilder(
                 context, index - widget.headerChildren.length - pageCount);
           }
@@ -222,8 +226,8 @@ class SuperListView2State extends State<SuperListView2> {
                   pageCount +
                   widget.itemCount +
                   widget.footerChildren.length)) {
-            return widget.footerChildren[
-            index - (widget.headerChildren.length + pageCount+ widget.itemCount)];
+            return widget.footerChildren[index -
+                (widget.headerChildren.length + pageCount + widget.itemCount)];
           }
 
           return buildItemWidget(context);
@@ -260,8 +264,10 @@ class SuperListView2State extends State<SuperListView2> {
               ),
             ),
             Container(
-              child: Text('加载中...',
-                  style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
+              child: Text(WidgetStrings.STATUS_ITEM_LOADING,
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: fontSize)),
               padding: EdgeInsets.only(left: 10),
             ),
           ],
@@ -280,8 +286,9 @@ class SuperListView2State extends State<SuperListView2> {
     return Container(
       height: _itemHeight,
       child: Center(
-        child: Text('没有更多了',
-            style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
+        child: Text(WidgetStrings.STATUS_ITEM_NOT_MORE,
+            style: TextStyle(
+                color: Theme.of(context).primaryColor, fontSize: fontSize)),
       ),
     );
   }
@@ -294,15 +301,16 @@ class SuperListView2State extends State<SuperListView2> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'data is error',
-              style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize),
+              WidgetStrings.STATUS_ITEM_ERROR,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor, fontSize: fontSize),
             ),
             GestureDetector(
               child: Container(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
-                  'Reload',
-                  style: TextStyle(color: Colors.blue,fontSize: fontSize),
+                  WidgetStrings.STATUS_ITEM_RELOAD,
+                  style: TextStyle(color: Colors.blue, fontSize: fontSize),
                 ),
               ),
               onTapDown: (details) {

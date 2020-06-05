@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
+import 'package:pioneer_flutter/theme/widget_strings.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 
 /// @author jv.lee
@@ -62,8 +63,9 @@ class StatusPageState extends State<StatusPage> {
   Widget buildEmpty(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('data is empty',
-            style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
+        child: Text(WidgetStrings.STATUS_PAGE_EMPTY,
+            style: TextStyle(
+                color: Theme.of(context).primaryColor, fontSize: fontSize)),
       ),
     );
   }
@@ -74,10 +76,14 @@ class StatusPageState extends State<StatusPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('data is error',
-                style: TextStyle(color: Theme.of(context).primaryColor,fontSize: fontSize)),
+            Text(WidgetStrings.STATUS_PAGE_ERROR,
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontSize: fontSize)),
             CupertinoButton(
-              child: Text('ReLoad',style: TextStyle(fontSize: fontSize),),
+              child: Text(
+                WidgetStrings.STATUS_PAGE_RELOAD,
+                style: TextStyle(fontSize: fontSize),
+              ),
               onPressed: () {
                 if (widget.reLoadFun != null) {
                   widget.reLoadFun();
