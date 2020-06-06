@@ -17,23 +17,29 @@ class MeToolbar extends AppBar {
               style: TextStyle(fontSize: ThemeDimens.font_size_medium),
             ),
             centerTitle: true,
-            actions: [
-              Container(
-                margin: EdgeInsets.only(right: ThemeDimens.padding_item),
-                child: SelectorIcon(
-                  isPress: DarkModeProvider.isDark,
-                  normalIcon:
-                      Icon(ThemeIcons.light, color: ThemeColors.colorLight),
-                  pressIcon:
-                      Icon(ThemeIcons.night, color: ThemeColors.colorNight),
-                  selectorFunction: (selector) {
-                    DarkModeProvider.changeMode(
-                        context,
-                        selector
-                            ? DarkModeProvider.MODE_DARK
-                            : DarkModeProvider.MODE_LIGHT);
-                  },
-                ),
-              )
-            ]);
+            actions: actionsWidget(context));
+
+  static List<Widget> actionsWidget(context) {
+    if (true) {
+      return null;
+    } else {
+      return [
+        Container(
+          margin: EdgeInsets.only(right: ThemeDimens.padding_item),
+          child: SelectorIcon(
+            isPress: DarkModeProvider.isDark,
+            normalIcon: Icon(ThemeIcons.light, color: ThemeColors.colorLight),
+            pressIcon: Icon(ThemeIcons.night, color: ThemeColors.colorNight),
+            selectorFunction: (selector) {
+              DarkModeProvider.changeMode(
+                  context,
+                  selector
+                      ? DarkModeProvider.MODE_DARK
+                      : DarkModeProvider.MODE_LIGHT);
+            },
+          ),
+        )
+      ];
+    }
+  }
 }
