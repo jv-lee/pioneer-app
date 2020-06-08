@@ -1,11 +1,10 @@
-import 'package:pioneer_flutter/db/base_database.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:pioneer_flutter/model/content_data.dart';
 
 /// @author jv.lee
 /// @date 2020/6/8
 /// @description 数据路记录浏览记录及收藏数据模型
 class History {
-  final int id;
+  final String id;
   final int readTime;
   final int isCollect;
   final String title;
@@ -23,8 +22,7 @@ class History {
       this.likeCount});
 
   static const TABLE_NAME = "history";
-  static const TABLE_EXECUTE =
-      "CREATE TABLE $TABLE_NAME(id INTEGER PRIMARY KEY,"
+  static const TABLE_EXECUTE = "CREATE TABLE $TABLE_NAME(id TEXT PRIMARY KEY,"
       "read_time INTEGER,"
       "is_collect INTEGER,"
       "title TEXT,"
@@ -49,4 +47,14 @@ class History {
     };
   }
 
+  History contentBuild(isCollect, ContentData data) {
+    return History(
+        id: data.sId,
+        readTime: DateTime.now().millisecondsSinceEpoch,
+        isCollect: isCollect,
+        title: data.title,
+        description: data.desc,
+        viewCount: data.views,
+        likeCount: data.likeCounts);
+  }
 }

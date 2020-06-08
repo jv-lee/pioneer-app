@@ -26,7 +26,7 @@ class _DatabaseTestState extends State<DatabaseTestPage> {
   insert() {
     for (int i = 0; i < 100; i++) {
       dao.insertHistory(History(
-          id: i,
+          id: i.toString(),
           readTime: DateTime.now().millisecondsSinceEpoch,
           isCollect: 0,
           title: "title - $i",
