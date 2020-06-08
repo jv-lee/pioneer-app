@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/db/base_database.dart';
 import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
+import 'package:pioneer_flutter/test/database_test.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/page/collect/collect_page.dart';
@@ -17,6 +19,7 @@ import 'view/page/main/main.dart';
 
 void main() {
   runFxApp(PioneerApp(), uiSize: Size(360, 720));
+  BaseDatabase.instance.init();
 }
 
 // ignore: must_be_immutable
@@ -63,8 +66,8 @@ class PioneerApp extends StatelessWidget {
   }
 
   var routes = {
-//    '/': (context) => SuperListViewTest2(),
-    '/': (context) => MainPage(),
+    '/': (context) => DatabaseTestPage(),
+//    '/': (context) => MainPage(),
     "/search": (context) => SearchPage(),
     "/message": (context) => MessagePage(),
     "/like": (context) => LikePage(),
