@@ -1,16 +1,13 @@
 package com.lee.pioneer.view.fragment
 
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.CacheUtil
 import com.lee.library.widget.dialog.ChoiceDialog
-import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
-import com.lee.pioneer.tools.CommonTools
+import com.lee.pioneer.tools.DarkThemeTools
 import com.lee.pioneer.viewmodel.MeViewModel
 
 /**
@@ -41,17 +38,18 @@ class MeFragment :
     override fun bindView() {
         binding.vm = viewModel
         binding.onClickListener = this
-        binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
-            override fun menuClick() {
-                CommonTools.updateDarkTheme(activity!!)
-                binding.isNight = CommonTools.isDarkTheme(activity!!)
-            }
-        })
+        binding.switchSystemEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+            DarkThemeTools.updateSystemTheme(isChecked, context!!)
+            binding.isSystem = isChecked
+        }
+        binding.switchDarkEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+            DarkThemeTools.updateNightTheme(isChecked)
+        }
     }
 
     override fun bindData() {
-        binding.isNight = CommonTools.isDarkTheme(activity!!)
-        Toast.makeText(context, "theme - ${AppCompatDelegate.getDefaultNightMode()}", Toast.LENGTH_SHORT).show()
+        binding.isSystem = DarkThemeTools.isSystemTheme(activity!!)
+        binding.isNight = DarkThemeTools.isDarkTheme(activity!!)
     }
 
     override fun onResume() {

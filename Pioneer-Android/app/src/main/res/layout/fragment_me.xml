@@ -10,8 +10,16 @@
             type="android.view.View.OnClickListener" />
 
         <variable
+            name="isSystem"
+            type="java.lang.Boolean" />
+
+        <variable
             name="isNight"
             type="java.lang.Boolean" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
 
         <variable
             name="vm"
@@ -31,8 +39,7 @@
             android:layout_height="wrap_content"
             app:backEnable="gone"
             app:layout_constraintTop_toTopOf="parent"
-            app:menuDrawable="@{isNight ? @drawable/vector_theme_mode_night:@drawable/vector_theme_mode_default}"
-            app:menuEnable="visible"
+            app:menuEnable="gone"
             app:titleText="@string/nav_me" />
 
         <LinearLayout
@@ -92,6 +99,56 @@
                 app:rightTextColor="@color/colorThemePrimary"
                 app:rightTextSize="@dimen/font_size_small"
                 tools:rightText="31.5M" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@color/colorThemeItem"
+                android:padding="@dimen/view_line_item_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    android:text="深色模式跟系统保持一致"
+                    android:textColor="@color/colorThemeAccent"
+                    android:textSize="@dimen/view_line_text_size" />
+
+                <Switch
+                    android:id="@+id/switch_system_enable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:checked="@{isSystem}" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorThemeItem"
+                android:padding="@dimen/view_line_item_padding"
+                android:visibility="@{isSystem ? view.INVISIBLE : view.VISIBLE}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    android:text="开启夜间模式"
+                    android:textColor="@color/colorThemeAccent"
+                    android:textSize="@dimen/view_line_text_size" />
+
+                <Switch
+                    android:id="@+id/switch_dark_enable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:checked="@{isNight}"
+                    android:enabled="true" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
