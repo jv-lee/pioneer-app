@@ -9,6 +9,7 @@ import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
 import 'package:pioneer_flutter/view/presenter/details_presenter.dart';
 import 'package:pioneer_flutter/view/widget/load_progress.dart';
+import 'package:share/share.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 /// @author jv.lee
@@ -56,6 +57,8 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
             onSelected: (value) {
               if (value == 'collect') {
                 _presenter.collectContent(widget.data);
+              } else if (value == 'share') {
+                Share.share(HttpConstants.getDetailsUri(widget.data.sId));
               }
             },
             color: Theme.of(context).canvasColor,
@@ -71,7 +74,7 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
                         color: Theme.of(context).accentColor,
                       ),
                       Text(
-                        "收藏",
+                        ThemeStrings.MENU_COLLECT,
                         style: TextStyle(color: Theme.of(context).accentColor),
                       )
                     ],
@@ -87,7 +90,7 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
                         ThemeIcons.share,
                         color: Theme.of(context).accentColor,
                       ),
-                      Text("分享",
+                      Text(ThemeStrings.MENU_SHARED,
                           style:
                               TextStyle(color: Theme.of(context).accentColor))
                     ],
