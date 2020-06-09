@@ -31,7 +31,6 @@ class _LoadProgressState extends State<LoadProgress> {
         setState(() {});
       })
       ..addListener(() {
-        print(_animation.value);
         if (_animation.value >= 0.3 && firstLoad) {
           widget.animationController.stop();
           firstLoad = false;

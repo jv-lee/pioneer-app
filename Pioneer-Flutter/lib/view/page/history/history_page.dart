@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/view/page/history/history_content.dart';
 
 /// @author jv.lee
 /// @date 2020/6/2
@@ -19,6 +20,7 @@ class _HistoryPageState extends State<HistoryPage> {
         title: Text(ThemeStrings.ME_ITEM_VIEWS),
         centerTitle: true,
       ),
+      body: HistoryContent(),
     );
   }
 }

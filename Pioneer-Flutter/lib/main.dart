@@ -66,8 +66,8 @@ class PioneerApp extends StatelessWidget {
   }
 
   var routes = {
-    '/': (context) => DatabaseTestPage(),
-//    '/': (context) => MainPage(),
+//    '/': (context) => DatabaseTestPage(),
+    '/': (context) => MainPage(),
     "/search": (context) => SearchPage(),
     "/message": (context) => MessagePage(),
     "/like": (context) => LikePage(),

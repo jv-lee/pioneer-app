@@ -90,15 +90,15 @@ class HistoryDao {
     final Database db = await BaseDatabase.instance.getDataBase();
 
     return Sqflite.firstIntValue(await db.rawQuery(
-        "SELECT COUNT(*) FROM ${History.TABLE_NAME} WHERE id = $id AND is_collect = 1"));
+        "SELECT COUNT(*) FROM ${History.TABLE_NAME} WHERE id = '$id' AND is_collect = 1"));
   }
 
   ///通过id查询一条数据
   Future<List<History>> queryHistoryById(id) async {
     final Database db = await BaseDatabase.instance.getDataBase();
 
-    final List<Map<String, dynamic>> maps =
-        await db.rawQuery("SELECT * FROM ${History.TABLE_NAME} WHERE id = $id");
+    final List<Map<String, dynamic>> maps = await db
+        .rawQuery("SELECT * FROM ${History.TABLE_NAME} WHERE id = '$id' ");
 
     return _mapsToList(maps);
   }

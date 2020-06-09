@@ -8,11 +8,8 @@ abstract class CacheLoad<T> {
       String value = await loadCache();
       T cacheEntity;
       if (value != null && value.isNotEmpty) {
-        print("value != null");
         cacheEntity = buildEntity(value);
         bindData(cacheEntity);
-      }else{
-        print("value == null");
       }
 
       var response = await loadNetwork();

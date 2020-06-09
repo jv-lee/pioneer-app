@@ -6,7 +6,7 @@ import 'package:pioneer_flutter/model/content_data.dart';
 class History {
   final String id;
   final int readTime;
-  final int isCollect;
+  int isCollect;
   final String title;
   final String description;
   final int viewCount;
@@ -47,7 +47,7 @@ class History {
     };
   }
 
-  History contentBuild(isCollect, ContentData data) {
+  static History contentBuild(isCollect, ContentData data) {
     return History(
         id: data.sId,
         readTime: DateTime.now().millisecondsSinceEpoch,

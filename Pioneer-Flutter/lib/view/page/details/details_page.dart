@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/constants/http_constants.dart';
+import 'package:pioneer_flutter/db/dao/history_dao.dart';
+import 'package:pioneer_flutter/db/entity/history.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/view/presenter/details_presenter.dart';
 import 'package:pioneer_flutter/view/widget/load_progress.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -25,6 +28,7 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
     with SingleTickerProviderStateMixin {
   Completer<WebViewController> _webController;
   AnimationController _animationController;
+  DetailsPresenter _presenter;
 
   @override
   void initState() {
@@ -32,6 +36,8 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
     _webController = Completer<WebViewController>();
     _animationController = AnimationController(
         duration: Duration(milliseconds: 1000), vsync: this);
+    _presenter = DetailsPresenter();
+    _presenter.insertHistoryToDB(widget.data);
   }
 
   @override
@@ -47,6 +53,11 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
             preferredSize: Size.fromHeight(2.0)),
         actions: <Widget>[
           PopupMenuButton(
+            onSelected: (value) {
+              if (value == 'collect') {
+                _presenter.collectContent(widget.data);
+              }
+            },
             color: Theme.of(context).canvasColor,
             offset: Offset(10, kToolbarHeight),
             itemBuilder: (BuildContext context) {
@@ -98,11 +109,9 @@ class _ContentDetailsPageState extends State<ContentDetailsPage>
               _webController.complete(webViewController);
             },
             onPageStarted: (url) {
-              print("onPageStarted");
               _animationController.forward();
             },
             onPageFinished: (url) {
-              print("onPageFinished");
               _webController.future.then((web) {
                 web.loadUrl(HttpConstants.getNoneHeaderJs());
               });
