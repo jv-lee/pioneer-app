@@ -14,7 +14,7 @@ class DetailsPresenter {
 
   insertHistoryToDB(ContentData data) async {
     var isCollect = await _dao.isCollect(data.sId);
-    _dao.insertHistory(History.contentBuild(isCollect, data));
+    _dao.insertHistory(History.contentToHistory(isCollect, data));
   }
 
   collectContent(ContentData data) async {

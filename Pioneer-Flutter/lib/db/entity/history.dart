@@ -1,4 +1,5 @@
 import 'package:pioneer_flutter/model/content_data.dart';
+import 'package:pioneer_flutter/model/content_data.dart';
 
 /// @author jv.lee
 /// @date 2020/6/8
@@ -47,7 +48,7 @@ class History {
     };
   }
 
-  static History contentBuild(isCollect, ContentData data) {
+  static History contentToHistory(isCollect, ContentData data) {
     return History(
         id: data.sId,
         readTime: DateTime.now().millisecondsSinceEpoch,
@@ -56,5 +57,22 @@ class History {
         description: data.desc,
         viewCount: data.views,
         likeCount: data.likeCounts);
+  }
+
+  static ContentData historyToContent(History history) {
+    return ContentData(
+        sId: history.id,
+        author: null,
+        category: null,
+        createdAt: null,
+        desc: history.description,
+        images: null,
+        likeCounts: history.likeCount,
+        publishedAt: null,
+        stars: null,
+        title: history.title,
+        type: null,
+        url: null,
+        views: history.viewCount);
   }
 }

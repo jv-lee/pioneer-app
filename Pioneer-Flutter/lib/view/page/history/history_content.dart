@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/db/entity/history.dart';
 import 'package:pioneer_flutter/tools/page_load.dart';
 import 'package:pioneer_flutter/view/control/history_control.dart';
+import 'package:pioneer_flutter/view/item/content_child_item.dart';
 import 'package:pioneer_flutter/view/presenter/history_presenter.dart';
 import 'package:pioneer_flutter/view/widget/status/status.dart';
 import 'package:pioneer_flutter/view/widget/status/status_controller.dart';
@@ -53,31 +54,25 @@ class _HistoryContentState extends State<HistoryContent>
 
   @override
   Widget build(BuildContext context) {
-    return SuperListView2(
-      statusController: _statusController,
-      itemCount: _pageLoad.data.length,
-      onPageReload: () {
-        _presenter.loadHistory(_pageLoad.getPage(false));
-      },
-      onItemReload: () {
-        _presenter.loadHistory(_pageLoad.getPage(true));
-      },
-      onLoadMore: () {
-        _presenter.loadHistory(_pageLoad.getPage(true));
-      },
-      isLoadMore: true,
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
-          color: Colors.amberAccent,
-          padding: EdgeInsets.all(30),
-          child: Center(
-            child: Text(
-              _pageLoad.data[index].title,
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        );
-      },
+    return Container(
+      margin: EdgeInsets.only(top: 1),
+      child: SuperListView2(
+        statusController: _statusController,
+        itemCount: _pageLoad.data.length,
+        onPageReload: () {
+          _presenter.loadHistory(_pageLoad.getPage(false));
+        },
+        onItemReload: () {
+          _presenter.loadHistory(_pageLoad.getPage(true));
+        },
+        onLoadMore: () {
+          _presenter.loadHistory(_pageLoad.getPage(true));
+        },
+        isLoadMore: true,
+        itemBuilder: (BuildContext context, int index) {
+          return ContentChildItem(_pageLoad.data[index]);
+        },
+      ),
     );
   }
 }
