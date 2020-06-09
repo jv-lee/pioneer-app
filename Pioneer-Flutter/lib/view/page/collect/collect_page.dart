@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/view/page/collect/collect_content.dart';
 
 /// @author jv.lee
 /// @date 2020/6/2
@@ -19,6 +20,7 @@ class _CollectPageState extends State<CollectPage> {
         title: Text(ThemeStrings.ME_ITEM_FAVORITE),
         centerTitle: true,
       ),
+      body: CollectContent(),
     );
   }
 }
