@@ -9,7 +9,6 @@ import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.tools.CommonTools
-import com.lee.pioneer.tools.PreferencesTools
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,7 +24,6 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
         registerActivityLifecycleCallbacks(this)
         GlobalScope.launch(Dispatchers.IO) {
             SPUtil.getInstance(this@App)
-            CommonTools.hasNightMode()
 
             AppDataBase.getInstance(this@App)
             CacheManager.getInstance(this@App, BuildConfig.VERSION_CODE)
@@ -40,7 +38,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        if (PreferencesTools.hasNightMode()) {
+        if (CommonTools.isDarkTheme(activity)) {
             StatusUtil.clearStatusFontLight2(activity)
         } else {
             StatusUtil.setStatusFontLight2(activity)

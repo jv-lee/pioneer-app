@@ -1,6 +1,7 @@
 package com.lee.pioneer.view.fragment
 
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
@@ -10,7 +11,6 @@ import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
 import com.lee.pioneer.tools.CommonTools
-import com.lee.pioneer.tools.PreferencesTools
 import com.lee.pioneer.viewmodel.MeViewModel
 
 /**
@@ -43,14 +43,15 @@ class MeFragment :
         binding.onClickListener = this
         binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
             override fun menuClick() {
-                binding.isNight = CommonTools.setNightMode()
+                CommonTools.updateDarkTheme(activity!!)
+                binding.isNight = CommonTools.isDarkTheme(activity!!)
             }
         })
     }
 
     override fun bindData() {
-        AppCompatDelegate.getDefaultNightMode()
-        binding.isNight = PreferencesTools.hasNightMode()
+        binding.isNight = CommonTools.isDarkTheme(activity!!)
+        Toast.makeText(context, "theme - ${AppCompatDelegate.getDefaultNightMode()}", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {

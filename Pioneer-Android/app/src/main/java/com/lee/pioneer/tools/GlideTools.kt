@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.lee.library.base.BaseApplication
 import com.lee.pioneer.R
 
 /**
@@ -34,7 +35,7 @@ class GlideTools {
     private var placeholderResId: Int? = null
 
     fun updatePlaceholder() {
-        placeholderResId = if (PreferencesTools.hasNightMode()) {
+        placeholderResId = if (CommonTools.isDarkTheme(BaseApplication.getContext())) {
             R.mipmap.ic_picture_temp_night
         } else {
             R.mipmap.ic_picture_temp
@@ -43,7 +44,6 @@ class GlideTools {
 
     private fun initOptions() {
         updatePlaceholder()
-        PreferencesTools.hasNightMode()
         //初始化普通加载
         RequestOptions()
             .skipMemoryCache(false)
