@@ -21,7 +21,7 @@ dependencies:
   flustars: ^0.2.6+1
   path_provider: ^1.6.9 #获取本地缓存目录 使用清除缓存功能
   share: ^0.6.1+1 #分享
-  dark: ^0.0.1 #深色模式适配
+  night: ^0.0.1 #深色模式适配
   #数据库依赖
   sqflite:
   path:

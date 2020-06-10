@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:night/night.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
-import 'package:pioneer_flutter/tools/cache_tools.dart';
-import 'package:pioneer_flutter/view/page/me/me_line.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
+import 'package:pioneer_flutter/tools/cache_tools.dart';
+import 'package:pioneer_flutter/tools/toast_tools.dart';
+import 'package:pioneer_flutter/view/page/me/me_line.dart';
 
 /// @author jv.lee
 /// @date 2020/5/8
@@ -20,10 +22,16 @@ class MeContent extends StatefulWidget {
 class _MeContentState extends State<MeContent> {
   var cacheValue = "0KB";
 
+  initNightMode() async{
+  var mode = await Night.getDefaultNightMode;
+  print("mode:$mode");
+}
+
   @override
   void initState() {
     super.initState();
     _loadCache();
+    initNightMode();
   }
 
   _loadCache() {
