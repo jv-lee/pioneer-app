@@ -120,6 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    app:theme="@style/Switch"
                     android:checked="@{isSystem}" />
 
             </FrameLayout>
@@ -142,6 +143,7 @@
 
                 <Switch
                     android:id="@+id/switch_dark_enable"
+                    app:theme="@style/Switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
