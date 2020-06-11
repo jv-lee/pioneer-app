@@ -35,7 +35,7 @@ class GlideTools {
     private var placeholderResId: Int? = null
 
     fun updatePlaceholder() {
-        placeholderResId = if (DarkThemeTools.isDarkTheme(BaseApplication.getContext())) {
+        placeholderResId = if (DarkModeTools.get().isDarkTheme()) {
             R.mipmap.ic_picture_temp_night
         } else {
             R.mipmap.ic_picture_temp

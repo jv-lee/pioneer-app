@@ -7,7 +7,7 @@ import com.lee.library.utils.CacheUtil
 import com.lee.library.widget.dialog.ChoiceDialog
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
-import com.lee.pioneer.tools.DarkThemeTools
+import com.lee.pioneer.tools.DarkModeTools
 import com.lee.pioneer.viewmodel.MeViewModel
 
 /**
@@ -38,18 +38,18 @@ class MeFragment :
     override fun bindView() {
         binding.vm = viewModel
         binding.onClickListener = this
-        binding.switchSystemEnable.setOnCheckedChangeListener { buttonView, isChecked ->
-            DarkThemeTools.updateSystemTheme(isChecked, context!!)
-            binding.isSystem = isChecked
-        }
-        binding.switchDarkEnable.setOnCheckedChangeListener { buttonView, isChecked ->
-            DarkThemeTools.updateNightTheme(isChecked)
-        }
     }
 
     override fun bindData() {
-        binding.isSystem = DarkThemeTools.isSystemTheme(activity!!)
-        binding.isNight = DarkThemeTools.isDarkTheme(activity!!)
+        binding.isSystem = DarkModeTools.get().isSystemTheme()
+        binding.isNight = DarkModeTools.get().isDarkTheme()
+        binding.switchSystemEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+            DarkModeTools.get().updateSystemTheme(isChecked)
+            binding.isSystem = isChecked
+        }
+        binding.switchDarkEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+            DarkModeTools.get().updateNightTheme(isChecked)
+        }
     }
 
     override fun onResume() {

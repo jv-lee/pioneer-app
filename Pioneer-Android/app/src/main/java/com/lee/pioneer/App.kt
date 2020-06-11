@@ -8,7 +8,7 @@ import com.lee.library.cache.CacheManager
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.db.AppDataBase
-import com.lee.pioneer.tools.DarkThemeTools
+import com.lee.pioneer.tools.DarkModeTools
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,10 +21,14 @@ import kotlinx.coroutines.launch
 class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
 
     override fun init() {
+        if (!DarkModeTools.get(applicationContext).isSystemTheme()) {
+            DarkModeTools.get()
+                .updateNightTheme(DarkModeTools.get().isDarkTheme())
+        }
         registerActivityLifecycleCallbacks(this)
         GlobalScope.launch(Dispatchers.IO) {
+            DarkModeTools.get(applicationContext)
             SPUtil.getInstance(this@App)
-
             AppDataBase.getInstance(this@App)
             CacheManager.getInstance(this@App, BuildConfig.VERSION_CODE)
         }
@@ -38,7 +42,7 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        if (DarkThemeTools.isDarkTheme(activity)) {
+        if (DarkModeTools.get().isDarkTheme()) {
             StatusUtil.clearStatusFontLight2(activity)
         } else {
             StatusUtil.setStatusFontLight2(activity)
