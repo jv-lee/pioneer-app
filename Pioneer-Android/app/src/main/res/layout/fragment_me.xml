@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center"
-                    android:text="深色模式跟系统保持一致"
+                    android:text="@string/dark_mode_system"
                     android:textColor="@color/colorThemeAccent"
                     android:textSize="@dimen/view_line_text_size" />
 
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center"
-                    android:text="开启夜间模式"
+                    android:text="@string/dark_mode_night"
                     android:textColor="@color/colorThemeAccent"
                     android:textSize="@dimen/view_line_text_size" />
 
