@@ -4,6 +4,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.CacheUtil
+import com.lee.library.utils.LogUtil
 import com.lee.library.widget.dialog.ChoiceDialog
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
@@ -38,18 +39,23 @@ class MeFragment :
     override fun bindView() {
         binding.vm = viewModel
         binding.onClickListener = this
+
+        binding.switchSystemEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isResumed) {
+                binding.isSystem = isChecked
+                DarkModeTools.get().updateSystemTheme(isChecked)
+            }
+        }
+        binding.switchDarkEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isResumed) {
+                DarkModeTools.get().updateNightTheme(isChecked)
+            }
+        }
     }
 
     override fun bindData() {
         binding.isSystem = DarkModeTools.get().isSystemTheme()
         binding.isNight = DarkModeTools.get().isDarkTheme()
-        binding.switchSystemEnable.setOnCheckedChangeListener { buttonView, isChecked ->
-            DarkModeTools.get().updateSystemTheme(isChecked)
-            binding.isSystem = isChecked
-        }
-        binding.switchDarkEnable.setOnCheckedChangeListener { buttonView, isChecked ->
-            DarkModeTools.get().updateNightTheme(isChecked)
-        }
     }
 
     override fun onResume() {
@@ -66,6 +72,12 @@ class MeFragment :
             R.id.line_feedback -> findNavController().navigate(R.id.action_main_to_feedback)
             R.id.line_settings -> clearDialog.show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.switchDarkEnable.setOnCheckedChangeListener(null)
+        binding.switchSystemEnable.setOnCheckedChangeListener(null)
     }
 
 }

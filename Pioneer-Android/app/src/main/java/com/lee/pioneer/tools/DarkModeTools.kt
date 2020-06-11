@@ -30,6 +30,7 @@ class DarkModeTools(val context: Context) {
         }
     }
 
+    private var nightEnable = true
     private val modeKey = "dark_mode"
     private val preferences =
         context.applicationContext.getSharedPreferences(modeKey, Context.MODE_PRIVATE)
@@ -38,8 +39,7 @@ class DarkModeTools(val context: Context) {
      * 当前是否为系统主题
      */
     fun isSystemTheme(): Boolean {
-        val mode =
-            preferences.getInt(modeKey, AppCompatDelegate.getDefaultNightMode())
+        val mode = preferences.getInt(modeKey, AppCompatDelegate.getDefaultNightMode())
         return mode != AppCompatDelegate.MODE_NIGHT_YES && mode != AppCompatDelegate.MODE_NIGHT_NO
     }
 
@@ -67,10 +67,12 @@ class DarkModeTools(val context: Context) {
      * 设置为跟随系统主题变更
      */
     fun updateSystemTheme(enable: Boolean) {
+        nightEnable = !enable
         if (enable) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             preferences.edit().putInt(modeKey, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM).apply()
-            return
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        } else {
+            updateNightTheme(isDarkTheme())
         }
     }
 
@@ -78,14 +80,14 @@ class DarkModeTools(val context: Context) {
      * 设置深色主题
      */
     fun updateNightTheme(enable: Boolean) {
+        if (!nightEnable) return
         if (enable) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             preferences.edit().putInt(modeKey, AppCompatDelegate.MODE_NIGHT_YES).apply()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             preferences.edit().putInt(modeKey, AppCompatDelegate.MODE_NIGHT_NO).apply()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-
     }
 
 }

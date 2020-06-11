@@ -125,12 +125,12 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frame_night"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="@color/colorThemeItem"
-                android:padding="@dimen/view_line_item_padding"
-                android:visibility="@{isSystem ? view.INVISIBLE : view.VISIBLE}">
+                android:padding="@dimen/view_line_item_padding">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -145,7 +145,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:checked="@{isNight}" />
+                    android:checked="@{isNight}"
+                    android:enabled="@{!isSystem}" />
 
             </FrameLayout>
 
