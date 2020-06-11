@@ -21,10 +21,14 @@ class MeContent extends StatefulWidget {
 
 class _MeContentState extends State<MeContent> {
   var cacheValue = "0KB";
-
+  var mode = 404;
   initNightMode() async{
   var mode = await Night.getDefaultNightMode;
   print("mode:$mode");
+  this.mode = mode;
+  setState(() {
+
+  });
 }
 
   @override
@@ -45,6 +49,7 @@ class _MeContentState extends State<MeContent> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        Text("mode:$mode"),
         //消息中心
         MeLine(
           marginTop: ThemeDimens.margin_item,

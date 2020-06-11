@@ -42,7 +42,6 @@ class PageLoad<T> {
       statusController.pageComplete();
 
       //是否只有一页数据
-      print("page $_page  pageTotal $pageTotal");
       if (_page == pageTotal || pageTotal == 1) {
         statusController.itemComplete();
       } else {

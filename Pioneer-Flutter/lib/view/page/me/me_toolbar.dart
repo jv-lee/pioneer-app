@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:night/night.dart';
 import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
@@ -20,7 +21,7 @@ class MeToolbar extends AppBar {
             actions: actionsWidget(context));
 
   static List<Widget> actionsWidget(context) {
-    if (true) {
+    if (false) {
       return null;
     } else {
       return [

@@ -26,20 +26,22 @@ void main() {
 class PioneerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS || Platform.isAndroid) {
+    if (Platform.isIOS) {
       return MaterialApp(
         //亮色主题 lightTheme
-        theme: darkThemeData,
+        theme: themeData,
         //深色主题 darkTheme
         darkTheme: darkThemeData,
         initialRoute: '/',
         routes: routes,
       );
     } else {
+      print("build");
       return MultiProvider(
         providers: [ChangeNotifierProvider.value(value: DarkModeProvider())],
         child: Consumer<DarkModeProvider>(
           builder: (context, darkModeProvider, _) {
+            print("build Consumer -> ${darkModeProvider.darkMode}");
             return darkModeProvider.darkMode == DarkModeProvider.MODE_SYSTEM
                 ? MaterialApp(
                     //亮色主题 lightTheme
