@@ -168,7 +168,7 @@ class _MeContentState extends State<MeContent> {
                       builder: (context) {
                         return CupertinoAlertDialog(
                           content: Text(
-                            '确认清除缓存',
+                            ThemeStrings.CLEAR_DIALOG_TITLE,
                             style: TextStyle(
                                 fontSize: ThemeDimens.font_size_small),
                           ),
@@ -198,39 +198,51 @@ class _MeContentState extends State<MeContent> {
                       })
                 }),
         MeLine(
-          startChild: Text(ThemeStrings.ME_ITEM_SYSTEM),
-          endChild: Switch(
-            value: isSystem,
-            onChanged: (change) {
-              setState(() {
-                isSystem = change;
-                DarkModeProvider.changeMode(
-                    context,
-                    isSystem
-                        ? DarkModeProvider.MODE_SYSTEM
-                        : Night.isDarkTheme() == true
-                            ? DarkModeProvider.MODE_DARK
-                            : DarkModeProvider.MODE_LIGHT);
-              });
-            },
+          marginTop: ThemeDimens.margin_item,
+          startChild: Text(ThemeStrings.ME_ITEM_SYSTEM,
+              style: TextStyle(color: Theme.of(context).accentColor)),
+          endChild: Container(
+            height: ThemeDimens.view_line_icon_size,
+            child: Switch(
+              activeColor: Colors.blue,
+              value: isSystem,
+              onChanged: (change) {
+                setState(() {
+                  isSystem = change;
+                  DarkModeProvider.changeMode(
+                      context,
+                      isSystem
+                          ? DarkModeProvider.MODE_SYSTEM
+                          : Night.isDarkTheme() == true
+                              ? DarkModeProvider.MODE_DARK
+                              : DarkModeProvider.MODE_LIGHT);
+                });
+              },
+            ),
           ),
         ),
         MeLine(
-          startChild: Text(ThemeStrings.ME_ITEM_DARK),
-          endChild: Switch(
-            value: isDark,
-            onChanged: (change) {
-              if (!isSystem) {
-                setState(() {
-                  isDark = change;
-                  DarkModeProvider.changeMode(
-                      context,
-                      isDark
-                          ? DarkModeProvider.MODE_DARK
-                          : DarkModeProvider.MODE_LIGHT);
-                });
-              }
-            },
+          marginTop: 1,
+          startChild: Text(ThemeStrings.ME_ITEM_DARK,
+              style: TextStyle(color: Theme.of(context).accentColor)),
+          endChild: Container(
+            height: ThemeDimens.view_line_icon_size,
+            child: Switch(
+              activeColor: Colors.blue,
+              value: isDark,
+              onChanged: (change) {
+                if (!isSystem) {
+                  setState(() {
+                    isDark = change;
+                    DarkModeProvider.changeMode(
+                        context,
+                        isDark
+                            ? DarkModeProvider.MODE_DARK
+                            : DarkModeProvider.MODE_LIGHT);
+                  });
+                }
+              },
+            ),
           ),
         )
       ],

@@ -43,7 +43,7 @@ class PioneerApp extends StatelessWidget {
           builder: (context, darkModeProvider, _) {
             print("build Consumer -> ${darkModeProvider.darkMode}");
             switch (darkModeProvider.darkMode) {
-              case DarkModeProvider.MODE_LIGHT:
+              case DarkModeProvider.MODE_DARK:
                 {
                   //深色主题 darkTheme
                   return MaterialApp(
@@ -53,7 +53,7 @@ class PioneerApp extends StatelessWidget {
                     routes: routes,
                   );
                 }
-              case DarkModeProvider.MODE_DARK:
+              case DarkModeProvider.MODE_LIGHT:
                 {
                   //亮色主题 lightTheme
                   return MaterialApp(
