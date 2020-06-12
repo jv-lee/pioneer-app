@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/constants/http_constants.dart';
-import 'package:pioneer_flutter/db/dao/history_dao.dart';
-import 'package:pioneer_flutter/db/entity/history.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';

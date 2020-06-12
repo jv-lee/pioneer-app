@@ -36,12 +36,10 @@ class PioneerApp extends StatelessWidget {
         routes: routes,
       );
     } else {
-      print("build");
       return MultiProvider(
         providers: [ChangeNotifierProvider.value(value: DarkModeProvider())],
         child: Consumer<DarkModeProvider>(
           builder: (context, darkModeProvider, _) {
-            print("build Consumer -> ${darkModeProvider.darkMode}");
             switch (darkModeProvider.darkMode) {
               case DarkModeProvider.MODE_DARK:
                 {

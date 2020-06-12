@@ -19,14 +19,12 @@ class DarkModeProvider with ChangeNotifier {
   }
 
   _init() async {
-    print("getDefault ${await Night.getDefaultNightMode}");
     var isSystem = await Night.isSystemTheme;
     if (isSystem) {
       darkMode = MODE_SYSTEM;
     } else {
       darkMode = await Night.isDarkTheme() ? MODE_DARK : MODE_LIGHT;
     }
-    print("当前模式$darkMode");
     notifyListeners();
   }
 
