@@ -42,25 +42,40 @@ class PioneerApp extends StatelessWidget {
         child: Consumer<DarkModeProvider>(
           builder: (context, darkModeProvider, _) {
             print("build Consumer -> ${darkModeProvider.darkMode}");
-            return darkModeProvider.darkMode == DarkModeProvider.MODE_SYSTEM
-                ? MaterialApp(
+            switch (darkModeProvider.darkMode) {
+              case DarkModeProvider.MODE_LIGHT:
+                {
+                  //深色主题 darkTheme
+                  return MaterialApp(
+                    theme: darkThemeData,
+                    darkTheme: darkThemeData,
+                    initialRoute: '/',
+                    routes: routes,
+                  );
+                }
+              case DarkModeProvider.MODE_DARK:
+                {
+                  //亮色主题 lightTheme
+                  return MaterialApp(
+                    theme: themeData,
+                    darkTheme: themeData,
+                    initialRoute: '/',
+                    routes: routes,
+                  );
+                }
+              default:
+                {
+                  //跟随系统
+                  return MaterialApp(
                     //亮色主题 lightTheme
                     theme: themeData,
                     //深色主题 darkTheme
                     darkTheme: darkThemeData,
                     initialRoute: '/',
                     routes: routes,
-                  )
-                : MaterialApp(
-                    //亮色主题 lightTheme
-                    theme:
-                        darkModeProvider.darkMode == DarkModeProvider.MODE_DARK
-                            ? darkThemeData
-                            : themeData,
-                    //深色主题 darkTheme
-                    initialRoute: '/',
-                    routes: routes,
                   );
+                }
+            }
           },
         ),
       );

@@ -13,34 +13,10 @@ import 'package:pioneer_flutter/view/widget/selector_icon.dart';
 class MeToolbar extends AppBar {
   MeToolbar(context)
       : super(
-            title: Text(
-              ThemeStrings.NAV_ME,
-              style: TextStyle(fontSize: ThemeDimens.font_size_medium),
-            ),
-            centerTitle: true,
-            actions: actionsWidget(context));
-
-  static List<Widget> actionsWidget(context) {
-    if (false) {
-      return null;
-    } else {
-      return [
-        Container(
-          margin: EdgeInsets.only(right: ThemeDimens.padding_item),
-          child: SelectorIcon(
-            isPress: DarkModeProvider.isDark,
-            normalIcon: Icon(ThemeIcons.light, color: ThemeColors.colorLight),
-            pressIcon: Icon(ThemeIcons.night, color: ThemeColors.colorNight),
-            selectorFunction: (selector) {
-              DarkModeProvider.changeMode(
-                  context,
-                  selector
-                      ? DarkModeProvider.MODE_DARK
-                      : DarkModeProvider.MODE_LIGHT);
-            },
+          title: Text(
+            ThemeStrings.NAV_ME,
+            style: TextStyle(fontSize: ThemeDimens.font_size_medium),
           ),
-        )
-      ];
-    }
-  }
+          centerTitle: true,
+        );
 }

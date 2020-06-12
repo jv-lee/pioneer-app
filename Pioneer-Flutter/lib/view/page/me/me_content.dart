@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:night/night.dart';
+import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
@@ -21,15 +22,14 @@ class MeContent extends StatefulWidget {
 
 class _MeContentState extends State<MeContent> {
   var cacheValue = "0KB";
-  var mode = 404;
-  initNightMode() async{
-  var mode = await Night.getDefaultNightMode;
-  print("mode:$mode");
-  this.mode = mode;
-  setState(() {
+  var isSystem = true;
+  var isDark = false;
 
-  });
-}
+  initNightMode() async {
+    isSystem = await Night.isSystemTheme;
+    isDark = await Night.isDarkTheme();
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -49,7 +49,6 @@ class _MeContentState extends State<MeContent> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text("mode:$mode"),
         //消息中心
         MeLine(
           marginTop: ThemeDimens.margin_item,
@@ -198,6 +197,42 @@ class _MeContentState extends State<MeContent> {
                         ).build(context);
                       })
                 }),
+        MeLine(
+          startChild: Text(ThemeStrings.ME_ITEM_SYSTEM),
+          endChild: Switch(
+            value: isSystem,
+            onChanged: (change) {
+              setState(() {
+                isSystem = change;
+                DarkModeProvider.changeMode(
+                    context,
+                    isSystem
+                        ? DarkModeProvider.MODE_SYSTEM
+                        : Night.isDarkTheme() == true
+                            ? DarkModeProvider.MODE_DARK
+                            : DarkModeProvider.MODE_LIGHT);
+              });
+            },
+          ),
+        ),
+        MeLine(
+          startChild: Text(ThemeStrings.ME_ITEM_DARK),
+          endChild: Switch(
+            value: isDark,
+            onChanged: (change) {
+              if (!isSystem) {
+                setState(() {
+                  isDark = change;
+                  DarkModeProvider.changeMode(
+                      context,
+                      isDark
+                          ? DarkModeProvider.MODE_DARK
+                          : DarkModeProvider.MODE_LIGHT);
+                });
+              }
+            },
+          ),
+        )
       ],
     );
   }

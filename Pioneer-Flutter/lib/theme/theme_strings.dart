@@ -22,6 +22,8 @@ class ThemeStrings {
   static const ME_ITEM_FAVORITE = "我的收藏";
   static const ME_ITEM_FEEDBACK = "意见反馈";
   static const ME_ITEM_SETTINGS = "清除缓存";
+  static const ME_ITEM_SYSTEM = "夜间模式跟随系统设置";
+  static const ME_ITEM_DARK = "夜间模式";
 
   //我的页面反馈字符
   static const CLEAR_DIALOG_TITLE = "确认清除缓存";

@@ -12,31 +12,26 @@ class DarkModeProvider with ChangeNotifier {
   static const int MODE_DARK = 2; // 深色模式
   static const int MODE_SYSTEM = 3; // 跟随系统
 
-  int _darkMode;
-
-  static bool isDark = false;
-
-  int get darkMode => _darkMode;
+  int darkMode;
 
   DarkModeProvider() {
     _init();
   }
 
   _init() async {
-    int mode = await Night.getDefaultNightMode;
-    print("初始化模式$mode");
-    if (mode != MODE_LIGHT && mode != MODE_DARK) {
-      _darkMode = MODE_SYSTEM;
+    print("getDefault ${await Night.getDefaultNightMode}");
+    var isSystem = await Night.isSystemTheme;
+    if (isSystem) {
+      darkMode = MODE_SYSTEM;
     } else {
-      _darkMode = mode;
+      darkMode = await Night.isDarkTheme() ? MODE_DARK : MODE_LIGHT;
     }
-    isDark = _darkMode == MODE_DARK ? true : false;
+    print("当前模式$darkMode");
     notifyListeners();
   }
 
   void _changeMode(int darkMode) async {
-    _darkMode = darkMode;
-    isDark = _darkMode == MODE_DARK ? true : false;
+    this.darkMode = darkMode;
     if (darkMode == MODE_DARK) {
       Night.updateNightTheme(true);
     } else if (darkMode == MODE_LIGHT) {
