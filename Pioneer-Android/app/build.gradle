@@ -36,17 +36,38 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../pioneer.jks')
+            storePassword "123456"
+            keyAlias "pioneer"
+            keyPassword "123456"
+        }
+        debug {
+            storeFile file('../pioneer.jks')
+            storePassword "123456"
+            keyAlias "pioneer"
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         debug {
-            minifyEnabled configs.minifyEnabled
+            minifyEnabled configs.minifyEnabled //混淆模式
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            debugUri.each { k, v ->
+            shrinkResources configs.minifyEnabled // 移除无用的resource文件
+            zipAlignEnabled configs.minifyEnabled // Zipalign优化
+            debugUri.each { k, v -> //创建公共常量
                 buildConfigField("String", k, "\"" + v + "\"")
             }
         }
         release {
             minifyEnabled configs.minifyEnabled
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            shrinkResources configs.minifyEnabled
+            zipAlignEnabled configs.minifyEnabled
             releaseUri.each { k, v ->
                 buildConfigField("String", k, "\"" + v + "\"")
             }
@@ -74,6 +95,9 @@ android {
                 srcDirs 'src/main/assets', 'src/main/assets/'
             }
         }
+    }
+    lintOptions {
+        abortOnError false
     }
     packagingOptions {
         pickFirst 'META-INF/LICENSE.txt' // picks the JavaMail license file
