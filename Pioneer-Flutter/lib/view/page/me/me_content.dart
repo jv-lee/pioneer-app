@@ -216,6 +216,9 @@ class _MeContentState extends State<MeContent> {
                           : Night.isDarkTheme() == true
                               ? DarkModeProvider.MODE_DARK
                               : DarkModeProvider.MODE_LIGHT);
+                  if (isSystem) {
+                    isDark = Night.isDarkTheme() == true ? true : false;
+                  }
                 });
               },
             ),
