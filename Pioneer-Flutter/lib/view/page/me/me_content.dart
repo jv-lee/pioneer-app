@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:night/night.dart';
 import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
+import 'package:pioneer_flutter/route/route_name.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
@@ -66,7 +67,7 @@ class _MeContentState extends State<MeContent> {
           ),
           endChild:
               Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
-          onClick: (clickDetails) => {Navigator.pushNamed(context, '/message')},
+          onClick: (clickDetails) => {Navigator.pushNamed(context, RouteNames.MESSAGE)},
         ),
         //我喜欢的
         MeLine(
@@ -83,7 +84,7 @@ class _MeContentState extends State<MeContent> {
           ),
           endChild:
               Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
-          onClick: (clickDetails) => {Navigator.pushNamed(context, '/like')},
+          onClick: (clickDetails) => {Navigator.pushNamed(context, RouteNames.LIKE)},
         ),
         //浏览过的
         MeLine(
@@ -101,7 +102,7 @@ class _MeContentState extends State<MeContent> {
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
             onClick: (clickDetails) =>
-                {Navigator.pushNamed(context, '/history')}),
+                {Navigator.pushNamed(context, RouteNames.HISTORY)}),
         //我的收藏
         MeLine(
             marginTop: 1,
@@ -118,7 +119,7 @@ class _MeContentState extends State<MeContent> {
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
             onClick: (clickDetails) =>
-                {Navigator.pushNamed(context, '/collect')}),
+                {Navigator.pushNamed(context, RouteNames.COLLECT)}),
         //意见反馈
         MeLine(
             marginTop: ThemeDimens.margin_item,
@@ -135,7 +136,7 @@ class _MeContentState extends State<MeContent> {
             endChild:
                 Icon(ThemeIcons.arrow, color: Theme.of(context).primaryColor),
             onClick: (clickDetails) =>
-                {Navigator.pushNamed(context, '/feedback')}),
+                {Navigator.pushNamed(context, RouteNames.FEEDBACK)}),
         //清除缓存
         MeLine(
             marginTop: 1,

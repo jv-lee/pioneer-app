@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/db/base_database.dart';
 import 'package:pioneer_flutter/provider/dark_mode_provider.dart';
-import 'package:pioneer_flutter/test/database_test.dart';
+import 'package:pioneer_flutter/route/route_anim.dart';
+import 'package:pioneer_flutter/route/route_name.dart';
 import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/page/collect/collect_page.dart';
-import 'package:pioneer_flutter/view/page/feedback/feedback_page.dart';
+import 'package:pioneer_flutter/view/page/details/details_page.dart';
 import 'package:pioneer_flutter/view/page/history/history_page.dart';
 import 'package:pioneer_flutter/view/page/like/like_page.dart';
 import 'package:pioneer_flutter/view/page/message/message_page.dart';
@@ -32,8 +33,9 @@ class PioneerApp extends StatelessWidget {
         theme: themeData,
         //深色主题 darkTheme
         darkTheme: darkThemeData,
+        onGenerateRoute: _onGenerateRoute,
         initialRoute: '/',
-        routes: routes,
+        home: MainPage(),
       );
     } else {
       return MultiProvider(
@@ -47,8 +49,9 @@ class PioneerApp extends StatelessWidget {
                   return MaterialApp(
                     theme: darkThemeData,
                     darkTheme: darkThemeData,
+                    onGenerateRoute: _onGenerateRoute,
                     initialRoute: '/',
-                    routes: routes,
+                    home: MainPage(),
                   );
                 }
               case DarkModeProvider.MODE_LIGHT:
@@ -57,8 +60,9 @@ class PioneerApp extends StatelessWidget {
                   return MaterialApp(
                     theme: themeData,
                     darkTheme: themeData,
+                    onGenerateRoute: _onGenerateRoute,
                     initialRoute: '/',
-                    routes: routes,
+                    home: MainPage(),
                   );
                 }
               default:
@@ -69,8 +73,9 @@ class PioneerApp extends StatelessWidget {
                     theme: themeData,
                     //深色主题 darkTheme
                     darkTheme: darkThemeData,
+                    onGenerateRoute: _onGenerateRoute,
                     initialRoute: '/',
-                    routes: routes,
+                    home: MainPage(),
                   );
                 }
             }
@@ -80,16 +85,34 @@ class PioneerApp extends StatelessWidget {
     }
   }
 
-  var routes = {
-//    '/': (context) => DatabaseTestPage(),
-    '/': (context) => MainPage(),
-    "/search": (context) => SearchPage(),
-    "/message": (context) => MessagePage(),
-    "/like": (context) => LikePage(),
-    "/history": (context) => HistoryPage(),
-    "/collect": (context) => CollectPage(),
-    "/feedback": (context) => FeedbackPage(),
-  };
+  Route<dynamic> _onGenerateRoute(RouteSettings settings) {
+    var arguments = settings.arguments;
+    switch (settings.name) {
+      case RouteNames.DETAILS:
+        return AnimationPageRoute(
+            builder: (_) => ContentDetailsPage(
+                  data: arguments,
+                ));
+      case RouteNames.SEARCH:
+        return AnimationPageRoute(builder: (_) => SearchPage(),
+        animationType: AnimationType.SlideBottomToTop);
+      case RouteNames.MESSAGE:
+        return AnimationPageRoute(builder: (_) => MessagePage());
+      case RouteNames.LIKE:
+        return AnimationPageRoute(builder: (_) => LikePage());
+      case RouteNames.HISTORY:
+        return AnimationPageRoute(builder: (_) => HistoryPage());
+      case RouteNames.COLLECT:
+        return AnimationPageRoute(builder: (_) => CollectPage());
+      case RouteNames.FEEDBACK:
+        return AnimationPageRoute(builder: (_) => HistoryPage());
+      default:
+        return AnimationPageRoute(
+            builder: (_) => MainPage(),
+            animationType: AnimationType.SlideRightToLeft,
+            pageAffectedType: PageAffectedType.Exit);
+    }
+  }
 
   var themeData = ThemeData(
     appBarTheme: AppBarTheme(

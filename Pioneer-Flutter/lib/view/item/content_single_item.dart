@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
+import 'package:pioneer_flutter/route/route_name.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
 import 'package:pioneer_flutter/tools/time_tools.dart';
-import 'package:pioneer_flutter/view/page/details/details_page.dart';
 
 import 'content_item_image.dart';
 
@@ -20,12 +20,7 @@ class ContentSingleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ContentDetailsPage(
-                  data: data,
-                )));
+        Navigator.pushNamed(context, RouteNames.DETAILS,arguments: data);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: ThemeDimens.margin_item),

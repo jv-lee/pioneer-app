@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pioneer_flutter/route/route_name.dart';
 import 'package:pioneer_flutter/view/widget/search_text.dart';
 
 /// @author jv.lee
@@ -11,6 +12,6 @@ class RecommendToolbar extends AppBar {
                 child: SearchText(),
                 onTapDown: (tapDownDetails) => {
                       //路由跳转位置
-                      Navigator.pushNamed(context, '/search')
+                      Navigator.pushNamed(context, RouteNames.SEARCH)
                     }));
 }

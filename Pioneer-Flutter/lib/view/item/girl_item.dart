@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/constants/http_constants.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
+import 'package:pioneer_flutter/route/route_name.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
-import 'package:pioneer_flutter/view/page/details/details_page.dart';
 
 /// @author jv.lee
 /// @date 2020/5/19
@@ -20,12 +20,7 @@ class _GirlItemState extends State<GirlItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ContentDetailsPage(
-                      data: widget.data,
-                    )));
+        Navigator.pushNamed(context, RouteNames.DETAILS,arguments: widget.data);
       },
       child: Card(
         margin: EdgeInsets.fromLTRB(

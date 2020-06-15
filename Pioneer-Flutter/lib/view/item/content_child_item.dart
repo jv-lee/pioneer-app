@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/db/entity/history.dart';
+import 'package:pioneer_flutter/route/route_name.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/theme/theme_icons.dart';
 import 'package:pioneer_flutter/theme/theme_strings.dart';
-import 'package:pioneer_flutter/view/page/details/details_page.dart';
 
 /// @author jv.lee
 /// @date 2020/6/9
@@ -17,12 +17,7 @@ class ContentChildItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ContentDetailsPage(
-                      data: History.historyToContent(data),
-                    )));
+        Navigator.pushNamed(context, RouteNames.DETAILS,arguments: History.historyToContent(data));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: ThemeDimens.margin_item),
