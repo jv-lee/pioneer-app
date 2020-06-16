@@ -27,7 +27,6 @@ class App : BaseApplication(), Application.ActivityLifecycleCallbacks {
         }
         registerActivityLifecycleCallbacks(this)
         GlobalScope.launch(Dispatchers.IO) {
-            DarkModeTools.get(applicationContext)
             SPUtil.getInstance(this@App)
             AppDataBase.getInstance(this@App)
             CacheManager.getInstance(this@App, BuildConfig.VERSION_CODE)
