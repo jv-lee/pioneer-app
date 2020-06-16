@@ -11,7 +11,7 @@ ext {
     //签名混淆压缩配置
     configs = [
             multiDexEnabled: true, //分包开关
-            minifyEnabled  : false, //代码资源混淆压缩
+            minifyEnabled  : true, //代码资源混淆压缩
     ]
 
     //测试地址

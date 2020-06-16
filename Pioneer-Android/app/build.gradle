@@ -53,11 +53,11 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled configs.minifyEnabled //混淆模式
+            minifyEnabled false //混淆模式
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            shrinkResources configs.minifyEnabled // 移除无用的resource文件
-            zipAlignEnabled configs.minifyEnabled // Zipalign优化
+            shrinkResources false // 移除无用的resource文件
+            zipAlignEnabled false // Zipalign优化
             debugUri.each { k, v -> //创建公共常量
                 buildConfigField("String", k, "\"" + v + "\"")
             }
