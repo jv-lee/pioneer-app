@@ -9,6 +9,7 @@ import 'package:pioneer_flutter/theme/theme_colors.dart';
 import 'package:pioneer_flutter/theme/theme_dimens.dart';
 import 'package:pioneer_flutter/view/page/collect/collect_page.dart';
 import 'package:pioneer_flutter/view/page/details/details_page.dart';
+import 'package:pioneer_flutter/view/page/feedback/feedback_page.dart';
 import 'package:pioneer_flutter/view/page/history/history_page.dart';
 import 'package:pioneer_flutter/view/page/like/like_page.dart';
 import 'package:pioneer_flutter/view/page/message/message_page.dart';
@@ -105,7 +106,7 @@ class PioneerApp extends StatelessWidget {
       case RouteNames.COLLECT:
         return AnimationPageRoute(builder: (_) => CollectPage());
       case RouteNames.FEEDBACK:
-        return AnimationPageRoute(builder: (_) => HistoryPage());
+        return AnimationPageRoute(builder: (_) => FeedbackPage());
       default:
         return AnimationPageRoute(
             builder: (_) => MainPage(),
