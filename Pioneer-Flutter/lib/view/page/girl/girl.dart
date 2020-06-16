@@ -31,8 +31,12 @@ class _GirlState extends State<GirlPage>
 
   @override
   bindData(ContentEntity data) {
-    _pageLoad.pageTotal = data.pageCount;
-    _pageLoad.loadData(data.data);
+    if (data != null) {
+      _pageLoad.pageTotal = data.pageCount;
+      _pageLoad.loadData(data.data);
+    } else {
+      _pageLoad.loadData(null);
+    }
   }
 
   @override
@@ -72,16 +76,13 @@ class _GirlState extends State<GirlPage>
             statusController: _statusController,
             itemCount: _pageLoad.data.length,
             onPageReload: () {
-              _presenter.getContentData(
-                  _pageLoad.getPage(false));
+              _presenter.getContentData(_pageLoad.getPage(false));
             },
             onItemReload: () {
-              _presenter.getContentData(
-                  _pageLoad.getPage(true));
+              _presenter.getContentData(_pageLoad.getPage(true));
             },
             onLoadMore: () {
-              _presenter.getContentData(
-                  _pageLoad.getPage(true));
+              _presenter.getContentData(_pageLoad.getPage(true));
             },
             isLoadMore: true,
             headerChildren: <Widget>[GirlHeader()],

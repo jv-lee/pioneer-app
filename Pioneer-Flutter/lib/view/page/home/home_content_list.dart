@@ -31,8 +31,12 @@ class _HomeContentListState extends State<HomeContentList>
 
   @override
   bindData(ContentEntity data) {
-    _pageLoad.pageTotal = data.pageCount;
-    _pageLoad.loadData(data.data);
+    if(data != null) {
+      _pageLoad.pageTotal = data.pageCount;
+      _pageLoad.loadData(data.data);
+    }else{
+      _pageLoad.loadData(null);
+    }
   }
 
   @override

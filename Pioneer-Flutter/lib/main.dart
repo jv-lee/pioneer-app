@@ -34,7 +34,7 @@ class PioneerApp extends StatelessWidget {
         theme: themeData,
         //深色主题 darkTheme
         darkTheme: darkThemeData,
-        onGenerateRoute: _onGenerateRoute,
+        onGenerateRoute: _onIosGenerateRoute,
         initialRoute: '/',
         home: MainPage(),
       );
@@ -86,6 +86,33 @@ class PioneerApp extends StatelessWidget {
     }
   }
 
+  Route<dynamic> _onIosGenerateRoute(RouteSettings settings) {
+    var arguments = settings.arguments;
+    switch (settings.name) {
+      case RouteNames.DETAILS:
+        return MaterialPageRoute(
+            builder: (_) => ContentDetailsPage(
+              data: arguments,
+            ));
+      case RouteNames.SEARCH:
+        return MaterialPageRoute(
+            builder: (_) => SearchPage());
+      case RouteNames.MESSAGE:
+        return MaterialPageRoute(builder: (_) => MessagePage());
+      case RouteNames.LIKE:
+        return MaterialPageRoute(builder: (_) => LikePage());
+      case RouteNames.HISTORY:
+        return MaterialPageRoute(builder: (_) => HistoryPage());
+      case RouteNames.COLLECT:
+        return MaterialPageRoute(builder: (_) => CollectPage());
+      case RouteNames.FEEDBACK:
+        return MaterialPageRoute(builder: (_) => FeedbackPage());
+      default:
+        return MaterialPageRoute(
+            builder: (_) => MainPage());
+    }
+  }
+
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     var arguments = settings.arguments;
     switch (settings.name) {
@@ -95,8 +122,9 @@ class PioneerApp extends StatelessWidget {
                   data: arguments,
                 ));
       case RouteNames.SEARCH:
-        return AnimationPageRoute(builder: (_) => SearchPage(),
-        animationType: AnimationType.SlideBottomToTop);
+        return AnimationPageRoute(
+            builder: (_) => SearchPage(),
+            animationType: AnimationType.SlideBottomToTop);
       case RouteNames.MESSAGE:
         return AnimationPageRoute(builder: (_) => MessagePage());
       case RouteNames.LIKE:
