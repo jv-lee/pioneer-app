@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/constants/http_constants.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
@@ -20,7 +21,8 @@ class _GirlItemState extends State<GirlItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, RouteNames.DETAILS,arguments: widget.data);
+        Navigator.pushNamed(context, RouteNames.DETAILS,
+            arguments: widget.data);
       },
       child: Card(
         margin: EdgeInsets.fromLTRB(
@@ -33,23 +35,7 @@ class _GirlItemState extends State<GirlItem> {
           height: ThemeDimens.item_girl_root_height,
           child: Column(
             children: <Widget>[
-              Container(
-                height: ThemeDimens.item_girl_picture_height,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(
-                          ThemeDimens.item_content_picture_radius),
-                      topRight: Radius.circular(
-                          ThemeDimens.item_content_picture_radius),
-                    ),
-                    image: widget.data.images[0] == null
-                        ? null
-                        : DecorationImage(
-                            image: NetworkImage(HttpConstants.getCropImagePath(
-                                widget.data.images[0])),
-                            fit: BoxFit.cover)),
-              ),
+              buildNetworkImage(context),
               Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.all(ThemeDimens.padding_large),
@@ -74,6 +60,53 @@ class _GirlItemState extends State<GirlItem> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildImage(BuildContext context) {
+    return Container(
+      height: ThemeDimens.item_girl_picture_height,
+      decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(ThemeDimens.item_content_picture_radius),
+            topRight: Radius.circular(ThemeDimens.item_content_picture_radius),
+          ),
+          image: widget.data.images[0] == null
+              ? null
+              : DecorationImage(
+                  image: NetworkImage(
+                      HttpConstants.getCropImagePath(widget.data.images[0])),
+                  fit: BoxFit.cover)),
+    );
+  }
+
+  Widget buildNetworkImage(BuildContext context) {
+    return Container(
+      height: ThemeDimens.item_girl_picture_height,
+      child: CachedNetworkImage(
+        imageUrl: HttpConstants.getCropImagePath(widget.data.images[0]),
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft:
+                    Radius.circular(ThemeDimens.item_content_picture_radius),
+                topRight:
+                    Radius.circular(ThemeDimens.item_content_picture_radius)),
+            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+          ),
+        ),
+        placeholder: (context, url) => Container(
+          decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.only(
+                  topLeft:
+                      Radius.circular(ThemeDimens.item_content_picture_radius),
+                  topRight: Radius.circular(
+                      ThemeDimens.item_content_picture_radius))),
+        ),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
   }

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:pioneer_flutter/constants/http_constants.dart';
 import 'package:pioneer_flutter/model/banner_entity.dart';
 
 /// @author jv.lee
@@ -44,9 +46,21 @@ class _RecommendContentBannerState extends State<RecommendContentBanner> {
           duration: 300,
           itemCount: widget.data.length,
           itemBuilder: (BuildContext context, int index) {
-            return Image.network(
-              widget.data[index].image,
-              fit: BoxFit.cover,
+            return CachedNetworkImage(
+              imageUrl: widget.data[index].image,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image:
+                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                ),
+              ),
+              placeholder: (context, url) => Container(
+                  color: Theme.of(context).primaryColor,
+                  child: Center(
+                    child: Text('加载中...',
+                        style: TextStyle(color: Theme.of(context).accentColor)),
+                  )),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             );
           },
           pagination: SwiperPagination(

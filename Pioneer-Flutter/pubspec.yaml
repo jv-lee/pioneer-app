@@ -22,6 +22,7 @@ dependencies:
   path_provider: ^1.6.9 #获取本地缓存目录 使用清除缓存功能
   share: ^0.6.1+1 #分享
   night: ^0.0.3 #深色模式适配
+  cached_network_image: ^2.2.0+1 #网络图片加载缓存
   #数据库依赖
   sqflite:
   path:
