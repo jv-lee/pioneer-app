@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:pioneer_flutter/constants/cache_constants.dart';
 import 'package:pioneer_flutter/model/content_entity.dart';
 import 'package:pioneer_flutter/model/repository/api_repository.dart';
+import 'package:pioneer_flutter/tools/cache_first_load.dart';
 import 'package:pioneer_flutter/tools/cache_load.dart';
 import 'package:pioneer_flutter/view/control/girl_control.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +25,7 @@ class GirlPresenter {
   }
 }
 
-class _ContentCacheLoad extends CacheLoad<ContentEntity> {
+class _ContentCacheLoad extends CacheFirstLoad<ContentEntity> {
   _ContentCacheLoad(this.control);
 
   GirlControl control;
@@ -58,9 +59,11 @@ class _ContentCacheLoad extends CacheLoad<ContentEntity> {
 
   @override
   localSave(ContentEntity entity) async {
-    var sp = await SharedPreferences.getInstance();
-    sp.setString(
-        CacheConstants.KEY_GIRL_LIST_CACHE, json.encode(entity.toJson()));
+    if (entity.page == 1) {
+      var sp = await SharedPreferences.getInstance();
+      sp.setString(
+          CacheConstants.KEY_GIRL_LIST_CACHE, json.encode(entity.toJson()));
+    }
   }
 
   @override

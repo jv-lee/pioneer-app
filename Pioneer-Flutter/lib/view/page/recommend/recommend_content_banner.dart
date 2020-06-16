@@ -55,11 +55,8 @@ class _RecommendContentBannerState extends State<RecommendContentBanner> {
                 ),
               ),
               placeholder: (context, url) => Container(
-                  color: Theme.of(context).primaryColor,
-                  child: Center(
-                    child: Text('加载中...',
-                        style: TextStyle(color: Theme.of(context).accentColor)),
-                  )),
+                color: Theme.of(context).primaryColor,
+              ),
               errorWidget: (context, url, error) => Icon(Icons.error),
             );
           },
