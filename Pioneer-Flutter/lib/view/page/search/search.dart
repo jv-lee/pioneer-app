@@ -36,7 +36,7 @@ class _SearchPageState extends State<SearchPage> implements SearchControl {
   }
 
   @override
-  pageError() {
+  bindError(Exception e) {
     _statusController.pageError().itemEmpty();
   }
 

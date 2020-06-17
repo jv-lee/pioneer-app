@@ -91,7 +91,7 @@ class _BannerCacheLoad extends CacheLoad<BannerEntity> {
   }
 
   @override
-  loadError() {}
+  loadError(Exception e) {}
 
   @override
   Future<BannerEntity> loadNetwork() async {
@@ -136,8 +136,8 @@ class _ContentCacheLoad extends CacheLoad<HotEntity> {
   }
 
   @override
-  loadError() {
-    control.pageError();
+  loadError(Exception e) {
+    control.bindError(e);
   }
 
   @override

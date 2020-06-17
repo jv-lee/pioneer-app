@@ -48,7 +48,7 @@ class _HistoryContentState extends State<HistoryContent>
   }
 
   @override
-  pageError() {
+  bindError(Exception e) {
     _statusController.pageError().itemEmpty();
   }
 

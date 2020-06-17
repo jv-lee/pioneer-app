@@ -31,17 +31,13 @@ class _GirlState extends State<GirlPage>
 
   @override
   bindData(ContentEntity data) {
-    if (data != null) {
-      _pageLoad.pageTotal = data.pageCount;
-      _pageLoad.loadData(data.data);
-    } else {
-      _pageLoad.loadData(null);
-    }
+    _pageLoad.pageTotal = data.pageCount;
+    _pageLoad.loadData(data.data);
   }
 
   @override
-  pageError() {
-    _statusController.pageError();
+  bindError(Exception e) {
+    _pageLoad.loadData(null);
   }
 
   @override

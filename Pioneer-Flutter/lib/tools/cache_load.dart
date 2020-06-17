@@ -14,13 +14,14 @@ abstract class CacheLoad<T> {
 
       var response = await loadNetwork();
       if (value == null && response == null) {
-        bindData(null);
-      } else if (response != null &&   cacheEntity == null || toJson(response) != toJson(cacheEntity) ) {
+        throw Exception("cache & response is null.");
+      } else if (response != null && cacheEntity == null ||
+          toJson(response) != toJson(cacheEntity)) {
         bindData(response);
         localSave(response);
       }
     } catch (e) {
-      loadError();
+      loadError(e);
     }
   }
 
@@ -32,7 +33,7 @@ abstract class CacheLoad<T> {
 
   Future<T> loadNetwork();
 
-  loadError();
+  loadError(Exception e);
 
   localSave(T entity);
 

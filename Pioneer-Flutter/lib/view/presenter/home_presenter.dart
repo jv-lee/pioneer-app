@@ -45,8 +45,8 @@ class _CategoryTabsCacheLoad extends CacheLoad<CategoryEntity> {
   }
 
   @override
-  loadError() {
-    homeControl.pageError();
+  loadError(Exception e) {
+    homeControl.bindError(e);
   }
 
   @override

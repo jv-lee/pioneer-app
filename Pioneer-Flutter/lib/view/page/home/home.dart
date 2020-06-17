@@ -34,7 +34,7 @@ class _HomeState extends State<HomePage> implements HomeControl {
   }
 
   @override
-  pageError() {
+  bindError(Exception e) {
     _status = PageStatus.error;
     setState(() {});
   }

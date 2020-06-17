@@ -48,8 +48,8 @@ class _ContentCacheLoad extends CacheFirstLoad<ContentEntity> {
   }
 
   @override
-  loadError() {
-    control.pageError();
+  loadError(Exception e) {
+    control.bindError(e);
   }
 
   @override

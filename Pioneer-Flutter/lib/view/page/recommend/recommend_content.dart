@@ -62,7 +62,7 @@ class _RecommendContentState extends State<RecommendContent>
   }
 
   @override
-  pageError() {
+  bindError(Exception e) {
     _statusController.pageError().itemEmpty();
   }
 

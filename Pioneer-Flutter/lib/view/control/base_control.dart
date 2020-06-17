@@ -5,5 +5,5 @@
 abstract class BaseControl<T> {
   bindData(T data);
 
-  pageError();
+  bindError(Exception e);
 }

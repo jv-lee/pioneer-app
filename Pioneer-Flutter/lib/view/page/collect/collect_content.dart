@@ -48,7 +48,7 @@ class _CollectContentState extends State<CollectContent>
   }
 
   @override
-  pageError() {
+  bindError(Exception e) {
     _statusController.pageError().itemEmpty();
   }
 

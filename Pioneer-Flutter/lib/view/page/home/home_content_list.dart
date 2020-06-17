@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pioneer_flutter/model/content_data.dart';
 import 'package:pioneer_flutter/model/content_entity.dart';
+import 'package:pioneer_flutter/tools/toast_tools.dart';
 import 'package:pioneer_flutter/view/control/content_list_control.dart';
 import 'package:pioneer_flutter/view/item/content_multiple_item.dart';
 import 'package:pioneer_flutter/view/item/content_single_item.dart';
@@ -31,17 +32,14 @@ class _HomeContentListState extends State<HomeContentList>
 
   @override
   bindData(ContentEntity data) {
-    if(data != null) {
-      _pageLoad.pageTotal = data.pageCount;
-      _pageLoad.loadData(data.data);
-    }else{
-      _pageLoad.loadData(null);
-    }
+    _pageLoad.pageTotal = data.pageCount;
+    _pageLoad.loadData(data.data);
   }
 
   @override
-  pageError() {
-    _statusController.pageError();
+  bindError(e) {
+    _pageLoad.loadData(null);
+    ToastTools.show(context, e.toString());
   }
 
   @override

@@ -1,3 +1,5 @@
+
+
 /// @author jv.lee
 /// @date 2020/6/4
 /// @description 缓存加载工具类
@@ -18,13 +20,14 @@ abstract class CacheFirstLoad<T> {
 
       var response = await loadNetwork();
       if (cacheEntity == null && response == null) {
-        bindData(null);
-      } else if (response != null &&   cacheEntity == null || toJson(response) != toJson(cacheEntity) ) {
+        throw Exception("cache & response is null.");
+      } else if (response != null && cacheEntity == null ||
+          toJson(response) != toJson(cacheEntity)) {
         bindData(response);
         localSave(response);
       }
     } catch (e) {
-      loadError();
+      loadError(e);
     }
   }
 
@@ -36,7 +39,7 @@ abstract class CacheFirstLoad<T> {
 
   Future<T> loadNetwork();
 
-  loadError();
+  loadError(Exception e);
 
   localSave(T entity);
 
