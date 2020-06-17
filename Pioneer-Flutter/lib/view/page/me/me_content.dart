@@ -226,13 +226,7 @@ class _MeContentState extends State<MeContent> {
             onChanged: (change) {
               setState(() {
                 isSystem = change;
-                DarkModeProvider.changeMode(
-                    context,
-                    isSystem
-                        ? DarkModeProvider.MODE_SYSTEM
-                        : Night.isDarkTheme() == true
-                            ? DarkModeProvider.MODE_DARK
-                            : DarkModeProvider.MODE_LIGHT);
+                DarkModeProvider.changeSystem(context, isSystem);
                 if (isSystem) {
                   isDark = Night.isDarkTheme() == true ? true : false;
                 }
@@ -254,11 +248,7 @@ class _MeContentState extends State<MeContent> {
               if (!isSystem) {
                 setState(() {
                   isDark = change;
-                  DarkModeProvider.changeMode(
-                      context,
-                      isDark
-                          ? DarkModeProvider.MODE_DARK
-                          : DarkModeProvider.MODE_LIGHT);
+                  DarkModeProvider.changeDark(context, isDark);
                 });
               }
             },

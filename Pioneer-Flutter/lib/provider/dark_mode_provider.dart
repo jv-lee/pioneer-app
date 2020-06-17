@@ -11,6 +11,7 @@ class DarkModeProvider with ChangeNotifier {
   static const int MODE_LIGHT = 1; // 亮色模式
   static const int MODE_DARK = 2; // 深色模式
   static const int MODE_SYSTEM = 3; // 跟随系统
+  static const int MODE_UN_SYSTEM = 4; //取消跟随系统
 
   int darkMode;
 
@@ -34,13 +35,22 @@ class DarkModeProvider with ChangeNotifier {
       Night.updateNightTheme(true);
     } else if (darkMode == MODE_LIGHT) {
       Night.updateNightTheme(false);
-    } else {
+    } else if (darkMode == MODE_SYSTEM) {
       Night.updateSystemTheme(true);
+    } else if (darkMode == MODE_UN_SYSTEM) {
+      Night.updateSystemTheme(false);
     }
     notifyListeners();
   }
 
-  static changeMode(BuildContext context, int darkMode) async {
-    Provider.of<DarkModeProvider>(context, listen: false)._changeMode(darkMode);
+  static changeSystem(context, enable) {
+    Provider.of<DarkModeProvider>(context, listen: false)._changeMode(enable
+        ? DarkModeProvider.MODE_SYSTEM
+        : DarkModeProvider.MODE_UN_SYSTEM);
+  }
+
+  static changeDark(context, enable) {
+    Provider.of<DarkModeProvider>(context, listen: false)._changeMode(
+        enable ? DarkModeProvider.MODE_DARK : DarkModeProvider.MODE_LIGHT);
   }
 }
