@@ -45,9 +45,15 @@ class GirlViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-    fun getGirlContentData(isLoadMore: Boolean, isReload: Boolean = false) {
+    fun getGirlContentData(
+        isLoadMore: Boolean,
+        isReload: Boolean = false,
+        isInit: Boolean = false
+    ) {
         launch(-1) {
-            contentData.pageLaunch(isLoadMore = isLoadMore, isReload = isReload,
+            contentData.pageLaunch(isLoadMore = isLoadMore,
+                isReload = isReload,
+                isInit = isInit,
                 startBlock = {
                     CacheRepository.get()
                         .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))

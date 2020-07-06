@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
-import com.lee.library.utils.LogUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
@@ -56,7 +55,7 @@ class ContentListFragment :
         }
         mAdapter.setLoadErrorListener(object : LoadErrorListener {
             override fun itemReload() {
-                type?.let { viewModel.loadListData(it, isLoadMore = true, isReload = true) }
+                type?.let { viewModel.loadListData(it, true, isReload = true) }
             }
 
             override fun pageReload() {
@@ -93,12 +92,12 @@ class ContentListFragment :
 
         }
         //首个tab页面默认加载
-        type?.let { if (type.equals("Android")) viewModel.loadListData(it, false) }
+        type?.let { if (type.equals("Android")) viewModel.loadListData(it, false,isInit = true) }
     }
 
     override fun lazyLoad() {
         //非首个tab页面使用懒加载
-        type?.let { if (!type.equals("Android")) viewModel.loadListData(it, false) }
+        type?.let { if (!type.equals("Android")) viewModel.loadListData(it, false,isInit = true) }
     }
 
 }

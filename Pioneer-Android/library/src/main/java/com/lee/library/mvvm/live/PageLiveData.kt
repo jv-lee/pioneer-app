@@ -1,7 +1,6 @@
 package com.lee.library.mvvm.live
 
 import com.lee.library.mvvm.base.BaseLiveData
-import com.lee.library.utils.LogUtil
 import kotlinx.coroutines.CoroutineScope
 
 /**
@@ -17,24 +16,28 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
     fun pageLaunch(
         isLoadMore: Boolean = false,
         isReload: Boolean = false,
+        isInit: Boolean = false,
         startBlock: suspend CoroutineScope.() -> T? = { null },
         resumeBlock: suspend CoroutineScope.(Int, Int) -> T? = { _: Int, _: Int -> null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         launch {
             var response: T? = null
-            //加载更多设置page
-            if (isLoadMore) {
-                if (!isReload) page++
-            } else {
+            //状态为加载更多且不是重新加载 增加page页码加载一下页数据
+            if (isLoadMore && !isReload) {
+                page++
+                //非加载更多且不是初始化状态 状态为刷新 设置初始page
+            } else if (!isLoadMore && !isInit) {
                 page = limit
+                //是否为初始化 数据不为空 则为重新构建view 重用数据 返回
+            } else if (isInit && value != null) {
+                return@launch
             }
             //首次加载缓存数据
             if (firstCache) {
                 firstCache = false
                 response = startBlock()?.also {
                     value = it
-                    LogUtil.i("设置首页缓存数据 page $page")
                 }
             }
 
@@ -42,14 +45,12 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             response = resumeBlock(page, limit).also {
                 if (response != it) {
                     value = it
-                    LogUtil.i("设置网络数据 page $page")
                 }
             }
 
             //首页将网络数据设置缓存
             if (page == limit) {
                 response?.run {
-                    LogUtil.i("保存本地缓存数据 page $page")
                     completedBlock(this)
                 }
             }

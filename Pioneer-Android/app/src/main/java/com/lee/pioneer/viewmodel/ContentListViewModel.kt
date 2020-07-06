@@ -25,9 +25,14 @@ class ContentListViewModel(application: Application) : BaseViewModel(application
     /**
      * 获取contentList列表
      */
-    fun loadListData(type: String, isLoadMore: Boolean, isReload: Boolean = false) {
+    fun loadListData(
+        type: String,
+        isLoadMore: Boolean,
+        isReload: Boolean = false,
+        isInit: Boolean = false
+    ) {
         launch(-1) {
-            contentListData.pageLaunch(isLoadMore, isReload,
+            contentListData.pageLaunch(isLoadMore, isReload,isInit,
                 {
                     //缓存数据
                     CacheRepository.get()
