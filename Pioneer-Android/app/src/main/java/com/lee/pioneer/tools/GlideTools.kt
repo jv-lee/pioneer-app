@@ -6,6 +6,7 @@ import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.lee.library.base.BaseApplication
 import com.lee.pioneer.R
@@ -33,6 +34,8 @@ class GlideTools {
 
     private lateinit var optionsCommand: RequestOptions
     private var placeholderResId: Int? = null
+    private val loadDuration = 300
+    private val animEnableArray = arrayListOf<Int>()
 
     fun updatePlaceholder() {
         placeholderResId = if (DarkModeTools.get().isDarkTheme()) {
@@ -58,9 +61,18 @@ class GlideTools {
 
     @SuppressLint("CheckResult")
     fun loadImage(path: String?, imageView: ImageView) {
+        var animEnable = animEnableArray.contains(path.hashCode())
         val request = Glide.with(imageView.context)
             .load(http2https(path))
             .apply(optionsCommand.placeholder(placeholderResId!!))
+
+        //通过tag判断是否为第一次加载 首次加载使用动画显示
+        if (!animEnable) {
+            animEnableArray.add(path.hashCode())
+            request.transition(
+                DrawableTransitionOptions.withCrossFade().crossFade(loadDuration)
+            )
+        }
         request.into(imageView)
     }
 
