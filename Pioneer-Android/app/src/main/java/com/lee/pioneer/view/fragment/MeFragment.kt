@@ -39,7 +39,16 @@ class MeFragment :
     override fun bindView() {
         binding.vm = viewModel
         binding.onClickListener = this
+    }
 
+    override fun bindData() {
+        binding.isSystem = DarkModeTools.get().isSystemTheme()
+        binding.isNight = DarkModeTools.get().isDarkTheme()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
         binding.switchSystemEnable.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isResumed) {
                 binding.isSystem = isChecked
@@ -51,16 +60,6 @@ class MeFragment :
                 DarkModeTools.get().updateNightTheme(isChecked)
             }
         }
-    }
-
-    override fun bindData() {
-        binding.isSystem = DarkModeTools.get().isSystemTheme()
-        binding.isNight = DarkModeTools.get().isDarkTheme()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
     }
 
     override fun onClick(v: View?) {
