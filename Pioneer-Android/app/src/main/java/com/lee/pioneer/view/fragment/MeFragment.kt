@@ -49,13 +49,13 @@ class MeFragment :
     override fun onResume() {
         super.onResume()
         viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
-        binding.switchSystemEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchSystemEnable.setOnCheckedChangeListener { _, isChecked ->
             if (isResumed) {
                 binding.isSystem = isChecked
                 DarkModeTools.get().updateSystemTheme(isChecked)
             }
         }
-        binding.switchDarkEnable.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchDarkEnable.setOnCheckedChangeListener { _, isChecked ->
             if (isResumed) {
                 DarkModeTools.get().updateNightTheme(isChecked)
             }
