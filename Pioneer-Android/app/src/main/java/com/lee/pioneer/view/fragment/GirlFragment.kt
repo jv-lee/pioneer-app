@@ -86,21 +86,21 @@ class GirlFragment :
             )
         }
         mAdapter.setAutoLoadMoreListener {
-            viewModel.getGirlContentData(true)
+            viewModel.getGirlContentData(isLoadMore = true)
         }
         mAdapter.setLoadErrorListener(object : LoadErrorListener {
             override fun itemReload() {
-                viewModel.getGirlContentData(isLoadMore = true, isReload = true)
+                viewModel.getGirlContentData(isReLoad = true)
             }
 
             override fun pageReload() {
-                viewModel.getGirlContentData(isLoadMore = false, isReload = true)
+                viewModel.getGirlContentData()
             }
 
         })
         binding.refresh.setOnRefreshListener {
             mAdapter.openLoadMore()
-            viewModel.getGirlContentData(false)
+            viewModel.getGirlContentData(isRefresh = true)
         }
     }
 
@@ -127,7 +127,7 @@ class GirlFragment :
     }
 
     override fun lazyLoad() {
-        viewModel.getGirlContentData(false, isInit = true)
+        viewModel.getGirlContentData()
     }
 
 }

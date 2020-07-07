@@ -31,7 +31,7 @@ class HistoryViewModel(application: Application) : ResponseViewModel(application
      */
     fun loadHistory(isLoadMore: Boolean) {
         launch {
-            contentData.pageLaunch(isLoadMore, resumeBlock = { page: Int, limit: Int ->
+            contentData.pageLaunch(isLoadMore = isLoadMore, resumeBlock = { page: Int, limit: Int ->
                 //获取总页数 使用懒加载
                 val pageCount = withContext(Dispatchers.IO) {
                     pageCount

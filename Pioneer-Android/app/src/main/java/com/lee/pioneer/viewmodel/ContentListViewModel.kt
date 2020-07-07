@@ -27,12 +27,12 @@ class ContentListViewModel(application: Application) : BaseViewModel(application
      */
     fun loadListData(
         type: String,
-        isLoadMore: Boolean,
-        isReload: Boolean = false,
-        isInit: Boolean = false
+        isRefresh: Boolean = false,
+        isLoadMore: Boolean = false,
+        isReLoad: Boolean = false
     ) {
         launch(-1) {
-            contentListData.pageLaunch(isLoadMore, isReload,isInit,
+            contentListData.pageLaunch(isRefresh, isLoadMore, isReLoad,
                 {
                     //缓存数据
                     CacheRepository.get()

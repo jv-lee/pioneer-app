@@ -51,15 +51,15 @@ class ContentListFragment :
         mAdapter.initStatusView()
         mAdapter.pageLoading()
         mAdapter.setAutoLoadMoreListener {
-            type?.let { viewModel.loadListData(it, true) }
+            type?.let { viewModel.loadListData(it, isLoadMore = true) }
         }
         mAdapter.setLoadErrorListener(object : LoadErrorListener {
             override fun itemReload() {
-                type?.let { viewModel.loadListData(it, true, isReload = true) }
+                type?.let { viewModel.loadListData(it, isReLoad = true) }
             }
 
             override fun pageReload() {
-                type?.let { viewModel.loadListData(it, false) }
+                type?.let { viewModel.loadListData(it) }
             }
 
         })
@@ -71,7 +71,7 @@ class ContentListFragment :
         }
         binding.refresh.setOnRefreshListener {
             mAdapter.openLoadMore()
-            type?.let { viewModel.loadListData(it, false) }
+            type?.let { viewModel.loadListData(it, isRefresh = true) }
         }
     }
 
@@ -92,12 +92,12 @@ class ContentListFragment :
 
         }
         //首个tab页面默认加载
-        type?.let { if (type.equals("Android")) viewModel.loadListData(it, false,isInit = true) }
+        type?.let { if (type.equals("Android")) viewModel.loadListData(it) }
     }
 
     override fun lazyLoad() {
         //非首个tab页面使用懒加载
-        type?.let { if (!type.equals("Android")) viewModel.loadListData(it, false,isInit = true) }
+        type?.let { if (!type.equals("Android")) viewModel.loadListData(it) }
     }
 
 }

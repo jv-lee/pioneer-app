@@ -14,25 +14,28 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
     private var firstCache = true
 
     fun pageLaunch(
+        isRefresh: Boolean = false,
         isLoadMore: Boolean = false,
-        isReload: Boolean = false,
-        isInit: Boolean = false,
+        isReLoad: Boolean = false,
         startBlock: suspend CoroutineScope.() -> T? = { null },
         resumeBlock: suspend CoroutineScope.(Int, Int) -> T? = { _: Int, _: Int -> null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         launch {
             var response: T? = null
-            //状态为加载更多且不是重新加载 增加page页码加载一下页数据
-            if (isLoadMore && !isReload) {
-                page++
-                //非加载更多且不是初始化状态 状态为刷新 设置初始page
-            } else if (!isLoadMore && !isInit) {
+
+            //根据加载状态设置页码
+            //刷新状态 重置页码
+            if (isRefresh) {
                 page = limit
-                //是否为初始化 数据不为空 则为重新构建view 重用数据 返回
-            } else if (isInit && value != null) {
+                //加载更多状态 增加页码
+            } else if (isLoadMore) {
+                page++
+                //非重试状态 value不为空则为view重构 直接使用原数据
+            } else if (!isReLoad && value != null) {
                 return@launch
             }
+
             //首次加载缓存数据
             if (firstCache) {
                 firstCache = false
