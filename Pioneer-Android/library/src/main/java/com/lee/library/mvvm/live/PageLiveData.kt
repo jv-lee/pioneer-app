@@ -18,7 +18,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
         isLoadMore: Boolean = false,
         isReLoad: Boolean = false,
         startBlock: suspend CoroutineScope.() -> T? = { null },
-        resumeBlock: suspend CoroutineScope.(Int, Int) -> T? = { _: Int, _: Int -> null },
+        resumeBlock: suspend CoroutineScope.(Int) -> T? = { _: Int -> null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         launch {
@@ -45,7 +45,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             }
 
             //网络数据设置
-            response = resumeBlock(page, limit).also {
+            response = resumeBlock(page).also {
                 if (response != it) {
                     value = it
                 }

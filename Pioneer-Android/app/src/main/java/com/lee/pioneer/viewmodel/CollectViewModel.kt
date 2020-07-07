@@ -30,7 +30,7 @@ class CollectViewModel(application: Application) : ResponseViewModel(application
      * 加载本地数据库历史记录
      */
     fun loadHistory(isLoadMore: Boolean) {
-        contentData.pageLaunch(isLoadMore = isLoadMore, resumeBlock = { page: Int, limit: Int ->
+        contentData.pageLaunch(isLoadMore = isLoadMore, resumeBlock = { page: Int ->
             //获取总页数 使用懒加载
             val pageCount = withContext(Dispatchers.IO) { pageCount }
             //获取当前页
