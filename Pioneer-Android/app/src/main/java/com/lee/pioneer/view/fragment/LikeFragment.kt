@@ -1,7 +1,7 @@
 package com.lee.pioneer.view.fragment
 
-import androidx.lifecycle.ViewModel
 import com.lee.library.base.BaseFragment
+import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentLikeBinding
 
@@ -10,7 +10,7 @@ import com.lee.pioneer.databinding.FragmentLikeBinding
  * @date 2020/4/26
  * @description MeFragment ChildPage -> 我喜欢的页面
  */
-class LikeFragment : BaseFragment<FragmentLikeBinding, ViewModel>(R.layout.fragment_like) {
+class LikeFragment : BaseFragment<FragmentLikeBinding, BaseViewModel>(R.layout.fragment_like) {
 
     override fun bindView() {
 
