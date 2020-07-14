@@ -1,7 +1,6 @@
 package com.lee.library.base
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.lee.library.extensions.getVmClazz
+import com.lee.library.extensions.getVmClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
-import java.lang.Exception
 
 /**
  * @author jv.lee
@@ -48,7 +45,7 @@ open abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
         super.onViewCreated(view, savedInstanceState)
         //设置viewModel
         try {
-            viewModel = ViewModelProvider(this).get(getVmClazz(this))
+            viewModel = ViewModelProvider(this).get(getVmClass(this))
         } catch (e: Exception) {
         }
         intentParams(arguments, savedInstanceState)

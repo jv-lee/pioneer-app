@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.lee.library.extensions.getVmClazz
+import com.lee.library.extensions.getVmClass
 import com.lee.library.utils.StatusUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +43,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : ViewModel>(
 
         //设置viewModel
         try {
-            viewModel = ViewModelProvider(this).get(getVmClazz(this))
+            viewModel = ViewModelProvider(this).get(getVmClass(this))
         } catch (e: Exception) {
         }
 

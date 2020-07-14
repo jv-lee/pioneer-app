@@ -11,9 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.lee.library.extensions.getVmClazz
-import java.lang.Exception
+import com.lee.library.extensions.getVmClass
 
 /**
  * @author jv.lee
@@ -44,7 +42,7 @@ open abstract class BaseNavigationFragment<V : ViewDataBinding, VM : ViewModel>(
         if (!isNavigationViewInit) {
             //设置viewModel
             try {
-                viewModel = ViewModelProvider(this).get(getVmClazz(this))
+                viewModel = ViewModelProvider(this).get(getVmClass(this))
             } catch (e: Exception) {
             }
             intentParams(arguments, savedInstanceState)

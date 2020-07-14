@@ -9,17 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lee.library.R
-import com.lee.library.extensions.getVmClazz
+import com.lee.library.extensions.getVmClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
-import java.lang.Exception
 
 /**
  * @author jv.lee
@@ -68,7 +66,7 @@ abstract class BaseSheetFragment<V : ViewDataBinding, VM : ViewModel>(
         super.onActivityCreated(savedInstanceState)
         //设置viewModel
         try {
-            viewModel = ViewModelProvider(this).get(getVmClazz(this))
+            viewModel = ViewModelProvider(this).get(getVmClass(this))
         } catch (e: Exception) {
         }
         intentParams(arguments, savedInstanceState)
