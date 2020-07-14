@@ -1,7 +1,6 @@
 package com.lee.pioneer.viewmodel
 
 import android.app.Activity
-import android.app.Application
 import android.text.TextUtils
 import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
 import android.widget.TextView
@@ -21,7 +20,7 @@ import com.lee.pioneer.model.repository.ApiRepository
  * @date 2020/4/7
  * @description
  */
-class SearchViewModel(application: Application) : ResponseViewModel(application) {
+class SearchViewModel : ResponseViewModel() {
 
     private var page = 0
     private val searchTextObservable = ObservableField<String>(CONST_EMPTY)

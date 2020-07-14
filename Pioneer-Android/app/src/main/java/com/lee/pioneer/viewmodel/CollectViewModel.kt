@@ -1,6 +1,5 @@
 package com.lee.pioneer.viewmodel
 
-import android.app.Application
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.KeyConstants
@@ -16,7 +15,7 @@ import kotlinx.coroutines.withContext
  * @date 2020/4/22
  * @description
  */
-class CollectViewModel(application: Application) : ResponseViewModel(application) {
+class CollectViewModel : ResponseViewModel() {
 
     val contentData by lazy { PageLiveData<PageData<ContentHistory>>(limit = 0) }
     private val pageCount by lazy {

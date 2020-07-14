@@ -1,6 +1,5 @@
 package com.lee.pioneer.viewmodel
 
-import android.app.Application
 import com.lee.library.mvvm.live.CacheLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_BANNER_KEY
@@ -21,7 +20,7 @@ import kotlin.collections.ArrayList
  * @date 2020/4/9
  * @description
  */
-class RecommendViewModel(application: Application) : ResponseViewModel(application) {
+class RecommendViewModel : ResponseViewModel() {
 
     val bannerData by lazy { CacheLiveData<ArrayList<Banner>>() }
     val contentData by lazy { CacheLiveData<PageData<Content>>() }

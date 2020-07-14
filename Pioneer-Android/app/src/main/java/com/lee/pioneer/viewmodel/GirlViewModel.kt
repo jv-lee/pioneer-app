@@ -1,6 +1,5 @@
 package com.lee.pioneer.viewmodel
 
-import android.app.Application
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
@@ -19,7 +18,7 @@ import java.util.*
  * @date 2020/4/10
  * @description
  */
-class GirlViewModel(application: Application) : BaseViewModel(application) {
+class GirlViewModel : BaseViewModel() {
 
     val contentData by lazy { PageLiveData<PageData<Content>>(limit = 1) }
 

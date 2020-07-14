@@ -1,12 +1,9 @@
 package com.lee.pioneer.viewmodel
 
-import android.app.Application
 import android.widget.CompoundButton
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.library.utils.CacheUtil
-import com.lee.pioneer.App
 import com.lee.pioneer.tools.DarkModeTools
 
 /**
@@ -14,7 +11,7 @@ import com.lee.pioneer.tools.DarkModeTools
  * @date 2020/4/10
  * @description
  */
-class MeViewModel(application: Application) : BaseViewModel(application) {
+class MeViewModel : BaseViewModel() {
 
     val totalCacheStr = ObservableField<String>("")
     val isSystem = ObservableField<Boolean>(DarkModeTools.get().isSystemTheme())

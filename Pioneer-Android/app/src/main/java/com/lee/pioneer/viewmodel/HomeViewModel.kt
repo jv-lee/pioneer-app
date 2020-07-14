@@ -1,6 +1,5 @@
 package com.lee.pioneer.viewmodel
 
-import android.app.Application
 import com.lee.library.mvvm.live.CacheLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.CATEGORY_CACHE_KEY
@@ -15,7 +14,7 @@ import com.lee.pioneer.model.repository.CacheRepository
  * @date 2020/3/26
  * @description 主页ViewModel
  */
-class HomeViewModel(application: Application) : ResponseViewModel(application) {
+class HomeViewModel : ResponseViewModel() {
 
     val categoryData by lazy { CacheLiveData<PageData<Category>>() }
 

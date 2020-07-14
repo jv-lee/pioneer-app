@@ -8,8 +8,8 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
-import androidx.lifecycle.ViewModel
 import com.lee.library.base.BaseActivity
+import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.utils.AdaptScreenUtils
 import com.lee.pioneer.databinding.ActivityMainBinding
 import com.lee.pioneer.tools.WebViewTools
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
  * @description 程序主窗口 单Activity架构
  */
 class MainActivity :
-    BaseActivity<ActivityMainBinding, ViewModel>(R.layout.activity_main, null) {
+    BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
 
     override fun intentParams(intent: Intent, savedInstanceState: Bundle?) {
         super.intentParams(intent, savedInstanceState)
@@ -46,6 +46,7 @@ class MainActivity :
     override fun bindData() {
         //初始化全局webView
         WebViewTools.get(applicationContext)
+//        toast(viewModel.strLive.value!!)
     }
 
     /**

@@ -1,9 +1,9 @@
 package com.lee.pioneer.viewmodel
 
-import android.app.Application
 import android.text.TextUtils
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import com.lee.library.base.BaseApplication
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.widget.interadap.TextWatcherAdapter
 import com.lee.pioneer.App
@@ -14,7 +14,7 @@ import com.lee.pioneer.R
  * @date 2020/4/24
  * @description
  */
-class FeedbackViewModel(application: Application) : BaseViewModel(application) {
+class FeedbackViewModel : BaseViewModel() {
 
     private val contentField by lazy { ObservableField<String>("") }
     private val linkField by lazy { ObservableField<String>("") }

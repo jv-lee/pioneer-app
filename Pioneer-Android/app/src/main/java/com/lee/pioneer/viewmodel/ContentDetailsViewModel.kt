@@ -1,6 +1,5 @@
 package com.lee.pioneer.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.pioneer.model.repository.DataBaseRepository
@@ -12,7 +11,7 @@ import kotlinx.coroutines.withContext
  * @date 2020/3/31
  * @description
  */
-class ContentDetailsViewModel(application: Application) : BaseViewModel(application) {
+class ContentDetailsViewModel : BaseViewModel() {
 
     val favoriteObservable by lazy { MutableLiveData<Int>() }
 
