@@ -21,10 +21,7 @@ import com.lee.pioneer.viewmodel.ContentDetailsViewModel
  * @description 内容详情页
  */
 class ContentDetailsFragment :
-    BaseNavigationFragment<FragmentContentDetailsBinding, ContentDetailsViewModel>(
-        R.layout.fragment_content_details,
-        ContentDetailsViewModel::class.java
-    ) {
+    BaseNavigationFragment<FragmentContentDetailsBinding, ContentDetailsViewModel>(R.layout.fragment_content_details) {
 
     private val detailsUrl by lazy { navArgs<ContentDetailsFragmentArgs>().value.url }
     private val detailsID by lazy { navArgs<ContentDetailsFragmentArgs>().value.id }

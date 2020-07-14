@@ -16,7 +16,7 @@ import com.lee.pioneer.view.fragment.RecommendFragment
  * @description RootFragment 是所有Fragment的容器类
  */
 class MainFragment :
-    BaseNavigationFragment<FragmentMainBinding, ViewModel>(R.layout.fragment_main, null) {
+    BaseNavigationFragment<FragmentMainBinding, ViewModel>(R.layout.fragment_main) {
 
     private val vpAdapter by lazy { UiPagerAdapter(childFragmentManager, fragments, titles) }
     private val fragments by lazy {

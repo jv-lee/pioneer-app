@@ -10,11 +10,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.lee.library.extensions.getVmClazz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
+import java.lang.Exception
 
 /**
  * @author jv.lee
@@ -22,8 +25,7 @@ import kotlinx.coroutines.cancel
  * @description
  */
 open abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
-    var layoutId: Int,
-    var vm: Class<VM>?
+    var layoutId: Int
 ) : Fragment()
     , CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
@@ -45,8 +47,11 @@ open abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //设置viewModel
-        if (vm != null) viewModel = ViewModelProviders.of(this).get<VM>(vm!!)
-        intentParams(arguments,savedInstanceState)
+        try {
+            viewModel = ViewModelProvider(this).get(getVmClazz(this))
+        } catch (e: Exception) {
+        }
+        intentParams(arguments, savedInstanceState)
         bindView()
         bindData()
     }
@@ -72,7 +77,7 @@ open abstract class BaseFragment<V : ViewDataBinding, VM : ViewModel>(
     /**
      * 初始化参数传递
      */
-    open fun intentParams(arguments: Bundle?,savedInstanceState: Bundle?) {}
+    open fun intentParams(arguments: Bundle?, savedInstanceState: Bundle?) {}
 
     /**
      * 设置view基础配置

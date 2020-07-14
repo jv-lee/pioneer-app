@@ -13,10 +13,7 @@ import com.lee.pioneer.viewmodel.FeedbackViewModel
  * @description MeFragment ChildPage -> 反馈页面
  */
 class FeedbackFragment :
-    BaseFragment<FragmentFeedbackBinding, FeedbackViewModel>(
-        R.layout.fragment_feedback,
-        FeedbackViewModel::class.java
-    ) {
+    BaseFragment<FragmentFeedbackBinding, FeedbackViewModel>(R.layout.fragment_feedback) {
 
     override fun bindView() {
     }

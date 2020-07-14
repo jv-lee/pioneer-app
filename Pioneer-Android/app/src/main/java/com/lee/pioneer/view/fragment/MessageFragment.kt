@@ -11,7 +11,7 @@ import com.lee.pioneer.databinding.FragmentMessageBinding
  * @description MeFragment ChildPage -> 消息中心的页面
  */
 class MessageFragment :
-    BaseFragment<FragmentMessageBinding, ViewModel>(R.layout.fragment_message, null) {
+    BaseFragment<FragmentMessageBinding, ViewModel>(R.layout.fragment_message) {
 
     override fun bindView() {
 

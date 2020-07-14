@@ -17,10 +17,8 @@ import com.lee.pioneer.viewmodel.MeViewModel
  * @description 我的页面
  */
 class MeFragment :
-    BaseNavigationFragment<FragmentMeBinding, MeViewModel>(
-        R.layout.fragment_me,
-        MeViewModel::class.java
-    ), View.OnClickListener {
+    BaseNavigationFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
+    View.OnClickListener {
 
     private val clearDialog by lazy {
         ChoiceDialog.build(context, getString(R.string.me_clear_title)).apply {

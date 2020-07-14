@@ -20,10 +20,7 @@ import executePageError
  * @description 搜索页
  */
 class SearchFragment :
-    BaseNavigationFragment<FragmentSearchBinding, SearchViewModel>(
-        R.layout.fragment_search,
-        SearchViewModel::class.java
-    ) {
+    BaseNavigationFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
 
     private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
 

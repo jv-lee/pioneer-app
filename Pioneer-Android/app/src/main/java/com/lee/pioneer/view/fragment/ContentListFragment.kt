@@ -24,10 +24,7 @@ private const val ARG_PARAM_TYPE = "arg_param_type"
  * @description 内容列表页
  */
 class ContentListFragment :
-    BaseNavigationFragment<FragmentContentListBinding, ContentListViewModel>(
-        R.layout.fragment_content_list,
-        ContentListViewModel::class.java
-    ) {
+    BaseNavigationFragment<FragmentContentListBinding, ContentListViewModel>(R.layout.fragment_content_list) {
     private var type: String? = null
     private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
 

@@ -15,10 +15,8 @@ import com.lee.pioneer.viewmodel.HomeViewModel
  * @date 2020/3/24
  * @description 主页
  */
-class HomeFragment : BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(
-    R.layout.fragment_home,
-    HomeViewModel::class.java
-) {
+class HomeFragment :
+    BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     private val vpAdapter by lazy {
         UiPagerAdapter(childFragmentManager, ArrayList<Fragment>(), ArrayList<String>())

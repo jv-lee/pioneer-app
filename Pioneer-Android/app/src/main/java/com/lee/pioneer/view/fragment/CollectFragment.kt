@@ -17,10 +17,7 @@ import executePageCompleted
  * @description MeFragment ChildPage -> 收藏页面
  */
 class CollectFragment :
-    BaseNavigationFragment<FragmentCollectBinding, CollectViewModel>(
-        R.layout.fragment_collect,
-        CollectViewModel::class.java
-    ) {
+    BaseNavigationFragment<FragmentCollectBinding, CollectViewModel>(R.layout.fragment_collect) {
 
     private val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
 

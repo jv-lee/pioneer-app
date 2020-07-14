@@ -32,10 +32,7 @@ import kotlin.math.abs
  * @description 主页妹子板块
  */
 class GirlFragment :
-    BaseNavigationFragment<FragmentGirlBinding, GirlViewModel>(
-        R.layout.fragment_girl,
-        GirlViewModel::class.java
-    ) {
+    BaseNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl) {
 
     private val linearLayoutManager by lazy { LinearLayoutManager(context) }
     private val mAdapter by lazy { GirlAdapter(context!!, ArrayList()) }

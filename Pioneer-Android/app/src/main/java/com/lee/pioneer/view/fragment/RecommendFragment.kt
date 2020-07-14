@@ -25,10 +25,7 @@ import com.lee.pioneer.viewmodel.RecommendViewModel
  * @description 推荐页面
  */
 class RecommendFragment :
-    BaseNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(
-        R.layout.fragment_recommend,
-        RecommendViewModel::class.java
-    ) {
+    BaseNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend) {
 
     private val headerBinding by lazy {
         DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(

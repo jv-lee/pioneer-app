@@ -17,10 +17,7 @@ import executePageCompleted
  * @description MeFragment ChildPage -> 浏览记录页面
  */
 class HistoryFragment :
-    BaseNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(
-        R.layout.fragment_history,
-        HistoryViewModel::class.java
-    ) {
+    BaseNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(R.layout.fragment_history) {
 
     private val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
 
