@@ -22,31 +22,33 @@ class HistoryFragment :
     private val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
-        binding.rvContainer.layoutManager = LinearLayoutManager(context)
-        binding.rvContainer.adapter = mAdapter.proxy
-
-        mAdapter.initStatusView()
-        mAdapter.pageLoading()
-        mAdapter.setAutoLoadMoreListener {
-            viewModel.loadHistory(true)
+        binding.rvContainer.run {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mAdapter.proxy
         }
-        mAdapter.setOnItemClickListener { view, entity, position ->
-            findNavController().navigate(
-                HistoryFragmentDirections.actionHistoryToContentDetails(
-                    entity.content._id, KeyConstants.CONST_EMPTY
+
+        mAdapter.run {
+            initStatusView()
+            pageLoading()
+            setAutoLoadMoreListener { viewModel.loadHistory(true) }
+            setOnItemClickListener { _, entity, _ ->
+                findNavController().navigate(
+                    HistoryFragmentDirections.actionHistoryToContentDetails(
+                        entity.content._id, KeyConstants.CONST_EMPTY
+                    )
                 )
-            )
+            }
         }
     }
 
     override fun bindData() {
-        viewModel.apply {
+        viewModel.run {
             contentData.observe(this@HistoryFragment, Observer {
                 executePageCompleted(it, mAdapter, 0)
             })
-        }
 
-        viewModel.loadHistory(false)
+            loadHistory(false)
+        }
     }
 
 }
