@@ -48,14 +48,13 @@ class ContentDetailsFragment :
                 }
             }
         })
-
-        web?.let { it ->
-            it.parent?.let { (it as ViewGroup).removeAllViews() }
-            binding.frameContainer.addView(it)
-            setWebBackEvent(it)
-            it.settings.useWideViewPort = true
-            it.settings.loadWithOverviewMode = true
-            it.addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
+        web?.run {
+            parent?.let { (it as ViewGroup).removeAllViews() }
+            binding.frameContainer.addView(this)
+            setWebBackEvent(this)
+            settings.useWideViewPort = true
+            settings.loadWithOverviewMode = true
+            addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
                 override fun callProgress(progress: Int) {
                     binding.progress.visibility = View.VISIBLE
                     binding.progress.progress = progress
