@@ -41,79 +41,87 @@ class RecommendFragment :
             findNavController().navigate(R.id.action_main_to_search)
         }
 
-        //设置推荐头部 banner
-        headerBinding.banner.setDelayedTime(5000)
-        headerBinding.banner.setBannerPageClickListener { _, position ->
-            (headerBinding.banner.data[position] as Banner).let {
-                findNavController().navigate(
-                    MainFragmentDirections.actionMainToContentDetails(
-                        KeyConstants.CONST_EMPTY,
-                        it.url
+        headerBinding.run {
+            //设置推荐头部 banner
+            banner.setDelayedTime(5000)
+            banner.setBannerPageClickListener { _, position ->
+                (banner.data[position] as Banner).let {
+                    findNavController().navigate(
+                        MainFragmentDirections.actionMainToContentDetails(
+                            KeyConstants.CONST_EMPTY,
+                            it.url
+                        )
                     )
-                )
+                }
             }
-        }
 
-        //设置推荐头部 分类样式
-        headerBinding.groupType.check(R.id.radio_view)
-        headerBinding.radioView.setButtonTint(
-            R.drawable.vector_view,
-            R.drawable.recommend_view_selector
-        )
-        headerBinding.radioLike.setButtonTint(
-            R.drawable.vector_like,
-            R.drawable.recommend_like_selector
-        )
-        headerBinding.radioComment.setButtonTint(
-            R.drawable.vector_comment,
-            R.drawable.recommend_comment_selector
-        )
-        headerBinding.groupType.setOnCheckedChangeListener { group, checkedId ->
-            mAdapter.initStatusView()
-            mAdapter.pageLoading()
-            when (checkedId) {
-                R.id.radio_view -> {
-                    type = "views"
-                    viewModel.getContentList(type)
-                }
-                R.id.radio_like -> {
-                    type = "likes"
-                    viewModel.getContentList(type)
-                }
-                R.id.radio_comment -> {
-                    type = "comments"
-                    viewModel.getContentList(type)
+            //设置推荐头部 分类样式
+            groupType.check(R.id.radio_view)
+            radioView.setButtonTint(
+                R.drawable.vector_view,
+                R.drawable.recommend_view_selector
+            )
+            radioLike.setButtonTint(
+                R.drawable.vector_like,
+                R.drawable.recommend_like_selector
+            )
+            radioComment.setButtonTint(
+                R.drawable.vector_comment,
+                R.drawable.recommend_comment_selector
+            )
+            groupType.setOnCheckedChangeListener { group, checkedId ->
+                mAdapter.initStatusView()
+                mAdapter.pageLoading()
+                when (checkedId) {
+                    R.id.radio_view -> {
+                        type = "views"
+                        viewModel.getContentList(type)
+                    }
+                    R.id.radio_like -> {
+                        type = "likes"
+                        viewModel.getContentList(type)
+                    }
+                    R.id.radio_comment -> {
+                        type = "comments"
+                        viewModel.getContentList(type)
+                    }
                 }
             }
+
         }
 
         //设置数据列表
-        binding.rvContainer.glideEnable()
-        binding.rvContainer.layoutManager = LinearLayoutManager(context)
-        binding.rvContainer.adapter = mAdapter.proxy
-
-        mAdapter.setLoadResource(RecommendLoadResource())
-        mAdapter.initStatusView()
-        mAdapter.pageLoading()
-        mAdapter.addHeader(headerBinding.root)
-        mAdapter.notifyDataSetChanged()
-        mAdapter.setOnItemClickListener { view, entity, position ->
-            viewModel.insertContentHistoryToDB(entity)
-            findNavController().navigate(
-                MainFragmentDirections.actionMainToContentDetails(
-                    entity._id,
-                    KeyConstants.CONST_EMPTY
-                )
-            )
+        binding.rvContainer.run {
+            glideEnable()
+            layoutManager = LinearLayoutManager(context)
+            adapter = mAdapter.proxy
         }
-        mAdapter.setLoadErrorListener(object : LoadErrorListener {
-            override fun itemReload() {}
 
-            override fun pageReload() {
-                viewModel.getContentList(type)
+        mAdapter.run {
+            setLoadResource(RecommendLoadResource())
+            initStatusView()
+            pageLoading()
+            addHeader(headerBinding.root)
+            notifyDataSetChanged()
+            setOnItemClickListener { _, entity, _ ->
+                viewModel.insertContentHistoryToDB(entity)
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainToContentDetails(
+                        entity._id,
+                        KeyConstants.CONST_EMPTY
+                    )
+                )
             }
+            setLoadErrorListener(object : LoadErrorListener {
+                override fun itemReload() {}
 
-        })
+                override fun pageReload() {
+                    viewModel.getContentList(type)
+                }
+
+            })
+        }
+
     }
 
     override fun bindData() {

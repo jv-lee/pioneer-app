@@ -23,19 +23,21 @@ class HomeFragment :
     }
 
     override fun bindView() {
-        binding.status.setStatus(StatusLayout.STATUS_LOADING)
-        binding.status.setOnReloadListener {
-            viewModel.buildCategoryFragment()
+        binding.run {
+            status.setStatus(StatusLayout.STATUS_LOADING)
+            status.setOnReloadListener {
+                viewModel.buildCategoryFragment()
+            }
+            tvSearch.setOnClickListener {
+                findNavController().navigate(R.id.action_main_to_search)
+            }
+            vpContainer.adapter = vpAdapter
+            tabCategory.setupWithViewPager(binding.vpContainer)
         }
-        binding.tvSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_main_to_search)
-        }
-        binding.vpContainer.adapter = vpAdapter
-        binding.tabCategory.setupWithViewPager(binding.vpContainer)
     }
 
     override fun bindData() {
-        viewModel.apply {
+        viewModel.run {
             //获取分类数据 构建分类tab 及 fragment
             categoryData.observe(this@HomeFragment, Observer { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
@@ -56,8 +58,10 @@ class HomeFragment :
                     binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
                 }
             })
+
+            buildCategoryFragment()
         }
-        viewModel.buildCategoryFragment()
+
     }
 
     override fun onResume() {

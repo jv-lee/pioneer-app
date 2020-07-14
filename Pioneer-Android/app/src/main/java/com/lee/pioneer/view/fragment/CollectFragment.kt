@@ -22,31 +22,33 @@ class CollectFragment :
     private val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
-        binding.rvContainer.layoutManager = LinearLayoutManager(context)
-        binding.rvContainer.adapter = mAdapter.proxy
-
-        mAdapter.initStatusView()
-        mAdapter.pageLoading()
-        mAdapter.setAutoLoadMoreListener {
-            viewModel.loadHistory(true)
+        binding.rvContainer.run {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mAdapter.proxy
         }
-        mAdapter.setOnItemClickListener { _, entity, _ ->
-            findNavController().navigate(
-                CollectFragmentDirections.actionCollectToContentDetails(
-                    entity.content._id, KeyConstants.CONST_EMPTY
+
+        mAdapter.run {
+            initStatusView()
+            pageLoading()
+            setAutoLoadMoreListener { viewModel.loadHistory(true) }
+            setOnItemClickListener { _, entity, _ ->
+                findNavController().navigate(
+                    CollectFragmentDirections.actionCollectToContentDetails(
+                        entity.content._id, KeyConstants.CONST_EMPTY
+                    )
                 )
-            )
+            }
         }
     }
 
     override fun bindData() {
-        viewModel.apply {
+        viewModel.run {
             contentData.observe(this@CollectFragment, Observer {
                 executePageCompleted(it, mAdapter, 0)
             })
-        }
 
-        viewModel.loadHistory(false)
+            viewModel.loadHistory(false)
+        }
     }
 
 }

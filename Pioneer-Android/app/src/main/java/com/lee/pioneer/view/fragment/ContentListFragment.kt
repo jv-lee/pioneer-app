@@ -41,39 +41,46 @@ class ContentListFragment :
     }
 
     override fun bindView() {
-        binding.rvContainer.glideEnable()
-        binding.rvContainer.layoutManager = LinearLayoutManager(context)
-        binding.rvContainer.adapter = mAdapter.proxy
-
-        mAdapter.initStatusView()
-        mAdapter.pageLoading()
-        mAdapter.setAutoLoadMoreListener {
-            type?.let { viewModel.loadListData(it, isLoadMore = true) }
-        }
-        mAdapter.setLoadErrorListener(object : LoadErrorListener {
-            override fun itemReload() {
-                type?.let { viewModel.loadListData(it, isReLoad = true) }
+        //设置view
+        binding.run {
+            rvContainer.run {
+                glideEnable()
+                layoutManager = LinearLayoutManager(context)
+                adapter = mAdapter.proxy
             }
 
-            override fun pageReload() {
-                type?.let { viewModel.loadListData(it) }
+            refresh.setOnRefreshListener {
+                mAdapter.openLoadMore()
+                type?.let { viewModel.loadListData(it, isRefresh = true) }
             }
 
-        })
-        mAdapter.setOnItemClickListener { _, entity, _ ->
-            viewModel.insertContentHistoryToDB(entity)
-            findNavController().navigate(
-                MainFragmentDirections.actionMainToContentDetails(entity._id, CONST_EMPTY)
-            )
         }
-        binding.refresh.setOnRefreshListener {
-            mAdapter.openLoadMore()
-            type?.let { viewModel.loadListData(it, isRefresh = true) }
+
+        //设置adapter
+        mAdapter.run {
+            initStatusView()
+            pageLoading()
+            setAutoLoadMoreListener { type?.let { viewModel.loadListData(it, isLoadMore = true) } }
+            setLoadErrorListener(object : LoadErrorListener {
+                override fun itemReload() {
+                    type?.let { viewModel.loadListData(it, isReLoad = true) }
+                }
+
+                override fun pageReload() {
+                    type?.let { viewModel.loadListData(it) }
+                }
+            })
+            setOnItemClickListener { _, entity, _ ->
+                viewModel.insertContentHistoryToDB(entity)
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainToContentDetails(entity._id, CONST_EMPTY)
+                )
+            }
         }
     }
 
     override fun bindData() {
-        viewModel.apply {
+        viewModel.run {
             //列表数据更新
             contentListData.observe(this@ContentListFragment, Observer {
                 executePageCompleted(it, mAdapter, binding.refresh, diff = true)
@@ -87,9 +94,9 @@ class ContentListFragment :
                 }
             })
 
+            //首个tab页面默认加载
+            type?.let { if (type.equals("Android")) loadListData(it) }
         }
-        //首个tab页面默认加载
-        type?.let { if (type.equals("Android")) viewModel.loadListData(it) }
     }
 
     override fun lazyLoad() {

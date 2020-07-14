@@ -25,27 +25,34 @@ class SearchFragment :
     private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
 
     override fun bindView() {
-        binding.tvCancel.setOnClickListener {
-            KeyboardUtil.hideSoftInput(activity)
-            findNavController().popBackStack()
+        binding.run {
+            tvCancel.setOnClickListener {
+                KeyboardUtil.hideSoftInput(activity)
+                findNavController().popBackStack()
+            }
+
+            rvContainer.run {
+                glideEnable()
+                layoutManager = LinearLayoutManager(context)
+                adapter = mAdapter.proxy
+            }
         }
 
-        binding.rvContainer.glideEnable()
-        binding.rvContainer.layoutManager = LinearLayoutManager(context)
-        binding.rvContainer.adapter = mAdapter.proxy
-
-        mAdapter.initStatusView()
-        mAdapter.setOnItemClickListener { _, entity, _ ->
-            findNavController().navigate(
-                SearchFragmentDirections.actionSearchToContentDetails(
-                    entity._id,
-                    KeyConstants.CONST_EMPTY
+        mAdapter.run {
+            initStatusView()
+            setOnItemClickListener { _, entity, _ ->
+                findNavController().navigate(
+                    SearchFragmentDirections.actionSearchToContentDetails(
+                        entity._id,
+                        KeyConstants.CONST_EMPTY
+                    )
                 )
-            )
+            }
+            setAutoLoadMoreListener {
+                viewModel.searchDataList(true)
+            }
         }
-        mAdapter.setAutoLoadMoreListener {
-            viewModel.searchDataList(true)
-        }
+
     }
 
     override fun bindData() {

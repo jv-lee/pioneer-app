@@ -45,59 +45,72 @@ class GirlFragment :
     override fun bindView() {
         //设置头部view padding值
         headerViewBinding.root.setPadding(0, binding.statusBar.getToolbarLayoutHeight(), 0, 0)
-        //设置statusBar透明度
-        binding.statusBar.background.mutate().alpha = 0
-        ViewCompat.setElevation(binding.statusBar, 1f)
 
-        //设置列表数据项
-        binding.rvContainer.glideEnable()
-        binding.rvContainer.layoutManager = linearLayoutManager
-        binding.rvContainer.adapter = mAdapter.proxy
-        //设置滑动设置statusBar透明度
-        binding.rvContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val position = linearLayoutManager.findFirstVisibleItemPosition()
-                if (position == 0) {
-                    linearLayoutManager.findViewByPosition(position)?.let {
-                        val scale = (255.0 / it.height)
-                        binding.statusBar.setBackgroundAlphaCompat((abs(it.top) * scale).toInt())
+        binding.run {
+            //设置statusBar透明度
+            statusBar.background.mutate().alpha = 0
+            ViewCompat.setElevation(statusBar, 1f)
+
+            //设置列表数据项
+            rvContainer.run {
+                glideEnable()
+                layoutManager = linearLayoutManager
+                adapter = mAdapter.proxy
+                //设置滑动设置statusBar透明度
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+                        val position = linearLayoutManager.findFirstVisibleItemPosition()
+                        if (position == 0) {
+                            linearLayoutManager.findViewByPosition(position)?.let {
+                                val scale = (255.0 / it.height)
+                                statusBar.setBackgroundAlphaCompat((abs(it.top) * scale).toInt())
+                            }
+                        } else {
+                            statusBar.setBackgroundAlphaCompat(255)
+                        }
                     }
-                } else {
-                    binding.statusBar.setBackgroundAlphaCompat(255)
-                }
+                })
+
             }
-        })
+
+            //刷新回调
+            refresh.setOnRefreshListener {
+                mAdapter.openLoadMore()
+                viewModel.getGirlContentData(isRefresh = true)
+            }
+
+        }
+
 
         //适配器参数设置
-        mAdapter.initStatusView()
-        mAdapter.pageLoading()
-        mAdapter.addHeader(headerViewBinding.root)
-        mAdapter.setOnItemClickListener { view, entity, position ->
-            viewModel.insertContentHistoryToDB(entity)
-            findNavController().navigate(
-                MainFragmentDirections.actionMainToContentDetails(
-                    entity._id,
-                    KeyConstants.CONST_EMPTY
+        mAdapter.run {
+            initStatusView()
+            pageLoading()
+            addHeader(headerViewBinding.root)
+            setOnItemClickListener { _, entity, _ ->
+                viewModel.insertContentHistoryToDB(entity)
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainToContentDetails(
+                        entity._id,
+                        KeyConstants.CONST_EMPTY
+                    )
                 )
-            )
-        }
-        mAdapter.setAutoLoadMoreListener {
-            viewModel.getGirlContentData(isLoadMore = true)
-        }
-        mAdapter.setLoadErrorListener(object : LoadErrorListener {
-            override fun itemReload() {
-                viewModel.getGirlContentData(isReLoad = true)
             }
-
-            override fun pageReload() {
-                viewModel.getGirlContentData()
+            setAutoLoadMoreListener {
+                viewModel.getGirlContentData(isLoadMore = true)
             }
+            setLoadErrorListener(object : LoadErrorListener {
+                override fun itemReload() {
+                    viewModel.getGirlContentData(isReLoad = true)
+                }
 
-        })
-        binding.refresh.setOnRefreshListener {
-            mAdapter.openLoadMore()
-            viewModel.getGirlContentData(isRefresh = true)
+                override fun pageReload() {
+                    viewModel.getGirlContentData()
+                }
+
+            })
+
         }
     }
 
@@ -107,7 +120,7 @@ class GirlFragment :
         headerViewBinding.tvDate.text = TimeUtil.getCurTimeString(SimpleDateFormat("MM月dd日"))
         headerViewBinding.tvWeek.text = TimeUtil.getWeek(Date())
 
-        viewModel.apply {
+        viewModel.run {
             contentData.observe(this@GirlFragment, Observer {
                 executePageCompleted(it, mAdapter, binding.refresh, diff = true)
             })
