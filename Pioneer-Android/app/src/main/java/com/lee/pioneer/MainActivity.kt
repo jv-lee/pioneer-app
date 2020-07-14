@@ -46,7 +46,6 @@ class MainActivity :
     override fun bindData() {
         //初始化全局webView
         WebViewTools.get(applicationContext)
-//        toast(viewModel.strLive.value!!)
     }
 
     /**
