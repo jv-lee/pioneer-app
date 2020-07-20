@@ -372,6 +372,9 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
                 break;
             case STATUS_ITEM_END:
                 loadEndView.setVisibility(View.VISIBLE);
+                if (!isPageCompleted) {
+                    removeFooter(pageLayout);
+                }
                 break;
             case STATUS_ITEM_ERROR:
                 loadErrorView.setVisibility(View.VISIBLE);
