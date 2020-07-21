@@ -13,7 +13,7 @@ import java.util.concurrent.CancellationException
  * @date 2019-08-15
  * @description
  */
-open class BaseViewModel: ViewModel() {
+open class BaseViewModel: ViewModel(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     val failedEvent: MutableLiveData<CustomException> = MutableLiveData()
 
@@ -22,7 +22,7 @@ open class BaseViewModel: ViewModel() {
     }
 
     private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
-        GlobalScope.launch(Dispatchers.Main) {
+        launch(Dispatchers.Main) {
             block()
         }
     }
