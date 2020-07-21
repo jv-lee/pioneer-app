@@ -11,7 +11,6 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.lee.library.utils.LogUtil
 
 /**
  * @author jv.lee
@@ -23,7 +22,7 @@ import com.lee.library.utils.LogUtil
  * 监听RecyclerView滑动状态 Glide加载模式
  */
 fun RecyclerView.glideEnable() {
-    if (false) {
+    if (true) {
         return
     }
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
