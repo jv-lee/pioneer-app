@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/colorThemePrimary"
-            android:text="@string/str_loading_empty" />
+            android:text="@string/page_load_empty" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="70dp"
-            android:text="@string/str_loading_error"
+            android:text="@string/page_load_error"
             android:textColor="@color/colorThemePrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/str_restart"
+            android:text="@string/page_load_restart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
