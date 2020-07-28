@@ -30,7 +30,7 @@ class RecommendLoadResource : LoadResource {
     }
 
     override fun itemLayoutId(): Int {
-        return R.layout.lee_item_load
+        return R.layout.widget_item_load
     }
 
     override fun itemLoadMoreId(): Int {
