@@ -84,5 +84,10 @@ open class BaseViewModel: ViewModel(), CoroutineScope by CoroutineScope(Dispatch
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        cancel()
+    }
+
 }
 
