@@ -40,7 +40,7 @@ class SearchViewModel : ResponseViewModel() {
     fun searchDataList(isLoadMore: Boolean) {
         if (TextUtils.isEmpty(searchTextObservable.get())) return
         if (!isLoadMore) page = 0
-        launch(-1) {
+        launchMain(-1) {
             val text = searchTextObservable.get()!!
             val response =
                 ApiRepository.getApi()

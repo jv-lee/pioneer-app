@@ -30,7 +30,7 @@ class ContentListViewModel : BaseViewModel() {
         isLoadMore: Boolean = false,
         isReLoad: Boolean = false
     ) {
-        launch(-1) {
+        launchMain(-1) {
             contentListData.pageLaunch(isRefresh, isLoadMore, isReLoad,
                 {
                     //缓存数据
@@ -61,7 +61,7 @@ class ContentListViewModel : BaseViewModel() {
      * 浏览后添加至数据库
      */
     fun insertContentHistoryToDB(content: Content) {
-        launch {
+        launchMain {
             val extends = withContext(Dispatchers.IO) {
                 DataBaseRepository.get().historyDao.isCollect(content._id)
             }

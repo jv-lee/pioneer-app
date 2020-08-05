@@ -26,7 +26,7 @@ class GirlViewModel : BaseViewModel() {
      * 浏览后添加至数据库
      */
     fun insertContentHistoryToDB(content: Content) {
-        launch {
+        launchMain {
             val extends = withContext(Dispatchers.IO) {
                 DataBaseRepository.get().historyDao.isCollect(content._id)
             }
@@ -49,7 +49,7 @@ class GirlViewModel : BaseViewModel() {
         isLoadMore: Boolean = false,
         isReLoad: Boolean = false
     ) {
-        launch(-1) {
+        launchMain(-1) {
             contentData.pageLaunch(
                 isRefresh = isRefresh,
                 isLoadMore = isLoadMore,

@@ -29,7 +29,7 @@ class HistoryViewModel : ResponseViewModel() {
      * 加载本地数据库历史记录
      */
     fun loadHistory(isLoadMore: Boolean) {
-        launch {
+        launchMain {
             contentData.pageLaunch(isLoadMore = isLoadMore, resumeBlock = { page: Int ->
                 //获取总页数 使用懒加载
                 val pageCount = withContext(Dispatchers.IO) {

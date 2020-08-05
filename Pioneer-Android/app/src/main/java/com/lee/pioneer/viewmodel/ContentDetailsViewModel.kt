@@ -16,7 +16,7 @@ class ContentDetailsViewModel : BaseViewModel() {
     val favoriteObservable by lazy { MutableLiveData<Int>() }
 
     fun contentCollect(id: String) {
-        launch {
+        launchMain {
             //查询是否收藏
             val isCollect =
                 withContext(Dispatchers.IO) {
@@ -24,7 +24,7 @@ class ContentDetailsViewModel : BaseViewModel() {
                 }
             if (isCollect == 1) {
                 favoriteObservable.value = 0
-                return@launch
+                return@launchMain
             }
 
             //添加收藏夹

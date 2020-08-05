@@ -21,7 +21,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
         resumeBlock: suspend CoroutineScope.(Int) -> T? = { _: Int -> null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
-        launch {
+        launchMain {
             var response: T? = null
 
             //根据加载状态设置页码
@@ -33,7 +33,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
                 page++
                 //非重试状态 value不为空则为view重构 直接使用原数据
             } else if (!isReLoad && value != null) {
-                return@launch
+                return@launchMain
             }
 
             //首次加载缓存数据

@@ -32,7 +32,7 @@ class RecommendViewModel : ResponseViewModel() {
      * 浏览记录数据库保存
      */
     fun insertContentHistoryToDB(content: Content) {
-        launch {
+        launchMain {
             val extends = withContext(Dispatchers.IO) {
                 DataBaseRepository.get().historyDao.isCollect(content._id)
             }
@@ -51,7 +51,7 @@ class RecommendViewModel : ResponseViewModel() {
     }
 
     fun getBannerData() {
-        launch(-2) {
+        launchMain(-2) {
             bannerData.cacheLaunch(
                 {
                     val response =
@@ -74,7 +74,7 @@ class RecommendViewModel : ResponseViewModel() {
             contentData.value = PageData(data, page_count = 0, page = 0)
             return
         }
-        launch(-1) {
+        launchMain(-1) {
             contentData.cacheLaunch(
                 {
                     CacheRepository.get().getContentCacheAsync(
