@@ -1,4 +1,4 @@
-package com.lee.library.adapter
+package com.lee.library.adapter.manager
 
 import com.lee.library.adapter.listener.DefaultLoadResource
 import com.lee.library.adapter.listener.LoadResource
@@ -16,8 +16,11 @@ class LeeViewAdapterManager {
         private var instance: LeeViewAdapterManager? = null
 
         @JvmStatic
-        fun getInstance() = instance ?: synchronized(this) {
-            instance ?: LeeViewAdapterManager().also { instance = it }
+        fun getInstance() = instance
+            ?: synchronized(this) {
+            instance
+                ?: LeeViewAdapterManager()
+                    .also { instance = it }
         }
     }
 

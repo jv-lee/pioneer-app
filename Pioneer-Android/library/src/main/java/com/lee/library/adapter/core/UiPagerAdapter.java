@@ -1,4 +1,4 @@
-package com.lee.library.adapter;
+package com.lee.library.adapter.core;
 
 
 import androidx.fragment.app.Fragment;

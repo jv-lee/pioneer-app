@@ -2,7 +2,7 @@ package com.lee.pioneer
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.lee.library.adapter.UiPagerAdapter
+import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.databinding.FragmentMainBinding
 import com.lee.pioneer.view.fragment.GirlFragment
@@ -18,7 +18,13 @@ import com.lee.pioneer.view.fragment.RecommendFragment
 class MainFragment :
     BaseNavigationFragment<FragmentMainBinding, ViewModel>(R.layout.fragment_main) {
 
-    private val vpAdapter by lazy { UiPagerAdapter(childFragmentManager, fragments, titles) }
+    private val vpAdapter by lazy {
+        UiPagerAdapter(
+            childFragmentManager,
+            fragments,
+            titles
+        )
+    }
     private val fragments by lazy {
         listOf<Fragment>(
             HomeFragment(),

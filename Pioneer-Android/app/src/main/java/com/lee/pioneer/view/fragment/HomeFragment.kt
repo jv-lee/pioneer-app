@@ -3,7 +3,7 @@ package com.lee.pioneer.view.fragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.lee.library.adapter.UiPagerAdapter
+import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
@@ -19,7 +19,11 @@ class HomeFragment :
     BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     private val vpAdapter by lazy {
-        UiPagerAdapter(childFragmentManager, ArrayList<Fragment>(), ArrayList<String>())
+        UiPagerAdapter(
+            childFragmentManager,
+            ArrayList<Fragment>(),
+            ArrayList<String>()
+        )
     }
 
     override fun bindView() {

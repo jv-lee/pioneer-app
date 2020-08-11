@@ -13,10 +13,11 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lee.library.adapter.listener.DefaultLoadResource;
+import com.lee.library.adapter.core.ProxyAdapter;
 import com.lee.library.adapter.listener.LeeViewItem;
 import com.lee.library.adapter.listener.LoadErrorListener;
 import com.lee.library.adapter.listener.LoadResource;
+import com.lee.library.adapter.manager.LeeViewAdapterManager;
 import com.lee.library.adapter.manager.LeeViewItemManager;
 
 import java.util.ArrayList;
