@@ -1,5 +1,7 @@
 package com.lee.pioneer.model.entity
 
+import com.lee.library.adapter.page.PagingData
+
 /**
  * @author jv.lee
  * @date 2020/3/25
@@ -15,7 +17,20 @@ data class PageData<T>(
     val status: Int = 0,
     val page: Int,
     val page_count: Int
-)
+) : PagingData<T> {
+    override fun getPageNumber(): Int {
+        return page
+    }
+
+    override fun getPageTotalNumber(): Int {
+        return page_count
+    }
+
+    override fun getDataSource(): List<T> {
+        return data
+    }
+
+}
 
 /**
  * BannerAPI data<T>

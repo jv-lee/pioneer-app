@@ -9,7 +9,6 @@ import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentHistoryBinding
 import com.lee.pioneer.view.adapter.ContentChildAdapter
 import com.lee.pioneer.viewmodel.HistoryViewModel
-import executePageCompleted
 
 /**
  * @author jv.lee
@@ -44,7 +43,7 @@ class HistoryFragment :
     override fun bindData() {
         viewModel.run {
             contentData.observe(this@HistoryFragment, Observer {
-                executePageCompleted(it, mAdapter, 0)
+                mAdapter.submitData(it,limit = 0)
             })
 
             loadHistory(false)

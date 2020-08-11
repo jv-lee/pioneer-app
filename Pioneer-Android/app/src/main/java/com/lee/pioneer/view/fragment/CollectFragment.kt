@@ -9,7 +9,6 @@ import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentCollectBinding
 import com.lee.pioneer.view.adapter.ContentChildAdapter
 import com.lee.pioneer.viewmodel.CollectViewModel
-import executePageCompleted
 
 /**
  * @author jv.lee
@@ -44,7 +43,7 @@ class CollectFragment :
     override fun bindData() {
         viewModel.run {
             contentData.observe(this@CollectFragment, Observer {
-                executePageCompleted(it, mAdapter, 0)
+                mAdapter.submitData(it,limit = 0)
             })
 
             viewModel.loadHistory(false)

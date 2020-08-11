@@ -32,7 +32,7 @@ fun <T> executePageError(
 fun <T> executePageCompleted(
     data: PageData<T>,
     adapter: LeeViewAdapter<T>,
-    refreshView: SwipeRefreshLayout?,
+    refreshView: SwipeRefreshLayout? = null,
     limit: Int = 1,
     diff: Boolean = false,
     refreshBlock: () -> Unit = {},
@@ -61,7 +61,7 @@ fun <T> executePageCompleted(
             adapter.updateData(data.data)
             val result = DiffUtil.calculateDiff(DiffCallback<T>(oldData, data.data), true)
             result.dispatchUpdatesTo(adapter)
-        }else{
+        } else {
             adapter.addData(data.data)
         }
     }
@@ -72,18 +72,4 @@ fun <T> executePageCompleted(
     } else {
         adapter.loadMoreCompleted()
     }
-}
-
-/**
- *  不带刷新头的分页数据列表填充处理
- */
-fun <T> executePageCompleted(
-    data: PageData<T>,
-    adapter: LeeViewAdapter<T>,
-    limit: Int = 1,
-    diff:Boolean = false,
-    refreshBlock: () -> Unit = {},
-    emptyBlock: () -> Unit = {}
-) {
-    executePageCompleted(data, adapter, null, limit,diff, refreshBlock, emptyBlock)
 }

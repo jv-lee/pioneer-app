@@ -11,8 +11,6 @@ import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentSearchBinding
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.SearchViewModel
-import executePageCompleted
-import executePageError
 
 /**
  * @author jv.lee
@@ -60,14 +58,14 @@ class SearchFragment :
 
         viewModel.apply {
             contentListObservable.observe(this@SearchFragment, Observer {
-                executePageCompleted(it, mAdapter)
+                mAdapter.submitData(it)
             })
 
             //错误处理
             failedEvent.observe(this@SearchFragment, Observer { it ->
                 it?.message?.let { toast(it) }
                 when (it.code) {
-                    -1 -> executePageError(mAdapter, null)
+                    -1 -> mAdapter.submitFailed()
                 }
             })
 

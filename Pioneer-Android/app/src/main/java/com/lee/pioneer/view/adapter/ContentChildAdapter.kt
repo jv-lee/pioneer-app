@@ -2,6 +2,7 @@ package com.lee.pioneer.view.adapter
 
 import android.content.Context
 import com.lee.library.adapter.LeeViewAdapter
+import com.lee.library.adapter.page.PagingAdapter
 import com.lee.pioneer.model.entity.ContentHistory
 import com.lee.pioneer.view.adapter.item.ContentChildItem
 
@@ -11,7 +12,7 @@ import com.lee.pioneer.view.adapter.item.ContentChildItem
  * @description
  */
 class ContentChildAdapter(context: Context, data: ArrayList<ContentHistory>) :
-    LeeViewAdapter<ContentHistory>(context, data) {
+    PagingAdapter<ContentHistory>(context, data) {
     init {
         addItemStyles(ContentChildItem())
     }
