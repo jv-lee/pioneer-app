@@ -8,9 +8,10 @@ import kotlinx.coroutines.CoroutineScope
  * @date 2020/5/20
  * @description
  */
-class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
+class PageKeyLiveData<T, K>(val initKey: K? = null) : BaseLiveData<T>() {
 
-    var page = limit
+    private var key: K? = null
+    private var nextKey: K? = null
     private var firstCache = true
 
     fun pageLaunch(
@@ -18,7 +19,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
         isLoadMore: Boolean = false,
         isReLoad: Boolean = false,
         startBlock: suspend CoroutineScope.() -> T? = { null },
-        resumeBlock: suspend CoroutineScope.(Int) -> T? = { page: Int -> null },
+        resumeBlock: suspend CoroutineScope.(K?) -> T? = { key: K? -> null },
         completedBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         launchMain {
@@ -27,10 +28,10 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             //根据加载状态设置页码
             //刷新状态 重置页码
             if (isRefresh) {
-                page = limit
+                key = initKey
                 //加载更多状态 增加页码
             } else if (isLoadMore) {
-                page++
+                key = nextKey
                 //非重试状态 value不为空则为view重构 直接使用原数据
             } else if (!isReLoad && value != null) {
                 return@launchMain
@@ -45,19 +46,23 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             }
 
             //网络数据设置
-            response = resumeBlock(page).also {
+            response = resumeBlock(key).also {
                 if (response != it) {
                     value = it
                 }
             }
 
             //首页将网络数据设置缓存
-            if (page == limit) {
+            if (key == initKey) {
                 response?.run {
                     completedBlock(this)
                 }
             }
         }
+    }
+
+    fun putNextKey(nextKey: K) {
+        this.nextKey = nextKey
     }
 
 }
