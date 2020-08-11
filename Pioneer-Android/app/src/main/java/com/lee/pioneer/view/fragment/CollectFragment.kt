@@ -18,7 +18,7 @@ import com.lee.pioneer.viewmodel.CollectViewModel
 class CollectFragment :
     BaseNavigationFragment<FragmentCollectBinding, CollectViewModel>(R.layout.fragment_collect) {
 
-    private val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
+    private val mAdapter by lazy { ContentChildAdapter(requireContext(), ArrayList()) }
 
     override fun bindView() {
         binding.rvContainer.run {

@@ -24,7 +24,7 @@ private const val ARG_PARAM_TYPE = "arg_param_type"
 class ContentListFragment :
     BaseNavigationFragment<FragmentContentListBinding, ContentListViewModel>(R.layout.fragment_content_list) {
     private var type: String? = null
-    private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
+    private val mAdapter by lazy { ContentAdapter(requireContext(), ArrayList()) }
 
     companion object {
         @JvmStatic

@@ -18,7 +18,7 @@ import com.lee.pioneer.viewmodel.HistoryViewModel
 class HistoryFragment :
     BaseNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(R.layout.fragment_history) {
 
-    private val mAdapter by lazy { ContentChildAdapter(context!!, ArrayList()) }
+    private val mAdapter by lazy { ContentChildAdapter(requireContext(), ArrayList()) }
 
     override fun bindView() {
         binding.rvContainer.run {

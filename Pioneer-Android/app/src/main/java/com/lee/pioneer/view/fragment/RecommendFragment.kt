@@ -32,7 +32,7 @@ class RecommendFragment :
             layoutInflater, R.layout.layout_recommend_header, null, false
         )
     }
-    private val mAdapter by lazy { ContentAdapter(context!!, ArrayList()) }
+    private val mAdapter by lazy { ContentAdapter(requireContext(), ArrayList()) }
     private var type = "views"
 
     override fun bindView() {

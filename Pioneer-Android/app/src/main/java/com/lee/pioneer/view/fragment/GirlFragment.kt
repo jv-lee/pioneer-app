@@ -33,7 +33,7 @@ class GirlFragment :
     BaseNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl) {
 
     private val linearLayoutManager by lazy { LinearLayoutManager(context) }
-    private val mAdapter by lazy { GirlAdapter(context!!, ArrayList()) }
+    private val mAdapter by lazy { GirlAdapter(requireContext(), ArrayList()) }
     private val headerViewBinding by lazy {
         DataBindingUtil.inflate<LayoutGirlHeaderBinding>(
             layoutInflater, R.layout.layout_girl_header, null, false
