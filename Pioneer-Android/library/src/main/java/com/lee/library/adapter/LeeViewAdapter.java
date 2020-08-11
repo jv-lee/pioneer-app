@@ -389,7 +389,7 @@ public class LeeViewAdapter<T> extends RecyclerView.Adapter<LeeViewHolder> {
         //开启loadMore模式
         hasLoadMore = true;
         if (mLoadResource == null) {
-            mLoadResource = new DefaultLoadResource();
+            mLoadResource = LeeViewAdapterManager.getInstance().getLoadResource();
         }
         if (pageLayout == null) {
             pageLayout = LayoutInflater.from(context).inflate(mLoadResource.pageLayoutId(), new FrameLayout(context), false);
