@@ -106,7 +106,7 @@ public class StatusUtil {
      *
      * @param activity
      */
-    public static void fullWindow(Activity activity) {
+    public static void fullWindow(Activity activity,boolean isFull) {
         //1.设置全屏幕
         int flags;
         int curApiVersion = Build.VERSION.SDK_INT;
@@ -122,7 +122,12 @@ public class StatusUtil {
             flags = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(flags);
+            if (isFull) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(flags);
+            }else{
+                activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                statusBar(activity,false);
+            }
         }
     }
 
