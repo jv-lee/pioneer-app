@@ -16,6 +16,7 @@ class FeedbackFragment :
     BaseFragment<FragmentFeedbackBinding, FeedbackViewModel>(R.layout.fragment_feedback) {
 
     override fun bindView() {
+        binding.toolbar.setBackgroundColor(resources.getColor(R.color.colorMessage))
     }
 
     override fun bindData() {
@@ -25,6 +26,10 @@ class FeedbackFragment :
             toast(it)
             if (it == getString(R.string.feedback_success)) findNavController().popBackStack()
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
 }
