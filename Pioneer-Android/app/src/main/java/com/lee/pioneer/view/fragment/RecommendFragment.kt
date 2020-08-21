@@ -8,6 +8,7 @@ import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setButtonTint
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -132,14 +133,15 @@ class RecommendFragment :
             })
 
             contentData.observe(this@RecommendFragment, Observer {
-                if (it.data.isNullOrEmpty()) {
+                LogUtil.i("data->${it.data.size}")
+                LogUtil.i("${it.data.isNullOrEmpty()} - ${mAdapter.data.isNullOrEmpty()}")
+                LogUtil.i("${it.data.isNotEmpty()}")
+                if (it.data.isNullOrEmpty() && mAdapter.data.isNullOrEmpty()) {
                     mAdapter.pageEmpty()
-                } else {
-                    if (mAdapter.data != it.data) {
-                        mAdapter.pageCompleted()
-                        mAdapter.updateData(it.data)
-                        mAdapter.loadMoreEnd()
-                    }
+                } else if (it.data.isNotEmpty()) {
+                    mAdapter.updateData(it.data)
+                    mAdapter.pageCompleted()
+                    mAdapter.loadMoreEnd()
                 }
 
             })
@@ -147,7 +149,11 @@ class RecommendFragment :
             contentData.failedEvent.observe(this@RecommendFragment, Observer {
                 it.message?.run { toast(this) }
                 when (it.code) {
-                    -1 -> mAdapter.pageError()
+                    -1 -> {
+                        if (!mAdapter.isPageCompleted) {
+                            mAdapter.pageError()
+                        }
+                    }
                 }
             })
         }
