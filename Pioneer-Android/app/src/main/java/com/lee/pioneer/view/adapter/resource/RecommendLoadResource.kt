@@ -10,7 +10,7 @@ import com.lee.library.adapter.listener.LoadResource
  */
 class RecommendLoadResource : LoadResource {
     override fun pageLayoutId(): Int {
-        return com.lee.pioneer.R.layout.layout_page_load
+        return com.lee.pioneer.R.layout.layout_recommend_page_load
     }
 
     override fun pageLoadingId(): Int {
