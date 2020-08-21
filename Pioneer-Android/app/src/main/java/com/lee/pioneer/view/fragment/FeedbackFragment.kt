@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.fragment
 
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseFragment
@@ -16,7 +17,7 @@ class FeedbackFragment :
     BaseFragment<FragmentFeedbackBinding, FeedbackViewModel>(R.layout.fragment_feedback) {
 
     override fun bindView() {
-        binding.toolbar.setBackgroundColor(resources.getColor(R.color.colorMessage))
+        binding.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeItem))
     }
 
     override fun bindData() {

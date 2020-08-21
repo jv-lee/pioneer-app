@@ -27,7 +27,7 @@
         <EditText
             android:id="@+id/et_content"
             android:layout_width="0dp"
-            android:layout_height="160pt"
+            android:layout_height="160dp"
             android:layout_margin="@dimen/padding_item"
             android:addTextChangedListener="@{vm.etContentWatcher}"
             android:background="@drawable/shape_theme_item"
@@ -42,7 +42,7 @@
         <EditText
             android:id="@+id/et_link"
             android:layout_width="0dp"
-            android:layout_height="36pt"
+            android:layout_height="36dp"
             android:layout_margin="@dimen/padding_item"
             android:addTextChangedListener="@{vm.etLinkWatcher}"
             android:background="@drawable/shape_theme_item"
@@ -60,7 +60,7 @@
         <Button
             android:id="@+id/btn_commit"
             android:layout_width="0dp"
-            android:layout_height="36pt"
+            android:layout_height="36dp"
             android:layout_margin="@dimen/padding_item"
             android:background="@drawable/shape_theme_accent"
             android:onClick="@{(v)->vm.commit()}"
