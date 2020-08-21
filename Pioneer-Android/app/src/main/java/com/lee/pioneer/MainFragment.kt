@@ -9,6 +9,7 @@ import com.lee.pioneer.view.fragment.GirlFragment
 import com.lee.pioneer.view.fragment.HomeFragment
 import com.lee.pioneer.view.fragment.MeFragment
 import com.lee.pioneer.view.fragment.RecommendFragment
+import com.lee.pioneer.view.recommend.ComicFragment
 
 /**
  * @author jv.lee
@@ -27,7 +28,7 @@ class MainFragment :
     }
     private val fragments by lazy {
         listOf<Fragment>(
-            HomeFragment(),
+            ComicFragment(),
             RecommendFragment(),
             GirlFragment(),
             MeFragment()

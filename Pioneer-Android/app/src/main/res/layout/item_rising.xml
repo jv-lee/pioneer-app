@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10.5pt"
+    android:paddingEnd="12pt"
+    android:paddingRight="12pt"
+    android:paddingBottom="10.5pt">
+
+    <com.lee.library.widget.ImageViewRound
+        android:id="@+id/iv_cover"
+        android:layout_width="64pt"
+        android:layout_height="92pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginEnd="16pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:radius="6pt" />
+
+    <TextView
+        android:id="@+id/tv_rank_tips"
+        android:layout_width="36pt"
+        android:layout_height="16pt"
+        android:layout_marginStart="13pt"
+        android:layout_marginLeft="13pt"
+        android:layout_marginTop="11pt"
+        android:gravity="center_horizontal"
+        android:includeFontPadding="false"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_cover"
+        tools:background="#FD578B"
+        tools:text="Top1" />
+
+    <TextView
+        android:id="@+id/tv_book_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8pt"
+        android:layout_marginLeft="8pt"
+        android:layout_marginTop="3pt"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_cover"
+        app:layout_constraintTop_toTopOf="@id/iv_cover"
+        tools:text="Start being a star today" />
+
+    <TextView
+        android:id="@+id/tv_book_tag"
+        android:layout_width="88pt"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14pt"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@id/iv_tips_icon"
+        app:layout_constraintStart_toStartOf="@id/tv_book_name"
+        tools:text="CEO" />
+
+    <ImageView
+        android:id="@+id/iv_tips_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_cover"
+        app:layout_constraintStart_toStartOf="@id/tv_book_name" />
+
+    <TextView
+        android:id="@+id/iv_rank_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2pt"
+        android:layout_marginLeft="2pt"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_tips_icon"
+        app:layout_constraintStart_toEndOf="@id/iv_tips_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_tips_icon"
+        tools:text="3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
