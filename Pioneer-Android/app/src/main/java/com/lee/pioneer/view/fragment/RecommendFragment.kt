@@ -133,9 +133,6 @@ class RecommendFragment :
             })
 
             contentData.observe(this@RecommendFragment, Observer {
-                LogUtil.i("data->${it.data.size}")
-                LogUtil.i("${it.data.isNullOrEmpty()} - ${mAdapter.data.isNullOrEmpty()}")
-                LogUtil.i("${it.data.isNotEmpty()}")
                 if (it.data.isNullOrEmpty() && mAdapter.data.isNullOrEmpty()) {
                     mAdapter.pageEmpty()
                 } else if (it.data.isNotEmpty()) {
