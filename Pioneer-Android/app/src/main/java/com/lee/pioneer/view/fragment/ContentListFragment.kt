@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
+import com.lee.library.mvvm.live.LoadStatus
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
@@ -49,7 +50,7 @@ class ContentListFragment :
 
             refresh.setOnRefreshListener {
                 mAdapter.openLoadMore()
-                type?.let { viewModel.loadListData(it, isRefresh = true) }
+                type?.let { viewModel.loadListData(LoadStatus.REFRESH,it) }
             }
 
         }
@@ -58,14 +59,14 @@ class ContentListFragment :
         mAdapter.run {
             initStatusView()
             pageLoading()
-            setAutoLoadMoreListener { type?.let { viewModel.loadListData(it, isLoadMore = true) } }
+            setAutoLoadMoreListener { type?.let { viewModel.loadListData(LoadStatus.LOAD_MORE,it) } }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {
-                    type?.let { viewModel.loadListData(it, isReLoad = true) }
+                    type?.let { viewModel.loadListData(LoadStatus.RELOAD,it) }
                 }
 
                 override fun pageReload() {
-                    type?.let { viewModel.loadListData(it) }
+                    type?.let { viewModel.loadListData(LoadStatus.REFRESH,it) }
                 }
             })
             setOnItemClickListener { _, entity, _ ->
@@ -97,13 +98,13 @@ class ContentListFragment :
             })
 
             //首个tab页面默认加载
-            type?.let { if (type.equals("Android")) loadListData(it) }
+            type?.let { if (type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH,it) }
         }
     }
 
     override fun lazyLoad() {
         //非首个tab页面使用懒加载
-        type?.let { if (!type.equals("Android")) viewModel.loadListData(it) }
+        type?.let { if (!type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH,it) }
     }
 
 }

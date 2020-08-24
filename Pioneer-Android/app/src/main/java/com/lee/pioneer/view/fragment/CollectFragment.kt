@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.mvvm.live.LoadStatus
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentCollectBinding
@@ -29,7 +30,7 @@ class CollectFragment :
         mAdapter.run {
             initStatusView()
             pageLoading()
-            setAutoLoadMoreListener { viewModel.loadHistory(true) }
+            setAutoLoadMoreListener { viewModel.loadHistory(LoadStatus.LOAD_MORE) }
             setOnItemClickListener { _, entity, _ ->
                 findNavController().navigate(
                     CollectFragmentDirections.actionCollectToContentDetails(
@@ -46,7 +47,7 @@ class CollectFragment :
                 mAdapter.submitData(it,limit = 0)
             })
 
-            viewModel.loadHistory(false)
+            viewModel.loadHistory(LoadStatus.REFRESH)
         }
     }
 

@@ -11,6 +11,7 @@ import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setBackgroundAlphaCompat
+import com.lee.library.mvvm.live.LoadStatus
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
@@ -75,7 +76,7 @@ class GirlFragment :
             //刷新回调
             refresh.setOnRefreshListener {
                 mAdapter.openLoadMore()
-                viewModel.getGirlContentData(isRefresh = true)
+                viewModel.getGirlContentData(LoadStatus.REFRESH)
             }
 
         }
@@ -96,15 +97,15 @@ class GirlFragment :
                 )
             }
             setAutoLoadMoreListener {
-                viewModel.getGirlContentData(isLoadMore = true)
+                viewModel.getGirlContentData(LoadStatus.LOAD_MORE)
             }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {
-                    viewModel.getGirlContentData(isReLoad = true)
+                    viewModel.getGirlContentData(LoadStatus.RELOAD)
                 }
 
                 override fun pageReload() {
-                    viewModel.getGirlContentData()
+                    viewModel.getGirlContentData(LoadStatus.REFRESH)
                 }
 
             })
@@ -139,7 +140,7 @@ class GirlFragment :
     }
 
     override fun lazyLoad() {
-        viewModel.getGirlContentData()
+        viewModel.getGirlContentData(LoadStatus.REFRESH)
     }
 
 }

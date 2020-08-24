@@ -1,6 +1,7 @@
 package com.lee.pioneer.viewmodel
 
 import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.live.LoadStatus
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_GIRL
@@ -45,15 +46,11 @@ class GirlViewModel : BaseViewModel() {
     }
 
     fun getGirlContentData(
-        isRefresh: Boolean = false,
-        isLoadMore: Boolean = false,
-        isReLoad: Boolean = false
+        @LoadStatus status: Int
     ) {
         launchMain(-1) {
             contentData.pageLaunch(
-                isRefresh = isRefresh,
-                isLoadMore = isLoadMore,
-                isReLoad = isReLoad,
+                status,
                 startBlock = {
                     CacheRepository.get()
                         .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))

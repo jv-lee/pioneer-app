@@ -1,5 +1,6 @@
 package com.lee.pioneer.viewmodel
 
+import com.lee.library.mvvm.live.LoadStatus
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.KeyConstants
@@ -28,9 +29,9 @@ class HistoryViewModel : ResponseViewModel() {
     /**
      * 加载本地数据库历史记录
      */
-    fun loadHistory(isLoadMore: Boolean) {
+    fun loadHistory(@LoadStatus status: Int) {
         launchMain {
-            contentData.pageLaunch(isLoadMore = isLoadMore, resumeBlock = { page: Int ->
+            contentData.pageLaunch(status, resumeBlock = { page: Int ->
                 //获取总页数 使用懒加载
                 val pageCount = withContext(Dispatchers.IO) {
                     pageCount

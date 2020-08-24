@@ -1,6 +1,7 @@
 package com.lee.pioneer.viewmodel
 
 import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.live.LoadStatus
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants
@@ -25,13 +26,11 @@ class ContentListViewModel : BaseViewModel() {
      * 获取contentList列表
      */
     fun loadListData(
-        type: String,
-        isRefresh: Boolean = false,
-        isLoadMore: Boolean = false,
-        isReLoad: Boolean = false
+        @LoadStatus status: Int,
+        type: String
     ) {
         launchMain(-1) {
-            contentListData.pageLaunch(isRefresh, isLoadMore, isReLoad,
+            contentListData.pageLaunch(status,
                 {
                     //缓存数据
                     CacheRepository.get()
