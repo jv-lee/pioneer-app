@@ -31,12 +31,6 @@ class ContentListViewModel : BaseViewModel() {
     ) {
         launchMain(-1) {
             contentListData.pageLaunch(status,
-                {
-                    //缓存数据
-                    CacheRepository.get()
-                        .getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()))
-                        .await()
-                },
                 { page: Int ->
                     //网络数据
                     ApiRepository.getApi().getContentDataAsync(
@@ -47,6 +41,12 @@ class ContentListViewModel : BaseViewModel() {
                             if (page != contentListData.limit) response.data.addAll(0, localData)
                         }
                     }
+                },
+                {
+                    //缓存数据
+                    CacheRepository.get()
+                        .getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()))
+                        .await()
                 },
                 {
                     //存储缓存数据

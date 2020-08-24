@@ -29,8 +29,8 @@ class CollectViewModel : ResponseViewModel() {
     /**
      * 加载本地数据库历史记录
      */
-    fun loadHistory(@LoadStatus status:Int) {
-        contentData.pageLaunch(status, resumeBlock = { page: Int ->
+    fun loadHistory(@LoadStatus status: Int) {
+        contentData.pageLaunch(status, { page: Int ->
             //获取总页数 使用懒加载
             val pageCount = withContext(Dispatchers.IO) { pageCount }
             //获取当前页

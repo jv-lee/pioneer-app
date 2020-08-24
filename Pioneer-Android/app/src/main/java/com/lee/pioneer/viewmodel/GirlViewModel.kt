@@ -51,12 +51,7 @@ class GirlViewModel : BaseViewModel() {
         launchMain(-1) {
             contentData.pageLaunch(
                 status,
-                startBlock = {
-                    CacheRepository.get()
-                        .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
-                        .await()
-                },
-                resumeBlock = { page: Int ->
+                { page: Int ->
                     ApiRepository.getApi()
                         .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
                         .await().also {
@@ -66,7 +61,12 @@ class GirlViewModel : BaseViewModel() {
                             }
                         }
                 },
-                completedBlock = {
+                {
+                    CacheRepository.get()
+                        .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
+                        .await()
+                },
+                {
                     CacheRepository.get().putCache(
                         CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
                     )

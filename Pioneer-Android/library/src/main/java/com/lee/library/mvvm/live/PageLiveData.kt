@@ -31,10 +31,10 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
     private var firstCache = true
 
     fun pageLaunch(
-        @LoadStatus status:Int,
-        startBlock: suspend CoroutineScope.() -> T? = { null },
-        resumeBlock: suspend CoroutineScope.(Int) -> T? = { page: Int -> null },
-        completedBlock: suspend CoroutineScope.(T) -> Unit = {}
+        @LoadStatus status: Int,
+        networkBlock: suspend CoroutineScope.(Int) -> T? = { page: Int -> null },
+        cacheBlock: suspend CoroutineScope.() -> T? = { null },
+        cacheSaveBlock: suspend CoroutineScope.(T) -> Unit = {}
     ) {
         launchMain {
             var response: T? = null
@@ -54,13 +54,13 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             //首次加载缓存数据
             if (firstCache) {
                 firstCache = false
-                response = startBlock()?.also {
+                response = cacheBlock()?.also {
                     value = it
                 }
             }
 
             //网络数据设置
-            response = resumeBlock(page).also {
+            response = networkBlock(page).also {
                 if (response != it) {
                     value = it
                 }
@@ -69,7 +69,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             //首页将网络数据设置缓存
             if (page == limit) {
                 response?.run {
-                    completedBlock(this)
+                    cacheSaveBlock(this)
                 }
             }
         }
