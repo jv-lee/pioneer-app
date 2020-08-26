@@ -28,8 +28,9 @@ class MainFragment :
     }
     private val fragments by lazy {
         listOf<Fragment>(
+            HomeFragment(),
             ComicFragment(),
-            RecommendFragment(),
+//            RecommendFragment(),
             GirlFragment(),
             MeFragment()
         )

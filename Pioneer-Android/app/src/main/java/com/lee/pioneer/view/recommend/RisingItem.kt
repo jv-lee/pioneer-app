@@ -44,7 +44,7 @@ class RisingItem :LeeViewItem<Recommend>{
         }
         holder?.getView<RecyclerView>(R.id.rv_container)?.run {
             entity?.comics?.let {
-                layoutManager = GridLayoutManager(context, 2)
+                layoutManager = GridLayoutManager(context, 2).apply { isAutoMeasureEnabled = true }
                 adapter = RisingAdapter(it)
             }
         }

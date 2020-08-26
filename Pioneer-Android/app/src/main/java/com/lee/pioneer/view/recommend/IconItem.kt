@@ -41,7 +41,7 @@ class IconItem :LeeViewItem<Recommend>{
     override fun convert(holder: LeeViewHolder?, entity: Recommend?, position: Int) {
         holder?.getView<RecyclerView>(R.id.rv_container)?.run {
             entity?.banners?.let {
-                layoutManager = GridLayoutManager(context, it.size)
+                layoutManager = GridLayoutManager(context, it.size).apply { isAutoMeasureEnabled = true }
                 adapter = IconGridAdapter(it)
             }
 
