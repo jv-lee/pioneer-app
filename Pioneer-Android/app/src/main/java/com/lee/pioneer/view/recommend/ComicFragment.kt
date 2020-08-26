@@ -1,8 +1,10 @@
 package com.lee.pioneer.view.recommend
 
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lee.library.base.BaseFragment
+import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.utils.LogUtil
 import com.lee.pioneer.R
@@ -17,9 +19,9 @@ import kotlinx.coroutines.withContext
  * @date 2020/8/21
  * @description
  */
-class ComicFragment : BaseFragment<FragmentComicBinding, BaseViewModel>(R.layout.fragment_comic) {
+class ComicFragment : BaseNavigationFragment<FragmentComicBinding, ComicViewModel>(R.layout.fragment_comic) {
 
-    private var count = 0
+    private var count = 1
     private val mAdapter by lazy { RecommendAdapter(requireContext(), ArrayList()) }
 
     override fun bindView() {
@@ -32,34 +34,32 @@ class ComicFragment : BaseFragment<FragmentComicBinding, BaseViewModel>(R.layout
             initStatusView()
             pageLoading()
             setAutoLoadMoreListener {
-                launch {
-                    val testMall = withContext(Dispatchers.IO) {
-                        delay(3000)
-                        TestRepository.testMall()
-                    }
-                    mAdapter.addData(testMall)
-                    if (count < 10) {
-                        count++
-                        loadMoreCompleted()
-                    } else {
-                        loadMoreEnd()
-                    }
-                }
-
+                viewModel.getData()
             }
         }
 
     }
 
     override fun bindData() {
-
+        viewModel.dataObservable.observe(this@ComicFragment, Observer {
+            mAdapter.updateData(it)
+            when {
+                count == 1 -> {
+                    mAdapter.pageCompleted()
+                }
+                count < 10 -> {
+                    mAdapter.loadMoreCompleted()
+                }
+                count >= 10 -> {
+                    mAdapter.loadMoreEnd()
+                }
+            }
+            count++
+        })
     }
 
     override fun lazyLoad() {
-        val testMall = TestRepository.testMall()
-        mAdapter.updateData(testMall)
-        mAdapter.notifyDataSetChanged()
-        mAdapter.pageCompleted()
+        viewModel.getData()
         //提前绘制 优化多类型掉帧问题
 //        if (mAdapter.itemCount > 4) {
 //            binding.rvContainer.smoothScrollToPosition(4)
