@@ -10,9 +10,9 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16pt"
-        android:layout_marginLeft="16pt"
-        android:layout_marginTop="26pt"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="26dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="#000000"
@@ -26,8 +26,8 @@
         android:id="@+id/tv_see_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16pt"
-        android:layout_marginRight="16pt"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:drawableEnd="@drawable/vector_arrow"
         android:drawableRight="@drawable/vector_arrow"
         android:text="See All"
@@ -41,22 +41,22 @@
         android:id="@+id/rv_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8pt"
-        android:layout_marginBottom="18pt"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toTopOf="@id/view_line"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1pt"
+        android:layout_height="1dp"
         android:background="#E6E6E6"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view_line"
         android:layout_width="match_parent"
-        android:layout_height="1pt"
-        android:layout_marginTop="12pt"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
         android:background="#E6E6E6"
         app:layout_constraintBottom_toBottomOf="parent" />
 

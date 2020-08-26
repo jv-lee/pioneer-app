@@ -9,19 +9,20 @@
 
     <com.lee.library.widget.ImageViewRound
         android:id="@+id/iv_cover"
-        android:layout_width="100pt"
-        android:layout_height="143pt"
+        android:layout_width="100dp"
+        android:layout_height="143dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:radius="6pt"
+        app:layout_mode="round"
+        app:radius="6dp"
         tools:background="#ff0000" />
 
     <TextView
         android:id="@+id/tv_book_name"
-        android:layout_width="100pt"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8pt"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="#000000"

@@ -5,10 +5,10 @@
     android:descendantFocusability="blocksDescendants"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="16pt"
-    android:paddingTop="25pt"
-    android:paddingEnd="16pt"
-    android:paddingBottom="12pt">
+    android:paddingStart="16dp"
+    android:paddingTop="25dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="12dp">
 
     <TextView
         android:id="@+id/tv_title"
@@ -25,7 +25,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
 

@@ -8,14 +8,14 @@
     <com.lee.library.widget.banner.MZBannerView
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="253pt"
+            android:layout_height="253dp"
             app:layout_constraintTop_toTopOf="parent"
             app:open_mz_mode="false"
             tools:background="#ffff00" />
 
     <View
             android:layout_width="match_parent"
-            android:layout_height="16pt"
+            android:layout_height="16dp"
             android:background="@drawable/shape_banner_mask"
             app:layout_constraintBottom_toBottomOf="parent" />
 

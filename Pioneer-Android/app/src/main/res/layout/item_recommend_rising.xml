@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@mipmap/ic_recommend_rising_bg"
+    android:background="@color/colorLike"
     android:descendantFocusability="blocksDescendants"
-    android:paddingBottom="10.5pt">
+    android:paddingBottom="10.5dp">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16pt"
-        android:layout_marginLeft="16pt"
-        android:layout_marginTop="51pt"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="51dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="#ffffff"
@@ -28,8 +28,8 @@
         android:id="@+id/tv_see_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16pt"
-        android:layout_marginRight="16pt"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:drawableEnd="@drawable/vector_arrow"
         android:drawableRight="@drawable/vector_arrow"
         android:gravity="center"
@@ -43,8 +43,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="6.5pt"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6.5dp"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
 

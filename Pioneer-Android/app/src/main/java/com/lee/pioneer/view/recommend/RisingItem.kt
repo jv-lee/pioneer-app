@@ -72,22 +72,12 @@ class RisingItem :LeeViewItem<Recommend>{
         private class RisingViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             fun bindView(entity: Comic) {
                     val ivCover = itemView.findViewById<ImageView>(R.id.iv_cover)
-                    val ivTipsIcon = itemView.findViewById<ImageView>(R.id.iv_tips_icon)
                     val tvRankTips = itemView.findViewById<TextView>(R.id.tv_rank_tips)
                     val tvBookName = itemView.findViewById<TextView>(R.id.tv_book_name)
                     val tvBookTag = itemView.findViewById<TextView>(R.id.tv_book_tag)
                     val tvRankNumber = itemView.findViewById<TextView>(R.id.iv_rank_number)
                     entity?.run {
                         GlideTools.get().loadImage(cover,ivCover)
-//                        ivTipsIcon.setImageResource(R.drawable.ic_ranking_smooth_white)
-//                        tvRankTips.setBackgroundResource(
-//                            buildRankTipsBackground(
-//                                CommonUtils.getRisingNumber(
-//                                    data.size,
-//                                    layoutPosition
-//                                )
-//                            )
-//                        )
                         tvRankTips.text = "Top1"
                         tvRankNumber.text = rising.toString()
                         tvBookName.text = name

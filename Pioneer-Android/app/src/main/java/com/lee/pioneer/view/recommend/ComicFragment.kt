@@ -25,14 +25,6 @@ class ComicFragment : BaseFragment<FragmentComicBinding, BaseViewModel>(R.layout
         binding.rvContainer.run {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = mAdapter.proxy
-
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                    LogUtil.i("itemPosition:${layoutManager.findFirstVisibleItemPosition()}")
-                }
-            })
         }
 
         mAdapter.run {
@@ -63,9 +55,9 @@ class ComicFragment : BaseFragment<FragmentComicBinding, BaseViewModel>(R.layout
         mAdapter.notifyDataSetChanged()
         mAdapter.pageCompleted()
         //提前绘制 优化多类型掉帧问题
-        if (mAdapter.itemCount > 4) {
-            binding.rvContainer.smoothScrollToPosition(4)
-            binding.rvContainer.smoothScrollToPosition(0)
-        }
+//        if (mAdapter.itemCount > 4) {
+//            binding.rvContainer.smoothScrollToPosition(4)
+//            binding.rvContainer.smoothScrollToPosition(0)
+//        }
     }
 }
