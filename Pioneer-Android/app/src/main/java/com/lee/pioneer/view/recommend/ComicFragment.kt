@@ -19,6 +19,7 @@ import kotlinx.coroutines.withContext
  */
 class ComicFragment : BaseFragment<FragmentComicBinding, BaseViewModel>(R.layout.fragment_comic) {
 
+    private var count = 0
     private val mAdapter by lazy { RecommendAdapter(requireContext(), ArrayList()) }
 
     override fun bindView() {
@@ -37,7 +38,12 @@ class ComicFragment : BaseFragment<FragmentComicBinding, BaseViewModel>(R.layout
                         TestRepository.testMall()
                     }
                     mAdapter.addData(testMall)
-                    loadMoreCompleted()
+                    if (count < 10) {
+                        count++
+                        loadMoreCompleted()
+                    } else {
+                        loadMoreEnd()
+                    }
                 }
 
             }
