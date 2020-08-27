@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.utils.LogUtil
 import com.lee.pioneer.databinding.FragmentMainBinding
 import com.lee.pioneer.view.fragment.GirlFragment
 import com.lee.pioneer.view.fragment.HomeFragment
@@ -52,7 +53,7 @@ class MainFragment :
     }
 
     override fun bindData() {
-
+        LogUtil.i("FragmentView绘制结束-${System.currentTimeMillis()}")
     }
 
     override fun onResume() {
