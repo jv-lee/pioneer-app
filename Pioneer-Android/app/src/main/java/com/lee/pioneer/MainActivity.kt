@@ -73,8 +73,6 @@ class MainActivity :
         delay(1000)
         //设置back开关
         banBackEnable(false)
-        //设置back双击模式
-        backExitEnable(true)
         //设置动画显示rootView
         val anim = ObjectAnimator.ofFloat(0F, 1F)
         anim.duration = duration
