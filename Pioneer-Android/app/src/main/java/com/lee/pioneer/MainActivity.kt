@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
@@ -28,8 +29,9 @@ class MainActivity :
         super.intentParams(intent, savedInstanceState)
         if (savedInstanceState == null) {
             launch {
-                delay(1000)
-                animUi(300)
+                requestConfig()
+                initUi()
+                animVisibleUi(300)
             }
         }
     }
@@ -40,7 +42,9 @@ class MainActivity :
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        animUi(0)
+        launch {
+            animVisibleUi(0)
+        }
     }
 
     override fun bindData() {
@@ -48,15 +52,25 @@ class MainActivity :
         WebViewTools.get(applicationContext)
     }
 
-    /**
-     * 设置屏幕适配
-     */
-//    override fun getResources(): Resources {
-//        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
-//    }
+    //客户端入口读取APP配置
+    private suspend fun requestConfig() {
+        delay(500)
+    }
 
-    private fun animUi(duration: Long) {
+    //初始化UI页面
+    private fun initUi() {
+        binding.mainContainer.removeAllViews()
+        LayoutInflater.from(this@MainActivity)
+            .inflate(R.layout.layout_main, binding.mainContainer, true)
+    }
+
+    //动画显示UI页面
+    private suspend fun animVisibleUi(duration: Long) {
+        //预加载预留时间
+        delay(1000)
+        //设置back开关
         banBackEnable(false)
+        //设置动画显示rootView
         val anim = ObjectAnimator.ofFloat(0F, 1F)
         anim.duration = duration
         anim.interpolator = LinearInterpolator()
@@ -74,5 +88,13 @@ class MainActivity :
         })
         anim.start()
     }
+
+    /**
+     * 设置屏幕适配
+     */
+//    override fun getResources(): Resources {
+//        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+//    }
+
 
 }
