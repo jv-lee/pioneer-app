@@ -43,6 +43,7 @@ class MainFragment :
     }
 
     override fun bindView() {
+        backDoubleClick()
         binding.vpContainer.adapter = vpAdapter
         binding.vpContainer.offscreenPageLimit = fragments.size - 1
         binding.vpContainer.setNoScroll(true)
