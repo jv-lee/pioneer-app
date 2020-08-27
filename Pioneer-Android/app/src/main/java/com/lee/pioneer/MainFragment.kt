@@ -1,5 +1,6 @@
 package com.lee.pioneer
 
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.lee.library.adapter.core.UiPagerAdapter
@@ -9,7 +10,6 @@ import com.lee.pioneer.databinding.FragmentMainBinding
 import com.lee.pioneer.view.fragment.GirlFragment
 import com.lee.pioneer.view.fragment.HomeFragment
 import com.lee.pioneer.view.fragment.MeFragment
-import com.lee.pioneer.view.fragment.RecommendFragment
 import com.lee.pioneer.view.recommend.ComicFragment
 
 /**
@@ -46,6 +46,7 @@ class MainFragment :
     }
 
     override fun bindView() {
+        backDoubleClick()
         binding.vpContainer.adapter = vpAdapter
         binding.vpContainer.offscreenPageLimit = fragments.size - 1
         binding.vpContainer.setNoScroll(true)
