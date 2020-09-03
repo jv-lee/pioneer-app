@@ -136,7 +136,7 @@ fun NestedScrollView.setScrollTransparent(limit: Int, transparentBar: (Boolean, 
         if (scrollY < limit) {
             transparentBar(true, scrollY)
         } else {
-            transparentBar(false, limit)
+            transparentBar(false, 255)
         }
         return@OnScrollChangeListener
     })
