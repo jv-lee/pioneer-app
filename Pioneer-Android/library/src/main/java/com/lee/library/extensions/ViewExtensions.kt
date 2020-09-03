@@ -8,6 +8,7 @@ import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -124,4 +125,18 @@ fun RadioButton.setButtonTint(drawableId: Int, selectorId: Int) {
     val colorStateList = ContextCompat.getColorStateList(context, selectorId)
     DrawableCompat.setTintList(drawable, colorStateList)
     buttonDrawable = drawable
+}
+
+/**
+ * 滑动改变view 透明度及view状态
+ */
+fun NestedScrollView.setScrollTransparent(limit: Int, transparentBar: (Boolean, Int) -> Unit) {
+    setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+        if (scrollY < limit) {
+            transparentBar(true, scrollY)
+        } else {
+            transparentBar(false, limit)
+        }
+        return@OnScrollChangeListener
+    })
 }
