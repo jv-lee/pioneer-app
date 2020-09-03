@@ -12,6 +12,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlin.math.abs
 
 /**
  * @author jv.lee
@@ -128,7 +129,7 @@ fun RadioButton.setButtonTint(drawableId: Int, selectorId: Int) {
 }
 
 /**
- * 滑动改变view 透明度及view状态
+ * NestedScrollView 滑动改变view 透明度及view状态
  */
 fun NestedScrollView.setScrollTransparent(limit: Int, transparentBar: (Boolean, Int) -> Unit) {
     setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
@@ -138,5 +139,27 @@ fun NestedScrollView.setScrollTransparent(limit: Int, transparentBar: (Boolean, 
             transparentBar(false, limit)
         }
         return@OnScrollChangeListener
+    })
+}
+
+/**
+ * RecyclerView 滑动改变view 透明度及view状态
+ */
+fun RecyclerView.setScrollTransparent( transparentBar: (Boolean, Int) -> Unit) {
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            if (recyclerView.layoutManager !is LinearLayoutManager) return
+            val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val position = linearLayoutManager.findFirstVisibleItemPosition()
+            if (position == 0) {
+                linearLayoutManager.findViewByPosition(position)?.let {
+                    val scale = (255 / it.height)
+                    transparentBar(true,(abs(it.top) * scale).toInt())
+                }
+            } else {
+                transparentBar(false, 255)
+            }
+        }
     })
 }

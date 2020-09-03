@@ -11,6 +11,7 @@ import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setBackgroundAlphaCompat
+import com.lee.library.extensions.setScrollTransparent
 import com.lee.library.mvvm.live.LoadStatus
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.MainFragmentDirections
@@ -56,21 +57,7 @@ class GirlFragment :
                 layoutManager = linearLayoutManager
                 adapter = mAdapter.proxy
                 //设置滑动设置statusBar透明度
-                addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        val position = linearLayoutManager.findFirstVisibleItemPosition()
-                        if (position == 0) {
-                            linearLayoutManager.findViewByPosition(position)?.let {
-                                val scale = (255.0 / it.height)
-                                statusBar.setBackgroundAlphaCompat((abs(it.top) * scale).toInt())
-                            }
-                        } else {
-                            statusBar.setBackgroundAlphaCompat(255)
-                        }
-                    }
-                })
-
+                setScrollTransparent { transition, alpha -> statusBar.setBackgroundAlphaCompat(alpha) }
             }
 
             //刷新回调
