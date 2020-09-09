@@ -36,7 +36,7 @@ public class TimerEx {
     }
 
     public ScheduledFuture<?> run(Runnable runnable, long delay, TimeUnit unit) {
-        return timer.schedule(runnable, delay, TimeUnit.SECONDS);
+        return timer.schedule(runnable, delay, unit);
     }
 
 }
