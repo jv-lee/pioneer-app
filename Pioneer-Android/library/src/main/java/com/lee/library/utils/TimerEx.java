@@ -39,4 +39,8 @@ public class TimerEx {
         return timer.schedule(runnable, delay, unit);
     }
 
+    public void destroy() {
+        timer.shutdownNow();
+    }
+
 }
