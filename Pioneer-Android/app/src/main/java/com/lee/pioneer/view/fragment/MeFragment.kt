@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.CacheUtil
 import com.lee.library.dialog.ChoiceDialog
+import com.lee.library.dialog.core.ConfrimListener
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
 import com.lee.pioneer.tools.DarkModeTools
@@ -21,7 +22,8 @@ class MeFragment :
 
     private val clearDialog by lazy {
         ChoiceDialog.build(context, getString(R.string.me_clear_title)).apply {
-            setConfirmListener {
+            setCancelable(true)
+            setConfirmListener(ConfrimListener {
                 if (CacheUtil.clearAllCache(activity)) {
                     viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
                     toast(getString(R.string.me_clear_success))
@@ -29,7 +31,7 @@ class MeFragment :
                     toast(getString(R.string.me_clear_failed))
                 }
                 dismiss()
-            }
+            })
         }
     }
 
