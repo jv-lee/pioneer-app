@@ -18,8 +18,7 @@ import com.lee.library.utils.SizeUtil
  */
 abstract class BaseDialog constructor(context: Context, theme: Int) : Dialog(context, theme) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    init {
         setContentView(buildViewId())
         bindView()
     }
