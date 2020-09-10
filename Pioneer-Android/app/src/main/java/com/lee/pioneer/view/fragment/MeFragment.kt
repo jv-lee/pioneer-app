@@ -4,8 +4,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.utils.CacheUtil
-import com.lee.library.utils.LogUtil
-import com.lee.library.widget.dialog.ChoiceDialog
+import com.lee.library.dialog.ChoiceDialog
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
 import com.lee.pioneer.tools.DarkModeTools

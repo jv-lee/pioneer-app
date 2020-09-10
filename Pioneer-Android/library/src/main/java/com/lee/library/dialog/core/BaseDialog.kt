@@ -1,10 +1,12 @@
-package com.lee.library.base
+package com.lee.library.dialog.core
 
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import com.lee.library.utils.SizeUtil
 
@@ -14,7 +16,14 @@ import com.lee.library.utils.SizeUtil
  * @date 2020/9/10
  * @description
  */
-open class BaseDialog constructor(context: Context, theme: Int) : Dialog(context, theme) {
+abstract class BaseDialog constructor(context: Context, theme: Int) : Dialog(context, theme) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(buildViewId())
+        bindView()
+    }
+
     override fun show() {
         if (context is Activity) {
             if ((context as Activity).isFinishing) {
@@ -40,6 +49,19 @@ open class BaseDialog constructor(context: Context, theme: Int) : Dialog(context
         }
         super.onBackPressed()
     }
+
+
+    /**
+     * dialog的view
+     *
+     * @return 返回view的 layout 资源ID
+     */
+    protected abstract fun buildViewId(): Int
+
+    /**
+     * 绑定view
+     */
+    protected abstract fun bindView()
 
 }
 

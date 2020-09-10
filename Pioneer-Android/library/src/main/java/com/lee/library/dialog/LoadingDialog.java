@@ -1,11 +1,11 @@
-package com.lee.library.widget.dialog;
+package com.lee.library.dialog;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
 import com.lee.library.R;
-import com.lee.library.widget.dialog.core.BaseTranslucentDialog;
+import com.lee.library.dialog.core.BaseTranslucentDialog;
 
 /**
  * @author jv.lee
