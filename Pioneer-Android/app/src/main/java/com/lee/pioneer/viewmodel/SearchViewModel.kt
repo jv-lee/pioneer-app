@@ -32,7 +32,7 @@ class SearchViewModel : ResponseViewModel() {
             searchTextObservable.set(view.text.toString())
             loadingObservable.value = true
             searchDataList(false)
-            KeyboardUtil.hideSoftInput(view.context as Activity?)
+            KeyboardUtil.hideSoftInput(view.context as Activity)
         }
         return@OnEditorActionListener false
     }

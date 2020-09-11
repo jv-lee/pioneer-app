@@ -25,7 +25,7 @@ class SearchFragment :
     override fun bindView() {
         binding.run {
             tvCancel.setOnClickListener {
-                KeyboardUtil.hideSoftInput(activity)
+                KeyboardUtil.hideSoftInput(requireActivity())
                 findNavController().popBackStack()
             }
 
