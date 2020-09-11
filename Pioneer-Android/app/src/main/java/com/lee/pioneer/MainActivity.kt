@@ -30,7 +30,7 @@ class MainActivity :
         if (savedInstanceState == null) {
             launch {
                 requestConfig()
-                initUi()
+//                initUi()
                 animVisibleUi(300)
             }
         }
@@ -43,6 +43,7 @@ class MainActivity :
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         launch {
+//            initUi()
             animVisibleUi(0)
         }
     }
@@ -67,7 +68,7 @@ class MainActivity :
     //动画显示UI页面
     private suspend fun animVisibleUi(duration: Long) {
         //预加载预留时间
-        delay(1000)
+//        delay(1000)
         //设置back开关
         banBackEnable(false)
         //设置动画显示rootView
