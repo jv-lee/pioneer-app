@@ -51,7 +51,6 @@ class MainFragment :
     }
 
     override fun bindData() {
-
     }
 
     override fun onResume() {

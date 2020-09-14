@@ -23,6 +23,11 @@ import kotlinx.coroutines.launch
 class MainActivity :
     BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
 
+    private val mainLayout by lazy {
+        LayoutInflater.from(this@MainActivity)
+            .inflate(R.layout.layout_main, null, false)
+    }
+
     override fun intentParams(intent: Intent, savedInstanceState: Bundle?) {
         super.intentParams(intent, savedInstanceState)
         if (savedInstanceState == null) {
@@ -56,14 +61,10 @@ class MainActivity :
         delay(500)
     }
 
-    //初始化UI页面
-    private fun initUi() {
-        binding.mainContainer.removeAllViews()
-        LayoutInflater.from(this@MainActivity)
-            .inflate(R.layout.layout_main, binding.mainContainer, true)
-    }
-
-    //动画显示UI页面
+    /**
+     * 动画显示UI页面
+     * @param duration 页面预加载时间
+     */
     private suspend fun animVisibleUi(duration: Long) {
         //预加载预留时间
         delay(duration)
