@@ -4,14 +4,12 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
 import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.library.utils.AdaptScreenUtils
 import com.lee.pioneer.databinding.ActivityMainBinding
 import com.lee.pioneer.tools.WebViewTools
 import kotlinx.coroutines.delay
@@ -29,8 +27,8 @@ class MainActivity :
         super.intentParams(intent, savedInstanceState)
         if (savedInstanceState == null) {
             launch {
+                //进程初始化启动 请求配置
                 requestConfig()
-//                initUi()
                 animVisibleUi(300)
             }
         }
@@ -43,7 +41,7 @@ class MainActivity :
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         launch {
-//            initUi()
+            //程序以外重启 或重新创建MainActivity 无需获取配置，直接显示view
             animVisibleUi(0)
         }
     }
@@ -68,7 +66,7 @@ class MainActivity :
     //动画显示UI页面
     private suspend fun animVisibleUi(duration: Long) {
         //预加载预留时间
-//        delay(1000)
+        delay(duration)
         //设置back开关
         banBackEnable(false)
         //设置动画显示rootView
