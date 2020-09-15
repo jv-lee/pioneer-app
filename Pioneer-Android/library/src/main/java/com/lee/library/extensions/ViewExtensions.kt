@@ -163,3 +163,37 @@ fun RecyclerView.setScrollTransparent( transparentBar: (Boolean, Int) -> Unit) {
         }
     })
 }
+
+/**
+ * RecyclerView 滑动改变view 透明度及view状态
+ */
+fun RecyclerView.setScrollTransparent2( transparentBar: (Boolean, Int) -> Unit) {
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            if (recyclerView.layoutManager !is LinearLayoutManager) return
+            val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val position = linearLayoutManager.findFirstCompletelyVisibleItemPosition()
+            if (position == 0) {
+                linearLayoutManager.findViewByPosition(position)?.let {
+                    val scale = (255 / it.height)
+                    transparentBar(true,(abs(it.top) * scale).toInt())
+                }
+            } else {
+                transparentBar(false, 255)
+            }
+        }
+    })
+}
+
+fun RecyclerView.callScrollHeight(callScroll: (Int) -> Unit) {
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        private var scrollHeight = 0
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            scrollHeight += dy
+            callScroll(scrollHeight)
+        }
+
+    })
+}
