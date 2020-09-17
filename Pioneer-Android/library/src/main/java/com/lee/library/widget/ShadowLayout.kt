@@ -137,17 +137,17 @@ class ShadowLayout(context: Context, attributeSet: AttributeSet) :
     private fun initPaddingSize() {
         if (shadowOffsetY > 0) {
             offsetTopPadding = (shadowBlur - shadowOffsetY).toInt()
-            offsetBottomPadding = (shadowBlur - shadowOffsetY).toInt()
+            offsetBottomPadding = (shadowBlur + shadowOffsetY).toInt()
         } else {
             offsetTopPadding = ((shadowBlur + abs(shadowOffsetY)).toInt())
-            offsetBottomPadding = (shadowBlur + abs(shadowOffsetY)).toInt()
+            offsetBottomPadding = (shadowBlur - abs(shadowOffsetY)).toInt()
         }
         if (shadowOffsetX > 0) {
             offsetLeftPadding = (shadowBlur - shadowOffsetX).toInt()
-            offsetRightPadding = (shadowBlur - shadowOffsetX).toInt()
+            offsetRightPadding = (shadowBlur + shadowOffsetX).toInt()
         } else {
             offsetLeftPadding = (shadowBlur + abs(shadowOffsetX)).toInt()
-            offsetRightPadding = (shadowBlur + abs(shadowOffsetX)).toInt()
+            offsetRightPadding = (shadowBlur - abs(shadowOffsetX)).toInt()
         }
     }
 
