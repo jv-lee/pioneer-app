@@ -14,6 +14,12 @@ import kotlin.math.abs
  * @author jv.lee
  * @date 2020/9/16
  * @description 阴影容器
+ * @set shadowRound 容器圆角size
+ * @set shadowBlur 阴影范围size
+ * @set shadowColor 阴影颜色
+ * @set shadowFillColor 内容填充颜色
+ * @set shadowOffsetX 阴影X轴偏移量
+ * @set shadowOffsetY 阴影Y轴偏移量
  */
 class ShadowLayout(context: Context, attributeSet: AttributeSet) :
     FrameLayout(context, attributeSet) {
@@ -32,6 +38,10 @@ class ShadowLayout(context: Context, attributeSet: AttributeSet) :
     private var shadowOffsetX: Float
     private var shadowOffsetY: Float
 
+    private var offsetLeftPadding = 0
+    private var offsetTopPadding = 0
+    private var offsetRightPadding = 0
+    private var offsetBottomPadding = 0
 
     init {
         context.obtainStyledAttributes(attributeSet, R.styleable.ShadowLayout).run {
@@ -52,8 +62,12 @@ class ShadowLayout(context: Context, attributeSet: AttributeSet) :
         }
         setWillNotDraw(false)
         initPaint()
+        initPaddingSize()
     }
 
+    /**
+     * 获取实际绘制宽高 初始化padding值
+     */
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         mWidth = w - shadowBlur
@@ -88,6 +102,9 @@ class ShadowLayout(context: Context, attributeSet: AttributeSet) :
         super.onLayout(changed, left, top, right, bottom)
     }
 
+    /**
+     * 绘制阴影区域
+     */
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.drawRoundRect(mRectF, shadowRound, shadowRound, mPaint)
@@ -97,14 +114,41 @@ class ShadowLayout(context: Context, attributeSet: AttributeSet) :
      * 根据offset 调整padding值
      */
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
-        val size = shadowBlur.toInt()
-        super.setPadding(left + size, top + size, right + size, bottom + size)
+        super.setPadding(
+            left + offsetLeftPadding,
+            top + offsetTopPadding,
+            right + offsetRightPadding,
+            bottom + offsetBottomPadding
+        )
     }
 
+    /**
+     * 初始化画笔参数 - 设置阴影值
+     */
     private fun initPaint() {
         mPaint.color = shadowFillColor
         mPaint.style = Paint.Style.FILL
         mPaint.setShadowLayer(shadowBlur, shadowOffsetX, shadowOffsetY, shadowColor)
+    }
+
+    /**
+     * 根据offset调整内容区域padding值
+     */
+    private fun initPaddingSize() {
+        if (shadowOffsetY > 0) {
+            offsetTopPadding = (shadowBlur - shadowOffsetY).toInt()
+            offsetBottomPadding = (shadowBlur - shadowOffsetY).toInt()
+        } else {
+            offsetTopPadding = ((shadowBlur + abs(shadowOffsetY)).toInt())
+            offsetBottomPadding = (shadowBlur + abs(shadowOffsetY)).toInt()
+        }
+        if (shadowOffsetX > 0) {
+            offsetLeftPadding = (shadowBlur - shadowOffsetX).toInt()
+            offsetRightPadding = (shadowBlur - shadowOffsetX).toInt()
+        } else {
+            offsetLeftPadding = (shadowBlur + abs(shadowOffsetX)).toInt()
+            offsetRightPadding = (shadowBlur + abs(shadowOffsetX)).toInt()
+        }
     }
 
     /**
