@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-    <com.lee.library.widget.ImageViewRound
+    <com.lee.library.widget.RoundImageView
         android:id="@+id/iv_picture"
         android:layout_width="@dimen/item_content_picture_width"
         android:layout_height="@dimen/item_content_picture_height"
@@ -73,7 +73,7 @@
         app:radius="@dimen/item_content_picture_radius"
         tools:background="@color/colorPrimary" />
 
-    <com.lee.library.widget.ImageViewRound
+    <com.lee.library.widget.RoundImageView
         android:id="@+id/iv_picture2"
         android:layout_width="@dimen/item_content_picture_width"
         android:layout_height="@dimen/item_content_picture_height"
@@ -86,7 +86,7 @@
         app:radius="@dimen/item_content_picture_radius"
         tools:background="@color/colorPrimary" />
 
-    <com.lee.library.widget.ImageViewRound
+    <com.lee.library.widget.RoundImageView
         android:id="@+id/iv_picture3"
         android:layout_width="@dimen/item_content_picture_width"
         android:layout_height="@dimen/item_content_picture_height"
