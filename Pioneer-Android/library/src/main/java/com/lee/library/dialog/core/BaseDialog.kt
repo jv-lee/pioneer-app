@@ -16,9 +16,10 @@ import com.lee.library.utils.SizeUtil
  * @date 2020/9/10
  * @description
  */
-abstract class BaseDialog constructor(context: Context, theme: Int) : Dialog(context, theme) {
+abstract class BaseDialog constructor(context: Context, theme: Int,cancel:Boolean=false) : Dialog(context, theme) {
 
     init {
+        setCancelable(cancel)
         setContentView(buildViewId())
         bindView()
     }
