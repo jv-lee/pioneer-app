@@ -5,9 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.lee.library.utils.SizeUtil
 
 
@@ -16,7 +14,8 @@ import com.lee.library.utils.SizeUtil
  * @date 2020/9/10
  * @description
  */
-abstract class BaseDialog constructor(context: Context, theme: Int,cancel:Boolean=false) : Dialog(context, theme) {
+abstract class BaseDialog constructor(context: Context, theme: Int, cancel: Boolean = false) :
+    Dialog(context, theme) {
 
     init {
         setCancelable(cancel)
@@ -80,4 +79,20 @@ fun Dialog.setBottomDialog(height: Int) {
         }
     }
 
+}
+
+/**
+ * dialog设置全屏
+ */
+fun Dialog.setFullWindow(layoutId: Int) {
+    val window = window
+    window ?: return
+    window.setContentView(layoutId)
+    //设置全屏
+    val windowManager: WindowManager = window.windowManager
+    val display: Display = windowManager.defaultDisplay
+    val lp: WindowManager.LayoutParams = window.attributes
+    lp.height = display.height //设置宽度
+    lp.width = display.width //设置宽度
+    window.attributes = lp
 }
