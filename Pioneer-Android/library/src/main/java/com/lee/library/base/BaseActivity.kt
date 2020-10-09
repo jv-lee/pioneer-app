@@ -11,6 +11,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.lee.library.R
 import com.lee.library.extensions.getVmClass
 import com.lee.library.utils.StatusUtil
 import kotlinx.coroutines.CoroutineScope
@@ -90,7 +91,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : ViewModel>(
                 val secondTime = System.currentTimeMillis()
                 //如果两次按键时间间隔大于2秒，则不退出
                 if (secondTime - firstTime > hasBackExitTimer) {
-                    Toast.makeText(this, "再次按下退出", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.double_click_back), Toast.LENGTH_SHORT).show()
                     //更新firstTime
                     firstTime = secondTime
                     return true
