@@ -1,5 +1,6 @@
 package com.lee.pioneer.http
 
+import com.lee.library.entity.ResponseData
 import com.lee.pioneer.model.entity.*
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -16,7 +17,7 @@ interface ApiService {
      *  首页banner轮播
      */
     @GET("banners")
-    fun getBannerAsync(): Deferred<PageData<Banner>>
+    suspend fun getBannerAsync(): PageData<Banner>
 
     /**
      *  分类 API
@@ -26,7 +27,7 @@ interface ApiService {
      * Girl：妹子图
      */
     @GET("categories/{category_type}")
-    fun getCategoriesAsync(@Path("category_type") categoryType: String): Deferred<PageData<Category>>
+    suspend fun getCategoriesAsync(@Path("category_type") categoryType: String): PageData<Category>
 
     /**
      *  分类数据 API
@@ -36,12 +37,12 @@ interface ApiService {
      * @param count： [10, 50]
      */
     @GET("data/category/{category}/type/{type}/page/{page}/count/{count}")
-    fun getContentDataAsync(
+    suspend fun getContentDataAsync(
         @Path("category") category: String,
         @Path("type") type: String,
         @Path("page") page: Int,
         @Path("count") count: Int
-    ): Deferred<PageData<Content>>
+    ): PageData<Content>
 
     /**
      *  随机数据API
@@ -50,11 +51,11 @@ interface ApiService {
      * @param count： [1, 50]
      */
     @GET("random/category/{category}/type/{type}/count/{count}")
-    fun getRandomDataAsync(
+    suspend fun getRandomDataAsync(
         @Path("category") category: String,
         @Path("type") type: String,
         @Path("count") count: Int
-    ): Deferred<Any>
+    ): Any
 
     /**
      *  本周最热 API
@@ -63,25 +64,25 @@ interface ApiService {
      * @param count： [1, 20]
      */
     @GET("hot/{hot_type}/category/{category}/count/{count}")
-    fun getHotDataAsync(
+    suspend fun getHotDataAsync(
         @Path("hot_type") hotType: String,
         @Path("category") category: String,
         @Path("count") count: Int
-    ): Deferred<PageData<Content>>
+    ): PageData<Content>
 
     /**
      *  文章详情 API
      * @param postId 可接受参数 文章Id
      */
     @GET("post/{post_id}")
-    fun getDetailsAsync(@Path("post_id") postId: String): Deferred<Data<Details>>
+    suspend fun getDetailsAsync(@Path("post_id") postId: String): Data<Details>
 
     /**
      *  文章评论获取 API
      * @param postId 可接受参数 文章Id
      */
     @GET("post/comments/{post_id}")
-    fun getCommentsAsync(@Path("post_id") postId: String): Deferred<Any>
+    suspend fun getCommentsAsync(@Path("post_id") postId: String): Any
 
     /**
      *  搜索 API
@@ -92,12 +93,20 @@ interface ApiService {
      * @param page: >=1
      */
     @GET("search/{search}/category/{category}/type/{type}/page/{page}/count/{count}")
-    fun getSearchDataAsync(
+    suspend fun getSearchDataAsync(
         @Path("search") search: String,
         @Path("category") category: String,
         @Path("type") type: String,
         @Path("page") page: Int,
         @Path("count") count: Int
-    ): Deferred<PageData<Content>>
+    ): PageData<Content>
+
+//    以下接口方法 测试使用
+
+    @GET("banners")
+    suspend fun getResponseDataBannerAsync(): ResponseData<PageData<Banner>>
+
+    @GET("banners")
+    suspend fun getPageDataBannerAsync(): PageData<Banner>
 
 }

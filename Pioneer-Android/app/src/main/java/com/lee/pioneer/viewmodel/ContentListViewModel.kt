@@ -34,7 +34,7 @@ class ContentListViewModel : BaseViewModel() {
                 //网络数据
                 ApiRepository.getApi().getContentDataAsync(
                     KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
-                ).await().also { response ->
+                ).also { response ->
                     //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
                     contentListData.value?.data?.let { localData ->
                         if (page != contentListData.limit) response.data.addAll(0, localData)

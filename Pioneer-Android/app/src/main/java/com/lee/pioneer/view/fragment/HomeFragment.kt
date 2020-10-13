@@ -9,6 +9,7 @@ import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
 import com.lee.pioneer.viewmodel.HomeViewModel
+import com.lee.pioneer.viewmodel.TestViewModel
 
 /**
  * @author jv.lee
@@ -17,6 +18,8 @@ import com.lee.pioneer.viewmodel.HomeViewModel
  */
 class HomeFragment :
     BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
+
+    val testViewModel by lazy { createViewModel(TestViewModel::class.java) }
 
     private val vpAdapter by lazy {
         UiPagerAdapter(
@@ -67,6 +70,19 @@ class HomeFragment :
 
             buildCategoryFragment()
         }
+
+        testViewModel.bannerLiveData.observe(this, Observer {
+            toast("size:${it.size}")
+        })
+//        testViewModel.bannerLiveData2.observe(this, Observer {
+//            toast("size:${it.size}")
+//            LogUtil.i(it.toString())
+//        })
+//
+//        testViewModel.failedEvent.observe(this, Observer {
+//            toast(it.message)
+//        })
+//        testViewModel.getBanner()
 
     }
 

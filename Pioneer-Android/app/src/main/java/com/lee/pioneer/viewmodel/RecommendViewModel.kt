@@ -58,8 +58,7 @@ class RecommendViewModel : ResponseViewModel() {
                 if (response != null) ArrayList(response) else null
             },
             {
-                ApiRepository.getApi().getBannerAsync()
-                    .await().data
+                ApiRepository.getApi().getBannerAsync().data
             },
             {
                 CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
@@ -82,7 +81,6 @@ class RecommendViewModel : ResponseViewModel() {
                 },
                 {
                     ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT)
-                        .await()
                         .also { putCacheContentList(type, it.data) }
                 },
                 {

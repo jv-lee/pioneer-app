@@ -29,7 +29,7 @@ ext {
     room = "2.2.2"
     glide = "4.9.0"
     gson = "2.8.5"
-    retrofit = "2.5.0"
+    retrofit = "2.6.0"
     navigation = "2.3.0-alpha04"
 
     //运行时注解处理器
@@ -51,6 +51,8 @@ ext {
 
             //生命周期
             "lifecycle"       : "androidx.lifecycle:lifecycle-extensions:2.1.0",
+
+            "livedata"        : "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0",
 
             //分包库
             "multidex"        : "androidx.multidex:multidex:2.0.1",

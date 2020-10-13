@@ -6,13 +6,15 @@ import com.lee.library.net.request.IRequest
 import com.lee.library.net.request.Request
 import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.http.ApiService
+import com.lee.pioneer.model.entity.Banner
+import com.lee.pioneer.model.entity.PageData
 
 /**
  * @author jv.lee
- * @date 2020/3/24
- * @description 数据提供类 服务提供及数据库内容提供
+ * @date 2020/10/13
+ * @description
  */
-class ApiRepository : BaseRepository() {
+class TestRepository : BaseRepository() {
 
     private val api: ApiService
 
@@ -21,20 +23,12 @@ class ApiRepository : BaseRepository() {
         api = HttpManager.getInstance().getService(ApiService::class.java, request)
     }
 
-    companion object {
+    suspend fun getBanner(): PageData<Banner> {
+        return apiCall { api.getResponseDataBannerAsync() }
+    }
 
-        @Volatile
-        private var instance: ApiRepository? = null
-
-        @JvmStatic
-        fun getInstance() = instance ?: synchronized(this) {
-            instance ?: ApiRepository().also { instance = it }
-        }
-
-        fun getApi(): ApiService {
-            return getInstance().api
-        }
-
+    suspend fun getBanner2(): PageData<Banner> {
+        return api.getPageDataBannerAsync()
     }
 
 }

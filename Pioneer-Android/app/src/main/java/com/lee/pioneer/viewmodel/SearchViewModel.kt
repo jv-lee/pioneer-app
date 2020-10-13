@@ -45,7 +45,6 @@ class SearchViewModel : ResponseViewModel() {
             val response =
                 ApiRepository.getApi()
                     .getSearchDataAsync(text, CATEGORY_ALL, CATEGORY_ALL, ++page, PAGE_COUNT)
-                    .await()
             executeResponseAny(response) { contentListObservable.value = it }
         }
     }

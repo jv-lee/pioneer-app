@@ -25,24 +25,22 @@ class ExampleInstrumentedTest {
 
 
         GlobalScope.launch {
-            val banners = ApiRepository.getApi().getBannerAsync().await()
+            val banners = ApiRepository.getApi().getBannerAsync()
             LogUtil.i("banners->${banners.data.size}")
 
-            val categories = ApiRepository.getApi().getCategoriesAsync("Article").await()
+            val categories = ApiRepository.getApi().getCategoriesAsync("Article")
             LogUtil.i("categories->${categories.data}")
 
             val dataList =
                 ApiRepository.getApi().getContentDataAsync("Article", "Android", 1, 10)
-                    .await()
             LogUtil.i("dataList->${dataList.data.size}")
 
             val hotData =
-                ApiRepository.getApi().getHotDataAsync("views", "Article", 10).await()
+                ApiRepository.getApi().getHotDataAsync("views", "Article", 10)
             LogUtil.i("hotData->${hotData.data.size}")
 
             val searchData =
                 ApiRepository.getApi().getSearchDataAsync("设计模式", "Article", "Android", 1, 10)
-                    .await()
             LogUtil.i("searchData->${searchData.data.size}")
         }
     }
