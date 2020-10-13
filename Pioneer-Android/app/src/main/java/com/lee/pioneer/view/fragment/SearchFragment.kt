@@ -62,11 +62,8 @@ class SearchFragment :
             })
 
             //错误处理
-            failedEvent.observe(this@SearchFragment, Observer { it ->
-                it?.message?.let { toast(it) }
-                when (it.code) {
-                    -1 -> mAdapter.submitFailed()
-                }
+            failedEvent.observe(this@SearchFragment, Observer {
+                if (it.code == -1) mAdapter.submitFailed()
             })
 
             loadingObservable.observe(this@SearchFragment, Observer {

@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
@@ -24,7 +23,6 @@ import com.lee.pioneer.viewmodel.GirlViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.abs
 
 /**
  * @author jv.lee
@@ -113,14 +111,10 @@ class GirlFragment :
             })
 
             //错误处理
-            contentData.failedEvent.observe(this@GirlFragment, Observer { it ->
-                it?.message?.let { toast(it) }
-                when (it.code) {
-                    -1 -> {
-                        binding.refresh.isRefreshing = false
-                        mAdapter.submitFailed()
-                    }
-                }
+            contentData.failedEvent.observe(this@GirlFragment, Observer {
+                toast(it.message)
+                binding.refresh.isRefreshing = false
+                mAdapter.submitFailed()
             })
 
         }

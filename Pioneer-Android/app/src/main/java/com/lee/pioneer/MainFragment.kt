@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.pioneer.databinding.FragmentMainBinding
 import com.lee.pioneer.view.fragment.GirlFragment
 import com.lee.pioneer.view.fragment.HomeFragment
@@ -16,7 +17,7 @@ import com.lee.pioneer.view.fragment.RecommendFragment
  * @description RootFragment 是所有Fragment的容器类
  */
 class MainFragment :
-    BaseNavigationFragment<FragmentMainBinding, ViewModel>(R.layout.fragment_main) {
+    BaseNavigationFragment<FragmentMainBinding, BaseViewModel>(R.layout.fragment_main) {
 
     private val vpAdapter by lazy {
         UiPagerAdapter(

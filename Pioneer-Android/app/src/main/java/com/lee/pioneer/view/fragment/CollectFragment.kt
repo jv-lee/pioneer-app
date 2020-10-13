@@ -44,7 +44,11 @@ class CollectFragment :
     override fun bindData() {
         viewModel.run {
             contentData.observe(this@CollectFragment, Observer {
-                mAdapter.submitData(it,limit = 0)
+                mAdapter.submitData(it, limit = 0)
+            })
+
+            contentData.failedEvent.observe(this@CollectFragment, Observer {
+                toast(it.message)
             })
 
             viewModel.loadHistory(LoadStatus.REFRESH)

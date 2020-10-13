@@ -143,14 +143,13 @@ class RecommendFragment :
 
             })
 
+            bannerData.failedEvent.observe(this@RecommendFragment, Observer {
+                toast(it.message)
+            })
             contentData.failedEvent.observe(this@RecommendFragment, Observer {
-                it.message?.run { toast(this) }
-                when (it.code) {
-                    -1 -> {
-                        if (!mAdapter.isPageCompleted) {
-                            mAdapter.pageError()
-                        }
-                    }
+                toast(it.message)
+                if (!mAdapter.isPageCompleted) {
+                    mAdapter.pageError()
                 }
             })
         }

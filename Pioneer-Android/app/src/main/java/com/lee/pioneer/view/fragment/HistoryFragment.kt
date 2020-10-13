@@ -47,6 +47,10 @@ class HistoryFragment :
                 mAdapter.submitData(it, limit = 0)
             })
 
+            contentData.failedEvent.observe(this@HistoryFragment, Observer {
+                toast(it.message)
+            })
+
             loadHistory(LoadStatus.REFRESH)
         }
     }

@@ -47,10 +47,12 @@ class HomeFragment :
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
                 vpAdapter.tabList.clear()
                 vpAdapter.fragmentList.clear()
+
                 it.data.map {
                     vpAdapter.tabList.add(it.title)
                     vpAdapter.fragmentList.add(ContentListFragment.newInstance(it.type))
                 }
+
                 vpAdapter.notifyDataSetChanged()
                 binding.vpContainer.offscreenPageLimit = vpAdapter.count - 1
             })
@@ -58,7 +60,7 @@ class HomeFragment :
             //获取
             categoryData.failedEvent.observe(this@HomeFragment, Observer {
                 toast("请求错误:${it.message}  ")
-                if (it.code == -1 && vpAdapter.tabList.isEmpty()) {
+                if (vpAdapter.tabList.isEmpty()) {
                     binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
                 }
             })

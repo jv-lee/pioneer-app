@@ -50,7 +50,7 @@ class ContentListFragment :
 
             refresh.setOnRefreshListener {
                 mAdapter.openLoadMore()
-                type?.let { viewModel.loadListData(LoadStatus.REFRESH,it) }
+                type?.let { viewModel.loadListData(LoadStatus.REFRESH, it) }
             }
 
         }
@@ -59,14 +59,21 @@ class ContentListFragment :
         mAdapter.run {
             initStatusView()
             pageLoading()
-            setAutoLoadMoreListener { type?.let { viewModel.loadListData(LoadStatus.LOAD_MORE,it) } }
+            setAutoLoadMoreListener {
+                type?.let {
+                    viewModel.loadListData(
+                        LoadStatus.LOAD_MORE,
+                        it
+                    )
+                }
+            }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {
-                    type?.let { viewModel.loadListData(LoadStatus.RELOAD,it) }
+                    type?.let { viewModel.loadListData(LoadStatus.RELOAD, it) }
                 }
 
                 override fun pageReload() {
-                    type?.let { viewModel.loadListData(LoadStatus.REFRESH,it) }
+                    type?.let { viewModel.loadListData(LoadStatus.REFRESH, it) }
                 }
             })
             setOnItemClickListener { _, entity, _ ->
@@ -88,23 +95,19 @@ class ContentListFragment :
 
             //错误处理
             contentListData.failedEvent.observe(this@ContentListFragment, Observer { it ->
-                it?.message?.let { toast(it) }
-                when (it.code) {
-                    -1 -> {
-                        binding.refresh.isRefreshing = false
-                        mAdapter.submitFailed()
-                    }
-                }
+                toast(it.message)
+                binding.refresh.isRefreshing = false
+                mAdapter.submitFailed()
             })
 
             //首个tab页面默认加载
-            type?.let { if (type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH,it) }
+            type?.let { if (type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH, it) }
         }
     }
 
     override fun lazyLoad() {
         //非首个tab页面使用懒加载
-        type?.let { if (!type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH,it) }
+        type?.let { if (!type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH, it) }
     }
 
 }

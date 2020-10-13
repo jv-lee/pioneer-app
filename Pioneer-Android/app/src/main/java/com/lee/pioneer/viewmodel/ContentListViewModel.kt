@@ -29,31 +29,29 @@ class ContentListViewModel : BaseViewModel() {
         @LoadStatus status: Int,
         type: String
     ) {
-        launchMain(-1) {
-            contentListData.pageLaunch(status,
-                { page: Int ->
-                    //网络数据
-                    ApiRepository.getApi().getContentDataAsync(
-                        KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
-                    ).await().also { response ->
-                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                        contentListData.value?.data?.let { localData ->
-                            if (page != contentListData.limit) response.data.addAll(0, localData)
-                        }
+        contentListData.pageLaunch(status,
+            { page: Int ->
+                //网络数据
+                ApiRepository.getApi().getContentDataAsync(
+                    KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
+                ).await().also { response ->
+                    //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
+                    contentListData.value?.data?.let { localData ->
+                        if (page != contentListData.limit) response.data.addAll(0, localData)
                     }
-                },
-                {
-                    //缓存数据
-                    CacheRepository.get()
-                        .getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()))
-                        .await()
-                },
-                {
-                    //存储缓存数据
-                    CacheRepository.get()
-                        .putCache(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
-                })
-        }
+                }
+            },
+            {
+                //缓存数据
+                CacheRepository.get()
+                    .getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()))
+                    .await()
+            },
+            {
+                //存储缓存数据
+                CacheRepository.get()
+                    .putCache(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
+            })
     }
 
     /**

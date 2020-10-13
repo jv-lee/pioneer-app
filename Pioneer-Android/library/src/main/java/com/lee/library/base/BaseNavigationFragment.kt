@@ -14,13 +14,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.lee.library.R
 import com.lee.library.extensions.getVmClass
+import com.lee.library.mvvm.base.BaseViewModel
 
 /**
  * @author jv.lee
  * @date 2020/3/30
  * @description
  */
-abstract class BaseNavigationFragment<V : ViewDataBinding, VM : ViewModel>(
+abstract class BaseNavigationFragment<V : ViewDataBinding, VM : BaseViewModel>(
     layoutId: Int
 ) : BaseFragment<V, VM>(layoutId) {
 
@@ -51,6 +52,7 @@ abstract class BaseNavigationFragment<V : ViewDataBinding, VM : ViewModel>(
             intentParams(arguments, savedInstanceState)
             bindView()
             bindData()
+            initFailedViewModel()
             isNavigationViewInit = true
         }
     }

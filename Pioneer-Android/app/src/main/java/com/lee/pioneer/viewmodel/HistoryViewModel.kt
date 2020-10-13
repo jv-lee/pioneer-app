@@ -30,21 +30,19 @@ class HistoryViewModel : ResponseViewModel() {
      * 加载本地数据库历史记录
      */
     fun loadHistory(@LoadStatus status: Int) {
-        launchMain {
-            contentData.pageLaunch(status,
-                { page: Int ->
-                    //获取总页数 使用懒加载
-                    val pageCount = withContext(Dispatchers.IO) {
-                        pageCount
-                    }
-                    //获取当前页
-                    val response = withContext(Dispatchers.IO) {
-                        DataBaseRepository.get().historyDao.queryContentHistory(page)
-                    }
-                    //通知数据更新
-                    PageData(ArrayList(response), page = page, page_count = pageCount)
-                })
-        }
+        contentData.pageLaunch(status,
+            { page: Int ->
+                //获取总页数 使用懒加载
+                val pageCount = withContext(Dispatchers.IO) {
+                    pageCount
+                }
+                //获取当前页
+                val response = withContext(Dispatchers.IO) {
+                    DataBaseRepository.get().historyDao.queryContentHistory(page)
+                }
+                //通知数据更新
+                PageData(ArrayList(response), page = page, page_count = pageCount)
+            })
     }
 
 }

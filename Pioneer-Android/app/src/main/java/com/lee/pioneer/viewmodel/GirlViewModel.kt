@@ -48,7 +48,6 @@ class GirlViewModel : BaseViewModel() {
     fun getGirlContentData(
         @LoadStatus status: Int
     ) {
-        launchMain(-1) {
             contentData.pageLaunch(
                 status,
                 { page: Int ->
@@ -71,7 +70,6 @@ class GirlViewModel : BaseViewModel() {
                         CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
                     )
                 })
-        }
     }
 
 }
