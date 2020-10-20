@@ -71,9 +71,9 @@ class HomeFragment :
             buildCategoryFragment()
         }
 
-        testViewModel.bannerLiveData.observe(this, Observer {
-            toast("size:${it.size}")
-        })
+//        testViewModel.bannerLiveData.observe(this, Observer {
+//            toast("size:${it.size}")
+//        })
 //        testViewModel.bannerLiveData2.observe(this, Observer {
 //            toast("size:${it.size}")
 //            LogUtil.i(it.toString())

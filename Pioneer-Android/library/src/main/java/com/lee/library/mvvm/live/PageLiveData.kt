@@ -6,8 +6,6 @@ import com.lee.library.mvvm.live.LoadStatus.Companion.LOAD_MORE
 import com.lee.library.mvvm.live.LoadStatus.Companion.REFRESH
 import com.lee.library.mvvm.live.LoadStatus.Companion.RELOAD
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * @author jv.lee
@@ -56,27 +54,22 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             //首次加载缓存数据
             if (firstCache) {
                 firstCache = false
-                response = withContext(Dispatchers.IO) { cacheBlock() }
-                response?.let { value = it }
+                response = cacheBlock()?.also {
+                    value = it
+                }
             }
 
             //网络数据设置
-            response = withContext(Dispatchers.IO) {
-                networkBlock(page).also {
-                    withContext(Dispatchers.Main) {
-                        if (response != it) {
-                            value = it
-                        }
-                    }
+            response = networkBlock(page).also {
+                if (response != it) {
+                    value = it
                 }
             }
 
             //首页将网络数据设置缓存
             if (page == limit) {
-                response?.let {
-                    withContext(Dispatchers.IO) {
-                        cacheSaveBlock(it)
-                    }
+                response?.run {
+                    cacheSaveBlock(this)
                 }
             }
         }
