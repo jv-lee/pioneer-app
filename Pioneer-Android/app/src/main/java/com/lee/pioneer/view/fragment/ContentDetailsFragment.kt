@@ -31,7 +31,7 @@ class ContentDetailsFragment :
         binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
 
             override fun menuClick() {
-                binding.toolbar.showMenu(-120, 10)
+                binding.toolbar.showMenu(-40, 10)
             }
 
             override fun menuItemClick(view: View) {
