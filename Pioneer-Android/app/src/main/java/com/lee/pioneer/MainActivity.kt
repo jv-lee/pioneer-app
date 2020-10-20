@@ -4,12 +4,14 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
 import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.utils.AdaptScreenUtils
 import com.lee.pioneer.databinding.ActivityMainBinding
 import com.lee.pioneer.tools.WebViewTools
 import kotlinx.coroutines.delay
@@ -91,10 +93,11 @@ class MainActivity :
 
     /**
      * 设置屏幕适配
+     * 单Activity - 多Fragment 模式推荐使用该适配方式 ， 无法使用 今日头条适配方案.
      */
-//    override fun getResources(): Resources {
-//        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
-//    }
+    override fun getResources(): Resources {
+        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
+    }
 
 
 }
