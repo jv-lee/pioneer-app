@@ -121,7 +121,7 @@ class GirlFragment :
     }
 
     override fun lazyLoad() {
-        viewModel.getGirlContentData(LoadStatus.REFRESH)
+        viewModel.getGirlContentData(LoadStatus.INIT)
     }
 
 }

@@ -101,13 +101,13 @@ class ContentListFragment :
             })
 
             //首个tab页面默认加载
-            type?.let { if (type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH, it) }
+            type?.let { if (type.equals("Android")) viewModel.loadListData(LoadStatus.INIT, it) }
         }
     }
 
     override fun lazyLoad() {
         //非首个tab页面使用懒加载
-        type?.let { if (!type.equals("Android")) viewModel.loadListData(LoadStatus.REFRESH, it) }
+        type?.let { if (!type.equals("Android")) viewModel.loadListData(LoadStatus.INIT, it) }
     }
 
 }

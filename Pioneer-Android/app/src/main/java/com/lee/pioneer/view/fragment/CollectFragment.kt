@@ -51,7 +51,7 @@ class CollectFragment :
                 toast(it.message)
             })
 
-            viewModel.loadHistory(LoadStatus.REFRESH)
+            viewModel.loadHistory(LoadStatus.INIT)
         }
     }
 

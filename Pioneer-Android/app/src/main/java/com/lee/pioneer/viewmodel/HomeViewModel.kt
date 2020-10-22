@@ -1,6 +1,8 @@
 package com.lee.pioneer.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.live.CacheLiveData
+import com.lee.library.mvvm.live.RestorePageLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.CacheConstants.Companion.CATEGORY_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_TYPE
@@ -17,6 +19,7 @@ import com.lee.pioneer.model.repository.CacheRepository
 class HomeViewModel : ResponseViewModel() {
 
     val categoryData by lazy { CacheLiveData<PageData<Category>>() }
+    val restoreHomePageLiveData by lazy { RestorePageLiveData() }
 
     /**
      *  构建主页分类tab 子fragments  启动缓存及网络数据加载

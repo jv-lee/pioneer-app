@@ -60,6 +60,9 @@ class HomeFragment :
                 binding.vpContainer.offscreenPageLimit = vpAdapter.count - 1
             })
 
+            //viewPager恢复页面
+            restoreHomePageLiveData.bindPager(this@HomeFragment, binding.vpContainer)
+
             //获取
             categoryData.failedEvent.observe(this@HomeFragment, Observer {
                 toast("请求错误:${it.message}  ")

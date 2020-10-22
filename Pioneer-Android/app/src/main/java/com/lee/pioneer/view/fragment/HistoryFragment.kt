@@ -51,7 +51,7 @@ class HistoryFragment :
                 toast(it.message)
             })
 
-            loadHistory(LoadStatus.REFRESH)
+            loadHistory(LoadStatus.INIT)
         }
     }
 

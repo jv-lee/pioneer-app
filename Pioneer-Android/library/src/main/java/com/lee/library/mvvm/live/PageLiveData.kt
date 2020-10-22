@@ -2,6 +2,7 @@ package com.lee.library.mvvm.live
 
 import androidx.annotation.IntDef
 import com.lee.library.mvvm.base.BaseLiveData
+import com.lee.library.mvvm.live.LoadStatus.Companion.INIT
 import com.lee.library.mvvm.live.LoadStatus.Companion.LOAD_MORE
 import com.lee.library.mvvm.live.LoadStatus.Companion.REFRESH
 import com.lee.library.mvvm.live.LoadStatus.Companion.RELOAD
@@ -19,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 annotation class LoadStatus {
 
     companion object {
+        const val INIT: Int = 0x0000
         const val REFRESH: Int = 0x001
         const val LOAD_MORE: Int = 0x002
         const val RELOAD: Int = 0x003
@@ -39,9 +41,13 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
         launchMain {
             var response: T? = null
 
+
             //根据加载状态设置页码
-            //刷新状态 重置页码
-            if (status == REFRESH) {
+            if (status == INIT) {
+                //Activity重启 直接使用原有数据渲染
+                value?.let { return@launchMain }
+                //刷新状态 重置页码
+            } else if (status == REFRESH) {
                 page = limit
                 //加载更多状态 增加页码
             } else if (status == LOAD_MORE) {
