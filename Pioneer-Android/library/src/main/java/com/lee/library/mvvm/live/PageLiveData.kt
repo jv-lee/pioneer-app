@@ -82,3 +82,9 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
     }
 
 }
+
+//分页数据合并
+fun <T> PageLiveData<*>.applyData(page: Int, limit: Int, oldData: ArrayList<T>?, newData: ArrayList<T>) {
+    oldData ?: return
+    if (page != limit) newData.addAll(0,oldData)
+}

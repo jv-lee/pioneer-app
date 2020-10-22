@@ -3,6 +3,7 @@ package com.lee.pioneer.viewmodel
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.mvvm.live.LoadStatus
 import com.lee.library.mvvm.live.PageLiveData
+import com.lee.library.mvvm.live.applyData
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.model.entity.*
@@ -36,9 +37,7 @@ class ContentListViewModel : BaseViewModel() {
                     KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
                 ).also { response ->
                     //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                    contentListData.value?.data?.let { localData ->
-                        if (page != contentListData.limit) response.data.addAll(0, localData)
-                    }
+                    contentListData.applyData(page, contentListData.limit, contentListData.value?.data, response.data)
                 }
             },
             {
