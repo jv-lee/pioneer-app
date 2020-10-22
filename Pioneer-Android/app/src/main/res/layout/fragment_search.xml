@@ -26,25 +26,19 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/et_search"
                 style="@style/SearchEditStyle"
-                android:setOnEditorActionListener="@{vm.editActionListener}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_cancel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_gravity="start|center_vertical"
+                android:setOnEditorActionListener="@{vm.editActionListener}" />
 
             <TextView
                 android:id="@+id/tv_cancel"
                 android:layout_width="@dimen/search_logo_size"
                 android:layout_height="@dimen/search_logo_size"
+                android:layout_gravity="end|center_vertical"
                 android:gravity="center"
                 android:text="@string/cancel"
                 android:textColor="@color/colorThemeAccent"
-                android:textSize="@dimen/font_size_large"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="@dimen/font_size_large" />
 
         </com.lee.library.widget.toolbar.CustomToolbarLayout>
 
