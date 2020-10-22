@@ -47,7 +47,9 @@ class CommonItem : LeeViewItem<Recommend> {
         holder?.getView<RecyclerView>(R.id.rv_container)?.run {
             entity?.comics?.let {
                 layoutManager = GridLayoutManager(context, 3).apply { isAutoMeasureEnabled = true }
-                adapter = CommonAdapter(it)
+                if (adapter == null) {
+                    adapter = CommonAdapter(it)
+                }
             }
         }
     }
