@@ -18,10 +18,10 @@
         <action
             android:id="@+id/action_main_to_search"
             app:destination="@id/search"
-            app:enterAnim="@anim/bottom_in"
+            app:enterAnim="@anim/slide_bottom_in"
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
-            app:popExitAnim="@anim/bottom_out" />
+            app:popExitAnim="@anim/slide_bottom_out" />
 
         <action
             android:id="@+id/action_main_to_message"
@@ -88,10 +88,10 @@
         <action
             android:id="@+id/action_search_to_contentDetails"
             app:destination="@id/contentDetails"
-            app:enterAnim="@anim/bottom_in"
+            app:enterAnim="@anim/slide_bottom_in"
             app:exitAnim="@anim/default_in_out"
             app:popEnterAnim="@anim/default_in_out"
-            app:popExitAnim="@anim/bottom_out" />
+            app:popExitAnim="@anim/slide_bottom_out" />
     </fragment>
 
     <fragment
