@@ -1,6 +1,5 @@
 package com.lee.pioneer.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.live.CacheLiveData
 import com.lee.library.mvvm.live.RestorePageLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
