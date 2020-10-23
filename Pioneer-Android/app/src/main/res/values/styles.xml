@@ -15,7 +15,6 @@
     <style name="SearchStyle" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">@dimen/search_text_width</item>
         <item name="android:layout_height">@dimen/search_text_height</item>
-        <item name="android:foreground">?android:selectableItemBackground</item>
         <item name="android:background">@drawable/shape_theme_search</item>
         <item name="android:drawableStart">@drawable/vector_search</item>
         <item name="android:drawablePadding">@dimen/padding_small</item>
