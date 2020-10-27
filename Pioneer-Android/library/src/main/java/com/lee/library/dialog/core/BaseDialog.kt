@@ -20,7 +20,7 @@ abstract class BaseDialog constructor(context: Context, theme: Int, cancel: Bool
 
     init {
         if(!cancel)setBackDismiss()
-        setFullWindow(buildViewId())
+        setContentFullView(buildViewId())
         bindView()
     }
 
