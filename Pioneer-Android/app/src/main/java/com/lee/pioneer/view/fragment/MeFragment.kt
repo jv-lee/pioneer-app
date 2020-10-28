@@ -69,7 +69,7 @@ class MeFragment :
             R.id.line_views -> findNavController().navigate(R.id.action_main_to_history)
             R.id.line_favorite -> findNavController().navigate(R.id.action_main_to_collect)
             R.id.line_feedback -> findNavController().navigate(R.id.action_main_to_feedback)
-            R.id.line_settings -> clearDialog.show()
+            R.id.line_settings -> show(clearDialog)
         }
     }
 
