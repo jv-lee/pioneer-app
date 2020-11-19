@@ -5,7 +5,6 @@ import androidx.room.*
 import com.lee.pioneer.db.converters.StringListConverter
 import com.lee.pioneer.model.entity.ContentType.Companion.CONTENT
 import com.lee.pioneer.model.entity.ContentType.Companion.PICTURE
-import org.jetbrains.annotations.NotNull
 
 /**
  * @author jv.lee
