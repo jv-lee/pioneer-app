@@ -37,6 +37,11 @@
 -dontwarn androidx.core.app.**
 -dontwarn androidx.legacy.**
 
+#DataStore Preferences
+-keepclassmembers class * extends androidx.datastore.preferences.protobuf.GeneratedMessageLite {
+    <fields>;
+}
+
 -keep public class * extends androidx.annotation.**
 -keep public class * extends androidx.appcompat.**
 -keep class androidx.appcompat.** {*;}
@@ -109,10 +114,15 @@ public void *(android.webkit.webView, jav.lang.String);
 
 #Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
-**[] $VALUES;
-public *;
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
 }
 
 #OkHttp3
@@ -162,7 +172,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keepattributes Signature
 # processing Annotations
 -keepattributes *Annotation*
-
 
 
 #自定义依赖库不参与混淆 ------ 自定义view不参与混淆
