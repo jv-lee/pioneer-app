@@ -26,6 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
+            tools:listitem="@layout/item_content_child"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
