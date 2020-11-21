@@ -17,7 +17,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.annotation.RetentionPolicy;
 import java.util.stream.Stream;
+
+import kotlin.annotation.AnnotationRetention;
+import kotlin.annotation.Retention;
 
 
 /**
@@ -42,6 +46,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager implements
     private static final int DEFAULT_VERTICAL_SPACE = 12;
 
     @IntDef({HORIZONTAL, VERTICAL})
+    @Retention(AnnotationRetention.SOURCE)
     public @interface Orientation {
     }
 
