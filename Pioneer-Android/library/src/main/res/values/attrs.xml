@@ -42,6 +42,8 @@
             <enum name="round" value="1" />
             <enum name="oval" value="2" />
         </attr>
+        <attr name="lineColor" format="color" />
+        <attr name="lineWidth" format="dimension" />
         <attr name="radius" format="dimension" />
         <attr name="topLeftRadius" format="dimension" />
         <attr name="topRightRadius" format="dimension" />
@@ -106,12 +108,18 @@
     </declare-styleable>
 
     <declare-styleable name="ShadowLayout">
+        <attr name="outLineWidth" format="dimension" />
+        <attr name="outLineColor" format="color" />
         <attr name="shadowRound" format="dimension" />
         <attr name="shadowBlur" format="dimension" />
         <attr name="shadowColor" format="color" />
         <attr name="shadowFillColor" format="color" />
         <attr name="shadowOffsetX" format="dimension" />
         <attr name="shadowOffsetY" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="VerticalViewPager">
+        <attr name="isVertical" format="boolean" />
     </declare-styleable>
 
 </resources>

@@ -2,10 +2,7 @@ package com.lee.library.extensions
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.StateListDrawable
-import android.text.Editable
-import android.text.InputType
-import android.text.TextUtils
-import android.text.TextWatcher
+import android.text.*
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -206,6 +203,23 @@ fun RecyclerView.callScrollHeight(callScroll: (Int) -> Unit) {
         }
 
     })
+}
+
+/**
+ * 设置输入框最大输入长度
+ */
+fun EditText.setMaxSize(maxSize: Int) {
+    filters = arrayOf(InputFilter.LengthFilter(maxSize))
+}
+
+/**
+ * 设置输入框最大size / 最大lines
+ * @param maxLines 最大行数
+ * @param maxSize 最大长度
+ */
+fun EditText.setMaxSizeOrLines(maxSize: Int = 0, maxLines: Int = 0) {
+    if (maxSize != 0) filters = arrayOf(InputFilter.LengthFilter(maxSize))
+    if (maxLines != 0) this.maxLines = maxLines
 }
 
 /**
