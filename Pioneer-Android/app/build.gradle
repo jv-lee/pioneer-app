@@ -24,7 +24,7 @@ android {
         //指定只支持中文字符
         resConfigs('zh-rCN')
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
