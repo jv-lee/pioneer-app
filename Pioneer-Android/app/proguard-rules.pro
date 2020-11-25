@@ -52,6 +52,9 @@
 -keep interface com.google.android.material.** { *; }
 -keep public class com.google.android.material.R$* { *; }
 
+#需要反射ViewPager2 mRecyclerView属性 设置混淆过滤
+-keep public class androidx.viewpager2.widget.ViewPager2 { *; }
+
 #自定义view
 -keep public class * extends android.view.View{
 *** get*();
