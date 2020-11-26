@@ -24,16 +24,18 @@ class HomeViewModel : ResponseViewModel() {
      *  构建主页分类tab 子fragments  启动缓存及网络数据加载
      */
     fun buildCategoryFragment() {
-        categoryData.cacheLaunch(
-            {
-                CacheRepository.get().getCategoryCacheAsync(CATEGORY_CACHE_KEY).await()
-            },
-            {
-                ApiRepository.getApi().getCategoriesAsync(CATEGORY_TYPE)
-            },
-            {
-                CacheRepository.get().putCache(CATEGORY_CACHE_KEY, it)
-            })
+        launchMain {
+            categoryData.cacheLaunch(
+                {
+                    CacheRepository.get().getCategoryCacheAsync(CATEGORY_CACHE_KEY).await()
+                },
+                {
+                    ApiRepository.getApi().getCategoriesAsync(CATEGORY_TYPE)
+                },
+                {
+                    CacheRepository.get().putCache(CATEGORY_CACHE_KEY, it)
+                })
+        }
     }
 
 }

@@ -51,18 +51,20 @@ class RecommendViewModel : ResponseViewModel() {
     }
 
     fun getBannerData() {
-        bannerData.cacheLaunch(
-            {
-                val response =
-                    CacheRepository.get().getBannerCacheAsync(RECOMMEND_BANNER_KEY).await()
-                if (response != null) ArrayList(response) else null
-            },
-            {
-                ApiRepository.getApi().getBannerAsync().data
-            },
-            {
-                CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
-            })
+        launchMain {
+            bannerData.cacheLaunch(
+                {
+                    val response =
+                        CacheRepository.get().getBannerCacheAsync(RECOMMEND_BANNER_KEY).await()
+                    if (response != null) ArrayList(response) else null
+                },
+                {
+                    ApiRepository.getApi().getBannerAsync().data
+                },
+                {
+                    CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
+                })
+        }
     }
 
     fun getContentList(type: String) {

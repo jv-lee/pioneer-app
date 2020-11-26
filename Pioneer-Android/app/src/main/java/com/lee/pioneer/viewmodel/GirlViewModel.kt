@@ -49,26 +49,28 @@ class GirlViewModel : BaseViewModel() {
     fun getGirlContentData(
         @LoadStatus status: Int
     ) {
-        contentData.pageLaunch(
-            status,
-            { page: Int ->
-                ApiRepository.getApi()
-                    .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
-                    .also {
-                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                        contentData.applyData(page, contentData.limit, contentData.value?.data, it.data)
-                    }
-            },
-            {
-                CacheRepository.get()
-                    .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
-                    .await()
-            },
-            {
-                CacheRepository.get().putCache(
-                    CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
-                )
-            })
+        launchMain {
+            contentData.pageLaunch(
+                status,
+                { page: Int ->
+                    ApiRepository.getApi()
+                        .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
+                        .also {
+                            //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
+                            contentData.applyData(page, contentData.limit, contentData.value?.data, it.data)
+                        }
+                },
+                {
+                    CacheRepository.get()
+                        .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
+                        .await()
+                },
+                {
+                    CacheRepository.get().putCache(
+                        CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
+                    )
+                })
+        }
     }
 
 }

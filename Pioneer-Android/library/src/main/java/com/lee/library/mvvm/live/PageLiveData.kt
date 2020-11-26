@@ -6,7 +6,6 @@ import com.lee.library.mvvm.load.LoadStatus.Companion.INIT
 import com.lee.library.mvvm.load.LoadStatus.Companion.LOAD_MORE
 import com.lee.library.mvvm.load.LoadStatus.Companion.REFRESH
 import com.lee.library.mvvm.load.LoadStatus.Companion.RELOAD
-import kotlinx.coroutines.CoroutineScope
 
 /**
  * @author jv.lee
@@ -19,20 +18,18 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
     var page = limit
     private var firstCache = true
 
-    fun pageLaunch(
+    suspend fun pageLaunch(
         @LoadStatus status: Int,
-        networkBlock: suspend CoroutineScope.(Int) -> T? = { page: Int -> null },
-        cacheBlock: suspend CoroutineScope.() -> T? = { null },
-        cacheSaveBlock: suspend CoroutineScope.(T) -> Unit = {}
+        networkBlock: suspend (Int) -> T? = { page: Int -> null },
+        cacheBlock: suspend () -> T? = { null },
+        cacheSaveBlock: suspend (T) -> Unit = {}
     ) {
-        launchMain {
             var response: T? = null
-
 
             //根据加载状态设置页码
             if (status == INIT) {
                 //Activity重启 直接使用原有数据渲染
-                value?.let { return@launchMain }
+                value?.let { return }
                 //刷新状态 重置页码
             } else if (status == REFRESH) {
                 page = limit
@@ -41,7 +38,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
                 page++
                 //非重试状态 value不为空则为view重构 直接使用原数据
             } else if (status != RELOAD && value != null) {
-                return@launchMain
+                return
             }
 
             //首次加载缓存数据
@@ -64,7 +61,6 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
                 response?.run {
                     cacheSaveBlock(this)
                 }
-            }
         }
     }
 
