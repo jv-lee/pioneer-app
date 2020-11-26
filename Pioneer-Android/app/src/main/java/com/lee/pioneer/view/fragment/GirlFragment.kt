@@ -108,11 +108,8 @@ class GirlFragment :
             contentData.observe(this@GirlFragment, Observer {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
-            })
-
-            //错误处理
-            contentData.failedEvent.observe(this@GirlFragment, Observer {
-                toast(it.message)
+            }, Observer {
+                toast(it)
                 binding.refresh.isRefreshing = false
                 mAdapter.submitFailed()
             })

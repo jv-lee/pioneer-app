@@ -130,6 +130,8 @@ class RecommendFragment :
             bannerData.observe(this@RecommendFragment, Observer {
                 headerBinding.banner.setPages(it.toList()) { BannerViewHolder() }
                 headerBinding.banner.start()
+            }, Observer {
+                toast(it)
             })
 
             contentData.observe(this@RecommendFragment, Observer {
@@ -141,17 +143,13 @@ class RecommendFragment :
                     mAdapter.loadMoreEnd()
                 }
 
-            })
-
-            bannerData.failedEvent.observe(this@RecommendFragment, Observer {
-                toast(it.message)
-            })
-            contentData.failedEvent.observe(this@RecommendFragment, Observer {
-                toast(it.message)
+            }, Observer {
+                toast(it)
                 if (!mAdapter.isPageCompleted) {
                     mAdapter.pageError()
                 }
             })
+
         }
     }
 

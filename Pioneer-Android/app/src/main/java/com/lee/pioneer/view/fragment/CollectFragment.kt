@@ -45,10 +45,8 @@ class CollectFragment :
         viewModel.run {
             contentData.observe(this@CollectFragment, Observer {
                 mAdapter.submitData(it, limit = 0)
-            })
-
-            contentData.failedEvent.observe(this@CollectFragment, Observer {
-                toast(it.message)
+            }, Observer {
+                toast(it)
             })
 
             viewModel.loadHistory(LoadStatus.INIT)

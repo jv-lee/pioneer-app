@@ -45,10 +45,8 @@ class HistoryFragment :
         viewModel.run {
             contentData.observe(this@HistoryFragment, Observer {
                 mAdapter.submitData(it, limit = 0)
-            })
-
-            contentData.failedEvent.observe(this@HistoryFragment, Observer {
-                toast(it.message)
+            }, Observer {
+                toast(it)
             })
 
             loadHistory(LoadStatus.INIT)

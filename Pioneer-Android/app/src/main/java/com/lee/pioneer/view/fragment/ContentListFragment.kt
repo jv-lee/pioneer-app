@@ -91,11 +91,8 @@ class ContentListFragment :
             contentListData.observe(this@ContentListFragment, Observer {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
-            })
-
-            //错误处理
-            contentListData.failedEvent.observe(this@ContentListFragment, Observer { it ->
-                toast(it.message)
+            }, Observer {
+                toast(it)
                 binding.refresh.isRefreshing = false
                 mAdapter.submitFailed()
             })
