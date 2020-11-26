@@ -1,6 +1,7 @@
 package com.lee.library.mvvm.live
 
 import com.lee.library.mvvm.base.BaseLiveData
+import com.lee.library.mvvm.load.LoadStatus
 
 /**
  * @author jv.lee
@@ -14,9 +15,7 @@ class PageKeyLiveData<T, K>(val initKey: K? = null) : BaseLiveData<T>() {
     private var firstCache = true
 
     suspend fun pageLaunch(
-        isRefresh: Boolean = false,
-        isLoadMore: Boolean = false,
-        isReLoad: Boolean = false,
+        @LoadStatus status: Int,
         startBlock: suspend () -> T? = { null },
         resumeBlock: suspend (K?) -> T? = { key: K? -> null },
         completedBlock: suspend (T) -> Unit = {}
@@ -25,13 +24,16 @@ class PageKeyLiveData<T, K>(val initKey: K? = null) : BaseLiveData<T>() {
 
         //根据加载状态设置页码
         //刷新状态 重置页码
-        if (isRefresh) {
+        if(status == LoadStatus.INIT){
+            //Activity重启 直接使用原有数据渲染
+            value?.let { return }
+        }else if (status == LoadStatus.REFRESH) {
             key = initKey
             //加载更多状态 增加页码
-        } else if (isLoadMore) {
+        } else if (status == LoadStatus.LOAD_MORE) {
             key = nextKey
             //非重试状态 value不为空则为view重构 直接使用原数据
-        } else if (!isReLoad && value != null) {
+        } else if (status != LoadStatus.RELOAD && value != null) {
             return
         }
 
