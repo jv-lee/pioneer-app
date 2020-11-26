@@ -71,7 +71,7 @@ class RecommendViewModel : ResponseViewModel() {
             contentData.value = PageData(data, page_count = 0, page = 0)
             return
         }
-        launchMain(-1) {
+        launchMain {
             contentData.cacheLaunch(
                 {
                     CacheRepository.get().getContentCacheAsync(

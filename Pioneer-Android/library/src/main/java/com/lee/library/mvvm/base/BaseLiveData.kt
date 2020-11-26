@@ -3,7 +3,6 @@ package com.lee.library.mvvm.base
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.lee.library.mvvm.CustomException
 import com.lee.library.net.HttpManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,11 +37,5 @@ open class BaseLiveData<T> : MutableLiveData<T>(),
         }
 
     }
-
-    override fun onInactive() {
-        super.onInactive()
-        cancel()
-    }
-
 
 }

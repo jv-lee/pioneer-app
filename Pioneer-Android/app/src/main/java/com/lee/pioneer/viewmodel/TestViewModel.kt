@@ -2,11 +2,13 @@ package com.lee.pioneer.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
-import com.lee.library.mvvm.CustomException
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.pioneer.model.entity.Banner
 import com.lee.pioneer.model.repository.TestRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 /**
  * @author jv.lee
@@ -21,7 +23,7 @@ class TestViewModel : BaseViewModel() {
         flow {
             emit(repository.getBanner2())
         }.catch {
-            failedEvent.value = CustomException(1, it)
+            failedEvent.value = it
         }.map {
             it.data
         }.asLiveData()

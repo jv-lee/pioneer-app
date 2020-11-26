@@ -59,11 +59,8 @@ class SearchFragment :
         viewModel.apply {
             contentListObservable.observe(this@SearchFragment, Observer {
                 mAdapter.submitData(it)
-            })
-
-            //错误处理
-            failedEvent.observe(this@SearchFragment, Observer {
-                if (it.code == -1) mAdapter.submitFailed()
+            }, Observer {
+                mAdapter.submitFailed()
             })
 
             loadingObservable.observe(this@SearchFragment, Observer {

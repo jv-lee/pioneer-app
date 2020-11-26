@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
 import android.widget.TextView
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import com.lee.library.mvvm.base.BaseLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_ALL
@@ -24,7 +25,7 @@ class SearchViewModel : ResponseViewModel() {
 
     private var page = 0
     private val searchTextObservable = ObservableField<String>(CONST_EMPTY)
-    val contentListObservable by lazy { MutableLiveData<PageData<Content>>() }
+    val contentListObservable by lazy { BaseLiveData<PageData<Content>>() }
     val loadingObservable by lazy { MutableLiveData<Boolean>() }
 
     val editActionListener = TextView.OnEditorActionListener { view, actionId, _ ->
@@ -40,7 +41,7 @@ class SearchViewModel : ResponseViewModel() {
     fun searchDataList(isLoadMore: Boolean) {
         if (TextUtils.isEmpty(searchTextObservable.get())) return
         if (!isLoadMore) page = 0
-        launchMain(-1) {
+        launchMain {
             val text = searchTextObservable.get()!!
             val response =
                 ApiRepository.getApi()
