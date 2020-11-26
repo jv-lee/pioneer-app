@@ -1,6 +1,6 @@
 package com.lee.pioneer.viewmodel
 
-import com.lee.library.mvvm.live.LoadStatus
+import com.lee.library.mvvm.load.LoadStatus
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.constants.KeyConstants

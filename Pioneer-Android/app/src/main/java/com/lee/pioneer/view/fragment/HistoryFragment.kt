@@ -4,7 +4,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.mvvm.live.LoadStatus
+import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentHistoryBinding

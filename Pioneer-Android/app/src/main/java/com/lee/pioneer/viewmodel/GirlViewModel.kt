@@ -1,7 +1,7 @@
 package com.lee.pioneer.viewmodel
 
 import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.library.mvvm.live.LoadStatus
+import com.lee.library.mvvm.load.LoadStatus
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.library.mvvm.live.applyData
 import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY

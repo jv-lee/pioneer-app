@@ -11,7 +11,7 @@ import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setBackgroundAlphaCompat
 import com.lee.library.extensions.setScrollTransparent
-import com.lee.library.mvvm.live.LoadStatus
+import com.lee.library.mvvm.load.LoadStatus
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
