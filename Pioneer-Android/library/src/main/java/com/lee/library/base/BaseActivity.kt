@@ -45,6 +45,25 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
     private var hasBanBack = false
     private var hasBackExitTimer = 2000
 
+    private var permissionSuccessCall: (() -> Unit)? = null
+    private var permissionFailedCall: ((String) -> Unit)? = null
+
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { it ->
+            if (it) permissionSuccessCall?.invoke() else permissionFailedCall?.invoke("")
+        }
+
+    private val permissionsLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { it ->
+            it.forEach {
+                if (!it.value) {
+                    permissionFailedCall?.invoke(it.key)
+                    return@forEach
+                }
+            }
+            permissionSuccessCall?.invoke()
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         StatusUtil.statusBar(window, false)
         super.onCreate(savedInstanceState)
@@ -125,6 +144,8 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
     override fun onDestroy() {
         super.onDestroy()
         cancel()
+        permissionLauncher.unregister()
+        permissionsLauncher.unregister()
     }
 
     /**
@@ -139,7 +160,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
         Toast.makeText(this, message, duration).show()
     }
 
-    fun AppCompatActivity.show(dialog: Dialog) {
+    fun FragmentActivity.show(dialog: Dialog) {
         if (ActivityUtil.assertActivityDestroyed(this@BaseActivity)) return
         try {
             dialog.show()
@@ -147,7 +168,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
         }
     }
 
-    fun AppCompatActivity.dismiss(dialog: Dialog) {
+    fun FragmentActivity.dismiss(dialog: Dialog) {
         if (ActivityUtil.assertActivityDestroyed(this@BaseActivity)) return
         try {
             dialog.dismiss()
@@ -155,7 +176,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
         }
     }
 
-    fun AppCompatActivity.show(dialog: DialogFragment) {
+    fun FragmentActivity.show(dialog: DialogFragment) {
         if (ActivityUtil.assertActivityDestroyed(this@BaseActivity)) return
         try {
             dialog.show(supportFragmentManager, dialog::class.java.simpleName)
@@ -163,7 +184,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
         }
     }
 
-    fun AppCompatActivity.dismiss(dialog: DialogFragment) {
+    fun FragmentActivity.dismiss(dialog: DialogFragment) {
         if (ActivityUtil.assertActivityDestroyed(this@BaseActivity)) return
         try {
             dialog.dismiss()
@@ -171,38 +192,33 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
         }
     }
 
-    fun AppCompatActivity.requestPermission(
+    fun FragmentActivity.requestPermission(
         permission: String,
         successCall: () -> Unit,
-        failedCall: () -> Unit = {}
+        failedCall: (String) -> Unit = {}
     ) {
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { it ->
-            if (it) successCall() else failedCall()
-        }.launch(permission)
+        this@BaseActivity.permissionSuccessCall = successCall
+        this@BaseActivity.permissionFailedCall = failedCall
+        permissionLauncher.launch(permission)
     }
 
-    fun AppCompatActivity.requestPermissions(
+    fun FragmentActivity.requestPermissions(
         vararg permission: String,
         successCall: () -> Unit,
         failedCall: (String) -> Unit = {}
     ) {
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){ it->
-            it.forEach {
-                if (!it.value) {
-                    failedCall(it.key)
-                    return@forEach
-                }
-            }
-            successCall()
-        }.launch(permission)
+        this@BaseActivity.permissionSuccessCall = successCall
+        this@BaseActivity.permissionFailedCall = failedCall
+        permissionsLauncher.launch(permission)
     }
 
     /**
      * fragment 控制扩展函数
      */
-    fun FragmentActivity.fragmentTransaction(containerId:Int,fragment: Fragment?) {
+    fun FragmentActivity.fragmentTransaction(containerId: Int, fragment: Fragment?) {
         fragment ?: return
-        val transaction = supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_right_in, R.anim.default_in_out)
+        val transaction = supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.slide_right_in, R.anim.default_in_out)
         for (tag in supportFragmentManager.fragments) {
             transaction.hide(tag)
         }
@@ -211,7 +227,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
         } else {
             //防止fragment重复添加
             if (!fragment.isAdded && supportFragmentManager.findFragmentByTag(fragment::class.java.simpleName) == null) {
-                transaction.add(containerId, fragment,fragment::class.java.simpleName)
+                transaction.add(containerId, fragment, fragment::class.java.simpleName)
             }
         }
         if (!isDestroyed) {

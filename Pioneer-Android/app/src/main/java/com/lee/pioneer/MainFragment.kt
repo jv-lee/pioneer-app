@@ -1,7 +1,6 @@
 package com.lee.pioneer
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.mvvm.base.BaseViewModel
@@ -52,6 +51,7 @@ class MainFragment :
     }
 
     override fun bindData() {
+
     }
 
     override fun onResume() {
