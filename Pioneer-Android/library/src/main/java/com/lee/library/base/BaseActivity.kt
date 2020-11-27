@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -168,6 +169,32 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
             dialog.dismiss()
         } catch (e: Exception) {
         }
+    }
+
+    fun AppCompatActivity.requestPermission(
+        permission: String,
+        successCall: () -> Unit,
+        failedCall: () -> Unit = {}
+    ) {
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { it ->
+            if (it) successCall() else failedCall()
+        }.launch(permission)
+    }
+
+    fun AppCompatActivity.requestPermissions(
+        vararg permission: String,
+        successCall: () -> Unit,
+        failedCall: (String) -> Unit = {}
+    ) {
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){ it->
+            it.forEach {
+                if (!it.value) {
+                    failedCall(it.key)
+                    return@forEach
+                }
+            }
+            successCall()
+        }.launch(permission)
     }
 
     /**
