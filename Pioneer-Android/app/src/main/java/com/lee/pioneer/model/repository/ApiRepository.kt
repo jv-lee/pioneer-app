@@ -17,7 +17,11 @@ class ApiRepository : BaseRepository() {
     private val api: ApiService
 
     init {
-        val request = Request(HttpConstant.BASE_URI, IRequest.ConverterType.JSON)
+        val request = Request(
+            HttpConstant.BASE_URI,
+            IRequest.ConverterType.JSON,
+            callTypes = intArrayOf(IRequest.CallType.COROUTINE, IRequest.CallType.FLOW)
+        )
         api = HttpManager.getInstance().getService(ApiService::class.java, request)
     }
 

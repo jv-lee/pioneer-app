@@ -12,6 +12,7 @@ import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
 import com.lee.pioneer.model.repository.DataBaseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.withContext
 import java.util.*
 
@@ -50,26 +51,49 @@ class GirlViewModel : BaseViewModel() {
         @LoadStatus status: Int
     ) {
         launchMain {
-            contentData.pageLaunch(
-                status,
-                { page: Int ->
+            contentData.pageLaunchFlow(status, { page: Int ->
+                flowOf(
                     ApiRepository.getApi()
                         .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
-                        .also {
-                            //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                            contentData.applyData(page, contentData.limit, contentData.value?.data, it.data)
-                        }
-                },
-                {
+                )
+            }, {
+                flowOf(
                     CacheRepository.get()
                         .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
                         .await()
-                },
-                {
+                )
+            }, {
+                //保存首页缓存
+                if (contentData.page == contentData.limit) {
                     CacheRepository.get().putCache(
-                        CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
+                        CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()),
+                        it
                     )
-                })
+                }
+                //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
+                contentData.applyData(contentData.value?.data, it.data)
+                it
+            })
+//            contentData.pageLaunch(
+//                status,
+//                { page: Int ->
+//                    ApiRepository.getApi()
+//                        .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
+//                        .also {
+//                            //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
+//                            contentData.applyData(contentData.value?.data, it.data)
+//                        }
+//                },
+//                {
+//                    CacheRepository.get()
+//                        .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()))
+//                        .await()
+//                },
+//                {
+//                    CacheRepository.get().putCache(
+//                        CONTENT_CACHE_KEY + CATEGORY_GIRL.toLowerCase(Locale.getDefault()), it
+//                    )
+//                })
         }
     }
 
