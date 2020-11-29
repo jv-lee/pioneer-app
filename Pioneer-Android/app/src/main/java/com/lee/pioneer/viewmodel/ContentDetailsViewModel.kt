@@ -19,7 +19,7 @@ class ContentDetailsViewModel : BaseViewModel() {
         launchMain {
             //查询是否收藏
             val isCollect =
-                withContext(Dispatchers.IO) {
+                launchIO {
                     DataBaseRepository.get().historyDao.isCollect(id)
                 }
             if (isCollect == 1) {
@@ -29,10 +29,10 @@ class ContentDetailsViewModel : BaseViewModel() {
 
             //添加收藏夹
             val content =
-                withContext(Dispatchers.IO) {
+                launchIO {
                     DataBaseRepository.get().historyDao.queryContentById(id)[0]
                 }
-            withContext(Dispatchers.IO) {
+            launchIO {
                 content.isCollect = 1
                 DataBaseRepository.get().historyDao.insert(content)
             }

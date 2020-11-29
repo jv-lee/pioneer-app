@@ -33,9 +33,9 @@ class CollectViewModel : ResponseViewModel() {
         launchMain {
             contentData.pageLaunch(status, { page: Int ->
                 //获取总页数 使用懒加载
-                val pageCount = withContext(Dispatchers.IO) { pageCount }
+                val pageCount = launchIO { pageCount }
                 //获取当前页
-                val response = withContext(Dispatchers.IO) {
+                val response = launchIO {
                     DataBaseRepository.get().historyDao.queryContentCollect(page)
                 }
                 PageData(ArrayList(response), page = page, page_count = pageCount)

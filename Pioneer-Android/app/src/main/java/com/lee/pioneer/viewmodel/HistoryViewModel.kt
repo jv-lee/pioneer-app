@@ -34,11 +34,11 @@ class HistoryViewModel : ResponseViewModel() {
             contentData.pageLaunch(status,
                 { page: Int ->
                     //获取总页数 使用懒加载
-                    val pageCount = withContext(Dispatchers.IO) {
+                    val pageCount = launchIO {
                         pageCount
                     }
                     //获取当前页
-                    val response = withContext(Dispatchers.IO) {
+                    val response = launchIO {
                         DataBaseRepository.get().historyDao.queryContentHistory(page)
                     }
                     //通知数据更新
