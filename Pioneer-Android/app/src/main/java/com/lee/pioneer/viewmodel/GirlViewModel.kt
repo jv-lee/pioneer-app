@@ -30,10 +30,10 @@ class GirlViewModel : BaseViewModel() {
      */
     fun insertContentHistoryToDB(content: Content) {
         launchMain {
-            val extends = withContext(Dispatchers.IO) {
+            val extends = launchIO {
                 DataBaseRepository.get().historyDao.isCollect(content._id)
             }
-            withContext(Dispatchers.IO) {
+            launchIO {
                 DataBaseRepository.get().historyDao
                     .insert(
                         ContentHistory.parse(

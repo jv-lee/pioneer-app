@@ -13,7 +13,7 @@ import java.util.concurrent.CancellationException
  * @date 2019-08-15
  * @description
  */
-open class BaseViewModel : ViewModel(){
+open class BaseViewModel : ViewModel() {
 
     val failedEvent: MutableLiveData<Throwable> = MutableLiveData()
 
@@ -27,9 +27,9 @@ open class BaseViewModel : ViewModel(){
         }
     }
 
-    suspend fun <T> launchIO(block: suspend CoroutineScope.() -> T) {
-        withContext(Dispatchers.IO) {
-            block
+    suspend fun <T> launchIO(block: suspend CoroutineScope.() -> T): T {
+        return withContext(Dispatchers.IO) {
+            block()
         }
     }
 
