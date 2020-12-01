@@ -24,7 +24,7 @@ public class StatusUtil {
     /**
      * 设置沉浸式状态栏
      *
-     * @param window                 引用
+     * @param window                   引用
      * @param navigationBarTranslucent 导航栏是否设置为透明
      */
     public static void statusBar(Window window, boolean navigationBarTranslucent) {
@@ -48,7 +48,7 @@ public class StatusUtil {
             visibility |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             window.getDecorView().setSystemUiVisibility(visibility);
             //4.0设置
-        } else {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //设置沉浸式 状态栏
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //设置沉浸式 导航栏
