@@ -21,6 +21,13 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
     </style>
 
+    <style name="Bottom.Animation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_bottom_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/default_in_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/default_in_out</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_bottom_out</item>
+    </style>
+
     <!--自定义圆形进度-->
     <style name="Progress_circle_acting">
         <item name="android:indeterminateDrawable">@drawable/rotate_progress_bar</item>
