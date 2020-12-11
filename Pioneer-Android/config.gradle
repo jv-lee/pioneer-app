@@ -91,9 +91,8 @@ ext {
             "conver-protobuf"     : "com.squareup.retrofit2:converter-protobuf:${retrofit}",
             "call-fast-json"      : "com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2",
 
-            //第三方
-            "permission"          : "com.github.jv-lee:permission:lite-2.0.0",
-            "image-tools"         : "com.github.jv-lee.imagetools:library:1.0.7",
+            //图片选择
+            "image-tools"         : "com.github.jv-lee.imagetools:library:1.1.1",
 
             //email
             "email"               : "com.sun.mail:android-mail:1.6.0",

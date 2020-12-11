@@ -2,9 +2,8 @@ package com.lee.pioneer.view.fragment
 
 import android.Manifest
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-import com.imagetools.select.ImageTools
+import com.imagetools.select.ImageLaunch
 import com.imagetools.select.entity.SelectConfig
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.dialog.ChoiceDialog
@@ -24,9 +23,7 @@ class MeFragment :
     BaseNavigationFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
     View.OnClickListener {
 
-    private val imageLaunch = ImageTools.selectLaunch(this) {
-        toast("image count :${it.size}")
-    }
+    private val imageLaunch = ImageLaunch(this)
 
     private val clearDialog by lazy {
         ChoiceDialog(requireContext()).apply {
@@ -50,7 +47,9 @@ class MeFragment :
 
         binding.lineMessage.setOnLongClickListener {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
-                imageLaunch.launch(SelectConfig(isMultiple = true, isCompress = false))
+                imageLaunch.select(SelectConfig(isMultiple = true, isCompress = false)) {
+                    toast(it[0].path)
+                }
             })
             false
         }
@@ -90,7 +89,6 @@ class MeFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
-        imageLaunch.unregister()
         binding.switchDarkEnable.setOnCheckedChangeListener(null)
         binding.switchSystemEnable.setOnCheckedChangeListener(null)
     }
