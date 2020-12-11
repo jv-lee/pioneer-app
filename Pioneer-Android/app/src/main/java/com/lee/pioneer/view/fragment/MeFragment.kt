@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.imagetools.select.ImageLaunch
 import com.imagetools.select.entity.SelectConfig
+import com.imagetools.select.entity.TakeConfig
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.dialog.ChoiceDialog
 import com.lee.library.dialog.core.ConfirmListener
@@ -47,8 +48,24 @@ class MeFragment :
 
         binding.lineMessage.setOnLongClickListener {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
+                imageLaunch.select(SelectConfig(isMultiple = false, isCompress = false,columnCount = 3)) {
+                    toast(it[0].path)
+                }
+            })
+            false
+        }
+        binding.lineLike.setOnLongClickListener {
+            requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
                 imageLaunch.select(SelectConfig(isMultiple = true, isCompress = false)) {
                     toast(it[0].path)
+                }
+            })
+            false
+        }
+        binding.lineViews.setOnLongClickListener{
+            requestPermission(Manifest.permission.CAMERA,{
+                imageLaunch.take(TakeConfig(isCrop = true)) {
+                    toast(it.path)
                 }
             })
             false
