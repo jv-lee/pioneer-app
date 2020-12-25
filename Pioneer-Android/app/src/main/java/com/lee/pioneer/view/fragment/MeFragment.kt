@@ -48,7 +48,9 @@ class MeFragment :
 
         binding.lineMessage.setOnLongClickListener {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
-                imageLaunch.select(SelectConfig(isMultiple = false, isCompress = false,columnCount = 3)) {
+                imageLaunch.select(
+                    SelectConfig(isMultiple = false, isCompress = false, columnCount = 3)
+                ) {
                     toast(it[0].path)
                 }
             })
@@ -62,8 +64,8 @@ class MeFragment :
             })
             false
         }
-        binding.lineViews.setOnLongClickListener{
-            requestPermission(Manifest.permission.CAMERA,{
+        binding.lineViews.setOnLongClickListener {
+            requestPermission(Manifest.permission.CAMERA, {
                 imageLaunch.take(TakeConfig(isCrop = true)) {
                     toast(it.path)
                 }
