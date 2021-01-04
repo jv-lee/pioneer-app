@@ -30,6 +30,8 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
+import com.lee.library.R;
+
 /**
  * @author jv.lee
  */
@@ -74,11 +76,11 @@ public class WebViewEx extends WebView implements LifecycleObserver {
                 final SslErrorHandler mHandler;
                 mHandler = handler;
                 AlertDialog.Builder builder = new AlertDialog.Builder((Activity) lifecycleOwner);
-                builder.setMessage("ssl证书验证失败");
+                builder.setMessage(getContext().getString(R.string.str_ssl_error));
                 //不校验https证书
-                builder.setPositiveButton("继续", (dialog, which) -> mHandler.proceed());
+                builder.setPositiveButton(getContext().getString(R.string.str_continue), (dialog, which) -> mHandler.proceed());
                 //校验证书
-                builder.setNegativeButton("取消", (dialog, which) -> mHandler.cancel());
+                builder.setNegativeButton(getContext().getString(R.string.str_cancel), (dialog, which) -> mHandler.cancel());
                 builder.setOnKeyListener((dialog, keyCode, event) -> {
                     if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                         mHandler.cancel();
