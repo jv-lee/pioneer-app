@@ -23,9 +23,9 @@ class App : BaseApplication() {
     private val activityLifecycleCallbacks = object : SimpleActivityLifecycleCallbacks() {
         override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
             if (DarkModeTools.get().isDarkTheme()) {
-                StatusUtil.clearStatusFontLight2(activity)
+                StatusUtil.setLightStatusIcon(activity)
             } else {
-                StatusUtil.setStatusFontLight2(activity)
+                StatusUtil.setDarkStatusIcon(activity)
             }
         }
     }
