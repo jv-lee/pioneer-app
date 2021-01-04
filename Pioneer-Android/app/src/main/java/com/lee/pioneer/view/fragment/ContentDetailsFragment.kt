@@ -49,6 +49,7 @@ class ContentDetailsFragment :
             }
         })
         web?.run {
+            bindLifecycle(requireActivity())
             parent?.let { (it as ViewGroup).removeAllViews() }
             binding.frameContainer.addView(this)
             setWebBackEvent(this)
