@@ -11,8 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toolbar;
 
-import androidx.annotation.RequiresApi;
-
 /**
  * 状态栏工具
  *
@@ -82,6 +80,18 @@ public class StatusUtil {
             //使用异或清除SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             activity.getWindow().getDecorView().setSystemUiVisibility(originFlag & ~View
                     .SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
+
+    /**
+     * 设置导航栏颜色
+     *
+     * @param activity
+     * @param color
+     */
+    public static void setNavigationBarColor(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().setNavigationBarColor(color);
         }
     }
 

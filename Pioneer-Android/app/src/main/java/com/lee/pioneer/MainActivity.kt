@@ -14,6 +14,8 @@ import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.utils.AdaptScreenUtils
 import com.lee.pioneer.databinding.ActivityMainBinding
 import com.lee.pioneer.tools.WebViewTools
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -56,6 +58,13 @@ class MainActivity :
     override fun bindData() {
         //初始化全局webView
         WebViewTools.get(applicationContext)
+    }
+
+    @ExperimentalCoroutinesApi
+    override fun onDestroy() {
+        cancel()
+        WebViewTools.get().onDestroy()
+        super.onDestroy()
     }
 
     //客户端入口读取APP配置

@@ -87,16 +87,6 @@ class ContentDetailsFragment :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        web?.exResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        web?.exPause()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         web?.destroyView()
