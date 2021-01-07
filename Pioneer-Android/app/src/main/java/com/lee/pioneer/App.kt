@@ -1,6 +1,7 @@
 package com.lee.pioneer
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import com.lee.library.base.BaseApplication
 import com.lee.library.cache.CacheManager
@@ -23,6 +24,7 @@ class App : BaseApplication() {
 
     private val activityLifecycleCallbacks = object : SimpleActivityLifecycleCallbacks() {
         override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
+            StatusUtil.setNavigationBarColor(activity,Color.BLACK)
             if (DarkModeTools.get().isDarkTheme()) {
                 StatusUtil.setLightStatusIcon(activity)
             } else {
