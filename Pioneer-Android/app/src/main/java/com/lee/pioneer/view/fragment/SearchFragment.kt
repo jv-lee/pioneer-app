@@ -57,13 +57,13 @@ class SearchFragment :
         binding.vm = viewModel
 
         viewModel.apply {
-            contentListObservable.observe(this@SearchFragment, Observer {
+            contentListObservable.observe(viewLifecycleOwner, Observer {
                 mAdapter.submitData(it)
             }, Observer {
                 mAdapter.submitFailed()
             })
 
-            loadingObservable.observe(this@SearchFragment, Observer {
+            loadingObservable.observe(viewLifecycleOwner, Observer {
                 mAdapter.initStatusView()
                 mAdapter.pageLoading()
             })

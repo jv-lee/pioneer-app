@@ -77,7 +77,7 @@ class ContentDetailsFragment :
         }
 
         viewModel.run {
-            favoriteObservable.observe(this@ContentDetailsFragment, Observer {
+            favoriteObservable.observe(viewLifecycleOwner, Observer {
                 if (it == 0) {
                     toast(getString(R.string.menu_collect_completed))
                 } else {
