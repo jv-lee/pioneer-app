@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import com.lee.library.base.BaseApplication
 import com.lee.library.cache.CacheManager
+import com.lee.library.utils.DensityUtil
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.db.AppDataBase
@@ -23,13 +24,23 @@ import kotlinx.coroutines.launch
 class App : BaseApplication() {
 
     private val activityLifecycleCallbacks = object : SimpleActivityLifecycleCallbacks() {
+
         override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-            StatusUtil.setNavigationBarColor(activity,Color.BLACK)
+            StatusUtil.setNavigationBarColor(activity, Color.BLACK)
             if (DarkModeTools.get().isDarkTheme()) {
                 StatusUtil.setLightStatusIcon(activity)
             } else {
                 StatusUtil.setDarkStatusIcon(activity)
             }
+        }
+
+        override fun onActivityStarted(activity: Activity) {
+            super.onActivityStarted(activity)
+            DensityUtil.setDensity(activity)
+        }
+
+        override fun onActivityDestroyed(activity: Activity) {
+            DensityUtil.resetDensity(activity)
         }
     }
 

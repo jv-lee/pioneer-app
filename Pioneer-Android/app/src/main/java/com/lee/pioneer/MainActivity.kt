@@ -100,13 +100,4 @@ class MainActivity :
         anim.start()
     }
 
-    /**
-     * 设置屏幕适配
-     * 单Activity - 多Fragment 模式推荐使用该适配方式 ， 无法使用 今日头条适配方案.
-     */
-    override fun getResources(): Resources {
-        return AdaptScreenUtils.adaptWidth(super.getResources(), 360)
-    }
-
-
 }
