@@ -62,9 +62,7 @@ class ContentListFragment :
             initStatusView()
             pageLoading()
             setAutoLoadMoreListener {
-                type?.let {
-                    viewModel.loadListData(LoadStatus.LOAD_MORE, it)
-                }
+                type?.let { viewModel.loadListData(LoadStatus.LOAD_MORE, it) }
             }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {
