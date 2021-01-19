@@ -1,7 +1,11 @@
 package com.lee.pioneer.tools
 
+import android.content.Context
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.TextView
+import com.imagetools.select.R
 
 /**
  * @author jv.lee
@@ -24,6 +28,14 @@ class ViewTools {
             val maxWidth = text.maxWidth
             val textWidth = text.paint.measureText(text.text.toString())
             return textWidth > maxWidth
+        }
+
+        fun getItemOrderAnimator(context: Context): LayoutAnimationController {
+            val animController =
+                LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.item_alpha_in))
+            animController.order = LayoutAnimationController.ORDER_NORMAL
+            animController.delay = 0.1f
+            return animController
         }
 
     }

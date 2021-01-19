@@ -18,6 +18,7 @@ import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentGirlBinding
 import com.lee.pioneer.databinding.LayoutGirlHeaderBinding
+import com.lee.pioneer.tools.ViewTools
 import com.lee.pioneer.view.adapter.GirlAdapter
 import com.lee.pioneer.viewmodel.GirlViewModel
 import java.text.SimpleDateFormat
@@ -52,6 +53,7 @@ class GirlFragment :
             //设置列表数据项
             rvContainer.run {
                 glideEnable()
+                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
                 layoutManager = linearLayoutManager
                 adapter = mAdapter.proxy
                 //设置滑动设置statusBar透明度
