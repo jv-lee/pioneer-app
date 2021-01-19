@@ -63,10 +63,7 @@ class ContentListFragment :
             pageLoading()
             setAutoLoadMoreListener {
                 type?.let {
-                    viewModel.loadListData(
-                        LoadStatus.LOAD_MORE,
-                        it
-                    )
+                    viewModel.loadListData(LoadStatus.LOAD_MORE, it)
                 }
             }
             setLoadErrorListener(object : LoadErrorListener {
