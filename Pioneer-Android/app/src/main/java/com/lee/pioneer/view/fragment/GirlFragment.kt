@@ -53,7 +53,7 @@ class GirlFragment :
             //设置列表数据项
             rvContainer.run {
                 glideEnable()
-                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
+//                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
                 layoutManager = linearLayoutManager
                 adapter = mAdapter.proxy
                 //设置滑动设置statusBar透明度

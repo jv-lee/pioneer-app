@@ -45,7 +45,7 @@ class ContentListFragment :
         binding.run {
             rvContainer.run {
                 glideEnable()
-                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
+//                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
                 layoutManager = LinearLayoutManager(context)
                 adapter = mAdapter.proxy
             }
