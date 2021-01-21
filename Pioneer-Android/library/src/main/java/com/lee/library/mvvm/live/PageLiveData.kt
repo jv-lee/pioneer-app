@@ -8,6 +8,7 @@ import com.lee.library.mvvm.load.LoadStatus.Companion.INIT
 import com.lee.library.mvvm.load.LoadStatus.Companion.LOAD_MORE
 import com.lee.library.mvvm.load.LoadStatus.Companion.REFRESH
 import com.lee.library.mvvm.load.LoadStatus.Companion.RELOAD
+import com.lee.library.utils.LogUtil
 import kotlinx.coroutines.flow.*
 import java.lang.Exception
 
@@ -56,6 +57,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
 
             //网络数据设置
             response = networkBlock(page).also {
+                LogUtil.i("net != cache :${response != it}")
                 if (response != it) {
                     value = it
                 }
@@ -103,10 +105,6 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             emitAll(networkBlock(page))
         }
             .notNull()
-            .filter {
-                //判断是否设置缓存数据 - 缓存数据与网络数据是否一致 不一致则继续设置网络数据
-                value != it
-            }
             .map {
                 //该回调中saveCache/applyData
                 completerBlock(it!!)
