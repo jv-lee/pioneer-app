@@ -57,7 +57,6 @@ public class WebViewEx extends WebView implements LifecycleObserver {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void init() {
-        setBackgroundColor(Color.TRANSPARENT);
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);

@@ -3,6 +3,7 @@ package com.lee.pioneer.view.fragment
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
@@ -52,6 +53,12 @@ class ContentDetailsFragment :
             bindLifecycle(requireActivity())
             parent?.let { (it as ViewGroup).removeAllViews() }
             binding.frameContainer.addView(this)
+            setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorThemeBackground
+                )
+            )
             setWebBackEvent(this)
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true

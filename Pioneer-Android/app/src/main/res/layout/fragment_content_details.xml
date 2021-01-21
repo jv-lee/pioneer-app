@@ -14,14 +14,6 @@
         tools:background="@color/colorThemeBackground"
         tools:context=".view.fragment.ContentDetailsFragment">
 
-        <com.lee.library.widget.toolbar.TitleToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:menuRes="@menu/details_menu"
-            app:titleText="@string/details_title_text" />
-
         <FrameLayout
             android:id="@+id/frame_container"
             android:layout_width="0dp"
@@ -31,12 +23,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+        <com.lee.library.widget.toolbar.TitleToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menuRes="@menu/details_menu"
+            app:titleText="@string/details_title_text" />
+
         <ProgressBar
             android:id="@+id/progress"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/web_loading_progress_height"
-            app:layout_constraintBottom_toBottomOf="@id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
