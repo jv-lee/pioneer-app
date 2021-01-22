@@ -54,12 +54,6 @@ class ContentDetailsFragment :
             bindLifecycle(requireActivity() as LifecycleOwner)
             parent?.let { (it as ViewGroup).removeAllViews() }
             binding.frameContainer.addView(this)
-            setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.colorThemeBackground
-                )
-            )
             setWebBackEvent(this)
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true

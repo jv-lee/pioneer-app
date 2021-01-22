@@ -47,7 +47,7 @@ class GirlFragment :
 
         binding.run {
             //设置statusBar透明度
-            statusBar.background.mutate().alpha = 0
+            statusBar.background?.let { it.mutate().alpha = 0 }
             ViewCompat.setElevation(statusBar, 1f)
 
             //设置列表数据项
