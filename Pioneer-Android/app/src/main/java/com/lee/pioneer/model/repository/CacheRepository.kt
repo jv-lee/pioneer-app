@@ -31,7 +31,7 @@ class CacheRepository {
      */
     fun getCategoryCacheAsync(key: String): Deferred<PageData<Category>?> {
         val type = object : TypeToken<PageData<Category>>() {}.type
-        return CompletableDeferred(CacheManager.getInstance().get<PageData<Category>>(key, type))
+        return CompletableDeferred(CacheManager.getDefault().get<PageData<Category>>(key, type))
     }
 
     /**
@@ -43,7 +43,7 @@ class CacheRepository {
         key: String
     ): Deferred<PageData<Content>?> {
         val type = object : TypeToken<PageData<Content>>() {}.type
-        return CompletableDeferred(CacheManager.getInstance().get<PageData<Content>>(key, type))
+        return CompletableDeferred(CacheManager.getDefault().get<PageData<Content>>(key, type))
     }
 
     /**
@@ -51,7 +51,7 @@ class CacheRepository {
      */
     fun getBannerCacheAsync(key: String): Deferred<List<Banner>?> {
         val type = object : TypeToken<List<Banner>>() {}.type
-        return CompletableDeferred(CacheManager.getInstance().get<List<Banner>>(key, type))
+        return CompletableDeferred(CacheManager.getDefault().get<List<Banner>>(key, type))
     }
 
     /**
@@ -59,7 +59,7 @@ class CacheRepository {
      * @param data 存储数据源
      */
     fun <T> putCache(key: String, data: T) {
-        CacheManager.getInstance().put(key, data)
+        CacheManager.getDefault().put(key, data)
     }
 
 }

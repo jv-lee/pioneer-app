@@ -11,6 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toolbar;
 
+import androidx.annotation.RequiresApi;
+
 /**
  * 状态栏工具
  *
@@ -22,7 +24,7 @@ public class StatusUtil {
     /**
      * 设置沉浸式状态栏
      *
-     * @param window                   引用
+     * @param window                 引用
      * @param navigationBarTranslucent 导航栏是否设置为透明
      */
     public static void statusBar(Window window, boolean navigationBarTranslucent) {

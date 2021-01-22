@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
+import com.lee.library.extensions.dimensToSp
 import com.lee.library.extensions.setImageTintCompat
-import com.lee.library.utils.SizeUtil
 import com.lee.pioneer.R
 
 /**
@@ -56,8 +56,8 @@ class LineButtonView : ConstraintLayout {
 
         context.obtainStyledAttributes(attrs, R.styleable.LineButtonView).run {
             //左侧文字
-            leftTextSize = SizeUtil.dimensToSp(
-                context, getDimension(
+            leftTextSize = context.dimensToSp(
+                getDimension(
                     R.styleable.LineButtonView_leftTextSize,
                     resources.getDimension(R.dimen.view_line_text_size)
                 )
@@ -73,8 +73,8 @@ class LineButtonView : ConstraintLayout {
             leftText = getString(R.styleable.LineButtonView_leftText) ?: ""
 
             //右侧文字
-            rightTextSize = SizeUtil.dimensToSp(
-                context, getDimension(
+            rightTextSize = context.dimensToSp(
+                getDimension(
                     R.styleable.LineButtonView_rightTextSize,
                     resources.getDimension(R.dimen.view_line_text_size)
                 )

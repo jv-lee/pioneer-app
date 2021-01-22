@@ -107,19 +107,64 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="ShadowLayout">
-        <attr name="outLineWidth" format="dimension" />
-        <attr name="outLineColor" format="color" />
-        <attr name="shadowRound" format="dimension" />
-        <attr name="shadowBlur" format="dimension" />
-        <attr name="shadowColor" format="color" />
-        <attr name="shadowFillColor" format="color" />
-        <attr name="shadowOffsetX" format="dimension" />
-        <attr name="shadowOffsetY" format="dimension" />
+    <declare-styleable name="BackgroundConstraintLayout">
+        <attr name="layoutBackgroundColor" format="color" />
+        <attr name="layoutStrokeColor" format="color" />
+        <attr name="layoutStrokeWidth" format="dimension" />
+        <attr name="layoutRadius" format="dimension" />
+    </declare-styleable>
+
+    <attr name="outLineWidth" format="dimension" />
+    <attr name="outLineColor" format="color" />
+    <attr name="shadowRound" format="dimension" />
+    <attr name="shadowBlur" format="dimension" />
+    <attr name="shadowColor" format="color" />
+    <attr name="shadowFillColor" format="color" />
+    <attr name="shadowOffsetX" format="dimension" />
+    <attr name="shadowOffsetY" format="dimension" />
+
+    <declare-styleable name="ShadowFrameLayout">
+        <attr name="outLineWidth" />
+        <attr name="outLineColor" />
+        <attr name="shadowRound" />
+        <attr name="shadowBlur" />
+        <attr name="shadowColor" />
+        <attr name="shadowFillColor" />
+        <attr name="shadowOffsetX" />
+        <attr name="shadowOffsetY" />
+    </declare-styleable>
+
+    <declare-styleable name="ShadowConstraintLayout">
+        <attr name="outLineWidth" />
+        <attr name="outLineColor" />
+        <attr name="shadowRound" />
+        <attr name="shadowBlur" />
+        <attr name="shadowColor" />
+        <attr name="shadowFillColor" />
+        <attr name="shadowOffsetX" />
+        <attr name="shadowOffsetY" />
     </declare-styleable>
 
     <declare-styleable name="VerticalViewPager">
         <attr name="isVertical" format="boolean" />
+    </declare-styleable>
+
+    <attr name="dotBackground" format="color" />
+
+    <declare-styleable name="BottomNavView">
+        <attr name="dotNumberTextSize" format="dimension" />
+        <attr name="dotBackground" />
+        <attr name="dotNumberTextColor" format="color" />
+        <attr name="dotLineColor" format="color" />
+        <attr name="dotSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DotView">
+        <attr name="dotBackground"  />
+    </declare-styleable>
+
+    <declare-styleable name="NumberDotView">
+        <attr name="dotBackground" />
     </declare-styleable>
 
 </resources>

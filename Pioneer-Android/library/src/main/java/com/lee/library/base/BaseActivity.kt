@@ -32,9 +32,7 @@ import kotlinx.coroutines.cancel
  * @date 2019-08-15
  * @description
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
-    var layoutId: Int
-) :
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(var layoutId: Int) :
     AppCompatActivity(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     protected lateinit var binding: V
@@ -157,7 +155,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
 
     fun Activity.toast(message: CharSequence?, duration: Int = Toast.LENGTH_SHORT) {
         message ?: return
-        Toast.makeText(this, message, duration).show()
+        Toast.makeText(applicationContext, message, duration).show()
     }
 
     fun FragmentActivity.show(dialog: Dialog) {

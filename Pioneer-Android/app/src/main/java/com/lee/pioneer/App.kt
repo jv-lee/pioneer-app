@@ -54,7 +54,7 @@ class App : BaseApplication() {
         GlobalScope.launch(Dispatchers.IO) {
             SPUtil.getInstance(this@App)
             AppDataBase.getInstance(this@App)
-            CacheManager.getInstance(this@App, BuildConfig.VERSION_CODE)
+            CacheManager.init(this@App, BuildConfig.VERSION_CODE)
         }
 
         //注册Activity生命周期监听

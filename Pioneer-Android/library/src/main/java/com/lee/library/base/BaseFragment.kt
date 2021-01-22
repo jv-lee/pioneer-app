@@ -28,10 +28,8 @@ import kotlinx.coroutines.cancel
  * @date 2019/8/16.
  * @description
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel>(
-    var layoutId: Int
-) : Fragment()
-    , CoroutineScope by CoroutineScope(Dispatchers.Main) {
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel>(var layoutId: Int) :
+    Fragment(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     protected lateinit var binding: V
     protected lateinit var viewModel: VM
@@ -154,7 +152,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel>(
 
     fun Fragment.toast(message: CharSequence?, duration: Int = Toast.LENGTH_SHORT) {
         message ?: return
-        Toast.makeText(activity, message, duration).show()
+        Toast.makeText(requireContext().applicationContext, message, duration).show()
     }
 
     fun Fragment.show(dialog: Dialog) {

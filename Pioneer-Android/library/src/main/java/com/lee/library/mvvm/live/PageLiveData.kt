@@ -8,7 +8,6 @@ import com.lee.library.mvvm.load.LoadStatus.Companion.INIT
 import com.lee.library.mvvm.load.LoadStatus.Companion.LOAD_MORE
 import com.lee.library.mvvm.load.LoadStatus.Companion.REFRESH
 import com.lee.library.mvvm.load.LoadStatus.Companion.RELOAD
-import com.lee.library.utils.LogUtil
 import kotlinx.coroutines.flow.*
 import java.lang.Exception
 
@@ -57,7 +56,6 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
 
             //网络数据设置
             response = networkBlock(page).also {
-                LogUtil.i("net != cache :${response != it}")
                 if (response != it) {
                     value = it
                 }

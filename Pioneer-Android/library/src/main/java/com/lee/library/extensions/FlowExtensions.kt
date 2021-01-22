@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.*
  * @description
  */
 suspend fun <T> Flow<T>.bindLive(liveData: BaseLiveData<T>) {
+    Dispatchers
     catch {
         liveData.throwMessage(it)
     }.collect {

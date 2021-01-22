@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseNavigationFragment
@@ -50,7 +51,7 @@ class ContentDetailsFragment :
             }
         })
         web?.run {
-            bindLifecycle(requireActivity())
+            bindLifecycle(requireActivity() as LifecycleOwner)
             parent?.let { (it as ViewGroup).removeAllViews() }
             binding.frameContainer.addView(this)
             setBackgroundColor(
