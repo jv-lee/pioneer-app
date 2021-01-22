@@ -12,6 +12,7 @@ import com.lee.pioneer.model.repository.CacheRepository
 import com.lee.pioneer.model.repository.DataBaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.RuntimeException
 import java.util.*
 
 /**

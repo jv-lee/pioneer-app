@@ -23,7 +23,7 @@ class FeedbackFragment :
     override fun bindData() {
         binding.vm = viewModel
 
-        viewModel.toastStrObserver.observe(viewLifecycleOwner, Observer {
+        viewModel.toastStrObserver.observe(this, Observer {
             toast(it)
             if (it == getString(R.string.feedback_success)) findNavController().popBackStack()
         })

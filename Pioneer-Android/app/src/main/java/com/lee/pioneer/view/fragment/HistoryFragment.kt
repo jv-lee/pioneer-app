@@ -43,7 +43,7 @@ class HistoryFragment :
 
     override fun bindData() {
         viewModel.run {
-            contentData.observe(viewLifecycleOwner, Observer {
+            contentData.observe(this@HistoryFragment, Observer {
                 mAdapter.submitData(it, limit = 0)
             }, Observer {
                 toast(it)

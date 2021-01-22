@@ -12,7 +12,6 @@ import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
 import com.lee.pioneer.databinding.FragmentContentListBinding
-import com.lee.pioneer.tools.ViewTools
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.viewmodel.ContentListViewModel
 
@@ -85,7 +84,7 @@ class ContentListFragment :
     override fun bindData() {
         viewModel.run {
             //列表数据更新
-            contentListData.observe(viewLifecycleOwner, Observer {
+            contentListData.observe(this@ContentListFragment, Observer {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
             }, Observer {

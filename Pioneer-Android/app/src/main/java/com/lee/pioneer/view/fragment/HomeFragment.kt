@@ -46,7 +46,7 @@ class HomeFragment :
     override fun bindData() {
         viewModel.run {
             //获取分类数据 构建分类tab 及 fragment
-            categoryData.observe(viewLifecycleOwner, Observer { it ->
+            categoryData.observe(this@HomeFragment, Observer { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
                 vpAdapter.tabList.clear()
                 vpAdapter.fragmentList.clear()
@@ -66,7 +66,7 @@ class HomeFragment :
             })
 
             //viewPager恢复页面
-            restoreHomePageLiveData.bindPager(viewLifecycleOwner, binding.vpContainer)
+            restoreHomePageLiveData.bindPager(this@HomeFragment, binding.vpContainer)
 
             buildCategoryFragment()
         }
