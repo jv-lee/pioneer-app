@@ -15,6 +15,8 @@ import kotlin.math.abs
  * @author jv.lee
  * @date 2020/9/16
  * @description 阴影容器
+ * @set outLineWidth 外线条宽度
+ * @set outLineColor 外线条颜色
  * @set shadowRound 容器圆角size
  * @set shadowBlur 阴影范围size
  * @set shadowColor 阴影颜色
