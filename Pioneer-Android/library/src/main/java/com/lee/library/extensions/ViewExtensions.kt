@@ -31,7 +31,7 @@ fun RecyclerView.glideEnable() {
         var lastPosition = 0
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
-            if (!isDown) return
+//            if (!isDown) return
             when (newState) {
                 //正在拖动
                 RecyclerView.SCROLL_STATE_DRAGGING ->
