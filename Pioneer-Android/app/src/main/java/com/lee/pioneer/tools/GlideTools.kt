@@ -61,18 +61,18 @@ class GlideTools {
 
     @SuppressLint("CheckResult")
     fun loadImage(path: String?, imageView: ImageView) {
-        var animEnable = animEnableArray.contains(path.hashCode())
+//        var animEnable = animEnableArray.contains(path.hashCode())
         val request = Glide.with(imageView.context)
             .load(http2https(path))
             .apply(optionsCommand.placeholder(placeholderResId!!))
 
         //通过tag判断是否为第一次加载 首次加载使用动画显示
-        if (!animEnable) {
-            animEnableArray.add(path.hashCode())
-            request.transition(
-                DrawableTransitionOptions.withCrossFade().crossFade(loadDuration)
-            )
-        }
+//        if (!animEnable) {
+//            animEnableArray.add(path.hashCode())
+//            request.transition(
+//                DrawableTransitionOptions.withCrossFade().crossFade(loadDuration)
+//            )
+//        }
         request.into(imageView)
     }
 

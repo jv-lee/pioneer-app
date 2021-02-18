@@ -52,7 +52,7 @@ class GirlFragment :
 
             //设置列表数据项
             rvContainer.run {
-                glideEnable()
+//                glideEnable()
 //                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
                 layoutManager = linearLayoutManager
                 adapter = mAdapter.proxy
