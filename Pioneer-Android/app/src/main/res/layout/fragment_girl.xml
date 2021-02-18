@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:itemCount="10"
-                tools:listitem="@layout/item_girl_top" />
+                tools:listitem="@layout/item_girl" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

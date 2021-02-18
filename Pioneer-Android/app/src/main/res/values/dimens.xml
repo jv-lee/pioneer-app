@@ -34,7 +34,7 @@
     <dimen name="item_girl_picture_width">300dp</dimen>
     <dimen name="item_girl_picture_height">220dp</dimen>
     <dimen name="item_girl_des_height">80dp</dimen>
-    <dimen name="item_girl_margin_horizontal">30dp</dimen>
+    <dimen name="item_girl_margin_horizontal">22dp</dimen>
     <dimen name="item_girl_margin_portrait">15dp</dimen>
     <dimen name="item_girl_elevation">10dp</dimen>
 

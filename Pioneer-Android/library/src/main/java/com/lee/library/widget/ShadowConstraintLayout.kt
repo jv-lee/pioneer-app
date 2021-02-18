@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.lee.library.R
+import com.lee.library.extensions.dp2px
 import kotlin.math.abs
 
 /**
@@ -55,7 +56,8 @@ class ShadowConstraintLayout(context: Context, attributeSet: AttributeSet) :
             shadowRound = getDimension(R.styleable.ShadowConstraintLayout_shadowRound, 10F)
             shadowBlur = getDimension(R.styleable.ShadowConstraintLayout_shadowBlur, 10F)
             shadowColor = getColor(R.styleable.ShadowConstraintLayout_shadowColor, Color.BLACK)
-            shadowFillColor = getColor(R.styleable.ShadowConstraintLayout_shadowFillColor, Color.WHITE)
+            shadowFillColor =
+                getColor(R.styleable.ShadowConstraintLayout_shadowFillColor, Color.WHITE)
             shadowOffsetX = getDimension(R.styleable.ShadowConstraintLayout_shadowOffsetX, 0F)
             shadowOffsetY = getDimension(R.styleable.ShadowConstraintLayout_shadowOffsetY, 0F)
             recycle()
@@ -63,7 +65,12 @@ class ShadowConstraintLayout(context: Context, attributeSet: AttributeSet) :
         setWillNotDraw(false)
         initPaint()
         initPaddingSize()
-        super.setPadding(offsetLeftPadding, offsetTopPadding, offsetRightPadding, offsetBottomPadding)
+        super.setPadding(
+            offsetLeftPadding,
+            offsetTopPadding,
+            offsetRightPadding,
+            offsetBottomPadding
+        )
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
@@ -96,12 +103,17 @@ class ShadowConstraintLayout(context: Context, attributeSet: AttributeSet) :
         super.onDraw(canvas)
         canvas?.drawRoundRect(
             mRectF,
-            shadowRound + outLineWidth,
-            shadowRound + outLineWidth,
+            context.dp2px((shadowRound + outLineWidth).toInt()),
+            context.dp2px((shadowRound + outLineWidth).toInt()),
             mPaint
         )
         if (outLineWidth != 0F) {
-            canvas?.drawRoundRect(mLineRectF, shadowRound, shadowRound, mStrokePaint)
+            canvas?.drawRoundRect(
+                mLineRectF,
+                context.dp2px(shadowRound.toInt()),
+                context.dp2px(shadowRound.toInt()),
+                mStrokePaint
+            )
         }
     }
 

@@ -18,7 +18,7 @@ import com.lee.pioneer.tools.GlideTools
  */
 class GirlTopItem : LeeViewItem<Content> {
     override fun getItemLayout(): Int {
-        return R.layout.item_girl_top
+        return R.layout.item_girl
     }
 
     override fun openClick(): Boolean {
