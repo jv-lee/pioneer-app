@@ -16,7 +16,7 @@ import com.lee.pioneer.tools.GlideTools
  * @date 2020/4/10
  * @description
  */
-class GirlTopItem : LeeViewItem<Content> {
+class GirlItem : LeeViewItem<Content> {
     override fun getItemLayout(): Int {
         return R.layout.item_girl
     }
