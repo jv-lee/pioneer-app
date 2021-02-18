@@ -26,9 +26,6 @@ import kotlin.math.abs
  * 监听RecyclerView滑动状态 Glide加载模式
  */
 fun RecyclerView.glideEnable() {
-    if (true) {
-        return
-    }
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
         var isDown = false
         var lastPosition = 0

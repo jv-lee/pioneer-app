@@ -6,9 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.extensions.glideEnable
 import com.lee.library.extensions.setButtonTint
-import com.lee.library.utils.LogUtil
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -93,7 +91,6 @@ class RecommendFragment :
 
         //设置数据列表
         binding.rvContainer.run {
-            glideEnable()
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter.proxy
         }

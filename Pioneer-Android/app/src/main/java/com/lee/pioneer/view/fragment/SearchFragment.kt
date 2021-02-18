@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
-import com.lee.library.extensions.glideEnable
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -30,7 +29,6 @@ class SearchFragment :
             }
 
             rvContainer.run {
-                glideEnable()
                 layoutManager = LinearLayoutManager(context)
                 adapter = mAdapter.proxy
             }
