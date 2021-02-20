@@ -4,6 +4,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseFragment
+import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentFeedbackBinding
 import com.lee.pioneer.viewmodel.FeedbackViewModel
@@ -27,6 +28,11 @@ class FeedbackFragment :
             toast(it)
             if (it == getString(R.string.feedback_success)) findNavController().popBackStack()
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        KeyboardUtil.hideSoftInput(requireActivity())
     }
 
     override fun onDestroyView() {
