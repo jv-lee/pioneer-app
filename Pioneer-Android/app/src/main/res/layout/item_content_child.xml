@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_item"
     android:background="@color/colorThemeItem"
+    android:foreground="?attr/selectableItemBackground"
     android:padding="@dimen/padding_item">
 
     <TextView
@@ -15,12 +16,12 @@
         android:ellipsize="end"
         android:includeFontPadding="false"
         android:maxLines="1"
-        tools:text="JackeyLove专访"
         android:textColor="@color/colorThemeAccent"
         android:textSize="@dimen/font_size_small"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="JackeyLove专访" />
 
     <TextView
         android:id="@+id/tv_description"
@@ -30,11 +31,11 @@
         android:ellipsize="end"
         android:includeFontPadding="false"
         android:maxLines="2"
-        tools:text="虽然迟到的JackeyLove专访来了"
         android:textColor="@color/colorThemePrimaryDark"
         android:textSize="@dimen/font_size_small_x"
         app:layout_constraintStart_toStartOf="@id/tv_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="虽然迟到的JackeyLove专访来了" />
 
     <TextView
         android:id="@+id/tv_like_count"

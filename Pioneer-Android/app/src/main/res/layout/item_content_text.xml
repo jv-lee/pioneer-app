@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_item"
     android:background="@color/colorThemeItem"
+    android:foreground="?attr/selectableItemBackground"
     android:padding="@dimen/padding_item"
     tools:background="@color/colorThemeItem">
 
