@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -15,8 +16,10 @@ import androidx.navigation.findNavController
 import com.lee.library.R
 import com.lee.library.extensions.px2sp
 import com.lee.library.extensions.setImageTintCompat
+import com.lee.library.extensions.setSelectableItemForeground
 import com.lee.library.utils.StatusUtil
 import com.lee.library.widget.menu.CustomPopupMenuHelper
+
 
 /**
  * @author jv.lee
@@ -93,6 +96,7 @@ open class TitleToolbar : CustomToolbarLayout {
         buildMenuWindow()
     }
 
+
     private fun buildBackImage() {
         ivBack = ImageView(context)
         ivBack?.run {
@@ -103,6 +107,7 @@ open class TitleToolbar : CustomToolbarLayout {
                     resources.getDimension(R.dimen.toolbar_button_width).toInt()
                 ).apply { gravity = Gravity.START }
             scaleType = ImageView.ScaleType.CENTER
+            setSelectableItemForeground()
             backIcon?.let { setImageTintCompat(it, backIconTint!!) }
             backEnable?.let { visibility = it }
             setOnClickListener {
@@ -142,6 +147,7 @@ open class TitleToolbar : CustomToolbarLayout {
                     resources.getDimension(R.dimen.toolbar_button_width).toInt()
                 ).apply { gravity = Gravity.END }
             scaleType = ImageView.ScaleType.CENTER
+            setSelectableItemForeground()
             menuIcon?.let { setImageTintCompat(it, menuIconTint!!) }
             menuEnable?.let { visibility = it }
             setOnClickListener {

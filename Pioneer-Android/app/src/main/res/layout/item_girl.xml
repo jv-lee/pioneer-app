@@ -7,7 +7,7 @@
     android:layout_marginLeft="@dimen/item_girl_margin_horizontal"
     android:layout_marginTop="@dimen/item_girl_margin_portrait"
     android:layout_marginRight="@dimen/item_girl_margin_horizontal"
-    android:foreground="?attr/selectableItemBackground"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
