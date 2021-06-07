@@ -180,7 +180,8 @@ class LineButtonView : ConstraintLayout {
         tvLeftText.text = text
     }
 
-    fun setRightText(text: String) {
+    fun setRightText(text: String?) {
+        text?:return
         tvRightText.text = text
     }
 

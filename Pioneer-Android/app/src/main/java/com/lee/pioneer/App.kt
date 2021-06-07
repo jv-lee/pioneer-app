@@ -61,9 +61,9 @@ class App : BaseApplication() {
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks)
 
         //初始化内存检测工具
-        if (!LeakCanary.isInAnalyzerProcess(this)) {
-            LeakCanary.install(this)
-        }
+//        if (!LeakCanary.isInAnalyzerProcess(this)) {
+//            LeakCanary.install(this)
+//        }
     }
 
     override fun unInit() {
