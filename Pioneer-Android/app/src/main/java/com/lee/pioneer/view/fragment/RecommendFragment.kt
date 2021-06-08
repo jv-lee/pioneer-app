@@ -179,6 +179,8 @@ class RecommendFragment :
         binding.tvSearch.setBackgroundDrawableCompat(R.drawable.shape_theme_search)
         binding.tvSearch.setTextColorCompat(R.color.colorThemePrimary)
         headerBinding.groupType.setBackgroundColorCompat(R.color.colorThemeItem)
+
+        mAdapter.reInitStatusView()
         mAdapter.notifyDataSetChanged()
     }
 

@@ -105,6 +105,7 @@ class ContentListFragment :
     }
 
     override fun updateDarkView() {
+        mAdapter.reInitStatusView()
         mAdapter.notifyDataSetChanged()
     }
 

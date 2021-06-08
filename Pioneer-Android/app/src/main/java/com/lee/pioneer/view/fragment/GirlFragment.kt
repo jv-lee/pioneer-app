@@ -133,6 +133,7 @@ class GirlFragment :
         headerViewBinding.tvDate.setTextColorCompat(R.color.colorThemePrimaryDark)
         headerViewBinding.tvToday.setTextColorCompat(R.color.colorThemeAccent)
 
+        mAdapter.reInitStatusView()
         mAdapter.notifyDataSetChanged()
     }
 
