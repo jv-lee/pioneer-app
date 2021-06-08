@@ -4,15 +4,17 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.content.res.Resources
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
 import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.library.utils.AdaptScreenUtils
+import com.lee.library.utils.DensityUtil
+import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.databinding.ActivityMainBinding
+import com.lee.pioneer.tools.DarkModeTools
 import com.lee.pioneer.tools.WebViewTools
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
@@ -98,6 +100,17 @@ class MainActivity :
             }
         })
         anim.start()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        DensityUtil.setDensity(this)
+
+        if (DarkModeTools.get().isDarkTheme()) {
+            StatusUtil.setLightStatusIcon(this)
+        } else {
+            StatusUtil.setDarkStatusIcon(this)
+        }
     }
 
 }
