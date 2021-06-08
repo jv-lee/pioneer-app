@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
@@ -94,6 +95,36 @@ fun View.setBackgroundAlphaCompat(alpha: Int) {
     } else {
         background.alpha = alpha
     }
+}
+
+/**
+ * 获取view背景透明度兼容方法
+ */
+fun View.getBackgroundAlphaCompat(): Int {
+    background ?: return 0
+    val mutate = background.mutate()
+    return mutate?.alpha ?: background.alpha
+}
+
+/**
+ * 设置view背景颜色兼容方法
+ */
+fun View.setBackgroundColorCompat(color: Int) {
+    setBackgroundColor(ContextCompat.getColor(context, color))
+}
+
+/**
+ * 设置view背景资源兼容方法
+ */
+fun View.setBackgroundDrawableCompat(drawableId: Int) {
+    background = ContextCompat.getDrawable(context,drawableId)
+}
+
+/**
+ * 设置文本颜色兼容方法
+ */
+fun TextView.setTextColorCompat(color: Int) {
+    setTextColor(ContextCompat.getColor(context,color))
 }
 
 /**
