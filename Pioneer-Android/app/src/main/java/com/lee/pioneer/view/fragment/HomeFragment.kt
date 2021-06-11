@@ -22,7 +22,8 @@ import com.lee.pioneer.viewmodel.TestViewModel
  * @description 主页
  */
 class HomeFragment :
-    BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),DarkViewUpdateTools.ViewCallback {
+    BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
+    DarkViewUpdateTools.ViewCallback {
 
     val testViewModel by lazy { createViewModel(TestViewModel::class.java) }
 
@@ -118,6 +119,12 @@ class HomeFragment :
         binding.tabCategory.setTabTextColors(
             ContextCompat.getColor(requireContext(), R.color.colorThemePrimary),
             ContextCompat.getColor(requireContext(), R.color.colorAccent)
+        )
+        binding.tabCategory.setSelectedTabIndicatorColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorAccent
+            )
         )
     }
 

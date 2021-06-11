@@ -55,6 +55,7 @@
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorFullWidth="false"
                 app:tabMode="scrollable"
+                app:tabIndicatorColor="@color/colorAccent"
                 app:tabRippleColor="@android:color/transparent"
                 app:tabSelectedTextColor="@color/colorAccent"
                 app:tabTextColor="@color/colorThemePrimary" />
