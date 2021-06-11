@@ -56,7 +56,7 @@ class MeFragment :
                 imageLaunch.select(
                     SelectConfig(isMultiple = false, isCompress = false, columnCount = 3)
                 ) {
-                    toast(it[0].path)
+                    toast(it[0].uri.toString())
                 }
             })
             false
@@ -64,7 +64,7 @@ class MeFragment :
         binding.lineLike.setOnLongClickListener {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
                 imageLaunch.select(SelectConfig(isMultiple = true, isCompress = false)) {
-                    toast(it[0].path)
+                    toast(it[0].uri.toString())
                 }
             })
             false
@@ -72,7 +72,7 @@ class MeFragment :
         binding.lineViews.setOnLongClickListener {
             requestPermission(Manifest.permission.CAMERA, {
                 imageLaunch.take(TakeConfig(isCrop = true)) {
-                    toast(it.path)
+                    toast(it.uri.toString())
                 }
             })
             false

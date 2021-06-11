@@ -92,7 +92,7 @@ ext {
             "call-fast-json"      : "com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2",
 
             //图片选择
-            "image-tools"         : "com.github.jv-lee.imagetools:library:1.3.2",
+            "image-tools"         : "com.github.jv-lee.imagetools:library:1.4.1",
 
             //email
             "email"               : "com.sun.mail:android-mail:1.6.0",
