@@ -56,24 +56,6 @@ abstract class BaseNavigationFragment<V : ViewDataBinding, VM : BaseViewModel>(l
         }
     }
 
-    /**
-     * 显示底部导航栏
-     */
-    open fun showNavigation() {
-        if (activity is BaseNavigationActivity<*, *>) {
-            (activity as BaseNavigationActivity<*, *>).showView()
-        }
-    }
-
-    /**
-     * 隐藏底部导航栏
-     */
-    open fun hideNavigation() {
-        if (activity is BaseNavigationActivity<*, *>) {
-            (activity as BaseNavigationActivity<*, *>).hideView()
-        }
-    }
-
     open fun setWebBackEvent(web: WebView) {
         web.isFocusable = true
         web.isFocusableInTouchMode = true
