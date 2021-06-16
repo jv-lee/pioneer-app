@@ -8,27 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import androidx.activity.OnBackPressedCallback
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import com.lee.library.R
+import com.lee.library.extensions.getVmClass
+import com.lee.library.mvvm.base.BaseViewModel
 
 /**
  * @author jv.lee
  * @date 2020/3/30
  * @description
  */
-abstract class BaseNavigationFragment(val layoutId: Int) :
-    BaseFragment(layoutId) {
+abstract class BaseVMNavigationFragment<V : ViewDataBinding, VM : BaseViewModel>(layoutId: Int) :
+    BaseVMFragment<V, VM>(layoutId) {
 
     private var isNavigationViewInit = false // 记录是否初始化view
     private var firstTime: Long = 0
-    private var rootView: View? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        rootView = LayoutInflater.from(context).inflate(layoutId, null, false)
-    }
-
-    override fun createView(inflater: LayoutInflater, container: ViewGroup?): View {
-        return super.createView(inflater, container)!!
+        //设置viewBinding
+        binding = DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, null, false)
     }
 
     override fun onCreateView(
@@ -36,20 +37,22 @@ abstract class BaseNavigationFragment(val layoutId: Int) :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return rootView
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (!isNavigationViewInit) {
-            navigationInit(view, savedInstanceState)
+            //设置viewModel
+            try {
+                viewModel = ViewModelProvider(this).get(getVmClass(this))
+            } catch (e: Exception) {
+            }
+            intentParams(arguments, savedInstanceState)
+            bindView()
+            bindData()
+            initFailedViewModel()
+            isNavigationViewInit = true
         }
-    }
-
-    open fun navigationInit(view: View, savedInstanceState: Bundle?) {
-        intentParams(arguments, savedInstanceState)
-        bindView()
-        bindData()
-        isNavigationViewInit = true
     }
 
     open fun setWebBackEvent(web: WebView) {

@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setBackgroundDrawableCompat
 import com.lee.library.extensions.setButtonTint
@@ -29,7 +29,7 @@ import com.lee.pioneer.viewmodel.RecommendViewModel
  * @description 推荐页面
  */
 class RecommendFragment :
-    BaseNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),DarkViewUpdateTools.ViewCallback {
+    BaseVMNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),DarkViewUpdateTools.ViewCallback {
 
     private val headerBinding by lazy {
         DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(

@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.library.utils.TimeUtil
@@ -29,7 +29,7 @@ import kotlin.collections.ArrayList
  * @description 主页妹子板块
  */
 class GirlFragment :
-    BaseNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl),DarkViewUpdateTools.ViewCallback {
+    BaseVMNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl),DarkViewUpdateTools.ViewCallback {
 
     private val linearLayoutManager by lazy { LinearLayoutManager(context) }
     private val mAdapter by lazy { GirlAdapter(requireContext(), ArrayList()) }

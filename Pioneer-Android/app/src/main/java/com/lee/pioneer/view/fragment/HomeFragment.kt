@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.core.UiPagerAdapter
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setBackgroundDrawableCompat
 import com.lee.library.extensions.setTextColorCompat
@@ -22,7 +22,7 @@ import com.lee.pioneer.viewmodel.TestViewModel
  * @description 主页
  */
 class HomeFragment :
-    BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
+    BaseVMNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
     DarkViewUpdateTools.ViewCallback {
 
     val testViewModel by lazy { createViewModel(TestViewModel::class.java) }

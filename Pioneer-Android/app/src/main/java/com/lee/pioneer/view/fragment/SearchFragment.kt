@@ -3,7 +3,7 @@ package com.lee.pioneer.view.fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -17,7 +17,7 @@ import com.lee.pioneer.viewmodel.SearchViewModel
  * @description 搜索页
  */
 class SearchFragment :
-    BaseNavigationFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
+    BaseVMNavigationFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
 
     private val mAdapter by lazy { ContentAdapter(requireContext(), ArrayList()) }
 

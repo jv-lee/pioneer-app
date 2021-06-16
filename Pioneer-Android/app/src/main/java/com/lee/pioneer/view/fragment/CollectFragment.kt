@@ -1,9 +1,12 @@
 package com.lee.pioneer.view.fragment
 
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.extensions.binding
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -17,8 +20,10 @@ import com.lee.pioneer.viewmodel.CollectViewModel
  * @description MeFragment ChildPage -> 收藏页面
  */
 class CollectFragment :
-    BaseNavigationFragment<FragmentCollectBinding, CollectViewModel>(R.layout.fragment_collect) {
+    BaseNavigationFragment(R.layout.fragment_collect) {
 
+    private val binding by binding(FragmentCollectBinding::bind)
+    private val viewModel by viewModels<CollectViewModel>()
     private val mAdapter by lazy { ContentChildAdapter(requireContext(), ArrayList()) }
 
     override fun bindView() {

@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.imagetools.select.ImageLaunch
 import com.imagetools.select.entity.SelectConfig
 import com.imagetools.select.entity.TakeConfig
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.dialog.ChoiceDialog
 import com.lee.library.dialog.core.ConfirmListener
 import com.lee.library.extensions.setBackgroundColorCompat
@@ -24,7 +24,7 @@ import com.lee.pioneer.viewmodel.MeViewModel
  * @description 我的页面
  */
 class MeFragment :
-    BaseNavigationFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
+    BaseVMNavigationFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
     View.OnClickListener,DarkViewUpdateTools.ViewCallback {
 
     private val imageLaunch = ImageLaunch(this)

@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
@@ -23,7 +23,7 @@ private const val ARG_PARAM_TYPE = "arg_param_type"
  * @description 内容列表页
  */
 class ContentListFragment :
-    BaseNavigationFragment<FragmentContentListBinding, ContentListViewModel>(R.layout.fragment_content_list),
+    BaseVMNavigationFragment<FragmentContentListBinding, ContentListViewModel>(R.layout.fragment_content_list),
     DarkViewUpdateTools.ViewCallback {
     private var type: String? = null
     private val mAdapter by lazy { ContentAdapter(requireContext(), ArrayList()) }
