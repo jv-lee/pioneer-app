@@ -216,7 +216,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(var layoutI
     fun FragmentActivity.fragmentTransaction(containerId: Int, fragment: Fragment?) {
         fragment ?: return
         val transaction = supportFragmentManager.beginTransaction()
-            .setCustomAnimations(R.anim.slide_right_in, R.anim.default_in_out)
+            .setCustomAnimations(R.anim.slide_right_in, R.anim.slide_default)
         for (tag in supportFragmentManager.fragments) {
             transaction.hide(tag)
         }

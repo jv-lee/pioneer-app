@@ -8,57 +8,66 @@
         android:name="com.lee.pioneer.MainFragment"
         tools:layout="@layout/fragment_main">
 
+        <!--
+        enterAnim:新页面进入动画
+        exitAnim:老页面退出动画
+        popEnterAnim:老页面进入动画
+        popExitAnim:新页面退出动画
+        -->
         <action
             android:id="@+id/action_main_to_contentDetails"
             app:destination="@id/contentDetails"
             app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_right_out" />
+
         <action
             android:id="@+id/action_main_to_search"
             app:destination="@id/search"
             app:enterAnim="@anim/slide_bottom_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_bottom_out" />
 
+        <!-- 动画效果 ios 进入退出联动滑动 -->
         <action
             android:id="@+id/action_main_to_message"
             app:destination="@id/message"
             app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_left_out"
+            app:popEnterAnim="@anim/slide_left_in"
             app:popExitAnim="@anim/slide_right_out" />
 
+        <!-- 动画效果 google系统应用 整个视图缩放进入退出 体验极佳 -->
         <action
             android:id="@+id/action_main_to_like"
             app:destination="@id/like"
-            app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
-            app:popExitAnim="@anim/slide_right_out" />
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/alpha_default"
+            app:popEnterAnim="@anim/zoom_out"
+            app:popExitAnim="@anim/alpha_default" />
 
         <action
             android:id="@+id/action_main_to_history"
             app:destination="@id/history"
             app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_right_out" />
         <action
             android:id="@+id/action_main_to_collect"
             app:destination="@id/collect"
             app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_right_out" />
         <action
             android:id="@+id/action_main_to_feedback"
             app:destination="@id/feedback"
             app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_right_out" />
 
     </fragment>
@@ -89,8 +98,8 @@
             android:id="@+id/action_search_to_contentDetails"
             app:destination="@id/contentDetails"
             app:enterAnim="@anim/slide_bottom_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_bottom_out" />
     </fragment>
 
@@ -115,8 +124,8 @@
             android:id="@+id/action_history_to_contentDetails"
             app:destination="@id/contentDetails"
             app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_right_out" />
     </fragment>
 
@@ -129,8 +138,8 @@
             android:id="@+id/action_collect_to_contentDetails"
             app:destination="@id/contentDetails"
             app:enterAnim="@anim/slide_right_in"
-            app:exitAnim="@anim/default_in_out"
-            app:popEnterAnim="@anim/default_in_out"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_right_out" />
     </fragment>
 
