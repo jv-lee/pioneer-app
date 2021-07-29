@@ -44,7 +44,7 @@
             android:id="@+id/action_main_to_like"
             app:destination="@id/like"
             app:enterAnim="@anim/zoom_in"
-            app:exitAnim="@anim/alpha_default_show"
+            app:exitAnim="@anim/zoom_exit"
             app:popEnterAnim="@anim/zoom_out"
             app:popExitAnim="@anim/alpha_default_hide" />
 
