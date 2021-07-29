@@ -8,6 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/const_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorThemeBackground"
@@ -54,6 +55,7 @@
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorFullWidth="false"
                 app:tabMode="scrollable"
+                app:tabIndicatorColor="@color/colorAccent"
                 app:tabRippleColor="@android:color/transparent"
                 app:tabSelectedTextColor="@color/colorAccent"
                 app:tabTextColor="@color/colorThemePrimary" />

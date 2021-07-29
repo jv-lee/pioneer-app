@@ -1,18 +1,23 @@
 package com.lee.pioneer.view.fragment
 
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.extensions.setBackgroundColorCompat
+import com.lee.library.extensions.setBackgroundDrawableCompat
 import com.lee.library.extensions.setButtonTint
+import com.lee.library.extensions.setTextColorCompat
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
 import com.lee.pioneer.databinding.FragmentRecommendBinding
 import com.lee.pioneer.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.model.entity.Banner
+import com.lee.pioneer.tools.DarkViewUpdateTools
 import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.view.adapter.resource.RecommendLoadResource
 import com.lee.pioneer.view.widget.BannerViewHolder
@@ -24,7 +29,7 @@ import com.lee.pioneer.viewmodel.RecommendViewModel
  * @description 推荐页面
  */
 class RecommendFragment :
-    BaseNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend) {
+    BaseVMNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),DarkViewUpdateTools.ViewCallback {
 
     private val headerBinding by lazy {
         DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(
@@ -35,6 +40,8 @@ class RecommendFragment :
     private var type = "views"
 
     override fun bindView() {
+        DarkViewUpdateTools.bindViewCallback(this, this)
+
         //设置toolbar 搜索跳转
         binding.tvSearch.setOnClickListener {
             findNavController().navigate(R.id.action_main_to_search)
@@ -164,6 +171,17 @@ class RecommendFragment :
     override fun onPause() {
         super.onPause()
         headerBinding.banner.pause()
+    }
+
+    override fun updateDarkView() {
+        binding.constContainer.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeBackground))
+        binding.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeItem))
+        binding.tvSearch.setBackgroundDrawableCompat(R.drawable.shape_theme_search)
+        binding.tvSearch.setTextColorCompat(R.color.colorThemePrimary)
+        headerBinding.groupType.setBackgroundColorCompat(R.color.colorThemeItem)
+
+        mAdapter.reInitStatusView()
+        mAdapter.notifyDataSetChanged()
     }
 
 }

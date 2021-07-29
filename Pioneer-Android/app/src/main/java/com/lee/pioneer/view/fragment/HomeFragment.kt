@@ -1,13 +1,18 @@
 package com.lee.pioneer.view.fragment
 
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.core.UiPagerAdapter
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.extensions.setBackgroundColorCompat
+import com.lee.library.extensions.setBackgroundDrawableCompat
+import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
+import com.lee.pioneer.tools.DarkViewUpdateTools
 import com.lee.pioneer.viewmodel.HomeViewModel
 import com.lee.pioneer.viewmodel.TestViewModel
 
@@ -17,7 +22,8 @@ import com.lee.pioneer.viewmodel.TestViewModel
  * @description 主页
  */
 class HomeFragment :
-    BaseNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
+    BaseVMNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
+    DarkViewUpdateTools.ViewCallback {
 
     val testViewModel by lazy { createViewModel(TestViewModel::class.java) }
 
@@ -30,6 +36,8 @@ class HomeFragment :
     }
 
     override fun bindView() {
+        DarkViewUpdateTools.bindViewCallback(this, this)
+
         binding.run {
             status.setStatus(StatusLayout.STATUS_LOADING)
             status.setOnReloadListener {
@@ -98,6 +106,26 @@ class HomeFragment :
         super.onDestroyView()
         //清除view引用
         binding.vpContainer.removeAllViews()
+    }
+
+    override fun updateDarkView() {
+        binding.constContainer.setBackgroundColorCompat(R.color.colorThemeBackground)
+        binding.toolbar.setBackgroundColorCompat(R.color.colorThemeItem)
+
+        binding.tvSearch.setBackgroundDrawableCompat(R.drawable.shape_theme_search)
+        binding.tvSearch.setTextColorCompat(R.color.colorThemePrimary)
+
+        binding.tabCategory.setBackgroundColorCompat(R.color.colorThemeItem)
+        binding.tabCategory.setTabTextColors(
+            ContextCompat.getColor(requireContext(), R.color.colorThemePrimary),
+            ContextCompat.getColor(requireContext(), R.color.colorAccent)
+        )
+        binding.tabCategory.setSelectedTabIndicatorColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorAccent
+            )
+        )
     }
 
 }

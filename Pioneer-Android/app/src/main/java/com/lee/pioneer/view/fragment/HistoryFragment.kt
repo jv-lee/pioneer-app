@@ -3,7 +3,7 @@ package com.lee.pioneer.view.fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants
@@ -17,7 +17,7 @@ import com.lee.pioneer.viewmodel.HistoryViewModel
  * @description MeFragment ChildPage -> 浏览记录页面
  */
 class HistoryFragment :
-    BaseNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(R.layout.fragment_history) {
+    BaseVMNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(R.layout.fragment_history) {
 
     private val mAdapter by lazy { ContentChildAdapter(requireContext(), ArrayList()) }
 

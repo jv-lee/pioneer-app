@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.*
+import com.lee.library.extensions.getVmClass
+import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.utils.ActivityUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,8 +25,11 @@ import kotlinx.coroutines.cancel
  * @date 2019/8/16.
  * @description
  */
-abstract class BaseFragment(private val resourceId: Int? = 0) : Fragment(),
-    CoroutineScope by CoroutineScope(Dispatchers.Main) {
+abstract class BaseVMFragment<V : ViewDataBinding, VM : BaseViewModel>(var layoutId: Int) :
+    Fragment(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
+
+    protected lateinit var binding: V
+    protected lateinit var viewModel: VM
 
     private var fistVisible = true
 
@@ -51,14 +57,28 @@ abstract class BaseFragment(private val resourceId: Int? = 0) : Fragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return createView(inflater, container)
+        //设置viewBinding
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //设置viewModel
+        try {
+            viewModel = ViewModelProvider(this).get(getVmClass(this))
+        } catch (e: Exception) {
+        }
         intentParams(arguments, savedInstanceState)
         bindView()
         bindData()
+        initFailedViewModel()
+    }
+
+    protected fun initFailedViewModel() {
+        viewModel.failedEvent.observe(this as LifecycleOwner, Observer {
+            toast(it.message)
+        })
     }
 
     override fun onResume() {
@@ -98,11 +118,6 @@ abstract class BaseFragment(private val resourceId: Int? = 0) : Fragment(),
      * 初始化参数传递
      */
     open fun intentParams(arguments: Bundle?, savedInstanceState: Bundle?) {}
-
-    open fun createView(inflater: LayoutInflater, container: ViewGroup?): View? {
-        if (resourceId == null || resourceId == 0) throw RuntimeException("fragment createView() not override && constructor params resourceId == 0")
-        return inflater.inflate(resourceId, container, false)
-    }
 
     /**
      * 设置view基础配置
@@ -174,8 +189,8 @@ abstract class BaseFragment(private val resourceId: Int? = 0) : Fragment(),
         successCall: () -> Unit,
         failedCall: (String) -> Unit = {}
     ) {
-        this@BaseFragment.permissionSuccessCall = successCall
-        this@BaseFragment.permissionFailedCall = failedCall
+        this@BaseVMFragment.permissionSuccessCall = successCall
+        this@BaseVMFragment.permissionFailedCall = failedCall
         permissionLauncher.launch(permission)
     }
 
@@ -184,8 +199,8 @@ abstract class BaseFragment(private val resourceId: Int? = 0) : Fragment(),
         successCall: () -> Unit,
         failedCall: (String) -> Unit = {}
     ) {
-        this@BaseFragment.permissionSuccessCall = successCall
-        this@BaseFragment.permissionFailedCall = failedCall
+        this@BaseVMFragment.permissionSuccessCall = successCall
+        this@BaseVMFragment.permissionFailedCall = failedCall
         permissionsLauncher.launch(permission)
     }
 

@@ -1,7 +1,6 @@
 package com.lee.pioneer.view.fragment
 
-import androidx.lifecycle.ViewModel
-import com.lee.library.base.BaseFragment
+import com.lee.library.base.BaseVMFragment
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMessageBinding
@@ -12,7 +11,7 @@ import com.lee.pioneer.databinding.FragmentMessageBinding
  * @description MeFragment ChildPage -> 消息中心的页面
  */
 class MessageFragment :
-    BaseFragment<FragmentMessageBinding, BaseViewModel>(R.layout.fragment_message) {
+    BaseVMFragment<FragmentMessageBinding, BaseViewModel>(R.layout.fragment_message) {
 
     override fun bindView() {
 

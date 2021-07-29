@@ -176,13 +176,22 @@ class LineButtonView : ConstraintLayout {
         }
     }
 
-    fun setLeftText(text: String) {
+    fun setLeftText(text: String?) {
+        text ?: return
         tvLeftText.text = text
     }
 
     fun setRightText(text: String?) {
-        text?:return
+        text ?: return
         tvRightText.text = text
+    }
+
+    fun getLeftTextView(): TextView? {
+        return tvLeftText
+    }
+
+    fun getRightTextView(): TextView? {
+        return tvRightText
     }
 
 }

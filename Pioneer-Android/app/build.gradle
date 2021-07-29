@@ -86,6 +86,9 @@ android {
     buildFeatures {
         dataBinding = true
     }
+    viewBinding{
+        enabled = true
+    }
     kapt {
         generateStubs = true
     }

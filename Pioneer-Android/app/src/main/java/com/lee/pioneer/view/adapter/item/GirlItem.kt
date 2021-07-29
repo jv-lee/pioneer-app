@@ -2,10 +2,12 @@ package com.lee.pioneer.view.adapter.item
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
 import com.lee.library.utils.LogUtil
+import com.lee.library.widget.ShadowConstraintLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
 import com.lee.pioneer.model.entity.Content
@@ -43,6 +45,8 @@ class GirlItem : LeeViewItem<Content> {
                 GlideTools.get().loadPlaceholderImage(HttpConstant.getCropImagePath(it), R.drawable.shape_theme_placeholder, getView(R.id.iv_picture))
             }
             getView<TextView>(R.id.tv_description).text = entity?.desc
+            getView<TextView>(R.id.tv_description).setTextColor(ContextCompat.getColor(holder.convertView?.context!!,R.color.colorThemePrimary))
+            getView<ShadowConstraintLayout>(R.id.shadow_container).setShadowFillColor(ContextCompat.getColor(holder.convertView?.context!!,R.color.colorThemeItem))
         }
     }
 

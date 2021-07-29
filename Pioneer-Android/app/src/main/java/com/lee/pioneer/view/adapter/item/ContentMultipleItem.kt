@@ -5,6 +5,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lee.library.adapter.LeeViewHolder
 import com.lee.library.adapter.listener.LeeViewItem
+import com.lee.library.extensions.setBackgroundColorCompat
+import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.HttpConstant
@@ -51,6 +53,16 @@ class ContentMultipleItem : LeeViewItem<Content> {
             val tvLike = getView<TextView>(R.id.tv_like)
             val tvViews = getView<TextView>(R.id.tv_view)
             val tvTime = getView<TextView>(R.id.tv_time)
+
+            holder.itemView.setBackgroundColorCompat(R.color.colorThemeItem)
+            tvAuthor.setTextColorCompat(R.color.colorPrimaryDark)
+            tvCategory.setTextColorCompat(R.color.colorPrimary)
+            tvTitle.setTextColorCompat(R.color.colorAccent)
+            tvDescription.setTextColorCompat(R.color.colorPrimaryDark)
+            tvLike.setTextColorCompat(R.color.colorPrimary)
+            tvViews.setTextColorCompat(R.color.colorPrimary)
+            tvTime.setTextColorCompat(R.color.colorPrimaryDark)
+
             entity?.run {
                 //设置图片
                 GlideTools.get().loadPlaceholderImage(
