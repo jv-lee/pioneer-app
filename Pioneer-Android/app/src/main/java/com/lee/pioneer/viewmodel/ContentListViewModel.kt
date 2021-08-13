@@ -61,10 +61,8 @@ class ContentListViewModel : BaseViewModel() {
      */
     fun insertContentHistoryToDB(content: Content) {
         launchMain {
-            val extends = launchIO {
-                DataBaseRepository.get().historyDao.isCollect(content._id)
-            }
             launchIO {
+                val extends = DataBaseRepository.get().historyDao.isCollect(content._id)
                 DataBaseRepository.get().historyDao
                     .insert(
                         ContentHistory.parse(

@@ -10,8 +10,6 @@ import com.lee.pioneer.model.entity.*
 import com.lee.pioneer.model.repository.ApiRepository
 import com.lee.pioneer.model.repository.CacheRepository
 import com.lee.pioneer.model.repository.DataBaseRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,10 +31,8 @@ class RecommendViewModel : ResponseViewModel() {
      */
     fun insertContentHistoryToDB(content: Content) {
         launchMain {
-            val extends = launchIO {
-                DataBaseRepository.get().historyDao.isCollect(content._id)
-            }
             launchIO {
+                val extends = DataBaseRepository.get().historyDao.isCollect(content._id)
                 DataBaseRepository.get().historyDao
                     .insert(
                         ContentHistory.parse(
