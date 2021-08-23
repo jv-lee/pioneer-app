@@ -48,9 +48,9 @@ class CollectFragment :
 
     override fun bindData() {
         viewModel.run {
-            contentData.observe(this@CollectFragment, Observer {
+            contentData.observe(this@CollectFragment, {
                 mAdapter.submitData(it, limit = 0)
-            }, Observer {
+            }, {
                 toast(it)
             })
 

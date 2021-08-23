@@ -85,10 +85,10 @@ class ContentListFragment :
     override fun bindData() {
         viewModel.run {
             //列表数据更新
-            contentListData.observe(this@ContentListFragment, Observer {
+            contentListData.observe(this@ContentListFragment, {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
-            }, Observer {
+            }, {
                 toast(it)
                 binding.refresh.isRefreshing = false
                 mAdapter.submitFailed()

@@ -54,7 +54,7 @@ class HomeFragment :
     override fun bindData() {
         viewModel.run {
             //获取分类数据 构建分类tab 及 fragment
-            categoryData.observe(this@HomeFragment, Observer { it ->
+            categoryData.observe(this@HomeFragment, { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
                 vpAdapter.tabList.clear()
                 vpAdapter.fragmentList.clear()
@@ -66,7 +66,7 @@ class HomeFragment :
 
                 vpAdapter.notifyDataSetChanged()
                 binding.vpContainer.offscreenPageLimit = vpAdapter.count - 1
-            }, Observer {
+            }, {
                 toast(it)
                 if (vpAdapter.tabList.isEmpty()) {
                     binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)

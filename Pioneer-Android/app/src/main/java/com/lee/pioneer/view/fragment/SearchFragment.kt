@@ -55,9 +55,9 @@ class SearchFragment :
         binding.vm = viewModel
 
         viewModel.apply {
-            contentListObservable.observe(this@SearchFragment, Observer {
+            contentListObservable.observe(this@SearchFragment, {
                 mAdapter.submitData(it)
-            }, Observer {
+            }, {
                 mAdapter.submitFailed()
             })
 
