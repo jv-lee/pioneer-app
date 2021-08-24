@@ -1,8 +1,6 @@
 package com.lee.pioneer.view.fragment
 
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseVMNavigationFragment
@@ -27,13 +25,7 @@ class HomeFragment :
 
     val testViewModel by lazy { createViewModel(TestViewModel::class.java) }
 
-    private val vpAdapter by lazy {
-        UiPagerAdapter(
-            childFragmentManager,
-            ArrayList<Fragment>(),
-            ArrayList<String>()
-        )
-    }
+    private val vpAdapter by lazy { UiPagerAdapter(childFragmentManager, arrayListOf(), arrayListOf()) }
 
     override fun bindView() {
         DarkViewUpdateTools.bindViewCallback(this, this)

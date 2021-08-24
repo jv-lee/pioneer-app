@@ -1,8 +1,8 @@
 package com.lee.pioneer.view.fragment
 
+import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
@@ -29,16 +29,18 @@ import com.lee.pioneer.viewmodel.RecommendViewModel
  * @description 推荐页面
  */
 class RecommendFragment :
-    BaseVMNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),DarkViewUpdateTools.ViewCallback {
+    BaseVMNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),
+    DarkViewUpdateTools.ViewCallback {
 
     private val headerBinding by lazy {
         DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(
             layoutInflater, R.layout.layout_recommend_header, null, false
         )
     }
-    private val mAdapter by lazy { ContentAdapter(requireContext(), ArrayList()) }
+    private val mAdapter by lazy { ContentAdapter(requireContext(), arrayListOf()) }
     private var type = "views"
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun bindView() {
         DarkViewUpdateTools.bindViewCallback(this, this)
 
@@ -173,9 +175,20 @@ class RecommendFragment :
         headerBinding.banner.pause()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun updateDarkView() {
-        binding.constContainer.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeBackground))
-        binding.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeItem))
+        binding.constContainer.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorThemeBackground
+            )
+        )
+        binding.toolbar.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorThemeItem
+            )
+        )
         binding.tvSearch.setBackgroundDrawableCompat(R.drawable.shape_theme_search)
         binding.tvSearch.setTextColorCompat(R.color.colorThemePrimary)
         headerBinding.groupType.setBackgroundColorCompat(R.color.colorThemeItem)

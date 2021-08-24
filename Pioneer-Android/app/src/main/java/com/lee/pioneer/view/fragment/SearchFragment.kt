@@ -19,7 +19,7 @@ import com.lee.pioneer.viewmodel.SearchViewModel
 class SearchFragment :
     BaseVMNavigationFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
 
-    private val mAdapter by lazy { ContentAdapter(requireContext(), ArrayList()) }
+    private val mAdapter by lazy { ContentAdapter(requireContext(), arrayListOf()) }
 
     override fun bindView() {
         binding.run {

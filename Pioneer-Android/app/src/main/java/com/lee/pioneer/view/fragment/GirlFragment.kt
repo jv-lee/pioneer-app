@@ -3,7 +3,6 @@ package com.lee.pioneer.view.fragment
 import android.annotation.SuppressLint
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
@@ -21,7 +20,6 @@ import com.lee.pioneer.view.adapter.GirlAdapter
 import com.lee.pioneer.viewmodel.GirlViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @author jv.lee
@@ -29,10 +27,13 @@ import kotlin.collections.ArrayList
  * @description 主页妹子板块
  */
 class GirlFragment :
-    BaseVMNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl),DarkViewUpdateTools.ViewCallback {
+    BaseVMNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl),
+    DarkViewUpdateTools.ViewCallback {
+
+    private val mAdapter by lazy { GirlAdapter(requireContext(), arrayListOf()) }
 
     private val linearLayoutManager by lazy { LinearLayoutManager(context) }
-    private val mAdapter by lazy { GirlAdapter(requireContext(), ArrayList()) }
+
     private val headerViewBinding by lazy {
         DataBindingUtil.inflate<LayoutGirlHeaderBinding>(
             layoutInflater, R.layout.layout_girl_header, null, false
@@ -122,6 +123,7 @@ class GirlFragment :
         viewModel.getGirlContentData(LoadStatus.INIT)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun updateDarkView() {
         val alpha = binding.statusBar.getBackgroundAlphaCompat()
         binding.statusBar.setBackgroundColorCompat(R.color.colorThemeItem)

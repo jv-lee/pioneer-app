@@ -1,6 +1,5 @@
 package com.lee.pioneer.view.fragment
 
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.base.BaseVMNavigationFragment
@@ -19,7 +18,7 @@ import com.lee.pioneer.viewmodel.HistoryViewModel
 class HistoryFragment :
     BaseVMNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(R.layout.fragment_history) {
 
-    private val mAdapter by lazy { ContentChildAdapter(requireContext(), ArrayList()) }
+    private val mAdapter by lazy { ContentChildAdapter(requireContext(), arrayListOf()) }
 
     override fun bindView() {
         binding.rvContainer.run {

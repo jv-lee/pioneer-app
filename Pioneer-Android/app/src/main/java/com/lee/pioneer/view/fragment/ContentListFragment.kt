@@ -1,11 +1,12 @@
 package com.lee.pioneer.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.extensions.arguments
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R
@@ -25,19 +26,14 @@ private const val ARG_PARAM_TYPE = "arg_param_type"
 class ContentListFragment :
     BaseVMNavigationFragment<FragmentContentListBinding, ContentListViewModel>(R.layout.fragment_content_list),
     DarkViewUpdateTools.ViewCallback {
-    private var type: String? = null
-    private val mAdapter by lazy { ContentAdapter(requireContext(), ArrayList()) }
+    private val type by arguments<String>(ARG_PARAM_TYPE)
+    private val mAdapter by lazy { ContentAdapter(requireContext(), arrayListOf()) }
 
     companion object {
         @JvmStatic
         fun newInstance(type: String) = ContentListFragment().apply {
             arguments = Bundle().apply { putString(ARG_PARAM_TYPE, type) }
         }
-    }
-
-    override fun intentParams(arguments: Bundle?, savedInstanceState: Bundle?) {
-        super.intentParams(arguments, savedInstanceState)
-        arguments?.let { type = it.getString(ARG_PARAM_TYPE) }
     }
 
     override fun bindView() {
@@ -52,7 +48,7 @@ class ContentListFragment :
 
             refresh.setOnRefreshListener {
                 mAdapter.openLoadMore()
-                type?.let { viewModel.loadListData(LoadStatus.REFRESH, it) }
+                viewModel.loadListData(LoadStatus.REFRESH, type)
             }
 
         }
@@ -62,15 +58,15 @@ class ContentListFragment :
             initStatusView()
             pageLoading()
             setAutoLoadMoreListener {
-                type?.let { viewModel.loadListData(LoadStatus.LOAD_MORE, it) }
+                viewModel.loadListData(LoadStatus.LOAD_MORE, type)
             }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {
-                    type?.let { viewModel.loadListData(LoadStatus.RELOAD, it) }
+                    viewModel.loadListData(LoadStatus.RELOAD, type)
                 }
 
                 override fun pageReload() {
-                    type?.let { viewModel.loadListData(LoadStatus.REFRESH, it) }
+                    viewModel.loadListData(LoadStatus.REFRESH, type)
                 }
             })
             setOnItemClickListener { _, entity, _ ->
@@ -95,15 +91,16 @@ class ContentListFragment :
             })
 
             //首个tab页面默认加载
-            type?.let { if (type.equals("Android")) viewModel.loadListData(LoadStatus.INIT, it) }
+            if (type == "Android") viewModel.loadListData(LoadStatus.INIT, type)
         }
     }
 
     override fun lazyLoad() {
         //非首个tab页面使用懒加载
-        type?.let { if (!type.equals("Android")) viewModel.loadListData(LoadStatus.INIT, it) }
+        if (type != "Android") viewModel.loadListData(LoadStatus.INIT, type)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun updateDarkView() {
         mAdapter.reInitStatusView()
         mAdapter.notifyDataSetChanged()

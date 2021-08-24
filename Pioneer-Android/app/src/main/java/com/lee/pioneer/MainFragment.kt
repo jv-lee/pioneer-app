@@ -30,6 +30,7 @@ class MainFragment :
             titles
         )
     }
+
     private val fragments by lazy {
         listOf<Fragment>(
             HomeFragment(),
@@ -38,6 +39,7 @@ class MainFragment :
             MeFragment()
         )
     }
+
     private val titles by lazy {
         listOf(
             getString(R.string.nav_home),
