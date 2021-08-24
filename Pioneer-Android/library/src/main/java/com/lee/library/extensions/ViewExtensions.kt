@@ -1,10 +1,14 @@
 package com.lee.library.extensions
 
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.text.*
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
@@ -17,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lee.library.R
+import com.lee.library.utils.StatusUtil
 import kotlin.math.abs
 
 /**
@@ -89,10 +94,10 @@ fun View.setBackgroundSelectorTintCompat(selectorId: Int) {
  */
 fun View.setBackgroundAlphaCompat(alpha: Int) {
     background ?: return
-    val mutate = background.mutate()
-    if (mutate != null) {
-        mutate.alpha = alpha
-    } else {
+    val mutate: Drawable? = background.mutate()
+    mutate?.let {
+        it.alpha = alpha
+    } ?: kotlin.run {
         background.alpha = alpha
     }
 }
@@ -375,3 +380,82 @@ fun EditText.setBankCodeTextWatcher(lengthLimit: Int = 16) {
 
     })
 }
+
+/**
+ * 扩展容器类设置Marin方法
+ */
+fun ViewGroup.setMargin(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0) {
+    if (layoutParams is ViewGroup.MarginLayoutParams) {
+        (layoutParams as ViewGroup.MarginLayoutParams).run {
+            setMargins(
+                if (left == 0) leftMargin else left,
+                if (top == 0) topMargin else top,
+                if (right == 0) rightMargin else right,
+                if (bottom == 0) bottomMargin else bottom
+            )
+        }
+    }
+}
+
+/**
+ * 沉浸式状态栏 设置adjustResize 后 解决软键盘无法正常顶起解决方式
+ */
+fun ViewGroup.adjustResizeStatusBar(
+    window: Window,
+    marginValue: Int = StatusUtil.getStatusBarHeight(context)
+) {
+    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    fitsSystemWindows = true
+    setMargin(top = -marginValue)
+}
+
+/**
+ * RecyclerView 反转布局方向
+ */
+fun RecyclerView.reverseLayout() {
+    layoutManager?.takeIf { it is LinearLayoutManager }.let {
+        (it as LinearLayoutManager).reverseLayout = true
+    }
+}
+
+/**
+ * RecyclerView 多数据列表快速滑动到顶部
+ */
+fun RecyclerView.smoothScrollToTop() {
+    val itemCount = adapter?.itemCount ?: return
+    if (itemCount == 0) return
+
+    if (layoutManager is LinearLayoutManager &&
+        (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() == 0
+    ) {
+        scrollToPosition(0)
+        return
+    }
+
+    scrollToPosition(5)
+    postDelayed({ smoothScrollToPosition(0) }, 50)
+}
+
+/**
+ * 监听键盘弹起
+ */
+fun Window.keyboardObserver(openObserver: () -> Unit = {}, closeObserver: () -> Unit = {}) {
+    var isOpen = false
+    val keyboardHeight = 200
+    decorView.viewTreeObserver.addOnGlobalLayoutListener {
+        val rect = android.graphics.Rect()
+        decorView.getWindowVisibleDisplayFrame(rect)
+
+        val height: Int = context.resources.displayMetrics.heightPixels
+        // 获取键盘抬高的高度
+        val diff: Int = height - rect.height()
+        if (diff > keyboardHeight && !isOpen) {
+            isOpen = true
+            openObserver()
+        } else if (diff < keyboardHeight && isOpen) {
+            isOpen = false
+            closeObserver()
+        }
+    }
+}
+
