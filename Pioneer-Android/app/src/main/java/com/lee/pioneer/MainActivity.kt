@@ -12,7 +12,6 @@ import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
 import com.lee.library.extensions.banBackEvent
 import com.lee.library.extensions.binding
-import com.lee.library.extensions.unBanBackEvent
 import com.lee.library.utils.DensityUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.databinding.ActivityMainBinding
@@ -32,6 +31,8 @@ class MainActivity : BaseActivity() {
 
     private val binding by binding(ActivityMainBinding::inflate)
 
+    private val backCallback by lazy { banBackEvent() }
+
     private val mainLayout by lazy {
         LayoutInflater.from(this@MainActivity)
             .inflate(R.layout.layout_main, null, false)
@@ -49,9 +50,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun bindView() {
-        //由于activity.binding扩展函数机制加上当前页面view操作时间靠后，需要提前手动调用binding初始化view .
+        backCallback
         binding
-        banBackEvent()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -84,10 +84,10 @@ class MainActivity : BaseActivity() {
      * @param duration 页面预加载时间
      */
     private suspend fun animVisibleUi(duration: Long) {
+        //移除back事件禁用
+        backCallback.remove()
         //预加载预留时间
         delay(duration)
-        //设置back开关
-        unBanBackEvent()
         //设置动画显示rootView
         val anim = ObjectAnimator.ofFloat(0F, 1F)
         anim.duration = duration

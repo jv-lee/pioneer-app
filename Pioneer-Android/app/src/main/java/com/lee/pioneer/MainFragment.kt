@@ -48,8 +48,12 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
     }
 
     override fun bindView() {
-        requireActivity().delayBackEvent()
+        //设置回退策略
+        delayBackEvent()
+        //设置深色主题控制器监听
         DarkViewUpdateTools.bindViewCallback(this, this)
+
+        //初始化view
         binding.vpContainer.adapter = vpAdapter
         binding.vpContainer.offscreenPageLimit = fragments.size - 1
         binding.vpContainer.setNoScroll(true)
