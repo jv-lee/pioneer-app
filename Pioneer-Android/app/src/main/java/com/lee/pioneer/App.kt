@@ -11,7 +11,6 @@ import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.tools.DarkModeTools
 import com.lee.pioneer.tools.SimpleActivityLifecycleCallbacks
-import com.squareup.leakcanary.LeakCanary
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -1,12 +1,14 @@
 package com.lee.pioneer.view.fragment
 
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setBackgroundDrawableCompat
 import com.lee.library.extensions.setTextColorCompat
+import com.lee.library.extensions.toast
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
@@ -23,7 +25,7 @@ class HomeFragment :
     BaseVMNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
     DarkViewUpdateTools.ViewCallback {
 
-    val testViewModel by lazy { createViewModel(TestViewModel::class.java) }
+    val testViewModel by viewModels<TestViewModel>()
 
     private val vpAdapter by lazy { UiPagerAdapter(childFragmentManager, arrayListOf(), arrayListOf()) }
 

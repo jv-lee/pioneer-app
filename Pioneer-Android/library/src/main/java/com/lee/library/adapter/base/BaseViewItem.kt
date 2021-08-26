@@ -1,40 +1,39 @@
-package com.lee.library.adapter.listener;
+package com.lee.library.adapter.base
 
-import com.lee.library.adapter.LeeViewHolder;
+import android.content.Context
+import android.view.ViewGroup
 
 /**
  * @author jv.lee
  * @date 2019/3/29
  * 某一类的item对象
  */
-public interface LeeViewItem<T> {
-
+interface BaseViewItem<T> {
     /**
-     * 获取item的布局
+     * 获取itemView 的实例（view、viewBinding)
      *
-     * @return 布局id
      */
-    int getItemLayout();
+    fun getItemViewAny(context: Context, parent: ViewGroup): Any
 
     /**
      * 是否开启item点击
      *
      * @return boolean值
      */
-    boolean openClick();
+    fun openClick(): Boolean = true
 
     /**
      * 是否打开防抖
      *
      * @return boolean
      */
-    boolean openShake();
+    fun openShake(): Boolean = true
 
     /**
      * 是否打开回收回调
      * @return boolean
      */
-    boolean openRecycler();
+    fun openRecycler(): Boolean = false
 
     /**
      * 是否为当前的item布局
@@ -43,7 +42,7 @@ public interface LeeViewItem<T> {
      * @param position
      * @return
      */
-    boolean isItemView(T entity, int position);
+    fun isItemView(entity: T, position: Int): Boolean = true
 
     /**
      * 将item的控件与需要显示数据绑定
@@ -52,7 +51,7 @@ public interface LeeViewItem<T> {
      * @param entity
      * @param position
      */
-    void convert(LeeViewHolder holder, T entity, int position);
+    fun convert(holder: BaseViewHolder, entity: T, position: Int)
 
     /**
      * 当item隐藏后 回调销毁及回收操作
@@ -60,6 +59,5 @@ public interface LeeViewItem<T> {
      * @param entity
      * @param position
      */
-    void viewRecycled(LeeViewHolder holder, T entity, int position);
-
+    fun viewRecycled(holder: BaseViewHolder, entity: T, position: Int) {}
 }

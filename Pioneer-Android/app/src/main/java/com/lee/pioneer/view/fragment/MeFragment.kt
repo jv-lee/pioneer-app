@@ -11,6 +11,8 @@ import com.lee.library.dialog.ChoiceDialog
 import com.lee.library.dialog.core.ConfirmListener
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
+import com.lee.library.extensions.show
+import com.lee.library.extensions.toast
 import com.lee.library.utils.CacheUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding

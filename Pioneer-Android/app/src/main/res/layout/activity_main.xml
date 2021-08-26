@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-    </data>
-
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="invisible"
+    tools:background="@color/colorThemeBackground"
+    tools:context=".MainActivity">
     <!--    通过invisible提前占位初始化view    -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_container"
+
+    <fragment
+        android:id="@+id/nav_main_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:background="@color/colorThemeBackground"
-        tools:context=".MainActivity">
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main" />
 
-        <fragment
-            android:id="@+id/nav_main_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/main" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

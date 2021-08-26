@@ -1,9 +1,9 @@
 package com.lee.pioneer.view.fragment
 
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseVMFragment
+import com.lee.library.extensions.toast
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentFeedbackBinding

@@ -1,8 +1,12 @@
 package com.lee.pioneer.view.adapter.item
 
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import com.lee.library.adapter.LeeViewHolder
-import com.lee.library.adapter.listener.LeeViewItem
+import com.lee.library.adapter.base.BaseViewHolder
+import com.lee.library.adapter.item.ViewItem
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.utils.TimeUtil
@@ -15,30 +19,17 @@ import com.lee.pioneer.tools.ViewTools
  * @date 2020/3/31
  * @description 内容item 无图样式
  */
-class ContentTextItem : LeeViewItem<Content> {
+class ContentTextItem : ViewItem<Content>() {
 
-    override fun getItemLayout(): Int {
-        return R.layout.item_content_text
+    override fun getItemView(context: Context, parent: ViewGroup): View =
+        LayoutInflater.from(context).inflate(R.layout.item_content_text, parent, false)
+
+    override fun isItemView(entity: Content, position: Int): Boolean {
+        return entity.images.isNullOrEmpty()
     }
 
-    override fun openClick(): Boolean {
-        return true
-    }
-
-    override fun openShake(): Boolean {
-        return true
-    }
-
-    override fun openRecycler(): Boolean {
-        return false
-    }
-
-    override fun isItemView(entity: Content?, position: Int): Boolean {
-        return entity?.images.isNullOrEmpty()
-    }
-
-    override fun convert(holder: LeeViewHolder?, entity: Content?, position: Int) {
-        holder?.run {
+    override fun convert(holder: BaseViewHolder, entity: Content, position: Int) {
+        holder.run {
             val tvAuthor = getView<TextView>(R.id.tv_author)
             val tvCategory = getView<TextView>(R.id.tv_category)
             val tvTitle = getView<TextView>(R.id.tv_title)
@@ -56,7 +47,7 @@ class ContentTextItem : LeeViewItem<Content> {
             tvViews.setTextColorCompat(R.color.colorPrimary)
             tvTime.setTextColorCompat(R.color.colorPrimaryDark)
 
-            entity?.run {
+            entity.run {
                 tvAuthor.text = author
                 tvCategory.text = category
                 tvTitle.text = title
@@ -70,10 +61,6 @@ class ContentTextItem : LeeViewItem<Content> {
 
             }
         }
-    }
-
-    override fun viewRecycled(holder: LeeViewHolder?, entity: Content?, position: Int) {
-
     }
 
 }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -19,7 +18,6 @@ import com.lee.library.extensions.setImageTintCompat
 import com.lee.library.extensions.setSelectableItemForeground
 import com.lee.library.utils.StatusUtil
 import com.lee.library.widget.menu.CustomPopupMenuHelper
-
 
 /**
  * @author jv.lee
@@ -60,8 +58,7 @@ open class TitleToolbar : CustomToolbarLayout {
      * 设置状态栏填充padding
      */
     override fun initStatusBarPadding() {
-        val statusHeight = StatusUtil.getStatusBarHeight(context)
-        setPadding(0, statusHeight, 0, 0)
+        setPadding(0, getStatusBarHeight(), 0, 0)
     }
 
     private fun initAttr(attrs: AttributeSet) {
@@ -95,7 +92,6 @@ open class TitleToolbar : CustomToolbarLayout {
         buildMenuImage()
         buildMenuWindow()
     }
-
 
     private fun buildBackImage() {
         ivBack = ImageView(context)

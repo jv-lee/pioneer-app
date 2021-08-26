@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.lee.library.adapter.core.UiPagerAdapter
 import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.extensions.delayBackEvent
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.pioneer.databinding.FragmentMainBinding
@@ -50,8 +51,8 @@ class MainFragment :
     }
 
     override fun bindView() {
+        requireActivity().delayBackEvent()
         DarkViewUpdateTools.bindViewCallback(this, this)
-        backDoubleClick()
         binding.vpContainer.adapter = vpAdapter
         binding.vpContainer.offscreenPageLimit = fragments.size - 1
         binding.vpContainer.setNoScroll(true)

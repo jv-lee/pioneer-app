@@ -1,7 +1,7 @@
 package com.lee.pioneer.view.adapter
 
 import android.content.Context
-import com.lee.library.adapter.page.PagingAdapter
+import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.view.adapter.item.GirlItem
 
@@ -11,7 +11,7 @@ import com.lee.pioneer.view.adapter.item.GirlItem
  * @description
  */
 class GirlAdapter(context: Context, data: ArrayList<Content>) :
-    PagingAdapter<Content>(context, data) {
+    BaseViewAdapter<Content>(context, data) {
 
     init {
         addItemStyles(GirlItem())

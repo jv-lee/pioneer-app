@@ -1,5 +1,6 @@
 package com.lee.pioneer.view.fragment
 
+import com.lee.library.base.BaseFragment
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.pioneer.R
@@ -11,7 +12,7 @@ import com.lee.pioneer.databinding.FragmentSizeBinding
  * @description
  */
 class SizeFragment :
-    BaseVMNavigationFragment<FragmentSizeBinding, BaseViewModel>(R.layout.fragment_size) {
+    BaseFragment(R.layout.fragment_size) {
     override fun bindView() {
 
     }

@@ -12,7 +12,7 @@ import com.lee.pioneer.model.entity.ContentHistory
  * @date 2020/4/16
  * @description 数据库
  */
-@Database(entities = [ContentHistory::class], version = 1)
+@Database(entities = [ContentHistory::class], version = 1, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun contentHistoryDao(): ContentHistoryDao

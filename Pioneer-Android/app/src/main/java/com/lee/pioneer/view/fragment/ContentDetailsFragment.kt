@@ -4,9 +4,10 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.extensions.setWebBackEvent
+import com.lee.library.extensions.toast
 import com.lee.library.utils.ShareUtil
 import com.lee.library.widget.WebViewEx
 import com.lee.library.widget.toolbar.TitleToolbar
@@ -53,7 +54,7 @@ class ContentDetailsFragment :
             bindLifecycle(requireActivity() as LifecycleOwner)
             parent?.let { (it as ViewGroup).removeAllViews() }
             binding.frameContainer.addView(this)
-            setWebBackEvent(this)
+            setWebBackEvent()
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
             addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {

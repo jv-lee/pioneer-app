@@ -18,24 +18,24 @@ import com.lee.library.utils.StatusUtil
  * @description
  */
 abstract class BaseDialog constructor(
-    context: Context,
+    private val mContext: Context,
     theme: Int,
     layoutId: Int,
     isCancel: Boolean = true
 ) :
-    Dialog(context, theme) {
+    Dialog(mContext, theme) {
 
     init {
         setContentView(layoutId)
-        setFullWindow()
+        setFullWindow(mContext)
         setBackDismiss(isCancel)
         bindView()
         bindData()
     }
 
     override fun show() {
-        if (context is Activity) {
-            if ((context as Activity).isFinishing) {
+        if (mContext is Activity) {
+            if (mContext.isFinishing) {
                 return
             }
         }
@@ -43,8 +43,8 @@ abstract class BaseDialog constructor(
     }
 
     override fun dismiss() {
-        if (context is Activity) {
-            if ((context as Activity).isFinishing) {
+        if (mContext is Activity) {
+            if (mContext.isFinishing) {
                 return
             }
         }
@@ -92,8 +92,9 @@ fun Dialog.setBottomDialog(height: Int) {
 /**
  * dialog设置全屏 兼容高版本刘海屏
  * 必须在setContentView之后
+ * @param context 传入activity
  */
-fun Dialog.setFullWindow() {
+fun Dialog.setFullWindow(context: Context?) {
     val window = window
     window ?: return
 
@@ -108,13 +109,12 @@ fun Dialog.setFullWindow() {
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
     }
 
+    val contentHeight = StatusUtil.getContentHeight(context)
     val dm = DisplayMetrics()
     //获取包含状态栏及导航栏的屏幕size
     window.windowManager.defaultDisplay.getRealMetrics(dm)
-    window.setLayout(
-        dm.widthPixels,
-        dm.heightPixels - StatusUtil.getNavigationBarHeight(window.context)//设置window内容区域高度 减去 导航栏高度
-    )
+    //获取到了contentView的高度即设置为该高度 否则设置屏幕高度
+    window.setLayout(dm.widthPixels, if (contentHeight == 0) dm.heightPixels else contentHeight)
     window.setGravity(Gravity.TOP)
     window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
     window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

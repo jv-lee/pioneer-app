@@ -5,8 +5,11 @@ import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
+import com.lee.library.adapter.page.submitData
+import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
+import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.MainFragmentDirections
 import com.lee.pioneer.R

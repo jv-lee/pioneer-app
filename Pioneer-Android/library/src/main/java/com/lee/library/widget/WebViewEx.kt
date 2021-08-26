@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.net.http.SslError
 import android.os.Build
@@ -19,7 +20,6 @@ import android.webkit.*
 import androidx.lifecycle.LifecycleOwner
 import com.lee.library.R
 import com.lee.library.lifecycle.ObservableLifecycle
-import org.jetbrains.annotations.NotNull
 
 /**
  * @author jv.lee

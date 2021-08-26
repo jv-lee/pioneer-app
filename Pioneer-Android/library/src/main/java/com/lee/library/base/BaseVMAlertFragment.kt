@@ -9,11 +9,12 @@ import com.lee.library.R
  * @date 2020/9/21
  * @description 通用AlertDialogFragment 基础类 带Alert缩放动画
  */
-abstract class BaseAlertDialogFragment<V : ViewDataBinding, VM : ViewModel>(
+abstract class BaseVMAlertFragment<V : ViewDataBinding, VM : ViewModel>(
     resId: Int,
-    isCancel: Boolean = true
+    isCancel: Boolean = true,
+    isFullWindow: Boolean = true
 ) :
-    BaseDialogFragment<V, VM>(resId, isCancel) {
+    BaseVMDialogFragment<V, VM>(resId, isCancel, isFullWindow) {
     init {
         setStyle(STYLE_NO_TITLE, R.style.BaseAlertDialog)
     }

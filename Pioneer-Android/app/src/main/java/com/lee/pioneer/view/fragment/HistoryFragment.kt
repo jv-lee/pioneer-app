@@ -2,7 +2,9 @@ package com.lee.pioneer.view.fragment
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.adapter.page.submitData
 import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.R
 import com.lee.pioneer.constants.KeyConstants

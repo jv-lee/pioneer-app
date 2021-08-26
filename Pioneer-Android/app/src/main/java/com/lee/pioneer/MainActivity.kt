@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
-import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.extensions.banBackEvent
+import com.lee.library.extensions.binding
+import com.lee.library.extensions.unBanBackEvent
 import com.lee.library.utils.DensityUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.databinding.ActivityMainBinding
@@ -26,16 +28,17 @@ import kotlinx.coroutines.launch
  * @date 2020.3.27
  * @description 程序主窗口 单Activity架构
  */
-class MainActivity :
-    BaseActivity<ActivityMainBinding, BaseViewModel>(R.layout.activity_main) {
+class MainActivity : BaseActivity() {
+
+    private val binding by binding(ActivityMainBinding::inflate)
 
     private val mainLayout by lazy {
         LayoutInflater.from(this@MainActivity)
             .inflate(R.layout.layout_main, null, false)
     }
 
-    override fun intentParams(intent: Intent, savedInstanceState: Bundle?) {
-        super.intentParams(intent, savedInstanceState)
+    override fun initSavedState(intent: Intent, savedInstanceState: Bundle?) {
+        super.initSavedState(intent, savedInstanceState)
         if (savedInstanceState == null) {
             launch {
                 //进程初始化启动 请求配置
@@ -46,7 +49,9 @@ class MainActivity :
     }
 
     override fun bindView() {
-        banBackEnable(true)
+        //由于activity.binding扩展函数机制加上当前页面view操作时间靠后，需要提前手动调用binding初始化view .
+        binding
+        banBackEvent()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -82,7 +87,7 @@ class MainActivity :
         //预加载预留时间
         delay(duration)
         //设置back开关
-        banBackEnable(false)
+        unBanBackEvent()
         //设置动画显示rootView
         val anim = ObjectAnimator.ofFloat(0F, 1F)
         anim.duration = duration

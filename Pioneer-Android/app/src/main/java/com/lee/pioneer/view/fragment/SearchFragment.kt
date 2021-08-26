@@ -3,6 +3,8 @@ package com.lee.pioneer.view.fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.adapter.page.submitData
+import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.R

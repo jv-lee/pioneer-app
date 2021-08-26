@@ -5,15 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.lee.library.dialog.core.setBackDismiss
 import com.lee.library.dialog.core.setFullWindow
-import com.lee.library.extensions.getVmClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,14 +18,12 @@ import kotlinx.coroutines.cancel
  * @date 2019/8/16.
  * @description
  */
-abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
-    private val layoutId: Int,
-    private val isCancel: Boolean = true
+abstract class BaseDialogFragment(
+    private val resourceId: Int? = 0,
+    private val isCancel: Boolean = true,
+    private val isFullWindow: Boolean = true
 ) :
     DialogFragment(), CoroutineScope by CoroutineScope(Dispatchers.Main) {
-
-    protected lateinit var binding: V
-    protected lateinit var viewModel: VM
 
     private var fistVisible = true
 
@@ -40,9 +32,7 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //设置viewBinding
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        return binding.root
+        return createView(inflater, container)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -51,16 +41,10 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
         return dialog
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         //全屏显示
-        dialog?.setFullWindow()
-        //设置viewModel
-        try {
-            viewModel = ViewModelProvider(this).get(getVmClass(this))
-        } catch (e: Exception) {
-        }
-        intentParams(arguments, savedInstanceState)
+        if (isFullWindow) dialog?.setFullWindow(context)
         bindView()
         bindData()
     }
@@ -79,11 +63,9 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
         cancel()
     }
 
-    /**
-     * 初始化参数配置
-     */
-    open fun intentParams(arguments: Bundle?, savedInstanceState: Bundle?) {
-
+    open fun createView(inflater: LayoutInflater, container: ViewGroup?): View? {
+        if (resourceId == null || resourceId == 0) throw RuntimeException("fragment createView() not override && constructor params resourceId == 0")
+        return inflater.inflate(resourceId, container, false)
     }
 
     /**
@@ -93,20 +75,11 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : ViewModel>(
 
     /**
      * 设置加载数据等业务操作
-     *
      */
     protected abstract fun bindData()
-
 
     /**
      * 使用page 多fragment时 懒加载
      */
     open fun lazyLoad() {}
-
-    /**
-     * 创建ViewModel
-     */
-    protected fun <T : ViewModel> createViewModel(cls: Class<T>): T {
-        return ViewModelProviders.of(this).get(cls)
-    }
 }

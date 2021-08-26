@@ -1,10 +1,13 @@
 package com.lee.pioneer.view.adapter.item
 
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import com.lee.library.adapter.LeeViewHolder
-import com.lee.library.adapter.listener.LeeViewItem
+import com.lee.library.adapter.base.BaseViewHolder
+import com.lee.library.adapter.item.ViewItem
 import com.lee.pioneer.R
-import com.lee.pioneer.model.entity.Content
 import com.lee.pioneer.model.entity.ContentHistory
 
 /**
@@ -12,30 +15,18 @@ import com.lee.pioneer.model.entity.ContentHistory
  * @date 2020/4/23
  * @description 用于展示浏览记录 收藏夹的 Content内容
  */
-class ContentChildItem : LeeViewItem<ContentHistory> {
-    override fun getItemLayout(): Int {
-        return R.layout.item_content_child
-    }
+class ContentChildItem : ViewItem<ContentHistory>() {
 
-    override fun openClick(): Boolean {
+    override fun getItemView(context: Context, parent: ViewGroup): View =
+        LayoutInflater.from(context).inflate(R.layout.item_content_child, parent, false)
+
+    override fun isItemView(entity: ContentHistory, position: Int): Boolean {
         return true
     }
 
-    override fun openShake(): Boolean {
-        return true
-    }
-
-    override fun openRecycler(): Boolean {
-        return false
-    }
-
-    override fun isItemView(entity: ContentHistory?, position: Int): Boolean {
-        return entity != null
-    }
-
-    override fun convert(holder: LeeViewHolder?, entity: ContentHistory?, position: Int) {
-        holder?.apply {
-            entity?.apply {
+    override fun convert(holder: BaseViewHolder, entity: ContentHistory, position: Int) {
+        holder.run {
+            entity.run {
                 getView<TextView>(R.id.tv_title).text = content.title
                 getView<TextView>(R.id.tv_description).text = content.desc
                 getView<TextView>(R.id.tv_like_count).text =
@@ -48,10 +39,6 @@ class ContentChildItem : LeeViewItem<ContentHistory> {
                     )
             }
         }
-    }
-
-    override fun viewRecycled(holder: LeeViewHolder?, entity: ContentHistory?, position: Int) {
-
     }
 
 }
