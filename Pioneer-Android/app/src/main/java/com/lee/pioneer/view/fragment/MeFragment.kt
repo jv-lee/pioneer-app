@@ -27,7 +27,7 @@ import com.lee.pioneer.viewmodel.MeViewModel
  */
 class MeFragment :
     BaseVMNavigationFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
-    View.OnClickListener,DarkViewUpdateTools.ViewCallback {
+    View.OnClickListener, DarkViewUpdateTools.ViewCallback {
 
     private val imageLaunch = ImageLaunch(this)
 
@@ -77,6 +77,10 @@ class MeFragment :
                     toast(it.uri.toString())
                 }
             })
+            false
+        }
+        binding.lineFavorite.setOnLongClickListener {
+            findNavController().navigate(R.id.action_main_to_size)
             false
         }
     }

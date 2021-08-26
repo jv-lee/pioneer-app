@@ -70,6 +70,14 @@
             app:popEnterAnim="@anim/slide_default"
             app:popExitAnim="@anim/slide_right_out" />
 
+        <action
+            android:id="@+id/action_main_to_size"
+            app:destination="@+id/size"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+
     </fragment>
 
     <fragment
@@ -148,6 +156,12 @@
         android:name="com.lee.pioneer.view.fragment.FeedbackFragment"
         android:label="feedbackFragment"
         tools:layout="@layout/fragment_feedback" />
+
+    <fragment
+        android:id="@+id/size"
+        android:name="com.lee.pioneer.view.fragment.SizeFragment"
+        android:label="sizeFragment"
+        tools:layout="@layout/fragment_size" />
 
 
 </navigation>
