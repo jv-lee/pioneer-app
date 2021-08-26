@@ -49,17 +49,28 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun bindView() {
-        backCallback
-        binding
-    }
-
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         launch {
             //程序以外重启 或重新创建MainActivity 无需获取配置，直接显示view
             animVisibleUi(0)
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        DensityUtil.setDensity(this)
+
+        if (DarkModeTools.get().isDarkTheme()) {
+            StatusUtil.setLightStatusIcon(this)
+        } else {
+            StatusUtil.setDarkStatusIcon(this)
+        }
+    }
+
+    override fun bindView() {
+        backCallback
+        binding
     }
 
     override fun bindData() {
@@ -105,17 +116,6 @@ class MainActivity : BaseActivity() {
             }
         })
         anim.start()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        DensityUtil.setDensity(this)
-
-        if (DarkModeTools.get().isDarkTheme()) {
-            StatusUtil.setLightStatusIcon(this)
-        } else {
-            StatusUtil.setDarkStatusIcon(this)
-        }
     }
 
 }
