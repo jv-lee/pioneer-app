@@ -70,7 +70,6 @@ class MainActivity : BaseActivity() {
 
     override fun bindView() {
         backCallback
-        binding
     }
 
     override fun bindData() {
