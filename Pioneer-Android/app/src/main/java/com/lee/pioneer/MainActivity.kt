@@ -6,7 +6,6 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
@@ -31,12 +30,7 @@ class MainActivity : BaseActivity() {
 
     private val binding by binding(ActivityMainBinding::inflate)
 
-    private val backCallback by lazy { banBackEvent() }
-
-    private val mainLayout by lazy {
-        LayoutInflater.from(this@MainActivity)
-            .inflate(R.layout.layout_main, null, false)
-    }
+    private val backCallback = banBackEvent()
 
     override fun initSavedState(intent: Intent, savedInstanceState: Bundle?) {
         super.initSavedState(intent, savedInstanceState)
@@ -69,12 +63,11 @@ class MainActivity : BaseActivity() {
     }
 
     override fun bindView() {
-        backCallback
+        //初始化全局webView
+        WebViewTools.get(applicationContext)
     }
 
     override fun bindData() {
-        //初始化全局webView
-        WebViewTools.get(applicationContext)
     }
 
     @ExperimentalCoroutinesApi
