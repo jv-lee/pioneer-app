@@ -13,6 +13,7 @@ import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.extensions.show
 import com.lee.library.extensions.toast
+import com.lee.library.permission.PermissionLauncher
 import com.lee.library.utils.CacheUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentMeBinding
@@ -30,6 +31,7 @@ class MeFragment :
     View.OnClickListener, DarkViewUpdateTools.ViewCallback {
 
     private val imageLaunch = ImageLaunch(this)
+    private val permissionLaunch = PermissionLauncher(this)
 
     private val clearDialog by lazy {
         ChoiceDialog(requireContext()).apply {
@@ -54,7 +56,7 @@ class MeFragment :
         binding.onClickListener = this
 
         binding.lineMessage.setOnLongClickListener {
-            requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
+            permissionLaunch.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
                 imageLaunch.select(
                     SelectConfig(isMultiple = false, isCompress = false, columnCount = 3)
                 ) {
@@ -64,7 +66,7 @@ class MeFragment :
             false
         }
         binding.lineLike.setOnLongClickListener {
-            requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
+            permissionLaunch.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
                 imageLaunch.select(SelectConfig(isMultiple = true, isCompress = false)) {
                     toast(it[0].uri.toString())
                 }
@@ -72,7 +74,7 @@ class MeFragment :
             false
         }
         binding.lineViews.setOnLongClickListener {
-            requestPermission(Manifest.permission.CAMERA, {
+            permissionLaunch.requestPermission(Manifest.permission.CAMERA, {
                 imageLaunch.take(TakeConfig(isCrop = true)) {
                     toast(it.uri.toString())
                 }
