@@ -53,7 +53,6 @@ class MainActivity : BaseActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        DensityUtil.setDensity(this)
 
         if (DarkModeTools.get().isDarkTheme()) {
             StatusUtil.setLightStatusIcon(this)
