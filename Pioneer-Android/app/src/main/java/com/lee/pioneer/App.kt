@@ -55,6 +55,7 @@ class App : BaseApplication() {
         }
 
         override fun onActivityDestroyed(activity: Activity) {
+            ScreenDensityUtil.resetDensity(activity)
             activity.unbindFragmentLifecycle(fragmentLifecycleCallbacks)
         }
     }
