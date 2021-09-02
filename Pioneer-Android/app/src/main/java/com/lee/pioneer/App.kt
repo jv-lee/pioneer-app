@@ -12,14 +12,13 @@ import com.lee.library.extensions.bindFragmentLifecycle
 import com.lee.library.extensions.unbindFragmentLifecycle
 import com.lee.library.lifecycle.SimpleActivityLifecycleCallbacks
 import com.lee.library.lifecycle.SimpleFragmentLifecycleCallbacks
-import com.lee.library.utils.DensityUtil
 import com.lee.library.utils.SPUtil
+import com.lee.library.utils.ScreenDensityUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.db.AppDataBase
 import com.lee.pioneer.tools.DarkModeTools
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /**
@@ -31,36 +30,37 @@ class App : BaseApplication() {
 
     private val fragmentLifecycleCallbacks = object : SimpleFragmentLifecycleCallbacks() {
 
-        override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
-            DensityUtil.setDensity(f.requireActivity())
-            super.onFragmentAttached(fm, f, context)
+        override fun onFragmentPreAttached(fm: FragmentManager, f: Fragment, context: Context) {
+            ScreenDensityUtil.init(f.requireActivity(), 360f)
+            super.onFragmentPreAttached(fm, f, context)
         }
+
     }
 
     private val activityLifecycleCallbacks = object : SimpleActivityLifecycleCallbacks() {
 
-        override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-            DensityUtil.setDensity(activity)
+        override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
+            ScreenDensityUtil.init(activity, 360f)
 
             activity.bindFragmentLifecycle(fragmentLifecycleCallbacks)
 
             StatusUtil.setNavigationBarColor(activity, Color.BLACK)
+
             if (DarkModeTools.get().isDarkTheme()) {
                 StatusUtil.setLightStatusIcon(activity)
             } else {
                 StatusUtil.setDarkStatusIcon(activity)
             }
-            super.onActivityCreated(activity, bundle)
+            super.onActivityPreCreated(activity, savedInstanceState)
         }
 
         override fun onActivityDestroyed(activity: Activity) {
-            DensityUtil.resetDensity(activity)
-
             activity.unbindFragmentLifecycle(fragmentLifecycleCallbacks)
         }
     }
 
     override fun init() {
+        ScreenDensityUtil.init(this)
         //深色主题适配
         if (!DarkModeTools.get(applicationContext).isSystemTheme()) {
             DarkModeTools.get().updateNightTheme(DarkModeTools.get().isDarkTheme())
