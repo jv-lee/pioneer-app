@@ -129,7 +129,7 @@ class MeFragment :
 
     override fun updateDarkView() {
         binding.toolbar.setBackgroundColorCompat(R.color.colorThemeItem)
-        binding.toolbar.tvTitle?.setTextColorCompat(R.color.colorAccent)
+        binding.toolbar.setTitleColor(R.color.colorAccent)
         binding.constContainer.setBackgroundColorCompat(R.color.colorThemeBackground)
 
         binding.lineMessage.setBackgroundColorCompat(R.color.colorThemeItem)
