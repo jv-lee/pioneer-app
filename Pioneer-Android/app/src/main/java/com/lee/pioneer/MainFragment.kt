@@ -56,6 +56,7 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
         //初始化view
         binding.vpContainer.adapter = vpAdapter
         binding.vpContainer.isUserInputEnabled = false
+        binding.vpContainer.isSaveEnabled = false
         binding.vpContainer.offscreenPageLimit = vpAdapter.itemCount
         binding.bottomNav.bindViewPager(binding.vpContainer)
     }
@@ -76,7 +77,7 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
     override fun onDestroyView() {
         super.onDestroyView()
         //清除view引用
-        binding.vpContainer.removeAllViews()
+//        binding.vpContainer.removeAllViews()
     }
 
     @SuppressLint("ResourceType")
