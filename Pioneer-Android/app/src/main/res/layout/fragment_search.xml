@@ -28,9 +28,6 @@
             <EditText
                 android:id="@+id/edit"
                 style="@style/SearchEditStyle"
-                android:layout_width="0dp"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginEnd="@dimen/margin_large"
                 android:setOnEditorActionListener="@{vm.editActionListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_cancel"

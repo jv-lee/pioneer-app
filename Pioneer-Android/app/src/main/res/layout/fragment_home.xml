@@ -25,9 +25,6 @@
             <TextView
                 android:id="@+id/tv_search"
                 style="@style/SearchStyle"
-                android:layout_width="0dp"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginEnd="@dimen/margin_large"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_logo"
                 app:layout_constraintStart_toStartOf="parent"

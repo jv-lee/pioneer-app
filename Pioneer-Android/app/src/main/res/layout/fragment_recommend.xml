@@ -23,9 +23,10 @@
             <TextView
                 android:id="@+id/tv_search"
                 style="@style/SearchStyle"
-                android:layout_width="match_parent"
-                android:layout_gravity="center"
+                android:layout_marginEnd="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </com.lee.library.widget.toolbar.CustomToolbarLayout>

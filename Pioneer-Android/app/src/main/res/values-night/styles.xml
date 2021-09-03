@@ -24,6 +24,7 @@
         <item name="android:textSize">@dimen/font_size_medium</item>
         <item name="android:textColor">@color/colorThemePrimary</item>
         <item name="android:text">@string/search_hint</item>
+        <item name="android:layout_marginEnd">@dimen/margin_large</item>
     </style>
 
     <!--    搜索edit样式    -->

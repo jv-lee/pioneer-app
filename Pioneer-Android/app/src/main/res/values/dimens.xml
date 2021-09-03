@@ -18,7 +18,7 @@
     <dimen name="search_text_width_home">260dp</dimen>
     <dimen name="search_text_width_search">300dp</dimen>
     <dimen name="search_text_height">36dp</dimen>
-    <dimen name="search_text_width">280dp</dimen>
+    <dimen name="search_text_width">0dp</dimen>
     <dimen name="search_icon_size">18dp</dimen>
     <dimen name="search_logo_size">36dp</dimen>
     <dimen name="common_radius">6dp</dimen>
