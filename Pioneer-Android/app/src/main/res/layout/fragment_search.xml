@@ -30,9 +30,9 @@
                 style="@style/SearchEditStyle"
                 android:layout_width="0dp"
                 android:layout_gravity="start|center_vertical"
-                android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
                 android:setOnEditorActionListener="@{vm.editActionListener}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_cancel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
