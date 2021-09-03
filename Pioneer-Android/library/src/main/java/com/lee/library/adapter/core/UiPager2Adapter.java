@@ -13,11 +13,11 @@ import java.util.List;
 
 /**
  * @author jv.lee
- * description：PageFragment适配器
+ * description：PageFragment适配器 -> 适用于ViewPager2
  */
 public class UiPager2Adapter extends FragmentStateAdapter {
-    private List<Fragment> fragmentList;
-    private List<String> tabList;
+    private final List<Fragment> fragmentList;
+    private final List<String> tabList;
 
     public UiPager2Adapter(@NonNull FragmentActivity fragmentActivity, List<Fragment> fragments, List<String> titles) {
         super(fragmentActivity);

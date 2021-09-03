@@ -3,7 +3,7 @@ package com.lee.pioneer
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.lee.library.adapter.core.UiPagerAdapter
+import com.lee.library.adapter.core.UiPager2Adapter
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.binding
 import com.lee.library.extensions.delayBackEvent
@@ -26,7 +26,7 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
     private val binding by binding(FragmentMainBinding::bind)
 
     private val vpAdapter by lazy {
-        UiPagerAdapter(childFragmentManager, fragments, titles)
+        UiPager2Adapter(this, fragments, titles)
     }
 
     private val fragments by lazy {
@@ -55,8 +55,8 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
 
         //初始化view
         binding.vpContainer.adapter = vpAdapter
-        binding.vpContainer.offscreenPageLimit = fragments.size - 1
-        binding.vpContainer.setNoScroll(true)
+        binding.vpContainer.isUserInputEnabled = false
+        binding.vpContainer.offscreenPageLimit = vpAdapter.itemCount
         binding.bottomNav.bindViewPager(binding.vpContainer)
     }
 
@@ -64,6 +64,7 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         //重新更新view
