@@ -1,7 +1,6 @@
 package com.lee.pioneer
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.lee.library.adapter.core.UiPager2Adapter
@@ -60,15 +59,6 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
         binding.vpContainer.isSaveEnabled = false
         binding.vpContainer.offscreenPageLimit = vpAdapter.itemCount
         binding.bottomNav.bindViewPager(binding.vpContainer)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        //activity重建后item下标主动重置
-        if (binding.vpContainer.childCount > 0) {
-            binding.vpContainer.setCurrentItem(0, false)
-            binding.bottomNav.toPosition(0)
-        }
     }
 
     override fun bindData() {
