@@ -9,6 +9,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.21302083333333333" />
+        <entry key="app/src/main/res/drawable/vector_collect.xml" value="0.37135416666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_collect.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_content_details.xml" value="0.3038949275362319" />
