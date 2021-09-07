@@ -1,52 +1,33 @@
-package com.lee.library.adapter.core;
+package com.lee.library.adapter.core
 
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.lifecycle.Lifecycle;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-
-import java.util.List;
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
 /**
  * @author jv.lee
  * description：PageFragment适配器 -> 适用于ViewPager2
  */
-public class UiPager2Adapter extends FragmentStateAdapter {
-    private final List<Fragment> fragmentList;
-    private final List<String> tabList;
+class UiPager2Adapter : FragmentStateAdapter {
+    private val fragmentList: List<Fragment>
 
-    public UiPager2Adapter(@NonNull FragmentActivity fragmentActivity, List<Fragment> fragments, List<String> titles) {
-        super(fragmentActivity);
-        this.fragmentList = fragments;
-        this.tabList = titles;
+    constructor(fragmentActivity: FragmentActivity, fragments: List<Fragment>)
+            : super(fragmentActivity) {
+        fragmentList = fragments
     }
 
-    public UiPager2Adapter(@NonNull Fragment fragment, List<Fragment> fragments, List<String> titles) {
-        super(fragment);
-        this.fragmentList = fragments;
-        this.tabList = titles;
+    constructor(fragment: Fragment, fragments: List<Fragment>) : super(fragment) {
+        fragmentList = fragments
     }
 
-    @NonNull
-    @Override
-    public Fragment createFragment(int position) {
-        return fragmentList.get(position);
+    override fun createFragment(position: Int): Fragment {
+        return fragmentList[position]
     }
 
-    @Override
-    public int getItemCount() {
-        return fragmentList.size();
+    override fun getItemCount(): Int {
+        return fragmentList.size
     }
 
-    public List<String> getTabList() {
-        return tabList;
-    }
+    fun getFragments() = fragmentList
 
-    public List<Fragment> getFragmentList() {
-        return fragmentList;
-    }
 }
