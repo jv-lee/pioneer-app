@@ -30,7 +30,7 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
     }
 
     private val fragments by lazy {
-        listOf<Fragment>(
+        arrayListOf<Fragment>(
             HomeFragment(),
             RecommendFragment(),
             GirlFragment(),

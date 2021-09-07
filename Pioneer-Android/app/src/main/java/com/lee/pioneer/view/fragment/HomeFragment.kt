@@ -1,9 +1,11 @@
 package com.lee.pioneer.view.fragment
 
+import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.lee.library.adapter.core.UiPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+import com.lee.library.adapter.core.UiPager2Adapter
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setBackgroundDrawableCompat
@@ -14,7 +16,6 @@ import com.lee.pioneer.R
 import com.lee.pioneer.databinding.FragmentHomeBinding
 import com.lee.pioneer.tools.DarkViewUpdateTools
 import com.lee.pioneer.viewmodel.HomeViewModel
-import com.lee.pioneer.viewmodel.TestViewModel
 
 /**
  * @author jv.lee
@@ -25,9 +26,8 @@ class HomeFragment :
     BaseVMNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
     DarkViewUpdateTools.ViewCallback {
 
-    val testViewModel by viewModels<TestViewModel>()
-
-    private val vpAdapter by lazy { UiPagerAdapter(childFragmentManager, arrayListOf(), arrayListOf()) }
+    private var adapter: UiPager2Adapter? = null
+    private var mediator: TabLayoutMediator? = null
 
     override fun bindView() {
         DarkViewUpdateTools.bindViewCallback(this, this)
@@ -40,66 +40,49 @@ class HomeFragment :
             tvSearch.setOnClickListener {
                 findNavController().navigate(R.id.action_main_to_search)
             }
-            vpContainer.adapter = vpAdapter
-            tabCategory.setupWithViewPager(binding.vpContainer)
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun bindData() {
         viewModel.run {
             //获取分类数据 构建分类tab 及 fragment
             categoryData.observe(this@HomeFragment, { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
-                vpAdapter.tabList.clear()
-                vpAdapter.fragmentList.clear()
+
+                val fragments = arrayListOf<Fragment>()
+                val titles = arrayListOf<String>()
 
                 it.data.map {
-                    vpAdapter.tabList.add(it.title)
-                    vpAdapter.fragmentList.add(ContentListFragment.newInstance(it.type))
+                    titles.add(it.title)
+                    fragments.add(ContentListFragment.newInstance(it.type))
                 }
 
-                vpAdapter.notifyDataSetChanged()
-                binding.vpContainer.offscreenPageLimit = vpAdapter.count - 1
+                binding.vpContainer.isSaveEnabled = false
+                binding.vpContainer.offscreenPageLimit = titles.size
+                binding.vpContainer.adapter = UiPager2Adapter(this@HomeFragment, fragments).also {
+                    adapter = it
+                }
+
+                TabLayoutMediator(binding.tabCategory, binding.vpContainer) { tab, position ->
+                    tab.text = titles[position]
+                }.also {
+                    mediator = it
+                }.attach()
+
             }, {
                 toast(it)
-                if (vpAdapter.tabList.isEmpty()) {
-                    binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
-                }
+                binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
             })
-
-            //viewPager恢复页面
-            restoreHomePageLiveData.bindPager(this@HomeFragment, binding.vpContainer)
 
             buildCategoryFragment()
         }
 
-//        testViewModel.bannerLiveData.observe(this, Observer {
-//            toast("size:${it.size}")
-//        })
-//        testViewModel.bannerLiveData2.observe(this, Observer {
-//            toast("size:${it.size}")
-//            LogUtil.i(it.toString())
-//        })
-//
-//        testViewModel.failedEvent.observe(this, Observer {
-//            toast(it.message)
-//        })
-//        testViewModel.getBanner()
-
     }
 
-    override fun onResume() {
-        super.onResume()
-        //重新更新view
-        if (binding.vpContainer.childCount == 0) {
-            vpAdapter.notifyDataSetChanged()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        //清除view引用
-        binding.vpContainer.removeAllViews()
+    override fun onDestroy() {
+        super.onDestroy()
+        mediator?.detach()
     }
 
     override fun updateDarkView() {
