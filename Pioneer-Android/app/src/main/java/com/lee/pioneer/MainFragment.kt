@@ -26,7 +26,7 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
     private val binding by binding(FragmentMainBinding::bind)
 
     private val vpAdapter by lazy {
-        UiPager2Adapter(this, fragments, titles)
+        UiPager2Adapter(this, fragments)
     }
 
     private val fragments by lazy {
@@ -35,15 +35,6 @@ class MainFragment : BaseNavigationFragment(R.layout.fragment_main),
             RecommendFragment(),
             GirlFragment(),
             MeFragment()
-        )
-    }
-
-    private val titles by lazy {
-        listOf(
-            getString(R.string.nav_home),
-            getString(R.string.nav_recommend),
-            getString(R.string.nav_girl),
-            getString(R.string.nav_me)
         )
     }
 
