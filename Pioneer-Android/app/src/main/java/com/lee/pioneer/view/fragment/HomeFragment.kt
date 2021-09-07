@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lee.library.adapter.core.UiPager2Adapter
-import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setBackgroundDrawableCompat
 import com.lee.library.extensions.setTextColorCompat
@@ -23,7 +23,7 @@ import com.lee.pioneer.viewmodel.HomeViewModel
  * @description 主页
  */
 class HomeFragment :
-    BaseVMNavigationFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
+    BaseVMFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
     DarkViewUpdateTools.ViewCallback {
 
     private var adapter: UiPager2Adapter? = null
@@ -58,7 +58,6 @@ class HomeFragment :
                     fragments.add(ContentListFragment.newInstance(it.type))
                 }
 
-                binding.vpContainer.isSaveEnabled = false
                 binding.vpContainer.offscreenPageLimit = titles.size
                 binding.vpContainer.adapter = UiPager2Adapter(this@HomeFragment, fragments).also {
                     adapter = it
