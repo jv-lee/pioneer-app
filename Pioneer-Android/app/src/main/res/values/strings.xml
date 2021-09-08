@@ -46,4 +46,10 @@
     <string name="feedback_commit">提交</string>
     <string name="dark_mode_system">夜间模式跟随系统设置</string>
     <string name="dark_mode_night">夜间模式</string>
+    <string name="title_home">home</string>
+    <string name="title_recommend">recommend</string>
+    <string name="title_girl">girl</string>
+    <string name="title_me">me</string>
+    <string name="title_details">details</string>
+    <string name="title_search">search</string>
 </resources>

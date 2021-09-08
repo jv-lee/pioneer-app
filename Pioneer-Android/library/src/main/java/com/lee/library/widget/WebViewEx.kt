@@ -31,11 +31,11 @@ class WebViewEx : WebView, ObservableLifecycle {
     private var time: Long = 0
     private var firstUrl: String? = null
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context) : super(context) {
         init()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(
+    constructor(context: Context, attrs: AttributeSet?) : super(
         context,
         attrs
     ) {
@@ -43,7 +43,7 @@ class WebViewEx : WebView, ObservableLifecycle {
     }
 
     constructor(
-        context: Context?,
+        context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr) {
@@ -245,7 +245,7 @@ class WebViewEx : WebView, ObservableLifecycle {
      *
      * @param url
      */
-    fun initUrl(url: String?) {
+    fun initUrl(url: String) {
         firstUrl = url
         loadUrl(url)
     }

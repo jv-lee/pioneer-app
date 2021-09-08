@@ -14,5 +14,8 @@ interface KeyConstants {
         const val CATEGORY_RECOMMEND = "GanHuo"//推荐页面查询类型
         const val PAGE_COUNT = 20
         const val CONST_EMPTY = ""
+
+        const val KEY_ID = "id"
+        const val KEY_URL = "url"
     }
 }

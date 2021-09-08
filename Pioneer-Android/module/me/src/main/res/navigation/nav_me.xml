@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/me">
+
+    <fragment
+        android:id="@+id/me"
+        android:name="com.lee.pioneer.me.MeFragment"
+        android:label="@string/nav_me"
+        app:moduleName="me"
+        tools:layout="@layout/fragment_me">
+
+        <!-- 动画效果 ios 进入退出联动滑动 -->
+        <action
+            android:id="@+id/action_me_to_message"
+            app:destination="@id/message"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_left_out"
+            app:popEnterAnim="@anim/slide_left_in"
+            app:popExitAnim="@anim/slide_right_out" />
+
+        <!-- 动画效果 google系统应用 整个视图缩放进入退出 体验极佳 -->
+        <action
+            android:id="@+id/action_me_to_like"
+            app:destination="@id/like"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_exit"
+            app:popEnterAnim="@anim/zoom_out"
+            app:popExitAnim="@anim/alpha_default_hide" />
+
+        <action
+            android:id="@+id/action_me_to_history"
+            app:destination="@id/history"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+        <action
+            android:id="@+id/action_me_to_collect"
+            app:destination="@id/collect"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+        <action
+            android:id="@+id/action_me_to_feedback"
+            app:destination="@id/feedback"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+
+        <action
+            android:id="@+id/action_me_to_size"
+            app:destination="@+id/size"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/message"
+        android:name="com.lee.pioneer.me.MessageFragment"
+        android:label="messageFragment"
+        tools:layout="@layout/fragment_message" />
+
+    <fragment
+        android:id="@+id/like"
+        android:name="com.lee.pioneer.me.LikeFragment"
+        android:label="likeFragment"
+        tools:layout="@layout/fragment_like" />
+
+    <fragment
+        android:id="@+id/history"
+        android:name="com.lee.pioneer.me.HistoryFragment"
+        android:label="historyFragment"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_history_to_contentDetails"
+            app:destination="@id/details"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/collect"
+        android:name="com.lee.pioneer.me.CollectFragment"
+        android:label="favoriteFragment"
+        tools:layout="@layout/fragment_collect">
+        <action
+            android:id="@+id/action_collect_to_contentDetails"
+            app:destination="@id/details"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/feedback"
+        android:name="com.lee.pioneer.me.FeedbackFragment"
+        android:label="feedbackFragment"
+        tools:layout="@layout/fragment_feedback" />
+
+    <fragment
+        android:id="@+id/size"
+        android:name="com.lee.pioneer.me.SizeFragment"
+        android:label="sizeFragment"
+        tools:layout="@layout/fragment_size" />
+
+    <include-dynamic
+        android:id="@+id/details"
+        app:graphResName="nav_details"
+        app:moduleName="details" />
+
+</navigation>

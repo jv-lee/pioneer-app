@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter
  * @date 2020/4/7
  * @description
  */
-@BindingAdapter("binding:editActionListener")
-fun setEditActionListener(view: EditText, listener: TextView.OnEditorActionListener) {
-    view.setOnEditorActionListener(listener)
-}
+//@BindingAdapter("binding:editActionListener")
+//fun setEditActionListener(view: EditText, listener: TextView.OnEditorActionListener) {
+//    view.setOnEditorActionListener(listener)
+//}

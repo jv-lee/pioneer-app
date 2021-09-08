@@ -7,11 +7,19 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/module" />
+            <option value="$PROJECT_DIR$/module/details" />
+            <option value="$PROJECT_DIR$/module/girl" />
+            <option value="$PROJECT_DIR$/module/home" />
+            <option value="$PROJECT_DIR$/module/me" />
+            <option value="$PROJECT_DIR$/module/recommend" />
+            <option value="$PROJECT_DIR$/module/search" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,19 +1,16 @@
 package com.lee.pioneer
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import com.lee.library.adapter.core.UiPager2Adapter
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.lee.library.base.BaseFragment
 import com.lee.library.extensions.binding
 import com.lee.library.extensions.delayBackEvent
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.pioneer.databinding.FragmentMainBinding
 import com.lee.pioneer.tools.DarkViewUpdateTools
-import com.lee.pioneer.view.fragment.GirlFragment
-import com.lee.pioneer.view.fragment.HomeFragment
-import com.lee.pioneer.view.fragment.MeFragment
-import com.lee.pioneer.view.fragment.RecommendFragment
 
 /**
  * @author jv.lee
@@ -25,30 +22,15 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
 
     private val binding by binding(FragmentMainBinding::bind)
 
-    private lateinit var vpAdapter: UiPager2Adapter
-
-    private val fragments by lazy {
-        arrayListOf<Fragment>(
-            HomeFragment(),
-            RecommendFragment(),
-            GirlFragment(),
-            MeFragment()
-        )
-    }
-
     override fun bindView() {
         //设置回退策略
         delayBackEvent()
+
         //设置深色主题控制器监听
         DarkViewUpdateTools.bindViewCallback(this, this)
 
-        //初始化view
-        binding.vpContainer.adapter = UiPager2Adapter(this, fragments).also {
-            vpAdapter = it
-        }
-        binding.vpContainer.isUserInputEnabled = false
-        binding.vpContainer.offscreenPageLimit = vpAdapter.itemCount
-        binding.bottomNav.bindViewPager(binding.vpContainer)
+        //fragment容器与navigationBar绑定
+        bindNavigationAction()
     }
 
     override fun bindData() {
@@ -57,11 +39,29 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
 
     @SuppressLint("ResourceType")
     override fun updateDarkView() {
-        binding.bottomNav.itemTextColor =
+        binding.navigationBar.itemTextColor =
             ContextCompat.getColorStateList(requireContext(), R.drawable.main_selector)
-        binding.bottomNav.itemIconTintList =
+        binding.navigationBar.itemIconTintList =
             ContextCompat.getColorStateList(requireContext(), R.drawable.main_selector)
-        binding.bottomNav.setBackgroundColorCompat(R.color.colorThemeItem)
+        binding.navigationBar.setBackgroundColorCompat(R.color.colorThemeItem)
+    }
+
+    private fun bindNavigationAction() {
+        binding.navigationBar.post {
+            val controller = binding.container.findNavController()
+            binding.navigationBar.setupWithNavController(controller)
+            controller.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.label) {
+                    getString(R.string.nav_home),
+                    getString(R.string.nav_recommend),
+                    getString(R.string.nav_girl),
+                    getString(R.string.nav_me) -> {
+                        binding.navigationBar.visibility = View.VISIBLE
+                    }
+                    else -> binding.navigationBar.visibility = View.GONE
+                }
+            }
+        }
     }
 
 }

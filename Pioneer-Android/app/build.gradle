@@ -2,15 +2,13 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
-apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion androidId.compileSdkVersion
-    buildToolsVersion "29.0.3"
+
 
     defaultConfig {
         applicationId androidId.applicationId
@@ -56,7 +54,6 @@ android {
             minifyEnabled false //混淆模式
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            shrinkResources false // 移除无用的resource文件
             zipAlignEnabled false // Zipalign优化
             debugUri.each { k, v -> //创建公共常量
                 buildConfigField("String", k, "\"" + v + "\"")
@@ -66,7 +63,6 @@ android {
             minifyEnabled configs.minifyEnabled
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            shrinkResources configs.minifyEnabled
             zipAlignEnabled configs.minifyEnabled
             releaseUri.each { k, v ->
                 buildConfigField("String", k, "\"" + v + "\"")
@@ -84,10 +80,8 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
-    }
-    viewBinding{
-        enabled = true
+        dataBinding  true
+        viewBinding  true
     }
     kapt {
         generateStubs = true
@@ -105,13 +99,14 @@ android {
     packagingOptions {
         pickFirst 'META-INF/LICENSE.txt' // picks the JavaMail license file
     }
+    dynamicFeatures = [':module:home', ':module:recommend', ':module:girl', ':module:me', ':module:details', ':module:search']
 
 }
 
 dependencies {
     processor.each { k, v -> annotationProcessor v }
     kapts.each { k, v -> kapt v }
-    implementation project(path: ':library')
+    api project(path: ':library')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
