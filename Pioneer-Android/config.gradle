@@ -30,7 +30,7 @@ ext {
     glide = "4.11.0"
     gson = "2.8.5"
     retrofit = "2.6.0"
-    navigation = "2.3.5"
+    navigation = "2.4.0-alpha06"
 
     //运行时注解处理器
     processor = [
