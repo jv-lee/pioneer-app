@@ -2,14 +2,14 @@ package com.lee.pioneer.recommend.viewmodel
 
 import com.lee.library.mvvm.live.CacheLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
-import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_BANNER_KEY
-import com.lee.pioneer.constants.CacheConstants.Companion.RECOMMEND_CACHE_KEY
-import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_RECOMMEND
-import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.model.entity.*
-import com.lee.pioneer.model.repository.ApiRepository
-import com.lee.pioneer.model.repository.CacheRepository
-import com.lee.pioneer.model.repository.DataBaseRepository
+import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
+import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_CACHE_KEY
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_RECOMMEND
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
+import com.lee.pioneer.library.common.model.entity.*
+import com.lee.pioneer.library.common.model.repository.CacheRepository
+import com.lee.pioneer.library.common.model.repository.DataBaseRepository
+import com.lee.pioneer.recommend.model.repository.ApiRepository
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,6 +19,8 @@ import kotlin.collections.ArrayList
  * @description
  */
 class RecommendViewModel : ResponseViewModel() {
+
+    private val repository by lazy { ApiRepository() }
 
     val bannerData by lazy { CacheLiveData<ArrayList<Banner>>() }
     val contentData by lazy { CacheLiveData<PageData<Content>>() }
@@ -55,7 +57,7 @@ class RecommendViewModel : ResponseViewModel() {
                     if (response != null) ArrayList(response) else null
                 },
                 {
-                    ApiRepository.getApi().getBannerAsync().data
+                    repository.api.getBannerAsync().data
                 },
                 {
                     CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
@@ -77,7 +79,7 @@ class RecommendViewModel : ResponseViewModel() {
                         ?.also { putCacheContentList(type, ArrayList(it.data)) }
                 },
                 {
-                    ApiRepository.getApi().getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT)
+                    repository.api.getHotDataAsync(type, CATEGORY_RECOMMEND, PAGE_COUNT)
                         .also { putCacheContentList(type, it.data) }
                 },
                 {

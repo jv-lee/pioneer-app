@@ -3,7 +3,7 @@ package com.lee.pioneer.girl.adapter
 import android.content.Context
 import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.pioneer.girl.adapter.item.GirlItem
-import com.lee.pioneer.model.entity.Content
+import com.lee.pioneer.library.common.model.entity.Content
 
 /**
  * @author jv.lee

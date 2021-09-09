@@ -4,15 +4,12 @@ import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.library.mvvm.live.applyData
 import com.lee.library.mvvm.load.LoadStatus
-import com.lee.pioneer.constants.CacheConstants.Companion.CONTENT_CACHE_KEY
-import com.lee.pioneer.constants.KeyConstants
-import com.lee.pioneer.model.entity.*
-import com.lee.pioneer.model.repository.ApiRepository
-import com.lee.pioneer.model.repository.CacheRepository
-import com.lee.pioneer.model.repository.DataBaseRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.lang.RuntimeException
+import com.lee.pioneer.home.model.repository.ApiRepository
+import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CONTENT_CACHE_KEY
+import com.lee.pioneer.library.common.constant.KeyConstants
+import com.lee.pioneer.library.common.model.entity.*
+import com.lee.pioneer.library.common.model.repository.CacheRepository
+import com.lee.pioneer.library.common.model.repository.DataBaseRepository
 import java.util.*
 
 /**
@@ -21,6 +18,8 @@ import java.util.*
  * @description 内容列表 ViewModel
  */
 class ContentListViewModel : BaseViewModel() {
+
+    private val repository by lazy { ApiRepository() }
 
     val contentListData by lazy { PageLiveData<PageData<Content>>(limit = 1) }
 
@@ -35,7 +34,7 @@ class ContentListViewModel : BaseViewModel() {
             contentListData.pageLaunch(status,
                 { page: Int ->
                     //网络数据
-                    ApiRepository.getApi().getContentDataAsync(
+                    repository.api.getContentDataAsync(
                         KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
                     ).also { response ->
                         //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)

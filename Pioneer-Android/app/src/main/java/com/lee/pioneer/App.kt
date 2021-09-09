@@ -15,8 +15,8 @@ import com.lee.library.lifecycle.SimpleFragmentLifecycleCallbacks
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.ScreenDensityUtil
 import com.lee.library.utils.StatusUtil
-import com.lee.pioneer.db.AppDataBase
-import com.lee.pioneer.tools.DarkModeTools
+import com.lee.pioneer.library.common.db.AppDataBase
+import com.lee.pioneer.library.common.tools.DarkModeTools
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

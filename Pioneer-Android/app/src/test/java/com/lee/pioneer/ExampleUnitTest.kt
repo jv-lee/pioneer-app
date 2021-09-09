@@ -1,12 +1,10 @@
 package com.lee.pioneer
 
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.Data
+import com.lee.pioneer.library.common.model.entity.Data
 import org.junit.Test
 
 import org.junit.Assert.*
 import kotlin.math.sqrt
-import kotlin.random.Random
 
 /**
  * Example local unit test, which will execute on the development machine (host).

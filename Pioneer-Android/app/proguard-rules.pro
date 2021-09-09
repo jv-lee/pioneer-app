@@ -180,7 +180,7 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 #自定义依赖库不参与混淆 ------ 自定义view不参与混淆
 -keep class com.lee.library.** {*;}
 #实体类不参与混淆
--keep class com.lee.pioneer.model.entity.** {*;}
+-keep class com.lee.pioneer.library.common.model.entity.** {*;}
 
 #关闭日志
 #-assumenosideeffects class android.util.Log {

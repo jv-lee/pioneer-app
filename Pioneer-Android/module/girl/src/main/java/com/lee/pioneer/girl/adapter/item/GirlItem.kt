@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import com.lee.library.adapter.base.BaseViewHolder
 import com.lee.library.adapter.item.ViewItem
 import com.lee.library.widget.ShadowConstraintLayout
-import com.lee.pioneer.constants.HttpConstant
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.tools.GlideTools
+import com.lee.pioneer.library.common.constant.HttpConstant
+import com.lee.pioneer.library.common.model.entity.Content
+import com.lee.pioneer.library.common.tools.GlideTools
 import com.lee.pioneer.R
 import com.lee.pioneer.girl.R as GR
 

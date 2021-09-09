@@ -49,4 +49,5 @@ android {
 dependencies {
     support.each { k, v -> api v}
     processor.each {k,v -> annotationProcessor v}
+    kapts.each { k, v -> kapt v }
 }

@@ -9,12 +9,12 @@ import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.library.utils.KeyboardUtil
-import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_ALL
-import com.lee.pioneer.constants.KeyConstants.Companion.CONST_EMPTY
-import com.lee.pioneer.constants.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.PageData
-import com.lee.pioneer.model.repository.ApiRepository
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_ALL
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CONST_EMPTY
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
+import com.lee.pioneer.library.common.model.entity.Content
+import com.lee.pioneer.library.common.model.entity.PageData
+import com.lee.pioneer.search.model.repository.ApiRepository
 
 /**
  * @author jv.lee
@@ -22,6 +22,8 @@ import com.lee.pioneer.model.repository.ApiRepository
  * @description
  */
 class SearchViewModel : ResponseViewModel() {
+
+    private val repository by lazy { ApiRepository() }
 
     private var page = 0
     private val searchTextObservable = ObservableField<String>(CONST_EMPTY)
@@ -44,8 +46,13 @@ class SearchViewModel : ResponseViewModel() {
         launchMain {
             val text = searchTextObservable.get()!!
             val response =
-                ApiRepository.getApi()
-                    .getSearchDataAsync(text, CATEGORY_ALL, CATEGORY_ALL, ++page, PAGE_COUNT)
+                repository.api.getSearchDataAsync(
+                    text,
+                    CATEGORY_ALL,
+                    CATEGORY_ALL,
+                    ++page,
+                    PAGE_COUNT
+                )
             executeResponseAny(response) { contentListObservable.value = it }
         }
     }

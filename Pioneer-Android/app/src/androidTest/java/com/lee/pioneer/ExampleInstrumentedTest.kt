@@ -3,7 +3,6 @@ package com.lee.pioneer
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.lee.library.utils.LogUtil
-import com.lee.pioneer.model.repository.ApiRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.junit.Assert.assertEquals

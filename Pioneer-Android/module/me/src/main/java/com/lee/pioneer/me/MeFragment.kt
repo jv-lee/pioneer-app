@@ -18,8 +18,8 @@ import com.lee.library.utils.CacheUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.me.databinding.FragmentMeBinding
 import com.lee.pioneer.me.viewmodel.MeViewModel
-import com.lee.pioneer.tools.DarkModeTools
-import com.lee.pioneer.tools.DarkViewUpdateTools
+import com.lee.pioneer.library.common.tools.DarkModeTools
+import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
 import com.lee.pioneer.me.R as MR
 
 /**

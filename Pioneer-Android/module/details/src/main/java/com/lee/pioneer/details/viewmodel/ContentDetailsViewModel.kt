@@ -2,7 +2,7 @@ package com.lee.pioneer.details.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.pioneer.model.repository.DataBaseRepository
+import com.lee.pioneer.library.common.model.repository.DataBaseRepository
 
 /**
  * @author jv.lee

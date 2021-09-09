@@ -4,7 +4,7 @@ import android.widget.CompoundButton
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.pioneer.tools.DarkModeTools
+import com.lee.pioneer.library.common.tools.DarkModeTools
 
 /**
  * @author jv.lee

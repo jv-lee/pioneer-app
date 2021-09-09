@@ -104,9 +104,7 @@ android {
 }
 
 dependencies {
-    processor.each { k, v -> annotationProcessor v }
-    kapts.each { k, v -> kapt v }
-    api project(path: ':library:base')
+    api project(path: ':library:common')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

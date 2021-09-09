@@ -1,14 +1,13 @@
 package com.lee.pioneer.home.viewmodel
 
 import com.lee.library.mvvm.live.CacheLiveData
-import com.lee.library.mvvm.live.RestorePageLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
-import com.lee.pioneer.constants.CacheConstants.Companion.CATEGORY_CACHE_KEY
-import com.lee.pioneer.constants.KeyConstants.Companion.CATEGORY_TYPE
-import com.lee.pioneer.model.entity.Category
-import com.lee.pioneer.model.entity.PageData
-import com.lee.pioneer.model.repository.ApiRepository
-import com.lee.pioneer.model.repository.CacheRepository
+import com.lee.pioneer.home.model.repository.ApiRepository
+import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CATEGORY_CACHE_KEY
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_TYPE
+import com.lee.pioneer.library.common.model.entity.Category
+import com.lee.pioneer.library.common.model.entity.PageData
+import com.lee.pioneer.library.common.model.repository.CacheRepository
 
 /**
  * @author jv.lee
@@ -17,8 +16,9 @@ import com.lee.pioneer.model.repository.CacheRepository
  */
 class HomeViewModel : ResponseViewModel() {
 
+    private val repository by lazy { ApiRepository() }
+
     val categoryData by lazy { CacheLiveData<PageData<Category>>() }
-    val restoreHomePageLiveData by lazy { RestorePageLiveData() }
 
     /**
      *  构建主页分类tab 子fragments  启动缓存及网络数据加载
@@ -30,7 +30,7 @@ class HomeViewModel : ResponseViewModel() {
                     CacheRepository.get().getCache<PageData<Category>>(CATEGORY_CACHE_KEY)
                 },
                 {
-                    ApiRepository.getApi().getCategoriesAsync(CATEGORY_TYPE)
+                    repository.api.getCategoriesAsync(CATEGORY_TYPE)
                 },
                 {
                     CacheRepository.get().putCache(CATEGORY_CACHE_KEY, it)

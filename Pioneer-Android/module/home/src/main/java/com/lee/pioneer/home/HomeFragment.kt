@@ -15,7 +15,7 @@ import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.R
 import com.lee.pioneer.home.databinding.FragmentHomeBinding
 import com.lee.pioneer.home.viewmodel.HomeViewModel
-import com.lee.pioneer.tools.DarkViewUpdateTools
+import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
 import com.lee.pioneer.home.R as HR
 
 /**

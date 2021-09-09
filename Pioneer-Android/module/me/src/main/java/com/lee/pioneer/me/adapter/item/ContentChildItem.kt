@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.lee.library.adapter.base.BaseViewHolder
 import com.lee.library.adapter.item.ViewItem
 import com.lee.pioneer.R
-import com.lee.pioneer.model.entity.ContentHistory
+import com.lee.pioneer.library.common.model.entity.ContentHistory
 import com.lee.pioneer.me.R as MR
 
 /**
