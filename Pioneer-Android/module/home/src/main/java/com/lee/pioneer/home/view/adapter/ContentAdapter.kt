@@ -1,11 +1,11 @@
-package com.lee.pioneer.view.adapter
+package com.lee.pioneer.home.view.adapter
 
 import android.content.Context
 import com.lee.library.adapter.base.BaseViewAdapter
+import com.lee.pioneer.home.view.adapter.item.ContentMultipleItem
+import com.lee.pioneer.home.view.adapter.item.ContentSingleItem
+import com.lee.pioneer.home.view.adapter.item.ContentTextItem
 import com.lee.pioneer.library.common.model.entity.Content
-import com.lee.pioneer.view.adapter.item.ContentMultipleItem
-import com.lee.pioneer.view.adapter.item.ContentSingleItem
-import com.lee.pioneer.view.adapter.item.ContentTextItem
 
 /**
  * @author jv.lee

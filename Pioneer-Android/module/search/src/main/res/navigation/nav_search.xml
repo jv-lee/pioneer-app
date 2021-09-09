@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.lee.pioneer.search.SearchFragment"
+        android:name="com.lee.pioneer.search.view.fragment.SearchFragment"
         android:label="search"
         app:moduleName="search"
         tools:layout="@layout/fragment_search" />

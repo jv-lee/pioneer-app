@@ -1,4 +1,4 @@
-package com.lee.pioneer.recommend
+package com.lee.pioneer.recommend.view.fragment
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
@@ -9,13 +9,14 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.*
 import com.lee.pioneer.R
 import com.lee.pioneer.library.common.model.entity.Banner
+import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
 import com.lee.pioneer.recommend.databinding.FragmentRecommendBinding
 import com.lee.pioneer.recommend.databinding.LayoutRecommendHeaderBinding
+import com.lee.pioneer.recommend.view.adapter.ContentAdapter
+import com.lee.pioneer.recommend.view.widget.BannerViewHolder
+import com.lee.pioneer.recommend.view.widget.RecommendLoadResource
 import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
-import com.lee.pioneer.recommend.widget.BannerViewHolder
-import com.lee.pioneer.recommend.widget.RecommendLoadResource
-import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
-import com.lee.pioneer.view.adapter.ContentAdapter
+import java.util.*
 import com.lee.pioneer.recommend.R as RR
 
 /**

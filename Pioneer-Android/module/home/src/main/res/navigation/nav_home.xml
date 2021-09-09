@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.lee.pioneer.home.HomeFragment"
+        android:name="com.lee.pioneer.home.view.fragment.HomeFragment"
         android:label="@string/nav_home"
         app:moduleName="home"
         tools:layout="@layout/fragment_home">

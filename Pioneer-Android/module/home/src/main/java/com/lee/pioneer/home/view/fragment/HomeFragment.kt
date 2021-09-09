@@ -1,4 +1,4 @@
-package com.lee.pioneer.home
+package com.lee.pioneer.home.view.fragment
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat

@@ -1,4 +1,4 @@
-package com.lee.pioneer.view.adapter.item
+package com.lee.pioneer.home.view.adapter.item
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,9 +10,10 @@ import com.lee.library.adapter.item.ViewItem
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.utils.TimeUtil
-import com.lee.pioneer.R
 import com.lee.pioneer.library.common.model.entity.Content
 import com.lee.pioneer.library.common.tools.ViewTools
+import com.lee.pioneer.R
+import com.lee.pioneer.home.R as HR
 
 /**
  * @author jv.lee
@@ -22,7 +23,7 @@ import com.lee.pioneer.library.common.tools.ViewTools
 class ContentTextItem : ViewItem<Content>() {
 
     override fun getItemView(context: Context, parent: ViewGroup): View =
-        LayoutInflater.from(context).inflate(R.layout.item_content_text, parent, false)
+        LayoutInflater.from(context).inflate(HR.layout.item_content_text, parent, false)
 
     override fun isItemView(entity: Content, position: Int): Boolean {
         return entity.images.isNullOrEmpty()
@@ -30,13 +31,13 @@ class ContentTextItem : ViewItem<Content>() {
 
     override fun convert(holder: BaseViewHolder, entity: Content, position: Int) {
         holder.run {
-            val tvAuthor = getView<TextView>(R.id.tv_author)
-            val tvCategory = getView<TextView>(R.id.tv_category)
-            val tvTitle = getView<TextView>(R.id.tv_title)
-            val tvDescription = getView<TextView>(R.id.tv_description)
-            val tvLike = getView<TextView>(R.id.tv_like)
-            val tvViews = getView<TextView>(R.id.tv_view)
-            val tvTime = getView<TextView>(R.id.tv_time)
+            val tvAuthor = getView<TextView>(HR.id.tv_author)
+            val tvCategory = getView<TextView>(HR.id.tv_category)
+            val tvTitle = getView<TextView>(HR.id.tv_title)
+            val tvDescription = getView<TextView>(HR.id.tv_description)
+            val tvLike = getView<TextView>(HR.id.tv_like)
+            val tvViews = getView<TextView>(HR.id.tv_view)
+            val tvTime = getView<TextView>(HR.id.tv_time)
 
             holder.itemView.setBackgroundColorCompat(R.color.colorThemeItem)
             tvAuthor.setTextColorCompat(R.color.colorPrimaryDark)

@@ -1,4 +1,4 @@
-package com.lee.pioneer.search
+package com.lee.pioneer.search.view.fragment
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -8,8 +8,8 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.search.databinding.FragmentSearchBinding
+import com.lee.pioneer.search.view.adapter.ContentAdapter
 import com.lee.pioneer.search.viewmodel.SearchViewModel
-import com.lee.pioneer.view.adapter.ContentAdapter
 import com.lee.pioneer.search.R as SR
 
 /**

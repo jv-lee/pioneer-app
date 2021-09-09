@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/recommend"
-        android:name="com.lee.pioneer.recommend.RecommendFragment"
+        android:name="com.lee.pioneer.recommend.view.fragment.RecommendFragment"
         android:label="@string/nav_recommend"
         app:moduleName="recommend"
         tools:layout="@layout/fragment_recommend" />

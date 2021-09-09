@@ -1,5 +1,6 @@
 package com.lee.pioneer.library.common.tools
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,6 +15,7 @@ class DarkModeTools(val context: Context) {
     private val TAG = "DarkModeTools"
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: DarkModeTools? = null
 
@@ -66,6 +68,7 @@ class DarkModeTools(val context: Context) {
     /**
      * 设置为跟随系统主题变更
      */
+    @SuppressLint("CommitPrefEdits")
     fun updateSystemTheme(enable: Boolean) {
         nightEnable = !enable
         if (enable) {
@@ -79,6 +82,7 @@ class DarkModeTools(val context: Context) {
     /**
      * 设置深色主题
      */
+    @SuppressLint("CommitPrefEdits")
     fun updateNightTheme(enable: Boolean) {
         if (!nightEnable) return
         if (enable) {

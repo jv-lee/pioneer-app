@@ -1,4 +1,4 @@
-package com.lee.pioneer.recommend.widget
+package com.lee.pioneer.recommend.view.widget
 
 import android.content.Context
 import android.view.View

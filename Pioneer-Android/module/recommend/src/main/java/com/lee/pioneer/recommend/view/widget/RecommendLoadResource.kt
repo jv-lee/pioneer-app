@@ -1,4 +1,4 @@
-package com.lee.pioneer.recommend.widget
+package com.lee.pioneer.recommend.view.widget
 
 import com.lee.library.R
 import com.lee.pioneer.recommend.R as RR
