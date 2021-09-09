@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/menu/details_menu.xml" value="0.2" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.2635416666666667" />
         <entry key="module/home/src/main/res/layout/item_content_multiple.xml" value="0.3188405797101449" />
+        <entry key="module/search/src/main/res/layout/fragment_search.xml" value="0.2653985507246377" />
       </map>
     </option>
   </component>
