@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.lee.pioneer.library.common.model.entity.ContentHistory
+import com.lee.pioneer.library.common.entity.ContentHistory
 import com.lee.pioneer.me.db.dao.ContentHistoryDao
 
 /**

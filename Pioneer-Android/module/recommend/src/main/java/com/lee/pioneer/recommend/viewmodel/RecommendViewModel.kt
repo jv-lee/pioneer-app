@@ -1,18 +1,18 @@
 package com.lee.pioneer.recommend.viewmodel
 
+import com.lee.library.cache.CacheManager
+import com.lee.library.extensions.getCache
+import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.live.CacheLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_RECOMMEND
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.library.common.model.entity.*
-import com.lee.pioneer.library.common.model.repository.CacheRepository
+import com.lee.pioneer.library.common.entity.*
 import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.model.repository.ApiRepository
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @author jv.lee
@@ -56,14 +56,14 @@ class RecommendViewModel : ResponseViewModel() {
             bannerData.cacheLaunch(
                 {
                     val response =
-                        CacheRepository.get().getCache<List<Banner>>(RECOMMEND_BANNER_KEY)
+                        CacheManager.getDefault().getCache<List<Banner>>(RECOMMEND_BANNER_KEY)
                     if (response != null) ArrayList(response) else null
                 },
                 {
                     repository.api.getBannerAsync().data
                 },
                 {
-                    CacheRepository.get().putCache(RECOMMEND_BANNER_KEY, it.toList())
+                    CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
                 })
         }
     }
@@ -77,7 +77,7 @@ class RecommendViewModel : ResponseViewModel() {
         launchMain {
             contentData.cacheLaunch(
                 {
-                    CacheRepository.get()
+                    CacheManager.getDefault()
                         .getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + type.lowercase())
                         ?.also { putCacheContentList(type, ArrayList(it.data)) }
                 },
@@ -86,8 +86,8 @@ class RecommendViewModel : ResponseViewModel() {
                         .also { putCacheContentList(type, it.data) }
                 },
                 {
-                    CacheRepository.get()
-                        .putCache(RECOMMEND_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
+                    CacheManager.getDefault()
+                        .putCache(RECOMMEND_CACHE_KEY + type.lowercase(), it)
                 })
         }
     }

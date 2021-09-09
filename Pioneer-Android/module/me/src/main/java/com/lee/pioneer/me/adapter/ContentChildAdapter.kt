@@ -3,7 +3,7 @@ package com.lee.pioneer.me.adapter
 import android.content.Context
 import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.pioneer.me.adapter.item.ContentChildItem
-import com.lee.pioneer.library.common.model.entity.ContentHistory
+import com.lee.pioneer.library.common.entity.ContentHistory
 
 /**
  * @author jv.lee

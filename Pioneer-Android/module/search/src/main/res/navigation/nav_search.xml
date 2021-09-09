@@ -9,6 +9,21 @@
         android:name="com.lee.pioneer.search.view.fragment.SearchFragment"
         android:label="search"
         app:moduleName="search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+
+        <action
+            android:id="@+id/action_search_to_details"
+            app:destination="@id/details"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+
+    </fragment>
+
+    <include-dynamic
+        android:id="@+id/details"
+        app:graphResName="nav_details"
+        app:moduleName="details" />
 
 </navigation>

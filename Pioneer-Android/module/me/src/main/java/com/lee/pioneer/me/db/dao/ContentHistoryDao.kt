@@ -3,8 +3,8 @@ package com.lee.pioneer.me.db.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.common.db.base.BaseDao
-import com.lee.pioneer.library.common.model.entity.ContentHistory
+import com.lee.library.db.base.BaseDao
+import com.lee.pioneer.library.common.entity.ContentHistory
 
 /**
  * @author jv.lee

@@ -9,6 +9,34 @@
         android:name="com.lee.pioneer.recommend.view.fragment.RecommendFragment"
         android:label="@string/nav_recommend"
         app:moduleName="recommend"
-        tools:layout="@layout/fragment_recommend" />
+        tools:layout="@layout/fragment_recommend" >
+
+        <action
+            android:id="@+id/action_recommend_to_details"
+            app:destination="@id/details"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+
+        <action
+            android:id="@+id/action_recommend_to_search"
+            app:destination="@id/search"
+            app:enterAnim="@anim/slide_bottom_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_bottom_out" />
+
+    </fragment>
+
+    <include-dynamic
+        android:id="@+id/search"
+        app:graphResName="nav_search"
+        app:moduleName="search" />
+
+    <include-dynamic
+        android:id="@+id/details"
+        app:graphResName="nav_details"
+        app:moduleName="details" />
 
 </navigation>

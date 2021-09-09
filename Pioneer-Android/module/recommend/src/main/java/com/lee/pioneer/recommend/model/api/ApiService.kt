@@ -1,8 +1,8 @@
 package com.lee.pioneer.recommend.model.api
 
-import com.lee.pioneer.library.common.model.entity.Banner
-import com.lee.pioneer.library.common.model.entity.Content
-import com.lee.pioneer.library.common.model.entity.PageData
+import com.lee.pioneer.library.common.entity.Banner
+import com.lee.pioneer.library.common.entity.Content
+import com.lee.pioneer.library.common.entity.PageData
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,13 +1,15 @@
 package com.lee.pioneer.home.viewmodel
 
+import com.lee.library.cache.CacheManager
+import com.lee.library.extensions.getCache
+import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.live.CacheLiveData
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.home.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CATEGORY_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_TYPE
-import com.lee.pioneer.library.common.model.entity.Category
-import com.lee.pioneer.library.common.model.entity.PageData
-import com.lee.pioneer.library.common.model.repository.CacheRepository
+import com.lee.pioneer.library.common.entity.Category
+import com.lee.pioneer.library.common.entity.PageData
 
 /**
  * @author jv.lee
@@ -27,13 +29,13 @@ class HomeViewModel : ResponseViewModel() {
         launchMain {
             categoryData.cacheLaunch(
                 {
-                    CacheRepository.get().getCache<PageData<Category>>(CATEGORY_CACHE_KEY)
+                    CacheManager.getDefault().getCache<PageData<Category>>(CATEGORY_CACHE_KEY)
                 },
                 {
                     repository.api.getCategoriesAsync(CATEGORY_TYPE)
                 },
                 {
-                    CacheRepository.get().putCache(CATEGORY_CACHE_KEY, it)
+                    CacheManager.getDefault().putCache(CATEGORY_CACHE_KEY, it)
                 })
         }
     }

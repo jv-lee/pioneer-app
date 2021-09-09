@@ -1,4 +1,4 @@
-package com.lee.pioneer.library.common.model.entity
+package com.lee.pioneer.library.common.entity
 
 import com.lee.library.adapter.page.PagingData
 

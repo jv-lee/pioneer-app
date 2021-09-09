@@ -1,10 +1,10 @@
-package com.lee.pioneer.library.common.model.entity
+package com.lee.pioneer.library.common.entity
 
 import androidx.annotation.IntDef
 import androidx.room.*
-import com.lee.pioneer.library.common.db.converters.StringListConverter
-import com.lee.pioneer.library.common.model.entity.ContentType.Companion.CONTENT
-import com.lee.pioneer.library.common.model.entity.ContentType.Companion.PICTURE
+import com.lee.library.db.converters.StringListConverter
+import com.lee.pioneer.library.common.entity.ContentType.Companion.CONTENT
+import com.lee.pioneer.library.common.entity.ContentType.Companion.PICTURE
 
 /**
  * @author jv.lee

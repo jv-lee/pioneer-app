@@ -3,7 +3,7 @@ package com.lee.pioneer.recommend.view.adapter
 import android.content.Context
 import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.library.adapter.base.BaseViewItem
-import com.lee.pioneer.library.common.model.entity.Content
+import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.service.HomeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 

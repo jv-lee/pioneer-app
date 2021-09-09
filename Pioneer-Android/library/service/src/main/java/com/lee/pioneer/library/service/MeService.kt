@@ -1,7 +1,7 @@
 package com.lee.pioneer.library.service
 
-import com.lee.pioneer.library.common.db.base.BaseDao
-import com.lee.pioneer.library.common.model.entity.ContentHistory
+import com.lee.library.db.base.BaseDao
+import com.lee.pioneer.library.common.entity.ContentHistory
 
 /**
  * @author jv.lee

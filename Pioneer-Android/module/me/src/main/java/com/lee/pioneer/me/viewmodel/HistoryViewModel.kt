@@ -4,8 +4,8 @@ import com.lee.library.mvvm.live.PageLiveData
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.common.model.entity.ContentHistory
-import com.lee.pioneer.library.common.model.entity.PageData
+import com.lee.pioneer.library.common.entity.ContentHistory
+import com.lee.pioneer.library.common.entity.PageData
 import com.lee.pioneer.library.common.tools.CommonTools
 import com.lee.pioneer.me.repository.DataBaseRepository
 

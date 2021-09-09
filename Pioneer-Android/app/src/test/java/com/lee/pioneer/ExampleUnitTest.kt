@@ -1,6 +1,6 @@
 package com.lee.pioneer
 
-import com.lee.pioneer.library.common.model.entity.Data
+import com.lee.pioneer.library.common.entity.Data
 import org.junit.Test
 
 import org.junit.Assert.*

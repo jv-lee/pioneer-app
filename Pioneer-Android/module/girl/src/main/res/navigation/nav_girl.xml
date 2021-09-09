@@ -9,6 +9,21 @@
         android:name="com.lee.pioneer.girl.GirlFragment"
         android:label="@string/nav_girl"
         app:moduleName="girl"
-        tools:layout="@layout/fragment_girl" />
+        tools:layout="@layout/fragment_girl" >
+
+        <action
+            android:id="@+id/action_girl_to_details"
+            app:destination="@id/details"
+            app:enterAnim="@anim/slide_right_in"
+            app:exitAnim="@anim/slide_default"
+            app:popEnterAnim="@anim/slide_default"
+            app:popExitAnim="@anim/slide_right_out" />
+
+    </fragment>
+
+    <include-dynamic
+        android:id="@+id/details"
+        app:graphResName="nav_details"
+        app:moduleName="details" />
 
 </navigation>

@@ -10,7 +10,7 @@ import com.lee.library.adapter.item.ViewItem
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.utils.TimeUtil
-import com.lee.pioneer.library.common.model.entity.Content
+import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.tools.ViewTools
 import com.lee.pioneer.R
 import com.lee.pioneer.home.R as HR

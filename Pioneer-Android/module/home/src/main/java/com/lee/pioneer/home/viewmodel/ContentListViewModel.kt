@@ -1,5 +1,8 @@
 package com.lee.pioneer.home.viewmodel
 
+import com.lee.library.cache.CacheManager
+import com.lee.library.extensions.getCache
+import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.mvvm.live.PageLiveData
 import com.lee.library.mvvm.live.applyData
@@ -7,11 +10,9 @@ import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.home.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.common.model.entity.*
-import com.lee.pioneer.library.common.model.repository.CacheRepository
+import com.lee.pioneer.library.common.entity.*
 import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
-import java.util.*
 
 /**
  * @author jv.lee
@@ -46,13 +47,13 @@ class ContentListViewModel : BaseViewModel() {
                 },
                 {
                     //缓存数据
-                    CacheRepository.get()
+                    CacheManager.getDefault()
                         .getCache<PageData<Content>>(CONTENT_CACHE_KEY + type.lowercase())
                 },
                 {
                     //存储缓存数据
-                    CacheRepository.get()
-                        .putCache(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()), it)
+                    CacheManager.getDefault()
+                        .putCache(CONTENT_CACHE_KEY + type.lowercase(), it)
                 })
         }
     }

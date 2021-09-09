@@ -5,7 +5,7 @@ import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.pioneer.home.view.adapter.item.ContentMultipleItem
 import com.lee.pioneer.home.view.adapter.item.ContentSingleItem
 import com.lee.pioneer.home.view.adapter.item.ContentTextItem
-import com.lee.pioneer.library.common.model.entity.Content
+import com.lee.pioneer.library.common.entity.Content
 
 /**
  * @author jv.lee

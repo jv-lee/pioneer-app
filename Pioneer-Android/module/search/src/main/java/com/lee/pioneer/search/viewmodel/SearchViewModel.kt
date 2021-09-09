@@ -12,8 +12,8 @@ import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_ALL
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CONST_EMPTY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
-import com.lee.pioneer.library.common.model.entity.Content
-import com.lee.pioneer.library.common.model.entity.PageData
+import com.lee.pioneer.library.common.entity.Content
+import com.lee.pioneer.library.common.entity.PageData
 import com.lee.pioneer.search.model.repository.ApiRepository
 
 /**

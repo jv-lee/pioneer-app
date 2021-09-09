@@ -1,4 +1,4 @@
-package com.lee.pioneer.library.common.db.base
+package com.lee.library.db.base
 
 import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken

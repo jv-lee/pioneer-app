@@ -1,6 +1,6 @@
-package com.lee.pioneer.library.common.db.converters
+package com.lee.library.db.converters
 
-import com.lee.pioneer.library.common.db.base.BaseConverter
+import com.lee.library.db.base.BaseConverter
 
 /**
  * @author jv.lee

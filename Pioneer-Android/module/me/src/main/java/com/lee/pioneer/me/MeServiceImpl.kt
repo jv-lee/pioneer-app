@@ -1,7 +1,7 @@
 package com.lee.pioneer.me
 
 import com.google.auto.service.AutoService
-import com.lee.pioneer.library.common.model.entity.ContentHistory
+import com.lee.pioneer.library.common.entity.ContentHistory
 import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.me.db.AppDataBase
 
