@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.lee.pioneer.me.widget.LineButtonView
+                <com.lee.pioneer.me.view.widget.LineButtonView
                     android:id="@+id/line_message"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
@@ -62,7 +62,7 @@
                     app:leftText="@string/me_item_message"
                     app:leftTint="@color/colorMessage" />
 
-                <com.lee.pioneer.me.widget.LineButtonView
+                <com.lee.pioneer.me.view.widget.LineButtonView
                     android:id="@+id/line_like"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
@@ -70,7 +70,7 @@
                     app:leftText="@string/me_item_like"
                     app:leftTint="@color/colorLike" />
 
-                <com.lee.pioneer.me.widget.LineButtonView
+                <com.lee.pioneer.me.view.widget.LineButtonView
                     android:id="@+id/line_views"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
@@ -78,7 +78,7 @@
                     app:leftText="@string/me_item_views"
                     app:leftTint="@color/colorViews" />
 
-                <com.lee.pioneer.me.widget.LineButtonView
+                <com.lee.pioneer.me.view.widget.LineButtonView
                     android:id="@+id/line_favorite"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
@@ -86,7 +86,7 @@
                     app:leftText="@string/me_item_favorite"
                     app:leftTint="@color/colorFavorite" />
 
-                <com.lee.pioneer.me.widget.LineButtonView
+                <com.lee.pioneer.me.view.widget.LineButtonView
                     android:id="@+id/line_feedback"
                     style="@style/CommendLineButtonView"
                     android:layout_marginTop="@dimen/margin_large"
@@ -94,7 +94,7 @@
                     app:leftDrawable="@drawable/vector_feedback"
                     app:leftText="@string/me_item_feedback" />
 
-                <com.lee.pioneer.me.widget.LineButtonView
+                <com.lee.pioneer.me.view.widget.LineButtonView
                     android:id="@+id/line_settings"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"

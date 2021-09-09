@@ -1,4 +1,4 @@
-package com.lee.pioneer.me
+package com.lee.pioneer.me.view.fragment
 
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.mvvm.base.BaseViewModel

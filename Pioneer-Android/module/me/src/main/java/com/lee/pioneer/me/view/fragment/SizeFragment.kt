@@ -1,4 +1,4 @@
-package com.lee.pioneer.me
+package com.lee.pioneer.me.view.fragment
 
 import com.lee.library.base.BaseNavigationFragment
 import com.lee.pioneer.me.R as MR

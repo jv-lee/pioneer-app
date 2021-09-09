@@ -10,7 +10,8 @@ import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_G
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.library.common.model.entity.*
 import com.lee.pioneer.library.common.model.repository.CacheRepository
-import com.lee.pioneer.library.common.model.repository.DataBaseRepository
+import com.lee.pioneer.library.service.MeService
+import com.lee.pioneer.library.service.hepler.ModuleService
 
 /**
  * @author jv.lee
@@ -18,6 +19,8 @@ import com.lee.pioneer.library.common.model.repository.DataBaseRepository
  * @description
  */
 class GirlViewModel : BaseViewModel() {
+
+    private val meService by lazy { ModuleService.find<MeService>() }
 
     private val repository by lazy { ApiRepository() }
 
@@ -29,8 +32,8 @@ class GirlViewModel : BaseViewModel() {
     fun insertContentHistoryToDB(content: Content) {
         launchMain {
             launchIO {
-                val extends = DataBaseRepository.get().historyDao.isCollect(content._id)
-                DataBaseRepository.get().historyDao
+                val extends = meService.isCollect(content._id)
+                meService
                     .insert(
                         ContentHistory.parse(
                             ContentType.PICTURE,

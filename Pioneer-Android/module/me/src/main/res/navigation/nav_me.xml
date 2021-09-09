@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/me"
-        android:name="com.lee.pioneer.me.MeFragment"
+        android:name="com.lee.pioneer.me.view.fragment.MeFragment"
         android:label="@string/nav_me"
         app:moduleName="me"
         tools:layout="@layout/fragment_me">
@@ -63,19 +63,19 @@
 
     <fragment
         android:id="@+id/message"
-        android:name="com.lee.pioneer.me.MessageFragment"
+        android:name="com.lee.pioneer.me.view.fragment.MessageFragment"
         android:label="messageFragment"
         tools:layout="@layout/fragment_message" />
 
     <fragment
         android:id="@+id/like"
-        android:name="com.lee.pioneer.me.LikeFragment"
+        android:name="com.lee.pioneer.me.view.fragment.LikeFragment"
         android:label="likeFragment"
         tools:layout="@layout/fragment_like" />
 
     <fragment
         android:id="@+id/history"
-        android:name="com.lee.pioneer.me.HistoryFragment"
+        android:name="com.lee.pioneer.me.view.fragment.HistoryFragment"
         android:label="historyFragment"
         tools:layout="@layout/fragment_history">
         <action
@@ -89,7 +89,7 @@
 
     <fragment
         android:id="@+id/collect"
-        android:name="com.lee.pioneer.me.CollectFragment"
+        android:name="com.lee.pioneer.me.view.fragment.CollectFragment"
         android:label="favoriteFragment"
         tools:layout="@layout/fragment_collect">
         <action
@@ -103,13 +103,13 @@
 
     <fragment
         android:id="@+id/feedback"
-        android:name="com.lee.pioneer.me.FeedbackFragment"
+        android:name="com.lee.pioneer.me.view.fragment.FeedbackFragment"
         android:label="feedbackFragment"
         tools:layout="@layout/fragment_feedback" />
 
     <fragment
         android:id="@+id/size"
-        android:name="com.lee.pioneer.me.SizeFragment"
+        android:name="com.lee.pioneer.me.view.fragment.SizeFragment"
         android:label="sizeFragment"
         tools:layout="@layout/fragment_size" />
 

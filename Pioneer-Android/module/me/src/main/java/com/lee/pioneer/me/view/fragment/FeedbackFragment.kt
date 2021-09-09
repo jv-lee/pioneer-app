@@ -1,4 +1,4 @@
-package com.lee.pioneer.me
+package com.lee.pioneer.me.view.fragment
 
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController

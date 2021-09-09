@@ -8,7 +8,8 @@ import java.util.*
  * @description AutoService工具类
  */
 object ModuleService {
-    inline fun <reified T> find(): T? {
+    inline fun <reified T> find(): T {
         return ServiceLoader.load(T::class.java).iterator().next()
+            ?: throw RuntimeException("${T::class.java.name} not module implements")
     }
 }

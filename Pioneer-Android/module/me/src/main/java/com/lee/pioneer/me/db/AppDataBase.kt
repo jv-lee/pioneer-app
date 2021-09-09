@@ -1,11 +1,11 @@
-package com.lee.pioneer.library.common.db
+package com.lee.pioneer.me.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.lee.pioneer.library.common.db.dao.ContentHistoryDao
 import com.lee.pioneer.library.common.model.entity.ContentHistory
+import com.lee.pioneer.me.db.dao.ContentHistoryDao
 
 /**
  * @author jv.lee

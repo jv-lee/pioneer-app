@@ -15,8 +15,8 @@ import com.lee.library.lifecycle.SimpleFragmentLifecycleCallbacks
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.ScreenDensityUtil
 import com.lee.library.utils.StatusUtil
-import com.lee.pioneer.library.common.db.AppDataBase
 import com.lee.pioneer.library.common.tools.DarkModeTools
+import com.lee.pioneer.library.service.hepler.ApplicationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -70,8 +70,8 @@ class App : BaseApplication() {
         //初始化工具类
         CoroutineScope(Dispatchers.IO).launch {
             SPUtil.getInstance(this@App)
-            AppDataBase.getInstance(this@App)
             CacheManager.init(this@App, BuildConfig.VERSION_CODE)
+            ApplicationService.init(this@App)
         }
 
         //注册Activity生命周期监听

@@ -1,23 +1,27 @@
-package com.lee.pioneer.me
+package com.lee.pioneer.me.view.fragment
 
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.page.submitData
-import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.base.BaseNavigationFragment
+import com.lee.library.extensions.binding
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.me.adapter.ContentChildAdapter
-import com.lee.pioneer.me.databinding.FragmentHistoryBinding
-import com.lee.pioneer.me.viewmodel.HistoryViewModel
+import com.lee.pioneer.me.databinding.FragmentCollectBinding
+import com.lee.pioneer.me.viewmodel.CollectViewModel
 import com.lee.pioneer.me.R as MR
 
 /**
  * @author jv.lee
- * @date 2020/4/17
- * @description MeFragment ChildPage -> 浏览记录页面
+ * @date 2020/3/24
+ * @description MeFragment ChildPage -> 收藏页面
  */
-class HistoryFragment :
-    BaseVMNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(MR.layout.fragment_history) {
+class CollectFragment :
+    BaseNavigationFragment(MR.layout.fragment_collect) {
 
+    private val binding by binding(FragmentCollectBinding::bind)
+    private val viewModel by viewModels<CollectViewModel>()
     private val mAdapter by lazy { ContentChildAdapter(requireContext(), arrayListOf()) }
 
     override fun bindView() {
@@ -32,7 +36,7 @@ class HistoryFragment :
             setAutoLoadMoreListener { viewModel.loadHistory(LoadStatus.LOAD_MORE) }
             setOnItemClickListener { _, entity, _ ->
 //                findNavController().navigate(
-//                    HistoryFragmentDirections.actionHistoryToContentDetails(
+//                    CollectFragmentDirections.actionCollectToContentDetails(
 //                        entity.content._id, KeyConstants.CONST_EMPTY
 //                    )
 //                )
@@ -42,13 +46,13 @@ class HistoryFragment :
 
     override fun bindData() {
         viewModel.run {
-            contentData.observe(this@HistoryFragment, {
+            contentData.observe(this@CollectFragment, {
                 mAdapter.submitData(it, limit = 0)
             }, {
                 toast(it)
             })
 
-            loadHistory(LoadStatus.INIT)
+            viewModel.loadHistory(LoadStatus.INIT)
         }
     }
 

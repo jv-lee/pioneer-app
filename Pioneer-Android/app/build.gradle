@@ -104,7 +104,6 @@ android {
 }
 
 dependencies {
-    api project(path: ':library:common')
     api project(path: ':library:service')
 
     testImplementation 'junit:junit:4.12'

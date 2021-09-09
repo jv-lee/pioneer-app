@@ -1,6 +1,6 @@
-package com.lee.pioneer.library.common.model.repository
+package com.lee.pioneer.me.repository
 
-import com.lee.pioneer.library.common.db.AppDataBase
+import com.lee.pioneer.me.db.AppDataBase
 
 /**
  * @author jv.lee

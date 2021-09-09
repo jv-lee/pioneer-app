@@ -9,7 +9,8 @@ import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CONTENT_
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.model.entity.*
 import com.lee.pioneer.library.common.model.repository.CacheRepository
-import com.lee.pioneer.library.common.model.repository.DataBaseRepository
+import com.lee.pioneer.library.service.MeService
+import com.lee.pioneer.library.service.hepler.ModuleService
 import java.util.*
 
 /**
@@ -18,6 +19,8 @@ import java.util.*
  * @description 内容列表 ViewModel
  */
 class ContentListViewModel : BaseViewModel() {
+
+    private val meService by lazy { ModuleService.find<MeService>() }
 
     private val repository by lazy { ApiRepository() }
 
@@ -60,16 +63,15 @@ class ContentListViewModel : BaseViewModel() {
     fun insertContentHistoryToDB(content: Content) {
         launchMain {
             launchIO {
-                val extends = DataBaseRepository.get().historyDao.isCollect(content._id)
-                DataBaseRepository.get().historyDao
-                    .insert(
-                        ContentHistory.parse(
-                            ContentType.CONTENT,
-                            ContentSource.ID,
-                            extends,
-                            content
-                        )
+                val extends = meService.isCollect(content._id)
+                meService.insert(
+                    ContentHistory.parse(
+                        ContentType.CONTENT,
+                        ContentSource.ID,
+                        extends,
+                        content
                     )
+                )
             }
         }
     }

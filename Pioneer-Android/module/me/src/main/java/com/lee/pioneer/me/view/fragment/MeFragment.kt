@@ -1,4 +1,4 @@
-package com.lee.pioneer.me
+package com.lee.pioneer.me.view.fragment
 
 import android.Manifest
 import android.view.View

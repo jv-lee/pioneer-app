@@ -8,7 +8,8 @@ import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_R
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.library.common.model.entity.*
 import com.lee.pioneer.library.common.model.repository.CacheRepository
-import com.lee.pioneer.library.common.model.repository.DataBaseRepository
+import com.lee.pioneer.library.service.MeService
+import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.model.repository.ApiRepository
 import java.util.*
 import kotlin.collections.ArrayList
@@ -19,6 +20,8 @@ import kotlin.collections.ArrayList
  * @description
  */
 class RecommendViewModel : ResponseViewModel() {
+
+    private val meService by lazy { ModuleService.find<MeService>() }
 
     private val repository by lazy { ApiRepository() }
 
@@ -34,8 +37,8 @@ class RecommendViewModel : ResponseViewModel() {
     fun insertContentHistoryToDB(content: Content) {
         launchMain {
             launchIO {
-                val extends = DataBaseRepository.get().historyDao.isCollect(content._id)
-                DataBaseRepository.get().historyDao
+                val extends = meService.isCollect(content._id)
+                meService
                     .insert(
                         ContentHistory.parse(
                             ContentType.CONTENT,

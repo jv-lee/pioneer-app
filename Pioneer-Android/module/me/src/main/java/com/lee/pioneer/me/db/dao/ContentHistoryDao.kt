@@ -1,4 +1,4 @@
-package com.lee.pioneer.library.common.db.dao
+package com.lee.pioneer.me.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query

@@ -9,6 +9,7 @@ import retrofit2.http.Path
  * @date 2020/3/24
  * @description 干货集中营API
  */
+@Deprecated("已分解至各模块内")
 interface Api {
 
     /**

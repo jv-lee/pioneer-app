@@ -16,8 +16,7 @@ class ContentAdapter(context: Context, data: ArrayList<Content>) :
     BaseViewAdapter<Content>(context, data) {
 
     init {
-        val homeService = ModuleService.find<HomeService>()
-        homeService?.run {
+        ModuleService.find<HomeService>().run {
             addItemStyles(getContentMultipleItem() as BaseViewItem<Content>)
             addItemStyles(getContentSingleItem() as BaseViewItem<Content>)
             addItemStyles(getContentTextItem() as BaseViewItem<Content>)
