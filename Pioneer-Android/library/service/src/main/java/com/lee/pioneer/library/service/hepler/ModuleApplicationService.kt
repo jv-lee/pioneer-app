@@ -7,9 +7,9 @@ import java.util.*
 /**
  * @author jv.lee
  * @date 2021/9/9
- * @description
+ * @description 各模块application初始化回调
  */
-object ApplicationService {
+object ModuleApplicationService {
     fun init(application: Application) {
         val iterator = ServiceLoader.load(ApplicationService::class.java).iterator()
         while (iterator.hasNext()) {

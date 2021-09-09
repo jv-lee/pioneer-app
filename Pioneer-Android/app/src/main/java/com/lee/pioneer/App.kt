@@ -16,7 +16,7 @@ import com.lee.library.utils.SPUtil
 import com.lee.library.utils.ScreenDensityUtil
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.library.common.tools.DarkModeTools
-import com.lee.pioneer.library.service.hepler.ApplicationService
+import com.lee.pioneer.library.service.hepler.ModuleApplicationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -71,7 +71,7 @@ class App : BaseApplication() {
         CoroutineScope(Dispatchers.IO).launch {
             SPUtil.getInstance(this@App)
             CacheManager.init(this@App, BuildConfig.VERSION_CODE)
-            ApplicationService.init(this@App)
+            ModuleApplicationService.init(this@App)
         }
 
         //注册Activity生命周期监听
