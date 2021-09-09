@@ -1,8 +1,6 @@
 package com.lee.pioneer.http
 
-import com.lee.library.entity.ResponseData
 import com.lee.pioneer.model.entity.*
-import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -100,13 +98,5 @@ interface ApiService {
         @Path("page") page: Int,
         @Path("count") count: Int
     ): PageData<Content>
-
-//    以下接口方法 测试使用
-
-    @GET("banners")
-    suspend fun getResponseDataBannerAsync(): ResponseData<PageData<Banner>>
-
-    @GET("banners")
-    suspend fun getPageDataBannerAsync(): PageData<Banner>
 
 }

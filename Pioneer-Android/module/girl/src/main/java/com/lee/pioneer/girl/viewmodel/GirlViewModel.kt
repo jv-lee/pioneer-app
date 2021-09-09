@@ -61,8 +61,7 @@ class GirlViewModel : BaseViewModel() {
                 },
                 {
                     CacheRepository.get()
-                        .getContentCacheAsync(CONTENT_CACHE_KEY + CATEGORY_GIRL.lowercase())
-                        .await()
+                        .getCache<PageData<Content>>(CONTENT_CACHE_KEY + CATEGORY_GIRL.lowercase())
                 },
                 {
                     CacheRepository.get().putCache(

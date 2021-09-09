@@ -27,7 +27,7 @@ class HomeViewModel : ResponseViewModel() {
         launchMain {
             categoryData.cacheLaunch(
                 {
-                    CacheRepository.get().getCategoryCacheAsync(CATEGORY_CACHE_KEY).await()
+                    CacheRepository.get().getCache<PageData<Category>>(CATEGORY_CACHE_KEY)
                 },
                 {
                     ApiRepository.getApi().getCategoriesAsync(CATEGORY_TYPE)

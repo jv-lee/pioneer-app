@@ -1,5 +1,8 @@
 rootProject.name='Pioneer-Android'
-include ':app', ':library'
+include ':app'
+
+include 'library:base'
+
 include ':module:home'
 include ':module:recommend'
 include ':module:girl'

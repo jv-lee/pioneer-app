@@ -51,7 +51,7 @@ class RecommendViewModel : ResponseViewModel() {
             bannerData.cacheLaunch(
                 {
                     val response =
-                        CacheRepository.get().getBannerCacheAsync(RECOMMEND_BANNER_KEY).await()
+                        CacheRepository.get().getCache<List<Banner>>(RECOMMEND_BANNER_KEY)
                     if (response != null) ArrayList(response) else null
                 },
                 {
@@ -72,9 +72,8 @@ class RecommendViewModel : ResponseViewModel() {
         launchMain {
             contentData.cacheLaunch(
                 {
-                    CacheRepository.get().getContentCacheAsync(
-                        RECOMMEND_CACHE_KEY + type.toLowerCase(Locale.getDefault())
-                    ).await()
+                    CacheRepository.get()
+                        .getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + type.lowercase())
                         ?.also { putCacheContentList(type, ArrayList(it.data)) }
                 },
                 {

@@ -2,12 +2,8 @@ package com.lee.pioneer.model.repository
 
 import com.google.gson.reflect.TypeToken
 import com.lee.library.cache.CacheManager
-import com.lee.pioneer.model.entity.Banner
-import com.lee.pioneer.model.entity.Category
-import com.lee.pioneer.model.entity.Content
-import com.lee.pioneer.model.entity.PageData
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
+
 
 /**
  * @author jv.lee
@@ -27,31 +23,11 @@ class CacheRepository {
     }
 
     /**
-     * 获取分类tab 缓存数据
+     * @param key 缓存key
      */
-    fun getCategoryCacheAsync(key: String): Deferred<PageData<Category>?> {
-        val type = object : TypeToken<PageData<Category>>() {}.type
-        return CompletableDeferred(CacheManager.getDefault().get<PageData<Category>>(key, type))
-    }
-
-    /**
-     * 获取Content列表缓存
-     * @param key 存储key
-     * 无法完全使用泛形解析 所以使用PageData包装类配合泛形使用
-     */
-    fun getContentCacheAsync(
-        key: String
-    ): Deferred<PageData<Content>?> {
-        val type = object : TypeToken<PageData<Content>>() {}.type
-        return CompletableDeferred(CacheManager.getDefault().get<PageData<Content>>(key, type))
-    }
-
-    /**
-     * 获取banner缓存
-     */
-    fun getBannerCacheAsync(key: String): Deferred<List<Banner>?> {
-        val type = object : TypeToken<List<Banner>>() {}.type
-        return CompletableDeferred(CacheManager.getDefault().get<List<Banner>>(key, type))
+    suspend inline fun <reified T> getCache(key: String): T? {
+        val type = object : TypeToken<T>() {}.type
+        return CompletableDeferred(CacheManager.getDefault().get<T>(key, type)).await()
     }
 
     /**

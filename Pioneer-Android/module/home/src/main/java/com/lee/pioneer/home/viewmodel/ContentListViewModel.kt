@@ -45,8 +45,7 @@ class ContentListViewModel : BaseViewModel() {
                 {
                     //缓存数据
                     CacheRepository.get()
-                        .getContentCacheAsync(CONTENT_CACHE_KEY + type.toLowerCase(Locale.getDefault()))
-                        .await()
+                        .getCache<PageData<Content>>(CONTENT_CACHE_KEY + type.lowercase())
                 },
                 {
                     //存储缓存数据
