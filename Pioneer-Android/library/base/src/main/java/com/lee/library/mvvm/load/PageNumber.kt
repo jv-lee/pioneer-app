@@ -1,7 +1,7 @@
 package com.lee.library.mvvm.load
 
 class PageNumber(var limit: Int = 0) {
-    private var page = limit
+    var page = limit
     fun getPage(@LoadStatus status: Int): Int {
         return when (status) {
             LoadStatus.INIT, LoadStatus.REFRESH -> {

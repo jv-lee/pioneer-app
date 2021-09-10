@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
@@ -12,6 +15,7 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.R
 import com.lee.pioneer.girl.adapter.GirlAdapter
@@ -19,7 +23,9 @@ import com.lee.pioneer.girl.databinding.FragmentGirlBinding
 import com.lee.pioneer.girl.databinding.LayoutGirlHeaderBinding
 import com.lee.pioneer.girl.viewmodel.GirlViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.pioneer.library.common.entity.Content
+import com.lee.pioneer.library.common.entity.PageData
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import com.lee.pioneer.girl.R as GR
@@ -66,7 +72,7 @@ class GirlFragment :
             //刷新回调
             refresh.setOnRefreshListener {
                 mAdapter.openLoadMore()
-                viewModel.getGirlContentData(LoadStatus.REFRESH)
+                viewModel.contentState.updateState(LoadStatus.REFRESH)
             }
 
         }
@@ -87,15 +93,15 @@ class GirlFragment :
                 )
             }
             setAutoLoadMoreListener {
-                viewModel.getGirlContentData(LoadStatus.LOAD_MORE)
+                viewModel.contentState.updateState(LoadStatus.LOAD_MORE)
             }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {
-                    viewModel.getGirlContentData(LoadStatus.RELOAD)
+                    viewModel.contentState.updateState(LoadStatus.RELOAD)
                 }
 
                 override fun pageReload() {
-                    viewModel.getGirlContentData(LoadStatus.REFRESH)
+                    viewModel.contentState.updateState(LoadStatus.REFRESH)
                 }
 
             })
@@ -109,21 +115,34 @@ class GirlFragment :
         headerViewBinding.tvDate.text = TimeUtil.getCurTimeString(SimpleDateFormat("MM月dd日"))
         headerViewBinding.tvWeek.text = TimeUtil.getWeek(Date())
 
-        viewModel.run {
-            contentData.observe(this@GirlFragment, {
-                binding.refresh.isRefreshing = false
-                mAdapter.submitData(it, diff = true)
-            }, {
-                toast(it)
-                binding.refresh.isRefreshing = false
-                mAdapter.submitFailed()
-            })
+//        viewModel.run {
+//            contentData.observe(this@GirlFragment, {
+//                binding.refresh.isRefreshing = false
+//                mAdapter.submitData(it, diff = true)
+//            }, {
+//                toast(it)
+//                binding.refresh.isRefreshing = false
+//                mAdapter.submitFailed()
+//            })
+//        }
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                viewModel.contentFlowData.collect<PageData<Content>>({
+                    binding.refresh.isRefreshing = false
+                    mAdapter.submitData(it)
+                }, {
+                    toast(it.message)
+                    binding.refresh.isRefreshing = false
+                    mAdapter.submitFailed()
+                })
+            }
         }
     }
 
     override fun lazyLoad() {
-        viewModel.getGirlContentData(LoadStatus.INIT)
+
     }
 
     @SuppressLint("NotifyDataSetChanged")

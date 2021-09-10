@@ -3,18 +3,25 @@ package com.lee.library.extensions
 import com.google.gson.reflect.TypeToken
 import com.lee.library.cache.CacheManager
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
- * @author jv.lee
- * @date 2021/9/9
- * @description
- */
-/**
  * @param key 缓存key
+ * @return 协程体
  */
 suspend inline fun <reified T> CacheManager.getCache(key: String): T? {
     val type = object : TypeToken<T>() {}.type
     return CompletableDeferred(CacheManager.getDefault().get<T>(key, type)).await()
+}
+
+/**
+ * @param key 缓存key
+ * @return 数据流
+ */
+inline fun <reified T> CacheManager.getCacheFlow(key: String): Flow<T?> {
+    val type = object : TypeToken<T>() {}.type
+    return flow { CacheManager.getDefault().get<T>(key, type) }
 }
 
 /**

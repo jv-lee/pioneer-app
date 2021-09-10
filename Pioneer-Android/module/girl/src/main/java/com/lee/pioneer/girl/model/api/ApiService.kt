@@ -2,6 +2,7 @@ package com.lee.pioneer.girl.model.api
 
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -26,5 +27,13 @@ interface ApiService {
         @Path("page") page: Int,
         @Path("count") count: Int
     ): PageData<Content>
+
+    @GET("data/category/{category}/type/{type}/page/{page}/count/{count}")
+    fun getFlowContentDataAsync(
+        @Path("category") category: String,
+        @Path("type") type: String,
+        @Path("page") page: Int,
+        @Path("count") count: Int
+    ): Flow<PageData<Content>>
 
 }

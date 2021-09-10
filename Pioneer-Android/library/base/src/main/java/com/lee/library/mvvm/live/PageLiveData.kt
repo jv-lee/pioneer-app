@@ -1,6 +1,6 @@
 package com.lee.library.mvvm.live
 
-import com.lee.library.extensions.dispatchersIO
+import com.lee.library.extensions.flowOnIO
 import com.lee.library.extensions.notNull
 import com.lee.library.mvvm.base.BaseLiveData
 import com.lee.library.mvvm.load.LoadStatus
@@ -76,7 +76,7 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
         @LoadStatus status: Int,
         networkBlock: suspend (Int) -> Flow<T?> = { flowOf(null) },
         cacheBlock: suspend () -> Flow<T?> = { flowOf(null) },
-        completerBlock: suspend (T) -> T = { it }
+        completerBlock: suspend (T) -> Unit = { it }
     ) {
         //根据加载状态设置页码
         if (status == INIT) {
@@ -106,8 +106,9 @@ class PageLiveData<T>(val limit: Int = 0) : BaseLiveData<T>() {
             .map {
                 //该回调中saveCache/applyData
                 completerBlock(it!!)
+                it
             }
-            .dispatchersIO()
+            .flowOnIO()
             .catch {
                 throwMessage(it)
             }
