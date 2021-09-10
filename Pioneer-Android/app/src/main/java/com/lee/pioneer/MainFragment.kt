@@ -72,10 +72,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
             binding.navigationBar.setupWithNavController(controller)
             controller.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.label) {
-                    getString(R.string.nav_home),
-                    getString(R.string.nav_recommend),
-                    getString(R.string.nav_girl),
-                    getString(R.string.nav_me) -> {
+                    getString(R.string.title_home),
+                    getString(R.string.title_recommend),
+                    getString(R.string.title_girl),
+                    getString(R.string.title_me) -> {
                         if (binding.navigationBar.visibility == View.GONE) {
                             binding.navigationBar.startAnimation(navigationInAnim)
                         }

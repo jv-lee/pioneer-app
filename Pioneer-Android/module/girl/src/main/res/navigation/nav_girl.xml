@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/girl"
         android:name="com.lee.pioneer.girl.GirlFragment"
-        android:label="@string/nav_girl"
+        android:label="@string/title_girl"
         app:moduleName="girl"
         tools:layout="@layout/fragment_girl" >
 
