@@ -2,15 +2,17 @@ package com.lee.pioneer
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lee.library.base.BaseFragment
 import com.lee.library.extensions.binding
 import com.lee.library.extensions.delayBackEvent
+import com.lee.library.extensions.endListener
 import com.lee.library.extensions.setBackgroundColorCompat
-import com.lee.pioneer.databinding.FragmentMainBinding
 import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.pioneer.databinding.FragmentMainBinding
 
 /**
  * @author jv.lee
@@ -21,6 +23,24 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
     DarkViewUpdateTools.ViewCallback {
 
     private val binding by binding(FragmentMainBinding::bind)
+
+    private val navigationInAnim by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom_in)
+            .apply {
+                endListener {
+                    binding.navigationBar.visibility = View.VISIBLE
+                }
+            }
+    }
+
+    private val navigationOutAnim by lazy {
+        AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom_out)
+            .apply {
+                endListener {
+                    binding.navigationBar.visibility = View.GONE
+                }
+            }
+    }
 
     override fun bindView() {
         //设置回退策略
@@ -56,9 +76,15 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
                     getString(R.string.nav_recommend),
                     getString(R.string.nav_girl),
                     getString(R.string.nav_me) -> {
-                        binding.navigationBar.visibility = View.VISIBLE
+                        if (binding.navigationBar.visibility == View.GONE) {
+                            binding.navigationBar.startAnimation(navigationInAnim)
+                        }
                     }
-                    else -> binding.navigationBar.visibility = View.GONE
+                    else -> {
+                        if (binding.navigationBar.visibility == View.VISIBLE) {
+                            binding.navigationBar.startAnimation(navigationOutAnim)
+                        }
+                    }
                 }
             }
         }
