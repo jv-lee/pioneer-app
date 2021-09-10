@@ -1,0 +1,20 @@
+<resources>
+    <!-- My page item character-->
+    <string name="me_item_message">message center</string>
+    <string name="me_item_like">I like it</string>
+    <string name="me_item_views">browsed </string>
+    <string name="me_item_favorite">my collection</string>
+    <string name="me_item_feedback">feedback </string>
+    <string name="me_item_settings">clear cache </string>
+
+    <string name="me_clear_title">confirm to clear the cache</string>
+    <string name="me_clear_success">cleared successfully </string>
+    <string name="me_clear_failed">clear failure </string>
+    <string name="feedback_success">feedback content sent successfully</string>
+    <string name="feedback_empty">feedback content cannot be empty</string>
+    <string name="feedback_hint">enter up to 300 characters</string>
+    <string name="feedback_hint2">Please leave your mobile phone number or QQ to facilitate contact and feedback</string>
+    <string name="feedback_commit">Submit</string>
+    <string name="dark_mode_system">Night mode follows the system settings </string>
+    <string name="dark_mode_night">night mode </string>
+</resources>

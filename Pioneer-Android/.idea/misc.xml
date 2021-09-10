@@ -10,7 +10,29 @@
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.21302083333333333" />
         <entry key="../../../../../layout/custom_preview.xml" value="0.21510416666666668" />
+        <entry key="app/src/main/res/drawable/main_selector.xml" value="0.37135416666666665" />
+        <entry key="app/src/main/res/drawable/recommend_comment_selector.xml" value="0.37135416666666665" />
+        <entry key="app/src/main/res/drawable/recommend_like_selector.xml" value="0.37135416666666665" />
+        <entry key="app/src/main/res/drawable/recommend_view_selector.xml" value="0.37135416666666665" />
+        <entry key="app/src/main/res/drawable/shape_theme_item.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/shape_theme_placeholder.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_arrow.xml" value="0.1287037037037037" />
         <entry key="app/src/main/res/drawable/vector_collect.xml" value="0.37135416666666665" />
+        <entry key="app/src/main/res/drawable/vector_comment.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_feedback.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_girl.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_home.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_like.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_me.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_menu.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_recommend.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_search.xml" value="0.37135416666666665" />
+        <entry key="app/src/main/res/drawable/vector_settings.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_share.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_theme_mode_default.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_theme_mode_night.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_view.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/vector_view_small.xml" value="0.1287037037037037" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_collect.xml" value="0.3038949275362319" />
         <entry key="app/src/main/res/layout/fragment_content_details.xml" value="0.3038949275362319" />
@@ -28,8 +50,27 @@
         <entry key="app/src/main/res/layout/layout_main.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/menu/details_menu.xml" value="0.2" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.2635416666666667" />
+        <entry key="library/common/src/main/res/drawable/shape_theme_placeholder.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/shape_theme_search.xml" value="0.37135416666666665" />
+        <entry key="library/common/src/main/res/drawable/vector_arrow.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/vector_collect.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/vector_comment.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/vector_like.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/vector_like_small.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/vector_theme_mode_default.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/vector_theme_mode_night.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/drawable/vector_view_small.xml" value="0.1287037037037037" />
+        <entry key="library/common/src/main/res/menu/details_menu.xml" value="0.35520833333333335" />
         <entry key="module/home/src/main/res/layout/item_content_multiple.xml" value="0.3188405797101449" />
-        <entry key="module/search/src/main/res/layout/fragment_search.xml" value="0.2653985507246377" />
+        <entry key="module/me/src/main/res/drawable/shape_theme_item.xml" value="0.1287037037037037" />
+        <entry key="module/me/src/main/res/drawable/vector_collect.xml" value="0.1287037037037037" />
+        <entry key="module/me/src/main/res/drawable/vector_like.xml" value="0.1287037037037037" />
+        <entry key="module/me/src/main/res/drawable/vector_message.xml" value="0.1287037037037037" />
+        <entry key="module/me/src/main/res/layout/fragment_feedback.xml" value="0.1" />
+        <entry key="module/recommend/src/main/res/drawable/recommend_comment_selector.xml" value="0.1287037037037037" />
+        <entry key="module/recommend/src/main/res/drawable/recommend_like_selector.xml" value="0.1287037037037037" />
+        <entry key="module/recommend/src/main/res/drawable/recommend_view_selector.xml" value="0.1287037037037037" />
+        <entry key="module/recommend/src/main/res/layout/layout_recommend_header.xml" value="0.1" />
       </map>
     </option>
   </component>

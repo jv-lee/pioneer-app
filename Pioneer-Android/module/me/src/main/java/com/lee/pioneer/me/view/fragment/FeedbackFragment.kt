@@ -27,7 +27,7 @@ class FeedbackFragment :
 
         viewModel.toastStrObserver.observe(this, {
             toast(it)
-            if (it == getString(R.string.feedback_success)) findNavController().popBackStack()
+            if (it == getString(MR.string.feedback_success)) findNavController().popBackStack()
         })
     }
 

@@ -19,12 +19,12 @@ class MeViewModel : BaseViewModel() {
     val liveSystem by lazy { MutableLiveData<Boolean>() }
     val liveDark by lazy { MutableLiveData<Boolean>() }
 
-    val systemSwitchChange = CompoundButton.OnCheckedChangeListener { view, check ->
+    val systemSwitchChange = CompoundButton.OnCheckedChangeListener { _, check ->
         isSystem.set(check)
         DarkModeTools.get().updateSystemTheme(check)
     }
 
-    val darkSwitchChange = CompoundButton.OnCheckedChangeListener { view, check ->
+    val darkSwitchChange = CompoundButton.OnCheckedChangeListener { _, check ->
         DarkModeTools.get().updateNightTheme(check)
     }
 }

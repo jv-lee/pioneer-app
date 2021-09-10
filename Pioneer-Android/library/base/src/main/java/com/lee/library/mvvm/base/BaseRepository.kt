@@ -1,6 +1,5 @@
 package com.lee.library.mvvm.base
 
-import com.lee.pioneer.library.common.entity.ResponseData
 import com.lee.library.utils.LogUtil
 import retrofit2.Response
 
@@ -19,11 +18,6 @@ open class BaseRepository {
             LogUtil.e("network request error :${e.message}")
             null
         }
-    }
-
-    suspend fun <T : Any> apiCall(call: suspend () -> com.lee.pioneer.library.common.entity.ResponseData<T>): T {
-        val response = call.invoke()
-        return if (response.code == 200) response.data else throw Throwable(response.msg)
     }
 
 }

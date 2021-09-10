@@ -36,14 +36,14 @@ class MeFragment :
 
     private val clearDialog by lazy {
         ChoiceDialog(requireContext()).apply {
-            setTitle(getString(R.string.me_clear_title))
+            setTitle(getString(MR.string.me_clear_title))
             setCancelable(true)
             confirmListener = ConfirmListener {
                 if (CacheUtil.clearAllCache(activity)) {
                     viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
-                    toast(getString(R.string.me_clear_success))
+                    toast(getString(MR.string.me_clear_success))
                 } else {
-                    toast(getString(R.string.me_clear_failed))
+                    toast(getString(MR.string.me_clear_failed))
                 }
                 dismiss()
             }

@@ -67,15 +67,15 @@ class RecommendFragment :
             groupType.check(RR.id.radio_view)
             radioView.setButtonTint(
                 R.drawable.vector_view,
-                R.drawable.recommend_view_selector
+                RR.drawable.recommend_view_selector
             )
             radioLike.setButtonTint(
                 R.drawable.vector_like,
-                R.drawable.recommend_like_selector
+                RR.drawable.recommend_like_selector
             )
             radioComment.setButtonTint(
                 R.drawable.vector_comment,
-                R.drawable.recommend_comment_selector
+                RR.drawable.recommend_comment_selector
             )
             groupType.setOnCheckedChangeListener { _, checkedId ->
                 mAdapter.initStatusView()

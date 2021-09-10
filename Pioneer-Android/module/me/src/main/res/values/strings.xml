@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    我的页面item字符-->
+    <string name="me_item_message">消息中心</string>
+    <string name="me_item_like">我喜欢的</string>
+    <string name="me_item_views">浏览过的</string>
+    <string name="me_item_favorite">我的收藏</string>
+    <string name="me_item_feedback">意见反馈</string>
+    <string name="me_item_settings">清除缓存</string>
+
+    <string name="me_clear_title">确认清除缓存</string>
+    <string name="me_clear_success">清除成功</string>
+    <string name="me_clear_failed">清除失败</string>
+    <string name="feedback_success">反馈内容发送成功</string>
+    <string name="feedback_empty">反馈内容不能为空</string>
+    <string name="feedback_hint">最多输入300字符</string>
+    <string name="feedback_hint2">请留下你的手机号或QQ，方便联系回馈</string>
+    <string name="feedback_commit">提交</string>
+    <string name="dark_mode_system">夜间模式跟随系统设置</string>
+    <string name="dark_mode_night">夜间模式</string>
+</resources>

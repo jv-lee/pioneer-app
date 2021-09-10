@@ -3,11 +3,10 @@ package com.lee.pioneer.me.viewmodel
 import android.text.TextUtils
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.lee.library.base.BaseApplication
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.widget.interadap.TextWatcherAdapter
 import com.lee.pioneer.App
-import com.lee.pioneer.R
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
