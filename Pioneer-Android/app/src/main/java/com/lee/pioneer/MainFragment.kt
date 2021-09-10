@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.lee.library.base.BaseFragment
 import com.lee.library.extensions.binding
 import com.lee.library.extensions.delayBackEvent
@@ -16,6 +15,7 @@ import com.lee.library.extensions.endListener
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.databinding.FragmentMainBinding
+import com.lee.pioneer.library.common.tools.setupWithNavController2
 import java.lang.ref.WeakReference
 
 /**
@@ -73,7 +73,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
     private fun bindNavigationAction() {
         binding.navigationBar.post {
             val controller = binding.container.findNavController()
-            binding.navigationBar.setupWithNavController(controller)
+            binding.navigationBar.setupWithNavController2(controller)
 
             val weakReference = WeakReference(binding.navigationBar)
             controller.addOnDestinationChangedListener(object :
