@@ -19,7 +19,7 @@ import com.lee.pioneer.girl.databinding.FragmentGirlBinding
 import com.lee.pioneer.girl.databinding.LayoutGirlHeaderBinding
 import com.lee.pioneer.girl.viewmodel.GirlViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
+import com.lee.library.tools.DarkViewUpdateTools
 import java.text.SimpleDateFormat
 import java.util.*
 import com.lee.pioneer.girl.R as GR

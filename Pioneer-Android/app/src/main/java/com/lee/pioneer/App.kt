@@ -15,7 +15,7 @@ import com.lee.library.lifecycle.SimpleFragmentLifecycleCallbacks
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.ScreenDensityUtil
 import com.lee.library.utils.StatusUtil
-import com.lee.pioneer.library.common.tools.DarkModeTools
+import com.lee.library.tools.DarkModeTools
 import com.lee.pioneer.library.service.hepler.ModuleApplicationService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

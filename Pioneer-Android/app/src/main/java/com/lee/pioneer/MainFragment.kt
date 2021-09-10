@@ -10,7 +10,7 @@ import com.lee.library.extensions.binding
 import com.lee.library.extensions.delayBackEvent
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.pioneer.databinding.FragmentMainBinding
-import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
+import com.lee.library.tools.DarkViewUpdateTools
 
 /**
  * @author jv.lee

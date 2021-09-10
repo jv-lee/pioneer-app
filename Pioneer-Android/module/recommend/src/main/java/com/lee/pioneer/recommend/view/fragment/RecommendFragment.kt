@@ -12,7 +12,7 @@ import com.lee.library.extensions.*
 import com.lee.pioneer.R
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Banner
-import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
+import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.recommend.databinding.FragmentRecommendBinding
 import com.lee.pioneer.recommend.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.recommend.view.adapter.ContentAdapter

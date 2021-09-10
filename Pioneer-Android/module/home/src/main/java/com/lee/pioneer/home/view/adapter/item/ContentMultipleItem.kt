@@ -12,11 +12,11 @@ import com.lee.library.adapter.item.ViewItem
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.utils.TimeUtil
+import com.lee.pioneer.R
 import com.lee.pioneer.library.common.constant.HttpConstant
 import com.lee.pioneer.library.common.entity.Content
+import com.lee.pioneer.library.common.tools.CommonTools
 import com.lee.pioneer.library.common.tools.GlideTools
-import com.lee.pioneer.library.common.tools.ViewTools
-import com.lee.pioneer.R
 import com.lee.pioneer.home.R as HR
 
 
@@ -101,7 +101,7 @@ class ContentMultipleItem : ViewItem<Content>() {
                 tvCategory.text = category
                 tvTitle.text = title
                 tvDescription.text = desc
-                tvDescription.maxLines = if (ViewTools.isTextEllipse(tvTitle)) 2 else 3
+                tvDescription.maxLines = if (CommonTools.isTextEllipse(tvTitle)) 2 else 3
                 tvLike.text =
                     if (entity.likeCounts == 0) tvLike.context.getString(R.string.item_like_text) else likeCounts.toString()
                 tvViews.text =

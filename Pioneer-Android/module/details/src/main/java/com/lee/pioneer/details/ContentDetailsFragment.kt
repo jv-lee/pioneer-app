@@ -8,15 +8,15 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
 import com.lee.library.extensions.setWebBackEvent
 import com.lee.library.extensions.toast
+import com.lee.library.tools.WebViewTools
 import com.lee.library.utils.ShareUtil
 import com.lee.library.widget.WebViewEx
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.R
-import com.lee.pioneer.library.common.constant.HttpConstant
-import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.details.databinding.FragmentContentDetailsBinding
 import com.lee.pioneer.details.viewmodel.ContentDetailsViewModel
-import com.lee.pioneer.library.common.tools.WebViewTools
+import com.lee.pioneer.library.common.constant.HttpConstant
+import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.details.R as DR
 
 /**

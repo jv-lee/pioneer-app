@@ -16,7 +16,7 @@ import com.lee.pioneer.home.databinding.FragmentContentListBinding
 import com.lee.pioneer.home.view.adapter.ContentAdapter
 import com.lee.pioneer.home.viewmodel.ContentListViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.common.tools.DarkViewUpdateTools
+import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.home.R as HR
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
