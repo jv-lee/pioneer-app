@@ -60,6 +60,7 @@ android {
 }
 
 dependencies {
+    kapts.each { k, v -> kapt v }
     implementation project(":app")
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

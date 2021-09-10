@@ -104,6 +104,7 @@ android {
 }
 
 dependencies {
+    kapts.each { k, v -> kapt v }
     api project(path: ':library:service')
 
     testImplementation 'junit:junit:4.12'

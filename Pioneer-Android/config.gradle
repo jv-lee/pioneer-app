@@ -37,13 +37,8 @@ ext {
     lifecycle = "2.4.0-alpha03"
 
     //运行时注解处理器
-    processor = [
-            "annotation": "androidx.annotation:annotation:1.1.0",
-            "glide"     : "com.github.bumptech.glide:compiler:${glide}",
-            "room"      : "androidx.room:room-compiler:${room}"
-    ]
-
     kapts = [
+            "annotation": "androidx.annotation:annotation:1.1.0",
             "room"       : "androidx.room:room-compiler:${room}",
             "glide"      : "com.github.bumptech.glide:compiler:${glide}",
             "autoService": "com.google.auto.service:auto-service:${autoService}"

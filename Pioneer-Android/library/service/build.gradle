@@ -56,7 +56,6 @@ android {
 
 dependencies {
     api project(path: ':library:common')
-    processor.each { k, v -> annotationProcessor v }
     kapts.each { k, v -> kapt v }
 
 }
