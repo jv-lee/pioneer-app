@@ -1,9 +1,12 @@
 package com.lee.pioneer
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lee.library.base.BaseFragment
@@ -13,6 +16,7 @@ import com.lee.library.extensions.endListener
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.databinding.FragmentMainBinding
+import java.lang.ref.WeakReference
 
 /**
  * @author jv.lee
@@ -70,23 +74,37 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
         binding.navigationBar.post {
             val controller = binding.container.findNavController()
             binding.navigationBar.setupWithNavController(controller)
-            controller.addOnDestinationChangedListener { _, destination, _ ->
-                when (destination.label) {
-                    getString(R.string.title_home),
-                    getString(R.string.title_recommend),
-                    getString(R.string.title_girl),
-                    getString(R.string.title_me) -> {
-                        if (binding.navigationBar.visibility == View.GONE) {
-                            binding.navigationBar.startAnimation(navigationInAnim)
-                        }
+
+            val weakReference = WeakReference(binding.navigationBar)
+            controller.addOnDestinationChangedListener(object :
+                NavController.OnDestinationChangedListener {
+                override fun onDestinationChanged(
+                    controller: NavController,
+                    destination: NavDestination,
+                    arguments: Bundle?
+                ) {
+                    val view = weakReference.get()
+                    if (view == null) {
+                        controller.removeOnDestinationChangedListener(this)
+                        return
                     }
-                    else -> {
-                        if (binding.navigationBar.visibility == View.VISIBLE) {
-                            binding.navigationBar.startAnimation(navigationOutAnim)
+                    when (destination.label) {
+                        getString(R.string.title_home),
+                        getString(R.string.title_recommend),
+                        getString(R.string.title_girl),
+                        getString(R.string.title_me) -> {
+                            if (view.visibility == View.GONE) {
+                                view.startAnimation(navigationInAnim)
+                            }
+                        }
+                        else -> {
+                            if (view.visibility == View.VISIBLE) {
+                                view.startAnimation(navigationOutAnim)
+                            }
                         }
                     }
                 }
-            }
+            })
         }
     }
 
