@@ -29,21 +29,21 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
     private val binding by binding(FragmentMainBinding::bind)
 
     private val navigationInAnim by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom_in)
-            .apply {
-                endListener {
-                    binding.navigationBar.visibility = View.VISIBLE
-                }
+        AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom_in).apply {
+            endListener {
+                binding.navigationBar.visibility = View.VISIBLE
+                binding.navigationBar.clearAnimation()
             }
+        }
     }
 
     private val navigationOutAnim by lazy {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom_out)
-            .apply {
-                endListener {
-                    binding.navigationBar.visibility = View.GONE
-                }
+        AnimationUtils.loadAnimation(requireContext(), R.anim.slide_bottom_out).apply {
+            endListener {
+                binding.navigationBar.visibility = View.GONE
+                binding.navigationBar.clearAnimation()
             }
+        }
     }
 
     override fun bindView() {
@@ -93,12 +93,12 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
                         getString(R.string.title_recommend),
                         getString(R.string.title_girl),
                         getString(R.string.title_me) -> {
-                            if (view.visibility == View.GONE) {
+                            if (view.visibility == View.GONE && view.animation == null) {
                                 view.startAnimation(navigationInAnim)
                             }
                         }
                         else -> {
-                            if (view.visibility == View.VISIBLE) {
+                            if (view.visibility == View.VISIBLE && view.animation == null) {
                                 view.startAnimation(navigationOutAnim)
                             }
                         }
