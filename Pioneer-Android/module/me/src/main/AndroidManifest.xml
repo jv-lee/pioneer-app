@@ -4,7 +4,7 @@
     package="com.lee.pioneer.me">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
         dist:title="@string/title_me">
         <dist:delivery>
             <dist:install-time />

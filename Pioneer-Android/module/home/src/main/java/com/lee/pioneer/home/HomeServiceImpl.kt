@@ -1,5 +1,6 @@
 package com.lee.pioneer.home
 
+import androidx.annotation.Keep
 import com.google.auto.service.AutoService
 import com.lee.library.adapter.base.BaseViewItem
 import com.lee.pioneer.home.view.adapter.item.ContentMultipleItem
@@ -12,6 +13,7 @@ import com.lee.pioneer.library.service.HomeService
  * @data 2021/9/9
  * @description
  */
+@Keep
 @AutoService(HomeService::class)
 class HomeServiceImpl : HomeService {
 

@@ -4,7 +4,7 @@
     package="com.lee.pioneer.recommend">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
         dist:title="@string/title_recommend">
         <dist:delivery>
             <dist:install-time />

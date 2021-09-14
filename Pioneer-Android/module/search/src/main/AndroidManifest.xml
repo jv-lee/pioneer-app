@@ -4,7 +4,7 @@
     package="com.lee.pioneer.search">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
         dist:title="@string/title_search">
         <dist:delivery>
             <dist:install-time />

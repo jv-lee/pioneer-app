@@ -51,7 +51,7 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false //混淆模式
+            minifyEnabled true //混淆模式
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             zipAlignEnabled false // Zipalign优化

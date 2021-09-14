@@ -1,5 +1,6 @@
 package com.lee.pioneer.me
 
+import androidx.annotation.Keep
 import com.google.auto.service.AutoService
 import com.lee.pioneer.library.common.entity.ContentHistory
 import com.lee.pioneer.library.service.MeService
@@ -10,6 +11,7 @@ import com.lee.pioneer.me.db.AppDataBase
  * @date 2021/9/9
  * @description
  */
+@Keep
 @AutoService(MeService::class)
 class MeServiceImpl : MeService {
     override fun queryContentHistory(limit: Int): List<ContentHistory> {

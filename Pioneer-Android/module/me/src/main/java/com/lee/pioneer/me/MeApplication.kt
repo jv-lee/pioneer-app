@@ -1,6 +1,7 @@
 package com.lee.pioneer.me
 
 import android.app.Application
+import androidx.annotation.Keep
 import com.google.auto.service.AutoService
 import com.lee.pioneer.library.service.ApplicationService
 import com.lee.pioneer.me.db.AppDataBase
@@ -10,6 +11,7 @@ import com.lee.pioneer.me.db.AppDataBase
  * @date 2021/9/9
  * @description
  */
+@Keep
 @AutoService(ApplicationService::class)
 class MeApplication : ApplicationService {
     override fun init(application: Application) {
