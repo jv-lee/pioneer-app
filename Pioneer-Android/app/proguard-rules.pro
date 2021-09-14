@@ -177,12 +177,11 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keepattributes *Annotation*
 
 
-#自定义依赖库不参与混淆 ------ 自定义view不参与混淆
--keep class com.lee.library.** {*;}
-#实体类不参与混淆
--keep class com.lee.pioneer.library.common.entity.** {*;}
+#实体类不参与混淆 使用注释@Keep 标记实体类
+#-keep class com.lee.pioneer.library.common.entity.** {*;}
 #模块服务不参与混淆 (模块服务实现类使用@Keep注解标注)
--keep class com.lee.pioneer.library.service.** {*;}
+-keep public class * extends com.lee.pioneer.library.service.core.IModuleService
+
 
 #关闭日志
 #-assumenosideeffects class android.util.Log {

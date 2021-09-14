@@ -2,13 +2,14 @@ package com.lee.pioneer.library.service
 
 import com.lee.library.db.base.BaseDao
 import com.lee.pioneer.library.common.entity.ContentHistory
+import com.lee.pioneer.library.service.core.IModuleService
 
 /**
  * @author jv.lee
  * @date 2021/9/9
  * @description
  */
-interface MeService :BaseDao<ContentHistory>{
+interface MeService : IModuleService, BaseDao<ContentHistory> {
     /**
      * 查询所有浏览记录
      */
