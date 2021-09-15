@@ -71,7 +71,7 @@ class MainActivity : BaseActivity() {
     @ExperimentalCoroutinesApi
     override fun onDestroy() {
         cancel()
-        WebViewTools.get().onDestroy()
+        WebViewTools.get(applicationContext).onDestroy()
         super.onDestroy()
     }
 

@@ -27,7 +27,7 @@ class ContentDetailsFragment :
 
     private val detailsUrl by arguments<String>(KeyConstants.KEY_URL)
     private val detailsID by arguments<String>(KeyConstants.KEY_ID)
-    private val web by lazy { WebViewTools.getWeb() }
+    private val web by lazy { WebViewTools.getWeb(requireActivity().applicationContext) }
 
     override fun bindView() {
         binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
