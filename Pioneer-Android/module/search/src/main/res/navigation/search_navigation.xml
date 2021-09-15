@@ -11,7 +11,7 @@
         android:label="@string/module_search"
         tools:layout="@layout/fragment_search">
 
-        <deepLink app:uri="@string/module_deep_link_search" />
+        <deepLink app:uri="pioneer-app://com.lee.pioneer/search_fragment"/>
 
     </fragment>
 

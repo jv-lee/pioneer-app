@@ -7,7 +7,4 @@
     <string name="module_me">me</string>
     <string name="module_details">details</string>
     <string name="module_search">search</string>
-
-    <string name="module_deep_link_search">pioneer-app://com.lee.pioneer/search_fragment</string>
-    <string name="module_deep_link_details">pioneer-app://com.lee.pioneer/details_fragment?id={id}&amp;url={url}</string>
 </resources>

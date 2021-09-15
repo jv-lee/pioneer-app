@@ -17,7 +17,7 @@ import com.lee.pioneer.router.navigationDeepLink
 class SearchServiceImpl : SearchService {
     override fun navigationSearch(navController: NavController) {
         navController.navigationDeepLink(
-            BaseApplication.getContext().getString(R.string.module_deep_link_search).toUri(),
+            "pioneer-app://com.lee.pioneer/search_fragment".toUri(),
             NavigationAnim.Bottom
         )
     }
