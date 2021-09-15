@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.lee.library.adapter.base.BaseViewHolder
 import com.lee.library.adapter.item.ViewItem
-import com.lee.pioneer.R
 import com.lee.pioneer.library.common.entity.ContentHistory
-import com.lee.pioneer.me.R as MR
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -19,7 +18,7 @@ import com.lee.pioneer.me.R as MR
 class ContentChildItem : ViewItem<ContentHistory>() {
 
     override fun getItemView(context: Context, parent: ViewGroup): View =
-        LayoutInflater.from(context).inflate(MR.layout.item_content_child, parent, false)
+        LayoutInflater.from(context).inflate(R.layout.item_content_child, parent, false)
 
     override fun isItemView(entity: ContentHistory, position: Int): Boolean {
         return true
@@ -28,13 +27,13 @@ class ContentChildItem : ViewItem<ContentHistory>() {
     override fun convert(holder: BaseViewHolder, entity: ContentHistory, position: Int) {
         holder.run {
             entity.run {
-                getView<TextView>(MR.id.tv_title).text = content.title
-                getView<TextView>(MR.id.tv_description).text = content.desc
-                getView<TextView>(MR.id.tv_like_count).text =
+                getView<TextView>(R.id.tv_title).text = content.title
+                getView<TextView>(R.id.tv_description).text = content.desc
+                getView<TextView>(R.id.tv_like_count).text =
                     convertView.context.getString(
                         R.string.item_like_text_count, content.likeCounts.toString()
                     )
-                getView<TextView>(MR.id.tv_view_count).text =
+                getView<TextView>(R.id.tv_view_count).text =
                     convertView.context.getString(
                         R.string.item_view_text_count, content.views.toString()
                     )

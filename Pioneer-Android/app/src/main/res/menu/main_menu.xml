@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/home_graph"
         android:icon="@drawable/vector_home"
         android:title="@string/nav_home" />
     <item
-        android:id="@+id/recommend"
+        android:id="@+id/recommend_graph"
         android:icon="@drawable/vector_recommend"
         android:title="@string/nav_recommend" />
     <item
-        android:id="@+id/girl"
+        android:id="@+id/girl_graph"
         android:icon="@drawable/vector_girl"
         android:title="@string/nav_girl" />
     <item
-        android:id="@+id/me"
+        android:id="@+id/me_graph"
         android:icon="@drawable/vector_me"
         android:title="@string/nav_me" />
 </menu>

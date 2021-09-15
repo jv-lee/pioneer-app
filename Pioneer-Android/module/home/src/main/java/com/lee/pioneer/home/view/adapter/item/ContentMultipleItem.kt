@@ -12,12 +12,11 @@ import com.lee.library.adapter.item.ViewItem
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.utils.TimeUtil
-import com.lee.pioneer.R
 import com.lee.pioneer.library.common.constant.HttpConstant
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.tools.CommonTools
 import com.lee.pioneer.library.common.tools.GlideTools
-import com.lee.pioneer.home.R as HR
+import com.lee.pioneer.home.R
 
 
 /**
@@ -28,7 +27,7 @@ import com.lee.pioneer.home.R as HR
 class ContentMultipleItem : ViewItem<Content>() {
 
     override fun getItemView(context: Context, parent: ViewGroup): View =
-        LayoutInflater.from(context).inflate(HR.layout.item_content_multiple, parent, false)
+        LayoutInflater.from(context).inflate(R.layout.item_content_multiple, parent, false)
 
     override fun openRecycler(): Boolean {
         return true
@@ -40,13 +39,13 @@ class ContentMultipleItem : ViewItem<Content>() {
 
     override fun viewRecycled(holder: BaseViewHolder, entity: Content, position: Int) {
         holder.let {
-            it.getView<ImageView>(HR.id.iv_picture)?.run {
+            it.getView<ImageView>(R.id.iv_picture)?.run {
                 Glide.with(this.context).clear(this)
             }
-            it.getView<ImageView>(HR.id.iv_picture2)?.run {
+            it.getView<ImageView>(R.id.iv_picture2)?.run {
                 Glide.with(this.context).clear(this)
             }
-            it.getView<ImageView>(HR.id.iv_picture3)?.run {
+            it.getView<ImageView>(R.id.iv_picture3)?.run {
                 Glide.with(this.context).clear(this)
             }
         }
@@ -54,16 +53,16 @@ class ContentMultipleItem : ViewItem<Content>() {
 
     override fun convert(holder: BaseViewHolder, entity: Content, position: Int) {
         holder.run {
-            val ivPicture = getView<ImageView>(HR.id.iv_picture)
-            val ivPicture2 = getView<ImageView>(HR.id.iv_picture2)
-            val ivPicture3 = getView<ImageView>(HR.id.iv_picture3)
-            val tvAuthor = getView<TextView>(HR.id.tv_author)
-            val tvCategory = getView<TextView>(HR.id.tv_category)
-            val tvTitle = getView<TextView>(HR.id.tv_title)
-            val tvDescription = getView<TextView>(HR.id.tv_description)
-            val tvLike = getView<TextView>(HR.id.tv_like)
-            val tvViews = getView<TextView>(HR.id.tv_view)
-            val tvTime = getView<TextView>(HR.id.tv_time)
+            val ivPicture = getView<ImageView>(R.id.iv_picture)
+            val ivPicture2 = getView<ImageView>(R.id.iv_picture2)
+            val ivPicture3 = getView<ImageView>(R.id.iv_picture3)
+            val tvAuthor = getView<TextView>(R.id.tv_author)
+            val tvCategory = getView<TextView>(R.id.tv_category)
+            val tvTitle = getView<TextView>(R.id.tv_title)
+            val tvDescription = getView<TextView>(R.id.tv_description)
+            val tvLike = getView<TextView>(R.id.tv_like)
+            val tvViews = getView<TextView>(R.id.tv_view)
+            val tvTime = getView<TextView>(R.id.tv_time)
 
             holder.itemView.setBackgroundColorCompat(R.color.colorThemeItem)
             tvAuthor.setTextColorCompat(R.color.colorPrimaryDark)

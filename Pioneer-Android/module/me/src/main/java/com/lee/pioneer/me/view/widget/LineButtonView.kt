@@ -11,8 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import com.lee.library.extensions.dimensToSp
 import com.lee.library.extensions.setImageTintCompat
-import com.lee.pioneer.R
-import com.lee.pioneer.me.R as MR
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -55,55 +54,55 @@ class LineButtonView : ConstraintLayout {
 
     private fun initAttribute(attrs: AttributeSet) {
 
-        context.obtainStyledAttributes(attrs, MR.styleable.LineButtonView).run {
+        context.obtainStyledAttributes(attrs, R.styleable.LineButtonView).run {
             //左侧文字
             leftTextSize = context.dimensToSp(
                 getDimension(
-                    MR.styleable.LineButtonView_leftTextSize,
+                    R.styleable.LineButtonView_leftTextSize,
                     resources.getDimension(R.dimen.view_line_text_size)
                 )
             )
             leftTextMargin = getDimensionPixelSize(
-                MR.styleable.LineButtonView_leftTextMargin,
+                R.styleable.LineButtonView_leftTextMargin,
                 resources.getDimension(R.dimen.view_line_text_margin).toInt()
             )
             leftTextColor = getColor(
-                MR.styleable.LineButtonView_leftTextColor,
+                R.styleable.LineButtonView_leftTextColor,
                 ContextCompat.getColor(context, R.color.colorThemeAccent)
             )
-            leftText = getString(MR.styleable.LineButtonView_leftText) ?: ""
+            leftText = getString(R.styleable.LineButtonView_leftText) ?: ""
 
             //右侧文字
             rightTextSize = context.dimensToSp(
                 getDimension(
-                    MR.styleable.LineButtonView_rightTextSize,
+                    R.styleable.LineButtonView_rightTextSize,
                     resources.getDimension(R.dimen.view_line_text_size)
                 )
             )
             rightTextMargin = getDimensionPixelSize(
-                MR.styleable.LineButtonView_rightTextMargin,
+                R.styleable.LineButtonView_rightTextMargin,
                 resources.getDimension(R.dimen.view_line_text_margin).toInt()
             )
             rightTextColor = getColor(
-                MR.styleable.LineButtonView_rightTextColor,
+                R.styleable.LineButtonView_rightTextColor,
                 ContextCompat.getColor(context, R.color.colorThemeAccent)
             )
-            rightText = getString(MR.styleable.LineButtonView_rightText) ?: ""
+            rightText = getString(R.styleable.LineButtonView_rightText) ?: ""
 
             //图片资源
             iconSize =
                 getDimensionPixelSize(
-                    MR.styleable.LineButtonView_iconSize,
+                    R.styleable.LineButtonView_iconSize,
                     resources.getDimensionPixelSize(R.dimen.view_line_icon_size)
                 )
-            leftDrawableId = getResourceId(MR.styleable.LineButtonView_leftDrawable, 0)
-            rightDrawableId = getResourceId(MR.styleable.LineButtonView_rightDrawable, 0)
+            leftDrawableId = getResourceId(R.styleable.LineButtonView_leftDrawable, 0)
+            rightDrawableId = getResourceId(R.styleable.LineButtonView_rightDrawable, 0)
             leftTint = getColor(
-                MR.styleable.LineButtonView_leftTint,
+                R.styleable.LineButtonView_leftTint,
                 0
             )
             rightTint = getColor(
-                MR.styleable.LineButtonView_rightTint,
+                R.styleable.LineButtonView_rightTint,
                 0
             )
 

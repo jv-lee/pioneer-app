@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/girl_graph"
+    app:startDestination="@id/girl_fragment">
+
+    <fragment
+        android:id="@+id/girl_fragment"
+        android:name="com.lee.pioneer.girl.GirlFragment"
+        android:label="@string/module_girl"
+        tools:layout="@layout/fragment_girl" >
+
+<!--        <action-->
+<!--            android:id="@+id/action_girl_to_details"-->
+<!--            app:destination="@id/details"-->
+<!--            app:enterAnim="@anim/slide_right_in"-->
+<!--            app:exitAnim="@anim/slide_default"-->
+<!--            app:popEnterAnim="@anim/slide_default"-->
+<!--            app:popExitAnim="@anim/slide_right_out" />-->
+
+    </fragment>
+
+<!--    <include-dynamic-->
+<!--        android:id="@+id/details"-->
+<!--        app:graphResName="nav_details"-->
+<!--        app:moduleName="details" />-->
+
+</navigation>

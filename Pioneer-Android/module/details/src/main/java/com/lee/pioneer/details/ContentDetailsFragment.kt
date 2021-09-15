@@ -12,12 +12,10 @@ import com.lee.library.tools.WebViewTools
 import com.lee.library.utils.ShareUtil
 import com.lee.library.widget.WebViewEx
 import com.lee.library.widget.toolbar.TitleToolbar
-import com.lee.pioneer.R
 import com.lee.pioneer.details.databinding.FragmentContentDetailsBinding
 import com.lee.pioneer.details.viewmodel.ContentDetailsViewModel
 import com.lee.pioneer.library.common.constant.HttpConstant
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.details.R as DR
 
 /**
  * @author jv.lee
@@ -25,7 +23,7 @@ import com.lee.pioneer.details.R as DR
  * @description 内容详情页
  */
 class ContentDetailsFragment :
-    BaseVMNavigationFragment<FragmentContentDetailsBinding, ContentDetailsViewModel>(DR.layout.fragment_content_details) {
+    BaseVMNavigationFragment<FragmentContentDetailsBinding, ContentDetailsViewModel>(R.layout.fragment_content_details) {
 
     private val detailsUrl by arguments<String>(KeyConstants.KEY_URL)
     private val detailsID by arguments<String>(KeyConstants.KEY_ID)

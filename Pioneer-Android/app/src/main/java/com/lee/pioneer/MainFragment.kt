@@ -89,10 +89,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main),
                         return
                     }
                     when (destination.label) {
-                        getString(R.string.title_home),
-                        getString(R.string.title_recommend),
-                        getString(R.string.title_girl),
-                        getString(R.string.title_me) -> {
+                        getString(R.string.module_home),
+                        getString(R.string.module_recommend),
+                        getString(R.string.module_girl),
+                        getString(R.string.module_me) -> {
                             if (view.visibility == View.GONE && view.animation == null) {
                                 view.startAnimation(navigationInAnim)
                             }

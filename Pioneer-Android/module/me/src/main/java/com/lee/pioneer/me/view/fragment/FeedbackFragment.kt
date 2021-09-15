@@ -5,10 +5,9 @@ import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.toast
 import com.lee.library.utils.KeyboardUtil
-import com.lee.pioneer.R
 import com.lee.pioneer.me.databinding.FragmentFeedbackBinding
 import com.lee.pioneer.me.viewmodel.FeedbackViewModel
-import com.lee.pioneer.me.R as MR
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -16,7 +15,7 @@ import com.lee.pioneer.me.R as MR
  * @description MeFragment ChildPage -> 反馈页面
  */
 class FeedbackFragment :
-    BaseVMFragment<FragmentFeedbackBinding, FeedbackViewModel>(MR.layout.fragment_feedback) {
+    BaseVMFragment<FragmentFeedbackBinding, FeedbackViewModel>(R.layout.fragment_feedback) {
 
     override fun bindView() {
         binding.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeItem))
@@ -27,7 +26,7 @@ class FeedbackFragment :
 
         viewModel.toastStrObserver.observe(this, {
             toast(it)
-            if (it == getString(MR.string.feedback_success)) findNavController().popBackStack()
+            if (it == getString(R.string.feedback_success)) findNavController().popBackStack()
         })
     }
 

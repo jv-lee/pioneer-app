@@ -7,9 +7,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.lee.library.widget.banner.holder.MZViewHolder
-import com.lee.pioneer.R
 import com.lee.pioneer.library.common.entity.Banner
 import com.lee.pioneer.library.common.tools.GlideTools
+import com.lee.pioneer.recommend.R
 
 /**
  * @author jv.lee

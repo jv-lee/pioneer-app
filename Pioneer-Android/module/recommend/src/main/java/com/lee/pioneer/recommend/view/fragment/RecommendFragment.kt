@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.*
-import com.lee.pioneer.R
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Banner
 import com.lee.library.tools.DarkViewUpdateTools
@@ -20,7 +19,7 @@ import com.lee.pioneer.recommend.view.widget.BannerViewHolder
 import com.lee.pioneer.recommend.view.widget.RecommendLoadResource
 import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
 import java.util.*
-import com.lee.pioneer.recommend.R as RR
+import com.lee.pioneer.recommend.R
 
 /**
  * @author jv.lee
@@ -28,12 +27,12 @@ import com.lee.pioneer.recommend.R as RR
  * @description 推荐页面
  */
 class RecommendFragment :
-    BaseVMNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(RR.layout.fragment_recommend),
+    BaseVMNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),
     DarkViewUpdateTools.ViewCallback {
 
     private val headerBinding by lazy {
         DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(
-            layoutInflater, RR.layout.layout_recommend_header, null, false
+            layoutInflater, R.layout.layout_recommend_header, null, false
         )
     }
     private val mAdapter by lazy { ContentAdapter(requireContext(), arrayListOf()) }
@@ -45,7 +44,7 @@ class RecommendFragment :
 
         //设置toolbar 搜索跳转
         binding.tvSearch.setOnClickListener {
-            findNavController().navigate(RR.id.action_recommend_to_search)
+//            findNavController().navigate(R.id.action_recommend_to_search)
         }
 
         headerBinding.run {
@@ -53,43 +52,43 @@ class RecommendFragment :
             banner.setDelayedTime(5000)
             banner.setBannerPageClickListener { _, position ->
                 (banner.data[position] as Banner).let {
-                    findNavController().navigate(
-                        RR.id.action_recommend_to_details,
-                        bundleOf(
-                            Pair(KeyConstants.KEY_ID, KeyConstants.CONST_EMPTY),
-                            Pair(KeyConstants.KEY_URL, it.url)
-                        )
-                    )
+//                    findNavController().navigate(
+//                        R.id.action_recommend_to_details,
+//                        bundleOf(
+//                            Pair(KeyConstants.KEY_ID, KeyConstants.CONST_EMPTY),
+//                            Pair(KeyConstants.KEY_URL, it.url)
+//                        )
+//                    )
                 }
             }
 
             //设置推荐头部 分类样式
-            groupType.check(RR.id.radio_view)
+            groupType.check(R.id.radio_view)
             radioView.setButtonTint(
                 R.drawable.vector_view,
-                RR.drawable.recommend_view_selector
+                R.drawable.recommend_view_selector
             )
             radioLike.setButtonTint(
                 R.drawable.vector_like,
-                RR.drawable.recommend_like_selector
+                R.drawable.recommend_like_selector
             )
             radioComment.setButtonTint(
                 R.drawable.vector_comment,
-                RR.drawable.recommend_comment_selector
+                R.drawable.recommend_comment_selector
             )
             groupType.setOnCheckedChangeListener { _, checkedId ->
                 mAdapter.initStatusView()
                 mAdapter.pageLoading()
                 when (checkedId) {
-                    RR.id.radio_view -> {
+                    R.id.radio_view -> {
                         type = "views"
                         viewModel.getContentList(type)
                     }
-                    RR.id.radio_like -> {
+                    R.id.radio_like -> {
                         type = "likes"
                         viewModel.getContentList(type)
                     }
-                    RR.id.radio_comment -> {
+                    R.id.radio_comment -> {
                         type = "comments"
                         viewModel.getContentList(type)
                     }
@@ -112,12 +111,12 @@ class RecommendFragment :
             notifyDataSetChanged()
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-                findNavController().navigate(RR.id.action_recommend_to_details,
-                    bundleOf(
-                        Pair(KeyConstants.KEY_ID, entity._id),
-                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-                    )
-                )
+//                findNavController().navigate(R.id.action_recommend_to_details,
+//                    bundleOf(
+//                        Pair(KeyConstants.KEY_ID, entity._id),
+//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
+//                    )
+//                )
             }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {}

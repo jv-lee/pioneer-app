@@ -15,12 +15,11 @@ import com.lee.library.extensions.show
 import com.lee.library.extensions.toast
 import com.lee.library.permission.PermissionLauncher
 import com.lee.library.utils.CacheUtil
-import com.lee.pioneer.R
 import com.lee.pioneer.me.databinding.FragmentMeBinding
 import com.lee.pioneer.me.viewmodel.MeViewModel
 import com.lee.library.tools.DarkModeTools
 import com.lee.library.tools.DarkViewUpdateTools
-import com.lee.pioneer.me.R as MR
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -28,7 +27,7 @@ import com.lee.pioneer.me.R as MR
  * @description 我的页面
  */
 class MeFragment :
-    BaseVMNavigationFragment<FragmentMeBinding, MeViewModel>(MR.layout.fragment_me),
+    BaseVMNavigationFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
     View.OnClickListener, DarkViewUpdateTools.ViewCallback {
 
     private val imageLaunch = ImageLaunch(this)
@@ -36,14 +35,14 @@ class MeFragment :
 
     private val clearDialog by lazy {
         ChoiceDialog(requireContext()).apply {
-            setTitle(getString(MR.string.me_clear_title))
+            setTitle(getString(R.string.me_clear_title))
             setCancelable(true)
             confirmListener = ConfirmListener {
                 if (CacheUtil.clearAllCache(activity)) {
                     viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
-                    toast(getString(MR.string.me_clear_success))
+                    toast(getString(R.string.me_clear_success))
                 } else {
-                    toast(getString(MR.string.me_clear_failed))
+                    toast(getString(R.string.me_clear_failed))
                 }
                 dismiss()
             }
@@ -83,7 +82,7 @@ class MeFragment :
             false
         }
         binding.lineFavorite.setOnLongClickListener {
-            findNavController().navigate(MR.id.action_me_to_size)
+            findNavController().navigate(R.id.action_me_to_size)
             false
         }
     }
@@ -113,12 +112,12 @@ class MeFragment :
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            MR.id.line_message -> findNavController().navigate(MR.id.action_me_to_message)
-            MR.id.line_like -> findNavController().navigate(MR.id.action_me_to_like)
-            MR.id.line_views -> findNavController().navigate(MR.id.action_me_to_history)
-            MR.id.line_favorite -> findNavController().navigate(MR.id.action_me_to_collect)
-            MR.id.line_feedback -> findNavController().navigate(MR.id.action_me_to_feedback)
-            MR.id.line_settings -> show(clearDialog)
+            R.id.line_message -> findNavController().navigate(R.id.action_me_to_message)
+            R.id.line_like -> findNavController().navigate(R.id.action_me_to_like)
+            R.id.line_views -> findNavController().navigate(R.id.action_me_to_history)
+            R.id.line_favorite -> findNavController().navigate(R.id.action_me_to_collect)
+            R.id.line_feedback -> findNavController().navigate(R.id.action_me_to_feedback)
+            R.id.line_settings -> show(clearDialog)
         }
     }
 

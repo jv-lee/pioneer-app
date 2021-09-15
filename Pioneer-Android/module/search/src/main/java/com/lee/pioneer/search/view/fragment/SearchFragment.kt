@@ -12,7 +12,7 @@ import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.search.databinding.FragmentSearchBinding
 import com.lee.pioneer.search.view.adapter.ContentAdapter
 import com.lee.pioneer.search.viewmodel.SearchViewModel
-import com.lee.pioneer.search.R as SR
+import com.lee.pioneer.search.R
 
 /**
  * @author jv.lee
@@ -20,7 +20,7 @@ import com.lee.pioneer.search.R as SR
  * @description 搜索页
  */
 class SearchFragment :
-    BaseVMNavigationFragment<FragmentSearchBinding, SearchViewModel>(SR.layout.fragment_search) {
+    BaseVMNavigationFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
 
     private val mAdapter by lazy { ContentAdapter(requireContext(), arrayListOf()) }
 
@@ -40,13 +40,13 @@ class SearchFragment :
         mAdapter.run {
             initStatusView()
             setOnItemClickListener { _, entity, _ ->
-                findNavController().navigate(
-                    SR.id.action_search_to_details,
-                    bundleOf(
-                        Pair(KeyConstants.KEY_ID, entity._id),
-                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-                    )
-                )
+//                findNavController().navigate(
+//                    R.id.action_search_to_details,
+//                    bundleOf(
+//                        Pair(KeyConstants.KEY_ID, entity._id),
+//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
+//                    )
+//                )
             }
             setAutoLoadMoreListener {
                 viewModel.searchDataList(true)

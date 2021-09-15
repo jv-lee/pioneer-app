@@ -11,7 +11,7 @@ import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.me.adapter.ContentChildAdapter
 import com.lee.pioneer.me.databinding.FragmentHistoryBinding
 import com.lee.pioneer.me.viewmodel.HistoryViewModel
-import com.lee.pioneer.me.R as MR
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -19,7 +19,7 @@ import com.lee.pioneer.me.R as MR
  * @description MeFragment ChildPage -> 浏览记录页面
  */
 class HistoryFragment :
-    BaseVMNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(MR.layout.fragment_history) {
+    BaseVMNavigationFragment<FragmentHistoryBinding, HistoryViewModel>(R.layout.fragment_history) {
 
     private val mAdapter by lazy { ContentChildAdapter(requireContext(), arrayListOf()) }
 
@@ -34,13 +34,13 @@ class HistoryFragment :
             pageLoading()
             setAutoLoadMoreListener { viewModel.loadHistory(LoadStatus.LOAD_MORE) }
             setOnItemClickListener { _, entity, _ ->
-                findNavController().navigate(
-                    MR.id.action_history_to_contentDetails   ,
-                    bundleOf(
-                        Pair(KeyConstants.KEY_ID, entity.content._id),
-                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-                    )
-                )
+//                findNavController().navigate(
+//                    R.id.action_history_to_contentDetails   ,
+//                    bundleOf(
+//                        Pair(KeyConstants.KEY_ID, entity.content._id),
+//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
+//                    )
+//                )
             }
         }
     }

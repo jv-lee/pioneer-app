@@ -17,7 +17,7 @@ import com.lee.pioneer.home.view.adapter.ContentAdapter
 import com.lee.pioneer.home.viewmodel.ContentListViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.library.tools.DarkViewUpdateTools
-import com.lee.pioneer.home.R as HR
+import com.lee.pioneer.home.R
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
 
@@ -27,7 +27,7 @@ private const val ARG_PARAM_TYPE = "arg_param_type"
  * @description 内容列表页
  */
 class ContentListFragment :
-    BaseVMNavigationFragment<FragmentContentListBinding, ContentListViewModel>(HR.layout.fragment_content_list),
+    BaseVMNavigationFragment<FragmentContentListBinding, ContentListViewModel>(R.layout.fragment_content_list),
     DarkViewUpdateTools.ViewCallback {
     private val type by arguments<String>(ARG_PARAM_TYPE)
     private val mAdapter by lazy { ContentAdapter(requireContext(), arrayListOf()) }
@@ -74,13 +74,13 @@ class ContentListFragment :
             })
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-                findNavController().navigate(
-                    HR.id.action_home_to_details,
-                    bundleOf(
-                        Pair(KeyConstants.KEY_ID, entity._id),
-                        Pair(KeyConstants.KEY_URL, entity.url)
-                    )
-                )
+//                findNavController().navigate(
+//                    R.id.action_home_to_details,
+//                    bundleOf(
+//                        Pair(KeyConstants.KEY_ID, entity._id),
+//                        Pair(KeyConstants.KEY_URL, entity.url)
+//                    )
+//                )
             }
         }
     }

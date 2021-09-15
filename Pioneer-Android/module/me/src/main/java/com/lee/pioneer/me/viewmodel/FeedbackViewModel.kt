@@ -3,9 +3,9 @@ package com.lee.pioneer.me.viewmodel
 import android.text.TextUtils
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import com.lee.library.base.BaseApplication
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.widget.interadap.TextWatcherAdapter
-import com.lee.pioneer.App
 import com.lee.pioneer.me.R
 
 /**
@@ -35,10 +35,10 @@ class FeedbackViewModel : BaseViewModel() {
 
     fun commit() {
         if (TextUtils.isEmpty(contentField.get()) || TextUtils.isEmpty(linkField.get())) {
-            toastStrObserver.value = getApplication<App>().getString(R.string.feedback_empty)
+            toastStrObserver.value = BaseApplication.getContext().getString(R.string.feedback_empty)
             return
         }
-        toastStrObserver.value = getApplication<App>().getString(R.string.feedback_success)
+        toastStrObserver.value = BaseApplication.getContext().getString(R.string.feedback_success)
     }
 
 }

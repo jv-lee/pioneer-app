@@ -13,7 +13,7 @@ import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.me.adapter.ContentChildAdapter
 import com.lee.pioneer.me.databinding.FragmentCollectBinding
 import com.lee.pioneer.me.viewmodel.CollectViewModel
-import com.lee.pioneer.me.R as MR
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -21,7 +21,7 @@ import com.lee.pioneer.me.R as MR
  * @description MeFragment ChildPage -> 收藏页面
  */
 class CollectFragment :
-    BaseNavigationFragment(MR.layout.fragment_collect) {
+    BaseNavigationFragment(R.layout.fragment_collect) {
 
     private val binding by binding(FragmentCollectBinding::bind)
     private val viewModel by viewModels<CollectViewModel>()
@@ -38,13 +38,13 @@ class CollectFragment :
             pageLoading()
             setAutoLoadMoreListener { viewModel.loadHistory(LoadStatus.LOAD_MORE) }
             setOnItemClickListener { _, entity, _ ->
-                findNavController().navigate(
-                 MR.id.action_collect_to_contentDetails   ,
-                    bundleOf(
-                        Pair(KeyConstants.KEY_ID, entity.content._id),
-                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-                    )
-                )
+//                findNavController().navigate(
+//                 R.id.action_collect_to_contentDetails   ,
+//                    bundleOf(
+//                        Pair(KeyConstants.KEY_ID, entity.content._id),
+//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
+//                    )
+//                )
             }
         }
     }

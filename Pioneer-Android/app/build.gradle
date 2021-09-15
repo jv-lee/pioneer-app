@@ -55,18 +55,13 @@ android {
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             zipAlignEnabled false // Zipalign优化
-            debugUri.each { k, v -> //创建公共常量
-                buildConfigField("String", k, "\"" + v + "\"")
-            }
         }
         release {
             minifyEnabled configs.minifyEnabled
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             zipAlignEnabled configs.minifyEnabled
-            releaseUri.each { k, v ->
-                buildConfigField("String", k, "\"" + v + "\"")
-            }
+
         }
     }
 
@@ -99,13 +94,19 @@ android {
     packagingOptions {
         pickFirst 'META-INF/LICENSE.txt' // picks the JavaMail license file
     }
-    dynamicFeatures = [':module:home', ':module:recommend', ':module:girl', ':module:me', ':module:details', ':module:search']
 
 }
 
 dependencies {
     kapts.each { k, v -> kapt v }
-    api project(path: ':library:service')
+    implementation project(path: ':library:service')
+
+    implementation project(path: ':module:home')
+    implementation project(path: ':module:recommend')
+    implementation project(path: ':module:girl')
+    implementation project(path: ':module:me')
+    implementation project(path: ':module:details')
+    implementation project(path: ':module:search')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

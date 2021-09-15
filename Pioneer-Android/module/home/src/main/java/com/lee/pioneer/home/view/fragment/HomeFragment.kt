@@ -3,7 +3,6 @@ package com.lee.pioneer.home.view.fragment
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lee.library.adapter.core.UiPager2Adapter
 import com.lee.library.base.BaseVMFragment
@@ -11,12 +10,11 @@ import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setBackgroundDrawableCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.extensions.toast
+import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.widget.StatusLayout
-import com.lee.pioneer.R
+import com.lee.pioneer.home.R
 import com.lee.pioneer.home.databinding.FragmentHomeBinding
 import com.lee.pioneer.home.viewmodel.HomeViewModel
-import com.lee.library.tools.DarkViewUpdateTools
-import com.lee.pioneer.home.R as HR
 
 /**
  * @author jv.lee
@@ -24,7 +22,7 @@ import com.lee.pioneer.home.R as HR
  * @description 主页
  */
 class HomeFragment :
-    BaseVMFragment<FragmentHomeBinding, HomeViewModel>(HR.layout.fragment_home),
+    BaseVMFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home),
     DarkViewUpdateTools.ViewCallback {
 
     private var adapter: UiPager2Adapter? = null
@@ -39,7 +37,7 @@ class HomeFragment :
                 viewModel.buildCategoryFragment()
             }
             tvSearch.setOnClickListener {
-                findNavController().navigate(HR.id.action_home_to_search)
+//                findNavController().navigate(R.id.action_home_to_search)
             }
         }
     }

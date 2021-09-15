@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-    <!--  module name  -->
-    <string name="title_home">home</string>
-    <string name="title_recommend">recommend</string>
-    <string name="title_girl">girl</string>
-    <string name="title_me">me</string>
-    <string name="title_details">details</string>
-    <string name="title_search">search</string>
 </resources>

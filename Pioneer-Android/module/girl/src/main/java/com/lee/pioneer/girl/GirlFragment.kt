@@ -13,7 +13,6 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.library.utils.TimeUtil
-import com.lee.pioneer.R
 import com.lee.pioneer.girl.adapter.GirlAdapter
 import com.lee.pioneer.girl.databinding.FragmentGirlBinding
 import com.lee.pioneer.girl.databinding.LayoutGirlHeaderBinding
@@ -22,7 +21,6 @@ import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.library.tools.DarkViewUpdateTools
 import java.text.SimpleDateFormat
 import java.util.*
-import com.lee.pioneer.girl.R as GR
 
 /**
  * @author jv.lee
@@ -30,7 +28,7 @@ import com.lee.pioneer.girl.R as GR
  * @description 主页妹子板块
  */
 class GirlFragment :
-    BaseVMNavigationFragment<FragmentGirlBinding, GirlViewModel>(GR.layout.fragment_girl),
+    BaseVMNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl),
     DarkViewUpdateTools.ViewCallback {
 
     private val mAdapter by lazy { GirlAdapter(requireContext(), arrayListOf()) }
@@ -39,7 +37,7 @@ class GirlFragment :
 
     private val headerViewBinding by lazy {
         DataBindingUtil.inflate<LayoutGirlHeaderBinding>(
-            layoutInflater, GR.layout.layout_girl_header, null, false
+            layoutInflater, R.layout.layout_girl_header, null, false
         )
     }
 
@@ -79,12 +77,12 @@ class GirlFragment :
             addHeader(headerViewBinding.root)
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-                findNavController().navigate(GR.id.action_girl_to_details,
-                    bundleOf(
-                        Pair(KeyConstants.KEY_ID, entity._id,),
-                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-                    )
-                )
+//                findNavController().navigate(R.id.action_girl_to_details,
+//                    bundleOf(
+//                        Pair(KeyConstants.KEY_ID, entity._id,),
+//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
+//                    )
+//                )
             }
             setAutoLoadMoreListener {
                 viewModel.getGirlContentData(LoadStatus.LOAD_MORE)

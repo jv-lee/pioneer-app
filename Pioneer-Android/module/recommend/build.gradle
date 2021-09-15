@@ -1,32 +1,30 @@
-plugins {
-    id 'com.android.dynamic-feature'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id "androidx.navigation.safeargs.kotlin"
-}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion 31
+
+    compileSdkVersion androidId.compileSdkVersion
 
 
     defaultConfig {
-        applicationId "com.lee.pioneer.recommend"
-        minSdkVersion 21
-        targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion androidId.minSdkVersion
+        targetSdkVersion androidId.targetSdkVersion
+        versionCode androidId.versionCode
+        versionName androidId.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 
     kotlinOptions {
@@ -37,9 +35,7 @@ android {
         dataBinding  true
         viewBinding  true
     }
-    kapt {
-        generateStubs = true
-    }
+
     sourceSets {
         main {
             assets {
@@ -47,19 +43,10 @@ android {
             }
         }
     }
-    lintOptions {
-        abortOnError false
-    }
-    packagingOptions {
-        pickFirst 'META-INF/LICENSE.txt' // picks the JavaMail license file
-    }
+
 }
 
 dependencies {
     kapts.each { k, v -> kapt v }
-    implementation project(":app")
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    androidTestImplementation 'androidx.annotation:annotation:1.2.0'
+    implementation project(path: ':library:service')
 }
