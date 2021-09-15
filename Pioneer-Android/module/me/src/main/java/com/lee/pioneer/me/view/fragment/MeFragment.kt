@@ -97,15 +97,18 @@ class MeFragment :
         viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
         binding.switchSystemEnable.setOnCheckedChangeListener { _, isChecked ->
             if (isResumed) {
-                binding.isSystem = isChecked
                 DarkModeTools.get().updateSystemTheme(isChecked)
+                binding.isSystem = isChecked
+                binding.isNight = DarkModeTools.get().isDarkTheme()
                 DarkViewUpdateTools.notifyUiMode()
             }
         }
         binding.switchDarkEnable.setOnCheckedChangeListener { _, isChecked ->
             if (isResumed) {
-                DarkModeTools.get().updateNightTheme(isChecked)
-                DarkViewUpdateTools.notifyUiMode()
+                if (DarkModeTools.get().isDarkTheme() != isChecked) {
+                    DarkModeTools.get().updateNightTheme(isChecked)
+                    DarkViewUpdateTools.notifyUiMode()
+                }
             }
         }
     }
