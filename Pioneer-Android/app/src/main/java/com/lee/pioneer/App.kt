@@ -9,13 +9,12 @@ import androidx.fragment.app.FragmentManager
 import com.lee.library.base.BaseApplication
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.bindFragmentLifecycle
-import com.lee.library.extensions.unbindFragmentLifecycle
 import com.lee.library.lifecycle.SimpleActivityLifecycleCallbacks
 import com.lee.library.lifecycle.SimpleFragmentLifecycleCallbacks
+import com.lee.library.tools.DarkModeTools
 import com.lee.library.utils.SPUtil
 import com.lee.library.utils.ScreenDensityUtil
 import com.lee.library.utils.StatusUtil
-import com.lee.library.tools.DarkModeTools
 import com.lee.pioneer.library.service.hepler.ApplicationModuleService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,10 +53,6 @@ class App : BaseApplication() {
             super.onActivityPreCreated(activity, savedInstanceState)
         }
 
-        override fun onActivityDestroyed(activity: Activity) {
-            ScreenDensityUtil.resetDensity(activity)
-            activity.unbindFragmentLifecycle(fragmentLifecycleCallbacks)
-        }
     }
 
     override fun init() {
