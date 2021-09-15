@@ -56,7 +56,7 @@ android {
 }
 
 dependencies {
-    api project(path: ':library:base')
+    implementation project(path: ':library:base')
     kapts.each { k, v -> kapt v }
 
 }

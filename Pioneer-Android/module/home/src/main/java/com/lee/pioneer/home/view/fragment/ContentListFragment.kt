@@ -2,7 +2,6 @@ package com.lee.pioneer.home.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
@@ -12,12 +11,13 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.pioneer.home.R
 import com.lee.pioneer.home.databinding.FragmentContentListBinding
 import com.lee.pioneer.home.view.adapter.ContentAdapter
 import com.lee.pioneer.home.viewmodel.ContentListViewModel
-import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.library.tools.DarkViewUpdateTools
-import com.lee.pioneer.home.R
+import com.lee.pioneer.library.service.DetailsService
+import com.lee.pioneer.library.service.hepler.ModuleService
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
 
@@ -74,13 +74,8 @@ class ContentListFragment :
             })
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-//                findNavController().navigate(
-//                    R.id.action_home_to_details,
-//                    bundleOf(
-//                        Pair(KeyConstants.KEY_ID, entity._id),
-//                        Pair(KeyConstants.KEY_URL, entity.url)
-//                    )
-//                )
+                ModuleService.find<DetailsService>()
+                    .navigationDetails(findNavController(), entity._id, entity.url)
             }
         }
     }

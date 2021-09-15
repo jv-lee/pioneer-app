@@ -28,7 +28,6 @@
 <!--            app:popExitAnim="@anim/slide_bottom_out" />-->
 
     </fragment>
-
 <!--    <include-dynamic-->
 <!--        android:id="@+id/search"-->
 <!--        app:graphResName="nav_search"-->

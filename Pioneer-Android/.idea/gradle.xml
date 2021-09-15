@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/library/base" />
             <option value="$PROJECT_DIR$/library/common" />
+            <option value="$PROJECT_DIR$/library/router" />
             <option value="$PROJECT_DIR$/library/service" />
             <option value="$PROJECT_DIR$/module" />
             <option value="$PROJECT_DIR$/module/details" />

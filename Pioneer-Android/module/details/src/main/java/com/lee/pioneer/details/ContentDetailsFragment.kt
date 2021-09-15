@@ -72,7 +72,7 @@ class ContentDetailsFragment :
     }
 
     override fun bindData() {
-        if (TextUtils.isEmpty(detailsID)) {
+        if (detailsID == KeyConstants.CONST_EMPTY) {
             web?.initUrl(detailsUrl)
         } else {
             web?.initUrl(HttpConstant.getDetailsUri(detailsID))

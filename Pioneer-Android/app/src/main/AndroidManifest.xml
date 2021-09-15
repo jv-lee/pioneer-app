@@ -15,14 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:screenOrientation="fullSensor"
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|uiMode">
+            android:configChanges="keyboardHidden|orientation|screenSize|uiMode"
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <nav-graph android:value="@navigation/main_navigation" />
         </activity>
     </application>
 

@@ -1,6 +1,5 @@
 package com.lee.pioneer.me.view.fragment
 
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.page.submitData
@@ -8,10 +7,12 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.library.common.constant.KeyConstants
+import com.lee.pioneer.library.service.DetailsService
+import com.lee.pioneer.library.service.hepler.ModuleService
+import com.lee.pioneer.me.R
 import com.lee.pioneer.me.adapter.ContentChildAdapter
 import com.lee.pioneer.me.databinding.FragmentHistoryBinding
 import com.lee.pioneer.me.viewmodel.HistoryViewModel
-import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -34,13 +35,12 @@ class HistoryFragment :
             pageLoading()
             setAutoLoadMoreListener { viewModel.loadHistory(LoadStatus.LOAD_MORE) }
             setOnItemClickListener { _, entity, _ ->
-//                findNavController().navigate(
-//                    R.id.action_history_to_contentDetails   ,
-//                    bundleOf(
-//                        Pair(KeyConstants.KEY_ID, entity.content._id),
-//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-//                    )
-//                )
+                ModuleService.find<DetailsService>()
+                    .navigationDetails(
+                        findNavController(),
+                        entity.content._id,
+                        KeyConstants.CONST_EMPTY
+                    )
             }
         }
     }

@@ -9,4 +9,7 @@
     <include app:graph="@navigation/girl_navigation" />
     <include app:graph="@navigation/me_navigation" />
 
+    <include app:graph="@navigation/search_navigation" />
+    <include app:graph="@navigation/details_navigation" />
+
 </navigation>

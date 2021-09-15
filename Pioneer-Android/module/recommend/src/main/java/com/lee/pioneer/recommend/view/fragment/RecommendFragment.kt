@@ -2,16 +2,19 @@ package com.lee.pioneer.recommend.view.fragment
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.*
+import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Banner
-import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.pioneer.library.service.DetailsService
+import com.lee.pioneer.library.service.SearchService
+import com.lee.pioneer.library.service.hepler.ModuleService
+import com.lee.pioneer.recommend.R
 import com.lee.pioneer.recommend.databinding.FragmentRecommendBinding
 import com.lee.pioneer.recommend.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.recommend.view.adapter.ContentAdapter
@@ -19,7 +22,6 @@ import com.lee.pioneer.recommend.view.widget.BannerViewHolder
 import com.lee.pioneer.recommend.view.widget.RecommendLoadResource
 import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
 import java.util.*
-import com.lee.pioneer.recommend.R
 
 /**
  * @author jv.lee
@@ -44,7 +46,7 @@ class RecommendFragment :
 
         //设置toolbar 搜索跳转
         binding.tvSearch.setOnClickListener {
-//            findNavController().navigate(R.id.action_recommend_to_search)
+            ModuleService.find<SearchService>().navigationSearch(findNavController())
         }
 
         headerBinding.run {
@@ -52,13 +54,8 @@ class RecommendFragment :
             banner.setDelayedTime(5000)
             banner.setBannerPageClickListener { _, position ->
                 (banner.data[position] as Banner).let {
-//                    findNavController().navigate(
-//                        R.id.action_recommend_to_details,
-//                        bundleOf(
-//                            Pair(KeyConstants.KEY_ID, KeyConstants.CONST_EMPTY),
-//                            Pair(KeyConstants.KEY_URL, it.url)
-//                        )
-//                    )
+                    ModuleService.find<DetailsService>()
+                        .navigationDetails(findNavController(), KeyConstants.CONST_EMPTY, it.url)
                 }
             }
 
@@ -111,12 +108,8 @@ class RecommendFragment :
             notifyDataSetChanged()
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-//                findNavController().navigate(R.id.action_recommend_to_details,
-//                    bundleOf(
-//                        Pair(KeyConstants.KEY_ID, entity._id),
-//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-//                    )
-//                )
+                ModuleService.find<DetailsService>()
+                    .navigationDetails(findNavController(), entity._id, KeyConstants.CONST_EMPTY)
             }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {}

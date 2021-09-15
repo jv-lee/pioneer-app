@@ -1,6 +1,5 @@
 package com.lee.pioneer.search.view.fragment
 
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,10 +8,12 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.library.common.constant.KeyConstants
+import com.lee.pioneer.library.service.DetailsService
+import com.lee.pioneer.library.service.hepler.ModuleService
+import com.lee.pioneer.search.R
 import com.lee.pioneer.search.databinding.FragmentSearchBinding
 import com.lee.pioneer.search.view.adapter.ContentAdapter
 import com.lee.pioneer.search.viewmodel.SearchViewModel
-import com.lee.pioneer.search.R
 
 /**
  * @author jv.lee
@@ -40,13 +41,8 @@ class SearchFragment :
         mAdapter.run {
             initStatusView()
             setOnItemClickListener { _, entity, _ ->
-//                findNavController().navigate(
-//                    R.id.action_search_to_details,
-//                    bundleOf(
-//                        Pair(KeyConstants.KEY_ID, entity._id),
-//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-//                    )
-//                )
+                ModuleService.find<DetailsService>()
+                    .navigationDetails(findNavController(), entity._id, KeyConstants.CONST_EMPTY)
             }
             setAutoLoadMoreListener {
                 viewModel.searchDataList(true)

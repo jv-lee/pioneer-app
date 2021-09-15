@@ -1,7 +1,6 @@
 package com.lee.pioneer.girl
 
 import android.annotation.SuppressLint
-import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
@@ -12,13 +11,15 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.girl.adapter.GirlAdapter
 import com.lee.pioneer.girl.databinding.FragmentGirlBinding
 import com.lee.pioneer.girl.databinding.LayoutGirlHeaderBinding
 import com.lee.pioneer.girl.viewmodel.GirlViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.pioneer.library.service.DetailsService
+import com.lee.pioneer.library.service.hepler.ModuleService
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -77,12 +78,8 @@ class GirlFragment :
             addHeader(headerViewBinding.root)
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-//                findNavController().navigate(R.id.action_girl_to_details,
-//                    bundleOf(
-//                        Pair(KeyConstants.KEY_ID, entity._id,),
-//                        Pair(KeyConstants.KEY_URL, KeyConstants.CONST_EMPTY)
-//                    )
-//                )
+                ModuleService.find<DetailsService>()
+                    .navigationDetails(findNavController(), entity._id, KeyConstants.CONST_EMPTY)
             }
             setAutoLoadMoreListener {
                 viewModel.getGirlContentData(LoadStatus.LOAD_MORE)

@@ -9,6 +9,8 @@
         android:id="@+id/details_fragment"
         android:name="com.lee.pioneer.details.ContentDetailsFragment"
         android:label="@string/module_details"
-        tools:layout="@layout/fragment_content_details"/>
+        tools:layout="@layout/fragment_content_details">
+        <deepLink app:uri="@string/module_deep_link_details" />
+    </fragment>
 
 </navigation>
