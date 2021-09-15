@@ -78,29 +78,13 @@
         android:id="@+id/history"
         android:name="com.lee.pioneer.me.view.fragment.HistoryFragment"
         android:label="historyFragment"
-        tools:layout="@layout/fragment_history">
-<!--        <action-->
-<!--            android:id="@+id/action_history_to_contentDetails"-->
-<!--            app:destination="@id/details"-->
-<!--            app:enterAnim="@anim/slide_right_in"-->
-<!--            app:exitAnim="@anim/slide_default"-->
-<!--            app:popEnterAnim="@anim/slide_default"-->
-<!--            app:popExitAnim="@anim/slide_right_out" />-->
-    </fragment>
+        tools:layout="@layout/fragment_history"/>
 
     <fragment
         android:id="@+id/collect"
         android:name="com.lee.pioneer.me.view.fragment.CollectFragment"
         android:label="favoriteFragment"
-        tools:layout="@layout/fragment_collect">
-<!--        <action-->
-<!--            android:id="@+id/action_collect_to_contentDetails"-->
-<!--            app:destination="@id/details"-->
-<!--            app:enterAnim="@anim/slide_right_in"-->
-<!--            app:exitAnim="@anim/slide_default"-->
-<!--            app:popEnterAnim="@anim/slide_default"-->
-<!--            app:popExitAnim="@anim/slide_right_out" />-->
-    </fragment>
+        tools:layout="@layout/fragment_collect"/>
 
     <fragment
         android:id="@+id/feedback"
@@ -113,10 +97,5 @@
         android:name="com.lee.pioneer.me.view.fragment.SizeFragment"
         android:label="sizeFragment"
         tools:layout="@layout/fragment_size" />
-
-<!--    <include-dynamic-->
-<!--        android:id="@+id/details"-->
-<!--        app:graphResName="nav_details"-->
-<!--        app:moduleName="details" />-->
 
 </navigation>

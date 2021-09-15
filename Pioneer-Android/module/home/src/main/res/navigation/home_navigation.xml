@@ -9,33 +9,6 @@
         android:id="@+id/home_fragment"
         android:name="com.lee.pioneer.home.view.fragment.HomeFragment"
         android:label="@string/module_home"
-        tools:layout="@layout/fragment_home">
-
-<!--        <action-->
-<!--            android:id="@+id/action_home_to_details"-->
-<!--            app:destination="@id/details"-->
-<!--            app:enterAnim="@anim/slide_right_in"-->
-<!--            app:exitAnim="@anim/slide_default"-->
-<!--            app:popEnterAnim="@anim/slide_default"-->
-<!--            app:popExitAnim="@anim/slide_right_out" />-->
-
-<!--        <action-->
-<!--            android:id="@+id/action_home_to_search"-->
-<!--            app:destination="@id/search"-->
-<!--            app:enterAnim="@anim/slide_bottom_in"-->
-<!--            app:exitAnim="@anim/slide_default"-->
-<!--            app:popEnterAnim="@anim/slide_default"-->
-<!--            app:popExitAnim="@anim/slide_bottom_out" />-->
-
-    </fragment>
-<!--    <include-dynamic-->
-<!--        android:id="@+id/search"-->
-<!--        app:graphResName="nav_search"-->
-<!--        app:moduleName="search" />-->
-
-<!--    <include-dynamic-->
-<!--        android:id="@+id/details"-->
-<!--        app:graphResName="nav_details"-->
-<!--        app:moduleName="details" />-->
+        tools:layout="@layout/fragment_home"/>
 
 </navigation>
