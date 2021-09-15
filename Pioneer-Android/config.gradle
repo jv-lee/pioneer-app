@@ -8,6 +8,15 @@ ext {
             applicationId    : "com.lee.pioneer"
     ]
 
+    appModules = [
+            "home"     : ":module:home",
+            "recommend": ":module:recommend",
+            "girl"     : ":module:girl",
+            "me"       : ":module:me",
+            "details"  : ":module:details",
+            "search"   : ":module:search",
+    ]
+
     //签名混淆压缩配置
     configs = [
             multiDexEnabled: true, //分包开关
@@ -38,7 +47,7 @@ ext {
 
     //运行时注解处理器
     kapts = [
-            "annotation": "androidx.annotation:annotation:1.1.0",
+            "annotation" : "androidx.annotation:annotation:1.1.0",
             "room"       : "androidx.room:room-compiler:${room}",
             "glide"      : "com.github.bumptech.glide:compiler:${glide}",
             "autoService": "com.google.auto.service:auto-service:${autoService}"

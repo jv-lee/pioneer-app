@@ -61,7 +61,6 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             zipAlignEnabled configs.minifyEnabled
-
         }
     }
 
@@ -75,8 +74,8 @@ android {
     }
 
     buildFeatures {
-        dataBinding  true
-        viewBinding  true
+        dataBinding true
+        viewBinding true
     }
     kapt {
         generateStubs = true
@@ -99,14 +98,10 @@ android {
 
 dependencies {
     kapts.each { k, v -> kapt v }
-    implementation project(path: ':library:service')
 
-    implementation project(path: ':module:home')
-    implementation project(path: ':module:recommend')
-    implementation project(path: ':module:girl')
-    implementation project(path: ':module:me')
-    implementation project(path: ':module:details')
-    implementation project(path: ':module:search')
+    appModules.each { k, v -> implementation project(path: v) }
+
+    implementation project(path: ':library:service')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
