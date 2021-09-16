@@ -2,7 +2,6 @@ package com.lee.pioneer.home.view.fragment
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,8 +18,6 @@ import com.lee.pioneer.home.databinding.FragmentHomeBinding
 import com.lee.pioneer.home.viewmodel.HomeViewModel
 import com.lee.pioneer.library.service.SearchService
 import com.lee.pioneer.library.service.hepler.ModuleService
-import com.lee.pioneer.router.NavigationAnim
-import com.lee.pioneer.router.navigationDeepLink
 
 /**
  * @author jv.lee
@@ -77,7 +74,11 @@ class HomeFragment :
 
             }, {
                 toast(it)
-                binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                binding.vpContainer.adapter?.let {
+                    if (it.itemCount == 0) binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                } ?: kotlin.run {
+                    binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                }
             })
 
             buildCategoryFragment()
