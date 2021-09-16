@@ -1,6 +1,7 @@
 package com.lee.pioneer.girl
 
 import android.annotation.SuppressLint
+import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.adapter.page.submitData
 import com.lee.library.adapter.page.submitFailed
-import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.library.tools.DarkViewUpdateTools
@@ -29,12 +30,10 @@ import java.util.*
  * @description 主页妹子板块
  */
 class GirlFragment :
-    BaseVMNavigationFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl),
+    BaseVMFragment<FragmentGirlBinding, GirlViewModel>(R.layout.fragment_girl),
     DarkViewUpdateTools.ViewCallback {
 
-    private val mAdapter by lazy { GirlAdapter(requireContext(), arrayListOf()) }
-
-    private val linearLayoutManager by lazy { LinearLayoutManager(context) }
+    private lateinit var mAdapter: GirlAdapter
 
     private val headerViewBinding by lazy {
         DataBindingUtil.inflate<LayoutGirlHeaderBinding>(
@@ -56,8 +55,11 @@ class GirlFragment :
             rvContainer.run {
 //                glideEnable()
 //                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
-                layoutManager = linearLayoutManager
-                adapter = mAdapter.proxy
+                layoutManager = LinearLayoutManager(context)
+                adapter = GirlAdapter(requireContext(), arrayListOf()).also {
+                    mAdapter = it
+                }.proxy
+
                 //设置滑动设置statusBar透明度
                 setScrollTransparent { _, alpha -> statusBar.setBackgroundAlphaCompat(alpha) }
             }
@@ -69,7 +71,6 @@ class GirlFragment :
             }
 
         }
-
 
         //适配器参数设置
         mAdapter.run {
@@ -94,7 +95,6 @@ class GirlFragment :
                 }
 
             })
-
         }
     }
 
@@ -119,6 +119,11 @@ class GirlFragment :
 
     override fun lazyLoad() {
         viewModel.getGirlContentData(LoadStatus.INIT)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mAdapter.removeHeader(headerViewBinding.root)
     }
 
     @SuppressLint("NotifyDataSetChanged")

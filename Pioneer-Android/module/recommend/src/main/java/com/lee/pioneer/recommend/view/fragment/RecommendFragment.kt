@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
-import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.library.common.constant.KeyConstants
@@ -29,16 +29,18 @@ import java.util.*
  * @description 推荐页面
  */
 class RecommendFragment :
-    BaseVMNavigationFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),
+    BaseVMFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),
     DarkViewUpdateTools.ViewCallback {
+
+    private var type = "views"
+
+    private lateinit var mAdapter: ContentAdapter
 
     private val headerBinding by lazy {
         DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(
             layoutInflater, R.layout.layout_recommend_header, null, false
         )
     }
-    private val mAdapter by lazy { ContentAdapter(requireContext(), arrayListOf()) }
-    private var type = "views"
 
     @SuppressLint("NotifyDataSetChanged")
     override fun bindView() {
@@ -97,7 +99,9 @@ class RecommendFragment :
         //设置数据列表
         binding.rvContainer.run {
             layoutManager = LinearLayoutManager(context)
-            adapter = mAdapter.proxy
+            adapter = ContentAdapter(requireContext(), arrayListOf()).also {
+                mAdapter = it
+            }.proxy
         }
 
         mAdapter.run {
@@ -165,6 +169,11 @@ class RecommendFragment :
     override fun onPause() {
         super.onPause()
         headerBinding.banner.pause()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mAdapter.removeHeader(headerBinding.root)
     }
 
     @SuppressLint("NotifyDataSetChanged")

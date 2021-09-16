@@ -74,8 +74,10 @@ class HomeFragment :
 
             }, {
                 toast(it)
-                binding.vpContainer.adapter?.let {
-                    if (it.itemCount == 0) binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                adapter?.let {
+                    it.itemCount.takeIf { it == 0 }.run {
+                        binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
+                    }
                 } ?: kotlin.run {
                     binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
                 }

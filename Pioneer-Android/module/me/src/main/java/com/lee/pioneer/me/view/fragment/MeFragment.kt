@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.imagetools.select.ImageLaunch
 import com.imagetools.select.entity.SelectConfig
 import com.imagetools.select.entity.TakeConfig
-import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.base.BaseVMFragment
 import com.lee.library.dialog.ChoiceDialog
 import com.lee.library.dialog.core.ConfirmListener
 import com.lee.library.extensions.setBackgroundColorCompat
@@ -14,12 +14,12 @@ import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.extensions.show
 import com.lee.library.extensions.toast
 import com.lee.library.permission.PermissionLauncher
-import com.lee.library.utils.CacheUtil
-import com.lee.pioneer.me.databinding.FragmentMeBinding
-import com.lee.pioneer.me.viewmodel.MeViewModel
 import com.lee.library.tools.DarkModeTools
 import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.library.utils.CacheUtil
 import com.lee.pioneer.me.R
+import com.lee.pioneer.me.databinding.FragmentMeBinding
+import com.lee.pioneer.me.viewmodel.MeViewModel
 
 /**
  * @author jv.lee
@@ -27,7 +27,7 @@ import com.lee.pioneer.me.R
  * @description 我的页面
  */
 class MeFragment :
-    BaseVMNavigationFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
+    BaseVMFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
     View.OnClickListener, DarkViewUpdateTools.ViewCallback {
 
     private val imageLaunch = ImageLaunch(this)

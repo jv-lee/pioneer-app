@@ -11,21 +11,19 @@ import android.view.animation.LinearInterpolator
 import com.lee.library.base.BaseActivity
 import com.lee.library.extensions.banBackEvent
 import com.lee.library.extensions.binding
+import com.lee.library.tools.DarkModeTools
 import com.lee.library.tools.WebViewTools
 import com.lee.library.utils.StatusUtil
 import com.lee.pioneer.databinding.ActivityMainBinding
-import com.lee.library.tools.DarkModeTools
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * @author jv.lee
  * @date 2020.3.27
  * @description 程序主窗口 单Activity架构
  */
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(),
+    CoroutineScope by CoroutineScope(Dispatchers.Main) {
 
     private val binding by binding(ActivityMainBinding::inflate)
 
@@ -68,7 +66,6 @@ class MainActivity : BaseActivity() {
     override fun bindData() {
     }
 
-    @ExperimentalCoroutinesApi
     override fun onDestroy() {
         cancel()
         WebViewTools.get(applicationContext).onDestroy()
