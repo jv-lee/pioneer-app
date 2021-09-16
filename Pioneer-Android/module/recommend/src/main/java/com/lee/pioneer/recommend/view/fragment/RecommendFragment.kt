@@ -2,7 +2,6 @@ package com.lee.pioneer.recommend.view.fragment
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
@@ -36,11 +35,7 @@ class RecommendFragment :
 
     private lateinit var mAdapter: ContentAdapter
 
-    private val headerBinding by lazy {
-        DataBindingUtil.inflate<LayoutRecommendHeaderBinding>(
-            layoutInflater, R.layout.layout_recommend_header, null, false
-        )
-    }
+    private val headerBinding by inflate(LayoutRecommendHeaderBinding::inflate)
 
     @SuppressLint("NotifyDataSetChanged")
     override fun bindView() {
@@ -169,11 +164,6 @@ class RecommendFragment :
     override fun onPause() {
         super.onPause()
         headerBinding.banner.pause()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mAdapter.removeHeader(headerBinding.root)
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -1,74 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/padding_large"
+    tools:background="@color/colorThemeBackground">
 
-    <data>
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.lee.library.widget.banner.MZBannerView
+        android:id="@+id/banner"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/banner_height"
+        app:layout_constraintTop_toTopOf="parent"
+        app:open_mz_mode="false" />
+
+    <RadioGroup
+        android:id="@+id/group_type"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/padding_large"
-        tools:background="@color/colorThemeBackground">
+        android:background="@color/colorThemeItem"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/banner">
 
-        <com.lee.library.widget.banner.MZBannerView
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/banner_height"
-            app:layout_constraintTop_toTopOf="parent"
-            app:open_mz_mode="false" />
-
-        <RadioGroup
-            android:id="@+id/group_type"
-            android:layout_width="0dp"
+        <RadioButton
+            android:id="@+id/radio_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorThemeItem"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:background="@null"
+            android:button="@drawable/vector_view"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/banner">
+            tools:buttonTint="@drawable/recommend_view_selector"
+            tools:checked="true" />
 
-            <RadioButton
-                android:id="@+id/radio_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:background="@null"
-                android:button="@drawable/vector_view"
-                android:gravity="center"
-                tools:buttonTint="@drawable/recommend_view_selector"
-                tools:checked="true" />
+        <RadioButton
+            android:id="@+id/radio_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:background="@null"
+            android:button="@drawable/vector_like"
+            android:gravity="center"
+            tools:buttonTint="@drawable/recommend_like_selector"
+            tools:checked="false" />
 
-            <RadioButton
-                android:id="@+id/radio_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:background="@null"
-                android:button="@drawable/vector_like"
-                android:gravity="center"
-                tools:buttonTint="@drawable/recommend_like_selector"
-                tools:checked="false" />
+        <RadioButton
+            android:id="@+id/radio_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:background="@null"
+            android:button="@drawable/vector_comment"
+            android:gravity="center"
+            tools:buttonTint="@drawable/recommend_comment_selector"
+            tools:checked="false" />
 
-            <RadioButton
-                android:id="@+id/radio_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:background="@null"
-                android:button="@drawable/vector_comment"
-                android:gravity="center"
-                tools:buttonTint="@drawable/recommend_comment_selector"
-                tools:checked="false" />
+    </RadioGroup>
 
-        </RadioGroup>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

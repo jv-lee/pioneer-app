@@ -1,9 +1,7 @@
 package com.lee.pioneer.girl
 
 import android.annotation.SuppressLint
-import android.view.ViewGroup
 import androidx.core.view.ViewCompat
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
@@ -35,11 +33,7 @@ class GirlFragment :
 
     private lateinit var mAdapter: GirlAdapter
 
-    private val headerViewBinding by lazy {
-        DataBindingUtil.inflate<LayoutGirlHeaderBinding>(
-            layoutInflater, R.layout.layout_girl_header, null, false
-        )
-    }
+    private val headerViewBinding by inflate(LayoutGirlHeaderBinding::inflate)
 
     override fun bindView() {
         DarkViewUpdateTools.bindViewCallback(this, this)
@@ -119,11 +113,6 @@ class GirlFragment :
 
     override fun lazyLoad() {
         viewModel.getGirlContentData(LoadStatus.INIT)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mAdapter.removeHeader(headerViewBinding.root)
     }
 
     @SuppressLint("NotifyDataSetChanged")
