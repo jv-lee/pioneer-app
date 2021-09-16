@@ -99,7 +99,7 @@ class GirlFragment :
         headerViewBinding.tvWeek.text = TimeUtil.getWeek(Date())
 
         viewModel.run {
-            contentData.observe(this@GirlFragment, {
+            contentData.observe(viewLifecycleOwner, {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
             }, {

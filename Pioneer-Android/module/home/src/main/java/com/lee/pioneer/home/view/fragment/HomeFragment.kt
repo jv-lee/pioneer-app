@@ -50,7 +50,7 @@ class HomeFragment :
     override fun bindData() {
         viewModel.run {
             //获取分类数据 构建分类tab 及 fragment
-            categoryData.observe(this@HomeFragment, { it ->
+            categoryData.observe(viewLifecycleOwner, { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
 
                 val fragments = arrayListOf<Fragment>()
@@ -82,8 +82,6 @@ class HomeFragment :
                     binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
                 }
             })
-
-            buildCategoryFragment()
         }
 
     }
