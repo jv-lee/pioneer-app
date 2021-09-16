@@ -3,6 +3,7 @@ package com.lee.pioneer.me.view.fragment
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.lee.library.base.BaseVMFragment
+import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.toast
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.me.databinding.FragmentFeedbackBinding
@@ -15,7 +16,7 @@ import com.lee.pioneer.me.R
  * @description MeFragment ChildPage -> 反馈页面
  */
 class FeedbackFragment :
-    BaseVMFragment<FragmentFeedbackBinding, FeedbackViewModel>(R.layout.fragment_feedback) {
+    BaseVMNavigationFragment<FragmentFeedbackBinding, FeedbackViewModel>(R.layout.fragment_feedback) {
 
     override fun bindView() {
         binding.toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeItem))

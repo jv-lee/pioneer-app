@@ -1,9 +1,7 @@
 package com.lee.pioneer.me.view.fragment
 
-import com.lee.library.base.BaseVMFragment
-import com.lee.library.mvvm.base.BaseViewModel
-import com.lee.pioneer.me.databinding.FragmentMessageBinding
-import com.lee.pioneer.me.R as MR
+import com.lee.library.base.BaseNavigationFragment
+import com.lee.pioneer.me.R
 
 /**
  * @author jv.lee
@@ -11,7 +9,7 @@ import com.lee.pioneer.me.R as MR
  * @description MeFragment ChildPage -> 消息中心的页面
  */
 class MessageFragment :
-    BaseVMFragment<FragmentMessageBinding, BaseViewModel>(MR.layout.fragment_message) {
+    BaseNavigationFragment(R.layout.fragment_message) {
 
     override fun bindView() {
 
