@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseLiveData
-import com.lee.library.mvvm.vm.ResponseViewModel
+import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_ALL
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CONST_EMPTY
@@ -21,7 +21,7 @@ import com.lee.pioneer.search.model.repository.ApiRepository
  * @date 2020/4/7
  * @description
  */
-class SearchViewModel : ResponseViewModel() {
+class SearchViewModel : BaseViewModel() {
 
     private val repository by lazy { ApiRepository() }
 
@@ -53,7 +53,7 @@ class SearchViewModel : ResponseViewModel() {
                     ++page,
                     PAGE_COUNT
                 )
-            executeResponseAny(response) { contentListObservable.value = it }
+            contentListObservable.value = response
         }
     }
 

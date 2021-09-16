@@ -3,8 +3,8 @@ package com.lee.pioneer.recommend.viewmodel
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
-import com.lee.library.mvvm.live.CacheLiveData
-import com.lee.library.mvvm.vm.ResponseViewModel
+import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.livedata.CacheLiveData
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_RECOMMEND
@@ -19,7 +19,7 @@ import com.lee.pioneer.recommend.model.repository.ApiRepository
  * @date 2020/4/9
  * @description
  */
-class RecommendViewModel : ResponseViewModel() {
+class RecommendViewModel : BaseViewModel() {
 
     private val meService by lazy { ModuleService.find<MeService>() }
 

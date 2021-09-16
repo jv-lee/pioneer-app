@@ -3,8 +3,8 @@ package com.lee.pioneer.home.viewmodel
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
-import com.lee.library.mvvm.live.CacheLiveData
-import com.lee.library.mvvm.vm.ResponseViewModel
+import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.livedata.CacheLiveData
 import com.lee.pioneer.home.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CATEGORY_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_TYPE
@@ -16,7 +16,7 @@ import com.lee.pioneer.library.common.entity.PageData
  * @date 2020/3/26
  * @description 主页ViewModel
  */
-class HomeViewModel : ResponseViewModel() {
+class HomeViewModel : BaseViewModel() {
 
     private val repository by lazy { ApiRepository() }
 

@@ -1,8 +1,8 @@
 package com.lee.pioneer.me.viewmodel
 
-import com.lee.library.mvvm.live.PageLiveData
+import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.livedata.PageLiveData
 import com.lee.library.mvvm.load.LoadStatus
-import com.lee.library.mvvm.vm.ResponseViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.ContentHistory
 import com.lee.pioneer.library.common.entity.PageData
@@ -14,7 +14,7 @@ import com.lee.pioneer.me.repository.DataBaseRepository
  * @date 2020/4/22
  * @description
  */
-class CollectViewModel : ResponseViewModel() {
+class CollectViewModel : BaseViewModel() {
 
     val contentData by lazy { PageLiveData<PageData<ContentHistory>>(limit = 0) }
     private val pageCount by lazy {
