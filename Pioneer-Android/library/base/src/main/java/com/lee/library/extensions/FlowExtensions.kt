@@ -1,5 +1,9 @@
 package com.lee.library.extensions
 
+import androidx.annotation.MainThread
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.base.BaseLiveData
 import com.lee.library.utils.LogUtil
 import kotlinx.coroutines.Dispatchers
@@ -66,4 +70,29 @@ sealed class UiState {
     data class Success<T>(val data: T) : UiState()
     data class Error(val exception: Throwable) : UiState()
     object Default : UiState()
+}
+
+typealias UiStateLiveData<T> = LiveData<UiState2<T>>
+typealias UiStateMutableLiveData<T> = MutableLiveData<UiState2<T>>
+
+@MainThread
+inline fun <T> UiStateLiveData<T>.observeState(
+    owner: LifecycleOwner,
+    crossinline onLoading: () -> Unit = {},
+    crossinline onSuccess: (T) -> Unit = {},
+    crossinline onError: (Exception) -> Unit = {}
+) {
+    observe(owner) { state ->
+        when (state) {
+            is UiState2.Loading -> onLoading()
+            is UiState2.Success -> onSuccess(state.data)
+            is UiState2.Error -> onError(state.error)
+        }
+    }
+}
+
+sealed class UiState2<out T> {
+    object Loading : UiState2<Nothing>()
+    data class Success<out T>(val data: T) : UiState2<T>()
+    data class Error(val error: Exception = RuntimeException()) : UiState2<Nothing>()
 }
