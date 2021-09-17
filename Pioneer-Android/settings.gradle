@@ -3,6 +3,7 @@ include ':app'
 
 include 'library:base'
 include ':library:common'
+include ':library:router'
 include ':library:service'
 
 include ':module:home'
@@ -11,5 +12,3 @@ include ':module:girl'
 include ':module:me'
 include ':module:details'
 include ':module:search'
-
-include ':library:router'
