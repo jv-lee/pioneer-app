@@ -1,4 +1,4 @@
-package com.lee.pioneer.details
+package com.lee.pioneer.details.ui.fragment
 
 import android.text.TextUtils
 import android.view.View
@@ -12,6 +12,7 @@ import com.lee.library.tools.WebViewTools
 import com.lee.library.utils.ShareUtil
 import com.lee.library.widget.WebViewEx
 import com.lee.library.widget.toolbar.TitleToolbar
+import com.lee.pioneer.details.R
 import com.lee.pioneer.details.databinding.FragmentContentDetailsBinding
 import com.lee.pioneer.details.viewmodel.ContentDetailsViewModel
 import com.lee.pioneer.library.common.constant.HttpConstant

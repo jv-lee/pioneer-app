@@ -1,9 +1,10 @@
-package com.lee.pioneer.router
+package com.lee.pioneer.router.extensions
 
 import android.net.Uri
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavOptions
+import com.lee.pioneer.router.R
 
 /**
  * @author jv.lee
@@ -11,7 +12,7 @@ import androidx.navigation.NavOptions
  * @description
  */
 
-fun NavController.navigationDeepLink(uri: Uri, anim: NavigationAnim) {
+fun NavController.navigateDeepLink(uri: Uri, anim: NavigationAnim = NavigationAnim.SlideIn) {
     navigate(NavDeepLinkRequest.Builder.fromUri(uri).build(), anim.options())
 }
 

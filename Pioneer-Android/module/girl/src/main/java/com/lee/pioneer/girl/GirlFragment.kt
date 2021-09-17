@@ -17,8 +17,7 @@ import com.lee.pioneer.girl.databinding.FragmentGirlBinding
 import com.lee.pioneer.girl.databinding.LayoutGirlHeaderBinding
 import com.lee.pioneer.girl.viewmodel.GirlViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.service.DetailsService
-import com.lee.pioneer.library.service.hepler.ModuleService
+import com.lee.pioneer.router.navigateDetails
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -73,8 +72,7 @@ class GirlFragment :
             addHeader(headerViewBinding.root)
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-                ModuleService.find<DetailsService>()
-                    .navigationDetails(findNavController(), entity._id, KeyConstants.CONST_EMPTY)
+                findNavController().navigateDetails(entity._id, KeyConstants.CONST_EMPTY)
             }
             setAutoLoadMoreListener {
                 viewModel.getGirlContentData(LoadStatus.LOAD_MORE)

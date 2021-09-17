@@ -10,9 +10,6 @@ import com.lee.library.extensions.*
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Banner
-import com.lee.pioneer.library.service.DetailsService
-import com.lee.pioneer.library.service.SearchService
-import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.R
 import com.lee.pioneer.recommend.databinding.FragmentRecommendBinding
 import com.lee.pioneer.recommend.databinding.LayoutRecommendHeaderBinding
@@ -20,7 +17,8 @@ import com.lee.pioneer.recommend.view.adapter.ContentAdapter
 import com.lee.pioneer.recommend.view.widget.BannerViewHolder
 import com.lee.pioneer.recommend.view.widget.RecommendLoadResource
 import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
-import java.util.*
+import com.lee.pioneer.router.navigateDetails
+import com.lee.pioneer.router.navigateSearch
 
 /**
  * @author jv.lee
@@ -43,7 +41,7 @@ class RecommendFragment :
 
         //设置toolbar 搜索跳转
         binding.tvSearch.setOnClickListener {
-            ModuleService.find<SearchService>().navigationSearch(findNavController())
+            findNavController().navigateSearch()
         }
 
         headerBinding.run {
@@ -51,8 +49,7 @@ class RecommendFragment :
             banner.setDelayedTime(5000)
             banner.setBannerPageClickListener { _, position ->
                 (banner.data[position] as Banner).let {
-                    ModuleService.find<DetailsService>()
-                        .navigationDetails(findNavController(), KeyConstants.CONST_EMPTY, it.url)
+                    findNavController().navigateDetails(KeyConstants.CONST_EMPTY, it.url)
                 }
             }
 
@@ -107,8 +104,7 @@ class RecommendFragment :
             notifyDataSetChanged()
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-                ModuleService.find<DetailsService>()
-                    .navigationDetails(findNavController(), entity._id, KeyConstants.CONST_EMPTY)
+                findNavController().navigateDetails(entity._id, KeyConstants.CONST_EMPTY)
             }
             setLoadErrorListener(object : LoadErrorListener {
                 override fun itemReload() {}

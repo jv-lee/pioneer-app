@@ -16,8 +16,7 @@ import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.home.R
 import com.lee.pioneer.home.databinding.FragmentHomeBinding
 import com.lee.pioneer.home.viewmodel.HomeViewModel
-import com.lee.pioneer.library.service.SearchService
-import com.lee.pioneer.library.service.hepler.ModuleService
+import com.lee.pioneer.router.navigateSearch
 
 /**
  * @author jv.lee
@@ -41,7 +40,7 @@ class HomeFragment :
             }
 
             tvSearch.setOnClickListener {
-                ModuleService.find<SearchService>().navigationSearch(findNavController())
+                findNavController().navigateSearch()
             }
         }
     }

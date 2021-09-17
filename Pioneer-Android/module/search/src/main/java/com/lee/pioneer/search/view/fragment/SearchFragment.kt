@@ -8,8 +8,7 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.service.DetailsService
-import com.lee.pioneer.library.service.hepler.ModuleService
+import com.lee.pioneer.router.navigateDetails
 import com.lee.pioneer.search.R
 import com.lee.pioneer.search.databinding.FragmentSearchBinding
 import com.lee.pioneer.search.view.adapter.ContentAdapter
@@ -41,8 +40,7 @@ class SearchFragment :
         mAdapter.run {
             initStatusView()
             setOnItemClickListener { _, entity, _ ->
-                ModuleService.find<DetailsService>()
-                    .navigationDetails(findNavController(), entity._id, KeyConstants.CONST_EMPTY)
+                findNavController().navigateDetails(entity._id, KeyConstants.CONST_EMPTY)
             }
             setAutoLoadMoreListener {
                 viewModel.searchDataList(true)

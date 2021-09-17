@@ -16,8 +16,7 @@ import com.lee.pioneer.home.R
 import com.lee.pioneer.home.databinding.FragmentContentListBinding
 import com.lee.pioneer.home.view.adapter.ContentAdapter
 import com.lee.pioneer.home.viewmodel.ContentListViewModel
-import com.lee.pioneer.library.service.DetailsService
-import com.lee.pioneer.library.service.hepler.ModuleService
+import com.lee.pioneer.router.navigateDetails
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
 
@@ -74,8 +73,7 @@ class ContentListFragment :
             })
             setOnItemClickListener { _, entity, _ ->
                 viewModel.insertContentHistoryToDB(entity)
-                ModuleService.find<DetailsService>()
-                    .navigationDetails(findNavController(), entity._id, entity.url)
+                findNavController().navigateDetails(entity._id, entity.url)
             }
         }
     }

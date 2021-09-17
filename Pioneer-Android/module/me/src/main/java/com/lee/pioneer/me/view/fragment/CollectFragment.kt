@@ -9,12 +9,11 @@ import com.lee.library.extensions.binding
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.library.common.constant.KeyConstants
-import com.lee.pioneer.library.service.DetailsService
-import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.me.R
 import com.lee.pioneer.me.adapter.ContentChildAdapter
 import com.lee.pioneer.me.databinding.FragmentCollectBinding
 import com.lee.pioneer.me.viewmodel.CollectViewModel
+import com.lee.pioneer.router.navigateDetails
 
 /**
  * @author jv.lee
@@ -39,12 +38,7 @@ class CollectFragment :
             pageLoading()
             setAutoLoadMoreListener { viewModel.loadHistory(LoadStatus.LOAD_MORE) }
             setOnItemClickListener { _, entity, _ ->
-                ModuleService.find<DetailsService>()
-                    .navigationDetails(
-                        findNavController(),
-                        entity.content._id,
-                        KeyConstants.CONST_EMPTY
-                    )
+                findNavController().navigateDetails(entity.content._id, KeyConstants.CONST_EMPTY)
             }
         }
     }

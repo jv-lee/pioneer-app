@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/details_fragment"
-        android:name="com.lee.pioneer.details.ContentDetailsFragment"
+        android:name="com.lee.pioneer.details.ui.fragment.ContentDetailsFragment"
         android:label="@string/module_details"
         tools:layout="@layout/fragment_content_details">
         <deepLink app:uri="pioneer-app://com.lee.pioneer/details_fragment?id={id}&amp;url={url}" />
