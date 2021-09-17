@@ -153,7 +153,6 @@ class RecommendFragment :
 
     override fun onResume() {
         super.onResume()
-        headerBinding.banner.pause()
         headerBinding.banner.start()
     }
 
