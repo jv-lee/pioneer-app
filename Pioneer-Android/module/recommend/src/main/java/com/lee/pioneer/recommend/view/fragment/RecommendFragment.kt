@@ -29,7 +29,11 @@ class RecommendFragment :
     BaseVMFragment<FragmentRecommendBinding, RecommendViewModel>(R.layout.fragment_recommend),
     DarkViewUpdateTools.ViewCallback {
 
-    private var type = "views"
+    companion object {
+        const val TYPE_VIEWS = "views"
+        const val TYPE_LIKES = "likes"
+        const val TYPE_COMMENTS = "comments"
+    }
 
     private lateinit var mAdapter: ContentAdapter
 
@@ -54,7 +58,6 @@ class RecommendFragment :
             }
 
             //设置推荐头部 分类样式
-            groupType.check(R.id.radio_view)
             radioView.setButtonTint(
                 R.drawable.vector_view,
                 R.drawable.recommend_view_selector
@@ -70,20 +73,13 @@ class RecommendFragment :
             groupType.setOnCheckedChangeListener { _, checkedId ->
                 mAdapter.initStatusView()
                 mAdapter.pageLoading()
-                when (checkedId) {
-                    R.id.radio_view -> {
-                        type = "views"
-                        viewModel.getContentList(type)
-                    }
-                    R.id.radio_like -> {
-                        type = "likes"
-                        viewModel.getContentList(type)
-                    }
-                    R.id.radio_comment -> {
-                        type = "comments"
-                        viewModel.getContentList(type)
-                    }
+                val type = when (checkedId) {
+                    R.id.radio_view -> TYPE_VIEWS
+                    R.id.radio_like -> TYPE_LIKES
+                    R.id.radio_comment -> TYPE_COMMENTS
+                    else -> TYPE_VIEWS
                 }
+                viewModel.checkType.value = type
             }
 
         }
@@ -110,7 +106,7 @@ class RecommendFragment :
                 override fun itemReload() {}
 
                 override fun pageReload() {
-                    viewModel.getContentList(type)
+                    viewModel.getContentList()
                 }
 
             })
@@ -120,6 +116,15 @@ class RecommendFragment :
 
     override fun bindData() {
         viewModel.apply {
+            checkType.observe(viewLifecycleOwner, { type ->
+                viewModel.getContentList(type)
+                when (type) {
+                    TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
+                    TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
+                    TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
+                }
+            })
+
             bannerData.observe(viewLifecycleOwner, {
                 headerBinding.banner.setPages(it.toList()) { BannerViewHolder() }
                 headerBinding.banner.start()
@@ -148,7 +153,7 @@ class RecommendFragment :
 
     override fun lazyLoad() {
         viewModel.getBannerData()
-        viewModel.getContentList(type)
+//        viewModel.getContentList(type)
     }
 
     override fun onResume() {

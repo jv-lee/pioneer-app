@@ -1,5 +1,6 @@
 package com.lee.pioneer.recommend.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
@@ -13,6 +14,7 @@ import com.lee.pioneer.library.common.entity.*
 import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.model.repository.ApiRepository
+import com.lee.pioneer.recommend.view.fragment.RecommendFragment.Companion.TYPE_VIEWS
 
 /**
  * @author jv.lee
@@ -27,6 +29,8 @@ class RecommendViewModel : BaseViewModel() {
 
     val bannerData by lazy { CacheLiveData<ArrayList<Banner>>() }
     val contentData by lazy { CacheLiveData<PageData<Content>>() }
+    val checkType by lazy { MutableLiveData(TYPE_VIEWS) }
+
     private val viewsData = arrayListOf<Content>()
     private val likesData = arrayListOf<Content>()
     private val commentsData = arrayListOf<Content>()
@@ -68,7 +72,7 @@ class RecommendViewModel : BaseViewModel() {
         }
     }
 
-    fun getContentList(type: String) {
+    fun getContentList(type: String = checkType.value!!) {
         val data = getCacheContentList(type)
         if (data.isNotEmpty()) {
             contentData.value = PageData(data, page_count = 0, page = 0)

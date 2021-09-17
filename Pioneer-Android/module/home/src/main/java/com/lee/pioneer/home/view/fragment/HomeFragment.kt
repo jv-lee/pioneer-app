@@ -36,6 +36,7 @@ class HomeFragment :
         binding.run {
             status.setStatus(StatusLayout.STATUS_LOADING)
             status.setOnReloadListener {
+                status.setStatus(StatusLayout.STATUS_LOADING)
                 viewModel.buildCategoryFragment()
             }
 
