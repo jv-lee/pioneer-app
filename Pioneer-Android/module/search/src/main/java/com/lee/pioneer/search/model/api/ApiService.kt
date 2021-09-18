@@ -1,5 +1,6 @@
 package com.lee.pioneer.search.model.api
 
+import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
 import retrofit2.http.GET
@@ -23,10 +24,10 @@ interface ApiService {
     @GET("search/{search}/category/{category}/type/{type}/page/{page}/count/{count}")
     suspend fun getSearchDataAsync(
         @Path("search") search: String,
-        @Path("category") category: String,
-        @Path("type") type: String,
         @Path("page") page: Int,
-        @Path("count") count: Int
+        @Path("category") category: String = KeyConstants.CATEGORY_ALL,
+        @Path("type") type: String = KeyConstants.CATEGORY_ALL,
+        @Path("count") count: Int = KeyConstants.PAGE_COUNT
     ): PageData<Content>
 
 }

@@ -3,11 +3,15 @@ package com.lee.pioneer.search.view.fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.adapter.page.submitData
 import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
+import com.lee.library.mvvm.ui.observe
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.library.common.constant.KeyConstants
+import com.lee.pioneer.library.common.entity.Content
+import com.lee.pioneer.library.common.entity.PageData
 import com.lee.pioneer.router.navigateDetails
 import com.lee.pioneer.search.R
 import com.lee.pioneer.search.databinding.FragmentSearchBinding
@@ -43,8 +47,17 @@ class SearchFragment :
                 findNavController().navigateDetails(entity._id, KeyConstants.CONST_EMPTY)
             }
             setAutoLoadMoreListener {
-                viewModel.searchDataList(true)
+                viewModel.pageLive.loadMore()
             }
+            setLoadErrorListener(object : LoadErrorListener {
+                override fun pageReload() {
+                    viewModel.pageLive.refresh()
+                }
+
+                override fun itemReload() {
+                    viewModel.pageLive.reload()
+                }
+            })
         }
 
     }
@@ -53,13 +66,15 @@ class SearchFragment :
         binding.vm = viewModel
 
         viewModel.apply {
-            contentListObservable.observe(this@SearchFragment, {
-                mAdapter.submitData(it)
-            }, {
-                mAdapter.submitFailed()
-            })
+            contentLive.observe<PageData<Content>>(this@SearchFragment,
+                success = {
+                    mAdapter.submitData(it)
+                },
+                error = {
+                    mAdapter.submitFailed()
+                })
 
-            loadingObservable.observe(this@SearchFragment, Observer {
+            loadingLive.observe(this@SearchFragment, {
                 mAdapter.initStatusView()
                 mAdapter.pageLoading()
             })
