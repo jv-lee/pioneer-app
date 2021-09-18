@@ -5,11 +5,15 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
+import com.lee.library.adapter.page.submitSinglePage
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
+import com.lee.library.mvvm.ui.observe
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Banner
+import com.lee.pioneer.library.common.entity.Content
+import com.lee.pioneer.library.common.entity.PageData
 import com.lee.pioneer.recommend.R
 import com.lee.pioneer.recommend.databinding.FragmentRecommendBinding
 import com.lee.pioneer.recommend.databinding.LayoutRecommendHeaderBinding
@@ -33,6 +37,15 @@ class RecommendFragment :
         const val TYPE_VIEWS = "views"
         const val TYPE_LIKES = "likes"
         const val TYPE_COMMENTS = "comments"
+
+        private fun getCheckType(checkedId: Int): String {
+            return when (checkedId) {
+                R.id.radio_view -> TYPE_VIEWS
+                R.id.radio_like -> TYPE_LIKES
+                R.id.radio_comment -> TYPE_COMMENTS
+                else -> TYPE_VIEWS
+            }
+        }
     }
 
     private lateinit var mAdapter: ContentAdapter
@@ -71,15 +84,7 @@ class RecommendFragment :
                 R.drawable.recommend_comment_selector
             )
             groupType.setOnCheckedChangeListener { _, checkedId ->
-                mAdapter.initStatusView()
-                mAdapter.pageLoading()
-                val type = when (checkedId) {
-                    R.id.radio_view -> TYPE_VIEWS
-                    R.id.radio_like -> TYPE_LIKES
-                    R.id.radio_comment -> TYPE_COMMENTS
-                    else -> TYPE_VIEWS
-                }
-                viewModel.checkType.value = type
+                viewModel.switchType(getCheckType(checkedId))
             }
 
         }
@@ -106,7 +111,7 @@ class RecommendFragment :
                 override fun itemReload() {}
 
                 override fun pageReload() {
-                    viewModel.getContentList()
+                    viewModel.switchType(getCheckType(headerBinding.groupType.checkedRadioButtonId))
                 }
 
             })
@@ -116,8 +121,16 @@ class RecommendFragment :
 
     override fun bindData() {
         viewModel.apply {
-            checkType.observe(viewLifecycleOwner, { type ->
-                viewModel.getContentList(type)
+            bannerLive.observe<ArrayList<Banner>>(viewLifecycleOwner,
+                success = {
+                    headerBinding.banner.setPages(it) { BannerViewHolder() }
+                    headerBinding.banner.start()
+                },
+                error = {
+                    toast(it.message)
+                })
+
+            typeLive.observe(viewLifecycleOwner, { type ->
                 when (type) {
                     TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
                     TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
@@ -125,35 +138,16 @@ class RecommendFragment :
                 }
             })
 
-            bannerData.observe(viewLifecycleOwner, {
-                headerBinding.banner.setPages(it.toList()) { BannerViewHolder() }
-                headerBinding.banner.start()
-            }, {
-                toast(it)
+            contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {
+                mAdapter.submitSinglePage(it.data)
+            }, error = {
+                toast(it.message)
+                mAdapter.pageError()
+            }, loading = {
+                mAdapter.initStatusView()
+                mAdapter.pageLoading()
             })
-
-            contentData.observe(viewLifecycleOwner, {
-                if (it.data.isNullOrEmpty() && mAdapter.data.isNullOrEmpty()) {
-                    mAdapter.pageEmpty()
-                } else if (it.data.isNotEmpty()) {
-                    mAdapter.updateData(it.data)
-                    mAdapter.pageCompleted()
-                    mAdapter.loadMoreEnd()
-                }
-
-            }, {
-                toast(it)
-                if (!mAdapter.isPageCompleted) {
-                    mAdapter.pageError()
-                }
-            })
-
         }
-    }
-
-    override fun lazyLoad() {
-        viewModel.getBannerData()
-//        viewModel.getContentList(type)
     }
 
     override fun onResume() {

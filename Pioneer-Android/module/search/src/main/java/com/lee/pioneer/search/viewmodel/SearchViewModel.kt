@@ -8,7 +8,7 @@ import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.mvvm.livedata.SingleLiveData
 import com.lee.library.mvvm.load.PageNumberLiveData
 import com.lee.library.mvvm.ui.UiState
-import com.lee.library.mvvm.ui.stateLiveData
+import com.lee.library.mvvm.ui.stateLive
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.search.model.repository.ApiRepository
 import kotlinx.coroutines.flow.*
@@ -31,7 +31,7 @@ class SearchViewModel : BaseViewModel() {
     val loadingLive: LiveData<Boolean> = _loadingLive
 
     val contentLive: LiveData<UiState> = pageLive.switchMap { input ->
-        stateLiveData {
+        stateLive {
             repository.api.getSearchDataAsync(searchText, input)
         }
     }
