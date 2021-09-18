@@ -121,21 +121,19 @@ class RecommendFragment :
 
     override fun bindData() {
         viewModel.apply {
-            bannerLive.observe<ArrayList<Banner>>(viewLifecycleOwner,
-                success = {
-                    headerBinding.banner.setPages(it) { BannerViewHolder() }
-                    headerBinding.banner.start()
-                },
-                error = {
-                    toast(it.message)
-                })
-
             typeLive.observe(viewLifecycleOwner, { type ->
                 when (type) {
                     TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
                     TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
                     TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
                 }
+            })
+
+            bannerLive.observe<ArrayList<Banner>>(viewLifecycleOwner, success = {
+                headerBinding.banner.setPages(it) { BannerViewHolder() }
+                headerBinding.banner.start()
+            }, error = {
+                toast(it.message)
             })
 
             contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {

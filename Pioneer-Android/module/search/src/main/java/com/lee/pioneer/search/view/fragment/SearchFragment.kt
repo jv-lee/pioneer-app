@@ -1,6 +1,5 @@
 package com.lee.pioneer.search.view.fragment
 
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.listener.LoadErrorListener
@@ -66,13 +65,11 @@ class SearchFragment :
         binding.vm = viewModel
 
         viewModel.apply {
-            contentLive.observe<PageData<Content>>(this@SearchFragment,
-                success = {
-                    mAdapter.submitData(it)
-                },
-                error = {
-                    mAdapter.submitFailed()
-                })
+            contentLive.observe<PageData<Content>>(this@SearchFragment, success = {
+                mAdapter.submitData(it)
+            }, error = {
+                mAdapter.submitFailed()
+            })
 
             loadingLive.observe(this@SearchFragment, {
                 mAdapter.initStatusView()
