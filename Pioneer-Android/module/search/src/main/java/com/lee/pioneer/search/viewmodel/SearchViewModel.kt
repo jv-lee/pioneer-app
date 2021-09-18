@@ -29,7 +29,7 @@ class SearchViewModel : BaseViewModel() {
     private val _loadingLive = SingleLiveData<Boolean>()
     val loadingLive: LiveData<Boolean> = _loadingLive
 
-    val contentLive = Transformations.switchMap(pageLive) { input ->
+    val contentLive = pageLive.switchMap { input ->
         stateLiveData {
             repository.api.getSearchDataAsync(searchText, input)
         }
