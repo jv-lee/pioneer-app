@@ -1,5 +1,7 @@
 package com.lee.pioneer.recommend.model.api
 
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_RECOMMEND
+import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.library.common.entity.Banner
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
@@ -28,8 +30,8 @@ interface ApiService {
     @GET("hot/{hot_type}/category/{category}/count/{count}")
     suspend fun getHotDataAsync(
         @Path("hot_type") hotType: String,
-        @Path("category") category: String,
-        @Path("count") count: Int
+        @Path("category") category: String = CATEGORY_RECOMMEND,
+        @Path("count") count: Int = PAGE_COUNT
     ): PageData<Content>
 
 }
