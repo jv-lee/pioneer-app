@@ -7,6 +7,7 @@ import androidx.lifecycle.*
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.mvvm.livedata.SingleLiveData
 import com.lee.library.mvvm.load.PageNumberLiveData
+import com.lee.library.mvvm.ui.UiState
 import com.lee.library.mvvm.ui.stateLiveData
 import com.lee.library.utils.KeyboardUtil
 import com.lee.pioneer.search.model.repository.ApiRepository
@@ -29,7 +30,7 @@ class SearchViewModel : BaseViewModel() {
     private val _loadingLive = SingleLiveData<Boolean>()
     val loadingLive: LiveData<Boolean> = _loadingLive
 
-    val contentLive = pageLive.switchMap { input ->
+    val contentLive: LiveData<UiState> = pageLive.switchMap { input ->
         stateLiveData {
             repository.api.getSearchDataAsync(searchText, input)
         }
