@@ -7,11 +7,8 @@ import androidx.lifecycle.*
 import com.lee.library.mvvm.base.BaseViewModel
 import com.lee.library.mvvm.livedata.SingleLiveData
 import com.lee.library.mvvm.load.PageNumberLiveData
-import com.lee.library.mvvm.ui.UiState
 import com.lee.library.mvvm.ui.stateLiveData
 import com.lee.library.utils.KeyboardUtil
-import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_ALL
-import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.search.model.repository.ApiRepository
 import kotlinx.coroutines.flow.*
 
@@ -24,10 +21,13 @@ class SearchViewModel : BaseViewModel() {
 
     private val repository by lazy { ApiRepository() }
 
+    //搜索内容及页码 根据页码变化进行内容搜索
     private lateinit var searchText: String
-
     val pageLive = PageNumberLiveData(1)
-    val loadingLive = SingleLiveData<Boolean>()
+
+    //loading状态
+    private val _loadingLive = SingleLiveData<Boolean>()
+    val loadingLive: LiveData<Boolean> = _loadingLive
 
     val contentLive = Transformations.switchMap(pageLive) { input ->
         stateLiveData {
@@ -40,7 +40,7 @@ class SearchViewModel : BaseViewModel() {
             val text = view.text.toString()
             if (text.isNotEmpty()) {
                 searchText = text
-                loadingLive.postValue(true)
+                _loadingLive.postValue(true)
                 pageLive.refresh()
                 KeyboardUtil.hideSoftInput(view.context as Activity)
             }
