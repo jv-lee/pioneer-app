@@ -4,7 +4,7 @@ import android.text.TextUtils
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.base.BaseApplication
-import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.base.CoroutineViewModel
 import com.lee.library.widget.interadap.TextWatcherAdapter
 import com.lee.pioneer.me.R
 
@@ -13,7 +13,7 @@ import com.lee.pioneer.me.R
  * @date 2020/4/24
  * @description
  */
-class FeedbackViewModel : BaseViewModel() {
+class FeedbackViewModel : CoroutineViewModel() {
 
     private val contentField by lazy { ObservableField<String>("") }
     private val linkField by lazy { ObservableField<String>("") }

@@ -1,7 +1,7 @@
 package com.lee.pioneer.details.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.base.CoroutineViewModel
 import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 
@@ -10,7 +10,7 @@ import com.lee.pioneer.library.service.hepler.ModuleService
  * @date 2020/3/31
  * @description
  */
-class ContentDetailsViewModel : BaseViewModel() {
+class ContentDetailsViewModel : CoroutineViewModel() {
 
     private val meService by lazy { ModuleService.find<MeService>() }
     val favoriteObservable by lazy { MutableLiveData<Int>() }

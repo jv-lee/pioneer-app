@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
-import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.base.CoroutineViewModel
 import com.lee.library.mvvm.ui.UiState
 import com.lee.library.mvvm.ui.stateCacheLive
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
  * @date 2020/4/9
  * @description
  */
-class RecommendViewModel : BaseViewModel() {
+class RecommendViewModel : CoroutineViewModel() {
 
     private val meService by lazy { ModuleService.find<MeService>() }
 

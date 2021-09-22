@@ -3,7 +3,7 @@ package com.lee.pioneer.girl.viewmodel
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
-import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.base.CoroutineViewModel
 import com.lee.library.mvvm.livedata.PageLiveData
 import com.lee.library.mvvm.livedata.applyData
 import com.lee.library.mvvm.load.LoadStatus
@@ -20,7 +20,7 @@ import com.lee.pioneer.library.service.hepler.ModuleService
  * @date 2020/4/10
  * @description
  */
-class GirlViewModel : BaseViewModel() {
+class GirlViewModel : CoroutineViewModel() {
 
     private val meService by lazy { ModuleService.find<MeService>() }
 

@@ -1,6 +1,6 @@
 package com.lee.pioneer.me.viewmodel
 
-import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.base.CoroutineViewModel
 import com.lee.library.mvvm.livedata.PageLiveData
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.library.common.constant.KeyConstants
@@ -14,7 +14,7 @@ import com.lee.pioneer.me.repository.DataBaseRepository
  * @date 2020/4/23
  * @description
  */
-class HistoryViewModel : BaseViewModel() {
+class HistoryViewModel : CoroutineViewModel() {
 
     val contentData by lazy { PageLiveData<PageData<ContentHistory>>(limit = 0) }
     private val pageCount by lazy {
