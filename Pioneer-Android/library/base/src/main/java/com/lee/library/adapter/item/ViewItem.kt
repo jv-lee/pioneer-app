@@ -25,7 +25,4 @@ abstract class ViewItem<T> :
 
     abstract fun getItemView(context: Context, parent: ViewGroup): View
 
-
-    fun viewRecycled(holder: ViewBindingHolder, entity: T, position: Int) {}
-
 }
