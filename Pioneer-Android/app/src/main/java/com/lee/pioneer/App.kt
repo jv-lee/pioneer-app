@@ -30,7 +30,7 @@ class App : BaseApplication() {
     private val fragmentLifecycleCallbacks = object : SimpleFragmentLifecycleCallbacks() {
 
         override fun onFragmentPreAttached(fm: FragmentManager, f: Fragment, context: Context) {
-            ScreenDensityUtil.init(f.requireActivity(), 360f)
+            ScreenDensityUtil.init(f.requireActivity())
             super.onFragmentPreAttached(fm, f, context)
         }
 
@@ -39,7 +39,7 @@ class App : BaseApplication() {
     private val activityLifecycleCallbacks = object : SimpleActivityLifecycleCallbacks() {
 
         override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
-            ScreenDensityUtil.init(activity, 360f)
+            ScreenDensityUtil.init(activity)
 
             activity.bindFragmentLifecycle(fragmentLifecycleCallbacks)
 
