@@ -2,49 +2,42 @@ package com.lee.pioneer.home.view.adapter.item
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.lee.library.adapter.base.BaseViewHolder
-import com.lee.library.adapter.item.ViewItem
+import androidx.viewbinding.ViewBinding
+import com.lee.library.adapter.binding.ViewBindingHolder
+import com.lee.library.adapter.item.ViewBindingItem
 import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.utils.TimeUtil
+import com.lee.pioneer.home.R
+import com.lee.pioneer.home.databinding.ItemContentTextBinding
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.tools.CommonTools
-import com.lee.pioneer.home.R
 
 /**
  * @author jv.lee
  * @date 2020/3/31
  * @description 内容item 无图样式
  */
-class ContentTextItem : ViewItem<Content>() {
+class ContentTextItem : ViewBindingItem<Content>() {
 
-    override fun getItemView(context: Context, parent: ViewGroup): View =
-        LayoutInflater.from(context).inflate(R.layout.item_content_text, parent, false)
+    override fun getItemViewBinding(context: Context, parent: ViewGroup): ViewBinding {
+        return ItemContentTextBinding.inflate(LayoutInflater.from(context), parent, false)
+    }
 
     override fun isItemView(entity: Content, position: Int): Boolean {
         return entity.images.isNullOrEmpty()
     }
 
-    override fun convert(holder: BaseViewHolder, entity: Content, position: Int) {
-        holder.run {
-            val tvAuthor = getView<TextView>(R.id.tv_author)
-            val tvCategory = getView<TextView>(R.id.tv_category)
-            val tvTitle = getView<TextView>(R.id.tv_title)
-            val tvDescription = getView<TextView>(R.id.tv_description)
-            val tvLike = getView<TextView>(R.id.tv_like)
-            val tvViews = getView<TextView>(R.id.tv_view)
-            val tvTime = getView<TextView>(R.id.tv_time)
-
+    override fun convert(holder: ViewBindingHolder, entity: Content, position: Int) {
+        holder.getViewBinding<ItemContentTextBinding>().run {
             holder.itemView.setBackgroundColorCompat(R.color.colorThemeItem)
             tvAuthor.setTextColorCompat(R.color.colorPrimaryDark)
             tvCategory.setTextColorCompat(R.color.colorPrimary)
             tvTitle.setTextColorCompat(R.color.colorAccent)
             tvDescription.setTextColorCompat(R.color.colorPrimaryDark)
             tvLike.setTextColorCompat(R.color.colorPrimary)
-            tvViews.setTextColorCompat(R.color.colorPrimary)
+            tvView.setTextColorCompat(R.color.colorPrimary)
             tvTime.setTextColorCompat(R.color.colorPrimaryDark)
 
             entity.run {
@@ -55,7 +48,7 @@ class ContentTextItem : ViewItem<Content>() {
                 tvDescription.maxLines = if (CommonTools.isTextEllipse(tvTitle)) 2 else 3
                 tvLike.text =
                     if (entity.likeCounts == 0) tvLike.context.getString(R.string.item_like_text) else likeCounts.toString()
-                tvViews.text =
+                tvView.text =
                     if (entity.views == 0) tvLike.context.getString(R.string.item_view_text) else views.toString()
                 tvTime.text = TimeUtil.getChineseTimeString2(publishedAt)
 

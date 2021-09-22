@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.adapter.page.submitSinglePage
 import com.lee.library.base.BaseVMFragment
@@ -48,7 +49,7 @@ class RecommendFragment :
         }
     }
 
-    private lateinit var mAdapter: ContentAdapter
+    private lateinit var mAdapter: BaseViewAdapter<Content>
 
     private val headerBinding by inflate(LayoutRecommendHeaderBinding::inflate)
 

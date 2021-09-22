@@ -3,6 +3,7 @@ package com.lee.pioneer.recommend.view.adapter
 import android.content.Context
 import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.library.adapter.base.BaseViewItem
+import com.lee.library.adapter.item.ViewBindingItem
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.service.HomeService
 import com.lee.pioneer.library.service.hepler.ModuleService
@@ -17,9 +18,9 @@ class ContentAdapter(context: Context, data: ArrayList<Content>) :
 
     init {
         ModuleService.find<HomeService>().run {
-            addItemStyles(getContentMultipleItem() as BaseViewItem<Content>)
-            addItemStyles(getContentSingleItem() as BaseViewItem<Content>)
-            addItemStyles(getContentTextItem() as BaseViewItem<Content>)
+            addItemStyles(getContentMultipleItem() as ViewBindingItem<Content>)
+            addItemStyles(getContentSingleItem() as ViewBindingItem<Content>)
+            addItemStyles(getContentTextItem() as ViewBindingItem<Content>)
         }
     }
 
