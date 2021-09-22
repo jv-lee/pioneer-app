@@ -5,6 +5,7 @@ import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.base.CoroutineViewModel
 import com.lee.library.mvvm.livedata.CacheLiveData
+import com.lee.library.mvvm.livedata.cacheLaunch
 import com.lee.pioneer.home.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CATEGORY_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_TYPE

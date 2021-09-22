@@ -2,6 +2,7 @@ package com.lee.pioneer.me.viewmodel
 
 import com.lee.library.mvvm.base.CoroutineViewModel
 import com.lee.library.mvvm.livedata.PageLiveData
+import com.lee.library.mvvm.livedata.pageLaunch
 import com.lee.library.mvvm.load.LoadStatus
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.ContentHistory
@@ -16,7 +17,7 @@ import com.lee.pioneer.me.repository.DataBaseRepository
  */
 class HistoryViewModel : CoroutineViewModel() {
 
-    val contentData by lazy { PageLiveData<PageData<ContentHistory>>(limit = 0) }
+    val contentData by lazy { PageLiveData<PageData<ContentHistory>>(initPage = 0) }
     private val pageCount by lazy {
         CommonTools.totalToPage(
             DataBaseRepository.get().historyDao.queryContentHistoryCount(),
