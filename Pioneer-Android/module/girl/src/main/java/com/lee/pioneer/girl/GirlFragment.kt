@@ -10,6 +10,7 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.utils.TimeUtil
 import com.lee.pioneer.girl.adapter.GirlAdapter
@@ -101,7 +102,7 @@ class GirlFragment :
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
             }, {
-                toast(it)
+                toast(HttpManager.getInstance().getServerMessage(it))
                 binding.refresh.isRefreshing = false
                 mAdapter.submitFailed()
             })

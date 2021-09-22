@@ -44,7 +44,7 @@ class HistoryFragment :
             contentData.observe(this@HistoryFragment, {
                 mAdapter.submitData(it, limit = 0)
             }, {
-                toast(it)
+                toast(it.message)
             })
 
             loadHistory(LoadStatus.INIT)

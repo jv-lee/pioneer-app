@@ -11,6 +11,7 @@ import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setBackgroundDrawableCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.extensions.toast
+import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.home.R
@@ -73,7 +74,7 @@ class HomeFragment :
                 }.attach()
 
             }, {
-                toast(it)
+                toast(HttpManager.getInstance().getServerMessage(it))
                 adapter?.let {
                     it.itemCount.takeIf { it == 0 }.run {
                         binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)

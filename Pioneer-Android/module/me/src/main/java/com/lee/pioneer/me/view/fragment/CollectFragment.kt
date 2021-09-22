@@ -8,6 +8,7 @@ import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.binding
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.net.HttpManager
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.me.R
 import com.lee.pioneer.me.adapter.ContentChildAdapter
@@ -48,7 +49,7 @@ class CollectFragment :
             contentData.observe(this@CollectFragment, {
                 mAdapter.submitData(it, limit = 0)
             }, {
-                toast(it)
+                toast(it.message)
             })
 
             viewModel.loadHistory(LoadStatus.INIT)

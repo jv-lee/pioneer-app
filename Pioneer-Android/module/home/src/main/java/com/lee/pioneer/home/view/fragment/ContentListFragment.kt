@@ -11,6 +11,7 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.home.R
 import com.lee.pioneer.home.databinding.FragmentContentListBinding
@@ -85,7 +86,7 @@ class ContentListFragment :
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
             }, {
-                toast(it)
+                toast(HttpManager.getInstance().getServerMessage(it))
                 binding.refresh.isRefreshing = false
                 mAdapter.submitFailed()
             })
