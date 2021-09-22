@@ -1,9 +1,9 @@
 package com.lee.pioneer.me.adapter
 
 import android.content.Context
-import com.lee.library.adapter.base.BaseViewAdapter
-import com.lee.pioneer.me.adapter.item.ContentChildItem
+import com.lee.library.adapter.binding.ViewBindingAdapter
 import com.lee.pioneer.library.common.entity.ContentHistory
+import com.lee.pioneer.me.adapter.item.ContentChildItem
 
 /**
  * @author jv.lee
@@ -11,8 +11,10 @@ import com.lee.pioneer.library.common.entity.ContentHistory
  * @description
  */
 class ContentChildAdapter(context: Context, data: ArrayList<ContentHistory>) :
-    BaseViewAdapter<ContentHistory>(context, data) {
+    ViewBindingAdapter<ContentHistory>(context, data) {
+
     init {
         addItemStyles(ContentChildItem())
     }
+
 }

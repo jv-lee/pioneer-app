@@ -296,16 +296,9 @@ public abstract class BaseViewAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         //根据布局的类型 创建不同的ViewHolder
         BaseViewItem<?> item = itemStyle.getViewItem(viewType);
         if (item == null) throw new RuntimeException("itemStyle.getViewItem is null.");
+        View view = (View) item.getItemViewAny(parent.getContext(), parent);
 
-        Object viewObject = item.getItemViewAny(parent.getContext(), parent);
-        BaseViewHolder viewHolder;
-
-        if (viewObject instanceof ViewBinding) {
-            viewHolder = new ViewBindingHolder((ViewBinding) viewObject);
-        } else {
-            viewHolder = new BaseViewHolder((View) viewObject);
-        }
-
+        BaseViewHolder viewHolder = new BaseViewHolder(view);
         //点击的监听
         if (item.openClick()) {
             setListener(viewHolder, item.openShake());

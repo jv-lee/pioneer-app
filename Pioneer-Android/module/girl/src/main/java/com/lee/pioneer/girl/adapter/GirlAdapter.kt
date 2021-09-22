@@ -1,7 +1,7 @@
 package com.lee.pioneer.girl.adapter
 
 import android.content.Context
-import com.lee.library.adapter.base.BaseViewAdapter
+import com.lee.library.adapter.binding.ViewBindingAdapter
 import com.lee.pioneer.girl.adapter.item.GirlItem
 import com.lee.pioneer.library.common.entity.Content
 
@@ -11,7 +11,7 @@ import com.lee.pioneer.library.common.entity.Content
  * @description
  */
 class GirlAdapter(context: Context, data: ArrayList<Content>) :
-    BaseViewAdapter<Content>(context, data) {
+    ViewBindingAdapter<Content>(context, data) {
 
     init {
         addItemStyles(GirlItem())
