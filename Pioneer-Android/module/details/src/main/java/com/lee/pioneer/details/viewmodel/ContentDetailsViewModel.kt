@@ -1,7 +1,7 @@
 package com.lee.pioneer.details.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.lee.library.mvvm.base.CoroutineViewModel
+import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 

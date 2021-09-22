@@ -3,7 +3,7 @@ package com.lee.pioneer.girl.viewmodel
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
-import com.lee.library.mvvm.base.CoroutineViewModel
+import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.library.mvvm.livedata.PageLiveData
 import com.lee.library.mvvm.livedata.applyData
 import com.lee.library.mvvm.livedata.pageLaunch

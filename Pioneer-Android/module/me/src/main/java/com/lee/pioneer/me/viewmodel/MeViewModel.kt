@@ -1,7 +1,7 @@
 package com.lee.pioneer.me.viewmodel
 
 import androidx.databinding.ObservableField
-import com.lee.library.mvvm.base.CoroutineViewModel
+import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.library.tools.DarkModeTools
 
 /**

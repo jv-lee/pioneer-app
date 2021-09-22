@@ -13,7 +13,7 @@ import com.lee.library.mvvm.livedata.SingleLiveData
  */
 open class BaseViewModel : ViewModel() {
 
-    val failedEvent = SingleLiveData<Throwable>()
+    protected val failedEvent = SingleLiveData<Throwable>()
 
     open fun <T : Application?> getApplication(): Context {
         return BaseApplication.getContext()

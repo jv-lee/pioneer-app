@@ -4,7 +4,7 @@ import android.text.TextUtils
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.base.BaseApplication
-import com.lee.library.mvvm.base.CoroutineViewModel
+import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.library.widget.interadap.TextWatcherAdapter
 import com.lee.pioneer.me.R
 
