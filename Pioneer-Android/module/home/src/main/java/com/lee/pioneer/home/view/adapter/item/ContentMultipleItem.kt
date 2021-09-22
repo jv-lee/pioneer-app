@@ -85,7 +85,7 @@ class ContentMultipleItem : ViewBindingItem<Content>() {
         }
     }
 
-    override fun viewRecycled(holder: ViewBindingHolder, entity: Content, position: Int) {
+    override fun viewRecycled(holder: ViewBindingHolder) {
         holder.getViewBinding<ItemContentMultipleBinding>().run {
             ivPicture.run {
                 Glide.with(this.context).clear(this)

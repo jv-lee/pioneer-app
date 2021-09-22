@@ -59,7 +59,7 @@ class GirlItem : ViewBindingItem<Content>() {
         }
     }
 
-    override fun viewRecycled(holder: ViewBindingHolder, entity: Content, position: Int) {
+    override fun viewRecycled(holder: ViewBindingHolder) {
         holder.getViewBinding<ItemGirlBinding>().run {
             ivPicture.run {
                 Glide.with(this.context).clear(this)

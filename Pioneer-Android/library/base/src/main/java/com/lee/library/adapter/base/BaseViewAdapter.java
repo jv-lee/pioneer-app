@@ -627,16 +627,7 @@ public abstract class BaseViewAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     }
 
     private void viewRecycled(BaseViewHolder holder) {
-        int position;
-        if (proxyAdapter != null) {
-            position = holder.getLayoutPosition() - proxyAdapter.getHeaderCount();
-        } else {
-            position = holder.getLayoutPosition();
-        }
-        if (position < getItemCount()) {
-            T entity = getData().get(position);
-            itemStyle.viewRecycled(holder, entity, position);
-        }
+        itemStyle.viewRecycled(holder);
     }
 
     /**

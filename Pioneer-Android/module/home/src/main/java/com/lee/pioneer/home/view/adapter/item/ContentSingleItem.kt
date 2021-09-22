@@ -71,7 +71,7 @@ class ContentSingleItem : ViewBindingItem<Content>() {
     }
 
 
-    override fun viewRecycled(holder: ViewBindingHolder, entity: Content, position: Int) {
+    override fun viewRecycled(holder: ViewBindingHolder) {
         holder.getViewBinding<ItemContentSingleBinding>().run {
             ivPicture.run {
                 Glide.with(this.context).clear(this)
