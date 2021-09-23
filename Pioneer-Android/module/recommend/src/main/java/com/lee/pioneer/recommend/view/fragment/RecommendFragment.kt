@@ -1,6 +1,7 @@
 package com.lee.pioneer.recommend.view.fragment
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
@@ -181,6 +182,16 @@ class RecommendFragment :
 
         mAdapter.reInitStatusView()
         mAdapter.notifyDataSetChanged()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        headerBinding.banner.onSaveInstanceState(outState)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        headerBinding.banner.onViewStateRestored(savedInstanceState)
+        super.onViewStateRestored(savedInstanceState)
     }
 
 }
