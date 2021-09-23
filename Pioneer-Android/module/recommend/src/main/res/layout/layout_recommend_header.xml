@@ -7,7 +7,7 @@
     android:paddingBottom="@dimen/padding_large"
     tools:background="@color/colorThemeBackground">
 
-    <com.lee.library.widget.banner.MZBannerView
+    <com.lee.library.widget.banner.BannerView
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/banner_height"

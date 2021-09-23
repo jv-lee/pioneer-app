@@ -1,6 +1,7 @@
 package com.lee.pioneer.recommend.view.fragment
 
 import android.annotation.SuppressLint
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,15 +12,16 @@ import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.ui.observe
 import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.library.widget.banner.holder.ImageCreateHolder
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Banner
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
+import com.lee.pioneer.library.common.tools.GlideTools
 import com.lee.pioneer.recommend.R
 import com.lee.pioneer.recommend.databinding.FragmentRecommendBinding
 import com.lee.pioneer.recommend.databinding.LayoutRecommendHeaderBinding
 import com.lee.pioneer.recommend.view.adapter.ContentAdapter
-import com.lee.pioneer.recommend.view.widget.BannerViewHolder
 import com.lee.pioneer.recommend.view.widget.RecommendLoadResource
 import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
 import com.lee.pioneer.router.navigateDetails
@@ -63,14 +65,6 @@ class RecommendFragment :
         }
 
         headerBinding.run {
-            //设置推荐头部 banner
-            banner.setDelayedTime(5000)
-            banner.setBannerPageClickListener { _, position ->
-                (banner.data[position] as Banner).let {
-                    findNavController().navigateDetails(KeyConstants.CONST_EMPTY, it.url)
-                }
-            }
-
             //设置推荐头部 分类样式
             radioView.setButtonTint(
                 R.drawable.vector_view,
@@ -131,8 +125,16 @@ class RecommendFragment :
             })
 
             bannerLive.observe<ArrayList<Banner>>(viewLifecycleOwner, success = {
-                headerBinding.banner.setPages(it) { BannerViewHolder() }
-                headerBinding.banner.start()
+                headerBinding.banner.bindDataCreate(it, object : ImageCreateHolder<Banner>() {
+                    override fun bindItem(imageView: ImageView, data: Banner) {
+                        GlideTools.get().loadImage(data.image, imageView)
+                    }
+
+                    override fun onItemClick(position: Int, item: Banner) {
+                        findNavController().navigateDetails(KeyConstants.CONST_EMPTY, item.url)
+                    }
+
+                })
             }, error = {
                 toast(it.message)
             })
