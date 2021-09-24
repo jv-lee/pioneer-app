@@ -151,16 +151,6 @@ class RecommendFragment :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        headerBinding.banner.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        headerBinding.banner.pause()
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     override fun updateDarkView() {
         binding.constContainer.setBackgroundColor(
