@@ -31,7 +31,7 @@
 
         </com.lee.library.widget.toolbar.CustomToolbarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.lee.library.widget.SavedRecyclerView
             android:id="@+id/rv_container"
             android:layout_width="0dp"
             android:layout_height="0dp"

@@ -25,7 +25,7 @@ import java.util.*
 /**
  * @author jv.lee
  * @data 2021/9/23
- * @description
+ * @description 使用ViewPager2实现的BannerView
  */
 class BannerView : RelativeLayout {
 
@@ -150,17 +150,18 @@ class BannerView : RelativeLayout {
     }
 
     fun <T> bindDataCreate(data: List<T>, createHolder: CreateHolder<T>) {
-        BannerAdapter(data, createHolder).also {
-            mAdapter = it
-            mViewPager.adapter = it
+        mAdapter = BannerAdapter(data, createHolder)
+
+        post {
+            mViewPager.adapter = mAdapter
             mViewPager.setCurrentItem(getStartIndex(), false)
             mViewPager.registerOnPageChangeCallback(mPagerChange)
             buildIndicatorView()
-        }
 
-        isStart = true
-        isAutoPlay = true
-        postDelayed(mLoopRunnable, delayTime)
+            isStart = true
+            isAutoPlay = true
+            postDelayed(mLoopRunnable, delayTime)
+        }
     }
 
     private fun getRealIndex(position: Int): Int {
