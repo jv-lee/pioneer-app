@@ -11,8 +11,7 @@
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/banner_height"
-        app:layout_constraintTop_toTopOf="parent"
-        app:open_mz_mode="false" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/group_type"
