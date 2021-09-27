@@ -13,7 +13,7 @@ import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.extensions.show
 import com.lee.library.extensions.toast
-import com.lee.library.permission.PermissionLauncher
+import com.lee.library.tools.PermissionLauncher
 import com.lee.library.tools.DarkModeTools
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.utils.CacheUtil

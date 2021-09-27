@@ -9,7 +9,7 @@ import com.lee.library.mvvm.livedata.SingleLiveData
 import com.lee.library.mvvm.load.PageNumberLiveData
 import com.lee.library.mvvm.ui.UiState
 import com.lee.library.mvvm.ui.stateLive
-import com.lee.library.utils.KeyboardUtil
+import com.lee.library.tools.KeyboardTools
 import com.lee.pioneer.search.model.repository.ApiRepository
 import kotlinx.coroutines.flow.*
 
@@ -43,7 +43,7 @@ class SearchViewModel : BaseViewModel() {
                 searchText = text
                 _loadingLive.postValue(true)
                 pageLive.refresh()
-                KeyboardUtil.hideSoftInput(view.context as Activity)
+                KeyboardTools.hideSoftInput(view.context as Activity)
             }
         }
         return@OnEditorActionListener false

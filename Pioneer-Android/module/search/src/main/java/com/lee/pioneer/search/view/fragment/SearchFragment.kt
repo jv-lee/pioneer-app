@@ -7,7 +7,7 @@ import com.lee.library.adapter.page.submitData
 import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.mvvm.ui.observe
-import com.lee.library.utils.KeyboardUtil
+import com.lee.library.tools.KeyboardTools
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
@@ -30,7 +30,7 @@ class SearchFragment :
     override fun bindView() {
         binding.run {
             tvCancel.setOnClickListener {
-                KeyboardUtil.hideSoftInput(requireActivity())
+                KeyboardTools.hideSoftInput(requireActivity())
                 findNavController().popBackStack()
             }
 
