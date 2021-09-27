@@ -1,15 +1,15 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
 android {
-
-    compileSdkVersion androidId.compileSdkVersion
-
+    compileSdk androidId.compileSdk
 
     defaultConfig {
-        minSdkVersion androidId.minSdkVersion
-        targetSdkVersion androidId.targetSdkVersion
+        minSdk androidId.minSdk
+        targetSdk androidId.targetSdk
         versionCode androidId.versionCode
         versionName androidId.versionName
 

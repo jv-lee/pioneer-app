@@ -1,11 +1,11 @@
 ext {
     androidId = [
-            compileSdkVersion: 30,
-            minSdkVersion    : 19,
-            targetSdkVersion : 29,
-            versionCode      : 1,
-            versionName      : "1.0.0",
-            applicationId    : "com.lee.pioneer"
+            compileSdk   : 30,
+            minSdk       : 19,
+            targetSdk    : 29,
+            versionCode  : 1,
+            versionName  : "1.0.0",
+            applicationId: "com.lee.pioneer"
     ]
 
     appModules = [
