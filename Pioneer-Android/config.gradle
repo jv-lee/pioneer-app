@@ -85,7 +85,7 @@ ext {
             //fragment导航
             "nav-fragment"      : "androidx.navigation:navigation-fragment-ktx:$navigation",
             "nav-ui"            : "androidx.navigation:navigation-ui-ktx:$navigation",
-            "nav-dynamic"       : "androidx.navigation:navigation-dynamic-features-fragment:$navigation",
+//            "nav-dynamic"       : "androidx.navigation:navigation-dynamic-features-fragment:$navigation",
 
             //room数据库
             "room"              : "androidx.room:room-ktx:${room}",
@@ -101,17 +101,12 @@ ext {
             "conver-gson"       : "com.squareup.retrofit2:converter-gson:${retrofit}",
             "conver-scalars"    : "com.squareup.retrofit2:converter-scalars:${retrofit}",
             "conver-protobuf"   : "com.squareup.retrofit2:converter-protobuf:${retrofit}",
-            "call-fast-json"    : "com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2",
 
             //组件化依赖
             "autoService"       : "com.google.auto.service:auto-service:${autoService}",
 
             //图片选择
             "image-tools"       : "com.github.jv-lee.imagetools:library:1.4.3",
-
-            //email
-            "email"             : "com.sun.mail:android-mail:1.6.0",
-            "email-activa"      : "com.sun.mail:android-activation:1.6.0"
     ]
 
 }
