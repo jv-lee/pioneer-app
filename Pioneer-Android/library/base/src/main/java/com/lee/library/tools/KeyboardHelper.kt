@@ -1,4 +1,4 @@
-package com.lee.library.utils
+package com.lee.library.tools
 
 import android.annotation.TargetApi
 import android.graphics.Rect
@@ -40,7 +40,7 @@ class KeyboardHelper(
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     fun enable() {
-        statusBarHeight = StatusUtil.getStatusBarHeight(decorView.context)
+        statusBarHeight = StatusTools.getStatusBarHeight(decorView.context)
         decorView.viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
         recyclerView?.addOnScrollListener(onScrollListener)
     }

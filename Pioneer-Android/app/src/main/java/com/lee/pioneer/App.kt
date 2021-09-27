@@ -12,9 +12,9 @@ import com.lee.library.extensions.bindFragmentLifecycle
 import com.lee.library.lifecycle.SimpleActivityLifecycleCallbacks
 import com.lee.library.lifecycle.SimpleFragmentLifecycleCallbacks
 import com.lee.library.tools.DarkModeTools
-import com.lee.library.utils.SPUtil
-import com.lee.library.utils.ScreenDensityUtil
-import com.lee.library.utils.StatusUtil
+import com.lee.library.tools.PreferencesTools
+import com.lee.library.tools.ScreenDensityUtil
+import com.lee.library.tools.StatusTools
 import com.lee.pioneer.library.service.hepler.ApplicationModuleService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,12 +43,12 @@ class App : BaseApplication() {
 
             activity.bindFragmentLifecycle(fragmentLifecycleCallbacks)
 
-            StatusUtil.setNavigationBarColor(activity, Color.BLACK)
+            StatusTools.setNavigationBarColor(activity, Color.BLACK)
 
             if (DarkModeTools.get().isDarkTheme()) {
-                StatusUtil.setLightStatusIcon(activity)
+                StatusTools.setLightStatusIcon(activity)
             } else {
-                StatusUtil.setDarkStatusIcon(activity)
+                StatusTools.setDarkStatusIcon(activity)
             }
             super.onActivityPreCreated(activity, savedInstanceState)
         }
@@ -64,7 +64,7 @@ class App : BaseApplication() {
 
         //初始化工具类
         CoroutineScope(Dispatchers.IO).launch {
-            SPUtil.getInstance(this@App)
+            PreferencesTools.getInstance(this@App)
             CacheManager.init(this@App, BuildConfig.VERSION_CODE)
             ApplicationModuleService.init(this@App)
         }

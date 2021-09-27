@@ -13,8 +13,8 @@ import com.lee.library.extensions.banBackEvent
 import com.lee.library.extensions.binding
 import com.lee.library.tools.DarkModeTools
 import com.lee.library.tools.WebViewTools
-import com.lee.library.utils.ScreenDensityUtil
-import com.lee.library.utils.StatusUtil
+import com.lee.library.tools.ScreenDensityUtil
+import com.lee.library.tools.StatusTools
 import com.lee.pioneer.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 
@@ -54,9 +54,9 @@ class MainActivity : BaseActivity(),
         super.onConfigurationChanged(newConfig)
         
         if (DarkModeTools.get().isDarkTheme()) {
-            StatusUtil.setLightStatusIcon(this)
+            StatusTools.setLightStatusIcon(this)
         } else {
-            StatusUtil.setDarkStatusIcon(this)
+            StatusTools.setDarkStatusIcon(this)
         }
     }
 
