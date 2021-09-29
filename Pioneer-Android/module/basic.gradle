@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdk androidId.compileSdk
+
+    defaultConfig {
+        minSdk androidId.minSdk
+        targetSdk androidId.targetSdk
+        versionCode androidId.versionCode
+        versionName androidId.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding  true
+        viewBinding  true
+    }
+
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src/main/assets', 'src/main/assets/'
+            }
+        }
+    }
+
+}
+
+dependencies {
+    kapts.each { k, v -> kapt v }
+    implementation project(path: ':library:service')
+}
