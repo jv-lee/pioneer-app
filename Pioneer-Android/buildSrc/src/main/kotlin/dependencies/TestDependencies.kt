@@ -1,10 +1,5 @@
 package dependencies
 
-/**
- * @author jv.lee
- * @data 2021/9/30
- * @description
- */
 object TestDependencies {
     const val junit = "junit:junit:${Version.junit}"
     const val junitAndroid = "androidx.test.ext:junit:${Version.junitAndroid}"

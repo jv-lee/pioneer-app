@@ -1,8 +1,3 @@
-/**
- * @author jv.lee
- * @data 2021/9/28
- * @description
- */
 object BuildConfig {
     const val applicationId = "com.lee.pioneer"
 
@@ -22,13 +17,13 @@ object BuildConfig {
 object BuildDebug {
     const val minifyEnabled = false
     const val zipAlignEnabled = false
-    const val baseApi = "https://gank.io/api/v2/"
+    val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
 }
 
 object BuildRelease {
     const val minifyEnabled = true
     const val zipAlignEnabled = true
-    const val baseApi = "https://gank.io/api/v2/"
+    val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
 }
 
 object SigningConfig {
