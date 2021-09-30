@@ -1,5 +1,20 @@
 apply from: "../basic.gradle"
 
+android {
+    buildTypes {
+        debug {
+            debugUri.each { k, v ->
+                buildConfigField("String", k, "\"" + v + "\"")
+            }
+        }
+        release {
+            releaseUri.each { k, v ->
+                buildConfigField("String", k, "\"" + v + "\"")
+            }
+        }
+    }
+}
+
 dependencies {
     implementation project(path: ':library:base')
     kapts.each { k, v -> kapt v }
