@@ -1,6 +1,6 @@
 apply from: "../basic.gradle"
 
 dependencies {
-    support.each { k, v -> api v}
-    kapts.each { k, v -> kapt v }
+    DependenciesEach.INSTANCE.support.each { api it }
+    DependenciesEach.INSTANCE.processors.each { kapt it }
 }

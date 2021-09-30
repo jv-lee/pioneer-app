@@ -3,20 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk androidId.compileSdk
+    compileSdk BuildConfig.compileSdk
 
     defaultConfig {
-        minSdk androidId.minSdk
-        targetSdk androidId.targetSdk
-        versionCode androidId.versionCode
-        versionName androidId.versionName
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
     }
 
     compileOptions {
@@ -44,6 +35,6 @@ android {
 }
 
 dependencies {
-    kapts.each { k, v -> kapt v }
-    implementation project(path: ':library:service')
+    implementation project(path: BuildModules.libraryService)
+    DependenciesEach.INSTANCE.processors.each { kapt it }
 }
