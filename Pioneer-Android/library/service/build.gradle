@@ -1,9 +1,9 @@
 apply from: "../basic.gradle"
 
 dependencies {
-    api project(path: ':library:base')
-    api project(path: ':library:common')
-    api project(path: ':library:router')
-    kapts.each { k, v -> kapt v }
+    api project(path: BuildModules.libraryBase)
+    api project(path: BuildModules.libraryCommon)
+    api project(path: BuildModules.libraryRouter)
+    DependenciesEach.INSTANCE.processors.each { kapt it }
 
 }

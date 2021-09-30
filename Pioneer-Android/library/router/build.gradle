@@ -1,6 +1,6 @@
 apply from: "../basic.gradle"
 
 dependencies {
-    implementation project(path: ':library:base')
-    kapts.each { k, v -> kapt v }
+    implementation project(path: BuildModules.libraryBase)
+    DependenciesEach.INSTANCE.processors.each { kapt it }
 }

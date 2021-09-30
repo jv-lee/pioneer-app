@@ -11,7 +11,7 @@ dependencyResolutionManagement {
 rootProject.name='Pioneer-Android'
 include ':app'
 
-include 'library:base'
+include ':library:base'
 include ':library:common'
 include ':library:router'
 include ':library:service'

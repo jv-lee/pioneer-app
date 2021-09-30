@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk androidId.compileSdk
+    compileSdk BuildConfig.compileSdk
 
     defaultConfig {
-        minSdk androidId.minSdk
-        targetSdk androidId.targetSdk
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
     }
 
     compileOptions {
