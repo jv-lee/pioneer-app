@@ -15,12 +15,14 @@ object BuildConfig {
 }
 
 object BuildDebug {
+    const val key = "debug"
     const val minifyEnabled = false
     const val zipAlignEnabled = false
     val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
 }
 
 object BuildRelease {
+    const val key = "release"
     const val minifyEnabled = true
     const val zipAlignEnabled = true
     val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
