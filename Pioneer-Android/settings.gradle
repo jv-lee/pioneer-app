@@ -8,6 +8,7 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
+includeBuild("build-config")
 rootProject.name='Pioneer-Android'
 include ':app'
 

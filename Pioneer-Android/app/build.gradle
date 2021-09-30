@@ -1,26 +1,31 @@
+import com.lee.pioneer.config.BuildConfig
+import com.lee.pioneer.config.BuildDebug
+import com.lee.pioneer.config.BuildRelease
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'build.config'
 }
 
 android {
-    compileSdk androidId.compileSdk
+    compileSdk BuildConfig.compileSdk
 
     defaultConfig {
-        applicationId androidId.applicationId
-        minSdk androidId.minSdk
-        targetSdk androidId.targetSdk
-        versionCode androidId.versionCode
-        versionName androidId.versionName
+        applicationId BuildConfig.applicationId
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
 
-        multiDexEnabled configs.multiDexEnabled
+        multiDexEnabled BuildConfig.multiDex
 
         //指定只支持中文字符
         resConfigs('zh-rCN')
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner BuildConfig.TEST_INSTRUMENTATION_RUNNER
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -33,32 +38,32 @@ android {
     }
 
     signingConfigs {
-        release {
-            storeFile file('../pioneer.jks')
-            storePassword "123456"
-            keyAlias "pioneer"
-            keyPassword "123456"
-        }
         debug {
-            storeFile file('../pioneer.jks')
-            storePassword "123456"
-            keyAlias "pioneer"
-            keyPassword "123456"
+            storeFile file(BuildDebug.Signing.storeFile)
+            storePassword BuildDebug.Signing.storePassword
+            keyAlias BuildDebug.Signing.keyAlias
+            keyPassword BuildDebug.Signing.keyPassword
+        }
+        release {
+            storeFile file(BuildRelease.Signing.storeFile)
+            storePassword BuildRelease.Signing.storePassword
+            keyAlias BuildRelease.Signing.keyAlias
+            keyPassword BuildRelease.Signing.keyPassword
         }
     }
 
     buildTypes {
         debug {
-            minifyEnabled false //混淆模式
+            minifyEnabled BuildDebug.minifyEnabled //混淆模式
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            zipAlignEnabled false // Zipalign优化
+            zipAlignEnabled BuildRelease.zipAlignEnabled // Zipalign优化
         }
         release {
-            minifyEnabled configs.minifyEnabled
+            minifyEnabled BuildRelease.minifyEnabled
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            zipAlignEnabled configs.minifyEnabled
+            zipAlignEnabled BuildRelease.zipAlignEnabled
         }
     }
 
