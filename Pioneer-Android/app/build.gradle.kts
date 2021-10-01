@@ -34,15 +34,25 @@ android {
 
     }
 
+    val signingConfigs = signingConfigs.create(BuildType.RELEASE).apply {
+        storeFile(File("${project.rootDir}/${BuildRelease.SigningConfig.storeFile}"))
+        storePassword(BuildRelease.SigningConfig.storePassword)
+        keyAlias(BuildRelease.SigningConfig.keyAlias)
+        keyPassword(BuildRelease.SigningConfig.keyPassword)
+    }
+
     buildTypes {
-        getByName(BuildDebug.key) {
-            isMinifyEnabled = BuildDebug.minifyEnabled //混淆模式
+        getByName(BuildType.DEBUG) {
+            isMinifyEnabled = BuildDebug.isMinifyEnabled //混淆模式
+            isZipAlignEnabled = BuildDebug.zipAlignEnabled
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
         }
 
-        getByName(BuildRelease.key) {
-            isMinifyEnabled = BuildRelease.minifyEnabled //混淆模式
+        getByName(BuildType.RELEASE) {
+            isMinifyEnabled = BuildRelease.isMinifyEnabled //混淆模式
+            isZipAlignEnabled = BuildRelease.zipAlignEnabled
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
+            signingConfig = signingConfigs
         }
     }
 
@@ -66,7 +76,7 @@ android {
 }
 
 dependencies {
-    implementation(project(BuildModules.libraryService))
+    implementation(project(BuildModules.Library.service))
 
     DependenciesEach.modules.forEach {
         implementation(project(it))
