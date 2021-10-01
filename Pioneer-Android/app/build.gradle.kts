@@ -1,10 +1,10 @@
 import dependencies.TestDependencies
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("androidx.navigation.safeargs.kotlin")
+    id(BuildPlugin.application)
+    id(BuildPlugin.kotlin)
+    id(BuildPlugin.kapt)
+    id(BuildPlugin.navigationSafeargs)
 }
 
 android {

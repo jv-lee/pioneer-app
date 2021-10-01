@@ -37,9 +37,9 @@ fun Project.androidConfigure(configure: Action<LibraryExtension>) {
 
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
 fun Project.moduleConfigure() {
-    plugins.apply("com.android.library")
-    plugins.apply("kotlin-android")
-    plugins.apply("kotlin-kapt")
+    plugins.apply(BuildPlugin.library)
+    plugins.apply(BuildPlugin.kotlin)
+    plugins.apply(BuildPlugin.kapt)
 
     extensions.configure<LibraryExtension> {
         compileSdk = BuildConfig.compileSdk
@@ -76,9 +76,9 @@ fun Project.moduleConfigure() {
 
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
 fun Project.libraryConfigure() {
-    plugins.apply("com.android.library")
-    plugins.apply("kotlin-android")
-    plugins.apply("kotlin-kapt")
+    plugins.apply(BuildPlugin.library)
+    plugins.apply(BuildPlugin.kotlin)
+    plugins.apply(BuildPlugin.kapt)
 
     extensions.configure<LibraryExtension> {
         compileSdk = BuildConfig.compileSdk
