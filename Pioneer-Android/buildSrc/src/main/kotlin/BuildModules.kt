@@ -1,17 +1,22 @@
 object BuildModules {
     const val app = ":app"
 
-    const val libraryBase = ":library:base"
-    const val libraryCommon = ":library:common"
-    const val libraryRouter = ":library:router"
-    const val libraryService = ":library:service"
+    object Library {
+        const val base = ":library:base"
+        const val common = ":library:common"
+        const val router = ":library:router"
+        const val service = ":library:service"
+    }
 
-    const val moduleHome = ":module:home"
-    const val moduleRecommend = ":module:recommend"
-    const val moduleGirl = ":module:girl"
-    const val moduleMe = ":module:me"
-    const val moduleSearch = ":module:search"
-    const val moduleDetails = ":module:details"
+    object Module {
+        const val home = ":module:home"
+        const val recommend = ":module:recommend"
+        const val girl = ":module:girl"
+        const val me = ":module:me"
+        const val search = ":module:search"
+        const val details = ":module:details"
+    }
+
 }
 
 

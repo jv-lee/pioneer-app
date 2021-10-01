@@ -14,24 +14,5 @@ object BuildConfig {
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 }
 
-object BuildDebug {
-    const val minifyEnabled = false
-    const val zipAlignEnabled = false
-    val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
-}
-
-object BuildRelease {
-    const val minifyEnabled = true
-    const val zipAlignEnabled = true
-    val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
-}
-
-object SigningConfig {
-    const val storeFile = "../pioneer.jks"
-    const val storePassword = "123456"
-    const val keyAlias = "pioneer"
-    const val keyPassword = "123456"
-}
-
 
 

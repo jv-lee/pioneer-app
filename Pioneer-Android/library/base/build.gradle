@@ -1,6 +1,0 @@
-apply from: "../basic.gradle"
-
-dependencies {
-    DependenciesEach.INSTANCE.support.each { api it }
-    DependenciesEach.INSTANCE.processors.each { kapt it }
-}

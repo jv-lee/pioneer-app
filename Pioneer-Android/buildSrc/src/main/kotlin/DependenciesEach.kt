@@ -4,12 +4,12 @@ import dependencies.Dependencies
 object DependenciesEach {
 
     val modules = arrayOf(
-        BuildModules.moduleHome,
-        BuildModules.moduleRecommend,
-        BuildModules.moduleGirl,
-        BuildModules.moduleMe,
-        BuildModules.moduleSearch,
-        BuildModules.moduleDetails
+        BuildModules.Module.home,
+        BuildModules.Module.recommend,
+        BuildModules.Module.girl,
+        BuildModules.Module.me,
+        BuildModules.Module.search,
+        BuildModules.Module.details
     )
 
     val processors = arrayOf(
