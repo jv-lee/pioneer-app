@@ -49,13 +49,13 @@ fun Project.moduleConfigure() {
             targetSdk = BuildConfig.targetSdk
         }
 
+        tasks.withType<KotlinCompile> {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
-        }
-
-        tasks.withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
         }
 
         buildFeatures {
@@ -88,13 +88,13 @@ fun Project.libraryConfigure() {
             targetSdk = BuildConfig.targetSdk
         }
 
+        tasks.withType<KotlinCompile> {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
-        }
-
-        tasks.withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
         }
 
         buildFeatures {

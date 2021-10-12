@@ -34,6 +34,15 @@ android {
 
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
     val signingConfigs = signingConfigs.create(BuildType.RELEASE).apply {
         storeFile(File("${project.rootDir}/${BuildRelease.SigningConfig.storeFile}"))
         storePassword(BuildRelease.SigningConfig.storePassword)
@@ -54,15 +63,6 @@ android {
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
             signingConfig = signingConfigs
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures {
