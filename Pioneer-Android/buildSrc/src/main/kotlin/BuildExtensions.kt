@@ -8,6 +8,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.withType
+import org.gradle.nativeplatform.BuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun DependencyHandler.releaseImplementation(dependencyNotation: Any): Dependency? =
@@ -118,4 +119,22 @@ fun Project.libraryConfigure() {
         }
     }
 
+}
+
+@Suppress("MISSING_DEPENDENCY_SUPERCLASS")
+fun Project.commonParams() {
+    extensions.configure<LibraryExtension> {
+        buildTypes {
+            getByName(BuildTypes.DEBUG) {
+                BuildDebug.paramsMap.onEach {
+                    buildConfigField("String",it.key,"\"" + it.value + "\"")
+                }
+            }
+            getByName(BuildTypes.RELEASE) {
+                BuildRelease.paramsMap.onEach {
+                    buildConfigField("String",it.key,"\"" + it.value + "\"")
+                }
+            }
+        }
+    }
 }

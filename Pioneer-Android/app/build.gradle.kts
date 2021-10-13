@@ -41,7 +41,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    val signingConfigs = signingConfigs.create(BuildType.RELEASE).apply {
+    val signingConfigs = signingConfigs.create(BuildTypes.RELEASE).apply {
         storeFile(File("${project.rootDir}/${BuildRelease.SigningConfig.storeFile}"))
         storePassword(BuildRelease.SigningConfig.storePassword)
         keyAlias(BuildRelease.SigningConfig.keyAlias)
@@ -49,13 +49,13 @@ android {
     }
 
     buildTypes {
-        getByName(BuildType.DEBUG) {
+        getByName(BuildTypes.DEBUG) {
             isMinifyEnabled = BuildDebug.isMinifyEnabled //混淆模式
             isZipAlignEnabled = BuildDebug.zipAlignEnabled
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
         }
 
-        getByName(BuildType.RELEASE) {
+        getByName(BuildTypes.RELEASE) {
             isMinifyEnabled = BuildRelease.isMinifyEnabled //混淆模式
             isZipAlignEnabled = BuildRelease.zipAlignEnabled
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")

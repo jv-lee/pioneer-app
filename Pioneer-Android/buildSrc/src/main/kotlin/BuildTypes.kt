@@ -1,4 +1,4 @@
-interface BuildType {
+interface BuildTypes {
 
     companion object {
         const val DEBUG = "debug"
@@ -10,7 +10,7 @@ interface BuildType {
     val paramsMap: Map<String, String>
 }
 
-object BuildDebug : BuildType {
+object BuildDebug : BuildTypes {
     override val isMinifyEnabled = false
     override val zipAlignEnabled = false
     override val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
@@ -23,7 +23,7 @@ object BuildDebug : BuildType {
     }
 }
 
-object BuildRelease : BuildType {
+object BuildRelease : BuildTypes {
     override val isMinifyEnabled = true
     override val zipAlignEnabled = true
     override val paramsMap = mapOf(Pair("BASE_URI", "https://gank.io/api/v2/"))
