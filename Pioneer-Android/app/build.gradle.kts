@@ -1,5 +1,3 @@
-import dependencies.TestDependencies
-
 plugins {
     id(BuildPlugin.application)
     id(BuildPlugin.kotlin)
@@ -76,19 +74,5 @@ android {
 }
 
 dependencies {
-    implementation(project(BuildModules.Library.service))
-
-    DependenciesEach.modules.forEach {
-        implementation(project(it))
-    }
-    DependenciesEach.processors.forEach {
-        kapt(it)
-    }
-
-    testImplementation(TestDependencies.junit)
-    androidTestImplementation(TestDependencies.junitAndroid)
-    androidTestImplementation(TestDependencies.espresso)
-
-    debugImplementation(TestDependencies.leakcanaryDebug)
-    releaseImplementation(TestDependencies.leakcanaryRelease)
+    appDependencies()
 }

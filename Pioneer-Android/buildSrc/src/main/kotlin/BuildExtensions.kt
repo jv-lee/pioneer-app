@@ -10,6 +10,9 @@ import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+fun DependencyHandler.releaseImplementation(dependencyNotation: Any): Dependency? =
+    add("releaseImplementation", dependencyNotation)
+
 fun DependencyHandler.debugImplementation(dependencyNotation: Any): Dependency? =
     add("debugImplementation", dependencyNotation)
 
@@ -69,8 +72,8 @@ fun Project.moduleConfigure() {
     }
 
     dependencies {
-        implementation(project(BuildModules.Library.service))
-        DependenciesEach.processors.forEach { kapt(it) }
+        commonProcessors()
+        baseService()
     }
 }
 
