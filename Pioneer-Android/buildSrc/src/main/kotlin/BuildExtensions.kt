@@ -3,28 +3,40 @@ import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.withType
-import org.gradle.nativeplatform.BuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
+    add("implementation", dependencyNotation)
+
+fun DependencyHandler.implementation(
+    dependencyNotation: Any,
+    dependencyConfiguration: Action<ExternalModuleDependency>
+): Dependency =
+    addDependencyTo(this, "implementation", dependencyNotation, dependencyConfiguration)
+
+fun DependencyHandler.api(dependencyNotation: Any): Dependency? =
+    add("api", dependencyNotation)
+
+fun DependencyHandler.api(
+    dependencyNotation: Any,
+    dependencyConfiguration: Action<ExternalModuleDependency>
+): Dependency =
+    addDependencyTo(this, "api", dependencyNotation, dependencyConfiguration)
+
+fun DependencyHandler.kapt(dependencyNotation: Any): Dependency? =
+    add("kapt", dependencyNotation)
 
 fun DependencyHandler.releaseImplementation(dependencyNotation: Any): Dependency? =
     add("releaseImplementation", dependencyNotation)
 
 fun DependencyHandler.debugImplementation(dependencyNotation: Any): Dependency? =
     add("debugImplementation", dependencyNotation)
-
-fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
-    add("implementation", dependencyNotation)
-
-fun DependencyHandler.api(dependencyNotation: Any): Dependency? =
-    add("api", dependencyNotation)
-
-fun DependencyHandler.kapt(dependencyNotation: Any): Dependency? =
-    add("kapt", dependencyNotation)
 
 fun DependencyHandler.testImplementation(dependencyNotation: Any): Dependency? =
     add("testImplementation", dependencyNotation)
@@ -127,12 +139,12 @@ fun Project.commonParams() {
         buildTypes {
             getByName(BuildTypes.DEBUG) {
                 BuildDebug.paramsMap.onEach {
-                    buildConfigField("String",it.key,"\"" + it.value + "\"")
+                    buildConfigField("String", it.key, "\"" + it.value + "\"")
                 }
             }
             getByName(BuildTypes.RELEASE) {
                 BuildRelease.paramsMap.onEach {
-                    buildConfigField("String",it.key,"\"" + it.value + "\"")
+                    buildConfigField("String", it.key, "\"" + it.value + "\"")
                 }
             }
         }
