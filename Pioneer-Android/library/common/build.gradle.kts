@@ -1,8 +1,8 @@
 libraryConfigure()
 
-commonParams()
+paramsConfigure()
 
 dependencies {
     commonProcessors()
-    implementation(project(BuildModules.Library.base))
+    implementation(project(build.BuildModules.Library.base))
 }

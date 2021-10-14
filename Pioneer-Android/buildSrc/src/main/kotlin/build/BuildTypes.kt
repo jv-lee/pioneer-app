@@ -1,3 +1,5 @@
+package build
+
 interface BuildTypes {
 
     companion object {

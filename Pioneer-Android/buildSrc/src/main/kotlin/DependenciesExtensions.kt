@@ -1,3 +1,4 @@
+import build.BuildModules
 import dependencies.Dependencies
 import dependencies.ProcessorsDependencies
 import dependencies.TestDependencies

@@ -1,3 +1,5 @@
+package build
+
 object BuildConfig {
     const val applicationId = "com.lee.pioneer"
 

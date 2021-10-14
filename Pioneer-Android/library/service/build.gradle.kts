@@ -2,7 +2,7 @@ libraryConfigure()
 
 dependencies {
     commonProcessors()
-    api(project(BuildModules.Library.base))
-    api(project(BuildModules.Library.common))
-    api(project(BuildModules.Library.router))
+    api(project(build.BuildModules.Library.base))
+    api(project(build.BuildModules.Library.common))
+    api(project(build.BuildModules.Library.router))
 }
