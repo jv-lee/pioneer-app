@@ -3,12 +3,4 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.lee.pioneer.me">
 
-    <dist:module
-        dist:instant="true"
-        dist:title="@string/title_me">
-        <dist:delivery>
-            <dist:install-time />
-        </dist:delivery>
-        <dist:fusing dist:include="true" />
-    </dist:module>
 </manifest>

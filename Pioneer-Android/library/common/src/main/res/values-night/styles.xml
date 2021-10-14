@@ -1,5 +1,16 @@
 <resources>
 
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.Animation</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
+
     <!--    搜索text样式    -->
     <style name="SearchStyle" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">@dimen/search_text_width</item>
