@@ -1,4 +1,4 @@
-package configures
+package configures.plugins
 
 import build.BuildDebug
 import build.BuildRelease
