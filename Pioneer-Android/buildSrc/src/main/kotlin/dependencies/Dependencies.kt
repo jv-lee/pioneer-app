@@ -60,5 +60,5 @@ object Dependencies {
     const val autoService = "com.google.auto.service:auto-service:${Version.autoService}"
 
     //图片选择器
-    const val imageTools = "com.github.jv-lee.imagetools:library:1.4.3"
+    const val imageTools = "com.github.jv-lee.imagetools:library:1.4.4"
 }
