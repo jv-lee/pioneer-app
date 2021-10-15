@@ -1,1 +1,3 @@
+import configures.moduleConfigure
+
 moduleConfigure()

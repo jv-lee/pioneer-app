@@ -1,3 +1,6 @@
+import configures.libraryConfigure
+import configures.paramsConfigure
+
 libraryConfigure()
 
 paramsConfigure()

@@ -1,3 +1,5 @@
+package configures
+
 import build.*
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
@@ -6,6 +8,8 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kapt
+import appDependencies
 
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS","MISSING_DEPENDENCY_CLASS")
 fun Project.appConfigure() {

@@ -1,3 +1,5 @@
+package configures
+
 import build.BuildDebug
 import build.BuildRelease
 import build.BuildTypes

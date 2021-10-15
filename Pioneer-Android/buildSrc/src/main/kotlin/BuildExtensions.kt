@@ -4,6 +4,8 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.jetbrains.kotlin.gradle.plugin.KaptExtension
+import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 
 fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
@@ -39,8 +41,8 @@ fun DependencyHandler.testImplementation(dependencyNotation: Any): Dependency? =
 fun DependencyHandler.androidTestImplementation(dependencyNotation: Any): Dependency? =
     add("androidTestImplementation", dependencyNotation)
 
-fun Project.kapt(configure: Action<org.jetbrains.kotlin.gradle.plugin.KaptExtension>): Unit =
-    (this as org.gradle.api.plugins.ExtensionAware).extensions.configure("kapt", configure)
+fun Project.kapt(configure: Action<KaptExtension>): Unit =
+    (this as ExtensionAware).extensions.configure("kapt", configure)
 
 fun Project.androidConfigure(configure: Action<LibraryExtension>) {
     extensions.configure("android", configure)

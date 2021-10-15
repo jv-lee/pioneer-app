@@ -1,3 +1,5 @@
+package configures
+
 import build.BuildConfig
 import build.BuildPlugin
 import com.android.build.gradle.LibraryExtension
@@ -6,6 +8,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kapt
 
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
 fun Project.libraryConfigure() {

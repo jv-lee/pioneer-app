@@ -1,3 +1,5 @@
+package configures
+
 import build.BuildConfig
 import build.BuildPlugin
 import com.android.build.gradle.LibraryExtension
@@ -7,6 +9,9 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kapt
+import commonProcessors
+import baseService
 
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
 fun Project.moduleConfigure() {
