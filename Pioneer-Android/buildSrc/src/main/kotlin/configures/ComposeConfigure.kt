@@ -5,6 +5,11 @@ import kotlinOptions
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
+/**
+ * @author jv.lee
+ * @data 2021/10/1
+ * @description 组建支持compose配置依赖扩展
+ */
 fun Project.composeConfigure() {
     extensions.configure<BaseAppModuleExtension> {
         defaultConfig {

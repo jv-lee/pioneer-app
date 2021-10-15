@@ -13,6 +13,11 @@ import kapt
 import commonProcessors
 import baseService
 
+/**
+ * @author jv.lee
+ * @data 2021/10/1
+ * @description 组件模块配置依赖扩展
+ */
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
 fun Project.moduleConfigure() {
     plugins.apply(BuildPlugin.library)

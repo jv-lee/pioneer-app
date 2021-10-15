@@ -3,7 +3,7 @@ package build
 /**
  * @author jv.lee
  * @data 2021/10/1
- * @description
+ * @description 项目插件配置信息
  */
 object BuildPlugin {
     const val application = "com.android.application"

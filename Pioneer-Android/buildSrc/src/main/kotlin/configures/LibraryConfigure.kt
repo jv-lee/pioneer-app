@@ -10,6 +10,11 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kapt
 
+/**
+ * @author jv.lee
+ * @data 2021/10/1
+ * @description 基础库配置依赖扩展
+ */
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
 fun Project.libraryConfigure() {
     plugins.apply(BuildPlugin.library)

@@ -1,5 +1,11 @@
 package build
 
+/**
+ * @author jv.lee
+ * @data 2021/10/1
+ * @description 项目编译类型配置信息
+ */
+
 interface BuildTypes {
 
     companion object {

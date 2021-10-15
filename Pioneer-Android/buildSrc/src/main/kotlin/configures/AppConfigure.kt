@@ -11,6 +11,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kapt
 import appDependencies
 
+/**
+ * @author jv.lee
+ * @data 2021/10/1
+ * @description app模块配置依赖扩展
+ */
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS","MISSING_DEPENDENCY_CLASS")
 fun Project.appConfigure() {
     plugins.apply(BuildPlugin.application)
