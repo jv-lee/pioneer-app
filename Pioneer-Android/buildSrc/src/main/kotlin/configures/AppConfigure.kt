@@ -17,11 +17,16 @@ import appDependencies
  * @description app模块配置依赖扩展
  */
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS","MISSING_DEPENDENCY_CLASS")
-fun Project.appConfigure() {
+fun Project.appConfigure(
+    projectConfigure: Project.() -> Unit = {},
+    androidConfigure: BaseAppModuleExtension.() -> Unit = {}
+) {
     plugins.apply(BuildPlugin.application)
     plugins.apply(BuildPlugin.kotlin)
     plugins.apply(BuildPlugin.kapt)
     plugins.apply(BuildPlugin.navigationSafeargs)
+
+    projectConfigure()
 
     extensions.configure<BaseAppModuleExtension> {
         compileSdk = BuildConfig.compileSdk
@@ -81,8 +86,11 @@ fun Project.appConfigure() {
             generateStubs = true
         }
 
-        dependencies {
-            appDependencies()
-        }
+        androidConfigure()
     }
+
+    dependencies {
+        appDependencies()
+    }
+
 }

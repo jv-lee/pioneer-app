@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kapt
 import commonProcessors
 import baseService
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 
 /**
  * @author jv.lee
@@ -19,10 +20,15 @@ import baseService
  * @description 组件模块配置依赖扩展
  */
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
-fun Project.moduleConfigure() {
+fun Project.moduleConfigure(
+    projectConfigure: Project.() -> Unit = {},
+    androidConfigure: LibraryExtension.() -> Unit = {}
+) {
     plugins.apply(BuildPlugin.library)
     plugins.apply(BuildPlugin.kotlin)
     plugins.apply(BuildPlugin.kapt)
+
+    projectConfigure()
 
     extensions.configure<LibraryExtension> {
         compileSdk = BuildConfig.compileSdk
@@ -49,6 +55,8 @@ fun Project.moduleConfigure() {
         kapt {
             generateStubs = true
         }
+
+        androidConfigure()
     }
 
     dependencies {

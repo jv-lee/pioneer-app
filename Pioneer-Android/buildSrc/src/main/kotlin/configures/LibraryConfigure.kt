@@ -3,6 +3,7 @@ package configures
 import build.BuildConfig
 import build.BuildPlugin
 import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -16,10 +17,15 @@ import kapt
  * @description 基础库配置依赖扩展
  */
 @Suppress("MISSING_DEPENDENCY_SUPERCLASS")
-fun Project.libraryConfigure() {
+fun Project.libraryConfigure(
+    projectConfigure: Project.() -> Unit = {},
+    androidConfigure: LibraryExtension.() -> Unit = {}
+) {
     plugins.apply(BuildPlugin.library)
     plugins.apply(BuildPlugin.kotlin)
     plugins.apply(BuildPlugin.kapt)
+
+    projectConfigure()
 
     extensions.configure<LibraryExtension> {
         compileSdk = BuildConfig.compileSdk
@@ -54,6 +60,8 @@ fun Project.libraryConfigure() {
         kapt {
             generateStubs = true
         }
+
+        androidConfigure()
     }
 
 }
