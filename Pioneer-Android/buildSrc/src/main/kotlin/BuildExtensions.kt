@@ -1,4 +1,5 @@
 import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
@@ -7,6 +8,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
     add("implementation", dependencyNotation)
@@ -43,6 +45,9 @@ fun DependencyHandler.androidTestImplementation(dependencyNotation: Any): Depend
 
 fun Project.kapt(configure: Action<KaptExtension>): Unit =
     (this as ExtensionAware).extensions.configure("kapt", configure)
+
+fun BaseAppModuleExtension.kotlinOptions(configure: Action<KotlinJvmOptions>): Unit =
+    (this as ExtensionAware).extensions.configure("kotlinOptions", configure)
 
 fun Project.androidConfigure(configure: Action<LibraryExtension>) {
     extensions.configure("android", configure)
