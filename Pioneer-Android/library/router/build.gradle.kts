@@ -1,9 +1,10 @@
 import configures.libraryConfigure
+import build.BuildModules
 
 libraryConfigure(projectConfigure = {
     dependencies {
         commonProcessors()
-        implementation(project(build.BuildModules.Library.base))
+        implementation(project(BuildModules.Library.base))
     }
 })
 

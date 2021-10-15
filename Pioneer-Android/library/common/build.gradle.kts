@@ -1,12 +1,13 @@
 import configures.libraryConfigure
 import configures.plugins.paramsConfigure
+import build.BuildModules
 
 libraryConfigure(projectConfigure = {
     paramsConfigure()
 
     dependencies {
         commonProcessors()
-        implementation(project(build.BuildModules.Library.base))
+        implementation(project(BuildModules.Library.base))
     }
 })
 
