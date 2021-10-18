@@ -87,6 +87,10 @@ class HomeFragment :
 
     }
 
+    override fun lazyLoad() {
+        viewModel.buildCategoryFragment()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         mediator?.detach()

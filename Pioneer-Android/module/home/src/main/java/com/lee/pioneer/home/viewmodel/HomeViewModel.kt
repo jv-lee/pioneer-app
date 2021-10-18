@@ -23,10 +23,6 @@ class HomeViewModel : CoroutineViewModel() {
 
     val categoryData by lazy { CacheLiveData<PageData<Category>>() }
 
-    init {
-        buildCategoryFragment()
-    }
-
     /**
      *  构建主页分类tab 子fragments  启动缓存及网络数据加载
      */
