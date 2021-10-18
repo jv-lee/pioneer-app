@@ -11,6 +11,7 @@ import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.bindFragmentLifecycle
 import com.lee.library.lifecycle.SimpleActivityLifecycleCallbacks
 import com.lee.library.lifecycle.SimpleFragmentLifecycleCallbacks
+import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkModeTools
 import com.lee.library.tools.PreferencesTools
 import com.lee.library.tools.ScreenDensityUtil
@@ -64,6 +65,7 @@ class App : BaseApplication() {
 
         //初始化工具类
         CoroutineScope(Dispatchers.IO).launch {
+            HttpManager.getInstance().setUnSafeClient(true)
             PreferencesTools.getInstance(this@App)
             CacheManager.init(this@App, BuildConfig.VERSION_CODE)
             ApplicationModuleService.init(this@App)
