@@ -35,7 +35,8 @@ class HomeFragment :
         DarkViewUpdateTools.bindViewCallback(this, this)
 
         binding.run {
-            status.setStatus(StatusLayout.STATUS_LOADING)
+            binding.status.setStatus(StatusLayout.STATUS_LOADING)
+
             status.setOnReloadListener {
                 status.setStatus(StatusLayout.STATUS_LOADING)
                 viewModel.buildCategoryFragment()
@@ -80,10 +81,6 @@ class HomeFragment :
                 }
             })
         }
-
-    }
-
-    override fun lazyLoad() {
         viewModel.buildCategoryFragment()
     }
 
