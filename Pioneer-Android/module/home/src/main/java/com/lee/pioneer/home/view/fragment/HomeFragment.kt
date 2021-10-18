@@ -75,11 +75,7 @@ class HomeFragment :
 
             }, {
                 toast(HttpManager.getInstance().getServerMessage(it))
-                adapter?.let {
-                    it.itemCount.takeIf { it == 0 }.run {
-                        binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
-                    }
-                } ?: kotlin.run {
+                adapter ?: kotlin.run {
                     binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
                 }
             })
