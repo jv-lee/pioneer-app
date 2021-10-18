@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.base.BaseViewAdapter
 import com.lee.library.adapter.listener.LoadErrorListener
+import com.lee.library.adapter.page.submitFailed
 import com.lee.library.adapter.page.submitSinglePage
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
@@ -143,7 +144,7 @@ class RecommendFragment :
                 mAdapter.submitSinglePage(it.data)
             }, error = {
                 toast(it.message)
-                mAdapter.pageError()
+                mAdapter.submitFailed()
             }, loading = {
                 mAdapter.initStatusView()
                 mAdapter.pageLoading()
