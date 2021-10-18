@@ -11,6 +11,7 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.adapter.page.submitSinglePage
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
+import com.lee.library.mvvm.ui.collect
 import com.lee.library.mvvm.ui.observe
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.widget.banner.holder.ImageCreateHolder
@@ -27,6 +28,7 @@ import com.lee.pioneer.recommend.view.widget.RecommendLoadResource
 import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
 import com.lee.pioneer.router.navigateDetails
 import com.lee.pioneer.router.navigateSearch
+
 
 /**
  * @author jv.lee
@@ -116,16 +118,8 @@ class RecommendFragment :
     }
 
     override fun bindData() {
-        viewModel.apply {
-            typeLive.observe(viewLifecycleOwner, { type ->
-                when (type) {
-                    TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
-                    TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
-                    TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
-                }
-            })
-
-            bannerLive.observe<ArrayList<Banner>>(viewLifecycleOwner, success = {
+        launchAndRepeatWithViewLifecycle {
+            viewModel.bannerFlow.collect<ArrayList<Banner>>(success = {
                 headerBinding.banner.bindDataCreate(it, object : ImageCreateHolder<Banner>() {
                     override fun bindItem(imageView: ImageView, data: Banner) {
                         GlideTools.get().loadImage(data.image, imageView)
@@ -138,6 +132,16 @@ class RecommendFragment :
                 })
             }, error = {
                 toast(it.message)
+            })
+        }
+
+        viewModel.apply {
+            typeLive.observe(viewLifecycleOwner, { type ->
+                when (type) {
+                    TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
+                    TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
+                    TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
+                }
             })
 
             contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {
