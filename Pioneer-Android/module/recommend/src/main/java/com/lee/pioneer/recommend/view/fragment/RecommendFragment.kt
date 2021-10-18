@@ -3,6 +3,7 @@ package com.lee.pioneer.recommend.view.fragment
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.base.BaseViewAdapter
@@ -118,7 +119,7 @@ class RecommendFragment :
     }
 
     override fun bindData() {
-        launchAndRepeatWithViewLifecycle {
+        launchAndRepeatWithViewLifecycle(Lifecycle.State.CREATED) {
             viewModel.bannerFlow.collect<ArrayList<Banner>>(success = {
                 headerBinding.banner.bindDataCreate(it, object : ImageCreateHolder<Banner>() {
                     override fun bindItem(imageView: ImageView, data: Banner) {
