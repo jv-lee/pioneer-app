@@ -9,7 +9,7 @@ import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.library.mvvm.ui.UiState
-import com.lee.library.mvvm.ui.flowCacheLive
+import com.lee.library.mvvm.ui.stateCacheFlow
 import com.lee.library.mvvm.ui.stateCacheLive
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_CACHE_KEY
@@ -51,7 +51,7 @@ class RecommendViewModel : CoroutineViewModel() {
     init {
         viewModelScope.launch {
             //获取banner数据 开启缓存模式
-            bannerFlow = flowCacheLive({
+            bannerFlow = stateCacheFlow({
                 CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
             }, {
                 repository.api.getBannerAsync().data

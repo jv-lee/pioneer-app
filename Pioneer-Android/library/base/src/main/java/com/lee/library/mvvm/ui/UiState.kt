@@ -99,29 +99,38 @@ inline fun <reified T> stateCacheLive(
     }
 }
 
-inline fun <reified T> flowCacheLive(
+inline fun <reified T> stateFlow(crossinline block: suspend () -> T) = flow {
+    try {
+        emit(UiState.Loading)
+        emit(UiState.Success(block()))
+    } catch (e: Exception) {
+        emit(UiState.Error(e))
+    }
+}
+
+inline fun <reified T> stateCacheFlow(
     crossinline startBlock: suspend () -> T? = { null },
     crossinline resumeBlock: suspend () -> T? = { null },
     crossinline completedBlock: suspend (T) -> Unit = {}
 ) = flow {
-        try {
-            emit(UiState.Loading)
+    try {
+        emit(UiState.Loading)
 
-            //加载缓存数据
-            val cacheData = startBlock()?.also {
-                emit(UiState.Success(it))
-            }
-
-            //网络数据
-            resumeBlock()?.also {
-                if (cacheData != it) {
-                    //发送网络数据
-                    emit(UiState.Success(it))
-                    //发送存储本地数据
-                    completedBlock(it)
-                }
-            }
-        } catch (e: Exception) {
-            emit(UiState.Error(e))
+        //加载缓存数据
+        val cacheData = startBlock()?.also {
+            emit(UiState.Success(it))
         }
+
+        //网络数据
+        resumeBlock()?.also {
+            if (cacheData != it) {
+                //发送网络数据
+                emit(UiState.Success(it))
+                //发送存储本地数据
+                completedBlock(it)
+            }
+        }
+    } catch (e: Exception) {
+        emit(UiState.Error(e))
     }
+}
