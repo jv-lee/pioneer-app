@@ -93,15 +93,11 @@ class ContentListFragment :
                 binding.refresh.isRefreshing = false
                 mAdapter.submitFailed()
             })
-
-            //首个tab页面默认加载
-            if (type == "Android") viewModel.loadListData(LoadStatus.INIT, type)
         }
     }
 
     override fun lazyLoad() {
-        //非首个tab页面使用懒加载
-        if (type != "Android") viewModel.loadListData(LoadStatus.INIT, type)
+        viewModel.loadListData(LoadStatus.INIT, type)
     }
 
     @SuppressLint("NotifyDataSetChanged")
