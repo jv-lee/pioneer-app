@@ -6,7 +6,7 @@ import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.ui.UiState
-import com.lee.library.mvvm.ui.UiStateLiveData
+import com.lee.library.mvvm.load.LoadStatusLiveData
 import com.lee.library.mvvm.ui.stateCacheLive
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.home.model.repository.ApiRepository
@@ -24,7 +24,7 @@ class HomeViewModel : CoroutineViewModel() {
 
     private val repository = ApiRepository()
 
-    private val categoryUiState = UiStateLiveData()
+    private val categoryUiState = LoadStatusLiveData()
 
     val categoryLive: LiveData<UiState> = categoryUiState.switchMap {
         stateCacheLive({
