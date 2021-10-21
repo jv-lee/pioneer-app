@@ -9,7 +9,7 @@ import com.lee.library.adapter.page.submitData
 import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
-import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.mvvm.livedata.LoadStatus
 import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.utils.TimeUtil

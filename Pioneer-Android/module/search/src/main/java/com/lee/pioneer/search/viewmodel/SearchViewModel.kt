@@ -5,8 +5,8 @@ import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
 import android.widget.TextView
 import androidx.lifecycle.*
 import com.lee.library.mvvm.base.BaseViewModel
+import com.lee.library.mvvm.livedata.LoadPageLiveData
 import com.lee.library.mvvm.livedata.SingleLiveData
-import com.lee.library.mvvm.load.PageNumberLiveData
 import com.lee.library.mvvm.ui.UiState
 import com.lee.library.mvvm.ui.stateLive
 import com.lee.library.tools.KeyboardTools
@@ -24,7 +24,7 @@ class SearchViewModel : BaseViewModel() {
 
     //搜索内容及页码 根据页码变化进行内容搜索
     private lateinit var searchText: String
-    val pageLive = PageNumberLiveData(1)
+    val pageLive = LoadPageLiveData(1)
 
     //loading状态
     private val _loadingLive = SingleLiveData<Boolean>()

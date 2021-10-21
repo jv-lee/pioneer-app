@@ -10,7 +10,7 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
 import com.lee.library.extensions.toast
-import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.mvvm.livedata.LoadStatus
 import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.home.R

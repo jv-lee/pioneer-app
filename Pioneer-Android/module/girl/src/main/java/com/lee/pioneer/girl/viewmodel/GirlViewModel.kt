@@ -7,7 +7,7 @@ import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.library.mvvm.livedata.PageLiveData
 import com.lee.library.mvvm.livedata.applyData
 import com.lee.library.mvvm.livedata.pageLaunch
-import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.mvvm.livedata.LoadStatus
 import com.lee.pioneer.girl.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_GIRL

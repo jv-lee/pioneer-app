@@ -3,7 +3,7 @@ package com.lee.pioneer.me.viewmodel
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.library.mvvm.livedata.PageLiveData
 import com.lee.library.mvvm.livedata.pageLaunch
-import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.mvvm.livedata.LoadStatus
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.ContentHistory
 import com.lee.pioneer.library.common.entity.PageData

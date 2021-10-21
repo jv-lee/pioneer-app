@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.page.submitData
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.toast
-import com.lee.library.mvvm.load.LoadStatus
+import com.lee.library.mvvm.livedata.LoadStatus
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.me.R
 import com.lee.pioneer.me.adapter.ContentChildAdapter
