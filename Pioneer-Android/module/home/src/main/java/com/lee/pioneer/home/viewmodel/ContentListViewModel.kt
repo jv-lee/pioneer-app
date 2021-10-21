@@ -5,8 +5,6 @@ import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.livedata.LoadStatus
 import com.lee.library.mvvm.ui.UiStatePageLiveData
-import com.lee.library.mvvm.ui.applyData
-import com.lee.library.mvvm.ui.pageLaunch
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.home.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CONTENT_CACHE_KEY
