@@ -7,14 +7,14 @@ import androidx.lifecycle.LiveData
  * @date 2021/9/18
  * @description
  */
-class PageNumberLiveData(var firstPage: Int = 0) : LiveData<Int>() {
+class PageNumberLiveData(var initPage: Int = 0) : LiveData<Int>() {
 
-    private var page = firstPage
+    private var page = initPage
 
     private fun load(@LoadStatus status: Int) {
         value = when (status) {
             LoadStatus.INIT, LoadStatus.REFRESH -> {
-                page = firstPage
+                page = initPage
                 page
             }
             LoadStatus.RELOAD -> {
