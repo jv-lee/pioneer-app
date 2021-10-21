@@ -119,8 +119,16 @@ class RecommendFragment :
     }
 
     override fun bindData() {
-        launchAndRepeatWithViewLifecycle(Lifecycle.State.CREATED) {
-            viewModel.bannerFlow.collect<ArrayList<Banner>>(success = {
+        viewModel.apply {
+            typeLive.observe(viewLifecycleOwner, { type ->
+                when (type) {
+                    TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
+                    TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
+                    TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
+                }
+            })
+
+            bannerLive.observe<ArrayList<Banner>>(viewLifecycleOwner, success = {
                 headerBinding.banner.bindDataCreate(it, object : ImageCreateHolder<Banner>() {
                     override fun bindItem(imageView: ImageView, data: Banner) {
                         GlideTools.get().loadImage(data.image, imageView)
@@ -133,16 +141,6 @@ class RecommendFragment :
                 })
             }, error = {
                 toast(it.message)
-            })
-        }
-
-        viewModel.apply {
-            typeLive.observe(viewLifecycleOwner, { type ->
-                when (type) {
-                    TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
-                    TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
-                    TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
-                }
             })
 
             contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {

@@ -7,16 +7,16 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lee.library.adapter.core.UiPager2Adapter
 import com.lee.library.base.BaseVMFragment
-import com.lee.library.extensions.setBackgroundColorCompat
-import com.lee.library.extensions.setBackgroundDrawableCompat
-import com.lee.library.extensions.setTextColorCompat
-import com.lee.library.extensions.toast
+import com.lee.library.extensions.*
+import com.lee.library.mvvm.ui.observe
 import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.widget.StatusLayout
 import com.lee.pioneer.home.R
 import com.lee.pioneer.home.databinding.FragmentHomeBinding
 import com.lee.pioneer.home.viewmodel.HomeViewModel
+import com.lee.pioneer.library.common.entity.Category
+import com.lee.pioneer.library.common.entity.PageData
 import com.lee.pioneer.router.navigateSearch
 
 /**
@@ -35,11 +35,8 @@ class HomeFragment :
         DarkViewUpdateTools.bindViewCallback(this, this)
 
         binding.run {
-            binding.status.setStatus(StatusLayout.STATUS_LOADING)
-
             status.setOnReloadListener {
-                status.setStatus(StatusLayout.STATUS_LOADING)
-                viewModel.buildCategoryFragment()
+                viewModel.categoryReload()
             }
 
             tvSearch.setOnClickListener {
@@ -50,9 +47,8 @@ class HomeFragment :
 
     @SuppressLint("NotifyDataSetChanged")
     override fun bindData() {
-        viewModel.run {
-            //获取分类数据 构建分类tab 及 fragment
-            categoryData.observe(viewLifecycleOwner, { it ->
+        viewModel.categoryLive.observe<PageData<Category>>(viewLifecycleOwner,
+            success = { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
 
                 val fragments = arrayListOf<Fragment>()
@@ -64,9 +60,10 @@ class HomeFragment :
                 }
 
                 binding.vpContainer.offscreenPageLimit = titles.size
-                binding.vpContainer.adapter = UiPager2Adapter(this@HomeFragment, fragments).also {
-                    adapter = it
-                }
+                binding.vpContainer.adapter =
+                    UiPager2Adapter(this@HomeFragment, fragments).also {
+                        adapter = it
+                    }
 
                 TabLayoutMediator(binding.tabCategory, binding.vpContainer) { tab, position ->
                     tab.text = titles[position]
@@ -74,14 +71,14 @@ class HomeFragment :
                     mediator = it
                 }.attach()
 
-            }, {
+            }, error = {
                 toast(HttpManager.getInstance().getServerMessage(it))
                 adapter ?: kotlin.run {
                     binding.status.setStatus(StatusLayout.STATUS_DATA_ERROR)
                 }
+            }, loading = {
+                binding.status.setStatus(StatusLayout.STATUS_LOADING)
             })
-        }
-        viewModel.buildCategoryFragment()
     }
 
     override fun onDestroyView() {
