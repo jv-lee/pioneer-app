@@ -3,11 +3,9 @@ package com.lee.pioneer.girl.viewmodel
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
-import com.lee.library.mvvm.viewmodel.CoroutineViewModel
-import com.lee.library.mvvm.livedata.PageLiveData
-import com.lee.library.mvvm.livedata.applyData
-import com.lee.library.mvvm.livedata.pageLaunch
 import com.lee.library.mvvm.livedata.LoadStatus
+import com.lee.library.mvvm.ui.UiStatePageLiveData
+import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.girl.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CONTENT_CACHE_KEY
 import com.lee.pioneer.library.common.constant.KeyConstants.Companion.CATEGORY_GIRL
@@ -27,7 +25,7 @@ class GirlViewModel : CoroutineViewModel() {
 
     private val repository by lazy { ApiRepository() }
 
-    val contentData by lazy { PageLiveData<PageData<Content>>(initPage = 1) }
+    val contentLive = UiStatePageLiveData(1)
 
     /**
      * 浏览后添加至数据库
@@ -53,14 +51,17 @@ class GirlViewModel : CoroutineViewModel() {
         @LoadStatus status: Int
     ) {
         launchMain {
-            contentData.pageLaunch(
+            contentLive.pageLaunch(
                 status,
                 { page: Int ->
                     repository.api
                         .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
-                        .also {
+                        .also { response ->
                             //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                            contentData.applyData(contentData.value?.data, it.data)
+                            contentLive.applyData(
+                                contentLive.getValueData<PageData<Content>>()?.data,
+                                response.data
+                            )
                         }
                 },
                 {
