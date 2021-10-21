@@ -11,12 +11,15 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.livedata.LoadStatus
+import com.lee.library.mvvm.ui.observe
 import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.home.R
 import com.lee.pioneer.home.databinding.FragmentContentListBinding
 import com.lee.pioneer.home.view.adapter.ContentAdapter
 import com.lee.pioneer.home.viewmodel.ContentListViewModel
+import com.lee.pioneer.library.common.entity.Content
+import com.lee.pioneer.library.common.entity.PageData
 import com.lee.pioneer.router.navigateDetails
 
 private const val ARG_PARAM_TYPE = "arg_param_type"
@@ -82,10 +85,10 @@ class ContentListFragment :
     override fun bindData() {
         viewModel.run {
             //列表数据更新
-            contentListData.observe(this@ContentListFragment, {
+            contentListLive.observe<PageData<Content>>(this@ContentListFragment, success = {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
-            }, {
+            }, error = {
                 toast(HttpManager.getInstance().getServerMessage(it))
                 binding.refresh.isRefreshing = false
                 mAdapter.submitFailed()

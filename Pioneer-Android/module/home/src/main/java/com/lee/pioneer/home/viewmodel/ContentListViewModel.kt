@@ -4,9 +4,9 @@ import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.livedata.LoadStatus
-import com.lee.library.mvvm.livedata.PageLiveData
-import com.lee.library.mvvm.livedata.applyData
-import com.lee.library.mvvm.livedata.pageLaunch
+import com.lee.library.mvvm.ui.UiStatePageLiveData
+import com.lee.library.mvvm.ui.applyData
+import com.lee.library.mvvm.ui.pageLaunch
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.home.model.repository.ApiRepository
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.CONTENT_CACHE_KEY
@@ -26,7 +26,7 @@ class ContentListViewModel : CoroutineViewModel() {
 
     private val repository by lazy { ApiRepository() }
 
-    val contentListData by lazy { PageLiveData<PageData<Content>>(initPage = 1) }
+    val contentListLive = UiStatePageLiveData(initPage = 1)
 
     /**
      * 获取contentList列表
@@ -36,14 +36,17 @@ class ContentListViewModel : CoroutineViewModel() {
         type: String
     ) {
         launchMain {
-            contentListData.pageLaunch(status,
+            contentListLive.pageLaunch(status,
                 { page: Int ->
                     //网络数据
                     repository.api.getContentDataAsync(
                         KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
                     ).also { response ->
                         //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                        contentListData.applyData(contentListData.value?.data, response.data)
+                        contentListLive.applyData(
+                            contentListLive.getValueData<PageData<Content>>()?.data,
+                            response.data
+                        )
                     }
                 },
                 {
