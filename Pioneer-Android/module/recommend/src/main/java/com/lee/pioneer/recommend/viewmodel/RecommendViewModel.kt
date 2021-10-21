@@ -8,6 +8,7 @@ import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.ui.UiState
+import com.lee.library.mvvm.ui.stateCacheFlow
 import com.lee.library.mvvm.ui.stateCacheLive
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
@@ -17,7 +18,9 @@ import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.model.repository.ApiRepository
 import com.lee.pioneer.recommend.view.fragment.RecommendFragment.Companion.TYPE_VIEWS
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
 /**
  * @author jv.lee
@@ -30,7 +33,14 @@ class RecommendViewModel : CoroutineViewModel() {
 
     private val repository by lazy { ApiRepository() }
 
-    lateinit var bannerLive: LiveData<UiState>
+    val bannerFlow: StateFlow<UiState> = stateCacheFlow({
+        CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
+    }, {
+        repository.api.getBannerAsync().data
+    }, {
+        CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
+    })
+        .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
 
     private val _typeLive = MutableLiveData(TYPE_VIEWS)
     val typeLive: LiveData<String> = _typeLive
@@ -44,19 +54,6 @@ class RecommendViewModel : CoroutineViewModel() {
         }, {
             CacheManager.getDefault().putCache(RECOMMEND_CACHE_KEY + type, it)
         })
-    }
-
-    init {
-        viewModelScope.launch {
-            //获取banner数据 开启缓存模式
-            bannerLive = stateCacheLive({
-                CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
-            }, {
-                repository.api.getBannerAsync().data
-            }, {
-                CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
-            })
-        }
     }
 
     /**
