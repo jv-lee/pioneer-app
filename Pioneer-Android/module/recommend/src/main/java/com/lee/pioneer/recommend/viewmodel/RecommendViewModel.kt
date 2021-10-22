@@ -34,9 +34,9 @@ class RecommendViewModel : CoroutineViewModel() {
     private val repository by lazy { ApiRepository() }
 
     val bannerFlow: StateFlow<UiState> = stateCacheFlow({
-        CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
-    }, {
         repository.api.getBannerAsync().data
+    }, {
+        CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
     }, {
         CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
     })
@@ -48,9 +48,9 @@ class RecommendViewModel : CoroutineViewModel() {
     //获取页面数据列表 根据选中type变更数据
     val contentLive: LiveData<UiState> = typeLive.switchMap { type ->
         stateCacheLive({
-            CacheManager.getDefault().getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + type)
-        }, {
             repository.api.getHotDataAsync(type)
+        }, {
+            CacheManager.getDefault().getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + type)
         }, {
             CacheManager.getDefault().putCache(RECOMMEND_CACHE_KEY + type, it)
         })

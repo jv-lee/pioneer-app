@@ -28,9 +28,9 @@ class HomeViewModel : CoroutineViewModel() {
 
     val categoryLive: LiveData<UiState> = categoryUiState.switchMap {
         stateCacheLive({
-            CacheManager.getDefault().getCache<PageData<Category>>(CATEGORY_CACHE_KEY)
-        }, {
             repository.api.getCategoriesAsync(CATEGORY_TYPE)
+        }, {
+            CacheManager.getDefault().getCache<PageData<Category>>(CATEGORY_CACHE_KEY)
         }, {
             CacheManager.getDefault().putCache(CATEGORY_CACHE_KEY, it)
         })
