@@ -5,6 +5,7 @@ import com.lee.pioneer.library.common.constant.KeyConstants.Companion.PAGE_COUNT
 import com.lee.pioneer.library.common.entity.Banner
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -14,6 +15,9 @@ import retrofit2.http.Path
  * @description
  */
 interface ApiService {
+
+    @GET("banners")
+    fun getBannerFlow(): Flow<PageData<Banner>>
 
     /**
      *  首页banner轮播
