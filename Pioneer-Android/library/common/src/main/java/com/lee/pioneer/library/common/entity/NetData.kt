@@ -16,7 +16,7 @@ data class Data<T>(
 
 @Keep
 data class PageData<T>(
-    val data: ArrayList<T>,
+    val data: MutableList<T>,
     val status: Int = 0,
     val page: Int,
     val page_count: Int

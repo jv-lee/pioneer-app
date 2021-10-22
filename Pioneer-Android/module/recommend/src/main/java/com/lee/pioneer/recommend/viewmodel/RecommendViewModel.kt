@@ -44,7 +44,7 @@ class RecommendViewModel : CoroutineViewModel() {
         }
         .onStart {
             //查询缓存
-            CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
+            CacheManager.getDefault().getCache<MutableList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
                 emit(it)
             }
         }

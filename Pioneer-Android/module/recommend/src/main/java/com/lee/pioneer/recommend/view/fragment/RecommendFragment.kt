@@ -120,7 +120,7 @@ class RecommendFragment :
 
     override fun bindData() {
         launchAndRepeatWithViewLifecycle {
-            viewModel.bannerFlow.collect<ArrayList<Banner>>(success = {
+            viewModel.bannerFlow.collect<List<Banner>>(success = {
                 headerBinding.banner.bindDataCreate(it, object : ImageCreateHolder<Banner>() {
                     override fun bindItem(imageView: ImageView, data: Banner) {
                         GlideTools.get().loadImage(data.image, imageView)
