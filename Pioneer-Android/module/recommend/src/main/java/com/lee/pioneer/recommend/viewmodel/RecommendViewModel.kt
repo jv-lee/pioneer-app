@@ -10,6 +10,7 @@ import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.ui.UiState
 import com.lee.library.mvvm.ui.stateCacheFlow
 import com.lee.library.mvvm.ui.stateCacheLive
+import com.lee.library.mvvm.ui.stateFlow
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_CACHE_KEY
@@ -18,9 +19,7 @@ import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.model.repository.ApiRepository
 import com.lee.pioneer.recommend.view.fragment.RecommendFragment.Companion.TYPE_VIEWS
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 
 /**
  * @author jv.lee
@@ -54,6 +53,25 @@ class RecommendViewModel : CoroutineViewModel() {
         }, {
             CacheManager.getDefault().putCache(RECOMMEND_CACHE_KEY + type, it)
         })
+    }
+
+    private val _action = MutableSharedFlow<Int>()
+    val action: SharedFlow<Int> = _action
+
+    val actionResult: StateFlow<UiState> = action.transformLatest { action ->
+        emitAll(getActionData(action))
+    }.map {
+        it
+    }.stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
+
+    fun updateAction(action: Int) {
+        _action.tryEmit(action)
+    }
+
+    private fun getActionData(action: Int): Flow<UiState> {
+        return stateFlow {
+
+        }
     }
 
     /**
