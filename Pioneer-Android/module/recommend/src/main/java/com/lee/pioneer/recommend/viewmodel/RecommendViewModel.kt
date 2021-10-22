@@ -19,10 +19,7 @@ import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.model.repository.ApiRepository
 import com.lee.pioneer.recommend.view.fragment.RecommendFragment.Companion.TYPE_VIEWS
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 
 /**
  * @author jv.lee
@@ -35,12 +32,26 @@ class RecommendViewModel : CoroutineViewModel() {
 
     private val repository by lazy { ApiRepository() }
 
-    val bannerDataFlow: StateFlow<UiState> = repository.api.getBannerFlow()
-        .map { it.data }
+    /**
+     * flow数据执行顺序是从下往上执行
+     */
+    val bannerFlow: StateFlow<UiState> = repository.api.getBannerFlow()
+        .map {
+            //转换数据并存储网络数据
+            it.data.also { banner ->
+                CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, banner)
+            }
+        }
+        .onStart {
+            //查询缓存
+            CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
+                emit(it)
+            }
+        }
         .uiState()
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
 
-    val bannerFlow: StateFlow<UiState> = stateCacheFlow({
+    val bannerFlow2: StateFlow<UiState> = stateCacheFlow({
         repository.api.getBannerAsync().data
     }, {
         CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
