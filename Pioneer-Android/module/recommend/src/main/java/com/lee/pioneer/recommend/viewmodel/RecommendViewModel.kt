@@ -60,6 +60,7 @@ class RecommendViewModel : CoroutineViewModel() {
     }, {
         CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
     })
+        .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
 
     private val _typeLive = MutableLiveData(TYPE_VIEWS)
