@@ -6,7 +6,7 @@ package build
  * @description 项目基础配置信息
  */
 object BuildConfig {
-    const val applicationId = "com.lee.pioneer.test"
+    const val applicationId = "com.lee.pioneer"
 
     const val compileSdk = 30
     const val minSdk = 19
