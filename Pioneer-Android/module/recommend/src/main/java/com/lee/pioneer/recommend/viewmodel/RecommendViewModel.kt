@@ -8,7 +8,6 @@ import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
 import com.lee.library.mvvm.ui.UiState
-import com.lee.library.mvvm.ui.stateCacheFlow
 import com.lee.library.mvvm.ui.stateCacheLive
 import com.lee.library.mvvm.ui.uiState
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
@@ -53,16 +52,6 @@ class RecommendViewModel : CoroutineViewModel() {
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
 
-    val bannerFlow2: StateFlow<UiState> = stateCacheFlow({
-        repository.api.getBannerAsync().data
-    }, {
-        CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
-    }, {
-        CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
-    })
-        .flowOn(Dispatchers.IO)
-        .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
-
     private val _typeLive = MutableLiveData(TYPE_VIEWS)
     val typeLive: LiveData<String> = _typeLive
 
@@ -91,16 +80,21 @@ class RecommendViewModel : CoroutineViewModel() {
         launchMain {
             launchIO {
                 val extends = meService.isCollect(content._id)
-                meService.insert(
-                    ContentHistory.parse(
-                        ContentType.CONTENT,
-                        ContentSource.ID,
-                        extends,
-                        content
-                    )
-                )
+                val contentHistory =
+                    ContentHistory.parse(ContentType.CONTENT, ContentSource.ID, extends, content)
+                meService.insert(contentHistory)
             }
         }
     }
 
 }
+
+//val bannerFlow: StateFlow<UiState> = stateCacheFlow({
+//    repository.api.getBannerAsync().data
+//}, {
+//    CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
+//}, {
+//    CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
+//})
+//    .flowOn(Dispatchers.IO)
+//    .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
