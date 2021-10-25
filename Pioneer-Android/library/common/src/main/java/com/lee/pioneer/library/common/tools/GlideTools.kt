@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.lee.library.tools.DarkModeTools
 import com.lee.pioneer.library.common.R
 
 /**
@@ -47,7 +48,11 @@ class GlideTools {
     fun loadImage(
         path: String?,
         imageView: ImageView,
-        @DrawableRes placeholderResId: Int = R.mipmap.ic_picture_placeholder
+        @DrawableRes placeholderResId: Int =
+            if (DarkModeTools.get().isDarkTheme())
+                R.mipmap.ic_picture_placeholder_night
+            else
+                R.mipmap.ic_picture_placeholder
     ) {
         val request = Glide.with(imageView.context)
             .load(http2https(path))
