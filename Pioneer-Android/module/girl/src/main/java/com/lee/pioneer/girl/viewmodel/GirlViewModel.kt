@@ -34,15 +34,9 @@ class GirlViewModel : CoroutineViewModel() {
         launchMain {
             launchIO {
                 val extends = meService.isCollect(content._id)
-                meService
-                    .insert(
-                        ContentHistory.parse(
-                            ContentType.PICTURE,
-                            ContentSource.ID,
-                            extends,
-                            content
-                        )
-                    )
+                val contentHistory =
+                    ContentHistory.parse(ContentType.PICTURE, ContentSource.ID, extends, content)
+                meService.insert(contentHistory)
             }
         }
     }

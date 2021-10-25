@@ -67,14 +67,9 @@ class ContentListViewModel : CoroutineViewModel() {
         launchMain {
             launchIO {
                 val extends = meService.isCollect(content._id)
-                meService.insert(
-                    ContentHistory.parse(
-                        ContentType.CONTENT,
-                        ContentSource.ID,
-                        extends,
-                        content
-                    )
-                )
+                val contentHistory =
+                    ContentHistory.parse(ContentType.CONTENT, ContentSource.ID, extends, content)
+                meService.insert(contentHistory)
             }
         }
     }
