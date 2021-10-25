@@ -17,6 +17,8 @@ import com.lee.pioneer.library.common.R
  */
 class GlideTools {
 
+    private lateinit var optionsCommand: RequestOptions
+
     companion object {
         @Volatile
         private var instance: GlideTools? = null
@@ -30,8 +32,6 @@ class GlideTools {
     init {
         initOptions()
     }
-
-    private lateinit var optionsCommand: RequestOptions
 
     private fun initOptions() {
         //初始化普通加载
@@ -49,6 +49,7 @@ class GlideTools {
         path: String?,
         imageView: ImageView,
         @DrawableRes placeholderResId: Int =
+        //glide内部没有进行图片模式判断 所以自行根据深色模式设置占位图
             if (DarkModeTools.get().isDarkTheme())
                 R.mipmap.ic_picture_placeholder_night
             else
@@ -62,15 +63,6 @@ class GlideTools {
 //        request.transition(DrawableTransitionOptions.withCrossFade())
 
         request.into(imageView)
-    }
-
-    fun loadPlaceholderImage(
-        path: String?, @DrawableRes placeholderResId: Int,
-        imageView: ImageView
-    ) {
-        path?.let {
-            loadImage(path, imageView, placeholderResId)
-        }
     }
 
     private fun http2https(path: Any?): Any? {
