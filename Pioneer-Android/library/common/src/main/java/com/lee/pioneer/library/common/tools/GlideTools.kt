@@ -6,6 +6,7 @@ import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.lee.library.tools.DarkModeTools
 import com.lee.pioneer.library.common.R
@@ -34,7 +35,6 @@ class GlideTools {
     private lateinit var optionsCommand: RequestOptions
     private var placeholderResId: Int? = null
     private val loadDuration = 300
-    private val animEnableArray = arrayListOf<Int>()
 
     fun updatePlaceholder() {
         placeholderResId = if (DarkModeTools.get().isDarkTheme()) {
@@ -59,19 +59,20 @@ class GlideTools {
     }
 
     @SuppressLint("CheckResult")
-    fun loadImage(path: String?, imageView: ImageView) {
-//        var animEnable = animEnableArray.contains(path.hashCode())
+    fun loadImage(
+        path: String?,
+        imageView: ImageView,
+        fade: Boolean = false,
+        @DrawableRes placeholderId: Int = -1
+    ) {
         val request = Glide.with(imageView.context)
             .load(http2https(path))
-            .apply(optionsCommand.placeholder(placeholderResId!!))
 
-        //通过tag判断是否为第一次加载 首次加载使用动画显示
-//        if (!animEnable) {
-//            animEnableArray.add(path.hashCode())
-//            request.transition(
-//                DrawableTransitionOptions.withCrossFade().crossFade(loadDuration)
-//            )
-//        }
+        request.apply(optionsCommand.placeholder(if (placeholderId == -1) placeholderResId!! else placeholderId))
+
+        if (fade) {
+            request.transition(DrawableTransitionOptions.withCrossFade().crossFade(loadDuration))
+        }
         request.into(imageView)
     }
 
@@ -80,8 +81,7 @@ class GlideTools {
         imageView: ImageView
     ) {
         path?.let {
-            //            imageView.setBackgroundResource(placeholderResId)
-            loadImage(path, imageView)
+            loadImage(path, imageView, placeholderId = placeholderResId)
         }
     }
 
