@@ -19,6 +19,7 @@ import com.lee.pioneer.library.service.MeService
 import com.lee.pioneer.library.service.hepler.ModuleService
 import com.lee.pioneer.recommend.model.repository.ApiRepository
 import com.lee.pioneer.recommend.view.fragment.RecommendFragment.Companion.TYPE_VIEWS
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 /**
@@ -49,6 +50,7 @@ class RecommendViewModel : CoroutineViewModel() {
             }
         }
         .uiState()
+        .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
 
     val bannerFlow2: StateFlow<UiState> = stateCacheFlow({
