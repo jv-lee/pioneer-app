@@ -17,14 +17,6 @@ class CollectViewModel : CoroutineViewModel() {
 
     val contentLive = UiStatePageLiveData(0)
 
-
-    private val pageCount by lazy {
-        CommonTools.totalToPage(
-            DataBaseRepository.get().historyDao.queryContentCollectCount(),
-            KeyConstants.PAGE_COUNT
-        )
-    }
-
     /**
      * 加载本地数据库历史记录
      */
@@ -32,7 +24,10 @@ class CollectViewModel : CoroutineViewModel() {
         launchMain {
             contentLive.pageLaunch(status, { page: Int ->
                 //获取总页数 使用懒加载
-                val pageCount = launchIO { pageCount }
+                val pageCount = launchIO {
+                    val count = DataBaseRepository.get().historyDao.queryContentCollectCount()
+                    CommonTools.totalToPage(count, KeyConstants.PAGE_COUNT)
+                }
                 //获取当前页
                 val response = launchIO {
                     DataBaseRepository.get().historyDao.queryContentCollect(page)

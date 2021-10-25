@@ -1,5 +1,6 @@
 package com.lee.pioneer.details.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.library.service.MeService
@@ -13,7 +14,9 @@ import com.lee.pioneer.library.service.hepler.ModuleService
 class ContentDetailsViewModel : CoroutineViewModel() {
 
     private val meService by lazy { ModuleService.find<MeService>() }
-    val favoriteObservable by lazy { MutableLiveData<Int>() }
+
+    private val _favoriteLive = MutableLiveData<Int>()
+    val favoriteLive: LiveData<Int> = _favoriteLive
 
     fun contentCollect(id: String) {
         launchMain {
@@ -21,7 +24,7 @@ class ContentDetailsViewModel : CoroutineViewModel() {
             val isCollect = launchIO { meService.isCollect(id) }
 
             if (isCollect == 1) {
-                favoriteObservable.value = 0
+                _favoriteLive.value = 0
                 return@launchMain
             }
 
@@ -31,7 +34,7 @@ class ContentDetailsViewModel : CoroutineViewModel() {
                 content.isCollect = 1
                 meService.insert(content)
             }
-            favoriteObservable.value = 1
+            _favoriteLive.value = 1
         }
     }
 

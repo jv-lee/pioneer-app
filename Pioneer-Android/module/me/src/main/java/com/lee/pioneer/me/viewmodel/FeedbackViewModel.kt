@@ -2,6 +2,7 @@ package com.lee.pioneer.me.viewmodel
 
 import android.text.TextUtils
 import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lee.library.base.BaseApplication
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
@@ -15,15 +16,16 @@ import com.lee.pioneer.me.R
  */
 class FeedbackViewModel : CoroutineViewModel() {
 
-    private val contentField by lazy { ObservableField<String>("") }
-    private val linkField by lazy { ObservableField<String>("") }
-    val toastStrObserver by lazy { MutableLiveData<String>() }
+    private val contentField by lazy { ObservableField("") }
+    private val linkField by lazy { ObservableField("") }
+
+    private val _toastLive = MutableLiveData<String>()
+    val toastLive: LiveData<String> = _toastLive
 
     val etContentWatcher = object : TextWatcherAdapter() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             contentField.set(s.toString())
         }
-
     }
 
     val etLinkWatcher = object : TextWatcherAdapter() {
@@ -35,10 +37,10 @@ class FeedbackViewModel : CoroutineViewModel() {
 
     fun commit() {
         if (TextUtils.isEmpty(contentField.get()) || TextUtils.isEmpty(linkField.get())) {
-            toastStrObserver.value = BaseApplication.getContext().getString(R.string.feedback_empty)
+            _toastLive.value = BaseApplication.getContext().getString(R.string.feedback_empty)
             return
         }
-        toastStrObserver.value = BaseApplication.getContext().getString(R.string.feedback_success)
+        _toastLive.value = BaseApplication.getContext().getString(R.string.feedback_success)
     }
 
 }
