@@ -49,9 +49,8 @@ class ContentSingleItem : ViewBindingItem<Content>() {
 
             entity.run {
                 //设置图片
-                GlideTools.get().loadPlaceholderImage(
+                GlideTools.get().loadImage(
                     HttpConstant.getCropImagePath(images[0]),
-                    R.drawable.shape_theme_placeholder,
                     ivPicture
                 )
 

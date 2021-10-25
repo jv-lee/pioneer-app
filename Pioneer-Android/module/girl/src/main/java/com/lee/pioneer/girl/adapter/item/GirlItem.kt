@@ -36,9 +36,8 @@ class GirlItem : ViewBindingItem<Content>() {
     override fun convert(holder: ViewBindingHolder, entity: Content, position: Int) {
         holder.getViewBinding<ItemGirlBinding>().run {
             entity.images.takeIf { it.isNotEmpty() }?.get(0)?.let {
-                GlideTools.get().loadPlaceholderImage(
+                GlideTools.get().loadImage(
                     HttpConstant.getCropImagePath(it),
-                    R.drawable.shape_theme_placeholder,
                     ivPicture
                 )
             }

@@ -44,7 +44,7 @@ class CommonTools {
             val animController =
                 LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.item_alpha_in))
             animController.order = LayoutAnimationController.ORDER_NORMAL
-            animController.delay = 0.1f
+            animController.delay = 1f
             return animController
         }
 

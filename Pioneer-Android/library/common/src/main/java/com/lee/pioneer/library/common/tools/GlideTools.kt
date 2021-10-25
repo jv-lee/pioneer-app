@@ -6,9 +6,7 @@ import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.lee.library.tools.DarkModeTools
 import com.lee.pioneer.library.common.R
 
 /**
@@ -33,19 +31,8 @@ class GlideTools {
     }
 
     private lateinit var optionsCommand: RequestOptions
-    private var placeholderResId: Int? = null
-    private val loadDuration = 300
-
-    fun updatePlaceholder() {
-        placeholderResId = if (DarkModeTools.get().isDarkTheme()) {
-            R.mipmap.ic_picture_temp_night
-        } else {
-            R.mipmap.ic_picture_temp
-        }
-    }
 
     private fun initOptions() {
-        updatePlaceholder()
         //初始化普通加载
         RequestOptions()
             .skipMemoryCache(false)
@@ -53,26 +40,22 @@ class GlideTools {
             .priority(Priority.IMMEDIATE)
             .dontTransform()
             .dontAnimate()
-            .also {
-                optionsCommand = it
-            }
+            .also { optionsCommand = it }
     }
 
     @SuppressLint("CheckResult")
     fun loadImage(
         path: String?,
         imageView: ImageView,
-        fade: Boolean = false,
-        @DrawableRes placeholderId: Int = -1
+        @DrawableRes placeholderResId: Int = R.mipmap.ic_picture_placeholder
     ) {
         val request = Glide.with(imageView.context)
             .load(http2https(path))
+            .apply(optionsCommand.placeholder(placeholderResId))
 
-        request.apply(optionsCommand.placeholder(if (placeholderId == -1) placeholderResId!! else placeholderId))
+//        //动画效果
+//        request.transition(DrawableTransitionOptions.withCrossFade())
 
-        if (fade) {
-            request.transition(DrawableTransitionOptions.withCrossFade().crossFade(loadDuration))
-        }
         request.into(imageView)
     }
 
@@ -81,7 +64,7 @@ class GlideTools {
         imageView: ImageView
     ) {
         path?.let {
-            loadImage(path, imageView, placeholderId = placeholderResId)
+            loadImage(path, imageView, placeholderResId)
         }
     }
 

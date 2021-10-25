@@ -50,20 +50,17 @@ class ContentMultipleItem : ViewBindingItem<Content>() {
 
             entity.run {
                 //设置图片
-                GlideTools.get().loadPlaceholderImage(
+                GlideTools.get().loadImage(
                     HttpConstant.getCropImagePath(images[0]),
-                    R.drawable.shape_theme_placeholder,
                     ivPicture
                 )
-                GlideTools.get().loadPlaceholderImage(
+                GlideTools.get().loadImage(
                     HttpConstant.getCropImagePath(images[1]),
-                    R.drawable.shape_theme_placeholder,
                     ivPicture2
                 )
                 if (images.size > 2) {
-                    GlideTools.get().loadPlaceholderImage(
+                    GlideTools.get().loadImage(
                         HttpConstant.getCropImagePath(images[2]),
-                        R.drawable.shape_theme_placeholder,
                         ivPicture3
                     )
                 } else {

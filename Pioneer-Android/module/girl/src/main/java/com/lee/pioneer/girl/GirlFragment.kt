@@ -21,6 +21,7 @@ import com.lee.pioneer.girl.viewmodel.GirlViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
+import com.lee.pioneer.library.common.tools.CommonTools
 import com.lee.pioneer.router.navigateDetails
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,7 +52,7 @@ class GirlFragment :
             //设置列表数据项
             rvContainer.run {
 //                glideEnable()
-//                layoutAnimation = ViewTools.getItemOrderAnimator(requireContext())
+//                layoutAnimation = CommonTools.getItemOrderAnimator(requireContext())
                 layoutManager = LinearLayoutManager(context)
                 adapter = GirlAdapter(requireContext(), arrayListOf()).also {
                     mAdapter = it
