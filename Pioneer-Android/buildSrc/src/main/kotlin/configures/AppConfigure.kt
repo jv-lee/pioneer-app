@@ -10,6 +10,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kapt
 import appDependencies
+import configures.core.freeCompilerArgs
 
 /**
  * @author jv.lee
@@ -48,6 +49,7 @@ fun Project.appConfigure(
 
         tasks.withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions.freeCompilerArgs += freeCompilerArgs
         }
 
         compileOptions {

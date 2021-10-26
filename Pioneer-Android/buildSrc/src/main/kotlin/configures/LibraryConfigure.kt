@@ -3,13 +3,13 @@ package configures
 import build.BuildConfig
 import build.BuildPlugin
 import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kapt
+import configures.core.freeCompilerArgs
 
 /**
  * @author jv.lee
@@ -37,6 +37,7 @@ fun Project.libraryConfigure(
 
         tasks.withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions.freeCompilerArgs += freeCompilerArgs
         }
 
         compileOptions {

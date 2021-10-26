@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kapt
 import commonProcessors
 import baseService
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import configures.core.freeCompilerArgs
 
 /**
  * @author jv.lee
@@ -40,15 +40,7 @@ fun Project.moduleConfigure(
 
         tasks.withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "1.8"
-            kotlinOptions.freeCompilerArgs = kotlinOptions.freeCompilerArgs.toMutableList().also {
-                it.add("-Xallow-jvm-ir-dependencies")
-                it.add("-Xskip-prerelease-check")
-                it.add("-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi")
-                it.add("-Xuse-experimental=androidx.compose.animation.ExperimentalAnimationApi")
-                it.add("-Xopt-in=androidx.compose.material.ExperimentalMaterialApi")
-                it.add("-Xopt-in=com.google.accompanist.pager.ExperimentalPagerApi")
-                it.add("-Xopt-in=kotlin.RequiresOptIn")
-            }
+            kotlinOptions.freeCompilerArgs += freeCompilerArgs
         }
 
         compileOptions {
