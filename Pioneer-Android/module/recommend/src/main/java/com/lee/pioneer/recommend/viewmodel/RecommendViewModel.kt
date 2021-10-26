@@ -60,7 +60,9 @@ class RecommendViewModel : CoroutineViewModel() {
         }, {
             cacheManager.putCache(RECOMMEND_CACHE_KEY + action.value, it)
         })
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
+    }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
 
     /**
      * 替换选中类型tab
@@ -84,13 +86,3 @@ class RecommendViewModel : CoroutineViewModel() {
     }
 
 }
-
-//val bannerFlow: StateFlow<UiState> = stateCacheFlow({
-//    repository.api.getBannerAsync().data
-//}, {
-//    CacheManager.getDefault().getCache<ArrayList<Banner>>(RECOMMEND_BANNER_KEY)
-//}, {
-//    CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, it.toList())
-//})
-//    .flowOn(Dispatchers.IO)
-//    .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)

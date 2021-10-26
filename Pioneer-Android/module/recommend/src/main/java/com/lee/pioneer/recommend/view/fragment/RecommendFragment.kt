@@ -3,7 +3,6 @@ package com.lee.pioneer.recommend.view.fragment
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lee.library.adapter.base.BaseViewAdapter
@@ -13,7 +12,6 @@ import com.lee.library.adapter.page.submitSinglePage
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.ui.collect
-import com.lee.library.mvvm.ui.observe
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.widget.banner.holder.ImageCreateHolder
 import com.lee.pioneer.library.common.constant.KeyConstants
@@ -30,7 +28,6 @@ import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
 import com.lee.pioneer.router.navigateDetails
 import com.lee.pioneer.router.navigateSearch
 import kotlinx.coroutines.flow.collect
-
 
 /**
  * @author jv.lee
@@ -86,7 +83,6 @@ class RecommendFragment :
             groupType.setOnCheckedChangeListener { _, checkedId ->
                 viewModel.switchType(getCheckType(checkedId))
             }
-
         }
 
         //设置数据列表
@@ -100,7 +96,6 @@ class RecommendFragment :
         mAdapter.run {
             setLoadResource(RecommendLoadResource())
             initStatusView()
-            pageLoading()
             addHeader(headerBinding.root)
             notifyDataSetChanged()
             setOnItemClickListener { _, entity, _ ->
@@ -116,7 +111,6 @@ class RecommendFragment :
 
             })
         }
-
     }
 
     override fun bindData() {
@@ -158,26 +152,6 @@ class RecommendFragment :
                 mAdapter.pageLoading()
             })
         }
-
-//        viewModel.apply {
-//            typeLive.observe(viewLifecycleOwner, { type ->
-//                when (type) {
-//                    TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
-//                    TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
-//                    TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
-//                }
-//            })
-//
-//            contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {
-//                mAdapter.submitSinglePage(it.data)
-//            }, error = {
-//                toast(it.message)
-//                mAdapter.submitFailed()
-//            }, loading = {
-//                mAdapter.initStatusView()
-//                mAdapter.pageLoading()
-//            })
-//        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
