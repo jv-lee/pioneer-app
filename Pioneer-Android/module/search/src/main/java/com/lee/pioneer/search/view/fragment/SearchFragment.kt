@@ -69,11 +69,11 @@ class SearchFragment :
                 mAdapter.submitData(it)
             }, error = {
                 mAdapter.submitFailed()
-            })
-
-            loadingLive.observe(this@SearchFragment, {
-                mAdapter.initStatusView()
-                mAdapter.pageLoading()
+            }, loading = {
+                if (pageLive.value == pageLive.initPage) {
+                    mAdapter.initStatusView()
+                    mAdapter.pageLoading()
+                }
             })
         }
     }
