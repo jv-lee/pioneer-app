@@ -11,7 +11,7 @@ import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.livedata.LoadStatus
-import com.lee.library.mvvm.ui.observe
+import com.lee.library.mvvm.ui.observeState
 import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.pioneer.home.R
@@ -85,7 +85,7 @@ class ContentListFragment :
     override fun bindData() {
         viewModel.run {
             //列表数据更新
-            contentListLive.observe<PageData<Content>>(this@ContentListFragment, success = {
+            contentListLive.observeState<PageData<Content>>(this@ContentListFragment, success = {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
             }, error = {

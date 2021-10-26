@@ -6,7 +6,7 @@ import com.lee.library.adapter.listener.LoadErrorListener
 import com.lee.library.adapter.page.submitData
 import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMNavigationFragment
-import com.lee.library.mvvm.ui.observe
+import com.lee.library.mvvm.ui.observeState
 import com.lee.library.tools.KeyboardTools
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Content
@@ -65,7 +65,7 @@ class SearchFragment :
         binding.vm = viewModel
 
         viewModel.apply {
-            contentLive.observe<PageData<Content>>(this@SearchFragment, success = {
+            contentLive.observeState<PageData<Content>>(this@SearchFragment, success = {
                 mAdapter.submitData(it)
             }, error = {
                 mAdapter.submitFailed()

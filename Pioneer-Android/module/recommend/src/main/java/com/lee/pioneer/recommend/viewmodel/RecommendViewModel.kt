@@ -1,5 +1,7 @@
 package com.lee.pioneer.recommend.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
@@ -23,11 +25,14 @@ import kotlinx.coroutines.flow.*
  */
 class RecommendViewModel : CoroutineViewModel() {
 
-    private val cacheManager by lazy { CacheManager.getDefault() }
+    private val cacheManager = CacheManager.getDefault()
 
-    private val meService by lazy { ModuleService.find<MeService>() }
+    private val meService = ModuleService.find<MeService>()
 
-    private val repository by lazy { ApiRepository() }
+    private val repository = ApiRepository()
+
+    private val _bannerLive = MutableLiveData<UiState>()
+    val bannerLive: LiveData<UiState> = _bannerLive
 
     private val _typeAction = MutableStateActionFlow(TYPE_VIEWS)
     val typeAction: StateActionFlow<String> = _typeAction
@@ -44,27 +49,31 @@ class RecommendViewModel : CoroutineViewModel() {
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
 
-    //flow数据执行顺序是从下往上执行
-    val bannerFlow: StateFlow<UiState> = repository.api.getBannerFlow()
-        .map {
-            //转换数据并存储网络数据
-            it.data.also { banner ->
-                cacheManager.putCache(RECOMMEND_BANNER_KEY, banner)
-            }
+    //网络获取banner数据及使用本地缓存
+    fun requestBanner() {
+        launchMain {
+            repository.api.getBannerFlow()
+                .map {
+                    //转换数据并存储网络数据
+                    it.data.also { banner ->
+                        cacheManager.putCache(RECOMMEND_BANNER_KEY, banner)
+                    }
+                }
+                .onStart {
+                    //查询缓存
+                    cacheManager.getCache<MutableList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
+                        emit(it)
+                    }
+                }
+                .uiState()
+                .flowOn(Dispatchers.IO)
+                .collectLatest {
+                    _bannerLive.postValue(it)
+                }
         }
-        .onStart {
-            //查询缓存
-            cacheManager.getCache<MutableList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
-                emit(it)
-            }
-        }
-        .uiState()
-        .flowOn(Dispatchers.IO)
-        .stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
+    }
 
-    /**
-     * 替换选中类型tab
-     */
+    //替换选中tab类型切换数据
     fun switchType(type: String) {
         _typeAction.emitAction(type)
     }
@@ -81,6 +90,10 @@ class RecommendViewModel : CoroutineViewModel() {
                 meService.insert(contentHistory)
             }
         }
+    }
+
+    init {
+        requestBanner()
     }
 
 }

@@ -8,7 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.lee.library.adapter.core.UiPager2Adapter
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
-import com.lee.library.mvvm.ui.observe
+import com.lee.library.mvvm.ui.observeState
 import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.widget.StatusLayout
@@ -47,7 +47,7 @@ class HomeFragment :
 
     @SuppressLint("NotifyDataSetChanged")
     override fun bindData() {
-        viewModel.categoryLive.observe<PageData<Category>>(viewLifecycleOwner,
+        viewModel.categoryLive.observeState<PageData<Category>>(viewLifecycleOwner,
             success = { it ->
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
 

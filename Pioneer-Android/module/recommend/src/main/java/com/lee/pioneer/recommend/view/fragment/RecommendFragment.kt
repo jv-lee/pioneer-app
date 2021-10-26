@@ -11,8 +11,10 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.adapter.page.submitSinglePage
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
-import com.lee.library.mvvm.ui.collect
+import com.lee.library.mvvm.ui.collectState
+import com.lee.library.mvvm.ui.observeState
 import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.library.widget.StatusLayout
 import com.lee.library.widget.banner.holder.ImageCreateHolder
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Banner
@@ -66,6 +68,10 @@ class RecommendFragment :
             findNavController().navigateSearch()
         }
 
+        headerBinding.bannerStatusLayout.setOnReloadListener {
+            viewModel.requestBanner()
+        }
+
         headerBinding.run {
             //设置推荐头部 分类样式
             radioView.setButtonTint(
@@ -114,22 +120,24 @@ class RecommendFragment :
     }
 
     override fun bindData() {
-        launchAndRepeatWithViewLifecycle {
-            viewModel.bannerFlow.collect<List<Banner>>(success = {
-                headerBinding.banner.bindDataCreate(it, object : ImageCreateHolder<Banner>() {
-                    override fun bindItem(imageView: ImageView, data: Banner) {
-                        GlideTools.get().loadImage(data.image, imageView)
-                    }
+        viewModel.bannerLive.observeState<List<Banner>>(viewLifecycleOwner, success = {
+            headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_DATA)
+            headerBinding.banner.bindDataCreate(it, object : ImageCreateHolder<Banner>() {
+                override fun bindItem(imageView: ImageView, data: Banner) {
+                    GlideTools.get().loadImage(data.image, imageView)
+                }
 
-                    override fun onItemClick(position: Int, item: Banner) {
-                        findNavController().navigateDetails(KeyConstants.CONST_EMPTY, item.url)
-                    }
+                override fun onItemClick(position: Int, item: Banner) {
+                    findNavController().navigateDetails(KeyConstants.CONST_EMPTY, item.url)
+                }
 
-                })
-            }, error = {
-                toast(it.message)
             })
-        }
+        }, error = {
+            headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_DATA_ERROR)
+            toast(it.message)
+        }, loading = {
+            headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_LOADING)
+        })
 
         launchAndRepeatWithViewLifecycle {
             viewModel.typeAction.collect { typeAction ->
@@ -142,7 +150,7 @@ class RecommendFragment :
         }
 
         launchAndRepeatWithViewLifecycle {
-            viewModel.contentFlow.collect<PageData<Content>>(success = {
+            viewModel.contentFlow.collectState<PageData<Content>>(success = {
                 mAdapter.submitSinglePage(it.data)
             }, error = {
                 toast(it.message)

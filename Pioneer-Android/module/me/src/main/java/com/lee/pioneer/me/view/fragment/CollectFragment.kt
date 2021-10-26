@@ -8,7 +8,7 @@ import com.lee.library.base.BaseNavigationFragment
 import com.lee.library.extensions.binding
 import com.lee.library.extensions.toast
 import com.lee.library.mvvm.livedata.LoadStatus
-import com.lee.library.mvvm.ui.observe
+import com.lee.library.mvvm.ui.observeState
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.ContentHistory
 import com.lee.pioneer.library.common.entity.PageData
@@ -48,7 +48,7 @@ class CollectFragment :
 
     override fun bindData() {
         viewModel.run {
-            contentLive.observe<PageData<ContentHistory>>(this@CollectFragment, success = {
+            contentLive.observeState<PageData<ContentHistory>>(this@CollectFragment, success = {
                 mAdapter.submitData(it, limit = 0)
             }, error = {
                 toast(it.message)

@@ -10,7 +10,7 @@ import com.lee.library.adapter.page.submitFailed
 import com.lee.library.base.BaseVMFragment
 import com.lee.library.extensions.*
 import com.lee.library.mvvm.livedata.LoadStatus
-import com.lee.library.mvvm.ui.observe
+import com.lee.library.mvvm.ui.observeState
 import com.lee.library.net.HttpManager
 import com.lee.library.tools.DarkViewUpdateTools
 import com.lee.library.utils.TimeUtil
@@ -21,7 +21,6 @@ import com.lee.pioneer.girl.viewmodel.GirlViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
-import com.lee.pioneer.library.common.tools.CommonTools
 import com.lee.pioneer.router.navigateDetails
 import java.text.SimpleDateFormat
 import java.util.*
@@ -104,7 +103,7 @@ class GirlFragment :
 
         viewModel.run {
             //列表数据更新
-            contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {
+            contentLive.observeState<PageData<Content>>(viewLifecycleOwner, success = {
                 binding.refresh.isRefreshing = false
                 mAdapter.submitData(it, diff = true)
             }, error = {
