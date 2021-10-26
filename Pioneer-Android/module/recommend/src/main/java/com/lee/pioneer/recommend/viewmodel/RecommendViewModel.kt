@@ -29,9 +29,22 @@ class RecommendViewModel : CoroutineViewModel() {
 
     private val repository by lazy { ApiRepository() }
 
-    /**
-     * flow数据执行顺序是从下往上执行
-     */
+    private val _typeAction = MutableStateActionFlow(TYPE_VIEWS)
+    val typeAction: StateActionFlow<String> = _typeAction
+
+    val contentFlow: StateFlow<UiState> = typeAction.flatMapLatest { action ->
+        stateCacheFlow({
+            repository.api.getHotDataAsync(action.value)
+        }, {
+            cacheManager.getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + action.value)
+        }, {
+            cacheManager.putCache(RECOMMEND_CACHE_KEY + action.value, it)
+        })
+    }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
+
+    //flow数据执行顺序是从下往上执行
     val bannerFlow: StateFlow<UiState> = repository.api.getBannerFlow()
         .map {
             //转换数据并存储网络数据
@@ -46,21 +59,6 @@ class RecommendViewModel : CoroutineViewModel() {
             }
         }
         .uiState()
-        .flowOn(Dispatchers.IO)
-        .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
-
-    private val _typeAction = MutableStateActionFlow(TYPE_VIEWS)
-    val typeAction: StateActionFlow<String> = _typeAction
-
-    val contentFlow: StateFlow<UiState> = typeAction.flatMapLatest { action ->
-        stateCacheFlow({
-            repository.api.getHotDataAsync(action.value)
-        }, {
-            cacheManager.getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + action.value)
-        }, {
-            cacheManager.putCache(RECOMMEND_CACHE_KEY + action.value, it)
-        })
-    }
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
 
