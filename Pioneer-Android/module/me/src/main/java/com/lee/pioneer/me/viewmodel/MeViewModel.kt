@@ -11,6 +11,6 @@ import com.lee.library.tools.DarkModeTools
  */
 class MeViewModel : CoroutineViewModel() {
 
-    val totalCacheStr = ObservableField<String>("")
-    val isSystem = ObservableField<Boolean>(DarkModeTools.get().isSystemTheme())
+    val totalCacheStr = ObservableField("")
+    val isSystem = ObservableField(DarkModeTools.get().isSystemTheme())
 }

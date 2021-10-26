@@ -3,6 +3,7 @@ package com.lee.pioneer.home.model.api
 import com.lee.pioneer.library.common.entity.Category
 import com.lee.pioneer.library.common.entity.Content
 import com.lee.pioneer.library.common.entity.PageData
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -37,5 +38,8 @@ interface ApiService {
      */
     @GET("categories/{category_type}")
     suspend fun getCategoriesAsync(@Path("category_type") categoryType: String): PageData<Category>
+
+    @GET("categories/{category_type}")
+    fun getCategoriesFlow(@Path("category_type") categoryType: String): Flow<PageData<Category>>
 
 }

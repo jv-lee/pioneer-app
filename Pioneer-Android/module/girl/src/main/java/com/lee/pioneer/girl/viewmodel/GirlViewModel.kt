@@ -21,11 +21,32 @@ import com.lee.pioneer.library.service.hepler.ModuleService
  */
 class GirlViewModel : CoroutineViewModel() {
 
-    private val meService by lazy { ModuleService.find<MeService>() }
+    private val cacheManager = CacheManager.getDefault()
 
-    private val repository by lazy { ApiRepository() }
+    private val meService = ModuleService.find<MeService>()
+
+    private val repository = ApiRepository()
 
     val contentLive = UiStatePageLiveData(1)
+
+    fun getGirlContentData(@LoadStatus status: Int) {
+        launchMain {
+            contentLive.pageLaunch(status, { page: Int ->
+                repository.api.getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
+                    .also { response ->
+                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
+                        contentLive.applyData(
+                            contentLive.getValueData<PageData<Content>>()?.data,
+                            response.data
+                        )
+                    }
+            }, {
+                cacheManager.getCache<PageData<Content>>(CONTENT_CACHE_KEY + CATEGORY_GIRL.lowercase())
+            }, {
+                cacheManager.putCache(CONTENT_CACHE_KEY + CATEGORY_GIRL.lowercase(), it)
+            })
+        }
+    }
 
     /**
      * 浏览后添加至数据库
@@ -38,35 +59,6 @@ class GirlViewModel : CoroutineViewModel() {
                     ContentHistory.parse(ContentType.PICTURE, ContentSource.ID, extends, content)
                 meService.insert(contentHistory)
             }
-        }
-    }
-
-    fun getGirlContentData(
-        @LoadStatus status: Int
-    ) {
-        launchMain {
-            contentLive.pageLaunch(
-                status,
-                { page: Int ->
-                    repository.api
-                        .getContentDataAsync(CATEGORY_GIRL, CATEGORY_GIRL, page, PAGE_COUNT)
-                        .also { response ->
-                            //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                            contentLive.applyData(
-                                contentLive.getValueData<PageData<Content>>()?.data,
-                                response.data
-                            )
-                        }
-                },
-                {
-                    CacheManager.getDefault()
-                        .getCache<PageData<Content>>(CONTENT_CACHE_KEY + CATEGORY_GIRL.lowercase())
-                },
-                {
-                    CacheManager.getDefault().putCache(
-                        CONTENT_CACHE_KEY + CATEGORY_GIRL.lowercase(), it
-                    )
-                })
         }
     }
 

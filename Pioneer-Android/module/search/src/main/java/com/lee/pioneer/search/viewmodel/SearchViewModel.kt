@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.*
  */
 class SearchViewModel : BaseViewModel() {
 
-    private val repository by lazy { ApiRepository() }
+    private val repository = ApiRepository()
 
     //搜索内容及页码 根据页码变化进行内容搜索
     private lateinit var searchText: String

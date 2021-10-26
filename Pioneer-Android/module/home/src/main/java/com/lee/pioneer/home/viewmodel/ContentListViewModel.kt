@@ -20,43 +20,37 @@ import com.lee.pioneer.library.service.hepler.ModuleService
  */
 class ContentListViewModel : CoroutineViewModel() {
 
-    private val meService by lazy { ModuleService.find<MeService>() }
+    private val cacheManager = CacheManager.getDefault()
 
-    private val repository by lazy { ApiRepository() }
+    private val meService = ModuleService.find<MeService>()
+
+    private val repository = ApiRepository()
 
     val contentListLive = UiStatePageLiveData(initPage = 1)
 
     /**
      * 获取contentList列表
      */
-    fun loadListData(
-        @LoadStatus status: Int,
-        type: String
-    ) {
+    fun loadListData(@LoadStatus status: Int, type: String) {
         launchMain {
-            contentListLive.pageLaunch(status,
-                { page: Int ->
-                    //网络数据
-                    repository.api.getContentDataAsync(
-                        KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
-                    ).also { response ->
-                        //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
-                        contentListLive.applyData(
-                            contentListLive.getValueData<PageData<Content>>()?.data,
-                            response.data
-                        )
-                    }
-                },
-                {
-                    //缓存数据
-                    CacheManager.getDefault()
-                        .getCache<PageData<Content>>(CONTENT_CACHE_KEY + type.lowercase())
-                },
-                {
-                    //存储缓存数据
-                    CacheManager.getDefault()
-                        .putCache(CONTENT_CACHE_KEY + type.lowercase(), it)
-                })
+            contentListLive.pageLaunch(status, { page: Int ->
+                //网络数据
+                repository.api.getContentDataAsync(
+                    KeyConstants.CATEGORY_ALL, type, page, KeyConstants.PAGE_COUNT
+                ).also { response ->
+                    //填充历史数据 让activity在重建时可以从liveData中获取到完整数据 首页无需填充原始数据(会造成数据重复)
+                    contentListLive.applyData(
+                        contentListLive.getValueData<PageData<Content>>()?.data,
+                        response.data
+                    )
+                }
+            }, {
+                //缓存数据
+                cacheManager.getCache<PageData<Content>>(CONTENT_CACHE_KEY + type.lowercase())
+            }, {
+                //存储缓存数据
+                cacheManager.putCache(CONTENT_CACHE_KEY + type.lowercase(), it)
+            })
         }
     }
 

@@ -36,7 +36,7 @@ class HomeFragment :
 
         binding.run {
             status.setOnReloadListener {
-                viewModel.categoryReload()
+                viewModel.requestCategory()
             }
 
             tvSearch.setOnClickListener {
