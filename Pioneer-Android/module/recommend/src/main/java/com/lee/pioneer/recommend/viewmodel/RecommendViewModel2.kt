@@ -23,7 +23,8 @@ import kotlinx.coroutines.flow.*
  * @date 2020/4/9
  * @description
  */
-class RecommendViewModel : CoroutineViewModel() {
+@Deprecated("")
+class RecommendViewModel2 : CoroutineViewModel() {
 
     private val cacheManager = CacheManager.getDefault()
 
@@ -38,27 +39,41 @@ class RecommendViewModel : CoroutineViewModel() {
     val typeAction: StateActionFlow<String> = _typeAction
 
     val contentFlow: StateFlow<UiState> = typeAction.flatMapLatest { action ->
-        stateCacheFlow({
-            repository.api.getHotDataAsync(action.value)
-        }, {
-            cacheManager.getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + action.value)
-        }, {
-            cacheManager.putCache(RECOMMEND_CACHE_KEY + action.value, it)
-        })
+        repository.api.getHotDataFlow(action.value)
+            .map {
+                //转换数据并存储网络数据
+                it.also { data->
+                    cacheManager.putCache(RECOMMEND_CACHE_KEY + action.value, data)
+                }
+            }
+            .onStart {
+                //查询缓存
+                cacheManager.getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + action.value)?.let {
+                    emit(it)
+                }
+            }
     }
+        .uiState()
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
 
     //网络获取banner数据及使用本地缓存
     fun requestBanner() {
         launchMain {
-            stateCacheFlow({
-                repository.api.getBannerAsync().data
-            }, {
-                cacheManager.getCache<MutableList<Banner>>(RECOMMEND_BANNER_KEY)
-            }, {
-                cacheManager.putCache(RECOMMEND_BANNER_KEY, it)
-            })
+            repository.api.getBannerFlow()
+                .map {
+                    //转换数据并存储网络数据
+                    it.data.also { banner ->
+                        cacheManager.putCache(RECOMMEND_BANNER_KEY, banner)
+                    }
+                }
+                .onStart {
+                    //查询缓存
+                    cacheManager.getCache<MutableList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
+                        emit(it)
+                    }
+                }
+                .uiState()
                 .flowOn(Dispatchers.IO)
                 .collectLatest {
                     _bannerLive.postValue(it)

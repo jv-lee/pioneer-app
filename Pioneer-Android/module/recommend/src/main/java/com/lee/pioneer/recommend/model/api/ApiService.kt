@@ -16,9 +16,6 @@ import retrofit2.http.Path
  */
 interface ApiService {
 
-    @GET("banners")
-    fun getBannerFlow(): Flow<PageData<Banner>>
-
     /**
      *  首页banner轮播
      */
@@ -37,5 +34,15 @@ interface ApiService {
         @Path("category") category: String = CATEGORY_RECOMMEND,
         @Path("count") count: Int = PAGE_COUNT
     ): PageData<Content>
+
+    @GET("banners")
+    fun getBannerFlow(): Flow<PageData<Banner>>
+
+    @GET("hot/{hot_type}/category/{category}/count/{count}")
+    suspend fun getHotDataFlow(
+        @Path("hot_type") hotType: String,
+        @Path("category") category: String = CATEGORY_RECOMMEND,
+        @Path("count") count: Int = PAGE_COUNT
+    ): Flow<PageData<Content>>
 
 }
