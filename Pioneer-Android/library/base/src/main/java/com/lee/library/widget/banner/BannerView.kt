@@ -418,6 +418,7 @@ class BannerView : RelativeLayout {
     fun <T> bindDataCreate(data: List<T>, createHolder: CreateHolder<T>) {
         removeCallbacks(mLoopRunnable)
         mAdapter = BannerAdapter(data, createHolder)
+        isStart = true
 
         post {
             if (bannerMode == MODE_CLIP && data.size < 3) {
@@ -428,12 +429,16 @@ class BannerView : RelativeLayout {
             mViewPager.registerOnPageChangeCallback(mPagerChange)
             buildIndicatorView()
 
-            isStart = true
             if (isAutoPlay) {
                 postDelayed(mLoopRunnable, delayTime)
             }
         }
     }
+
+    /**
+     * 查看当前启动状态
+     */
+    fun isStart() = isStart
 
     /**
      * 设置是否支持自动播放

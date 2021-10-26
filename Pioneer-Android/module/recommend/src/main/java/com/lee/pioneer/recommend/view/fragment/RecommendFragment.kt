@@ -133,8 +133,10 @@ class RecommendFragment :
 
             })
         }, error = {
-            headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_DATA_ERROR)
             toast(it.message)
+            if (!headerBinding.banner.isStart()) {
+                headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_DATA_ERROR)
+            }
         }, loading = {
             headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_LOADING)
         })
