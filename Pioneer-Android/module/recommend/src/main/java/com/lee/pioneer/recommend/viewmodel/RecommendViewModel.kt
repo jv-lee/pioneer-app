@@ -1,15 +1,10 @@
 package com.lee.pioneer.recommend.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.lee.library.cache.CacheManager
 import com.lee.library.extensions.getCache
 import com.lee.library.extensions.putCache
-import com.lee.library.mvvm.ui.UiState
-import com.lee.library.mvvm.ui.stateCacheLive
-import com.lee.library.mvvm.ui.uiState
+import com.lee.library.mvvm.ui.*
 import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_BANNER_KEY
 import com.lee.pioneer.library.common.constant.CacheConstants.Companion.RECOMMEND_CACHE_KEY
@@ -28,6 +23,8 @@ import kotlinx.coroutines.flow.*
  */
 class RecommendViewModel : CoroutineViewModel() {
 
+    private val cacheManager by lazy { CacheManager.getDefault() }
+
     private val meService by lazy { ModuleService.find<MeService>() }
 
     private val repository by lazy { ApiRepository() }
@@ -39,12 +36,12 @@ class RecommendViewModel : CoroutineViewModel() {
         .map {
             //转换数据并存储网络数据
             it.data.also { banner ->
-                CacheManager.getDefault().putCache(RECOMMEND_BANNER_KEY, banner)
+                cacheManager.putCache(RECOMMEND_BANNER_KEY, banner)
             }
         }
         .onStart {
             //查询缓存
-            CacheManager.getDefault().getCache<MutableList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
+            cacheManager.getCache<MutableList<Banner>>(RECOMMEND_BANNER_KEY)?.let {
                 emit(it)
             }
         }
@@ -52,25 +49,24 @@ class RecommendViewModel : CoroutineViewModel() {
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Default)
 
-    private val _typeLive = MutableLiveData(TYPE_VIEWS)
-    val typeLive: LiveData<String> = _typeLive
+    private val _typeAction = MutableStateActionFlow(TYPE_VIEWS)
+    val typeAction: StateActionFlow<String> = _typeAction
 
-    //获取页面数据列表 根据选中type变更数据
-    val contentLive: LiveData<UiState> = typeLive.switchMap { type ->
-        stateCacheLive({
-            repository.api.getHotDataAsync(type)
+    val contentFlow: StateFlow<UiState> = typeAction.flatMapLatest { action ->
+        stateCacheFlow({
+            repository.api.getHotDataAsync(action.value)
         }, {
-            CacheManager.getDefault().getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + type)
+            cacheManager.getCache<PageData<Content>>(RECOMMEND_CACHE_KEY + action.value)
         }, {
-            CacheManager.getDefault().putCache(RECOMMEND_CACHE_KEY + type, it)
+            cacheManager.putCache(RECOMMEND_CACHE_KEY + action.value, it)
         })
-    }
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Default)
 
     /**
      * 替换选中类型tab
      */
     fun switchType(type: String) {
-        _typeLive.value = type
+        _typeAction.emitAction(type)
     }
 
     /**

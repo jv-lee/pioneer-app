@@ -29,6 +29,7 @@ import com.lee.pioneer.recommend.view.widget.RecommendLoadResource
 import com.lee.pioneer.recommend.viewmodel.RecommendViewModel
 import com.lee.pioneer.router.navigateDetails
 import com.lee.pioneer.router.navigateSearch
+import kotlinx.coroutines.flow.collect
 
 
 /**
@@ -136,16 +137,18 @@ class RecommendFragment :
             })
         }
 
-        viewModel.apply {
-            typeLive.observe(viewLifecycleOwner, { type ->
-                when (type) {
+        launchAndRepeatWithViewLifecycle {
+            viewModel.typeAction.collect { typeAction ->
+                when (typeAction.value) {
                     TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
                     TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
                     TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
                 }
-            })
+            }
+        }
 
-            contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {
+        launchAndRepeatWithViewLifecycle {
+            viewModel.contentFlow.collect<PageData<Content>>(success = {
                 mAdapter.submitSinglePage(it.data)
             }, error = {
                 toast(it.message)
@@ -155,6 +158,26 @@ class RecommendFragment :
                 mAdapter.pageLoading()
             })
         }
+
+//        viewModel.apply {
+//            typeLive.observe(viewLifecycleOwner, { type ->
+//                when (type) {
+//                    TYPE_VIEWS -> headerBinding.groupType.checkUnNotification(R.id.radio_view)
+//                    TYPE_LIKES -> headerBinding.groupType.checkUnNotification(R.id.radio_like)
+//                    TYPE_COMMENTS -> headerBinding.groupType.checkUnNotification(R.id.radio_comment)
+//                }
+//            })
+//
+//            contentLive.observe<PageData<Content>>(viewLifecycleOwner, success = {
+//                mAdapter.submitSinglePage(it.data)
+//            }, error = {
+//                toast(it.message)
+//                mAdapter.submitFailed()
+//            }, loading = {
+//                mAdapter.initStatusView()
+//                mAdapter.pageLoading()
+//            })
+//        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
