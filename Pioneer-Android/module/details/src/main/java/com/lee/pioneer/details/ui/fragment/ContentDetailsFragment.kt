@@ -10,7 +10,7 @@ import com.lee.library.extensions.setWebBackEvent
 import com.lee.library.extensions.toast
 import com.lee.library.tools.WebViewTools
 import com.lee.library.utils.ShareUtil
-import com.lee.library.widget.WebViewEx
+import com.lee.library.widget.AppWebView
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.details.R
 import com.lee.pioneer.details.databinding.FragmentContentDetailsBinding
@@ -58,7 +58,7 @@ class ContentDetailsFragment :
             setWebBackEvent()
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
-            addWebStatusListenerAdapter(object : WebViewEx.WebStatusListenerAdapter() {
+            addWebStatusListenerAdapter(object : AppWebView.WebStatusListenerAdapter() {
                 override fun callProgress(progress: Int) {
                     binding.progress.visibility = View.VISIBLE
                     binding.progress.progress = progress
