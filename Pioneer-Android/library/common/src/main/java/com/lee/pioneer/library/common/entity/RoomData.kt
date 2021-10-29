@@ -1,6 +1,7 @@
 package com.lee.pioneer.library.common.entity
 
 import androidx.annotation.IntDef
+import androidx.annotation.Keep
 import androidx.room.*
 import com.lee.library.db.converters.StringListConverter
 import com.lee.pioneer.library.common.entity.ContentType.Companion.CONTENT
@@ -47,6 +48,7 @@ annotation class ContentSource {
  * @param type 文字类型/妹子图类型
  * @param source id/url
  */
+@Keep
 @Entity
 @TypeConverters(StringListConverter::class)
 data class ContentHistory(
