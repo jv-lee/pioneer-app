@@ -6,13 +6,13 @@ package build
  * @description 项目基础配置信息
  */
 object BuildConfig {
-    const val applicationId = "com.lee.pioneer"
+    const val applicationId = "com.lee.pioneer.test"
 
     const val compileSdk = 30
     const val minSdk = 19
     const val targetSdk = 30
-    const val versionCode = 1
-    const val versionName = "1.0.0"
+    const val versionCode = 3
+    const val versionName = "1.0.3"
 
     const val multiDex = true
 

@@ -80,6 +80,7 @@ class AppWebView : WebView, ObservableLifecycle {
                     //校验证书
                     cancelListener = CancelListener {
                         mHandler.cancel()
+                        dismiss()
                     }
                 }.show()
             }
