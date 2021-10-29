@@ -49,9 +49,7 @@ fun DependencyHandlerScope.commonTest() {
 //基础依赖配置
 fun DependencyHandlerScope.commonDependencies() {
     api(Dependencies.coreKtx)
-
     api(Dependencies.coroutines)
-    api(Dependencies.coroutinesAndroid)
 
     api(Dependencies.lifecycle)
     api(Dependencies.lifecycleLivedata)
@@ -63,11 +61,11 @@ fun DependencyHandlerScope.commonDependencies() {
     api(Dependencies.multidex)
 
     api(Dependencies.appcompat)
-    api(Dependencies.support)
+    api(Dependencies.material)
     api(Dependencies.recyclerview)
     api(Dependencies.constraint)
     api(Dependencies.viewpager2)
-    api(Dependencies.material)
+    api(Dependencies.swipeRefreshLayout)
 
     api(Dependencies.navigationFragment)
     api(Dependencies.navigationUi)
