@@ -3,6 +3,8 @@ package com.lee.pioneer.details.ui.fragment
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.postDelayed
 import androidx.lifecycle.LifecycleOwner
 import com.lee.library.base.BaseVMNavigationFragment
 import com.lee.library.extensions.arguments
@@ -11,6 +13,7 @@ import com.lee.library.extensions.toast
 import com.lee.library.tools.WebViewTools
 import com.lee.library.utils.ShareUtil
 import com.lee.library.widget.AppWebView
+import com.lee.library.widget.skeleton.Skeleton
 import com.lee.library.widget.toolbar.TitleToolbar
 import com.lee.pioneer.details.R
 import com.lee.pioneer.details.databinding.FragmentContentDetailsBinding
@@ -29,6 +32,7 @@ class ContentDetailsFragment :
     private val detailsUrl by arguments<String>(KeyConstants.KEY_URL)
     private val detailsID by arguments<String>(KeyConstants.KEY_ID)
     private val web by lazy { WebViewTools.getWeb(requireActivity().applicationContext) }
+    private lateinit var skeleton: Skeleton
 
     override fun bindView() {
         binding.toolbar.setClickListener(object : TitleToolbar.ClickListener() {
@@ -52,21 +56,44 @@ class ContentDetailsFragment :
             }
         })
         web?.run {
+            setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorThemeBackground))
             bindLifecycle(requireActivity() as LifecycleOwner)
             parent?.let { (it as ViewGroup).removeAllViews() }
             binding.frameContainer.addView(this)
             setWebBackEvent()
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
+
+            //添加webView骨架viewLoading
+            skeleton = Skeleton.Builder(binding.frameContainer)
+                .load(R.layout.layout_content_skeleton)
+                .bind()
+
             addWebStatusListenerAdapter(object : AppWebView.WebStatusListenerAdapter() {
+                override fun callStart() {
+                    web?.visibility = View.INVISIBLE
+                }
+
                 override fun callProgress(progress: Int) {
                     binding.progress.visibility = View.VISIBLE
                     binding.progress.progress = progress
                 }
 
                 override fun callSuccess() {
-                    binding.progress.visibility = View.GONE
                     web?.loadUrl(HttpConstant.getNoneHeaderJs())
+                    binding.progress.visibility = View.GONE
+
+                    web?.postDelayed(100){
+                        web?.visibility = View.VISIBLE
+                        skeleton.unBind()
+                    }
+                }
+
+                override fun callFailed() {
+                    web?.postDelayed(100){
+                        web?.visibility = View.VISIBLE
+                        skeleton.unBind()
+                    }
                 }
             })
         }
