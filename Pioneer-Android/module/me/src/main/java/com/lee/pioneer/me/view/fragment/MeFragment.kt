@@ -57,14 +57,7 @@ class MeFragment :
         binding.onLongClickListener = this
         binding.isSystem = DarkModeTools.get().isSystemTheme()
         binding.isNight = DarkModeTools.get().isDarkTheme()
-    }
 
-    override fun bindData() {
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
         binding.switchSystemEnable.setOnCheckedChangeListener { _, isChecked ->
             if (isResumed) {
                 DarkModeTools.get().updateSystemTheme(isChecked)
@@ -81,6 +74,10 @@ class MeFragment :
                 }
             }
         }
+    }
+
+    override fun bindData() {
+        viewModel.totalCacheStr.set(CacheUtil.getTotalCacheSize(activity))
     }
 
     override fun onClick(v: View?) {
