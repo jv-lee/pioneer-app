@@ -10,6 +10,10 @@
             type="android.view.View.OnClickListener" />
 
         <variable
+            name="onLongClickListener"
+            type="android.view.View.OnLongClickListener" />
+
+        <variable
             name="isSystem"
             type="java.lang.Boolean" />
 
@@ -59,6 +63,7 @@
                     android:id="@+id/line_message"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
+                    android:onLongClick="@{(view)->onLongClickListener.onLongClick(view)}"
                     app:leftDrawable="@drawable/vector_message"
                     app:leftText="@string/me_item_message"
                     app:leftTint="@color/colorMessage" />
@@ -67,6 +72,7 @@
                     android:id="@+id/line_like"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
+                    android:onLongClick="@{(view)->onLongClickListener.onLongClick(view)}"
                     app:leftDrawable="@drawable/vector_like"
                     app:leftText="@string/me_item_like"
                     app:leftTint="@color/colorLike" />
@@ -75,6 +81,7 @@
                     android:id="@+id/line_views"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
+                    android:onLongClick="@{(view)->onLongClickListener.onLongClick(view)}"
                     app:leftDrawable="@drawable/vector_view"
                     app:leftText="@string/me_item_views"
                     app:leftTint="@color/colorViews" />
@@ -83,6 +90,7 @@
                     android:id="@+id/line_favorite"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
+                    android:onLongClick="@{(view)->onLongClickListener.onLongClick(view)}"
                     app:leftDrawable="@drawable/vector_collect"
                     app:leftText="@string/me_item_favorite"
                     app:leftTint="@color/colorFavorite" />
@@ -92,6 +100,7 @@
                     style="@style/CommendLineButtonView"
                     android:layout_marginTop="@dimen/margin_large"
                     android:onClick="@{onClickListener}"
+                    android:onLongClick="@{(view)->onLongClickListener.onLongClick(view)}"
                     app:leftDrawable="@drawable/vector_feedback"
                     app:leftText="@string/me_item_feedback" />
 
@@ -99,6 +108,7 @@
                     android:id="@+id/line_settings"
                     style="@style/CommendLineButtonView"
                     android:onClick="@{onClickListener}"
+                    android:onLongClick="@{(view)->onLongClickListener.onLongClick(view)}"
                     app:leftDrawable="@drawable/vector_settings"
                     app:leftText="@string/me_item_settings"
                     app:rightText="@{vm.totalCacheStr}"

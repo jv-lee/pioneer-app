@@ -50,7 +50,6 @@ class GirlFragment :
 
             //设置列表数据项
             rvContainer.run {
-//                glideEnable()
 //                layoutAnimation = CommonTools.getItemOrderAnimator(requireContext())
                 layoutManager = LinearLayoutManager(context)
                 adapter = GirlAdapter(requireContext(), arrayListOf()).also {
@@ -99,7 +98,6 @@ class GirlFragment :
         //设置header时间
         headerViewBinding.tvDate.text = TimeUtil.getCurTimeString(SimpleDateFormat("MM月dd日"))
         headerViewBinding.tvWeek.text = TimeUtil.getWeek(Date())
-
 
         viewModel.run {
             //列表数据更新

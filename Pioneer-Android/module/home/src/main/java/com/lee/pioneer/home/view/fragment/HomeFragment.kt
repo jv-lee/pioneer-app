@@ -48,29 +48,9 @@ class HomeFragment :
     @SuppressLint("NotifyDataSetChanged")
     override fun bindData() {
         viewModel.categoryLive.observeState<PageData<Category>>(viewLifecycleOwner,
-            success = { it ->
+            success = {
                 binding.status.setStatus(StatusLayout.STATUS_DATA)
-
-                val fragments = arrayListOf<Fragment>()
-                val titles = arrayListOf<String>()
-
-                it.data.map {
-                    titles.add(it.title)
-                    fragments.add(ContentListFragment.newInstance(it.type))
-                }
-
-                binding.vpContainer.offscreenPageLimit = titles.size
-                binding.vpContainer.adapter =
-                    UiPager2Adapter(this@HomeFragment, fragments).also {
-                        adapter = it
-                    }
-
-                TabLayoutMediator(binding.tabCategory, binding.vpContainer) { tab, position ->
-                    tab.text = titles[position]
-                }.also {
-                    mediator = it
-                }.attach()
-
+                bindAdapter(it)
             }, error = {
                 toast(HttpManager.getInstance().getServerMessage(it))
                 adapter ?: kotlin.run {
@@ -104,6 +84,31 @@ class HomeFragment :
                 R.color.colorAccent
             )
         )
+    }
+
+    /**
+     * 根据分类数据构建分页tab及page
+     * @param categoryData 分类page数据
+     */
+    private fun bindAdapter(categoryData: PageData<Category>) {
+        val fragments = arrayListOf<Fragment>()
+        val titles = arrayListOf<String>()
+
+        categoryData.data.map {
+            titles.add(it.title)
+            fragments.add(ContentListFragment.newInstance(it.type))
+        }
+
+        binding.vpContainer.offscreenPageLimit = titles.size
+        binding.vpContainer.adapter = UiPager2Adapter(this@HomeFragment, fragments).also {
+            adapter = it
+        }
+
+        TabLayoutMediator(binding.tabCategory, binding.vpContainer) { tab, position ->
+            tab.text = titles[position]
+        }.also {
+            mediator = it
+        }.attach()
     }
 
 }

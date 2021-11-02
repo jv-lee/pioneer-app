@@ -13,9 +13,9 @@ import com.lee.library.extensions.setBackgroundColorCompat
 import com.lee.library.extensions.setTextColorCompat
 import com.lee.library.extensions.show
 import com.lee.library.extensions.toast
-import com.lee.library.tools.PermissionLauncher
 import com.lee.library.tools.DarkModeTools
 import com.lee.library.tools.DarkViewUpdateTools
+import com.lee.library.tools.PermissionLauncher
 import com.lee.library.utils.CacheUtil
 import com.lee.pioneer.me.R
 import com.lee.pioneer.me.databinding.FragmentMeBinding
@@ -28,7 +28,7 @@ import com.lee.pioneer.me.viewmodel.MeViewModel
  */
 class MeFragment :
     BaseVMFragment<FragmentMeBinding, MeViewModel>(R.layout.fragment_me),
-    View.OnClickListener, DarkViewUpdateTools.ViewCallback {
+    View.OnClickListener, View.OnLongClickListener, DarkViewUpdateTools.ViewCallback {
 
     private val imageLaunch = ImageLaunch(this)
     private val permissionLaunch = PermissionLauncher(this)
@@ -54,42 +54,12 @@ class MeFragment :
 
         binding.vm = viewModel
         binding.onClickListener = this
-
-        binding.lineMessage.setOnLongClickListener {
-            permissionLaunch.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
-                imageLaunch.select(
-                    SelectConfig(isMultiple = false, isCompress = false, columnCount = 3)
-                ) {
-                    toast(it[0].uri.toString())
-                }
-            })
-            false
-        }
-        binding.lineLike.setOnLongClickListener {
-            permissionLaunch.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
-                imageLaunch.select(SelectConfig(isMultiple = true, isCompress = false)) {
-                    toast(it[0].uri.toString())
-                }
-            })
-            false
-        }
-        binding.lineViews.setOnLongClickListener {
-            permissionLaunch.requestPermission(Manifest.permission.CAMERA, {
-                imageLaunch.take(TakeConfig(isCrop = true)) {
-                    toast(it.uri.toString())
-                }
-            })
-            false
-        }
-        binding.lineFavorite.setOnLongClickListener {
-            findNavController().navigate(R.id.action_me_to_size)
-            false
-        }
+        binding.onLongClickListener = this
+        binding.isSystem = DarkModeTools.get().isSystemTheme()
+        binding.isNight = DarkModeTools.get().isDarkTheme()
     }
 
     override fun bindData() {
-        binding.isSystem = DarkModeTools.get().isSystemTheme()
-        binding.isNight = DarkModeTools.get().isDarkTheme()
     }
 
     override fun onResume() {
@@ -122,6 +92,38 @@ class MeFragment :
             R.id.line_feedback -> findNavController().navigate(R.id.action_me_to_feedback)
             R.id.line_settings -> show(clearDialog)
         }
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        when (v?.id) {
+            R.id.line_message -> {
+                permissionLaunch.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
+                    imageLaunch.select(
+                        SelectConfig(isMultiple = false, isCompress = false, columnCount = 3)
+                    ) {
+                        toast(it[0].uri.toString())
+                    }
+                })
+            }
+            R.id.line_like -> {
+                permissionLaunch.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, {
+                    imageLaunch.select(SelectConfig(isMultiple = true, isCompress = false)) {
+                        toast(it[0].uri.toString())
+                    }
+                })
+            }
+            R.id.line_views -> {
+                permissionLaunch.requestPermission(Manifest.permission.CAMERA, {
+                    imageLaunch.take(TakeConfig(isCrop = true)) {
+                        toast(it.uri.toString())
+                    }
+                })
+            }
+            R.id.line_favorite -> {
+                findNavController().navigate(R.id.action_me_to_size)
+            }
+        }
+        return false
     }
 
     override fun onDestroyView() {
