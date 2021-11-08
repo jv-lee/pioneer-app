@@ -58,13 +58,11 @@ class ContentListViewModel : CoroutineViewModel() {
      * 浏览后添加至数据库
      */
     fun insertContentHistoryToDB(content: Content) {
-        launchMain {
-            launchIO {
-                val extends = meService.isCollect(content._id)
-                val contentHistory =
-                    ContentHistory.parse(ContentType.CONTENT, ContentSource.ID, extends, content)
-                meService.insert(contentHistory)
-            }
+        launchIO {
+            val extends = meService.isCollect(content._id)
+            val contentHistory =
+                ContentHistory.parse(ContentType.CONTENT, ContentSource.ID, extends, content)
+            meService.insert(contentHistory)
         }
     }
 

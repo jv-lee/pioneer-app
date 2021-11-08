@@ -19,22 +19,20 @@ class ContentDetailsViewModel : CoroutineViewModel() {
     val favoriteLive: LiveData<Int> = _favoriteLive
 
     fun contentCollect(id: String) {
-        launchMain {
-            launchIO {
-                val isCollect = meService.isCollect(id) == 1
+        launchIO {
+            val isCollect = meService.isCollect(id) == 1
 
-                //已收藏
-                if (isCollect) {
-                    _favoriteLive.postValue(0)
-                    return@launchIO
-                }
-
-                //添加收藏夹
-                val content = meService.queryContentById(id)[0]
-                content.isCollect = 1
-                meService.insert(content)
-                _favoriteLive.postValue(1)
+            //已收藏
+            if (isCollect) {
+                _favoriteLive.postValue(0)
+                return@launchIO
             }
+
+            //添加收藏夹
+            val content = meService.queryContentById(id)[0]
+            content.isCollect = 1
+            meService.insert(content)
+            _favoriteLive.postValue(1)
         }
     }
 

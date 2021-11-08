@@ -1,8 +1,8 @@
 package com.lee.pioneer.me.viewmodel
 
-import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.library.mvvm.livedata.LoadStatus
 import com.lee.library.mvvm.ui.UiStatePageLiveData
+import com.lee.library.mvvm.viewmodel.CoroutineViewModel
 import com.lee.pioneer.library.common.constant.KeyConstants
 import com.lee.pioneer.library.common.entity.PageData
 import com.lee.pioneer.library.common.tools.CommonTools
@@ -21,17 +21,14 @@ class CollectViewModel : CoroutineViewModel() {
      * 加载本地数据库历史记录
      */
     fun loadHistory(@LoadStatus status: Int) {
-        launchMain {
+        launchIO {
             contentLive.pageLaunch(status, { page: Int ->
                 //获取总页数 使用懒加载
-                val pageCount = launchIO {
-                    val count = DataBaseRepository.get().historyDao.queryContentCollectCount()
-                    CommonTools.totalToPage(count, KeyConstants.PAGE_COUNT)
-                }
+                val count = DataBaseRepository.get().historyDao.queryContentCollectCount()
+                val pageCount = CommonTools.totalToPage(count, KeyConstants.PAGE_COUNT)
+
                 //获取当前页
-                val response = launchIO {
-                    DataBaseRepository.get().historyDao.queryContentCollect(page)
-                }
+                val response = DataBaseRepository.get().historyDao.queryContentCollect(page)
                 PageData(ArrayList(response), page = page, page_count = pageCount)
             })
         }

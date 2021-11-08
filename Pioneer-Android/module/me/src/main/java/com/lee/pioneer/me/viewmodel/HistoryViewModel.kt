@@ -21,18 +21,15 @@ class HistoryViewModel : CoroutineViewModel() {
      * 加载本地数据库历史记录
      */
     fun loadHistory(@LoadStatus status: Int) {
-        launchMain {
+        launchIO {
             contentLive.pageLaunch(status,
                 { page: Int ->
                     //获取总页数 使用懒加载
-                    val pageCount = launchIO {
-                        val count = DataBaseRepository.get().historyDao.queryContentHistoryCount()
-                        CommonTools.totalToPage(count, KeyConstants.PAGE_COUNT)
-                    }
+                    val count = DataBaseRepository.get().historyDao.queryContentHistoryCount()
+                    val pageCount = CommonTools.totalToPage(count, KeyConstants.PAGE_COUNT)
+
                     //获取当前页
-                    val response = launchIO {
-                        DataBaseRepository.get().historyDao.queryContentHistory(page)
-                    }
+                    val response = DataBaseRepository.get().historyDao.queryContentHistory(page)
                     //通知数据更新
                     PageData(ArrayList(response), page = page, page_count = pageCount)
                 })

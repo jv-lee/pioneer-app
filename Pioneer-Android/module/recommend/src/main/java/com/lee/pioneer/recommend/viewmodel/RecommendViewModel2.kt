@@ -42,7 +42,7 @@ class RecommendViewModel2 : CoroutineViewModel() {
         repository.api.getHotDataFlow(action.value)
             .map {
                 //转换数据并存储网络数据
-                it.also { data->
+                it.also { data ->
                     cacheManager.putCache(RECOMMEND_CACHE_KEY + action.value, data)
                 }
             }
@@ -90,13 +90,11 @@ class RecommendViewModel2 : CoroutineViewModel() {
      * 浏览记录数据库保存
      */
     fun insertContentHistoryToDB(content: Content) {
-        launchMain {
-            launchIO {
-                val extends = meService.isCollect(content._id)
-                val contentHistory =
-                    ContentHistory.parse(ContentType.CONTENT, ContentSource.ID, extends, content)
-                meService.insert(contentHistory)
-            }
+        launchIO {
+            val extends = meService.isCollect(content._id)
+            val contentHistory =
+                ContentHistory.parse(ContentType.CONTENT, ContentSource.ID, extends, content)
+            meService.insert(contentHistory)
         }
     }
 
