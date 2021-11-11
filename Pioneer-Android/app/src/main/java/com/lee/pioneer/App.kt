@@ -54,6 +54,11 @@ class App : BaseApplication() {
             super.onActivityPreCreated(activity, savedInstanceState)
         }
 
+        override fun onActivityDestroyed(activity: Activity) {
+            super.onActivityDestroyed(activity)
+            ScreenDensityUtil.resetDensity(activity)
+        }
+
     }
 
     override fun init() {
