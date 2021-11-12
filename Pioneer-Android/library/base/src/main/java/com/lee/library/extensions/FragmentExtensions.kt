@@ -66,20 +66,14 @@ fun Fragment.dismiss(dialog: DialogFragment) {
  * 根据泛型直接获取父Fragment
  */
 inline fun <reified T : Fragment> Fragment.findParentFragment(): T? {
-    if (parentFragment is T) {
-        return parentFragment as T
-    }
-    return null
+    return parentFragment as? T
 }
 
 /**
  * 根据泛型直接获取Activity容器
  */
 inline fun <reified T : Activity> Fragment.findParentActivity(): T? {
-    if (requireActivity() is T) {
-        return requireActivity() as T
-    }
-    return null
+    return requireActivity() as? T
 }
 
 /**
