@@ -65,16 +65,12 @@ fun Fragment.dismiss(dialog: DialogFragment) {
 /**
  * 根据泛型直接获取父Fragment
  */
-inline fun <reified T : Fragment> Fragment.findParentFragment(): T? {
-    return parentFragment as? T
-}
+inline fun <reified T : Fragment> Fragment.findParentFragment() = parentFragment as? T
 
 /**
  * 根据泛型直接获取Activity容器
  */
-inline fun <reified T : Activity> Fragment.findParentActivity(): T? {
-    return requireActivity() as? T
-}
+inline fun <reified T : Activity> Fragment.findParentActivity() = requireActivity() as? T
 
 /**
  * 携程flow fragment生命周期绑定
