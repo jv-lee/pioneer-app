@@ -8,7 +8,7 @@ package build
 object BuildConfig {
     const val applicationId = "com.lee.pioneer.test"
 
-    const val compileSdk = 30
+    const val compileSdk = 31
     const val minSdk = 19
     const val targetSdk = 30
     const val versionCode = 9

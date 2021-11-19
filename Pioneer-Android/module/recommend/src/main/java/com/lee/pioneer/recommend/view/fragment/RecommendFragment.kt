@@ -134,9 +134,7 @@ class RecommendFragment :
             })
         }, error = {
             toast(it.message)
-            if (!headerBinding.banner.isStart()) {
-                headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_DATA_ERROR)
-            }
+            headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_DATA_ERROR)
         }, loading = {
             headerBinding.bannerStatusLayout.setStatus(StatusLayout.STATUS_LOADING)
         })
